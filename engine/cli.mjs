@@ -1,0 +1,206 @@
+#!/usr/bin/env node
+// studio: the command surface of the motion studio. `studio help` lists everything.
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { buildMusic, buildSfx, gridBeats, measureBeats, mix } from './audio.mjs';
+import { gates } from './gates.mjs';
+import { FILMS, readFilm, readJson, writeJson } from './lib/film.mjs';
+import { run } from './lib/proc.mjs';
+import { ROOT } from './lib/serve.mjs';
+import { renderFilm } from './render.mjs';
+import { addReview } from './review.mjs';
+import { contactSheet, poster } from './stills.mjs';
+
+const HELP = `studio <command> <film> [options]
+
+  new <key> [--title T] [--duration 15] [--formats 9:16,1:1,16:9] [--bpm 120] [--loop]
+                         scaffold films/<key> from templates/film
+  list                   films with their status
+  look <film> [--mode every|beats|shots|strip|times|phone] [--every 0.5] [--at 4.2] [--times 1,2.5]
+               [--fmt 9:16] [--width 270]
+                         contact sheet straight from seek(t) → out/sheets/*.png (seconds, no encode)
+  capture <film> <url>   real screenshots, logos, colors, fonts → films/<film>/assets/ (+ site.json)
+  refs <film> <video>    extract reference frames every 0.5s → films/<film>/refs/frames/ + a contact sheet
+  poster <film> --at 3.2 full-res still → out/poster-<fmt>.png
+  render <film> [--draft] [--fmt 9:16|all] [--from 2 --to 5] [--sub 4] [--workers 4]
+                         frames → H.264 (draft: half-res 30fps; final: film fps + motion blur)
+  grid <film>            beats.json from film.json music.bpm (synthesized score)
+  beats <film>           beats.json measured from film.json "track" (librosa)
+  sound <film>           beats (if missing) → music → sfx → mix at -14 LUFS → out/mix.wav
+  gate <film>            mechanical gates → gates.json (lint, determinism, dead time, loop, loudness …)
+  review <film> --json '{"scores":{…},"problems":[…]}'   record a critique round
+  read <film> [--sheet sheets/times-9x16.png] [--prompt "…"] [--model flash|pro|flash_lite|gemini-2.5-pro] [--engine agy|api|gemini]
+                         An AI reads a sheet/poster (default: newest). Engine agy = Antigravity agents
+                         on your Google AI Pro subscription (no key — default when installed).
+                         api = GEMINI_API_KEY vision. gemini = the Gemini CLI agent.
+  login-gemini          browser login with your Google account (Pro/Code Assist quota, no API key)
+  ship <film>            sound → gate → final render (all formats) → poster → sheets → loop check
+  gui                    start the Studio GUI (http://localhost:3142)`;
+
+const argv = process.argv.slice(2);
+const cmd = argv[0], key = argv[1] && !argv[1].startsWith('--') ? argv[1] : undefined;
+const opt = (k, d) => { const i = argv.indexOf('--' + k); return i < 0 ? d : argv[i + 1] === undefined || argv[i + 1].startsWith('--') ? true : argv[i + 1]; };
+const num = (k, d) => (opt(k) === undefined ? d : Number(opt(k)));
+const rel = (f) => f.startsWith(ROOT) ? f.slice(ROOT.length + 1) : f;
+
+async function main() {
+  switch (cmd) {
+    case 'new': {
+      if (!key || !/^[a-z0-9][a-z0-9-]*$/.test(key)) throw new Error('studio new <key>: lowercase letters, digits, dashes');
+      const dir = join(FILMS, key);
+      if (existsSync(dir)) throw new Error(`films/${key} already exists`);
+      cpSync(join(ROOT, 'templates', 'film'), dir, { recursive: true });
+      const cfg = readJson(join(dir, 'film.json'));
+      Object.assign(cfg, {
+        title: opt('title', key), duration: num('duration', cfg.duration),
+        formats: opt('formats') ? String(opt('formats')).split(',') : cfg.formats, loop: !!opt('loop', cfg.loop),
+      });
+      cfg.music.bpm = num('bpm', cfg.music.bpm);
+      writeJson(join(dir, 'film.json'), cfg);
+      gridBeats(key);
+      console.log(`created films/${key}\n  next: write brief.md, design.json, shotlist.md, then index.html\n  preview: studio gui  (or open http://localhost:3142/films/${key}/)`);
+      break;
+    }
+    case 'list': {
+      const films = existsSync(FILMS) ? readdirSync(FILMS).filter((f) => existsSync(join(FILMS, f, 'film.json'))) : [];
+      if (!films.length) console.log('no films yet: studio new <key>');
+      for (const f of films) {
+        const { cfg, out } = readFilm(f);
+        const reviews = readJson(join(FILMS, f, 'reviews.json'), []), g = readJson(join(FILMS, f, 'gates.json'));
+        const finals = readdirSync(out).filter((x) => /^final-[^.]*\.mp4$/.test(x));
+        console.log(`${f.padEnd(24)} ${String(cfg.duration + 's').padEnd(5)} ${cfg.formats.join(',').padEnd(16)} ` +
+          `review ${reviews.length ? `r${reviews.length} min ${reviews.at(-1).min}` : '-'}  gates ${g ? (g.pass ? 'pass' : 'FAIL') : '-'}  ${finals.join(' ') || 'not rendered'}`);
+      }
+      break;
+    }
+    case 'look': {
+      const mode = opt('mode', 'every');
+      const o = { mode, every: num('every', 0.5), at: num('at', 0), fmt: opt('fmt'), width: opt('width') ? num('width') : undefined,
+        times: opt('times') ? String(opt('times')).split(',').map(Number) : undefined, n: num('n', 12) };
+      if (mode === 'phone') Object.assign(o, { mode: 'every', every: 1, width: 360, name: `phone-${(o.fmt || readFilm(key).cfg.formats[0]).replace(':', 'x')}`, title: 'phone test 360px' });
+      const r = await contactSheet(key, o);
+      console.log(`${rel(r.file)}  (${r.count} frames: ${r.times.join(', ')})`);
+      break;
+    }
+    case 'capture': {
+      const url = argv[2];
+      if (!url || !/^https?:\/\//.test(url)) throw new Error('studio capture <film> <https://url>');
+      await (await import('./capture.mjs')).capture(key, url);
+      break;
+    }
+    case 'refs': {
+      const src = argv[2];
+      if (!src || !existsSync(src)) throw new Error('studio refs <film> <path/to/reference.mp4>');
+      const film = readFilm(key), dir = join(film.dir, 'refs', 'frames');
+      mkdirSync(dir, { recursive: true });
+      await run('ffmpeg', ['-y', '-v', 'error', '-i', src, '-vf', 'fps=2,scale=540:-2', join(dir, 'f%04d.png')]);
+      const sheet = join(film.dir, 'refs', 'reference-sheet.png');
+      await run('ffmpeg', ['-y', '-v', 'error', '-i', src, '-vf', 'fps=2,scale=240:-2,tile=8x6', '-frames:v', '1', sheet]);
+      console.log(`${rel(dir)} (${readdirSync(dir).length} frames, one per 0.5s)\n${rel(sheet)}`);
+      break;
+    }
+    case 'poster': console.log(rel((await poster(key, { at: num('at', 0), fmt: opt('fmt') })).file)); break;
+    case 'render': {
+      const r = await renderFilm(key, { quality: opt('draft') ? 'draft' : 'final', fmt: opt('fmt'), from: opt('from') !== undefined ? num('from') : undefined,
+        to: opt('to') !== undefined ? num('to') : undefined, sub: opt('sub') !== undefined ? num('sub') : undefined, workers: opt('workers') ? num('workers') : undefined });
+      for (const x of r) console.log(rel(x.file));
+      break;
+    }
+    case 'grid': { const r = gridBeats(key); console.log(`${rel(r.file)}: ${r.beats} beats at ${r.bpm} bpm`); break; }
+    case 'beats': { const r = await measureBeats(key); console.log(`${rel(r.file)}: ${r.beats} beats, ${r.hits} hits, ${r.bpm.toFixed(1)} bpm`); break; }
+    case 'sound': await sound(key); break;
+    case 'gate': { const r = await gates(key); console.log(r.pass ? '\ngates: PASS' : '\ngates: FAIL'); process.exitCode = r.pass ? 0 : 1; break; }
+    case 'review': {
+      const e = addReview(key, JSON.parse(opt('json', '{}')));
+      console.log(`round ${e.round}: min ${e.min} → ${e.pass ? 'PASS' : 'fix the worst 3 and look again'}`);
+      break;
+    }
+    case 'ship': {
+      const film = readFilm(key);
+      console.log('── sound'); await sound(key);
+      console.log('── gates'); const g = await gates(key);
+      if (!g.pass) throw new Error('gates failed: fix the FAIL lines above before shipping');
+      const reviews = readJson(join(film.dir, 'reviews.json'), []);
+      if (!reviews.length || !reviews.at(-1).pass) console.log(`!! last review ${reviews.length ? `min ${reviews.at(-1).min}` : 'missing'}: shipping anyway, but the loop says 8+ first`);
+      console.log('── render'); const r = await renderFilm(key, { quality: 'final', fmt: 'all' });
+      const at = film.cfg.poster ?? Math.min(film.cfg.duration * 0.35, 3);
+      for (const f of film.cfg.formats) console.log(rel((await poster(key, { at, fmt: f })).file));
+      console.log(rel((await contactSheet(key, { mode: 'every', every: 0.5, name: 'contact' })).file));
+      if (film.cfg.loop) {
+        const src = r[0].file, dst = join(film.out, 'loop_check.mp4');
+        await run('ffmpeg', ['-y', '-v', 'error', '-stream_loop', '1', '-i', src, '-c', 'copy', dst]);
+        console.log(rel(dst));
+      }
+      await gates(key, { log: () => {} });
+      console.log('── shipped'); for (const x of r) console.log(`${rel(x.file)}  (${x.seconds}s to render)`);
+      break;
+    }
+    case 'read': {
+      // An AI reads a contact sheet/poster and critiques it. Engines:
+      //   agy    — Antigravity agents on the Google AI Pro subscription (default when installed)
+      //   api    — bare Gemini API key vision
+      //   gemini — the Gemini CLI agent
+      const { geminiRead, agentRead } = await import('./lib/gemini.mjs');
+      const out = join(FILMS, key, 'out');
+      const newest = (dir, sub) => {
+        if (!existsSync(dir)) return null;
+        const n = readdirSync(dir).filter((f) => /\.png$/i.test(f))
+          .map((f) => ({ f, m: statSync(join(dir, f)).mtimeMs })).sort((a, b) => b.m - a.m).at(0);
+        return n ? (sub ? `${sub}/${n.f}` : n.f) : null;
+      };
+      const sheet = String(opt('sheet', '') || '').replace(/\\/g, '/').replace(/^\/+/, '');
+      if (/[.]{2}/.test(sheet)) throw new Error('sheet must live under films/<key>/out');
+      const pick = sheet || newest(join(out, 'sheets'), 'sheets') || newest(out, '');
+      if (!pick) throw new Error(`no sheets in films/${key}/out — run: studio look ${key}`);
+      const { cfg } = readFilm(key);
+      const prompt = opt('prompt') || `You are a harsh motion-design director. This is a contact sheet of frames from "${cfg.title}" — a ${cfg.duration}s ${cfg.formats.join(' + ')} film; frames carry their own time labels. Judge what you SEE: hook, readability (phone-size text?), motion, variety, composition, brand consistency. Score each 1-10, then the 3 worst problems with frame timestamps, each with a concrete fix. Be specific and harsh.`;
+      const engineArg = String(opt('engine', '') || '').toLowerCase();
+      const agy = await import('./lib/antigravity.mjs');
+      const useAgy = engineArg === 'agy' || (engineArg !== 'api' && engineArg !== 'gemini' && agy.antigravityAvailable());
+      const r = useAgy
+        ? await agy.askAntigravity({ image: join(out, pick), prompt, model: opt('model'),
+            onProgress: (m) => process.stderr.write(`  · ${m}\n`) })
+        : engineArg === 'gemini'
+          ? await agentRead({ cwd: ROOT, sheetPath: join(out, pick), filmKey: key, prompt })
+          : await geminiRead({ image: join(out, pick), file: pick, prompt, model: opt('model') });
+      console.log(`\n${r.engine || r.model} · films/${key}/out/${pick}\n\n${r.text}\n`);
+      break;
+    }
+    case 'login-gemini': {
+      const { loginGemini } = await import('./lib/gemini-auth.mjs');
+      console.log('\nBrowser login for Gemini (Google account — uses your Google AI Pro / Code Assist quota, no API key):\n');
+      let url = '';
+      const r = await loginGemini({
+        onProgress: (m) => {
+          url = m;
+          if (/accounts\.google/.test(m)) {
+            console.log(`  opening your browser… (if nothing opens, visit:\n\n  ${m}\n)`);
+            try { require('node:child_process').exec(`explorer.exe "${m}"`); } catch { /* WSL: explorer may be missing; URL is printed */ }
+          } else console.log(`  ${m}`);
+        },
+      }).catch((e) => { console.error('  login failed:', e.message); return null; });
+      if (r) {
+        console.log(`\nlogged in ✓${r.projectId ? `  project: ${r.projectId}` : ''}  creds: ${r.file.replace(ROOT + '/', '')}`);
+        try {
+          const { subPing } = await import('./lib/gemini-auth.mjs');
+          const pong = await subPing();
+          console.log(`subscription check: ${pong.includes('OK') ? '✓ working on your Google AI quota' : pong}`);
+        } catch (e) { console.log(`subscription check failed: ${e.message} (creds are saved; retry \`studio read\` — re-login if it persists)`); }
+        console.log('  `studio read <film>` and the GUI reader now use your subscription quota.\n  (Login expired? Just run this command again.)');
+      }
+      break;
+    }
+    case 'gui': await import('../studio-gui/server.mjs'); return;
+    default: console.log(HELP);
+  }
+}
+
+async function sound(key) {
+  const film = readFilm(key);
+  if (!existsSync(join(film.dir, 'beats.json'))) film.cfg.track ? await measureBeats(key) : gridBeats(key);
+  const m = buildMusic(key); if (m.file) console.log(rel(m.file));
+  const s = buildSfx(key); console.log(`${rel(s.file)} (${s.cues} cues)`);
+  const x = await mix(key); console.log(`${rel(x.file)}  ${x.lufs} LUFS, true peak ${x.truePeak} dBFS`);
+}
+
+main().catch((e) => { console.error('studio: ' + (e.message || e)); process.exit(1); });

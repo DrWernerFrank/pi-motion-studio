@@ -1,0 +1,142 @@
+{
+  "title": "The Determinant, explained",
+  "duration": 60,
+  "fps": 60,
+  "formats": [
+    "16:9",
+    "9:16"
+  ],
+  "loop": false,
+  "background": "#F2EEE4",
+  "motionBlur": 4,
+  "music": {
+    "bpm": 120,
+    "key": "C major",
+    "progression": [
+      "I",
+      "V",
+      "vi",
+      "IV"
+    ],
+    "style": "piano",
+    "seed": 7,
+    "sections": [
+      {
+        "bars": 2,
+        "layers": [
+          "piano"
+        ]
+      },
+      {
+        "bars": 6,
+        "layers": [
+          "piano",
+          "bass",
+          "softkick"
+        ]
+      },
+      {
+        "bars": 6,
+        "layers": [
+          "piano",
+          "bass",
+          "softkick",
+          "hat"
+        ]
+      },
+      {
+        "bars": 5,
+        "layers": [
+          "keys",
+          "bass",
+          "softkick",
+          "arp"
+        ]
+      },
+      {
+        "bars": 1,
+        "layers": [
+          "keys",
+          "bass",
+          "arp",
+          "roll"
+        ]
+      },
+      {
+        "bars": 7,
+        "layers": [
+          "keys",
+          "bass",
+          "kick",
+          "hat",
+          "arp"
+        ]
+      },
+      {
+        "bars": 2,
+        "layers": [
+          "piano",
+          "bass",
+          "softkick"
+        ]
+      },
+      {
+        "bars": 1,
+        "layers": [
+          "piano"
+        ]
+      }
+    ]
+  },
+  "mix": {
+    "music": 0.42,
+    "sfx": 0.85,
+    "lufs": -17
+  },
+  "shots": [
+    {
+      "t": 0,
+      "name": "hook: a square gets 5x bigger"
+    },
+    {
+      "t": 4,
+      "name": "title"
+    },
+    {
+      "t": 8,
+      "name": "what it means: area scale"
+    },
+    {
+      "t": 16,
+      "name": "2x2 formula: ad - bc"
+    },
+    {
+      "t": 23,
+      "name": "worked example = 5"
+    },
+    {
+      "t": 28,
+      "name": "sign: flipped space"
+    },
+    {
+      "t": 34,
+      "name": "zero: squashed flat"
+    },
+    {
+      "t": 40,
+      "name": "3x3 cofactor expansion"
+    },
+    {
+      "t": 54,
+      "name": "recap cards"
+    },
+    {
+      "t": 58,
+      "name": "lockup"
+    }
+  ],
+  "gates": {
+    "maxStill": 2.5,
+    "maxNoNovelty": 4
+  }
+}

@@ -1,0 +1,11 @@
+/* Bundled faces (SIL Open Font License, from github.com/google/fonts). Variable where available. */
+@font-face { font-family: 'Inter'; src: url('/engine/fonts/Inter.ttf') format('truetype'); font-weight: 100 900; }
+@font-face { font-family: 'DM Sans'; src: url('/engine/fonts/DMSans.ttf') format('truetype'); font-weight: 100 1000; }
+@font-face { font-family: 'Space Grotesk'; src: url('/engine/fonts/SpaceGrotesk.ttf') format('truetype'); font-weight: 300 700; }
+@font-face { font-family: 'Bricolage Grotesque'; src: url('/engine/fonts/BricolageGrotesque.ttf') format('truetype'); font-weight: 200 800; }
+@font-face { font-family: 'Syne'; src: url('/engine/fonts/Syne.ttf') format('truetype'); font-weight: 400 800; }
+@font-face { font-family: 'Anton'; src: url('/engine/fonts/Anton.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'Fraunces'; src: url('/engine/fonts/Fraunces.ttf') format('truetype'); font-weight: 100 900; }
+@font-face { font-family: 'Instrument Serif'; src: url('/engine/fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-style: normal; }
+@font-face { font-family: 'Instrument Serif'; src: url('/engine/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; }
+@font-face { font-family: 'JetBrains Mono'; src: url('/engine/fonts/JetBrainsMono.ttf') format('truetype'); font-weight: 100 800; }

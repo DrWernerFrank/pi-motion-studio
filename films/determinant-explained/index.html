@@ -1,0 +1,573 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>The Determinant, explained</title>
+<link rel="stylesheet" href="/engine/lib/fonts.css">
+</head>
+<body>
+<script type="module">
+// The Determinant, explained. A live coordinate plane is the spine: its parallelogram label is always
+// the real det of the matrix it is showing. Times are on the 120 bpm grid (bar = 2 s). Plan: shotlist.md.
+import { film } from '/engine/lib/runtime.js';
+import { loadDesign } from '/engine/lib/design.js';
+import * as M from '/engine/lib/motion.js';
+
+let D, cfg, C;
+const MINUS = '\u2212', DOT = '\u00b7', TIMES = '\u00d7';
+const SERIF = '"Instrument Serif"', MONO = '"JetBrains Mono"';
+// Feels: type is critically damped (no overshoot), UI snappy, the plane's transforms slower.
+const F = { type: [200, 28.3], ui: M.SNAPPY, box: M.DEFAULT, slow: [110, 21], flip: [36, 12] };
+const sp = (t, f) => M.spring(t, ...f);
+const cl = M.clamp;
+const num = (v) => (Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1)).replace('-', MINUS).replace(/^−0$/, '0');
+
+function setFont(ctx, px, fam, italic = false, weight = 400, track = 0) { M.font(ctx, px, fam, weight, track, italic ? 'italic' : ''); }
+
+// A track whose every key carries its own feel: [[t, value, feel], ...]
+function ktrack(t, keys, idx) {
+  const at = (k) => (idx == null ? k[1] : k[1][idx]);
+  let v = at(keys[0]);
+  for (let i = 1; i < keys.length; i++) v += (at(keys[i]) - at(keys[i - 1])) * sp(t - keys[i][0], keys[i][2] || F.box);
+  return v;
+}
+
+// ── layout: A = words + matrix, B = the plane (landscape: side by side; portrait: stacked) ──────────
+function lay(L) {
+  const u = L.u, P = L.portrait;
+  const A = P ? { x: L.W * 0.08, y: L.H * 0.1, w: L.W * 0.84, h: L.H * 0.4 } : { x: L.W * 0.06, y: L.H * 0.1, w: L.W * 0.4, h: L.H * 0.8 };
+  const B = P ? { x: L.W * 0.05, y: L.H * 0.5, w: L.W * 0.9, h: L.H * 0.33 } : { x: L.W * 0.5, y: L.H * 0.08, w: L.W * 0.44, h: L.H * 0.84 };
+  const h1 = A.y + 14 * u, b1 = A.y + A.h * (P ? 0.8 : 0.86);
+  const S = { k: A.y + 3 * u, h1, h2: h1 + 10 * u, mat: A.y + A.h * (P ? 0.56 : 0.58), matSize: (P ? 9 : 10) * u,
+    m3: P ? L.H * 0.36 : A.y + A.h * 0.64, m3Size: (P ? 6.8 : 9) * u, b1, b2: b1 + 5.5 * u };
+  const OFF = P ? { ...B, y: B.y + L.H * 0.62 } : { ...B, x: B.x + L.W * 0.6 };
+  // portrait only: the plane sits under the formula while it is being worked out
+  const BF = P ? { x: B.x, y: L.H * 0.575, w: B.w, h: L.H * 0.255 } : OFF;
+  return { A, B, S, OFF, BF, FULL: { x: 0, y: 0, w: L.W, h: L.H } };
+}
+
+// ── type helpers ─────────────────────────────────────────────────────────────────────────────────────
+// Words rise out of a clip on tIn and leave upwards on tOut (never a plain fade).
+function words(ctx, text, x, y, t, tIn, tOut = 1e9, o = {}) {
+  if (t < tIn - 0.01 || t > tOut + 1.2) return 0;
+  const { color = D.c.ink, align = 'left', stagger = D.stagger } = o;
+  const ws = text.split(' '), space = ctx.measureText(' ').width, wd = ws.map((w) => ctx.measureText(w).width);
+  const total = wd.reduce((a, b) => a + b, 0) + space * (ws.length - 1);
+  const m = ctx.measureText('Hgjy(|'), asc = m.actualBoundingBoxAscent, desc = m.actualBoundingBoxDescent, lh = asc + desc;
+  let cx = align === 'center' ? x - total / 2 : align === 'right' ? x - total : x;
+  const pad = lh * 0.3;
+  ws.forEach((w, i) => {
+    const pin = sp(t - tIn - i * stagger, F.type), pout = sp(t - tOut - i * stagger * 0.6, F.ui);
+    if (pin > 0.001 && pout < 0.999) {
+      ctx.save(); ctx.beginPath(); ctx.rect(cx - pad, y - asc - pad * 0.5, wd[i] + pad * 2, lh + pad); ctx.clip();
+      ctx.globalAlpha = cl(pin * 2) * cl(1 - pout);
+      ctx.fillStyle = typeof color === 'function' ? color(i, w) : color;
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.fillText(w, cx, y + (1 - pin) * lh * 1.15 - cl(pout) * lh * 1.15);
+      ctx.restore();
+    }
+    cx += wd[i] + space;
+  });
+  return total;
+}
+
+// Segments of mixed style on one baseline: [{ s, it, c, at, k, fam, hide }]. Returns centers.
+function rich(ctx, segs, x, y, t, o = {}) {
+  const { size, align = 'left', tOut = 1e9, alpha = 1 } = o;
+  const fontOf = (g) => setFont(ctx, size * (g.k || 1), g.fam || SERIF, !!g.it);
+  const wd = segs.map((g) => { fontOf(g); return ctx.measureText(g.s).width; });
+  const total = wd.reduce((a, b) => a + b, 0);
+  let cx = align === 'center' ? x - total / 2 : align === 'right' ? x - total : x;
+  const out = [];
+  segs.forEach((g, i) => {
+    out.push({ x: cx + wd[i] / 2, y, w: wd[i], x0: cx });
+    const pin = g.at == null ? 1 : sp(t - g.at, F.type), pout = sp(t - tOut - i * 0.02, F.ui);
+    if (!g.hide && pin > 0.001 && pout < 0.999 && g.s.trim()) {
+      fontOf(g);
+      const px = size * (g.k || 1), lh = px * 1.1;
+      ctx.save(); ctx.beginPath(); ctx.rect(cx - px * 0.2, y - px * 0.95, wd[i] + px * 0.4, px * 1.3); ctx.clip();
+      ctx.globalAlpha = alpha * cl(pin * 2) * cl(1 - pout);
+      ctx.fillStyle = g.c || D.c.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.fillText(g.s, cx, y + (1 - pin) * lh - cl(pout) * lh);
+      ctx.restore();
+    }
+    cx += wd[i];
+  });
+  return out;
+}
+
+const kicker = (ctx, L, text, x, y, t, a, b) => { setFont(ctx, 3.2 * L.u, MONO, false, 600, 0.08); return words(ctx, text, x, y, t, a, b, { color: D.c.accentInk, stagger: 0.03 }); };
+const head = (ctx, L, text, x, y, t, a, b, o) => { setFont(ctx, (L.portrait ? 9.5 : 9) * L.u, SERIF); return words(ctx, text, x, y, t, a, b, o); };
+const body = (ctx, L, text, x, y, t, a, b, o) => { setFont(ctx, (L.portrait ? 4 : 3.6) * L.u, MONO, false, 500, -0.01); return words(ctx, text, x, y, t, a, b, o); };
+
+// An expanding ring that stamps an answer.
+function stamp(ctx, L, x, y, t, t0, color, r0 = 5) {
+  const p = (t - t0) / 0.7; if (p < 0 || p > 1) return;
+  ctx.save(); ctx.strokeStyle = color; ctx.globalAlpha = cl(1 - p) * 0.8; ctx.lineWidth = L.u * 0.35 * (1 - p) + 1;
+  ctx.beginPath(); ctx.arc(x, y, L.u * (r0 + 6 * M.ease.outCubic(p)), 0, M.TAU); ctx.stroke(); ctx.restore();
+}
+
+// ── matrices ─────────────────────────────────────────────────────────────────────────────────────────
+// Brackets grow from the center, entries rise in one by one. style(i, j) → { s, it, c, a, dx, dy, hide, swap: { to, at, it, c } }
+function mgeom(x, y, R, Cn, size) {
+  const cw = size * 1.4, rh = size * 1.28, W = Cn * cw, H = R * rh;
+  const centers = [];
+  for (let i = 0; i < R; i++) { centers.push([]); for (let j = 0; j < Cn; j++) centers[i].push([x - W / 2 + cw * (j + 0.5), y - H / 2 + rh * (i + 0.5)]); }
+  return { cw, rh, W, H, centers };
+}
+function matrix(ctx, L, x, y, t, o) {
+  const { cells, size, tIn, tOut = 1e9, bars = false, barP = 0, stagger = 0.07, it = false, style } = o;
+  const R = cells.length, Cn = cells[0].length, g = mgeom(x, y, R, Cn, size);
+  const pIn = sp(t - tIn, F.box), pOut = sp(t - tOut, F.ui);
+  if (pIn <= 0.001 || pOut >= 0.999) return g;
+  const A = cl(1 - pOut * 1.5);
+  ctx.save();
+  // brackets
+  const bh = (g.H + size * 0.25) * M.lerp(0.15, 1, cl(pIn)), lx = x - g.W / 2 - size * 0.12, rx = x + g.W / 2 + size * 0.12;
+  const top = y - bh / 2, bot = y + bh / 2, tick = bars ? 0 : size * 0.26 * (1 - cl(barP));
+  ctx.globalAlpha = A * cl(pIn * 3); ctx.strokeStyle = D.c.ink; ctx.lineWidth = Math.max(2, size * 0.055); ctx.lineCap = 'square'; ctx.lineJoin = 'miter';
+  ctx.beginPath(); ctx.moveTo(lx + tick, top); ctx.lineTo(lx, top); ctx.lineTo(lx, bot); ctx.lineTo(lx + tick, bot);
+  ctx.moveTo(rx - tick, top); ctx.lineTo(rx, top); ctx.lineTo(rx, bot); ctx.lineTo(rx - tick, bot); ctx.stroke();
+  // entries
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  for (let i = 0; i < R; i++) for (let j = 0; j < Cn; j++) {
+    const st = style ? style(i, j) || {} : {};
+    if (st.hide) continue;
+    const p = sp(t - (tIn + 0.12 + (i * Cn + j) * stagger), F.type);
+    const a = cl(p * 2) * A * (st.a ?? 1);
+    if (a <= 0.002) continue;
+    const [cx0, cy0] = g.centers[i][j], cx = cx0 + (st.dx || 0), cy = cy0 + (st.dy || 0);
+    const yy = cy + size * 0.33 + (1 - p) * size * 0.45 + cl(pOut) * size * 0.4;
+    ctx.globalAlpha = a;
+    const s0 = st.s ?? cells[i][j];
+    if (st.swap) {
+      const q = sp(t - st.swap.at, F.type);
+      ctx.save(); ctx.beginPath(); ctx.rect(cx - g.cw / 2, cy - g.rh / 2, g.cw, g.rh); ctx.clip();
+      if (q < 0.999) { setFont(ctx, size, SERIF, st.it ?? it); ctx.fillStyle = st.c || D.c.ink; ctx.fillText(s0, cx, yy - q * g.rh * 0.8); }
+      if (q > 0.001) { setFont(ctx, size, SERIF, !!st.swap.it); ctx.fillStyle = st.swap.c || D.c.ink; ctx.fillText(st.swap.to, cx, yy + (1 - q) * g.rh * 0.8); }
+      ctx.restore();
+    } else { setFont(ctx, size, SERIF, st.it ?? it); ctx.fillStyle = st.c || D.c.ink; ctx.fillText(s0, cx, yy); }
+  }
+  ctx.restore();
+  return g;
+}
+
+// ── the live plane ───────────────────────────────────────────────────────────────────────────────────
+const I2 = [1, 0, 0, 1], A2 = [3, 1, 1, 2];
+const MAT = [[0, I2], [0.3, A2, F.slow], [7.3, I2, F.box], [10.0, [3, 0, 1, 1], F.slow], [11.5, A2, F.slow],
+  [29.0, [1, 3, 2, 1], F.flip], [34.5, [2, 4, 1, 2], F.flip]];
+let VIEW;
+const viewKeys = (P) => [[0, [0.5, 0.5, 2.4]], [0.3, [2, P ? 0.9 : 1.5, 7], F.slow], [3.9, [2, 1.5, P ? 5.4 : 6.2], F.box], [34.4, [3, 1.5, P ? 6.8 : 7.6], F.box]];
+const matAt = (t) => [0, 1, 2, 3].map((k) => ktrack(t, MAT, k));
+
+function planeRect(t) {
+  const K = [[0, C.FULL], [3.9, C.B, F.box], [16.0, C.OFF, F.box], [22.5, C.BF, F.box], [26.95, C.B, F.box], [39.8, C.OFF, F.box]];
+  const f = (p) => ktrack(t, K.map((k) => [k[0], k[1][p], k[2]]));
+  return { x: f('x'), y: f('y'), w: f('w'), h: f('h') };
+}
+
+function arrow(ctx, L, x0, y0, x1, y1, color, w) {
+  const a = Math.atan2(y1 - y0, x1 - x0), len = Math.hypot(x1 - x0, y1 - y0), hl = Math.min(L.u * 2.4, len * 0.45);
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = w; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1 - Math.cos(a) * hl * 0.6, y1 - Math.sin(a) * hl * 0.6); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x1, y1);
+  ctx.lineTo(x1 - Math.cos(a - 0.42) * hl, y1 - Math.sin(a - 0.42) * hl); ctx.lineTo(x1 - Math.cos(a + 0.42) * hl, y1 - Math.sin(a + 0.42) * hl);
+  ctx.closePath(); ctx.fill();
+}
+
+// Color of signed area: amber when positive, red when flipped.
+const signCol = (det) => M.mix(D.c.accent, D.c.neg, M.smoothstep(0.25, -0.25, det));
+const signInk = (det) => M.mix(D.c.accentInk, D.c.neg, M.smoothstep(0.25, -0.25, det));
+const withA = (rgb, a) => rgb.replace('rgb(', 'rgba(').replace(')', `,${cl(a)})`);
+
+function drawPlane(ctx, t, L) {
+  const r = planeRect(t);
+  if (r.x >= L.W || r.y >= L.H) return;
+  const v = [0, 1, 2].map((k) => ktrack(t, VIEW, k)), u = L.u;
+  const s = Math.min(r.w, r.h) / v[2];
+  const ox = r.x + r.w / 2 - v[0] * s, oy = r.y + r.h / 2 + v[1] * s;
+  const m = matAt(t), det = m[0] * m[3] - m[1] * m[2];
+  const P = (x, y) => [ox + (m[0] * x + m[1] * y) * s, oy - (m[2] * x + m[3] * y) * s];
+  const Q = (x, y) => [ox + x * s, oy - y * s];
+  const line = (a, b) => { ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); };
+
+  ctx.save();
+  M.rrect(ctx, r.x, r.y, r.w, r.h, u * 2.2 * cl(sp(t - 3.9, F.box)));
+  ctx.fillStyle = D.c.surface; ctx.fill(); ctx.clip();
+  // the untouched grid, for reference
+  ctx.strokeStyle = D.c.gridBase; ctx.lineWidth = Math.max(1, u * 0.1); ctx.beginPath();
+  for (let i = -24; i <= 28; i++) { line(Q(i, -40), Q(i, 40)); line(Q(-40, i), Q(40, i)); }
+  ctx.stroke();
+  // the grid the matrix made
+  ctx.strokeStyle = M.rgba(D.c.grid, M.smoothstep(0.15, 1.2, Math.abs(det))); ctx.lineWidth = Math.max(1.2, u * 0.14); ctx.beginPath();
+  for (let i = -24; i <= 28; i++) { if (i) { line(P(i, -40), P(i, 40)); line(P(-40, i), P(40, i)); } }
+  ctx.stroke();
+  ctx.strokeStyle = M.rgba(D.c.ink, 0.35); ctx.lineWidth = Math.max(1.5, u * 0.2); ctx.beginPath();
+  line(P(0, -40), P(0, 40)); line(P(-40, 0), P(40, 0)); ctx.stroke();
+
+  // the unit square, carried by the matrix
+  const col = signCol(det), p0 = P(0, 0), p1 = P(1, 0), p2 = P(1, 1), p3 = P(0, 1);
+  ctx.beginPath(); ctx.moveTo(...p0); ctx.lineTo(...p1); ctx.lineTo(...p2); ctx.lineTo(...p3); ctx.closePath();
+  ctx.fillStyle = withA(col, 0.3); ctx.fill();
+  ctx.strokeStyle = col; ctx.lineWidth = u * 0.35; ctx.lineJoin = 'round'; ctx.stroke();
+
+  // orientation arc (sign section): turns the other way once space flips
+  const oa = cl(M.life(t, 28.3, 33.9, F.box)) * M.smoothstep(0.15, 0.6, Math.abs(det));
+  if (oa > 0.01) {
+    const th1 = Math.atan2(-m[2], m[0]), th2 = Math.atan2(-m[3], m[1]), R = s * 0.55, ccw = det > 0;
+    let d = th2 - th1; if (ccw && d > 0) d -= M.TAU; if (!ccw && d < 0) d += M.TAU;
+    const a0 = th1 + d * 0.12, a1 = th1 + d * 0.8;
+    ctx.globalAlpha = oa; ctx.strokeStyle = signInk(det); ctx.fillStyle = signInk(det); ctx.lineWidth = u * 0.4; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.arc(ox, oy, R, a0, a1, ccw); ctx.stroke();
+    const hx = ox + Math.cos(a1) * R, hy = oy + Math.sin(a1) * R, tang = a1 + (ccw ? -Math.PI / 2 : Math.PI / 2), hl = u * 1.6;
+    ctx.beginPath(); ctx.moveTo(hx + Math.cos(tang) * hl, hy + Math.sin(tang) * hl);
+    ctx.lineTo(hx + Math.cos(tang + 2.5) * hl, hy + Math.sin(tang + 2.5) * hl); ctx.lineTo(hx + Math.cos(tang - 2.5) * hl, hy + Math.sin(tang - 2.5) * hl); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // the two columns as vectors (highlighted while the matrix shows that column)
+  const hl1 = cl(M.life(t, 9.9, 11.5, F.box, 0.3)), hl2 = cl(M.life(t, 11.4, 13.0, F.box, 0.3));
+  arrow(ctx, L, ...p0, ...p1, M.mix(D.c.ink, D.c.accentInk, hl1), u * (0.45 + 0.25 * hl1));
+  arrow(ctx, L, ...p0, ...p3, M.mix(D.c.ink, D.c.accentInk, hl2), u * (0.45 + 0.25 * hl2));
+  ctx.beginPath(); ctx.arc(...p0, u * 0.7, 0, M.TAU); ctx.fillStyle = D.c.ink; ctx.fill();
+
+  // coordinates at the tips
+    const hide = Math.max(...[[28.85, 30.3], [34.4, 35.9]].map(([a, b]) => Math.min(cl((t - a) / 0.12), cl((b - t) / 0.3))));
+  const la = cl(M.life(t, 9.8, 39.9, F.box)) * (1 - hide);
+  if (la > 0.01) {
+    setFont(ctx, (L.portrait ? 3.6 : 3.2) * u, MONO, false, 600); ctx.textBaseline = 'middle'; ctx.fillStyle = M.rgba(D.c.ink, 0.85 * la);
+    for (const [tip, cx, cy, side] of [[p1, m[0], m[2], 1], [p3, m[1], m[3], -1]]) {
+      // along the vector, then off to its own side, so the two tags never share a line
+      const dx = tip[0] - ox, dy = tip[1] - oy, dl = Math.hypot(dx, dy) || 1, nx = (-dy / dl) * side, ny = (dx / dl) * side;
+      const lx = tip[0] + (dx / dl) * u * 1.5 + nx * u * 3, ly = tip[1] + (dy / dl) * u * 1.5 + ny * u * 3;
+      ctx.textAlign = lx >= tip[0] ? 'left' : 'right';
+      ctx.fillText(`(${num(cx)}, ${num(cy)})`, lx, ly);
+    }
+  }
+
+  // the live determinant, sitting inside the shape it measures
+  const [gx, gy] = P(0.5, 0.5), size = M.lerp(12, 8, cl(sp(t - 3.9, F.box))) * u;
+  const lift = M.smoothstep(2.5, 0, Math.abs(det)) * u * 8;
+  setFont(ctx, size, SERIF); ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = signInk(det); ctx.fillText(num(det), gx, gy + size * 0.33 - lift);
+  ctx.restore();
+}
+
+// ── scenes ───────────────────────────────────────────────────────────────────────────────────────────
+function hook(ctx, t, L) {
+  const u = L.u, x = L.safe.x, y = L.safe.y + 9 * u;
+  head(ctx, L, 'This matrix made', x, y, t, 0.7, 3.65);
+  head(ctx, L, 'every area 5× bigger.', x, y + 10 * u, t, 0.85, 3.7, { color: (i, w) => (w === '5×' ? D.c.accentInk : D.c.ink) });
+  const my = L.portrait ? L.H * 0.66 : L.H * 0.74, size = (L.portrait ? 7 : 6) * u;
+  const lab = rich(ctx, [{ s: 'A', it: true, at: 1.3 }, { s: ' =', at: 1.35 }], x, my + size * 0.33, t, { size: size * 1.1, tOut: 3.7 });
+  const g = mgeom(0, 0, 2, 2, size);
+  matrix(ctx, L, lab[1].x0 + lab[1].w + size * 0.6 + g.W / 2, my, t, { cells: [['3', '1'], ['1', '2']], size, tIn: 1.38, tOut: 3.7 });
+}
+
+function title(ctx, t, L) {
+  const { A } = C, u = L.u;
+  const px = Math.min(M.fitPx(ctx, 'Determinant', A.w, SERIF, 400), 17 * u);
+  const y1 = A.y + 7 * u, y2 = y1 + px * 0.95;
+  head(ctx, L, 'The', A.x, y1, t, 3.95, 7.6);
+  setFont(ctx, px, SERIF, false, 400, -0.02); words(ctx, 'Determinant', A.x - px * 0.03, y2, t, 4.0, 7.62);
+  const items = ['01  what it means', '02  how to compute it', '03  what its sign says', '04  3×3 in three steps'];
+  items.forEach((s, i) => body(ctx, L, s, A.x, y2 + 10 * u + i * 5.4 * u, t, 5.0 + i * 0.5, 7.5 + i * 0.03, { color: i === 0 ? D.c.ink : D.c.muted }));
+}
+
+function meaning(ctx, t, L) {
+  const { A, S } = C, u = L.u;
+  kicker(ctx, L, '01 · WHAT IT MEANS', A.x, S.k, t, 8.0, 15.9);
+  head(ctx, L, 'A matrix moves', A.x, S.h1, t, 8.1, 12.7); head(ctx, L, 'all of space.', A.x, S.h2, t, 8.2, 12.72);
+  head(ctx, L, 'det = how much', A.x, S.h1, t, 13.0, 15.9); head(ctx, L, 'area stretches.', A.x, S.h2, t, 13.1, 15.92,
+    { color: (i) => (i === 1 ? D.c.accentInk : D.c.ink) });
+  const size = S.matSize, g = mgeom(0, 0, 2, 2, size), mx = A.x + g.W / 2 + size * 0.3;
+  // column highlight boxes, synced with the plane
+  for (const [j, a, b] of [[0, 9.9, 11.5], [1, 11.4, 13.0]]) {
+    const p = cl(M.life(t, a, b, F.box, 0.3)); if (p < 0.01) continue;
+    const gg = mgeom(mx, S.mat, 2, 2, size), cx = gg.centers[0][j][0];
+    ctx.fillStyle = M.rgba(D.c.accent, 0.25 * p);
+    M.rrect(ctx, cx - gg.cw * 0.42, S.mat - (gg.H / 2 + size * 0.2) * p, gg.cw * 0.84, (gg.H + size * 0.4) * p, u * 1.2); ctx.fill();
+  }
+  matrix(ctx, L, mx, S.mat, t, { cells: [['3', '1'], ['1', '2']], size, tIn: 8.88, tOut: 15.9 });
+  body(ctx, L, 'column 1 = where (1, 0) lands', A.x, S.b1, t, 10.0, 13.4);
+  body(ctx, L, 'column 2 = where (0, 1) lands', A.x, S.b2, t, 11.5, 13.45);
+  const r = rich(ctx, [{ s: 'det ', at: 13.8 }, { s: 'A', it: true, at: 13.85 }, { s: ' = ', at: 13.9 }, { s: '5', c: D.c.accentInk, at: 14.0 }],
+    A.x, S.b1 + 3 * u, t, { size: 9 * u, tOut: 15.9 });
+  stamp(ctx, L, r[3].x, S.b1 + 3 * u - 3 * u, t, 14.0, D.c.accent);
+}
+
+function formula(ctx, t, L) {
+  const { A, B, S } = C, u = L.u;
+  kicker(ctx, L, '02 · HOW TO COMPUTE IT', A.x, S.k, t, 16.0, 27.9);
+  head(ctx, L, 'Multiply diagonals,', A.x, S.h1, t, 16.1, 22.8); head(ctx, L, 'then subtract.', A.x, S.h2, t, 16.2, 22.82);
+  head(ctx, L, 'Now plug in', A.x, S.h1, t, 23.0, 27.9); head(ctx, L, 'our matrix.', A.x, S.h2, t, 23.1, 27.92);
+  const by = L.portrait ? L.H * 0.458 + 8.5 * u : S.h2 + 9 * u;
+  const bx = L.portrait ? L.W / 2 - 16 * u : A.x;
+  body(ctx, L, '↘ down:  a × d', bx, by, t, 18.2, 22.8, { color: D.c.accentInk });
+  body(ctx, L, '↙ up:    b × c', bx, by + 5.5 * u, t, 20.2, 22.82, { color: D.c.neg });
+  body(ctx, L, 'same 5 as the area ✓', A.x, S.h2 + 9 * u, t, 26.95, 27.9, { color: D.c.accentInk });
+
+  const size = (L.portrait ? 9 : 12) * u, mx = B.x + B.w / 2, my = L.portrait ? L.H * 0.335 : B.y + B.h * 0.34, g = mgeom(mx, my, 2, 2, size);
+  const out = cl(1 - sp(t - 26.9, F.ui));
+  // diagonal highlighters, drawn behind the entries
+  const band = (i0, j0, i1, j1, t0, color) => {
+    const p = cl(sp(t - t0, F.box)) * out; if (p < 0.01) return;
+    const [x0, y0] = g.centers[i0][j0], [x1, y1] = g.centers[i1][j1], a = Math.atan2(y1 - y0, x1 - x0), len = Math.hypot(x1 - x0, y1 - y0) + size * 1.1;
+    const off = len * cl(sp(t - 26.0, F.box));
+    if (len * p - off < size * 0.05) return;
+    ctx.save(); ctx.translate(x0, y0); ctx.rotate(a); ctx.fillStyle = color;
+    M.rrect(ctx, -size * 0.55 + off, -size * 0.55, len * p - off, size * 1.1, size * 0.55); ctx.fill(); ctx.restore();
+  };
+  band(0, 0, 1, 1, 18.0, M.rgba(D.c.accent, 0.28));
+  band(0, 1, 1, 0, 20.0, M.rgba(D.c.neg, 0.18));
+  const nums = [['3', '1'], ['1', '2']];
+  matrix(ctx, L, mx, my, t, { cells: [['a', 'b'], ['c', 'd']], size, tIn: 16.38, stagger: 0.25, it: true, tOut: 26.9,
+    style: (i, j) => ({ swap: { to: nums[i][j], at: 23.2 + (i * 2 + j) * 0.15 } }) });
+
+  // det = ad − bc: the letters fly out of the matrix into place
+  const fy = L.portrait ? L.H * 0.458 : B.y + B.h * 0.72, fs = (L.portrait ? 10 : 9) * u;
+  const segs = [{ s: 'det = ', at: 18.3 }, { s: 'a', it: true, hide: true }, { s: 'd', it: true, hide: true },
+    { s: ` ${MINUS} `, at: 20.3 }, { s: 'b', it: true, hide: true }, { s: 'c', it: true, hide: true }];
+  const pos = rich(ctx, segs, mx, fy, t, { size: fs, align: 'center', tOut: 26.9 });
+  const fly = [[1, 0, 0, 18.5, D.c.accentInk], [2, 1, 1, 18.62, D.c.accentInk], [4, 0, 1, 20.5, D.c.neg], [5, 1, 0, 20.62, D.c.neg]];
+  for (const [si, i, j, t0, c] of fly) {
+    const p = sp(t - t0, F.box); if (p <= 0.001) continue;
+    const [sx, sy] = g.centers[i][j], arc = Math.sin(Math.PI * cl(p)) * u * 6;
+    const x = M.lerp(sx, pos[si].x, p), y = M.lerp(sy + size * 0.33, fy, p) - arc, fz = M.lerp(size, fs, p);
+    const po = sp(t - 26.9 - si * 0.02, F.ui);
+    ctx.save(); ctx.globalAlpha = cl(1 - po * 1.6); setFont(ctx, fz, SERIF, true); ctx.fillStyle = c; ctx.textAlign = 'center';
+    ctx.fillText(segs[si].s, x, y - cl(po) * fs); ctx.restore();
+  }
+  // the box that says "this is the formula"
+  const bp = cl(sp(t - 22.0, F.ui));
+  if (bp > 0.01 && out > 0.02) {
+    const x0 = pos[0].x0 - fs * 0.45, x1 = pos[5].x0 + pos[5].w + fs * 0.45, w = (x1 - x0) * bp;
+    ctx.save(); ctx.globalAlpha = out * out; ctx.strokeStyle = D.c.ink; ctx.lineWidth = u * 0.3;
+    M.rrect(ctx, (x0 + x1) / 2 - w / 2, fy - fs * 0.95 - (1 - out) * fs, w, fs * 1.35, u * 1.4); ctx.stroke(); ctx.restore();
+  }
+  // the worked line rolls: 3·2 − 1·1 → 6 − 1 → 5
+  const ly = L.portrait ? L.H * 0.458 + 12 * u : B.y + B.h * 0.9, ls = (L.portrait ? 9.5 : 9) * u, A_ = D.c.accentInk, N = D.c.neg;
+  rich(ctx, [{ s: '= ', at: 24.0 }, { s: `3 ${TIMES} 2`, c: A_, at: 24.05 }, { s: ` ${MINUS} `, at: 24.15 }, { s: `1 ${TIMES} 1`, c: N, at: 24.2 }], mx, ly, t, { size: ls, align: 'center', tOut: 25.0 });
+  rich(ctx, [{ s: '= ', at: 25.0 }, { s: '6', c: A_, at: 25.05 }, { s: ` ${MINUS} `, at: 25.1 }, { s: '1', c: N, at: 25.15 }], mx, ly, t, { size: ls, align: 'center', tOut: 26.0 });
+  const r = rich(ctx, [{ s: '= ', at: 26.0 }, { s: '5', c: A_, k: 1.3, at: 26.02 }], mx, ly, t, { size: ls, align: 'center', tOut: 26.9 });
+  stamp(ctx, L, r[1].x, ly - ls * 0.4, t, 26.05, D.c.accent, 4);
+}
+
+function sign(ctx, t, L) {
+  const { A, S } = C, u = L.u;
+  kicker(ctx, L, '03 · THE SIGN', A.x, S.k, t, 28.0, 33.9);
+  head(ctx, L, 'Swap the two', A.x, S.h1, t, 28.1, 31.2); head(ctx, L, 'columns…', A.x, S.h2, t, 28.2, 31.22);
+  head(ctx, L, 'Negative det:', A.x, S.h1, t, 31.4, 33.9, { color: (i) => (i === 0 ? D.c.neg : D.c.ink) });
+  head(ctx, L, 'space flips over.', A.x, S.h2, t, 31.5, 33.92);
+  const size = S.matSize, g = mgeom(0, 0, 2, 2, size), mx = A.x + g.W / 2 + size * 0.3;
+  const p = sp(t - 28.8, F.box), lift = Math.sin(Math.PI * cl(p)) * size * 0.55;
+  matrix(ctx, L, mx, S.mat, t, { cells: [['3', '1'], ['1', '2']], size, tIn: 28.18, tOut: 33.9,
+    style: (i, j) => (j === 0 ? { dx: g.cw * p, dy: -lift } : { dx: -g.cw * p, dy: lift }) });
+  const N = D.c.neg;
+  rich(ctx, [{ s: `1 ${TIMES} 1`, at: 30.3 }, { s: ` ${MINUS} `, at: 30.35 }, { s: `3 ${TIMES} 2`, c: N, at: 30.4 }, { s: ' = ', at: 30.45 }, { s: `${MINUS}5`, c: N, at: 30.5 }],
+    A.x, S.b1 + 3 * u, t, { size: 8 * u, tOut: 33.9 });
+}
+
+function zero(ctx, t, L) {
+  const { A, S } = C, u = L.u;
+  kicker(ctx, L, '04 · WHEN IT IS ZERO', A.x, S.k, t, 34.0, 39.55);
+  head(ctx, L, 'What if', A.x, S.h1, t, 34.1, 37.2); head(ctx, L, 'det = 0?', A.x, S.h2, t, 34.2, 37.22);
+  head(ctx, L, 'Space gets', A.x, S.h1, t, 37.4, 39.55); head(ctx, L, 'squashed flat.', A.x, S.h2, t, 37.5, 39.6);
+  const size = S.matSize, g = mgeom(0, 0, 2, 2, size), mx = A.x + g.W / 2 + size * 0.3;
+  matrix(ctx, L, mx, S.mat, t, { cells: [['2', '4'], ['1', '2']], size, tIn: 34.18, tOut: 39.55 });
+  rich(ctx, [{ s: `2 ${TIMES} 2`, at: 36.3 }, { s: ` ${MINUS} `, at: 36.35 }, { s: `4 ${TIMES} 1`, c: D.c.neg, at: 36.4 }, { s: ' = ', at: 36.45 }, { s: '0', at: 36.5 }],
+    A.x, S.b1 + 3 * u, t, { size: 8 * u, tOut: 39.7 });
+  body(ctx, L, "→ no inverse: it can't be undone", A.x, S.b2 + 2 * u, t, 38.0, 39.7, { color: D.c.muted });
+}
+
+// 3×3 by cofactor expansion along the first row.
+const M3 = [['2', '1', '0'], ['1', '3', '1'], ['0', '1', '2']];
+const T3 = [42, 44.5, 47];
+const TERMS = [
+  { sign: '+', pivot: '2', res: [`2 ${TIMES} 5`, '10'] },
+  { sign: MINUS, pivot: '1', res: [`${MINUS}1 ${TIMES} 2`, `${MINUS}2`] },
+  { sign: '+', pivot: '0', res: null },
+];
+function three(ctx, t, L) {
+  const { A, B, S } = C, u = L.u, out = 54.6;
+  // exit: a curtain wipes the whole expansion upward off the frame (no ghostly fade)
+  const wp = cl(sp(t - 53.5, F.box));
+  ctx.save();
+  if (wp > 0.001) { ctx.beginPath(); ctx.rect(0, L.H * wp * 1.06, L.W, L.H); ctx.clip(); ctx.translate(0, -6 * u * wp); }
+  kicker(ctx, L, '05 · BIGGER: 3×3', A.x, S.k, t, 39.8, out);
+  head(ctx, L, 'Break it into', A.x, S.h1, t, 39.85, 49.5); head(ctx, L, 'little 2×2s.', A.x, S.h2, t, 39.9, 49.52);
+  head(ctx, L, 'Add them up', A.x, S.h1, t, 49.6, out); head(ctx, L, 'with signs + − +', A.x, S.h2, t, 49.7, out + 0.02);
+  const size = S.m3Size, my = S.m3, g0 = mgeom(0, 0, 3, 3, size), mx = A.x + g0.W / 2 + size * 0.3;
+  const g = mgeom(mx, my, 3, 3, size);
+  const active = (k) => cl(M.life(t, T3[k], T3[k] + 2.4, F.box, 0.3));
+  const pout = sp(t - out, F.ui), vis = cl(1 - pout);
+  // pivot ring behind the entry
+  for (let k = 0; k < 3; k++) {
+    const a = active(k) * vis; if (a < 0.01) continue;
+    const [cx, cy] = g.centers[0][k];
+    ctx.beginPath(); ctx.arc(cx, cy, size * 0.62 * cl(sp(t - T3[k], F.ui)), 0, M.TAU); ctx.fillStyle = M.rgba(D.c.accent, 0.35 * a); ctx.fill();
+  }
+  matrix(ctx, L, mx, my, t, { cells: M3, size, tIn: 39.85, stagger: 0.06, tOut: out, barP: sp(t - 51.9, F.ui),
+    style: (i, j) => { let a = 1; for (let k = 0; k < 3; k++) { const q = active(k); if ((i === 0 || j === k) && !(i === 0 && j === k)) a = Math.min(a, 1 - 0.78 * q); } return { a }; } });
+  // strike the pivot's row and column
+  for (let k = 0; k < 3; k++) {
+    const a = active(k) * vis; if (a < 0.01) continue;
+    const p = cl(sp(t - T3[k] - 0.15, F.box));
+    ctx.strokeStyle = M.rgba(D.c.ink, 0.55 * a); ctx.lineWidth = u * 0.3; ctx.lineCap = 'round';
+    const [rx0, ry] = g.centers[0][0], [rx1] = g.centers[0][2], [cx, cy0] = g.centers[0][k], [, cy1] = g.centers[2][k];
+    ctx.beginPath(); ctx.moveTo(rx0 - size * 0.5, ry); ctx.lineTo(M.lerp(rx0 - size * 0.5, rx1 + size * 0.5, p), ry);
+    ctx.moveTo(cx, cy0 - size * 0.5); ctx.lineTo(cx, M.lerp(cy0 - size * 0.5, cy1 + size * 0.5, p)); ctx.stroke();
+  }
+  // + − + chips above the first row
+  ['+', MINUS, '+'].forEach((s, k) => {
+    const p = sp(t - (41.0 + k * 0.25), F.ui) * vis; if (p < 0.01) return;
+    const [cx] = g.centers[0][k], cy = my - g.H / 2 - size * 0.62;
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(cl(p, 0, 1.2), cl(p, 0, 1.2));
+    ctx.beginPath(); ctx.arc(0, 0, u * 2.1, 0, M.TAU); ctx.fillStyle = k === 1 ? D.c.neg : D.c.ink; ctx.fill();
+    setFont(ctx, 3.2 * u, MONO, false, 700); ctx.fillStyle = D.c.surface; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(s, 0, u * 0.15);
+    ctx.restore();
+  });
+
+  // expansion rows in B
+  const x0 = B.x + 3 * u, rs = 7.5 * u, ms = 6 * u;
+  // one column grid for all three rows, so the minors line up
+  setFont(ctx, rs, SERIF); const coefW = ctx.measureText(`${MINUS}2 ${DOT} `).width;
+  const mgw = mgeom(0, 0, 2, 2, ms).W, colDot = x0 + coefW, colMinor = colDot + ms * 0.35 + mgw / 2, colRes = colMinor + mgw / 2 + ms * 0.5;
+  const rowY = (k) => (L.portrait ? L.H * (0.5 + 0.1 * k) : B.y + B.h * (0.12 + 0.225 * k));
+  // a soft row marker travels down the expansion: "this is the term we're on"
+  const ba = cl(M.life(t, T3[0] - 0.05, 49.7, F.box, 0.4));
+  if (ba > 0.01) {
+    const by = M.track(t, T3.map((tt, k) => [tt, rowY(k)]), ...F.box), bh = ms * 2.9, bw = (L.portrait ? L.W * 0.95 : B.x + B.w + 2 * u) - (x0 - 2 * u);
+    ctx.fillStyle = M.rgba(D.c.accent, 0.16 * ba); M.rrect(ctx, x0 - 2 * u, by - bh / 2, bw * cl(sp(t - T3[0] + 0.05, F.box)), bh, u * 1.5); ctx.fill();
+  }
+  TERMS.forEach((T, k) => {
+    const t0 = T3[k], ry = rowY(k);
+    const seg = rich(ctx, [{ s: T.sign, at: t0 + 0.3, c: k === 1 ? D.c.neg : D.c.ink }, { s: T.pivot, hide: true }, { s: ` ${DOT} `, at: t0 + 0.45 }], colDot, ry + rs * 0.33, t, { size: rs, tOut: out, align: 'right' });
+    // pivot flies from the big matrix
+    const pf = sp(t - (t0 + 0.3), F.box);
+    const po = sp(t - out, F.ui);
+    if (pf > 0.001) {
+      const [sx, sy] = g.centers[0][k];
+      ctx.save(); ctx.globalAlpha = cl(1 - po); setFont(ctx, M.lerp(size, rs, pf), SERIF); ctx.fillStyle = D.c.accentInk; ctx.textAlign = 'center';
+      ctx.fillText(T.pivot, M.lerp(sx, seg[1].x, pf), M.lerp(sy + size * 0.33, ry + rs * 0.33, pf) - Math.sin(Math.PI * cl(pf)) * u * 4 - cl(po) * rs); ctx.restore();
+    }
+    // the minor: bars, then its four entries fly over
+    const mcx = colMinor;
+    const mg = matrix(ctx, L, mcx, ry, t, { cells: [['', ''], ['', '']], size: ms, tIn: t0 + 0.75, bars: true, tOut: out, style: () => ({ hide: true }) });
+    const cols = [0, 1, 2].filter((j) => j !== k);
+    [1, 2].forEach((i, ii) => cols.forEach((j, jj) => {
+      const p = sp(t - (t0 + 0.5 + (ii * 2 + jj) * 0.1), F.box); if (p <= 0.001) return;
+      const [sx, sy] = g.centers[i][j], [dx, dy] = mg.centers[ii][jj], fz = M.lerp(size, ms, p);
+      ctx.save(); ctx.globalAlpha = cl(1 - po); setFont(ctx, fz, SERIF); ctx.fillStyle = D.c.ink; ctx.textAlign = 'center';
+      ctx.fillText(M3[i][j], M.lerp(sx, dx, p), M.lerp(sy, dy, p) + fz * 0.33 - Math.sin(Math.PI * cl(p)) * u * 3 - cl(po) * ms); ctx.restore();
+    }));
+    const rx = colRes;
+    if (T.res) {
+      const rr = rich(ctx, [{ s: ' = ', at: t0 + 1.5 }, { s: T.res[0], at: t0 + 1.55 }, { s: ' = ', at: t0 + 2.0 }, { s: T.res[1], c: k === 1 ? D.c.neg : D.c.accentInk, at: t0 + 2.05 }], rx, ry + rs * 0.33, t, { size: rs, tOut: out });
+      stamp(ctx, L, rr[3].x, ry, t, t0 + 2.05, k === 1 ? D.c.neg : D.c.accent, 4);
+    } else {
+      const z = rich(ctx, [{ s: ' = ', at: t0 + 1.5 }, { s: '0', c: D.c.accentInk, at: t0 + 1.55 }], rx, ry + rs * 0.33, t, { size: rs, tOut: out });
+      stamp(ctx, L, z[1].x, ry, t, t0 + 1.55, D.c.accent, 4);
+      setFont(ctx, 3.4 * u, MONO, false, 600);
+      words(ctx, '← zero: skip it', z[1].x0 + z[1].w + 2.5 * u, ry + rs * 0.2, t, t0 + 2.0, out, { color: D.c.accentInk });
+    }
+  });
+  // the sum and the answer
+  const sy = L.portrait ? L.H * 0.815 : B.y + B.h * 0.9, ss = (L.portrait ? 8.5 : 8) * u;
+  const r = rich(ctx, [{ s: 'det = ', at: 50.0 }, { s: '10', c: D.c.accentInk, at: 50.25 }, { s: ` ${MINUS} 2`, c: D.c.neg, at: 50.5 }, { s: ' + 0', at: 50.75 },
+    { s: ' = ', at: 51.5 }, { s: '8', c: D.c.accentInk, k: 1.35, at: 52.0 }], x0, sy, t, { size: ss, tOut: out });
+  const lp = cl(sp(t - 49.8, F.box)) * cl(1 - sp(t - out, F.ui));
+  if (lp > 0.01) { ctx.fillStyle = D.c.ink; ctx.fillRect(x0, sy - ss * 1.15, (B.w - 6 * u) * lp, Math.max(2, u * 0.2)); }
+  stamp(ctx, L, r[5].x, sy - ss * 0.45, t, 52.0, D.c.accent, 5);
+  // the same answer, stamped onto the matrix itself: |A| = 8
+  const big = rich(ctx, [{ s: '= ', at: 52.0 }, { s: '8', c: D.c.accentInk, k: 1.5, at: 52.05 }], mx + g.W / 2 + size * 0.9, my + size * 0.45, t, { size: size * 1.2, tOut: out });
+  stamp(ctx, L, big[1].x, my - size * 0.1, t, 52.1, D.c.accent, 8);
+  ctx.restore();
+  if (wp > 0.001 && wp < 0.98) { ctx.fillStyle = D.c.accent; ctx.fillRect(0, L.H * wp * 1.06 - u * 0.25, L.W, u * 0.5); }
+}
+
+// Recap cards, then the lockup.
+function miniPara(ctx, cx, cy, s, m, color, arrowFlip) {
+  const P = (x, y) => [cx + ((m[0] * x + m[1] * y) - (m[0] + m[1]) / 2) * s, cy - ((m[2] * x + m[3] * y) - (m[2] + m[3]) / 2) * s];
+  ctx.beginPath(); ctx.moveTo(...P(0, 0)); ctx.lineTo(...P(1, 0)); ctx.lineTo(...P(1, 1)); ctx.lineTo(...P(0, 1)); ctx.closePath();
+  ctx.fillStyle = M.rgba(color, 0.3); ctx.fill(); ctx.strokeStyle = color; ctx.lineWidth = Math.max(2, s * 0.05); ctx.lineJoin = 'round'; ctx.stroke();
+}
+function recap(ctx, t, L) {
+  const u = L.u, sf = L.safe, gap = 2.2 * u;
+  const cards = [
+    { f: [{ s: 'a', it: true, c: D.c.accentInk }, { s: 'd', it: true, c: D.c.accentInk }, { s: ` ${MINUS} ` }, { s: 'b', it: true, c: D.c.neg }, { s: 'c', it: true, c: D.c.neg }], cap: 'a 2×2: multiply, subtract', g: 'x' },
+    { f: [{ s: '|det|' }], cap: 'how much area stretches', g: 'pos' },
+    { f: [{ s: 'det < 0', c: D.c.neg }], cap: 'space flips over', g: 'neg' },
+    { f: [{ s: 'det = 0' }], cap: 'squashed flat · no inverse', g: 'zero' },
+  ];
+  cards.forEach((cd, i) => {
+    const tin = 53.55 + i * 0.5, tout = 57.45 + i * 0.05;
+    const pin = sp(t - tin, F.box), pout = sp(t - tout, F.ui);
+    if (pin <= 0.001 || pout >= 0.999) return;
+    let x, y, w, h;
+    if (L.portrait) { w = sf.w; h = (sf.h - gap * 3) / 4; x = sf.x; y = sf.y + i * (h + gap); }
+    else { w = (sf.w - gap) / 2; h = (sf.h - gap) / 2; x = sf.x + (i % 2) * (w + gap); y = sf.y + Math.floor(i / 2) * (h + gap); }
+    const dy = (1 - pin) * u * 8 + cl(pout) * L.H * 0.12, sc = M.lerp(0.94, 1, pin);
+    const ca = cl(pin * 2.5) * cl(1 - pout * 1.8);
+    ctx.save(); ctx.globalAlpha = ca;
+    ctx.translate(x + w / 2, y + h / 2 + dy); ctx.scale(sc, sc); ctx.translate(-w / 2, -h / 2);
+    M.rrect(ctx, 0, 0, w, h, u * 2.2); ctx.fillStyle = D.c.surface; ctx.fill();
+    ctx.strokeStyle = M.rgba(D.c.ink, 0.08); ctx.lineWidth = 2; ctx.stroke();
+    setFont(ctx, 3.2 * u, MONO, false, 600, 0.08); ctx.fillStyle = D.c.muted; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(`0${i + 1}`, 4 * u, 6.5 * u);
+    const fy = h * 0.58, ms = Math.min(9 * u, h * 0.3);
+    rich(ctx, cd.f, 4 * u, fy, t, { size: ms, alpha: ca });
+    setFont(ctx, 3.6 * u, MONO, false, 500); ctx.fillStyle = D.c.ink; ctx.fillText(cd.cap, 4 * u, fy + 7 * u);
+    const gx = w - h * 0.32, gy = h / 2, gs = h * 0.13, gp = cl(sp(t - tin - 0.2, F.slow));
+    if (cd.g === 'pos') miniPara(ctx, gx, gy, gs, [M.lerp(1, 3, gp) * 0.5, 0.5 * gp * 1, 0.5 * gp, M.lerp(1, 2, gp) * 0.5].map((v) => v * 1.6), D.c.accent);
+    if (cd.g === 'neg') miniPara(ctx, gx, gy, gs, [M.lerp(3, 1, gp), M.lerp(1, 3, gp), M.lerp(1, 2, gp), M.lerp(2, 1, gp)].map((v) => v * 0.8), M.mix(D.c.accent, D.c.neg, M.smoothstep(0.4, 0.6, gp)).replace(/rgb\((\d+),(\d+),(\d+)\)/, (_, r, g, b) => '#' + [r, g, b].map((n) => (+n).toString(16).padStart(2, '0')).join('')));
+    if (cd.g === 'zero') miniPara(ctx, gx, gy, gs, [2, M.lerp(1, 4, gp), 1, M.lerp(2.5, 2, gp)].map((v) => v * 0.6), D.c.ink);
+    if (cd.g === 'x') {
+      const s2 = gs * 1.1, lw = u * 1.2;
+      ctx.lineCap = 'round'; ctx.lineWidth = lw;
+      ctx.strokeStyle = M.rgba(D.c.accent, 0.8); ctx.beginPath(); ctx.moveTo(gx - s2, gy - s2); ctx.lineTo(gx - s2 + 2 * s2 * gp, gy - s2 + 2 * s2 * gp); ctx.stroke();
+      const g2 = cl(sp(t - tin - 0.45, F.slow));
+      ctx.strokeStyle = M.rgba(D.c.neg, 0.7); ctx.beginPath(); ctx.moveTo(gx + s2, gy - s2); ctx.lineTo(gx + s2 - 2 * s2 * g2, gy - s2 + 2 * s2 * g2); ctx.stroke();
+    }
+    ctx.restore();
+  });
+}
+
+function lockup(ctx, t, L) {
+  if (t < 57.45) return;
+  const u = L.u, lt = t - 57.5, push = 1 + 0.015 * cl((t - 58) / 2);
+  ctx.save(); ctx.translate(L.cx, L.cy); ctx.scale(push, push); ctx.translate(-L.cx, -L.cy);
+  const gp = cl(sp(lt - 0.25, F.slow)), m = [M.lerp(1, 3, gp), gp, gp, M.lerp(1, 2, gp)];
+  const gcx = L.portrait ? L.cx : L.W * 0.3, gcy = L.portrait ? L.H * 0.36 : L.cy, gs = (L.portrait ? 16 : 17) * u * cl(sp(lt, F.box));
+  if (gs > 0.5) {
+    miniPara(ctx, gcx, gcy, gs, m, D.c.accent);
+    const det = m[0] * m[3] - m[1] * m[2];
+    setFont(ctx, 9 * u, SERIF); ctx.fillStyle = D.c.accentInk; ctx.textAlign = 'center'; ctx.fillText(num(det), gcx, gcy + 3 * u);
+  }
+  const hx = L.portrait ? L.safe.x : L.W * 0.52, hy = L.portrait ? L.H * 0.62 : L.cy + 2 * u;
+  setFont(ctx, 16 * u, SERIF); words(ctx, "det(A)", hx, hy, t, 57.7, 1e9, { color: D.c.ink });
+  setFont(ctx, 4.2 * u, MONO, false, 500);
+  words(ctx, 'one number:', hx, hy + 9 * u, t, 58.3, 1e9, { color: D.c.muted });
+  words(ctx, 'how much space stretches', hx, hy + 15 * u, t, 58.4, 1e9, { color: D.c.ink });
+  ctx.restore();
+}
+
+film({
+  async setup(L, c) { cfg = c; D = await loadDesign(); C = lay(L); VIEW = viewKeys(L.portrait); },
+  draw(ctx, t, L) {
+    ctx.fillStyle = D.c.bg; ctx.fillRect(0, 0, L.W, L.H);
+    if (t < 41) drawPlane(ctx, t, L);
+    if (t < 4.8) hook(ctx, t, L);
+    if (t > 3.9 && t < 8.8) title(ctx, t, L);
+    if (t > 7.9 && t < 16.8) meaning(ctx, t, L);
+    if (t > 15.9 && t < 28.8) formula(ctx, t, L);
+    if (t > 27.9 && t < 34.8) sign(ctx, t, L);
+    if (t > 33.9 && t < 41) zero(ctx, t, L);
+    if (t > 39.8 && t < 54.7) three(ctx, t, L);
+    if (t > 53.5 && t < 58.6) recap(ctx, t, L);
+    lockup(ctx, t, L);
+  },
+});
+</script>
+</body>
+</html>

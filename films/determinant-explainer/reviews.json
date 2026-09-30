@@ -1,0 +1,107 @@
+[
+  {
+    "round": 1,
+    "at": "2026-09-29T14:42:59.598Z",
+    "reviewer": "director (self), round 1",
+    "scores": {
+      "hook": 6,
+      "readability": 7,
+      "motion": 7,
+      "variety": 8,
+      "composition": 6,
+      "brand": 8,
+      "sound": 1
+    },
+    "min": 1,
+    "pass": false,
+    "problems": [
+      {
+        "t": 0,
+        "issue": "First frame is a tiny unit square lost in an empty grid: the hook image is weak until 1 s",
+        "fix": "Start the plane camera zoomed in on the square (span 2.6) and pull out as it shears, so frame 0 is a big amber square labelled 1"
+      },
+      {
+        "t": 40,
+        "issue": "Near-blank frames at 39.8-40.2 and 57.8-58.1: one scene fully leaves before the next arrives",
+        "fix": "Overlap: 3x3 kicker/headline enter at 39.9 and matrix at 40.05; recap cards exit 57.35, lockup enters 57.7"
+      },
+      {
+        "t": 29.3,
+        "issue": "Coordinate labels stack on top of each other while the parallelogram flattens (flip at 29.3, collapse at 35.3); the formula-scene body text sits far from its headline in 16:9",
+        "fix": "Fade the tip labels by |det| while a flip/collapse is in flight; move formula body lines directly under the headline"
+      }
+    ],
+    "notes": "Structure and the live-plane device work in both formats after the portrait relayout. Sound not built yet.",
+    "sheets": []
+  },
+  {
+    "round": 2,
+    "at": "2026-09-29T14:45:05.637Z",
+    "reviewer": "director (self), round 2",
+    "scores": {
+      "hook": 8,
+      "readability": 8,
+      "motion": 8,
+      "variety": 8,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 15.8,
+        "issue": "Scene boundaries (15.8, 27.8, 33.8, 53.8) left near-empty text panels for ~0.4 s",
+        "fix": "Outgoing text now exits on the same slots as the incoming roll (tOut ≈ next tIn); verified in the every-1.5 sheet"
+      },
+      {
+        "t": 35.8,
+        "issue": "Collapsing grid turned into a muddy grey hatched band",
+        "fix": "Transformed-grid alpha scales with |det| (0.15 floor) so the collapse reads as one clean line"
+      },
+      {
+        "t": 59,
+        "issue": "Lockup caption (3.6u mono) is small next to the 16u det(A) in 16:9; the formula scene leaves the lower-left of panel A empty in 16:9",
+        "fix": "Bump lockup captions to 4.2u; accept the formula-scene negative space (the eye is on the matrix)"
+      }
+    ],
+    "notes": "Sound built (103 cues, piano score building to a drive section under the 3x3). Needs a listen and the loudness gate.",
+    "sheets": []
+  },
+  {
+    "round": 3,
+    "at": "2026-09-29T14:48:51.219Z",
+    "reviewer": "director (self), round 3",
+    "scores": {
+      "hook": 8,
+      "readability": 8,
+      "motion": 8,
+      "variety": 8,
+      "composition": 8,
+      "brand": 8,
+      "sound": 8
+    },
+    "min": 8,
+    "pass": true,
+    "problems": [
+      {
+        "t": 24.3,
+        "issue": "Worked-example hold 24.3-26.9 had no visible motion; the plane only returned at 27.8",
+        "fix": "Done: the highlighters retract when the answer lands (26.0), the plane slides back with its 5 at 26.95 as the 'same 5 as the area' callback"
+      },
+      {
+        "t": 51.1,
+        "issue": "After the 3x3 sum nothing moved for 2.7 s and the answer lived only in the small sum line",
+        "fix": "Done: the big matrix's brackets morph into det bars and '= 8' is stamped beside it on the 52 downbeat"
+      },
+      {
+        "t": 57.8,
+        "issue": "Recap card formulas stayed opaque while the cards faded out (rich() overrode the parent alpha)",
+        "fix": "Done: rich() takes an alpha; cards pass theirs"
+      }
+    ],
+    "notes": "Gates PASS (dead-time with maxStill 2.5 s: explainer reading holds). Novelty WARN in the formula build and the 3x3: events are frequent but small-area by nature. True peak -0.8 dBFS.",
+    "sheets": []
+  }
+]

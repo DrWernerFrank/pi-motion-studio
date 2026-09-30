@@ -1,0 +1,19 @@
+{
+  "direction": "A film is a function of time: the viewer should feel precision and play, like watching a very good instrument being tuned.",
+  "fonts": { "display": "Bricolage Grotesque", "ui": "Inter", "mono": "JetBrains Mono" },
+  "palette": { "bg": "#0f0e0c", "ink": "#f3efe6", "muted": "#8c857a", "surface": "#1d1b18", "line": "#2e2b27", "accent": "#ff5a1f" },
+  "ladder": [
+    { "role": "hero", "u": 19, "weight": 800, "trackingEm": -0.045 },
+    { "role": "title", "u": 10, "weight": 800, "trackingEm": -0.035 },
+    { "role": "body", "u": 4.4, "weight": 500, "trackingEm": -0.01 },
+    { "role": "label", "u": 3.2, "weight": 600, "trackingEm": 0.02 }
+  ],
+  "motion": { "ui": "SNAPPY", "containers": "DEFAULT", "type": "HEAVY", "character": "PLAYFUL", "stagger": 0.05 },
+  "devices": [
+    { "name": "the line", "purpose": "one accent stroke carries the eye from type to graph to container: the film never hard-cuts" },
+    { "name": "mono readouts", "purpose": "code-like labels (t, frame counts, scores) prove it is a program" },
+    { "name": "designed wipes", "purpose": "band wipe and iris instead of cross-fades" }
+  ],
+  "reference": "grammar of product-film UI motion: one element transforming, cursor-driven, warm neutral canvas, one accent",
+  "banned": ["centered title on gradient", "everything fading in", "corner labels", "frame borders", "glow", "particle bursts"]
+}

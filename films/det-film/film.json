@@ -1,0 +1,124 @@
+{
+  "title": "The Determinant",
+  "duration": 40,
+  "fps": 60,
+  "formats": [
+    "9:16",
+    "16:9"
+  ],
+  "loop": false,
+  "background": "#f3efe6",
+  "motionBlur": 4,
+  "music": {
+    "bpm": 120,
+    "key": "A minor",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "style": "piano",
+    "seed": 13,
+    "sections": [
+      {
+        "bars": 2,
+        "layers": [
+          "piano"
+        ]
+      },
+      {
+        "bars": 2,
+        "layers": [
+          "piano",
+          "bass",
+          "softkick"
+        ]
+      },
+      {
+        "bars": 6,
+        "layers": [
+          "piano",
+          "bass",
+          "softkick",
+          "hat"
+        ]
+      },
+      {
+        "bars": 5,
+        "layers": [
+          "keys",
+          "bass",
+          "kick",
+          "hat",
+          "arp"
+        ]
+      },
+      {
+        "bars": 3,
+        "layers": [
+          "piano",
+          "bass",
+          "softkick",
+          "arp"
+        ]
+      },
+      {
+        "bars": 2,
+        "layers": [
+          "piano"
+        ]
+      }
+    ]
+  },
+  "mix": {
+    "music": 0.6,
+    "sfx": 0.62
+  },
+  "shots": [
+    {
+      "t": 0,
+      "name": "hook \u2014 the 3\u00d73 poses the question, det(A) = ?"
+    },
+    {
+      "t": 2,
+      "name": "block \u2014 the 2\u00d72 building block, ad \u2212 bc"
+    },
+    {
+      "t": 6,
+      "name": "grow \u2014 the 2\u00d72 becomes the 3\u00d73; expand along row 1"
+    },
+    {
+      "t": 9,
+      "name": "crossout \u2014 minors peel off; signs + \u2212 +"
+    },
+    {
+      "t": 13,
+      "name": "formula \u2014 three term cards: entry \u00d7 minor"
+    },
+    {
+      "t": 16.5,
+      "name": "example \u2014 real numbers, minors 5 3 1, sum rolls to 8"
+    },
+    {
+      "t": 24,
+      "name": "stamp \u2014 det(A) = 8"
+    },
+    {
+      "t": 26.5,
+      "name": "meaning \u2014 the columns draw a box, volume \u00d78"
+    },
+    {
+      "t": 30.5,
+      "name": "zero \u2014 det 0 collapses the box flat"
+    },
+    {
+      "t": 33,
+      "name": "outro \u2014 recap chips + lockup"
+    }
+  ],
+  "gates": {
+    "maxStill": 2.0,
+    "maxNoNovelty": 4
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "The Determinant, explained",
+  "direction": "A math notebook that moves. Warm paper, a fine graph grid, textbook serif math with italic variables, mono labels. One live coordinate plane is the spine of the film: the number inside the parallelogram is always the real determinant of the matrix on screen. Color is meaning: amber = positive area / the down diagonal, red = minus / flipped space.",
+  "fonts": { "display": "Instrument Serif", "ui": "JetBrains Mono" },
+  "palette": {
+    "bg": "#F2EEE4", "surface": "#FBF9F3", "ink": "#17150F", "muted": "#8A8478",
+    "gridBase": "#E7E1D4", "grid": "#CBC2AE", "accent": "#EE9A12", "accentInk": "#A86400", "neg": "#D2462C"
+  },
+  "ladder": [
+    { "role": "hero", "u": 16, "weight": 400, "trackingEm": -0.02 },
+    { "role": "title", "u": 9, "weight": 400, "trackingEm": -0.01 },
+    { "role": "math", "u": 9, "weight": 400 },
+    { "role": "body", "u": 3.6, "weight": 500, "trackingEm": -0.01 },
+    { "role": "label", "u": 3.2, "weight": 600, "trackingEm": 0.08, "case": "upper" }
+  ],
+  "motion": { "ui": "SNAPPY", "containers": "DEFAULT", "type": "HEAVY", "stagger": 0.045 },
+  "devices": [
+    { "name": "the live plane", "purpose": "one grid transformed by the current matrix; the parallelogram's label is its live determinant (1 → 5 → −5 → 0). Never cuts, only moves between full frame, its panel and off-stage" },
+    { "name": "flying terms", "purpose": "entries physically fly from the matrix into the formula / the 3×3 expansion, so the viewer sees where each number comes from" },
+    { "name": "diagonal highlighters", "purpose": "amber band ↘ (ad), red band ↙ (bc): the formula's colors match" },
+    { "name": "rolling results", "purpose": "a worked line rolls up into its simpler form (3 × 2 − 1 × 1 → 6 − 1 → 5)" }
+  ],
+  "banned": ["centered title on gradient", "everything fading in", "corner labels", "frame borders", "glow", "particle bursts"]
+}

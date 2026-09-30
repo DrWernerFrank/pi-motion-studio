@@ -1,0 +1,107 @@
+[
+  {
+    "round": 1,
+    "at": "2026-09-29T12:55:42.610Z",
+    "reviewer": "author (round 1, before fixes)",
+    "scores": {
+      "hook": 6,
+      "readability": 5,
+      "motion": 7,
+      "variety": 8,
+      "composition": 6,
+      "brand": 7,
+      "sound": 3
+    },
+    "min": 3,
+    "pass": false,
+    "problems": [
+      {
+        "t": 6.5,
+        "issue": "contact-sheet tiles are tiny and show random bars: unreadable at phone size, and they are not the film",
+        "fix": "tiles become real thumbnails: drawFrame(t) recursively, 4x3 / 5x3 grid, frame aspect"
+      },
+      {
+        "t": 4,
+        "issue": "chart ticks, dashed target and leftover curve stay behind the Render button",
+        "fix": "retract ticks and target with the erase at 3.5s"
+      },
+      {
+        "t": 0,
+        "issue": "frame 0 is empty; 16:9 type too small and lockup small; faint seams in the band wipe",
+        "fix": "start the hook mid-rise; landscape scale 1.45/1.6; pixel-snapped bands + solid fill"
+      }
+    ],
+    "notes": "no sound yet",
+    "sheets": []
+  },
+  {
+    "round": 2,
+    "at": "2026-09-29T12:55:42.763Z",
+    "reviewer": "author",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 8,
+      "variety": 9,
+      "composition": 7,
+      "brand": 8,
+      "sound": 3
+    },
+    "min": 3,
+    "pass": false,
+    "problems": [
+      {
+        "t": 1,
+        "issue": "portrait hook: lower half of the frame is empty for 2s",
+        "fix": "mono time readout under the block (t = 0.25 s · frame 015) ticking: the device that proves it is a program"
+      },
+      {
+        "t": 2.8,
+        "issue": "spring() label and lockup tagline too small at 360px",
+        "fix": "label x1.35, tagline x1.35"
+      },
+      {
+        "t": 0,
+        "issue": "no sound yet",
+        "fix": "cues on the grid + synthesized drive score, film_sound"
+      }
+    ],
+    "notes": "",
+    "sheets": []
+  },
+  {
+    "round": 3,
+    "at": "2026-09-29T12:58:53.051Z",
+    "reviewer": "author",
+    "scores": {
+      "hook": 8,
+      "readability": 8,
+      "motion": 8,
+      "variety": 9,
+      "composition": 8,
+      "brand": 8,
+      "sound": 8
+    },
+    "min": 8,
+    "pass": true,
+    "problems": [
+      {
+        "t": 2.9,
+        "issue": "quiet stretch while the curve settles (gate data: <1% change 2.9-3.6s)",
+        "fix": "done: overshoot 23% annotation pops at the peak on beat 5"
+      },
+      {
+        "t": 4.5,
+        "issue": "button label faded out before the cursor clicked it (phone test)",
+        "fix": "done: label holds through the click, morph starts 4.72"
+      },
+      {
+        "t": 10,
+        "issue": "iris revealed an empty frame; half-row edge artifact at fractional preview scales",
+        "fix": "done: lockup starts 80ms earlier; runtime maps W×H onto the integer canvas"
+      }
+    ],
+    "notes": "sound scored from the cue plan vs the beat grid and the measured mix (-14.1 LUFS, -1.1 dBTP), not by ear. Next improvement: the lockup end (11.3-12s) is calm; a final beat-locked accent pulse would land the ending harder.",
+    "sheets": []
+  }
+]

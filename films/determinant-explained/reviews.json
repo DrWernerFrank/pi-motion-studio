@@ -1,0 +1,288 @@
+[
+  {
+    "round": 1,
+    "at": "2026-09-29T14:42:59.598Z",
+    "reviewer": "director (self), round 1",
+    "scores": {
+      "hook": 6,
+      "readability": 7,
+      "motion": 7,
+      "variety": 8,
+      "composition": 6,
+      "brand": 8,
+      "sound": 1
+    },
+    "min": 1,
+    "pass": false,
+    "problems": [
+      {
+        "t": 0,
+        "issue": "First frame is a tiny unit square lost in an empty grid: the hook image is weak until 1 s",
+        "fix": "Start the plane camera zoomed in on the square (span 2.6) and pull out as it shears, so frame 0 is a big amber square labelled 1"
+      },
+      {
+        "t": 40,
+        "issue": "Near-blank frames at 39.8-40.2 and 57.8-58.1: one scene fully leaves before the next arrives",
+        "fix": "Overlap: 3x3 kicker/headline enter at 39.9 and matrix at 40.05; recap cards exit 57.35, lockup enters 57.7"
+      },
+      {
+        "t": 29.3,
+        "issue": "Coordinate labels stack on top of each other while the parallelogram flattens (flip at 29.3, collapse at 35.3); the formula-scene body text sits far from its headline in 16:9",
+        "fix": "Fade the tip labels by |det| while a flip/collapse is in flight; move formula body lines directly under the headline"
+      }
+    ],
+    "notes": "Structure and the live-plane device work in both formats after the portrait relayout. Sound not built yet.",
+    "sheets": []
+  },
+  {
+    "round": 2,
+    "at": "2026-09-29T14:45:05.637Z",
+    "reviewer": "director (self), round 2",
+    "scores": {
+      "hook": 8,
+      "readability": 8,
+      "motion": 8,
+      "variety": 8,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 15.8,
+        "issue": "Scene boundaries (15.8, 27.8, 33.8, 53.8) left near-empty text panels for ~0.4 s",
+        "fix": "Outgoing text now exits on the same slots as the incoming roll (tOut ≈ next tIn); verified in the every-1.5 sheet"
+      },
+      {
+        "t": 35.8,
+        "issue": "Collapsing grid turned into a muddy grey hatched band",
+        "fix": "Transformed-grid alpha scales with |det| (0.15 floor) so the collapse reads as one clean line"
+      },
+      {
+        "t": 59,
+        "issue": "Lockup caption (3.6u mono) is small next to the 16u det(A) in 16:9; the formula scene leaves the lower-left of panel A empty in 16:9",
+        "fix": "Bump lockup captions to 4.2u; accept the formula-scene negative space (the eye is on the matrix)"
+      }
+    ],
+    "notes": "Sound built (103 cues, piano score building to a drive section under the 3x3). Needs a listen and the loudness gate.",
+    "sheets": []
+  },
+  {
+    "round": 3,
+    "at": "2026-09-29T14:48:51.219Z",
+    "reviewer": "director (self), round 3",
+    "scores": {
+      "hook": 8,
+      "readability": 8,
+      "motion": 8,
+      "variety": 8,
+      "composition": 8,
+      "brand": 8,
+      "sound": 8
+    },
+    "min": 8,
+    "pass": true,
+    "problems": [
+      {
+        "t": 24.3,
+        "issue": "Worked-example hold 24.3-26.9 had no visible motion; the plane only returned at 27.8",
+        "fix": "Done: the highlighters retract when the answer lands (26.0), the plane slides back with its 5 at 26.95 as the 'same 5 as the area' callback"
+      },
+      {
+        "t": 51.1,
+        "issue": "After the 3x3 sum nothing moved for 2.7 s and the answer lived only in the small sum line",
+        "fix": "Done: the big matrix's brackets morph into det bars and '= 8' is stamped beside it on the 52 downbeat"
+      },
+      {
+        "t": 57.8,
+        "issue": "Recap card formulas stayed opaque while the cards faded out (rich() overrode the parent alpha)",
+        "fix": "Done: rich() takes an alpha; cards pass theirs"
+      }
+    ],
+    "notes": "Gates PASS (dead-time with maxStill 2.5 s: explainer reading holds). Novelty WARN in the formula build and the 3x3: events are frequent but small-area by nature. True peak -0.8 dBFS.",
+    "sheets": []
+  },
+  {
+    "round": 4,
+    "at": "2026-09-29T15:06:43.903Z",
+    "reviewer": "director (self), round 4: user notes",
+    "scores": {
+      "hook": 8,
+      "readability": 8,
+      "motion": 8,
+      "variety": 8,
+      "composition": 8,
+      "brand": 8,
+      "sound": 8
+    },
+    "min": 8,
+    "pass": true,
+    "problems": [
+      {
+        "t": 8.82,
+        "issue": "USER NOTE: too loud",
+        "fix": "Film-level loudness target mix.lufs = -17 (engine now honours it, gate checks it); music bed 0.5 -> 0.42 under the SFX"
+      },
+      {
+        "t": 49.27,
+        "issue": "USER NOTE: 'times 0: skip it' rides up into the 2x2 above, and the three 2x2 minors don't line up",
+        "fix": "Expansion on a fixed column grid (coefficient right-aligned, minors on one center line, results on one start); the note now sits on its own row after '= 0'"
+      },
+      {
+        "t": 20,
+        "issue": "9:16 was the 16:9 layout stacked: formula scene hid in the plane slot and left the middle of the phone frame empty; small type",
+        "fix": "Portrait formula block moved to the frame's middle and scaled up (15u matrix, 11u formula), headline 9.5u, body 4u, 3x3 rows spaced out"
+      }
+    ],
+    "notes": "Moved to films/determinant-explained because films/determinant-explainer/design.json was overwritten mid-render by another process (old stub design), which broke every frame drawn after 18:22.",
+    "sheets": []
+  },
+  {
+    "round": 5,
+    "at": "2026-09-29T15:27:33.313Z",
+    "reviewer": "motion-critic",
+    "scores": {
+      "hook": 8,
+      "readability": 7,
+      "motion": 7,
+      "variety": 7,
+      "composition": 6,
+      "brand": 8,
+      "sound": 8
+    },
+    "min": 6,
+    "pass": false,
+    "problems": [
+      {
+        "t": 40,
+        "issue": "9:16 + 16:9: headline swap collides. The outgoing 'Space gets squashed flat.' and incoming 'Break it into little 2×2s.' plus both kickers are drawn on top of each other at the same baseline for about 0.2 s ('Breakit… flat.')",
+        "fix": "Use swapAlpha on the headline slot: finish the old line's exit (alpha 0 and clipped by about 39.95) before the new line starts at 40.05. Or offset the incoming line one line-height down and rise it into place, as the 16.0 and 34.0 swaps already do cleanly"
+      },
+      {
+        "t": 44.5,
+        "issue": "9:16 composition and readability in the 3×3 section (40.8–54). The three 2×2 minors are the key content, but they are the smallest math on screen (entries about 4u), stacked with no gap, so their bars run together into one column. '← times 0: skip it' is about 2u grey mono. The bottom 40–45% of the frame is empty until 50 s",
+        "fix": "In portrait, scale the minors to at least 6u entries and give each row a 3u gap. Move the whole expansion block down so its centre sits at about 55% H (the 3×3 near 25–40%, the rows at 45–70%, the det line at about 76%). Raise the side note to label size (3.2u) in accentInk. This also fixes the empty lower half"
+      },
+      {
+        "t": 34.6,
+        "issue": "Direction broken. From 34.3 to 35.2 the matrix on screen is already [2 4; 1 2] (det 0), but the live plane still shows −5 with (1,2) and (3,1). The morph labels then collide: at 35.2 '−3.8' sits on the '(1.3, 1.7)' tag, and at 35.5 '−1.3' sits on the arrowhead",
+        "fix": "Start the plane morph on the same beat the new matrix lands (34.5), or hold the old matrix until 35.0. During the morph, hide the vector tags (alpha 0 while |dA/dt| is large) and push the area label off the collapsing edge along the normal"
+      },
+      {
+        "t": 54,
+        "issue": "3×3 → recap exit is a ghost crossfade: the whole 3×3 block sits at about 15% alpha with stray '+', '0' and '−' glyphs scattered. At 27.1 the formula dissolve leaves a hollow rounded-rect 'pill' artifact and faded 'ad ? bc' over the fading matrix. Both break the 'not everything fades' rule",
+        "fix": "Exit these blocks with a directional move (translate up 6u with a clip mask, or collapse the elements into the next card's position), not alpha. Kill the 1-px-wide box remnant: set the box alpha to 0 once width < 2u"
+      },
+      {
+        "t": 17.5,
+        "issue": "9:16 composition in the formula scene (16.4–27): the matrix and formula sit at 30–65% H, the '↘ down / ↙ up' legend is about 2.3u mono at 76–80%, and 80–100% is empty. The live plane is off-stage for 10 s, which is the gate's novelty gap at 16.9–22.9",
+        "fix": "In portrait, bring the plane panel back below the formula from about 22.5 (the example's plug-in step) so '= 5' and the area 5 are visible together. Otherwise enlarge the matrix to about 20u entries and put the legend at 3.2u directly under 'det = ad − bc'"
+      },
+      {
+        "t": 39.2,
+        "issue": "9:16: the '→ no inverse: it can't be undone' mono line touches the top edge of the plane panel (about 0.5u gap), and at under 3u it is illegible on a phone. Inside the panel, '(2, 1)' sits on the line and '(4, 2)' overlaps the red segment",
+        "fix": "Leave a 3u gap above the panel (push the panel down or lift the equation block) and set the note at 3.2u. Offset the vector tags perpendicular to the collapsed line by 2.5u"
+      },
+      {
+        "t": 57.7,
+        "issue": "Recap exit into the lockup: the growing unit square '1' lands on top of card 01's caption while the cards are still at about 40% alpha",
+        "fix": "Hold the square until the cards are fully off (about 57.85), or spawn it from card 02's parallelogram icon so the handoff reads as one object"
+      },
+      {
+        "t": 12.5,
+        "issue": "9:16: the plane panel is a landscape box (about 48% of the frame height is unused around it), and its coordinate tags are about 2.5u. The film's spine is under-sized on the phone",
+        "fix": "In portrait, make the plane panel about 1:1 (full safe width, 45% H), scale the tags to 3.2u, and anchor it at about 45–85% H"
+      }
+    ],
+    "notes": "Independent critique, 9:16 focus (16:9 checked briefly). Math verified correct everywhere: det[3 1;1 2]=3·2−1·1=5; column swap [1 3;2 1] gives 1·1−3·2=−5; [2 4;1 2] gives 2·2−4·1=0; 3×3 [2 1 0;1 3 1;0 1 2] expands along row 1 with signs +−+ into +2·|3 1;1 2|=10, −1·|1 1;0 2|=−2, +0·|1 3;0 1|=0, total 8, and the minors are correct. The plane's column tags match the matrix columns. The hook is strong (full-bleed parallelogram growing to 5 with the claim). Palette and colour meaning are consistent. Sound: cues sit on the 0.25 s grid, sections change on bars, the drop is at 35.25 on the collapse, the impacts land on the title (4) and the 8 (52); the mix is at −17 LUFS because the user asked for it quieter. The 16:9 fix for the user's 49.27 note looks resolved: the +0 row no longer crowds the minor above, and the bars align. On 16:9, 'times 0: skip it' now ends about 5% from the right edge. The main 9:16 weakness is that it still reads like the landscape film letterboxed into a tall frame: large empty lower zones (17–27, 40–50, 58–60), under-sized plane and minors, and several side notes in about 2–2.5u mono that vanish at 360 px. Motion problems cluster at the chapter seams: 40.0 headline collision, 27.1 and 54.0 ghost crossfades, 34.3–35.2 plane lagging the matrix.",
+    "sheets": [
+      "films/determinant-explained/out/sheets/every-9x16.png",
+      "films/determinant-explained/out/sheets/phone-9x16.png",
+      "films/determinant-explained/out/sheets/times-9x16-360.png",
+      "films/determinant-explained/out/sheets/times-9x16-361.png",
+      "films/determinant-explained/out/sheets/times-9x16-300.png",
+      "films/determinant-explained/out/sheets/times-9x16-301.png",
+      "films/determinant-explained/out/sheets/times-9x16-302.png",
+      "films/determinant-explained/out/sheets/times-9x16-303.png",
+      "films/determinant-explained/out/sheets/times-9x16-304.png",
+      "films/determinant-explained/out/sheets/every-16x9.png",
+      "films/determinant-explained/out/sheets/times-16x9-480.png"
+    ]
+  },
+  {
+    "round": 6,
+    "at": "2026-09-29T15:42:18.304Z",
+    "reviewer": "motion-critic",
+    "scores": {
+      "hook": 8,
+      "readability": 7,
+      "motion": 7,
+      "variety": 8,
+      "composition": 7,
+      "brand": 8,
+      "sound": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 17.5,
+        "issue": "9:16 regression in the formula scene (16.4–22.5). The a b c d matrix now has about 6u entries (round 5 had about 12u), so the film's key teaching moment is smaller than the headline. The frame is empty from 55% to 100% H for 6 s, the plane only returns at 22.5, and the '↘ down / ↙ up' legend is still about 2.3u mono",
+        "fix": "In portrait, give the formula matrix at least 11u entries (math role at 9u for 'det = ad − bc') and centre the block at about 40% H. Bring the plane in at 18.0 (when the ad band lands), not 22.5, so the lower half is never empty. Set the legend at label size 3.2u"
+      },
+      {
+        "t": 44.8,
+        "issue": "9:16 + 16:9: the amber row marker moves to the next row slot about 1 s before that row's content arrives. It reads as an empty filled amber slab under the finished rows (42.5 '+' alone in it, 44.8 and 47.3 empty). Its flat full-width fill is also the heaviest shape on screen and competes with the numbers",
+        "fix": "Move the marker on the same beat the row's '±k·' lands (track() the target to the row's arrival time, not the previous row's stamp). Make it a 0.6u amber left rule plus a 12% tint that is only as wide as the row content, not the full safe width"
+      },
+      {
+        "t": 53.6,
+        "issue": "16:9 (and faintly 9:16): the 53.5 curtain wipe collides. Recap card 01 ('ad − bc / a 2×2: multiply, subtract') fades in at about 40% alpha over the 3×3 matrix above the amber wipe line, so the two layers overlap for about 0.15 s. The card should arrive clean behind the curtain",
+        "fix": "Clip the incoming cards to the region the curtain has already passed (clip rect from the top to the wipe line) and draw them at full alpha, so nothing new is visible over the outgoing 3×3. Or delay the cards to 53.7, after the line has crossed their slot"
+      },
+      {
+        "t": 42.6,
+        "issue": "Flying minor entries are still messy despite the 0.1 s stagger. At 42.6 a duplicate '3' is drawn over the 3×3 cell while the flyer leaves, and '2 +.' scatters inside the marker. At 43.0 '1' and '2' land stacked ('1²') in the minor",
+        "fix": "Hide the source cell (alpha 0) the moment its flyer departs, fly along an arc offset away from neighbours, and land each flyer in its final grid cell before the next one leaves (stagger at least 0.15 s at DEFAULT feel)"
+      },
+      {
+        "t": 39.8,
+        "issue": "40 s handover: the shared-baseline collision is fixed, but 39.65–39.95 is a ghost dissolve. Half-clipped fragments of 'squashed flat.', '2×2−4×1=0' and '…can't be undone' float at 20–60% alpha over an empty frame, and at 39.9 there is a stray empty bracket pair. In 16:9 at 39.85 the equation remnants sit mid-frame alone",
+        "fix": "Exit the zero block as one group: translate up 4u behind a clip mask on SNAPPY and reach alpha 0 by 39.7, with no partial glyphs. Do not draw brackets until the first entry lands"
+      },
+      {
+        "t": 27.05,
+        "issue": "The formula box 'slides out' but still leaves a faded '- - - bc' box ghost over the empty matrix slot for about 0.15 s. The 'same 5 as the area ✓' line then types on above an empty zone",
+        "fix": "Slide the box and its contents together as one clipped group; do not fade the text separately"
+      },
+      {
+        "t": 35,
+        "issue": "The zero collapse is now in sync with its matrix (good), but at 35.0 the sheared grid still turns into a dense hatch across the whole panel for about 0.2 s. At 35.9, '(4, 2)' partly overlaps the red extension of the line",
+        "fix": "Fade the grid's minor lines as |det| falls below 1 (alpha ∝ |det|), keeping only the axes. Place the '(4, 2)' tag on the side of the line opposite the red segment"
+      },
+      {
+        "t": 39.2,
+        "issue": "9:16: '→ no inverse: it can't be undone' is still grey mono at about 2.6u and faint at 360 px. It is the chapter's key takeaway",
+        "fix": "Set it at label size 3.2u in ink (or neg) and move the arrow glyph to accentInk"
+      },
+      {
+        "t": 12.5,
+        "issue": "9:16: the plane panel is still a wide box at 50–83% H, with about 15% of empty paper below it in every plane scene (8–16, 27–40 s)",
+        "fix": "In portrait, extend the panel to about 88% H (L.safe bottom) and make it roughly square, with the origin lower so the parallelogram sits at the panel's centre"
+      }
+    ],
+    "notes": "Round 6, independent, 9:16 focus (16:9 checked briefly). Verified as fixed:\n- 40 s: headlines no longer share a baseline.\n- 34.5: the zero morph now starts with its matrix, the vector tags are hidden during the flip and the collapse, and the area label clears the edges.\n- 3×3 portrait: the minors are about 6u on a fixed grid at 50/60/70% H, with the det line at about 81%. The bars no longer merge. The '← zero: skip it' note is accent-coloured and legible.\n- The lockup waits for the cards (57.7 is clean).\n- The hook matrix is bigger at 66% H.\n- The plane returns under the formula at 22.5, and the example now shows '= 3×2 − 1×1'.\n- The 16:9 +0 row is aligned; the note fits but ends about 3% from the edge.\nMath re-verified: 5, −5, 0, and 10 − 2 + 0 = 8; the minors and the +−+ signs are correct.\n\nNew or remaining issues:\n- Regression: the 16.4–22.5 portrait formula matrix shrank to about 6u.\n- The amber row marker runs ahead of its content, leaving empty slabs.\n- The 53.6 wipe shows the card over the 3×3 (worst in 16:9).\n- Flyers are still messy at 42.6–43.\n- Ghost dissolves persist at 27.05 and 39.7.\n\nGates still warn about novelty at 16.9–22.9 and 40.4–53.6. The first is real: the small, static formula block in 9:16. The second is mitigated by the row cadence.",
+    "sheets": [
+      "films/determinant-explained/out/sheets/every-9x16.png",
+      "films/determinant-explained/out/sheets/phone-9x16.png",
+      "films/determinant-explained/out/sheets/times-9x16-362.png",
+      "films/determinant-explained/out/sheets/times-9x16-363.png",
+      "films/determinant-explained/out/sheets/times-9x16-305.png",
+      "films/determinant-explained/out/sheets/times-9x16-306.png",
+      "films/determinant-explained/out/sheets/times-9x16-307.png",
+      "films/determinant-explained/out/sheets/times-16x9-481.png"
+    ]
+  }
+]

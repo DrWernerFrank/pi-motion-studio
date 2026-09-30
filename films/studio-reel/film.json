@@ -1,0 +1,58 @@
+{
+  "title": "Motion Studio reel",
+  "duration": 12,
+  "fps": 60,
+  "formats": [
+    "9:16",
+    "16:9"
+  ],
+  "loop": false,
+  "background": "#0f0e0c",
+  "motionBlur": 4,
+  "music": {
+    "bpm": 120,
+    "key": "A minor",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "style": "drive",
+    "seed": 11
+  },
+  "mix": {
+    "music": 0.8,
+    "sfx": 0.9
+  },
+  "shots": [
+    {
+      "t": 0,
+      "name": "hook: every frame is a function"
+    },
+    {
+      "t": 2,
+      "name": "spring curve draws"
+    },
+    {
+      "t": 4,
+      "name": "morph: render button"
+    },
+    {
+      "t": 6,
+      "name": "contact sheet bloom"
+    },
+    {
+      "t": 8,
+      "name": "look at your frames"
+    },
+    {
+      "t": 10,
+      "name": "lockup"
+    }
+  ],
+  "gates": {
+    "maxStill": 1.5,
+    "maxNoNovelty": 4
+  }
+}

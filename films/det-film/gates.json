@@ -1,0 +1,54 @@
+{
+  "at": "2026-09-29T19:03:36.713Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "lint",
+      "pass": true,
+      "level": "pass",
+      "detail": "no timers, randomness, wall clock or CSS animation"
+    },
+    {
+      "name": "determinism",
+      "pass": true,
+      "level": "pass",
+      "detail": "4 frames identical across seek orders"
+    },
+    {
+      "name": "dead-time",
+      "pass": true,
+      "level": "pass",
+      "detail": "something moves in every 2s window"
+    },
+    {
+      "name": "novelty",
+      "pass": false,
+      "level": "warn",
+      "detail": "no big change during 17.2-22.7s"
+    },
+    {
+      "name": "hook",
+      "pass": true,
+      "level": "pass",
+      "detail": "first frame contrast 6.1 (want >3), max change in first 2s 11.4 (want >8)"
+    },
+    {
+      "name": "blank-frames",
+      "pass": true,
+      "level": "pass",
+      "detail": "no flat frames"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-14 LUFS (want -14 ±1), true peak -0.9 dBFS"
+    },
+    {
+      "name": "cue-sync",
+      "pass": true,
+      "level": "pass",
+      "detail": "76 cues on the grid"
+    }
+  ]
+}

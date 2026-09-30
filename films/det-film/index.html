@@ -1,0 +1,1043 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>The Determinant</title>
+<link rel="stylesheet" href="/engine/lib/fonts.css">
+</head>
+<body>
+<script type="module">
+// det-film — The Determinant (40s). Engineering notebook: paper, grid, ink, one red pen.
+// One matrix object travels the whole film; rows/cols cross out; minors peel off into cards.
+// Layout: y positions are fractions of the SAFE area (portrait spreads, landscape compacts).
+import { film } from '/engine/lib/runtime.js';
+import { loadDesign } from '/engine/lib/design.js';
+import * as M from '/engine/lib/motion.js';
+
+let D, cfg;
+
+// ---------------- content ----------------
+const LET = [['a','b','c'],['d','e','f'],['g','h','i']];          // 3x3 letters
+const LET2 = [['a','b'],['c','d']];                                 // 2x2 block letters
+const NUM = [['2','1','1'],['1','2','1'],['0','1','3']];         // worked example A
+const MINL = [ [['e','f'],['h','i']], [['d','f'],['g','i']], [['d','e'],['g','h']] ];  // letter minors
+const MINN = [ [['2','1'],['1','3']], [['1','1'],['0','3']], [['1','2'],['0','1']] ]; // number minors
+const MINV = ['5','3','1'];
+const ENTRYL = ['a','b','c'];
+const PROD = ['10', '\u2212', '3', '+', '1'];
+const CHUNK = ['2\u00b75', '\u2212', '1\u00b73', '+', '1\u00b71'];
+const CHIPS = [
+  [0, 'DETERMINANT \u00b7 3\u00d73'],
+  [2, 'STEP 1 \u2014 THE 2\u00d72 BLOCK'],
+  [6, 'STEP 2 \u2014 EXPAND ALONG A ROW'],
+  [9, 'STEP 3 \u2014 MINORS & SIGNS'],
+  [13, 'STEP 4 \u2014 THE FORMULA'],
+  [16.5, 'STEP 5 \u2014 WORKED EXAMPLE'],
+  [24, 'RESULT'],
+  [26.5, 'MEANING \u2014 VOLUME'],
+  [30.5, 'SPECIAL CASE \u2014 ZERO'],
+  [33, 'RECAP'],
+];
+const JOLTS = [1.32, 4.35, 16.5, 22.65, 24.5, 31.9, 36.05];
+const MINUS = '\u2212';
+
+// ---------------- setup caches ----------------
+let gridC, grainTiles = [], grainPats = null, meas = {};
+
+function buildGrid(L) {
+  gridC = document.createElement('canvas'); gridC.width = L.W; gridC.height = L.H;
+  const g = gridC.getContext('2d'), u = L.u;
+  const minor = 2.5 * u, major = 10 * u;
+  g.strokeStyle = M.rgba(D.c.grid, 0.24); g.lineWidth = 1;
+  g.beginPath();
+  for (let x = 0; x <= L.W + .5; x += minor) { g.moveTo(Math.round(x) + .5, 0); g.lineTo(Math.round(x) + .5, L.H); }
+  for (let y = 0; y <= L.H + .5; y += minor) { g.moveTo(0, Math.round(y) + .5); g.lineTo(L.W, Math.round(y) + .5); }
+  g.stroke();
+  g.strokeStyle = M.rgba(D.c.grid, 0.44); g.lineWidth = 1.5;
+  g.beginPath();
+  for (let x = 0; x <= L.W + .5; x += major) { g.moveTo(Math.round(x) + .5, 0); g.lineTo(Math.round(x) + .5, L.H); }
+  for (let y = 0; y <= L.H + .5; y += major) { g.moveTo(0, Math.round(y) + .5); g.lineTo(L.W, Math.round(y) + .5); }
+  g.stroke();
+}
+function buildGrain() {
+  for (let k = 0; k < 8; k++) {
+    const c = document.createElement('canvas'); c.width = c.height = 512;
+    const g = c.getContext('2d'), im = g.createImageData(512, 512), r = M.rng(42 + k * 7);
+    for (let i = 0; i < im.data.length; i += 4) {
+      im.data[i] = 28; im.data[i+1] = 33; im.data[i+2] = 64;
+      im.data[i+3] = r() < 0.55 ? 0 : Math.floor(r() * 26);
+    }
+    g.putImageData(im, 0, 0);
+    grainTiles.push(c);
+  }
+}
+function measure(L) {
+  const c = document.createElement('canvas').getContext('2d');
+  const m = (txt, role, scale = 1) => {
+    const rung = D.raw.ladder.find((r) => r.role === role);
+    const px = rung.u * L.u * scale;
+    M.font(c, px, `"${rung.family || (role === 'label' ? D.fonts.ui : D.fonts.display)}"`, rung.weight, rung.trackingEm || 0);
+    return c.measureText(txt).width / L.u; // width in u
+  };
+  meas.sumF = m('det = a\u00b7M1 ' + MINUS + ' b\u00b7M2 + c\u00b7M3', 'math', 1.15);
+}
+
+// ---------------- drawing helpers ----------------
+const yF = (L, f) => L.safe.y + L.safe.h * f;   // fractional safe-area anchor
+function kin(ctx, L, text, x, y, t, opt = {}) {
+  D.type(ctx, opt.role || 'h2', L, { scale: opt.scale });
+  return M.kineticLine(ctx, text, x, y, t, {
+    color: opt.color || D.c.ink, feel: D.feel('type'), stagger: D.stagger, align: 'center', clip: false, alpha: opt.alpha,
+  });
+}
+function matGeom(o, L) {
+  const u = (L ? L.u : o.u) || 10.8;
+  const half = (o.n - 1) / 2;
+  const w = (o.n - 0.3) * o.p + u, h = (o.n - 0.3) * o.p;
+  return {
+    cell: (i, j) => [o.x + (j - half) * o.p, o.y + (i - half) * o.p],
+    box: { x: o.x - w / 2, y: o.y - h / 2, w, h },
+  };
+}
+function brackets(ctx, L, b, p, opt = {}) {
+  if (p <= 0) return;
+  const u = L.u, P = opt.p ?? 7; // P = pitch in u units
+  const lw = Math.max(0.13, 0.045 * P) * u, serif = Math.max(0.5, 0.19 * P) * u, gap = 0.5 * u;
+  ctx.save();
+  ctx.strokeStyle = opt.color || D.c.ink; ctx.lineWidth = lw; ctx.lineCap = 'butt';
+  ctx.globalAlpha = M.clamp(opt.alpha ?? 1);
+  const side = (x, dir, pd) => {
+    const e = M.ease.outCubic(M.clamp(pd));
+    const sh = M.clamp((pd - 0.55) / 0.45), sl = serif * M.ease.outCubic(sh);
+    ctx.beginPath();
+    ctx.moveTo(x, b.y); ctx.lineTo(x, b.y + b.h * e);
+    if (sh > 0) { ctx.moveTo(x, b.y); ctx.lineTo(x + dir * sl, b.y); ctx.moveTo(x, b.y + b.h); ctx.lineTo(x + dir * sl, b.y + b.h); }
+    ctx.stroke();
+  };
+  side(b.x - gap, 1, p);
+  side(b.x + b.w + gap, -1, p - 0.12);
+  ctx.restore();
+}
+function drawMat(ctx, L, o) {
+  const g = matGeom(o, L);
+  if (o.brkP > 0) brackets(ctx, L, g.box, o.brkP, { p: o.p / L.u, color: o.brkColor, alpha: o.brkAlpha });
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  for (let i = 0; i < o.n; i++) for (let j = 0; j < o.n; j++) {
+    const a = M.clamp(o.a ? o.a(i, j) : 1); if (a <= 0.002) continue;
+    const s = M.clamp(o.s ? o.s(i, j) : 1, 0.02, 3);
+    const [cx, cy] = g.cell(i, j);
+    const dx = (o.dx ? o.dx(i, j) : 0) * L.u, dy = (o.dy ? o.dy(i, j) : 0) * L.u;
+    ctx.save(); ctx.translate(cx + dx, cy + dy); ctx.scale(s, s);
+    D.type(ctx, o.role || 'math', L, { scale: o.scale ?? 1 });
+    ctx.fillStyle = o.color ? o.color(i, j) : D.c.ink;
+    ctx.globalAlpha = a;
+    if (o.halo) {
+      ctx.save(); ctx.strokeStyle = D.c.bg; ctx.lineWidth = 0.8 * L.u; ctx.lineJoin = 'round';
+      ctx.strokeText(o.txt(i, j), 0, 0);
+      ctx.restore();
+    }
+    ctx.fillText(o.txt(i, j), 0, 0);
+    ctx.restore();
+  }
+  ctx.globalAlpha = 1;
+  return g;
+}
+function strike(ctx, L, x, y, w, h, p, alpha = 0.75) {
+  // band dim + ONE clean diagonal through it
+  if (p <= 0) return;
+  const e = M.ease.outCubic(M.clamp(p));
+  const tall = h > w;
+  ctx.save();
+  ctx.fillStyle = M.rgba(D.c.accent, 0.08 * M.clamp(p * 2));
+  ctx.fillRect(x, y, w * M.clamp(p * 1.5), h);
+  ctx.strokeStyle = M.rgba(D.c.accent, alpha); ctx.lineWidth = 0.45 * L.u; ctx.lineCap = 'round';
+  ctx.beginPath();
+  if (tall) { ctx.moveTo(x + w * 0.5, y + h * 0.12); ctx.lineTo(x + w * 0.5 + (e - 0.5) * w * 0.7, y + h * (0.12 + 0.76 * e)); }
+  else { ctx.moveTo(x + w * 0.06, y + h * 0.5 - h * 0.16); ctx.lineTo(x + w * e, y + h * 0.5 + h * 0.16); }
+  ctx.stroke();
+  ctx.restore();
+}
+function roughCircle(ctx, L, x, y, rx, ry, p, opt = {}) {
+  if (p <= 0) return;
+  const n = 64, seed = opt.seed ?? 1;
+  const a0 = -2.2 + M.hash(seed) * 4;
+  const last = Math.floor(M.clamp(p) * n);
+  ctx.save();
+  ctx.strokeStyle = opt.color || D.c.accent;
+  ctx.lineWidth = (opt.w ?? 0.55) * L.u; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.globalAlpha = M.clamp((opt.alpha ?? 1) * M.clamp(p * 4));
+  ctx.beginPath();
+  for (let k = 0; k <= last; k++) {
+    const th = a0 + (k / n) * M.TAU * 1.0;
+    const wob = 1 + (opt.wob ?? 0.03) * M.noise(th * 2.3 + seed * 7, seed * 3 + 2);
+    const px = x + Math.cos(th) * rx * wob, py = y + Math.sin(th) * ry * wob;
+    k === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+function roughUnderline(ctx, L, x0, x1, y, p, opt = {}) {
+  if (p <= 0) return;
+  ctx.save();
+  ctx.strokeStyle = opt.color || D.c.accent; ctx.lineWidth = (opt.w ?? 0.5) * L.u; ctx.lineCap = 'round';
+  ctx.globalAlpha = M.clamp(opt.alpha ?? 0.9);
+  const n = 24, last = Math.floor(M.clamp(p) * n), seed = opt.seed ?? 3;
+  ctx.beginPath();
+  for (let k = 0; k <= last; k++) {
+    const f = k / n, x = M.lerp(x0, x1, f);
+    const y2 = y + M.noise(f * 6 + seed, 11) * 0.35 * L.u + 0.22 * L.u * Math.sin(f * Math.PI);
+    k === 0 ? ctx.moveTo(x, y2) : ctx.lineTo(x, y2);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+function slam(ctx, t, t0, drawFn, opt = {}) {
+  const p = M.spring(t - t0, ...D.feel(opt.feel || 'stamp'));
+  if (p <= 0) return;
+  const s = M.lerp(opt.from ?? 1.28, 1, p);
+  ctx.save(); ctx.scale(s, s);
+  drawFn(M.clamp(p * 2.6));
+  ctx.restore();
+}
+function flyPos(t, t0, dur, src, dst, liftU, u) {
+  const pe = M.clamp((t - t0) / dur), e = M.ease.inOutCubic(pe);
+  return [M.lerp(src[0], dst[0], e), M.lerp(src[1], dst[1], e) - Math.sin(Math.PI * pe) * liftU * u, pe];
+}
+function chipDraw(ctx, t, L) {
+  let idx = 0;
+  for (let k = 0; k < CHIPS.length; k++) if (t >= CHIPS[k][0]) idx = k;
+  const cur = CHIPS[idx], nxt = CHIPS[idx + 1];
+  const u = L.u, y = L.safe.y + 1.6 * u;
+  const tin = M.spring(t - cur[0], ...D.feel('pop'));
+  const tout = nxt ? 1 - M.spring(t - (nxt[0] - 0.22), ...D.feel('pop')) : 1;
+  const a = M.clamp(tin * tout); if (a <= 0.002) return;
+  ctx.save();
+  ctx.globalAlpha = a;
+  const yy = y + (1 - tin) * -2.6 * u - (1 - tout) * 2.6 * u;
+  ctx.fillStyle = D.c.accent;
+  ctx.fillRect(L.safe.x, yy - 0.55 * u, 1.05 * u, 1.05 * u);
+  D.type(ctx, 'label', L);
+  ctx.fillStyle = D.c.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  const s = D.upper('label', cur[1]);
+  ctx.fillText(s, L.safe.x + 2.7 * u, yy);
+  const w = ctx.measureText(s).width;
+  ctx.strokeStyle = M.rgba(D.c.ink, 0.16); ctx.lineWidth = Math.max(1, 0.09 * u);
+  ctx.beginPath(); ctx.moveTo(L.safe.x, yy + 2.1 * u); ctx.lineTo(L.safe.x + 2.7 * u + w + 7 * u, yy + 2.1 * u); ctx.stroke();
+  ctx.restore();
+}
+function joltOf(t) {
+  for (const j of JOLTS) {
+    const dt = t - j;
+    if (dt >= 0 && dt < 0.45) {
+      const k = Math.exp(-dt * 11) * 0.55;
+      return [M.noise(dt * 42, 21) * k, M.noise(dt * 39, 8) * k];
+    }
+  }
+  return null;
+}
+function bandWipe(ctx, t, L, t0) {
+  const dt = t - t0; if (dt < 0 || dt > 0.62) return;
+  const N = 5, u = L.u, bh = L.H / N;
+  for (let i = 0; i < N; i++) {
+    const del = i * 0.028;
+    const pc = M.ease.inOutCubic(M.clamp((dt - del) / 0.2));
+    const pu = M.ease.inOutCubic(M.clamp((dt - del - 0.24) / 0.2));
+    if (pc <= 0 || pu >= 1) continue;
+    const x0 = pu > 0 ? L.W * pu : 0;
+    const w = L.W * (pc - pu);
+    if (w <= 0) continue;
+    const edge = Math.max(1.2, 0.12 * u);
+    ctx.fillStyle = D.c.paper2;
+    ctx.fillRect(x0, i * bh, w, bh + 1);
+    ctx.fillStyle = D.c.accent; ctx.globalAlpha = 0.85;
+    ctx.fillRect(x0, i * bh, w, edge);
+    ctx.fillRect(x0, (i + 1) * bh - edge, w, edge);
+    ctx.globalAlpha = 1;
+  }
+}
+function diagArrow(ctx, L, x0, y0, x1, y1, p, color, bend = 0) {
+  if (p <= 0) return;
+  const u = L.u;
+  ctx.save();
+  ctx.strokeStyle = color; ctx.lineWidth = 0.55 * u; ctx.lineCap = 'round';
+  const mx = (x0 + x1) / 2 + bend * u, my = (y0 + y1) / 2 - bend * 0.35 * u;
+  const q = (f) => { const g = 1 - f; return [g * g * x0 + 2 * g * f * mx + f * f * x1, g * g * y0 + 2 * g * f * my + f * f * y1]; };
+  ctx.beginPath();
+  const end = M.clamp(p), st = 0.05;
+  ctx.moveTo(...q(0));
+  for (let f = st; f <= end + 1e-9; f += st) ctx.lineTo(...q(Math.min(f, end)));
+  ctx.stroke();
+  if (p > 0.6) {
+    const th = Math.atan2(y1 - my, x1 - mx), hl = 1.7 * u;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x1 - hl * Math.cos(th - 0.42), y1 - hl * Math.sin(th - 0.42));
+    ctx.lineTo(x1 - hl * Math.cos(th + 0.42), y1 - hl * Math.sin(th + 0.42));
+    ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
+}
+function card(ctx, L, o) {
+  const u = L.u, ap = M.clamp(o.aIn ?? 1) * (o.dim ?? 1); if (ap <= 0.002) return null;
+  ctx.save();
+  ctx.globalAlpha = ap;
+  const x = o.x - o.w / 2, y = o.y - o.h / 2 + (1 - M.clamp(o.aIn ?? 1)) * 7 * u;
+  ctx.fillStyle = M.rgba(D.c.ink, 0.09);
+  M.rrect(ctx, x + 0.55 * u, y + 0.8 * u, o.w, o.h, 1.4 * u); ctx.fill();
+  ctx.fillStyle = D.c.paper2;
+  M.rrect(ctx, x, y, o.w, o.h, 1.4 * u); ctx.fill();
+  ctx.strokeStyle = M.rgba(D.c.ink, 0.45); ctx.lineWidth = Math.max(1, 0.13 * u);
+  M.rrect(ctx, x, y, o.w, o.h, 1.4 * u); ctx.stroke();
+  ctx.restore();
+  return { x, y, w: o.w, h: o.h };
+}
+// classic iso box; opt.el = view elevation in degrees (30 = classic). Floor plane reads as ground.
+function box3d(ctx, L, o) {
+  const u = L.u, s = o.s * u;
+  const el = ((o.el ?? 30) * Math.PI) / 180;
+  const P = (v) => [o.x + Math.cos(el) * (v[0] - v[1]) * s, o.y + Math.sin(el) * (v[0] + v[1]) * s - v[2] * s];
+  const cols = o.cols;
+  const corner = (m) => [0, 1, 2].map((k) => ((m & 1) ? cols[0][k] : 0) + ((m & 2) ? cols[1][k] : 0) + ((m & 4) ? cols[2][k] : 0));
+  const pts = [];
+  for (let m = 0; m < 8; m++) pts.push(P(corner(m)));
+  ctx.save();
+  const GA = M.clamp(o.alpha ?? 1);
+  ctx.globalAlpha = GA;
+  if (o.fillP > 0) {
+    ctx.fillStyle = M.rgba(D.c.accent, 0.30 * M.clamp(o.fillP));
+    ctx.beginPath();
+    [pts[0], pts[1], pts[3], pts[2]].forEach((p, i) => (i ? ctx.lineTo(...p) : ctx.moveTo(...p)));
+    ctx.closePath(); ctx.fill();
+  }
+  // as the box flattens, interior edges fade and the view tips toward floor level
+  const edgeFade = 1 - 0.7 * M.clamp((o.fillP - 0.6) / 0.4);
+  ctx.strokeStyle = D.c.ink; ctx.lineWidth = 0.7 * u; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.globalAlpha = GA * M.clamp(edgeFade);
+  ctx.beginPath();
+  const edge = (a, b) => { ctx.moveTo(...pts[a]); ctx.lineTo(...pts[b]); };
+  edge(0, 1); edge(2, 3); edge(4, 5); edge(6, 7);
+  edge(0, 2); edge(1, 3); edge(4, 6); edge(5, 7);
+  edge(0, 4); edge(1, 5); edge(2, 6); edge(3, 7);
+  ctx.stroke();
+  ctx.globalAlpha = GA;
+  const ap = M.clamp(o.arrowP ?? 1);
+  const arrows = o.arrows ?? true;
+  const labs = ['a\u2081', 'a\u2082', 'a\u2083'];
+  cols.forEach((c, i) => {
+    if (!arrows) return;
+    const f = Math.min(1, ap * (1 + i * 0.18));
+    if (f <= 0) return;
+    const [x1, y1] = P(c);
+    const tx = o.x + (x1 - o.x) * f, ty = o.y + (y1 - o.y) * f;
+    ctx.strokeStyle = D.c.accent; ctx.lineWidth = 0.75 * u;
+    ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(tx, ty); ctx.stroke();
+    if (f > 0.85) {
+      const th = Math.atan2(ty - o.y, tx - o.x), hl = 2.6 * u;
+      ctx.fillStyle = D.c.accent;
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - hl * Math.cos(th - 0.4), ty - hl * Math.sin(th - 0.4));
+      ctx.lineTo(tx - hl * Math.cos(th + 0.4), ty - hl * Math.sin(th + 0.4));
+      ctx.closePath(); ctx.fill();
+    }
+    if (ap >= 1 && o.labels) {
+      D.type(ctx, 'mathS', L, { scale: 1.5 });
+      ctx.fillStyle = D.c.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.globalAlpha = GA * M.clamp((ap - 0.85) / 0.15);
+      const lx = x1 + (i === 0 ? 2.6 : i === 1 ? -2.6 : 0.4) * u, ly = y1 + (i === 2 ? -2.8 : 1.5) * u;
+      ctx.fillText(labs[i], lx, ly);
+      ctx.globalAlpha = GA;
+    }
+  });
+  ctx.restore();
+}
+function mixCols(unit, cols, p) {
+  return unit.map((v, i) => v.map((x, k) => M.lerp(x, cols[i][k], M.clamp(p))));
+}
+
+// ---------------- scenes ----------------
+const scenes = [];
+
+// HOOK 0–2.3: matrix blooms, det(A) = ?
+scenes.push({ from: 0, to: 2.3, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const MY = yF(L, 0.40);
+  const exit = M.clamp((t - 2) / 0.28);
+  if (t < 2.0) {
+    const cs = M.spring(t / 1.05, ...D.feel('stamp'));
+    ctx.save();
+    ctx.translate(cx, MY); ctx.rotate(M.lerp(-0.02, 0, cs)); ctx.scale(M.lerp(1.06, 1, cs), M.lerp(1.06, 1, cs)); ctx.translate(-cx, -MY);
+    const delay = (i, j) => 0.1 + Math.hypot(i - 1, j - 1) * 0.1;
+    const o = { x: cx, y: MY, p: 12 * u, n: 3, role: 'math', scale: 1.25, txt: (i, j) => LET[i][j], brkP: M.ease.outCubic(M.clamp(t / 0.5)) };
+    o.a = (i, j) => M.clamp(M.spring(t - delay(i, j), ...D.feel('pop')) * 2.4);
+    o.s = (i, j) => Math.max(0.02, M.spring(t - delay(i, j), ...D.feel('pop')));
+    o.dy = (i, j) => (1 - o.s(i, j)) * -4;
+    drawMat(ctx, L, o);
+    ctx.restore();
+  }
+  if (t < 2.3) roughCircle(ctx, L, cx, MY, 27 * u, 24 * u, M.ease.outCubic(M.clamp((t - 0.88) / 0.42)), { seed: 3, alpha: 0.92 * (1 - exit), wob: 0.025 });
+  // det(A) = ? slam
+  if (t >= 1.3) {
+    const sp = M.spring(t - 1.3, ...D.feel('stamp'));
+    ctx.save();
+    ctx.translate(cx, yF(L, 0.68));
+    ctx.scale(M.lerp(1.28, 1, sp), M.lerp(1.28, 1, sp));
+    ctx.globalAlpha = M.clamp(sp * 4) * (1 - exit);
+    D.type(ctx, 'hero', L, { scale: 1.0 });
+    ctx.textBaseline = 'middle';
+    const wEq = ctx.measureText('det(A) =').width, wQ = ctx.measureText('?').width;
+    const x0 = -(wEq + 1.2 * u + wQ) / 2;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = D.c.ink; ctx.fillText('det(A) =', x0, 0);
+    ctx.fillStyle = D.c.accent; ctx.fillText('?', x0 + wEq + 1.2 * u, 0);
+    ctx.restore(); ctx.globalAlpha = 1;
+  }
+} });
+
+// BLOCK 2–6: the 2×2 building block, ad − bc
+scenes.push({ from: 2, to: 6.02, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const MY = yF(L, 0.40);
+  // hook matrix exits upward
+  const ex = M.spring(t - 2, ...D.feel('containers'));
+  if (ex > 0 && ex < 0.999) {
+    const k = M.lerp(1, 0.28, ex);
+    ctx.save();
+    ctx.translate(cx, yF(L, 0.40)); ctx.scale(k, k); ctx.translate(-cx, -yF(L, 0.40));
+    drawMat(ctx, L, { x: cx, y: yF(L, 0.40), p: 12 * u, n: 3, role: 'math', scale: 1.25, txt: (i, j) => LET[i][j], brkP: 1,
+      a: () => M.clamp(1 - ex * 1.12) });
+    ctx.restore();
+  }
+  // 2x2 arrives at the same spot
+  const fade = M.clamp(1 - (t - 5.82) / 0.16);
+  const geo = { x: cx, y: MY, p: 12 * u, n: 2 };
+  const g2 = matGeom(geo, L);
+  const draw2 = t < 6.0;
+  const delay = (i, j) => 2.45 + Math.hypot(i - 0.5, j - 0.5) * 0.18;
+  const cellS = (i, j) => Math.max(0.02, M.spring(t - delay(i, j), ...D.feel('pop')));
+  const d1 = M.ease.outCubic(M.clamp((t - 3.3) / 0.55));
+  const d2 = M.ease.outCubic(M.clamp((t - 3.75) / 0.55));
+  ctx.save(); ctx.globalAlpha = fade;
+  const [ax, ay] = g2.cell(0, 0), [bx, by] = g2.cell(0, 1), [ccx, ccy] = g2.cell(1, 0), [dx, dy] = g2.cell(1, 1);
+  // pull the arrow ends back from the glyph centers
+  const cut = (x0, y0, x1, y1) => [M.lerp(x0, x1, 0.18), M.lerp(y0, y1, 0.18), M.lerp(x1, x0, 0.16), M.lerp(y1, y0, 0.16)];
+  const [ax2, ay2, dx2, dy2] = cut(ax, ay, dx, dy);
+  const [cx2, cy2, bx2, by2] = cut(ccx, ccy, bx, by);
+  diagArrow(ctx, L, ax2, ay2, dx2, dy2, d1, D.c.accent, 3.2);
+  diagArrow(ctx, L, cx2, cy2, bx2, by2, d2, M.rgba(D.c.ink, 0.5), -3.2);
+  ctx.restore();
+  const redP = M.clamp((t - 3.7) / 0.4) * (1 - M.clamp((t - 5.5) / 0.3)); // red drains back before the cut
+  if (draw2) drawMat(ctx, L, { ...geo, role: 'math', scale: 1.2, txt: (i, j) => LET2[i][j], brkP: M.clamp((t - 2.35) / 0.5), halo: true,
+    a: (i, j) => M.clamp(M.spring(t - delay(i, j), ...D.feel('pop')) * 2.4),
+    s: cellS, dy: (i, j) => (1 - cellS(i, j)) * -3,
+    color: (i, j) => (i === j ? M.mix(D.c.ink, D.c.accent, redP)
+      : i + j === 1 ? M.mix(D.c.ink, D.c.soft, redP) : D.c.ink) });
+  // formula: ad − bc
+  if (t >= 4.3) {
+    const sp = M.spring(t - 4.3, ...D.feel('stamp'));
+    ctx.save();
+    ctx.translate(cx, yF(L, 0.72));
+    ctx.scale(M.lerp(1.3, 1, sp), M.lerp(1.3, 1, sp));
+    ctx.globalAlpha = M.clamp(sp * 2.4) * fade;
+    D.type(ctx, 'math', L, { scale: 2.1 });
+    ctx.textBaseline = 'middle';
+    const wA = ctx.measureText('ad').width, wM = ctx.measureText(MINUS).width, wB = ctx.measureText('bc').width;
+    const x0 = -(wA + 1.6 * u + wM + 1.6 * u + wB) / 2;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = D.c.accent; ctx.fillText('ad', x0, 0);
+    ctx.fillStyle = D.c.accent; ctx.fillText(MINUS, x0 + wA + 1.6 * u, 0);
+    ctx.fillStyle = D.c.ink; ctx.fillText('bc', x0 + wA + 3.2 * u + wM, 0);
+    ctx.restore(); ctx.globalAlpha = 1;
+    const fx = yF(L, 0.72);
+    const x0u = -(wA + 1.6 * u + wM + 1.6 * u + wB) / 2;
+    roughUnderline(ctx, L, cx + x0u - 0.5 * u, cx + x0u + wA + 1.6 * u + wM + 0.9 * u, fx + 7.6 * u, M.clamp((t - 4.55) / 0.4), { seed: 5, w: 0.65, alpha: 0.95 * fade });
+  }
+  kin(ctx, L, 'the building block', cx, yF(L, 0.14) + 2 * u, t - 2.9, { color: D.c.soft, alpha: fade });
+} });
+
+// GROW 6–9: the 2×2 becomes the 3×3; expand along row 1
+scenes.push({ from: 6, to: 9.02, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const MY = yF(L, 0.40);
+  const gp = M.ease.inOutCubic(M.clamp(lt / 0.72));
+  const P2 = 12 * u, P3 = 10.5 * u;
+  const pos22 = (i, j) => [cx + (j - 0.5) * P2, MY + (i - 0.5) * P2];
+  const pos33 = (i, j) => [cx + (j - 1) * P3, MY + (i - 1) * P3];
+  const isNew = (i, j) => i === 2 || j === 2;
+  // re-letter: the block's c,d become the big matrix's d,e as it grows
+  const reL = { '1,0': ['c', 'd'], '1,1': ['d', 'e'] };
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+    let x, y, sp = 1, a = 1, txt = LET[i][j], sq = 1;
+    if (isNew(i, j)) {
+      const d = 6.32 + Math.max(0, Math.hypot(i - 1, j - 1) - 1) * 0.25;
+      sp = M.spring(t - d, ...D.feel('pop'));
+      a = M.clamp(sp * 2.4);
+      [x, y] = pos33(i, j);
+      y += (1 - sp) * -4 * u;
+    } else {
+      const [sx, sy] = pos22(i, j), [tx, ty] = pos33(i, j);
+      x = M.lerp(sx, tx, gp); y = M.lerp(sy, ty, gp);
+      const rk = `${i},${j}`;
+      if (reL[rk]) {
+        const t0 = 6.06 + (j === 1 ? 0.12 : 0);
+        const pe = M.clamp((t - t0) / 0.22);
+        txt = pe < 0.5 ? reL[rk][0] : reL[rk][1];
+        sq = pe < 0.5 ? 1 - pe * 1.8 : 0.2 + (pe - 0.5) * 1.8;
+      }
+    }
+    if (a <= 0.002) continue;
+    ctx.save(); ctx.translate(x, y); ctx.scale(Math.max(0.02, sp), Math.max(0.02, sp * sq));
+    D.type(ctx, 'math', L, { scale: 1.15 }); ctx.fillStyle = D.c.ink; ctx.globalAlpha = a;
+    ctx.fillText(txt, 0, 0);
+    ctx.restore();
+  }
+  // brackets morph 2x2 -> 3x3
+  const b22 = matGeom({ x: cx, y: MY, p: P2, n: 2 }, L).box;
+  const b33 = matGeom({ x: cx, y: MY, p: P3, n: 3 }, L).box;
+  const gpB = M.ease.inOutCubic(M.clamp((lt - 0.18) / 0.72));
+  const mb = { x: M.lerp(b22.x, b33.x, gpB), y: M.lerp(b22.y, b33.y, gpB), w: M.lerp(b22.w, b33.w, gpB), h: M.lerp(b22.h, b33.h, gpB) };
+  brackets(ctx, L, mb, 1, { p: M.lerp(12, 10.5, gp) });
+  // row 1 band
+  const bp = M.clamp((t - 6.95) / 0.4);
+  if (bp > 0) {
+    const y0 = MY - P3, h = P3 * 1.06;
+    ctx.fillStyle = M.rgba(D.c.accent, 0.11 * bp);
+    M.rrect(ctx, mb.x - 0.8 * u, y0 - h / 2 - 0.3 * u, mb.w + 1.3 * u, h + 0.6 * u, 0.8 * u); ctx.fill();
+    const tp = M.spring(t - 7.15, ...D.feel('pop'));
+    ctx.save(); ctx.globalAlpha = M.clamp(tp * 2.4);
+    D.type(ctx, 'mathS', L, { scale: 1.05 }); ctx.fillStyle = D.c.accent; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    ctx.fillText('row 1', mb.x - 4.5 * u, y0 - 0.53 * P3 + (1 - tp) * -1.5 * u);
+    ctx.restore();
+  }
+  kin(ctx, L, 'build it from 2\u00d72s', cx, yF(L, 0.70), t - 7.35);
+} });
+
+// CROSSOUT 9–13: minors peel off; signs + − +
+scenes.push({ from: 9, to: 13.0, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const mv = M.spring(t - 9, ...D.feel('containers'));
+  const mo = { x: cx, y: M.lerp(yF(L, 0.40), yF(L, 0.25), mv), p: M.lerp(10.5 * u, 8.8 * u, mv), n: 3 };
+  const g = matGeom(mo, L);
+  const MP = mo.p;
+  const slotX = [cx - 29.5 * u, cx, cx + 29.5 * u];
+  const slotY = yF(L, 0.58), slotP = 7.4 * u;
+  const slotGeoms = slotX.map((x) => matGeom({ x, y: slotY, p: slotP, n: 2 }, L));
+  const kT = (k) => 9.35 + k * 0.6;
+  const cellA = (i, j) => {
+    let a = 1;
+    for (let k = 0; k < 3; k++) {
+      if (t > kT(k) + 0.28 && i > 0 && j === k)
+        a = Math.min(a, M.lerp(1, 0.42, M.clamp((t - kT(k) - 0.28) / 0.2)));
+      if (t > kT(k) + 0.28 && i === 0)
+        a = Math.min(a, M.lerp(1, 0.62, M.clamp((t - kT(k) - 0.28) / 0.2)));
+    }
+    return a;
+  };
+  // row-1 entry highlight
+  for (let j = 0; j < 3; j++) {
+    const on = M.clamp((t - kT(j)) / 0.18) * (1 - M.clamp((t - kT(j) - 0.62) / 0.3));
+    const rest = t > kT(j) + 0.5 ? 0.5 : 0;
+    const o2 = Math.max(on, rest);
+    if (o2 <= 0) continue;
+    const [x, y] = g.cell(0, j);
+    ctx.fillStyle = M.rgba(D.c.accent, 0.13 * o2);
+    M.rrect(ctx, x - MP * 0.52, y - MP * 0.52, MP * 1.04, MP * 1.04, 0.6 * u); ctx.fill();
+  }
+  // strike bands: flash line, residual = dim band only
+  for (let k = 0; k < 3; k++) {
+    const sp = M.clamp((t - kT(k)) / 0.28);
+    const flash = sp > 0 && sp < 1;
+    const resid = t > kT(k) + 0.3;
+    const y0c = g.cell(0, k)[1], x0c = g.cell(0, k)[0];
+    if (flash) {
+      strike(ctx, L, g.box.x - 1 * u, y0c - MP / 2 - 0.3 * u, g.box.w + 2 * u, MP + 0.6 * u, sp, 0.6);
+      strike(ctx, L, x0c - MP / 2 - 0.3 * u, g.box.y - 0.6 * u, MP + 0.6 * u, g.box.h + 1.2 * u, sp, 0.6);
+    } else if (resid && t < 12.4) {
+      const fade = 1 - M.clamp((t - 12.0) / 0.4);
+      ctx.save(); ctx.globalAlpha = 0.14 * fade;
+      ctx.fillStyle = M.rgba(D.c.accent, 1);
+      ctx.fillRect(g.box.x - 1 * u, y0c - MP / 2 - 0.3 * u, g.box.w + 2 * u, MP + 0.6 * u);
+      ctx.fillRect(x0c - MP / 2 - 0.3 * u, g.box.y - 0.6 * u, MP + 0.6 * u, g.box.h + 1.2 * u);
+      ctx.restore();
+    }
+  }
+  // matrix
+  drawMat(ctx, L, { ...mo, role: 'math', scale: 1.1, txt: (i, j) => LET[i][j], brkP: 1, a: cellA, halo: true,
+    color: () => D.c.ink });
+  // flying cells -> slots (letters copied out)
+  for (let k = 0; k < 3; k++) {
+    const t0 = kT(k) + 0.28;
+    const sarr = M.clamp((t - t0) / 0.3);
+    if (sarr > 0) brackets(ctx, L, slotGeoms[k].box, Math.min(1, sarr * 1.6), { p: 7.4 });
+    for (let i = 1; i <= 2; i++) for (let j = 0; j < 3; j++) {
+      if (j === k) continue;
+      const mi = i - 1, mj = j < k ? j : j - 1;
+      const src = g.cell(i, j), dst = slotGeoms[k].cell(mi, mj);
+      if (t < t0) continue;
+      const [fx, fy, pe] = flyPos(t, t0, 0.34, src, dst, 4.5, u);
+      const x = pe < 1 ? fx : dst[0], y = pe < 1 ? fy : dst[1];
+      ctx.save();
+      if (pe < 1) {
+        ctx.fillStyle = D.c.paper2;
+        M.rrect(ctx, x - 1.9 * u, y - 1.9 * u, 3.8 * u, 3.8 * u, 0.5 * u); ctx.fill();
+        ctx.strokeStyle = M.rgba(D.c.ink, 0.25); ctx.lineWidth = Math.max(1, 0.1 * u); ctx.stroke();
+      }
+      D.type(ctx, 'mathS', L, { scale: 1.45 }); ctx.fillStyle = D.c.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(LET[i][j], x, y);
+      ctx.restore();
+    }
+  }
+  // signs + − + stamped ABOVE each slot (clean sticker discs)
+  for (let k = 0; k < 3; k++) {
+    const t0 = 11.4 + k * 0.15;
+    const sp = M.spring(t - t0, ...D.feel('stamp'));
+    if (sp <= 0) continue;
+    ctx.save(); ctx.globalAlpha = M.clamp(sp * 2.4);
+    ctx.translate(slotX[k], slotY - 11 * u);
+    ctx.scale(M.lerp(1.3, 1, sp), M.lerp(1.3, 1, sp));
+    ctx.fillStyle = D.c.bg;
+    ctx.beginPath(); ctx.arc(0, 0, 3.4 * u, 0, M.TAU); ctx.fill();
+    ctx.strokeStyle = D.c.accent; ctx.lineWidth = 0.42 * u;
+    ctx.beginPath(); ctx.arc(0, 0, 3.4 * u, 0, M.TAU); ctx.stroke();
+    D.type(ctx, 'mathS', L, { scale: 1.35 }); ctx.fillStyle = D.c.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(k === 1 ? MINUS : '+', 0, 0);
+    ctx.restore();
+  }
+  kin(ctx, L, 'cross out its row + column', cx, yF(L, 0.76), t - 9.3);
+  kin(ctx, L, 'what\u2019s left = the minor', cx, yF(L, 0.83), t - 10.3, { color: D.c.soft });
+} });
+
+// FORMULA 13–16.5: entry × minor cards (portrait: stacked terms; landscape: row)
+scenes.push({ from: 13, to: 16.5, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const mv = M.spring(t - 13, ...D.feel('containers'));
+  const mo = { x: cx, y: M.lerp(yF(L, 0.25), yF(L, L.portrait ? 0.15 : 0.19), mv), p: M.lerp(8.8 * u, 6.2 * u, mv), n: 3 };
+  const g = matGeom(mo, L);
+  drawMat(ctx, L, { ...mo, role: 'math', txt: (i, j) => LET[i][j], brkP: 1,
+    a: () => M.lerp(1, 0.8, mv), halo: true, color: () => D.c.ink });
+  ctx.save();
+  D.type(ctx, 'mathS', L, { scale: 1.2 }); ctx.fillStyle = D.c.soft; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  ctx.globalAlpha = M.clamp((t - 13.3) / 0.3);
+  ctx.fillText('A =', g.box.x - 2.4 * u, mo.y);
+  ctx.restore();
+  // card geometry: portrait stacks three full-term cards; landscape keeps the row
+  const stack = L.portrait;
+  const cardW = (stack ? 62 : 23) * u, cardH = (stack ? 13.5 : 13) * u;
+  const cardYs = stack ? [0.31, 0.46, 0.61].map((f) => yF(L, f)) : [yF(L, 0.52), yF(L, 0.52), yF(L, 0.52)];
+  const cardXs = stack ? [cx, cx, cx] : [cx - 30 * u, cx, cx + 30 * u];
+  const entryRel = stack ? -23 * u : -7 * u;
+  const xRel = stack ? -17 * u : -1.8 * u;
+  const miniRel = stack ? 7 * u : 5.5 * u;
+  const miniP = (stack ? 6 : 5) * u;
+  for (let k = 0; k < 3; k++) {
+    const gr = M.spring(t - 13.05 - k * 0.06, ...D.feel('containers'));
+    const w = M.lerp(9 * u, cardW, gr), h = M.lerp(10 * u, cardH, gr);
+    const cX = M.lerp(stack ? [cx - 28 * u, cx, cx + 28 * u][k] : cardXs[k], cardXs[k], gr);
+    const cY = M.lerp(yF(L, 0.52), cardYs[k], gr);
+    card(ctx, L, { x: cX, y: cY, w, h, aIn: 1 });
+    const mini = { x: M.lerp(stack ? [cx - 28 * u, cx, cx + 28 * u][k] : cX, cX + miniRel, gr),
+      y: M.lerp(yF(L, 0.52), cY - 1 * u, gr), p: miniP, n: 2 };
+    drawMat(ctx, L, { ...mini, role: 'mathS', scale: 1.35, txt: (i, j) => MINL[k][i][j], brkP: 1 });
+    // sign badge inside cards 2,3 (portrait) / between cards (landscape)
+    if (stack && k > 0) {
+      const sp = M.spring(t - 13.5 - k * 0.08, ...D.feel('pop'));
+      if (sp > 0) {
+        ctx.save(); ctx.globalAlpha = M.clamp(sp * 2.4);
+        D.type(ctx, 'math', L, { scale: 1.35 }); ctx.fillStyle = D.c.accent;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(k === 1 ? MINUS : '+', cX + entryRel - 5.5 * u, cY - 1 * u);
+        ctx.restore();
+      }
+    }
+    // entry flies from matrix row-1 to card-left
+    const e0 = 13.35 + k * 0.11, edur = 0.3;
+    const dst = [cX + entryRel, cY - 1 * u];
+    if (t > e0) {
+      const [fx, fy, pe] = flyPos(t, e0, edur, g.cell(0, k), dst, 4, u);
+      const x = pe < 1 ? fx : dst[0], y = pe < 1 ? fy : dst[1];
+      ctx.save();
+      D.type(ctx, 'math', L, { scale: 1.6 }); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = D.c.accent; ctx.globalAlpha = M.clamp((t - e0) / 0.06);
+      ctx.fillText(ENTRYL[k], x, y);
+      ctx.restore();
+    }
+    // × between entry and mini
+    const xp = M.spring(t - 13.6 - k * 0.06, ...D.feel('pop'));
+    if (xp > 0) {
+      ctx.save(); ctx.globalAlpha = M.clamp(xp * 2.4);
+      D.type(ctx, 'mathS', L, { scale: 1.15 }); ctx.fillStyle = D.c.soft; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('\u00d7', cX + xRel, cY - 1 * u + (1 - xp) * 1.5 * u);
+      ctx.restore();
+    }
+  }
+  // operators (landscape only)
+  if (!stack) [[MINUS, cx - 16 * u], ['+', cx + 16 * u]].forEach(([s, x], i) => {
+    const sp = M.spring(t - 13.5 - i * 0.1, ...D.feel('pop'));
+    if (sp <= 0) return;
+    ctx.save(); ctx.globalAlpha = M.clamp(sp * 2.4);
+    ctx.translate(x, yF(L, 0.52) - 1 * u); ctx.scale(M.lerp(1.35, 1, sp), M.lerp(1.35, 1, sp));
+    D.type(ctx, 'math', L, { scale: 1.35 }); ctx.fillStyle = D.c.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(s, 0, 0);
+    ctx.restore();
+  });
+  // sum line + teacher circle
+  kin(ctx, L, 'det = a\u00b7M1 ' + MINUS + ' b\u00b7M2 + c\u00b7M3', cx, yF(L, 0.85), t - 13.95, { role: 'math', scale: 1.15 });
+  roughCircle(ctx, L, cx, yF(L, 0.85) - 0.4 * u, (meas.sumF / 2 + 5.5) * u, 7.2 * u, M.ease.outCubic(M.clamp((t - 14.55) / 0.55)), { seed: 7, alpha: 0.85 });
+} });
+
+// EXAMPLE 16.5–24: numbers; minors; sum rolls to 8
+scenes.push({ from: 16.5, to: 24.0, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const stack = L.portrait;
+  const mo = { x: cx, y: yF(L, stack ? 0.15 : 0.19), p: 6.2 * u, n: 3 };
+  const g = matGeom(mo, L);
+  const dim = M.lerp(1, 0.38, M.clamp((t - 21.5) / 0.35)); // spotlight onto the sum line
+  const flip = (i, j) => {
+    const t0 = 16.55 + (i * 3 + j) * 0.055;
+    const pe = M.clamp((t - t0) / 0.26);
+    return { txt: pe < 0.5 ? LET[i][j] : NUM[i][j], s: pe < 0.5 ? 1 - pe * 1.84 : 0.16 + (pe - 0.5) * 1.84 };
+  };
+  const rowHl = M.clamp((t - 17.15) / 0.3) * (1 - M.clamp((t - 23.2) / 0.5));
+  if (rowHl > 0) {
+    const yTop = g.cell(0, 0)[1] - mo.p / 2 - 0.4 * u;
+    ctx.fillStyle = M.rgba(D.c.accent, 0.12 * rowHl);
+    M.rrect(ctx, g.box.x - 0.8 * u, yTop, g.box.w + 2.3 * u, mo.p + 0.9 * u, 0.7 * u); ctx.fill();
+  }
+  const flying = (i, j) => {
+    for (let k = 0; k < 3; k++) {
+      const t0 = 17.5 + k * 0.4;
+      if (t >= t0 && t < t0 + 0.35) {
+        const inMinor = i > 0 && j !== k;
+        if (inMinor) return 0.1;
+      }
+    }
+    return 1;
+  };
+  drawMat(ctx, L, { ...mo, role: 'math', txt: (i, j) => flip(i, j).txt, brkP: 1,
+    s: (i, j) => flip(i, j).s, halo: true,
+    a: (i, j) => dim * flying(i, j),
+    color: (i, j) => (i === 0 ? D.c.accent : D.c.ink) });
+  ctx.save();
+  D.type(ctx, 'mathS', L, { scale: 1.2 }); ctx.fillStyle = D.c.soft; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  ctx.globalAlpha = M.clamp((t - 16.8) / 0.3) * dim;
+  ctx.fillText('A =', g.box.x - 2.4 * u, mo.y);
+  ctx.restore();
+  // cards: portrait = stacked full terms (value inline at right); landscape = row (value under mini)
+  const cardW = (stack ? 62 : 23) * u;
+  const growH = M.spring(t - 16.5, ...D.feel('containers'));
+  const cardH = stack ? M.lerp(13.5 * u, 15.5 * u, growH) : M.lerp(13 * u, 17.5 * u, growH);
+  const cardYs = stack ? [0.31, 0.46, 0.61].map((f) => yF(L, f))
+    : [yF(L, 0.52), yF(L, 0.52), yF(L, 0.52)].map((y0) => M.lerp(y0, yF(L, 0.505), growH));
+  const cardXs = stack ? [cx, cx, cx] : [cx - 30 * u, cx, cx + 30 * u];
+  const entryRel = stack ? -23 * u : -7 * u;
+  const xRel = stack ? -17 * u : -1.8 * u;
+  const miniRel = stack ? 7 * u : 5.5 * u;
+  const miniP = (stack ? 6 : 5) * u;
+  const contentY = stack ? 0 : M.lerp(-1, -3.2, growH) * u;
+  for (let k = 0; k < 3; k++) {
+    const cX = cardXs[k], cY = cardYs[k];
+    card(ctx, L, { x: cX, y: cY, w: cardW, h: cardH, aIn: 1, dim });
+    const mini = { x: cX + miniRel, y: cY + contentY, p: miniP, n: 2 };
+    const mg = matGeom(mini, L);
+    const t0 = 17.5 + k * 0.4, landT = t0 + 0.35;
+    for (let i = 0; i < 2; i++) for (let j = 0; j < 2; j++) {
+      const bi = i + 1, bj = j + (j >= k ? 1 : 0);
+      const [fx, fy, pe] = flyPos(t, t0, 0.35, g.cell(bi, bj), mg.cell(i, j), 7, u);
+      if (t >= t0 && pe < 1) {
+        ctx.save();
+        ctx.fillStyle = D.c.paper2;
+        M.rrect(ctx, fx - 1.6 * u, fy - 1.6 * u, 3.2 * u, 3.2 * u, 0.5 * u); ctx.fill();
+        ctx.strokeStyle = M.rgba(D.c.ink, 0.25); ctx.lineWidth = Math.max(1, 0.1 * u); ctx.stroke();
+        D.type(ctx, 'mathS', L, { scale: 1.05 }); ctx.fillStyle = D.c.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(NUM[bi][bj], fx, fy);
+        ctx.restore();
+      }
+    }
+    const letterA = M.clamp(1 - (t - (landT - 0.1)) / 0.1);
+    if (t < landT + 0.2 && letterA > 0) {
+      drawMat(ctx, L, { ...mini, role: 'mathS', scale: 1.35, txt: (i, j) => MINL[k][i][j], brkP: 1, a: () => letterA });
+    }
+    const numA = M.clamp((t - landT - 0.04) / 0.12);
+    if (numA > 0) {
+      drawMat(ctx, L, { ...mini, role: 'mathS', scale: 1.35, txt: (i, j) => MINN[k][i][j], brkP: 1, a: () => numA * dim });
+    }
+    // diagonal echo inside the mini
+    const dP = M.clamp((t - 18.55 - k * 0.12) / 0.3) * (1 - M.clamp((t - 19.15 - k * 0.12) / 0.35));
+    if (dP > 0) {
+      ctx.save(); ctx.globalAlpha = M.clamp(dP) * 0.5 * dim;
+      ctx.strokeStyle = D.c.accent; ctx.lineWidth = 0.3 * u; ctx.lineCap = 'round';
+      const c00 = mg.cell(0, 0), c11 = mg.cell(1, 1), c01 = mg.cell(0, 1), c10 = mg.cell(1, 0);
+      ctx.beginPath(); ctx.moveTo(...c00); ctx.lineTo(...c11); ctx.moveTo(...c10); ctx.lineTo(...c01); ctx.stroke();
+      ctx.restore();
+    }
+    // minor value: inline right (stack) / under the mini (row)
+    const mv0 = 18.9 + k * 0.4;
+    if (t > mv0) {
+      const vx = stack ? cX + 21 * u : cX + miniRel;
+      const vy = stack ? cY : cY + cardH / 2 - 2.6 * u;
+      ctx.save();
+      ctx.translate(vx, vy);
+      slam(ctx, t, mv0, (a) => {
+        D.type(ctx, 'mathS', L, { scale: 1.45 });
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = D.c.accent;
+        ctx.globalAlpha = a * dim;
+        ctx.fillText('= ' + MINV[k], 0, 0);
+        ctx.globalAlpha = a * 0.3 * dim; ctx.fillText('= ' + MINV[k], 0.18 * u, -0.12 * u);
+      }, { from: 1.3 });
+      ctx.restore();
+    }
+    // entry number (flips with the matrix)
+    if (t > 16.55 + k * 0.055) {
+      const ef = flip(0, k);
+      ctx.save();
+      D.type(ctx, 'math', L, { scale: 1.6 }); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = D.c.accent; ctx.globalAlpha = M.clamp((t - 16.55) / 0.1) * dim;
+      ctx.save(); ctx.translate(cX + entryRel, cY + contentY); ctx.scale(1, Math.max(0.15, ef.s));
+      ctx.fillText(ef.txt, 0, 0);
+      ctx.restore(); ctx.restore();
+    }
+    // sign badges inside stacked cards 2,3
+    if (stack && k > 0) {
+      ctx.save();
+      D.type(ctx, 'math', L, { scale: 1.35 }); ctx.fillStyle = D.c.accent;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.globalAlpha = M.clamp((t - 16.5) / 0.12) * dim;
+      ctx.fillText(k === 1 ? MINUS : '+', cX + entryRel - 5.5 * u, cY);
+      ctx.restore();
+    }
+    // × between entry and mini
+    ctx.save();
+    D.type(ctx, 'mathS', L, { scale: 1.15 }); ctx.fillStyle = D.c.soft; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.globalAlpha = M.clamp((t - 16.5) / 0.12) * dim;
+    ctx.fillText('\u00d7', cX + xRel, cY + contentY);
+    ctx.restore();
+  }
+  // operators (landscape only)
+  if (!stack) [[MINUS, cx - 16 * u], ['+', cx + 16 * u]].forEach(([s, x]) => {
+    ctx.save();
+    D.type(ctx, 'math', L, { scale: 1.35 }); ctx.fillStyle = D.c.accent; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.globalAlpha = M.clamp((t - 16.5) / 0.12) * dim;
+    ctx.fillText(s, x, yF(L, 0.505) + contentY);
+    ctx.restore();
+  });
+  // ---- sum line (px-consistent, centered) ----
+  const lineY = yF(L, 0.85);
+  D.type(ctx, 'math', L, { scale: 1.7 });
+  const mw = (s) => ctx.measureText(s).width;
+  const slotWs = CHUNK.map((s, k) => Math.max(mw(s), mw(PROD[k])) + 1.1 * u);
+  const wEqS = mw('= ');
+  const wRoll = mw('8') + 0.8 * u;
+  const gapS = 1.1 * u;
+  const totalS = slotWs.reduce((a, b) => a + b, 0) + 4 * gapS + wEqS + wRoll + 2.8 * u;
+  const xBase = cx - totalS / 2;
+  let sx = xBase;
+  const stageB = t >= 20.4;
+  // highlighter sweep: the teacher marks the key line as the numbers land
+  const hlP = M.ease.outCubic(M.clamp((t - 20.4) / 0.4));
+  if (hlP > 0 && hlP < 1) {
+    ctx.save();
+    ctx.fillStyle = M.rgba(D.c.accent, 0.13);
+    M.rrect(ctx, xBase - 1 * u, lineY - 3.4 * u, (totalS + 2 * u) * hlP, 6.8 * u, 1.2 * u); ctx.fill();
+    ctx.restore();
+  }
+  const popsA = [18.9, 19.05, 19.3, 19.45, 19.7], popsB = [20.5, 20.7, 20.9, 21.1, 21.3];
+  const drawSlotTxt = (txt, x, y, w, a, color, sqy = 1) => {
+    if (a <= 0.002) return;
+    ctx.save(); ctx.globalAlpha = a;
+    ctx.translate(x + w / 2, y); ctx.scale(1, Math.max(0.1, sqy));
+    D.type(ctx, 'math', L, { scale: 1.7 }); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = color || D.c.ink;
+    ctx.fillText(txt, 0, 0);
+    ctx.restore();
+  };
+  for (let k = 0; k < 5; k++) {
+    const w = slotWs[k];
+    const aA = M.clamp(M.spring(t - popsA[k], ...D.feel('pop')) * 2.4);
+    if (aA > 0) {
+      const cross = stageB ? M.clamp((t - popsB[k]) / 0.12) : 0;
+      const sq = 1 - Math.sin(M.clamp(cross) * Math.PI) * 0.6;
+      drawSlotTxt(CHUNK[k], sx, lineY, w, aA * M.clamp(1 - cross * 2), D.c.ink, cross > 0 && cross < 1 ? sq : 1);
+    }
+    const aB = stageB ? M.clamp(M.spring(t - popsB[k] - 0.07, ...D.feel('pop')) * 2.4) : 0;
+    if (aB > 0) drawSlotTxt(PROD[k], sx, lineY + (1 - aB) * 1.2 * u, w, aB, k === 1 || k === 3 ? D.c.soft : D.c.ink);
+    sx += w + gapS;
+  }
+  // = roll (fast: wrong-looking intermediate values last < 0.15s)
+  const rollT = 21.8;
+  if (t > rollT - 0.05) {
+    drawSlotTxt('= ', sx, lineY, wEqS, M.clamp((t - rollT) / 0.1), D.c.ink);
+    const rp = M.spring(t - rollT, 70, 20);
+    const done = t > 22.6;
+    ctx.save();
+    ctx.translate(sx + wEqS + 1.2 * u + wRoll / 2, lineY);
+    if (done) {
+      const sp = M.spring(t - 22.65, ...D.feel('stamp'));
+      ctx.scale(M.lerp(1.55, 1, sp), M.lerp(1.55, 1, sp));
+      ctx.globalAlpha = M.clamp(sp * 2.6);
+    }
+    D.type(ctx, 'math', L, { scale: 1.7 }); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = done ? D.c.accent : D.c.ink;
+    ctx.fillText(String(done ? 8 : Math.round(M.lerp(0, 8, M.clamp(rp)))), 0, 0);
+    ctx.restore();
+    if (done) roughCircle(ctx, L, sx + wEqS + 1.2 * u + wRoll / 2, lineY, 7.2 * u, 7 * u, M.ease.outCubic(M.clamp((t - 22.7) / 0.5)), { seed: 12, wob: 0.05 });
+  }
+} });
+
+// STAMP 24–26.76: det(A) = 8
+scenes.push({ from: 24, to: 26.76, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const HY = yF(L, 0.46);
+  // measured, centered lockup: [det(A) =][gap][8 circled]
+  D.type(ctx, 'hero', L, { scale: 1.05 });
+  ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+  const wEq = ctx.measureText('det(A) =').width, w8 = ctx.measureText('8').width;
+  const circD = 2 * (w8 / 2 + 7.4 * u);
+  const total = wEq + 2.4 * u + circD;
+  const xEq = cx - total / 2, x8 = xEq + wEq + 2.4 * u + circD / 2;
+  // the 8 grows from the sum line into the hero lockup
+  const gp = M.spring(t - 24, ...D.feel('stamp'));
+  const scale = M.lerp(0.4, 1, gp);
+  const x8n = M.lerp(cx + 14 * u, x8, gp);
+  const y8n = M.lerp(yF(L, 0.72), HY, gp);
+  // det(A) = slides in
+  const eqP = M.spring(t - 24.25, ...D.feel('containers'));
+  ctx.save();
+  ctx.globalAlpha = M.clamp(eqP * 1.2);
+  ctx.fillStyle = D.c.ink;
+  ctx.fillText('det(A) =', xEq + (1 - eqP) * -14 * u, HY);
+  ctx.restore();
+  // the 8 (stamp double strike)
+  ctx.save();
+  ctx.translate(x8n, y8n); ctx.scale(scale, scale);
+  ctx.globalAlpha = M.clamp((t - 24) / 0.05);
+  D.type(ctx, 'hero', L, { scale: 1.05 }); ctx.textAlign = 'center';
+  ctx.fillStyle = D.c.accent;
+  ctx.fillText('8', 0, 0);
+  ctx.globalAlpha *= 0.3; ctx.fillText('8', 0.2 * u / scale, -0.13 * u / scale);
+  ctx.restore(); ctx.globalAlpha = 1;
+  roughCircle(ctx, L, x8, HY, w8 / 2 + 6.8 * u, w8 / 2 + 6.4 * u, M.ease.outCubic(M.clamp((t - 24.5) / 0.5)), { seed: 14, wob: 0.12, w: 1.1 });
+  roughCircle(ctx, L, x8 + 0.5 * u, HY - 0.3 * u, w8 / 2 + 7.2 * u, w8 / 2 + 6.8 * u, M.ease.outCubic(M.clamp((t - 24.62) / 0.5)), { seed: 15, wob: 0.12, w: 0.9, alpha: 0.8 });
+  // provenance: tiny A
+  const tp = { x: cx, y: yF(L, 0.15), p: 5.2 * u, n: 3 };
+  drawMat(ctx, L, { ...tp, role: 'mathS', scale: 1.1, txt: (i, j) => NUM[i][j], brkP: 1, a: () => M.clamp((t - 24.4) / 0.4) * 0.85 });
+  ctx.save();
+  D.type(ctx, 'mathS', L, { scale: 1.15 }); ctx.fillStyle = D.c.soft; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  ctx.globalAlpha = M.clamp((t - 24.4) / 0.4) * 0.85;
+  ctx.fillText('A =', matGeom(tp, L).box.x - 2.6 * u, yF(L, 0.17));
+  ctx.restore();
+  kin(ctx, L, 'every square matrix has one', cx, yF(L, 0.76), t - 25.4, { role: 'body', color: M.mix(D.c.soft, D.c.ink, 0.45), scale: 1.4 });
+} });
+
+// MEANING 26.74–30.5: the columns draw a box, volume ×8
+scenes.push({ from: 26.74, to: 30.52, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  kin(ctx, L, 'the volume factor', cx, yF(L, 0.14) + 2 * u, t - 26.95);
+  const drawP = M.ease.outCubic(M.clamp((t - 26.95) / 0.6));
+  const morphP = M.spring(t - 28.3, ...D.feel('stamp'));
+  const UNIT = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+  const ACOLS = [[2, 1, 0], [1, 2, 1], [1, 1, 3]];
+  box3d(ctx, L, { x: cx, y: yF(L, 0.46), s: L.portrait ? 13 : 11, cols: mixCols(UNIT, ACOLS, morphP), alpha: drawP,
+    arrowP: M.ease.outCubic(M.clamp((t - 27.2) / 0.75)), labels: true });
+  const vp = M.clamp((t - 27.4) / 0.3);
+  if (vp > 0) {
+    ctx.save(); ctx.globalAlpha = vp;
+    D.type(ctx, 'math', L, { scale: 1.3 }); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = D.c.accent;
+    ctx.fillText('vol \u00d7' + Math.round(M.lerp(1, 8, M.clamp(morphP))), cx, yF(L, 0.85));
+    ctx.restore();
+  }
+} });
+
+// ZERO 30.5–33.55: det 0 collapses flat onto the floor plane
+scenes.push({ from: 30.5, to: 33.55, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  kin(ctx, L, 'det = 0 \u2192 flat', cx, yF(L, 0.14) + 2 * u, t - 30.7);
+  const A0 = [[2, 1, 0], [1, 2, 1], [1, 1, 3]];        // A's columns (continuity from the meaning scene)
+  const A1 = [[2, 1, 0], [1, 2, 0], [1, 1, 0]];        // flattened onto the floor plane: coplanar, det = 0
+  const flatP = M.clamp(M.spring(t - 30.9, ...D.feel('stamp')));
+  box3d(ctx, L, { x: cx, y: M.lerp(yF(L, 0.46), yF(L, 0.60), flatP), s: L.portrait ? 26 : 13, cols: mixCols(A0, A1, flatP), alpha: 1, arrows: false, labels: false, fillP: flatP,
+    el: M.lerp(30, 6, flatP) });   // falls AND flattens: the view tips toward the floor
+  const glitch = t > 32.05 && t < 32.7 ? 0.55 + 0.45 * M.noise(t * 30, 4) : 1;
+  ctx.save(); ctx.globalAlpha = glitch * M.clamp((t - 30.75) / 0.25);
+  D.type(ctx, 'math', L, { scale: 1.3 }); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = D.c.accent;
+  ctx.fillText('vol \u00d7' + Math.round(M.lerp(8, 0, flatP)), cx, M.lerp(yF(L, 0.85), yF(L, 0.77), flatP));
+  ctx.restore();
+  kin(ctx, L, 'no volume \u00b7 no inverse', cx, yF(L, 0.88), t - 31.7, { role: 'body', color: M.mix(D.c.soft, D.c.ink, 0.45), scale: 1.45 });
+} });
+
+// OUTRO 33.5–40: recap + lockup
+scenes.push({ from: 33.5, to: 40.01, draw(ctx, lt, L, p, t) {
+  const u = L.u, cx = L.cx;
+  const recap = ['2\u00d72 \u2192 ad ' + MINUS + ' bc', '3\u00d73 \u2192 expand a row', 'minors \u00b7 signs + ' + MINUS + ' +', 'det = the volume factor'];
+  ctx.save();
+  D.type(ctx, 'label', L, { scale: 1.45 });
+  const recapW = Math.max(...recap.map((s) => ctx.measureText(s).width));
+  ctx.restore();
+  recap.forEach((s, i) => {
+    const t0 = 33.25 + i * 0.45;
+    const sp = M.spring(t - t0, ...D.feel('pop'));
+    if (sp <= 0) return;
+    ctx.save(); ctx.globalAlpha = M.clamp(sp * 2.4);
+    const y = yF(L, 0.18 + i * 0.06) + (1 - sp) * 2.2 * u;
+    const x = L.safe.x + 3.6 * u;
+    ctx.fillStyle = D.c.accent;
+    ctx.fillRect(x - 2.4 * u, y - 0.55 * u, 1 * u, 1.1 * u);
+    D.type(ctx, 'label', L, { scale: 1.45 });
+    ctx.fillStyle = D.c.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(s, x, y);
+    ctx.restore();
+  });
+  kin(ctx, L, 'THE DETERMINANT', cx, yF(L, 0.58), t - 36, { role: 'title' });
+  kin(ctx, L, 'one number that knows the whole matrix', cx, yF(L, 0.69), t - 36.5, { role: 'body', color: M.mix(D.c.soft, D.c.ink, 0.35), scale: 1.45 });
+  // red-pen underline closes the film (no big circle: it crossed the type)
+  roughUnderline(ctx, L, cx - 30 * u, cx + 30 * u, yF(L, 0.58) + 6.5 * u, M.clamp((t - 36.9) / 0.8), { seed: 21, alpha: 0.75 });
+  if (t > 37.4) {
+    const ap = M.spring(t - 37.4, ...D.feel('pop'));
+    const y = yF(L, 0.84);
+    const tp = { x: cx - 14.5 * u, y, p: 5 * u, n: 3 };
+    drawMat(ctx, L, { ...tp, role: 'mathS', scale: 1.2, txt: (i, j) => NUM[i][j], brkP: Math.min(1, ap * 1.5), a: () => M.clamp(ap * 2.4) });
+    ctx.save();
+    D.type(ctx, 'math', L, { scale: 1.45 }); ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = D.c.ink; ctx.globalAlpha = M.clamp(ap * 2.4);
+    const ex = cx - 2 * u;
+    ctx.fillText('det(A) =', ex, y);
+    const w8 = ctx.measureText('det(A) =').width;
+    ctx.fillStyle = D.c.accent; ctx.fillText('8', ex + w8 + 2.4 * u, y);
+    ctx.restore();
+  }
+} });
+
+// ---------------- film ----------------
+film({
+  async setup(L, c) {
+    cfg = c;
+    D = await loadDesign();
+    buildGrid(L);
+    buildGrain();
+    measure(L);
+  },
+  draw(ctx, t, L) {
+    const j = joltOf(t);
+    ctx.save();
+    if (j) ctx.translate(j[0] * L.u, j[1] * L.u);
+    ctx.drawImage(gridC, 0, 0);
+    M.playScenes(scenes, ctx, t, L);
+    bandWipe(ctx, t, L, 0);
+    bandWipe(ctx, t, L, 26.5);
+    bandWipe(ctx, t, L, 33.0);
+    chipDraw(ctx, t, L);
+    ctx.restore();
+    if (!grainPats) grainPats = grainTiles.map((c2) => ctx.createPattern(c2, 'repeat'));
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = grainPats[Math.floor(t * 24) % 8];
+    ctx.fillRect(0, 0, L.W, L.H);
+    ctx.globalAlpha = 1;
+  },
+});
+</script>
+</body>
+</html>

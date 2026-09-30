@@ -1,0 +1,441 @@
+[
+  {
+    "t": 0.0,
+    "type": "riser",
+    "len": 1.1,
+    "gain": 0.5
+  },
+  {
+    "t": 0.25,
+    "type": "tick",
+    "gain": 0.5
+  },
+  {
+    "t": 0.36,
+    "type": "tick",
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 0.5,
+    "type": "tick",
+    "gain": 0.55
+  },
+  {
+    "t": 0.92,
+    "type": "swipe",
+    "len": 0.5,
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 1.32,
+    "type": "impact",
+    "gain": 0.75,
+    "free": true
+  },
+  {
+    "t": 1.38,
+    "type": "chime",
+    "gain": 0.35,
+    "free": true
+  },
+  {
+    "t": 2.0,
+    "type": "whoosh",
+    "len": 0.5,
+    "gain": 0.55
+  },
+  {
+    "t": 2.5,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 2.62,
+    "type": "tick",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 2.75,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 2.86,
+    "type": "tick",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 3.35,
+    "type": "swipe",
+    "len": 0.45,
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 3.75,
+    "type": "swipe",
+    "len": 0.45,
+    "gain": 0.45
+  },
+  {
+    "t": 4.35,
+    "type": "impact",
+    "gain": 0.7,
+    "free": true
+  },
+  {
+    "t": 4.42,
+    "type": "chime",
+    "gain": 0.3,
+    "free": true
+  },
+  {
+    "t": 6.0,
+    "type": "whoosh",
+    "len": 0.55,
+    "gain": 0.6
+  },
+  {
+    "t": 6.35,
+    "type": "tick",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 6.5,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 6.65,
+    "type": "tick",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 6.75,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 7.0,
+    "type": "swipe",
+    "len": 0.4,
+    "gain": 0.4
+  },
+  {
+    "t": 7.5,
+    "type": "pop",
+    "gain": 0.4
+  },
+  {
+    "t": 9.0,
+    "type": "whoosh",
+    "len": 0.4,
+    "gain": 0.45
+  },
+  {
+    "t": 9.35,
+    "type": "impact",
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 9.63,
+    "type": "whoosh",
+    "len": 0.35,
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 10.0,
+    "type": "impact",
+    "gain": 0.5
+  },
+  {
+    "t": 10.25,
+    "type": "whoosh",
+    "len": 0.35,
+    "gain": 0.5
+  },
+  {
+    "t": 10.5,
+    "type": "impact",
+    "gain": 0.5
+  },
+  {
+    "t": 10.83,
+    "type": "whoosh",
+    "len": 0.35,
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 11.25,
+    "type": "pop",
+    "pitch": 1.35,
+    "gain": 0.5
+  },
+  {
+    "t": 11.5,
+    "type": "pop",
+    "pitch": 0.85,
+    "gain": 0.5
+  },
+  {
+    "t": 11.6,
+    "type": "pop",
+    "pitch": 1.35,
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 13.0,
+    "type": "whoosh",
+    "len": 0.5,
+    "gain": 0.5
+  },
+  {
+    "t": 13.35,
+    "type": "tick",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 13.5,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 13.75,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 14.0,
+    "type": "pop",
+    "gain": 0.4
+  },
+  {
+    "t": 15.25,
+    "type": "chime",
+    "gain": 0.42
+  },
+  {
+    "t": 16.5,
+    "type": "impact",
+    "gain": 0.65
+  },
+  {
+    "t": 16.75,
+    "type": "tick",
+    "gain": 0.4
+  },
+  {
+    "t": 17.0,
+    "type": "tick",
+    "gain": 0.4
+  },
+  {
+    "t": 17.1,
+    "type": "tick",
+    "gain": 0.4,
+    "free": true
+  },
+  {
+    "t": 17.25,
+    "type": "impact",
+    "gain": 0.45
+  },
+  {
+    "t": 17.5,
+    "type": "whoosh",
+    "len": 0.35,
+    "gain": 0.5
+  },
+  {
+    "t": 17.75,
+    "type": "impact",
+    "gain": 0.45
+  },
+  {
+    "t": 18.0,
+    "type": "whoosh",
+    "len": 0.35,
+    "gain": 0.5
+  },
+  {
+    "t": 18.25,
+    "type": "impact",
+    "gain": 0.45
+  },
+  {
+    "t": 18.5,
+    "type": "whoosh",
+    "len": 0.35,
+    "gain": 0.5
+  },
+  {
+    "t": 18.9,
+    "type": "pop",
+    "pitch": 1.2,
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 19.25,
+    "type": "pop",
+    "pitch": 1.1,
+    "gain": 0.5
+  },
+  {
+    "t": 19.75,
+    "type": "pop",
+    "pitch": 1.0,
+    "gain": 0.5
+  },
+  {
+    "t": 20.5,
+    "type": "tick",
+    "pitch": 1.25,
+    "gain": 0.55
+  },
+  {
+    "t": 20.9,
+    "type": "tick",
+    "pitch": 1.1,
+    "gain": 0.55,
+    "free": true
+  },
+  {
+    "t": 21.25,
+    "type": "tick",
+    "pitch": 0.95,
+    "gain": 0.55
+  },
+  {
+    "t": 21.75,
+    "type": "riser",
+    "len": 0.8,
+    "gain": 0.45
+  },
+  {
+    "t": 22.65,
+    "type": "tick",
+    "pitch": 1.4,
+    "gain": 0.6,
+    "free": true
+  },
+  {
+    "t": 22.85,
+    "type": "chime",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 24.0,
+    "type": "whoosh",
+    "len": 0.5,
+    "gain": 0.5
+  },
+  {
+    "t": 24.5,
+    "type": "impact",
+    "gain": 0.85
+  },
+  {
+    "t": 24.6,
+    "type": "chime",
+    "gain": 0.5,
+    "free": true
+  },
+  {
+    "t": 26.5,
+    "type": "whoosh",
+    "len": 0.6,
+    "gain": 0.6
+  },
+  {
+    "t": 27.25,
+    "type": "swipe",
+    "len": 0.5,
+    "gain": 0.4
+  },
+  {
+    "t": 28.25,
+    "type": "riser",
+    "len": 1.2,
+    "gain": 0.4
+  },
+  {
+    "t": 29.5,
+    "type": "chime",
+    "gain": 0.5
+  },
+  {
+    "t": 30.5,
+    "type": "swipe",
+    "len": 0.45,
+    "gain": 0.4
+  },
+  {
+    "t": 31.9,
+    "type": "thump",
+    "gain": 0.8,
+    "free": true
+  },
+  {
+    "t": 32.15,
+    "type": "glitch",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 33.0,
+    "type": "whoosh",
+    "len": 0.55,
+    "gain": 0.55
+  },
+  {
+    "t": 33.25,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 33.75,
+    "type": "tick",
+    "gain": 0.45
+  },
+  {
+    "t": 34.15,
+    "type": "tick",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 34.6,
+    "type": "tick",
+    "gain": 0.45,
+    "free": true
+  },
+  {
+    "t": 36.0,
+    "type": "impact",
+    "gain": 0.55
+  },
+  {
+    "t": 37.5,
+    "type": "pop",
+    "gain": 0.45
+  },
+  {
+    "t": 38.9,
+    "type": "chime",
+    "gain": 0.4,
+    "free": true
+  }
+]

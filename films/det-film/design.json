@@ -1,0 +1,37 @@
+{
+  "direction": "Engineering notebook: warm paper, graph-paper grid in pale blueprint blue, ink navy type, ONE red-pen accent for the teacher's marks (rough circles, strike-outs, stamps, the answer). Math set in JetBrains Mono, headlines in Space Grotesk. Elements sit on the grid; results land as rubber-stamp slams with a small paper jolt. No gradients, no glow, no dark-tech.",
+  "fonts": { "display": "Space Grotesk", "ui": "JetBrains Mono" },
+  "palette": {
+    "bg": "#f3efe6",
+    "paper2": "#eae3d2",
+    "ink": "#1c2140",
+    "soft": "#5d6480",
+    "grid": "#5b9bc0",
+    "accent": "#df4128"
+  },
+  "ladder": [
+    { "role": "hero", "u": 11, "weight": 700, "trackingEm": -0.02, "family": "JetBrains Mono" },
+    { "role": "title", "u": 8, "weight": 700, "trackingEm": -0.015 },
+    { "role": "h2", "u": 5, "weight": 700, "trackingEm": 0 },
+    { "role": "label", "u": 3.3, "weight": 600, "trackingEm": 0.14, "case": "upper", "family": "JetBrains Mono" },
+    { "role": "body", "u": 3.05, "weight": 500, "trackingEm": 0.01 },
+    { "role": "math", "u": 4.4, "weight": 600, "trackingEm": 0, "family": "JetBrains Mono" },
+    { "role": "mathS", "u": 3.3, "weight": 600, "trackingEm": 0, "family": "JetBrains Mono" }
+  ],
+  "motion": {
+    "type": "HEAVY",
+    "ui": "DEFAULT",
+    "pop": "SNAPPY",
+    "stamp": "HEAVY",
+    "containers": "DEFAULT",
+    "camera": "DEFAULT",
+    "stagger": 0.045
+  },
+  "devices": {
+    "graphPaper": "fine grid every 2.5u at 0.14 alpha + major every 10u at 0.26; paper grain tiles at 24 fps, 0.05 alpha",
+    "redPen": "the only accent: rough hand-drawn circle, strike-out X bands, underlines, stamps — the teacher's marks",
+    "matrixObject": "one bracketed matrix travels and morphs through the whole film; rows/cols cross out so 2x2 minors peel off and fly to their slots",
+    "stamp": "results land from 1.28x scale on a HEAVY spring with a 0.4s noise-based paper jolt — no glow",
+    "chip": "mono margin note top-left, one per section, red bullet, swaps with a rise"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "at": "2026-09-29T15:35:55.641Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "lint",
+      "pass": true,
+      "level": "pass",
+      "detail": "no timers, randomness, wall clock or CSS animation"
+    },
+    {
+      "name": "determinism",
+      "pass": true,
+      "level": "pass",
+      "detail": "4 frames identical across seek orders"
+    },
+    {
+      "name": "dead-time",
+      "pass": true,
+      "level": "pass",
+      "detail": "something moves in every 2.5s window"
+    },
+    {
+      "name": "novelty",
+      "pass": false,
+      "level": "warn",
+      "detail": "no big change during 16.9-22.9s, 35.6-39.7s, 40.4-53.6s"
+    },
+    {
+      "name": "hook",
+      "pass": true,
+      "level": "pass",
+      "detail": "first frame contrast 31.3 (want >3), max change in first 2s 13.2 (want >8)"
+    },
+    {
+      "name": "blank-frames",
+      "pass": true,
+      "level": "pass",
+      "detail": "no flat frames"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-17 LUFS (want -17 ±1), true peak -1.1 dBFS"
+    },
+    {
+      "name": "cue-sync",
+      "pass": true,
+      "level": "pass",
+      "detail": "105 cues on the grid"
+    },
+    {
+      "name": "deliverable final-16x9.mp4",
+      "pass": true,
+      "level": "pass",
+      "detail": "60.00s, yuv420p, with audio"
+    },
+    {
+      "name": "deliverable final-9x16.mp4",
+      "pass": true,
+      "level": "pass",
+      "detail": "60.00s, yuv420p, with audio"
+    }
+  ]
+}

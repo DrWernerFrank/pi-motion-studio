@@ -1,0 +1,182 @@
+import { film } from '/engine/lib/runtime.js';
+import { loadDesign } from '/engine/lib/design.js';
+import * as M from '/engine/lib/motion.js';
+
+let D;
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SHOT 0: HOOK (0 – 3 s)
+// ═══════════════════════════════════════════════════════════════════════════
+const shotHook = (ctx, lt, L) => {
+  ctx.fillStyle = dark; ctx.fillRect(0, 0, L.W, L.H);
+  const p = M.spring(lt, ...M.HEAVY);
+  ctx.save();
+  ctx.globalAlpha = p; ctx.translate(L.cx, L.cy); ctx.scale(p, p);
+  ctx.fillStyle = '#F0EDE8'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  D.type(ctx, 'hero', L, { scale: 1.2 });
+  ctx.fillText('What if one number', 0, -L.u * 6.5);
+  ctx.fillText('told you everything', 0, 0);
+  ctx.fillText('about a matrix?', 0, L.u * 6.5);
+  ctx.restore();
+  ctx.fillStyle = D.c.accent;
+  ctx.globalAlpha = p;
+  ctx.fillRect(L.cx - L.W * 0.22, L.H - L.u * 1.6, L.W * 0.44 * p, L.u * 0.28);
+  ctx.globalAlpha = 1;
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SHOT 1: WHAT IS A MATRIX (3 – 8 s)
+// ═══════════════════════════════════════════════════════════════════════════
+const shotMatrix = (ctx, lt, L) => {
+  ctx.fillStyle = light; ctx.fillRect(0, 0, L.W, L.H);
+  const mx = L.cx, my = L.cy - L.u * 2.5, cs = L.u * 5.5;
+  const vals = [['a','b'],['c','d']];
+
+  const lbl = M.spring(lt - 0.15, ...M.DEFAULT);
+  if (lbl > 0) {
+    ctx.save(); ctx.globalAlpha = lbl;
+    ctx.fillStyle = '#777'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    D.type(ctx, 'label', L); ctx.fillText('THE GRID THAT TRANSFORMS SPACE', mx, my - cs * 2.8); ctx.restore();
+  }
+
+  [[0,0],[0,1],[1,0],[1,1]].forEach(([r,c], i) => {
+    const dp = M.clamp(M.spring(lt - 0.5 - i * 0.14, ...M.SNAPPY) * 3);
+    if (dp <= 0) return;
+    const cx2 = mx - cs + c * cs * 1.1 + cs / 2;
+    const cy2 = my - cs + r * cs * 1.1 + cs / 2;
+    ctx.save(); ctx.globalAlpha = dp * 0.12;
+    ctx.fillStyle = D.c.accent;
+    M.rrect(ctx, cx2 - cs/2 + 4, cy2 - cs/2 + 4, cs - 8, cs - 8, 6); ctx.fill(); ctx.restore();
+    ctx.save(); ctx.globalAlpha = dp; ctx.fillStyle = D.c.ink;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `700 ${cs * 0.55}px "${D.fonts.body}"`;
+    ctx.fillText(vals[r][c], cx2, cy2 + (1 - dp) * cs * 0.6); ctx.restore();
+  });
+
+  const bp = M.spring(lt - 0.3, ...M.DEFAULT);
+  if (bp > 0) {
+    ctx.save(); ctx.globalAlpha = bp; ctx.strokeStyle = D.c.ink; ctx.lineWidth = 3; ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(mx - cs*1.4, my - cs*1.4); ctx.lineTo(mx - cs*1.4, my + cs*1.35);
+    ctx.lineTo(mx + cs*1.35, my + cs*1.35); ctx.lineTo(mx + cs*1.35, my - cs*1.4); ctx.stroke();
+    ctx.restore();
+  }
+
+  if (lt > 2.7) {
+    const ap = M.spring(lt - 2.7, ...M.DEFAULT);
+    ctx.save(); ctx.globalAlpha = ap; ctx.fillStyle = '#555'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    D.type(ctx, 'label', L); ctx.fillText('2 rows  ·  2 columns', mx, my + cs * 2.9); ctx.restore();
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SHOT 2: THE DETERMINANT FORMULA (8 – 17 s)
+// ═══════════════════════════════════════════════════════════════════════════
+const shotFormula = (ctx, lt, L) => {
+  ctx.fillStyle = light; ctx.fillRect(0, 0, L.W, L.H);
+  const mx = L.cx, my = L.cy - L.u * 4, cs = L.u * 4.8;
+
+  const detP = M.spring(lt, ...M.HEAVY);
+  if (detP > 0) {
+    ctx.save(); ctx.globalAlpha = detP; ctx.fillStyle = D.c.ink; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    ctx.font = `700 ${cs * 0.75}px "${D.fonts.display}"`;
+    ctx.fillText('det', mx - cs * 3.5, my); ctx.restore();
+  }
+
+  const matP = M.spring(lt - 0.4, ...M.DEFAULT);
+  if (matP > 0) drawMatrix(ctx, mx - cs * 0.4, my, cs, [['a','b'],['c','d']], matP);
+
+  const eqP = M.spring(lt - 1.0, ...M.SNAPPY);
+  if (eqP > 0) {
+    ctx.save(); ctx.globalAlpha = eqP; ctx.fillStyle = D.c.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `700 ${cs * 0.9}px "${D.fonts.display}"`; ctx.fillText('=', mx + cs * 1.0, my); ctx.restore();
+  }
+
+  const adP = M.spring(lt - 1.4, ...M.SNAPPY);
+  if (adP > 0) {
+    ctx.save(); ctx.globalAlpha = adP; ctx.fillStyle = green;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `700 ${cs * 0.7}px "${D.fonts.body}"`; ctx.fillText('ad', mx + cs * 2.0, my - L.u * 0.5);
+    ctx.strokeStyle = green + '55'; ctx.lineWidth = 4;
+    ctx.strokeRect(mx + cs * 1.5, my - L.u * 2.2, cs * 1.1, L.u * 2.8);
+    ctx.fillStyle = green + 'BB'; ctx.font = `400 ${cs * 0.32}px "${D.fonts.body}"`;
+    ctx.fillText('main ↘', mx + cs * 2.0, my + L.u * 2.1); ctx.restore();
+  }
+
+  const mP = M.spring(lt - 1.9, ...M.SNAPPY);
+  if (mP > 0) {
+    ctx.save(); ctx.globalAlpha = mP; ctx.fillStyle = D.c.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `700 ${cs * 0.9}px "${D.fonts.display}"`; ctx.fillText('−', mx + cs * 2.9, my); ctx.restore();
+  }
+
+  const bcP = M.spring(lt - 2.4, ...M.SNAPPY);
+  if (bcP > 0) {
+    ctx.save(); ctx.globalAlpha = bcP; ctx.fillStyle = red;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `700 ${cs * 0.7}px "${D.fonts.body}"`; ctx.fillText('bc', mx + cs * 4.0, my - L.u * 0.5);
+    ctx.strokeStyle = red + '55'; ctx.lineWidth = 4;
+    ctx.strokeRect(mx + cs * 3.5, my - L.u * 2.2, cs * 1.1, L.u * 2.8);
+    ctx.fillStyle = red + 'BB'; ctx.font = `400 ${cs * 0.32}px "${D.fonts.body}"`;
+    ctx.fillText('anti ↙', mx + cs * 4.0, my + L.u * 2.1); ctx.restore();
+  }
+
+  if (lt > 4.2) {
+    const mp = M.spring(lt - 4.2, ...M.DEFAULT);
+    ctx.save(); ctx.globalAlpha = mp; ctx.fillStyle = '#555'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    D.type(ctx, 'body', L); ctx.fillText('Multiply down the diagonals — then subtract.', mx, my + L.u * 9); ctx.restore();
+  }
+};
+
+
+// ─── Inline matrix with optional highlight ─────────────────────────────────────
+function drawMatrix(ctx, mx, my, cs, vals, alpha = 1, hlCell = null, hlColor = null) {
+  ctx.save(); ctx.globalAlpha = alpha;
+  for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) {
+    const x = mx - cs + c * cs * 1.1 + cs / 2;
+    const y = my - cs + r * cs * 1.1 + cs / 2;
+    const key = `${r}${c}`, on = hlCell === key;
+    if (on && hlColor) {
+      ctx.fillStyle = hlColor + '22';
+      M.rrect(ctx, x - cs / 2 + 3, y - cs / 2 + 3, cs - 6, cs - 6, 4); ctx.fill();
+      ctx.strokeStyle = hlColor; ctx.lineWidth = 2.5;
+      M.rrect(ctx, x - cs / 2 + 3, y - cs / 2 + 3, cs - 6, cs - 6, 4); ctx.stroke();
+    }
+    ctx.fillStyle = on ? (hlColor || D.c.accent) : D.c.ink;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `700 ${cs * 0.55}px "${D.fonts.body}"`;
+    ctx.fillText(vals[r][c], x, y);
+  }
+  ctx.strokeStyle = D.c.ink; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+  const bx = mx - cs * 1.35, by = my - cs * 1.35;
+  ctx.beginPath();
+  ctx.moveTo(bx, by); ctx.lineTo(bx, by + cs * 2.75); ctx.lineTo(bx + cs * 2.75, by + cs * 2.75); ctx.lineTo(bx + cs * 2.75, by);
+  ctx.stroke(); ctx.restore();
+}
+
+// ─── Vector pair + parallelogram ────────────────────────────────────────────────
+function drawVecPara(ctx, ox, oy, v1x, v1y, v2x, v2y, s, color, fillA) {
+  ctx.save(); ctx.globalAlpha = fillA;
+  ctx.fillStyle = color + '30';
+  ctx.beginPath();
+  ctx.moveTo(ox, oy); ctx.lineTo(ox + v1x*s, oy + v1y*s);
+  ctx.lineTo(ox + (v1x+v2x)*s, oy + (v1y+v2y)*s);
+  ctx.lineTo(ox + v2x*s, oy + v2y*s); ctx.closePath(); ctx.fill();
+  ctx.globalAlpha = fillA; ctx.strokeStyle = color; ctx.lineWidth = 2;
+  ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(ox+v1x*s, oy+v1y*s); ctx.lineTo(ox+(v1x+v2x)*s, oy+(v1y+v2y)*s); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox+v2x*s, oy+v2y*s); ctx.lineTo(ox+(v1x+v2x)*s, oy+(v1y+v2y)*s); ctx.stroke();
+  ctx.setLineDash([]); ctx.lineWidth = 3.2;
+  ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox+v1x*s, oy+v1y*s); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox+v2x*s, oy+v2y*s); ctx.stroke();
+  const arr = (ex, ey, vx, vy) => {
+    const a = Math.atan2(vy, vx), ln = 13;
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.moveTo(ex, ey);
+    ctx.lineTo(ex - ln*Math.cos(a-0.45), ey - ln*Math.sin(a-0.45));
+    ctx.lineTo(ex - ln*Math.cos(a+0.45), ey - ln*Math.sin(a+0.45));
+    ctx.closePath(); ctx.fill();
+  };
+  arr(ox+v1x*s, oy+v1y*s, v1x, v1y);
+  arr(ox+v2x*s, oy+v2y*s, v2x, v2y);
+  ctx.restore();
+}

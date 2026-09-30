@@ -1,0 +1,386 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Motion Studio reel</title>
+<link rel="stylesheet" href="/engine/lib/fonts.css">
+</head>
+<body>
+<script type="module">
+import { film } from '/engine/lib/runtime.js';
+import { loadDesign } from '/engine/lib/design.js';
+import * as M from '/engine/lib/motion.js';
+
+let D, cfg, grain;
+const { spring, track, clamp, lerp, rrect } = M;
+const mono = () => `"${D.fonts.mono}"`;
+
+// ── layout per format (all in u / safe area, so 9:16 and 16:9 reframe) ─────
+function geo(L) {
+  const s = L.safe;
+  return {
+    textX: s.x,
+    chart: L.portrait
+      ? { x0: s.x, x1: s.x + s.w, base: L.cy + L.u * 22, h: L.u * 46 }
+      : { x0: s.x + L.u * 6, x1: s.x + s.w - L.u * 6, base: L.cy + L.u * 24, h: L.u * 44 },
+    grid: L.portrait ? { cols: 4, rows: 3 } : { cols: 5, rows: 3 },
+  };
+}
+
+// Three stacked lines that rise out of clip masks on beats. Returns geometry of the last line.
+function heroLines(ctx, L, lines, t0s, t, color, { exitAt = Infinity, draw = true } = {}) {
+  const g = geo(L);
+  const longest = lines.reduce((a, b) => (a.length > b.length ? a : b));
+  const px = Math.min(D.px('hero', L) * (L.landscape ? 1.45 : 1), M.fitPx(ctx, longest, L.safe.w * 0.98, `"${D.fonts.display}"`, 800, 999, -0.045));
+  D.type(ctx, 'hero', L, { scale: px / D.px('hero', L) });
+  const lh = px * 0.98;
+  const top = L.cy - (lh * lines.length) / 2 + px * 0.74;
+  const exit = spring(t - exitAt, ...M.SNAPPY);
+  if (draw) lines.forEach((line, i) => {
+    const y = top + i * lh;
+    ctx.save();
+    // exit: each line slides up out of its own clip, staggered
+    const e = spring(t - exitAt - i * 0.05, ...M.SNAPPY);
+    ctx.beginPath(); ctx.rect(0, y - px * 0.95, L.W, px * 1.18); ctx.clip();
+    ctx.translate(0, -e * px * 1.2);
+    M.kineticLine(ctx, line, g.textX, y, t - t0s[i], { color, feel: D.feel('ui'), stagger: D.stagger, rise: 0.75, clip: false });
+    ctx.restore();
+  });
+  const last = lines[lines.length - 1];
+  return { px, lh, top, y: top + (lines.length - 1) * lh, x: g.textX, measure: (s) => ctx.measureText(s).width, exit, last };
+}
+
+// ── shot 1 + 2 + the line that connects them ────────────────────────────────
+function hook(ctx, L, t, draw = true) {
+  const r = heroLines(ctx, L, ['Every', 'frame is', 'a function.'], [-0.12, 0.5, 1.0], t, D.c.ink, { exitAt: 1.85, draw });
+  if (draw) {
+    // mono readout: the clock the whole film is a function of
+    const a = clamp(Math.min((t + 0.1) / 0.2, 1 - spring(t - 1.8, ...M.SNAPPY)));
+    M.font(ctx, D.px('label', L) * 1.35, mono(), 600, 0);
+    ctx.globalAlpha = a; ctx.fillStyle = D.c.muted;
+    const y = r.y + r.px * (L.portrait ? 0.9 : 0.75);
+    ctx.fillText('t = ', r.x, y);
+    ctx.fillStyle = D.c.accent; ctx.fillText(`${Math.max(0, t).toFixed(3)} s`, r.x + ctx.measureText('t = ').width, y);
+    ctx.fillStyle = D.c.muted; ctx.fillText(`frame ${String(Math.floor(Math.max(0, t) * 60)).padStart(3, '0')}`, r.x + ctx.measureText('t = 0.000 s   ').width, y);
+    ctx.globalAlpha = 1;
+    D.type(ctx, 'hero', L, { scale: r.px / D.px('hero', L) }); // leave the hero font set for measure()
+  }
+  return r;
+}
+
+function theLine(ctx, L, t, r) {
+  // Underline under "function" → grows full width → becomes the chart baseline → collapses into the dot.
+  const g = geo(L), c = g.chart;
+  const fx = r.x + r.measure('a '), fw = r.measure('function');
+  const uy = r.y + r.px * 0.13;
+  const x0 = track(t, [[0, fx], [1.95, c.x0], [3.72, c.x1]], ...D.feel('containers'));
+  const x1 = track(t, [[0, fx], [1.22, fx + fw], [1.95, c.x1]], ...D.feel('ui'));
+  const y = track(t, [[0, uy], [1.95, c.base]], ...D.feel('containers'));
+  const th = track(t, [[0, r.px * 0.075], [1.95, L.u * 0.28]], ...D.feel('containers'));
+  if (x1 - x0 < 0.5 || t > 4.05) return;
+  ctx.fillStyle = t < 1.95 ? D.c.accent : M.mix(D.c.accent, D.c.line, spring(t - 1.95, ...M.DEFAULT));
+  ctx.fillRect(x0, y - th / 2, x1 - x0, th);
+}
+
+// Thumbnail times for the contact-sheet shot: moments from the other shots.
+const THUMBS = [0.4, 1.3, 1.9, 2.7, 3.2, 4.3, 4.9, 5.4, 8.3, 9.2, 9.8, 10.9, 11.6, 3.5, 0.9];
+const SPRING_K = 200, SPRING_D = 12, CURVE_T = 1.6;
+function curveShot(ctx, L, t) {
+  const c = geo(L).chart, lt = t - 2.0;
+  if (lt < 0 || t > 4.3) return;
+  const W = c.x1 - c.x0, H = c.h * 0.78;
+  const X = (u) => c.x0 + (u / CURVE_T) * W, Y = (v) => c.base - v * H;
+  // time ticks along the baseline, staggered in
+  ctx.fillStyle = D.c.line;
+  for (let i = 0; i <= 16; i++) {
+    const p = spring(lt - 0.05 - i * 0.015, ...M.SNAPPY) * (1 - spring(t - 3.5 - i * 0.012, ...M.SNAPPY));
+    const h = (i % 4 === 0 ? L.u * 2.2 : L.u * 1.1) * p;
+    ctx.fillRect(X((i / 16) * CURVE_T) - 1, c.base - h, 2, h);
+  }
+  // target line (1.0), dashed
+  const tl = spring(lt - 0.15, ...M.DEFAULT), tr = spring(t - 3.5, ...M.DEFAULT);
+  ctx.save(); ctx.setLineDash([L.u * 1.2, L.u * 1.0]); ctx.strokeStyle = D.c.muted; ctx.lineWidth = L.u * 0.18;
+  if (tl - tr > 0.002) { ctx.beginPath(); ctx.moveTo(lerp(c.x0, c.x1, tr), Y(1)); ctx.lineTo(lerp(c.x0, c.x1, tl), Y(1)); ctx.stroke(); }
+  ctx.restore();
+  // the curve draws itself like a pen (constant pen speed = time itself)
+  const draw = clamp((lt - 0.25) / 1.25) * CURVE_T;
+  const erase = clamp((t - 3.55) / 0.3) * CURVE_T; // wipe away before the dot leaves
+  ctx.strokeStyle = D.c.ink; ctx.lineWidth = L.u * 0.55; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  for (let u = erase; u <= draw; u += CURVE_T / 240) {
+    const px = X(u), py = Y(spring(u, SPRING_K, SPRING_D));
+    u === erase ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  if (draw > erase) ctx.stroke();
+  // label, typed
+  ctx.fillStyle = D.c.muted; M.font(ctx, D.px('label', L) * 1.35, mono(), 500, 0);
+  const label = `spring(t, k=${SPRING_K}, d=${SPRING_D})`;
+  const la = 1 - clamp((t - 3.5) / 0.2);
+  ctx.globalAlpha = la;
+  ctx.fillText(M.typed(label, lt - 0.2, 38) + (lt > 0.2 && lt < 1.6 && M.caretOn(lt) ? '▍' : ''), c.x0, c.base + L.u * 7);
+  // annotation at the overshoot peak: the number is the real one for k=200, d=12
+  const wd = Math.sqrt(SPRING_K) * Math.sqrt(1 - (SPRING_D / (2 * Math.sqrt(SPRING_K))) ** 2), tp = Math.PI / wd;
+  const peak = spring(tp, SPRING_K, SPRING_D), pa = spring(t - 2.5, ...M.SNAPPY) * (1 - spring(t - 3.45, ...M.SNAPPY));
+  if (pa > 0.001) {
+    const px = X(tp), py = Y(peak), lab = `overshoot ${Math.round((peak - 1) * 100)}%`;
+    ctx.globalAlpha = 1; ctx.strokeStyle = D.c.accent; ctx.lineWidth = L.u * 0.25;
+    ctx.beginPath(); ctx.moveTo(px, py - L.u * 1.5); ctx.lineTo(px + L.u * 4 * pa, py - L.u * 1.5 - L.u * 4 * pa); ctx.stroke();
+    ctx.save(); ctx.translate(px + L.u * 5, py - L.u * 6); ctx.scale(pa, pa);
+    M.font(ctx, D.px('label', L) * 1.35, mono(), 700, 0); ctx.fillStyle = D.c.accent; ctx.fillText(lab, 0, 0);
+    ctx.restore();
+    M.font(ctx, D.px('label', L) * 1.35, mono(), 500, 0); ctx.fillStyle = D.c.muted;
+  }
+  ctx.globalAlpha = 1 - clamp((t - 3.4) / 0.2);
+  ctx.fillText('1.0', c.x1 - ctx.measureText('1.0').width, Y(1) + L.u * 4.2);
+  ctx.globalAlpha = 1;
+}
+
+// Where the dot is: riding the curve tip, then flying to the center to become the container.
+function dotPos(L, t) {
+  const c = geo(L).chart, W = c.x1 - c.x0, H = c.h * 0.78;
+  const u = clamp((t - 2.25) / 1.25) * CURVE_T;
+  const tip = [c.x0 + (u / CURVE_T) * W, c.base - spring(u, SPRING_K, SPRING_D) * H];
+  const fly = spring(t - 3.62, ...M.DEFAULT);
+  return [lerp(tip[0], L.cx, fly), lerp(tip[1], L.cy, fly)];
+}
+
+// ── shot 3: the morphing container ──────────────────────────────────────────
+function morph(ctx, L, t) {
+  if (t < 2.2 || t > 6.4) return null;
+  const u = L.u * (L.landscape ? 1.25 : 1), [dx, dy] = dotPos(L, t);
+  const R0 = u * 1.9;
+  // states: dot → pill button → progress track → check circle → grid tile
+  const tile = gridTile(L);
+  const S = [
+    [0, { w: R0 * 2, h: R0 * 2, r: R0 }],
+    [3.98, { w: u * 46, h: u * 13, r: u * 6.5 }],
+    [4.72, { w: u * 72, h: u * 3.4, r: u * 1.7 }],
+    [5.5, { w: u * 20, h: u * 20, r: u * 10 }],
+    [5.98, { w: tile.w, h: tile.h, r: u * 1.2 }],
+  ];
+  const k = (p) => S.map(([tt, s]) => [tt, s[p]]);
+  const w = track(t, k('w'), ...M.SNAPPY), h = track(t, k('h'), ...M.DEFAULT), r = track(t, k('r'), ...M.DEFAULT);
+  const cx = t < 5.98 ? (t < 3.62 ? dx : lerp(dx, L.cx, 1)) : lerp(L.cx, tile.cx, spring(t - 5.98, ...M.DEFAULT));
+  const cy = t < 5.98 ? dy : lerp(L.cy, tile.cy, spring(t - 5.98, ...M.DEFAULT));
+  // press dip on click
+  const click = 4.5, press = t >= click && t < click + 0.25 ? 1 - 0.06 * Math.sin(Math.PI * (t - click) / 0.25) : 1;
+  const fill = t < 4.72 ? D.c.accent : t < 5.5 ? M.mix(D.c.accent, D.c.surface, spring(t - 4.72, ...M.DEFAULT))
+    : t < 5.98 ? M.mix(D.c.surface, D.c.accent, spring(t - 5.5, ...M.SNAPPY)) : M.mix(D.c.accent, D.c.surface, spring(t - 6.1, ...M.DEFAULT));
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(press, press);
+  rrect(ctx, -w / 2, -h / 2, w, h, r); ctx.fillStyle = fill; ctx.fill();
+
+  // content swaps: "Render" label → progress fill + counter → check
+  const aBtn = M.swapAlpha(t, 3.98, 4.72);
+  if (aBtn > 0) {
+    ctx.globalAlpha = aBtn; ctx.filter = `blur(${(1 - aBtn) * u * 0.8}px)`;
+    ctx.fillStyle = D.c.bg; D.type(ctx, 'body', L); ctx.font = `700 ${u * 5}px "${D.fonts.ui}"`; ctx.letterSpacing = '0px';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('Render  ▸', 0, u * 0.2);
+    ctx.filter = 'none'; ctx.globalAlpha = 1;
+  }
+  if (t >= 4.72 && t < 5.6) {
+    const p = M.ease.inOutCubic(clamp((t - 4.78) / 0.68));
+    rrect(ctx, -w / 2, -h / 2, Math.max(h, w * p), h, r); ctx.fillStyle = D.c.accent; ctx.fill();
+  }
+  const aChk = M.swapAlpha(t, 5.5, 6.0);
+  if (aChk > 0) {
+    const d = clamp((t - 5.6) / 0.28);
+    ctx.strokeStyle = D.c.bg; ctx.lineWidth = u * 1.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.globalAlpha = aChk;
+    const pts = [[-u * 4.2, 0], [-u * 1.2, u * 3.1], [u * 4.6, -u * 3.4]];
+    const seg1 = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]), seg2 = Math.hypot(pts[2][0] - pts[1][0], pts[2][1] - pts[1][1]);
+    const len = (seg1 + seg2) * d;
+    ctx.beginPath(); ctx.moveTo(...pts[0]);
+    if (len <= seg1) ctx.lineTo(lerp(pts[0][0], pts[1][0], len / seg1), lerp(pts[0][1], pts[1][1], len / seg1));
+    else { ctx.lineTo(...pts[1]); const q = (len - seg1) / seg2; ctx.lineTo(lerp(pts[1][0], pts[2][0], q), lerp(pts[1][1], pts[2][1], q)); }
+    ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  ctx.restore();
+
+  // frame counter above the progress bar
+  const aCnt = Math.min(clamp((t - 4.9) / 0.12), 1 - clamp((t - 5.85) / 0.12));
+  if (aCnt > 0) {
+    const p = clamp((t - 4.78) / 0.68), f = Math.round(M.ease.inOutCubic(p) * 720);
+    ctx.globalAlpha = aCnt; ctx.fillStyle = D.c.ink; M.font(ctx, D.px('label', L) * 1.25, mono(), 600, 0); ctx.textAlign = 'center';
+    const txt = t < 5.5 ? `frame ${String(f).padStart(3, '0')} / 720` : '720 frames · 12.0 s';
+    ctx.fillText(txt, L.cx, L.cy - u * (t < 5.5 ? 7 : 16));
+    ctx.globalAlpha = 1; ctx.textAlign = 'left';
+  }
+  return { cx, cy, w, h };
+}
+
+// ── cursor (drives the click at 4.5) ───────────────────────────────────────
+function cursor(ctx, L, t) {
+  if (t < 3.95 || t > 5.2) return;
+  const u = L.u;
+  const keys = [[0, L.cx + u * 38, L.cy + u * 30], [4.1, L.cx + u * 8, L.cy + u * 2.5], [4.75, L.cx + u * 30, L.cy + u * 26]];
+  const [x, y] = M.track2(t, keys, 240, 26);
+  const a = Math.min(clamp((t - 3.95) / 0.15), 1 - clamp((t - 5.0) / 0.2));
+  const click = 4.5, press = t >= click && t < click + 0.2 ? 0.85 : 1;
+  if (t >= click && t < click + 0.45) {
+    const p = (t - click) / 0.45;
+    ctx.strokeStyle = M.rgba(D.c.ink, 0.6 * (1 - p)); ctx.lineWidth = u * 0.35;
+    ctx.beginPath(); ctx.arc(x, y, u * (1 + 6 * M.ease.outCubic(p)), 0, M.TAU); ctx.stroke();
+  }
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(press * u * 0.32, press * u * 0.32);
+  const p = new Path2D('M0 0 L0 17 L4.5 12.5 L7.5 19.5 L10 18.5 L7 11.5 L13 11.5 Z');
+  ctx.fillStyle = D.c.ink; ctx.fill(p); ctx.strokeStyle = D.c.bg; ctx.lineWidth = 1.2; ctx.stroke(p);
+  ctx.restore();
+}
+
+// ── shot 4: contact sheet grid ──────────────────────────────────────────────
+function gridLayout(L) {
+  const { cols, rows } = geo(L).grid, s = L.safe, gap = L.u * 1.6;
+  const areaH = L.portrait ? s.h * 0.78 : s.h * 0.74;
+  const aspect = L.H / L.W; // tiles are thumbnails of this film, same aspect
+  const tw = Math.min((s.w - gap * (cols - 1)) / cols, (areaH - gap * (rows - 1)) / rows / aspect);
+  const th = tw * aspect;
+  const gw = cols * tw + (cols - 1) * gap, gh = rows * th + (rows - 1) * gap;
+  const x0 = L.cx - gw / 2, y0 = (L.portrait ? L.cy - L.u * 6 : L.cy - L.u * 4) - gh / 2;
+  return { cols, rows, tw, th, gap, x0, y0 };
+}
+function gridTile(L) {
+  const g = gridLayout(L), c = Math.floor((g.cols - 1) / 2), r = Math.floor((g.rows - 1) / 2);
+  return { w: g.tw, h: g.th, cx: g.x0 + c * (g.tw + g.gap) + g.tw / 2, cy: g.y0 + r * (g.th + g.gap) + g.th / 2, c, r };
+}
+function contactSheet(ctx, L, t) {
+  if (t < 6.0 || t > 8.45) return;
+  const g = gridLayout(L), center = gridTile(L), u = L.u;
+  const scan = [[6.0, 0, 0], [6.5, 1, 0], [7.0, g.cols - 2, 1], [7.5, 2, g.rows - 1]].map(([tt, c, r]) => [tt, g.x0 + c * (g.tw + g.gap), g.y0 + r * (g.th + g.gap)]);
+  for (let r = 0; r < g.rows; r++) for (let c = 0; c < g.cols; c++) {
+    const x = g.x0 + c * (g.tw + g.gap), y = g.y0 + r * (g.th + g.gap);
+    const dist = Math.hypot(c - center.c, r - center.r);
+    const isCenter = c === center.c && r === center.r;
+    const p = isCenter ? 1 : spring(t - 6.05 - dist * 0.06, ...M.SNAPPY);
+    const out = spring(t - 7.95 - (g.rows - r) * 0.02, ...M.SNAPPY);
+    const s = p * (1 - out * 0.15);
+    const i = r * g.cols + c, tt = THUMBS[i % THUMBS.length];
+    if (s <= 0.001) continue;
+    ctx.save(); ctx.translate(x + g.tw / 2, y + g.th / 2); ctx.scale(s, s); ctx.translate(-g.tw / 2, -g.th / 2);
+    rrect(ctx, 0, 0, g.tw, g.th, u * 1.2); ctx.clip();
+    // the tile is a real frame of this film at another time (pure function of t: safe to call recursively)
+    ctx.save(); ctx.scale(g.tw / L.W, g.th / L.H); drawFrame(ctx, isCenter ? 5.9 : tt, L, false); ctx.restore();
+    if (isCenter) { ctx.fillStyle = M.rgba(D.c.accent, 1 - spring(t - 6.1, ...M.DEFAULT)); ctx.fillRect(0, 0, g.tw, g.th); }
+    ctx.strokeStyle = D.c.line; ctx.lineWidth = u * 0.3; rrect(ctx, 0, 0, g.tw, g.th, u * 1.2); ctx.stroke();
+    M.font(ctx, u * 2.4, mono(), 600, 0);
+    const lab = `${(isCenter ? 5.9 : tt).toFixed(1)}s`, lw = ctx.measureText(lab).width;
+    rrect(ctx, u * 1, g.th - u * 4.6, lw + u * 2, u * 3.6, u * 1.8); ctx.fillStyle = M.rgba(D.c.bg, 0.85); ctx.fill();
+    ctx.fillStyle = D.c.ink; ctx.fillText(lab, u * 2, g.th - u * 1.9);
+    ctx.restore();
+  }
+  // the scanner: an accent frame that jumps tile to tile on the beats ("looking")
+  const sa = Math.min(clamp((t - 6.35) / 0.1), 1 - clamp((t - 7.9) / 0.1));
+  if (sa > 0) {
+    const [sx, sy] = M.track2(t, scan, 300, 28);
+    ctx.globalAlpha = sa; ctx.strokeStyle = D.c.accent; ctx.lineWidth = u * 0.55;
+    rrect(ctx, sx - u * 0.8, sy - u * 0.8, g.tw + u * 1.6, g.th + u * 1.6, u * 1.8); ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  // score chips roll in under the grid
+  const chips = [['hook', 9], ['motion', 8], ['variety', 9]];
+  M.font(ctx, D.px('label', L) * 1.2, mono(), 600, 0);
+  const cw = chips.map(([k]) => ctx.measureText(`${k} 00`).width + u * 5);
+  const total = cw.reduce((a, b) => a + b, 0) + u * 2 * (chips.length - 1);
+  let x = L.cx - total / 2;
+  const y = g.y0 + g.rows * (g.th + g.gap) + u * 4;
+  chips.forEach(([k, v], i) => {
+    const p = spring(t - 7.0 - i * 0.08, ...M.SNAPPY), out = spring(t - 7.9, ...M.SNAPPY);
+    if (p < 0.001) { x += cw[i] + u * 2; return; }
+    ctx.save(); ctx.beginPath(); ctx.rect(x - u, y - u, cw[i] + u * 2, u * 12); ctx.clip();
+    ctx.translate(0, (1 - p) * u * 10 + out * u * 10);
+    rrect(ctx, x, y, cw[i], u * 8, u * 4); ctx.fillStyle = D.c.surface; ctx.fill();
+    ctx.fillStyle = D.c.muted; ctx.textBaseline = 'middle'; ctx.fillText(k, x + u * 2.5, y + u * 4.2);
+    const n = Math.round(lerp(0, v, clamp(p * 1.1)));
+    ctx.fillStyle = D.c.accent; ctx.fillText(String(n), x + cw[i] - u * 2.5 - ctx.measureText(String(n)).width, y + u * 4.2);
+    ctx.restore(); ctx.textBaseline = 'alphabetic';
+    x += cw[i] + u * 2;
+  });
+}
+
+// ── shot 5: band wipe to accent, "Look at your own frames." ────────────────
+function bands(ctx, L, t, color, t0, n = 7) {
+  for (let i = 0; i < n; i++) {
+    const p = spring(t - t0 - i * 0.035, ...M.SNAPPY);
+    if (p <= 0) continue;
+    const y0 = Math.floor((i * L.H) / n), y1 = Math.ceil(((i + 1) * L.H) / n);
+    ctx.fillStyle = color; ctx.fillRect(0, y0 - L.u * 0.3, L.W * Math.min(1, p), y1 - y0 + L.u * 0.6);
+  }
+}
+function lookShot(ctx, L, t) {
+  if (t < 7.85 || t > 10.5) return;
+  if (t > 8.4) { ctx.fillStyle = D.c.accent; ctx.fillRect(0, 0, L.W, L.H); } else bands(ctx, L, t, D.c.accent, 7.85);
+  if (t < 8.0) return;
+  const r = heroLines(ctx, L, ['Look at', 'your own', 'frames.'], [8.0, 8.5, 9.0], t, D.c.bg);
+  // the critique box: a rectangle stroke draws itself around "frames."
+  const w = r.measure('frames.'), pad = L.u * 1.8;
+  const bx = r.x - pad, by = r.y - r.px * 0.8, bw = w + pad * 2, bh = r.px * 1.02;
+  const d = clamp((t - 9.45) / 0.35);
+  if (d > 0) {
+    const per = 2 * (bw + bh);
+    ctx.save(); ctx.strokeStyle = D.c.bg; ctx.lineWidth = L.u * 0.6; ctx.setLineDash([per * d, per]);
+    ctx.strokeRect(bx, by, bw, bh); ctx.restore();
+  }
+  // mono readout under the block
+  ctx.fillStyle = D.c.bg; M.font(ctx, D.px('label', L) * 1.15, mono(), 600, 0);
+  const s = 'film_look → film_review → fix';
+  ctx.fillText(M.typed(s, t - 9.2, 34), r.x, r.y + r.px * 0.75);
+}
+
+// ── shot 6: iris to dark, lockup, playhead to the end ──────────────────────
+function lockup(ctx, L, t) {
+  if (t < 9.85) return;
+  const R = Math.hypot(L.W, L.H) * spring(t - 9.85, ...M.DEFAULT);
+  ctx.save(); ctx.beginPath(); ctx.arc(L.cx, L.cy, R, 0, M.TAU); ctx.clip();
+  ctx.fillStyle = D.c.bg; ctx.fillRect(0, 0, L.W, L.H);
+  const u = L.u, lt = t - 9.92, x = L.safe.x;
+  // accent block pulses on beats like a playhead
+  const pulse = M.pulse(t, cfg.beats, 7);
+  const titlePx = D.type(ctx, 'title', L, { scale: L.portrait ? 1.25 : 1.6 });
+  const yTitle = L.cy - titlePx * 0.35;
+  const bs = titlePx * 0.62 * spring(lt, ...M.PLAYFUL) * (1 + 0.1 * pulse);
+  ctx.fillStyle = D.c.accent; rrect(ctx, x, yTitle - titlePx * 0.66 - (bs - titlePx * 0.62) / 2, bs, bs, u * 1.2); ctx.fill();
+  const tx = x + titlePx * 0.62 + u * 3;
+  D.type(ctx, 'title', L, { scale: L.portrait ? 1.25 : 1.6 });
+  M.kineticLine(ctx, 'motion', tx, yTitle, lt - 0.08, { color: D.c.ink, feel: D.feel('type'), rise: 0.8 });
+  M.kineticLine(ctx, 'studio', tx, yTitle + titlePx * 0.95, lt - 0.2, { color: D.c.ink, feel: D.feel('type'), rise: 0.8 });
+  ctx.fillStyle = D.c.muted; M.font(ctx, D.px('label', L) * 1.4, mono(), 500, 0);
+  ctx.fillText(M.typed('pi · seek(t) → frames → mp4', lt - 0.55, 40), tx, yTitle + titlePx * 1.75);
+  // timeline ruler + playhead that runs to the last frame
+  const y = L.portrait ? L.safe.y + L.safe.h - u * 4 : L.safe.y + L.safe.h - u * 3;
+  const x0 = L.safe.x, x1 = L.safe.x + L.safe.w, grow = spring(lt - 0.3, ...M.DEFAULT);
+  ctx.fillStyle = D.c.line; ctx.fillRect(x0, y, (x1 - x0) * grow, u * 0.3);
+  for (let i = 0; i <= 24; i++) { const tx2 = lerp(x0, x1, i / 24); if (tx2 > lerp(x0, x1, grow)) break; ctx.fillRect(tx2, y - (i % 4 ? u * 0.8 : u * 1.8), 2, i % 4 ? u * 0.8 : u * 1.8); }
+  const ph = lerp(x0, x1, clamp((t - 10.3) / 1.7));
+  if (t > 10.3) { ctx.fillStyle = D.c.accent; ctx.fillRect(ph - u * 0.2, y - u * 3, u * 0.4, u * 3.6); }
+  ctx.restore();
+}
+
+film({
+  async setup(L, c) {
+    cfg = c; D = await loadDesign();
+    // deterministic grain tile
+    const g = new OffscreenCanvas(256, 256), gx = g.getContext('2d'), img = gx.createImageData(256, 256), r = M.rng(3);
+    for (let i = 0; i < img.data.length; i += 4) { const v = r() * 255; img.data[i] = img.data[i + 1] = img.data[i + 2] = v; img.data[i + 3] = 255; }
+    gx.putImageData(img, 0, 0); grain = g;
+  },
+  draw(ctx, t, L) { drawFrame(ctx, t, L, true); },
+});
+
+function drawFrame(ctx, t, L, top) {
+    ctx.fillStyle = D.c.bg; ctx.fillRect(0, 0, L.W, L.H);
+    // the hook's geometry anchors the line even after the words have left
+    theLine(ctx, L, t, hook(ctx, L, t, t < 2.4));
+    curveShot(ctx, L, t);
+    morph(ctx, L, t);
+    cursor(ctx, L, t);
+    if (top) contactSheet(ctx, L, t);
+    lookShot(ctx, L, t);
+    lockup(ctx, L, t);
+    if (!top) return;
+    // grain, offset per 24fps frame (pure function of t)
+    const f = Math.floor(t * 24);
+    ctx.save(); ctx.globalAlpha = 0.045; ctx.globalCompositeOperation = 'overlay';
+    const pat = ctx.createPattern(grain, 'repeat'); pat.setTransform(new DOMMatrix().translate(M.hash(f, 1) * 256, M.hash(f, 2) * 256));
+    ctx.fillStyle = pat; ctx.fillRect(0, 0, L.W, L.H); ctx.restore();
+}
+</script>
+</body>
+</html>

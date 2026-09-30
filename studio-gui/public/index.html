@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion Studio</title>
+<link rel="stylesheet" href="/engine/lib/fonts.css">
+<link rel="stylesheet" href="/style.css">
+<script>window.STUDIO_TOKEN = '__TOKEN__';</script>
+</head>
+<body>
+<aside id="side">
+  <header><b>Motion Studio</b><button id="newFilm" title="New film">+ new</button></header>
+  <ul id="films"></ul>
+  <footer>
+    <a href="http://localhost:3141" target="_blank" rel="noopener">open pi-web ↗</a>
+    <span class="dim">ask pi: <code>/skill:motion-reel</code></span>
+  </footer>
+</aside>
+
+<main id="main">
+  <div id="empty" class="empty">
+    <h1>No film selected</h1>
+    <p>Start one in pi-web in this folder with <code>/skill:motion-reel</code>, or click <b>+ new</b>.</p>
+  </div>
+
+  <section id="film" hidden>
+    <div id="topbar">
+      <div class="title"><h2 id="fTitle"></h2><span id="fMeta" class="dim"></span></div>
+      <div class="seg" id="viewSeg"><button data-v="live" class="on">Live</button><button data-v="render">Rendered</button></div>
+      <div class="seg" id="fmtSeg"></div>
+    </div>
+
+    <div id="stage">
+      <div id="liveWrap"><iframe id="live" title="live preview"></iframe></div>
+      <div id="renderWrap" hidden><video id="video" controls playsinline></video><div id="noRender" class="empty small" hidden>Not rendered in this format yet.</div></div>
+    </div>
+
+    <div id="transport">
+      <button id="play" title="Space">▶</button>
+      <span id="tc">0.00s</span>
+      <canvas id="timeline" height="64"></canvas>
+      <label class="dim"><input type="checkbox" id="loopChk" checked> loop</label>
+    </div>
+  </section>
+</main>
+
+<aside id="panel" hidden>
+  <nav id="tabs">
+    <button data-tab="overview" class="on">Overview</button>
+    <button data-tab="reviews">Reviews</button>
+    <button data-tab="gates">Gates</button>
+    <button data-tab="sheets">Sheets</button>
+    <button data-tab="notes">Notes</button>
+    <button data-tab="jobs">Run</button>
+  </nav>
+  <div id="tabBody"></div>
+</aside>
+
+<dialog id="lightbox">
+  <div class="lbGrid">
+    <img id="lbImg" alt="">
+    <div class="lbReader">
+      <div class="lbHead"><b>✨ Gemini reads this</b><form method="dialog"><button>close</button></form></div>
+      <div class="seg" id="gPresets">
+        <button data-p="critique" class="on">Director critique</button>
+        <button data-p="ocr">Read text</button>
+        <button data-p="free">Free-form</button>
+      </div>
+      <textarea id="gPrompt" spellcheck="false"></textarea>
+      <p class="lbAsk"><button class="primary" id="gAsk">Ask Gemini</button> <span class="dim" id="gMeta"></span></p>
+      <div id="gOut" class="gOut dim">Pick a preset or write your own question, then Ask.</div>
+    </div>
+  </div>
+</dialog>
+<dialog id="newDlg">
+  <form id="newForm" method="dialog">
+    <h3>New film</h3>
+    <label>key <input name="key" placeholder="launch-film" pattern="[a-z0-9][a-z0-9-]*" required></label>
+    <label>title <input name="title" placeholder="Launch film"></label>
+    <label>duration (s) <input name="duration" type="number" value="15" min="2" max="600"></label>
+    <fieldset><legend>formats</legend>
+      <label><input type="checkbox" name="fmt" value="9:16" checked> 9:16</label>
+      <label><input type="checkbox" name="fmt" value="1:1"> 1:1</label>
+      <label><input type="checkbox" name="fmt" value="16:9"> 16:9</label>
+      <label><input type="checkbox" name="fmt" value="4:5"> 4:5</label>
+    </fieldset>
+    <p class="dim">Then tell pi: <code>/skill:motion-reel make films/&lt;key&gt; …</code></p>
+    <menu><button value="cancel" formnovalidate>cancel</button><button value="ok" class="primary">create</button></menu>
+  </form>
+</dialog>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

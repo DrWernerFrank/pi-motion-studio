@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# studio: the motion studio CLI (engine/cli.mjs) plus GUI start/stop.
+#   ./studio help               all film commands (new, look, render, sound, gate, ship, ...)
+#   ./studio gui                start the Studio GUI in the background and open the browser
+#   ./studio gui stop|status    stop it / say whether it runs
+set -uo pipefail
+HERE="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
+PI="$(command -v pi 2>/dev/null || true)"
+NODE="$([ -n "$PI" ] && [ -x "$(dirname "$PI")/node" ] && echo "$(dirname "$PI")/node" || command -v node)"
+PORT="${STUDIO_PORT:-3142}"; URL="http://localhost:$PORT"
+PIDF="${XDG_RUNTIME_DIR:-/tmp}/motion-studio-gui.pid"
+
+up() { "$NODE" -e "fetch('$URL/api/films',{signal:AbortSignal.timeout(1200)}).then(r=>process.exit(r.ok?0:1),()=>process.exit(1))" 2>/dev/null; }
+open_url() {
+  if grep -qi microsoft /proc/version 2>/dev/null; then cmd.exe /c start "" "$URL" >/dev/null 2>&1 & else xdg-open "$URL" >/dev/null 2>&1 & fi
+}
+
+if [ "${1:-}" = "gui" ]; then
+  case "${2:-start}" in
+    stop) [ -f "$PIDF" ] && kill "$(cat "$PIDF")" 2>/dev/null && rm -f "$PIDF" && echo "stopped" || echo "not running"; exit 0 ;;
+    status) up && echo "running: $URL" || echo "not running"; exit 0 ;;
+    start|open)
+      if ! up; then
+        nohup "$NODE" "$HERE/studio-gui/server.mjs" >"${XDG_RUNTIME_DIR:-/tmp}/motion-studio-gui.log" 2>&1 & echo $! >"$PIDF"
+        for _ in $(seq 30); do up && break; sleep 0.2; done
+      fi
+      up && echo "Motion Studio: $URL" || { echo "GUI failed to start; log: ${XDG_RUNTIME_DIR:-/tmp}/motion-studio-gui.log"; exit 1; }
+      [ "${2:-start}" = "open" ] || [ -t 1 ] && open_url
+      exit 0 ;;
+  esac
+fi
+exec "$NODE" "$HERE/engine/cli.mjs" "$@"

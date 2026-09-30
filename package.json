@@ -1,0 +1,14 @@
+{
+  "name": "pi-motion-studio",
+  "private": true,
+  "type": "module",
+  "description": "Motion design studio rendered from code, driven by pi.",
+  "bin": { "studio": "engine/cli.mjs" },
+  "scripts": {
+    "gui": "node studio-gui/server.mjs",
+    "setup": "bash setup.sh"
+  },
+  "dependencies": {
+    "playwright": "1.63.0"
+  }
+}
