@@ -16,6 +16,7 @@ Everything fetched for the editing pipeline: URL, license, sha256. Nothing here 
 | Piper voice `en_US-ljspeech-medium.onnx(.json)` | https://huggingface.co/rhasspy/piper-voices (en/en_US/ljspeech/medium) | dataset LJSpeech: public domain (model card) | `6f52a751e2349abe` |
 | Piper voice `en_GB-northern_english_male-medium.onnx(.json)` | same repo (en/en_GB/northern_english_male/medium) | CC-BY-SA 4.0 (OpenSLR 83); used only to generate a private test fixture | `57a219ae8e638873` |
 | Piper voice `fa_IR-amir-medium.onnx(.json)` | same repo (fa/fa_IR/amir/medium) | CC0 (model card) | `fb815380d969ea37` |
+| YuNet `face_detection_yunet_2023mar.onnx` | https://github.com/opencv/opencv_zoo (models/face_detection_yunet) | MIT | `8f2383e4dd3cfbb4` |
 | faster-whisper `small` (CTranslate2 int8) | https://huggingface.co/Systran/faster-whisper-small, fetched by faster-whisper | MIT | (cached by huggingface_hub) |
 
 ## Python packages (ML venv, user space)

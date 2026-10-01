@@ -1,12 +1,12 @@
 # Progress
 
-Now: P1 — spike S1 (footage in Chromium) needs the ffmpeg-only fixtures first: build `engine/fixtures.mjs` (sync barcode clip, vfr-rotated, hlg, noaudio, noisy, subject, screen, clips12 + song)
-Next: S2 ASR (uv + Python 3.12 ML venv, faster-whisper small int8), S3 tracker (OpenCV YuNet), ADR-001..003, then P2 ingest
+Now: P2 ingest: engine/ingest.mjs (media.json from ffprobe, conform to CFR/upright/bt709 yuv420p short-GOP, proxy, peaks, filmstrip, scenes, silence map), content-hash cache, relink, studio ingest/cache commands
+Next: checks ingest-probe, ingest-conform; then P3 edit model + first vertical slice (edit.json, ops, edit.js, render)
 
 ## Phases
 
 - [x] **P0** Orientation: read code, INSPIRATION.md, branch, baseline, PROGRESS/DECISIONS, verify-edit + doctor skeletons, unknown commands exit non-zero
-- [ ] **P1** Spikes S1 (footage in Chromium) S2 (ASR) S3 (tracking) + fixtures generator; ADR-001..003
+- [x] **P1** Spikes S1 (footage in Chromium) S2 (ASR) S3 (tracking) + fixtures generator; ADR-001..003
 - [ ] **P2** Ingest: media.json, conform, proxy, peaks, filmstrip, scenes, silence map, caches, relink, doctor green
 - [ ] **P3** Edit model + first vertical slice: edit.json, ops + undo, edit.js (footage, __prepare), new --edit, render, edit_look + core edit_* tools; tag slice-1
 - [ ] **P4** Transcribe + text-based editing
@@ -22,9 +22,9 @@ Next: S2 ASR (uv + Python 3.12 ML venv, faster-whisper small int8), S3 tracker (
 
 ## Checks (mirrors `studio verify-edit --list`; tick when it passes in a full run)
 
-- [ ] `env` (P2) doctor resolves ffmpeg, ffprobe, node, ML python, ASR model, tracker model, Chromium H.264 decode
+- [x] `env` (P2) doctor resolves ffmpeg, ffprobe, node, ML python, ASR model, tracker model, Chromium H.264 decode
 - [x] `regress-films` (P0) the four motion films: gate verdicts and baseline frame hashes unchanged
-- [ ] `fixtures` (P1) all fixtures generated + checksummed, plus a real open-licensed talking-head clip with its license
+- [x] `fixtures` (P1) all fixtures generated + checksummed, plus a real open-licensed talking-head clip with its license
 - [ ] `ingest-probe` (P2) media.json equals ffprobe truth; Windows/space/unicode paths; truncated file fails clearly
 - [ ] `ingest-conform` (P2) CFR, upright, SDR bt709 tags, yuv420p; HLG luma within 6; cache hit < 2 s; relink by hash
 - [ ] `frame-exact` (P3) 12 cuts on sync + vfr-rotated: 0 frames of error in preview and final
@@ -65,5 +65,5 @@ Next: S2 ASR (uv + Python 3.12 ML venv, faster-whisper small int8), S3 tracker (
 
 ## Known problems
 
-- `./studio doctor` is red for `asr` and `tracker` until spikes S2/S3 install them (so `env` fails, correctly).
+- GPU Whisper is unproven (`libcublas.so.12` missing): ASR runs on CPU int8 (ADR-002).
 - `films/determinant-explainer` is truncated and cannot render (pre-existing, see D-001).

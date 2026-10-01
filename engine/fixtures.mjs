@@ -7,7 +7,9 @@ import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { BARCODE, barcodeSource } from './lib/barcode.mjs';
 import { readJson, writeJson } from './lib/film.mjs';
+import { synthMusic, writeWav } from './audio.mjs';
 import { pythonFor } from './doctor.mjs';
+import { ROOT } from './lib/serve.mjs';
 import { run } from './lib/proc.mjs';
 import { writeFileSync } from 'node:fs';
 
@@ -125,7 +127,46 @@ export const FIXTURES = {
       writeFileSync(out, Buffer.from(await r.arrayBuffer()));
       if ((await sha256(out)) !== FIXTURES['real-talking-head'].sha256) { rmSync(out, { force: true }); throw new Error('real-talking-head: sha256 mismatch after download'); }
     } },
+  // a track with a steady beat from the engine's own synth; the beat grid is exact truth (120 bpm: 0.5 s)
+  song: { file: 'song.wav', extra: ['song.truth.json'], desc: '40 s steady 120 bpm A-minor track (engine synth), beat grid in song.truth.json', async build(out, dir) {
+    const bus = synthMusic({ bpm: 120, key: 'A minor', style: 'drive', seed: 11 }, 40, false);
+    writeWav(out, bus.L, bus.R);
+    writeFileSync(join(dir, 'song.truth.json'), JSON.stringify({ bpm: 120, duration: 40, beats: Array.from({ length: 80 }, (_, i) => i * 0.5) }));
+  } },
+  // 12 short distinct clips for montages: colour by index, big number, a moving block, a per-clip pitch, barcode = frame in clip
+  clips12: { file: 'clips12/clip01.mp4', extra: Array.from({ length: 11 }, (_, i) => `clips12/clip${String(i + 2).padStart(2, '0')}.mp4`).concat('clips12/clips.json'), desc: '12 clips, 2.0-3.5 s each, 1280x720 30 fps with audio, numbered 01-12', async build(out, dir) {
+    mkdirSync(join(dir, 'clips12'), { recursive: true });
+    const font = join(ROOT, 'engine', 'fonts', 'Inter.ttf'), list = [];
+    for (let i = 0; i < 12; i++) {
+      const dur = 2 + (i % 4) * 0.5, hue = (i * 30) % 360, f = join(dir, 'clips12', `clip${String(i + 1).padStart(2, '0')}.mp4`);
+      const hex = hslHex(hue, 0.55, 0.32);
+      await ff(['-f', 'lavfi', '-i', `color=c=${hex}:s=1280x720:r=30:d=${dur}`, '-f', 'lavfi', '-i', barcodeSource(30, dur), '-f', 'lavfi', '-i', `sine=f=${220 * 2 ** (i / 12)}:r=48000:d=${dur}`,
+        '-filter_complex', `[0:v][1:v]overlay=0:0,drawtext=fontfile=${font}:text='${String(i + 1).padStart(2, '0')}':fontsize=300:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2,drawbox=x='100+900*t/${dur}':y=620:w=80:h=40:color=white:t=fill,format=yuv420p[v]`,
+        '-map', '[v]', '-map', '2:a', ...x264(20), '-c:a', 'aac', '-b:a', '96k', '-ac', '2', '-af', 'volume=0.3', '-shortest', ...ENC, f]);
+      list.push({ file: `clip${String(i + 1).padStart(2, '0')}.mp4`, duration: dur, hue });
+    }
+    writeFileSync(join(dir, 'clips12', 'clips.json'), JSON.stringify(list, null, 1));
+  } },
+  // synthetic screen recording: typing bursts, a progress animation, long idle stretches (truth below). Idle = pixel-identical frames.
+  screen: { file: 'screen.mp4', extra: ['screen.truth.json'], desc: '30 s 1280x720 30 fps: typing 1-3.9 s and 10-13 s, progress bar 17-20.8 s, everything else pixel-identical; beep every 2 s (freezedetect n=-75dB)',
+    truth: { active: [[1, 3.9], [10, 13], [17, 20.8]], idle: [[0, 1], [3.9, 10], [13, 17], [20.8, 30]] },
+    async build(out, dir) {
+      const font = join(ROOT, 'engine', 'fonts', 'JetBrainsMono.ttf'), adv = 36, x0 = 40;
+      const lines = [{ y: 110, text: '$ studio render launch --draft', t0: 1.0, rate: 10 }, { y: 210, text: '$ studio gate launch > gate.log', t0: 10.0, rate: 10 }];
+      let g = `color=c=0x1e1f22:s=1280x720:r=30:d=30,drawbox=x=0:y=0:w=iw:h=48:color=0x2b2d31:t=fill,drawbox=x=24:y=18:w=14:h=14:color=0xff5f57:t=fill,drawbox=x=48:y=18:w=14:h=14:color=0xfebc2e:t=fill,drawbox=x=72:y=18:w=14:h=14:color=0x28c840:t=fill,drawbox=x=80:y=420:w=1120:h=160:color=0x3a3d44:t=fill`;
+      for (const l of lines) [...l.text].forEach((ch, k) => { if (ch === ' ') return; g += `,drawtext=fontfile=${font}:text='${ch}':fontsize=60:fontcolor=0xd7dae0:x=${x0 + k * adv}:y=${l.y}:enable='gte(t,${(l.t0 + k / l.rate).toFixed(3)})'`; });
+      // drawbox evaluates w once at init (no per-frame t), so the bar grows in 20 fixed steps, one every 0.2 s
+      for (let k = 0; k < 20; k++) g += `,drawbox=x=${80 + 56 * k}:y=420:w=56:h=160:color=0x4ea1ff:t=fill:enable='gte(t,${(17 + 0.2 * k).toFixed(1)})'`;
+      g += ',format=yuv420p[v]';
+      const script = join(dir, '.screen.filter'); writeFileSync(script, g);
+      await ff(['-f', 'lavfi', '-i', 'color=c=black:s=16x16:r=30:d=30', '-f', 'lavfi', '-i', BEEP(30, 48000), '-filter_complex_script', script, '-map', '[v]', '-map', '1:a', ...x264(20), '-c:a', 'aac', '-b:a', '96k', '-ac', '2', ...ENC, out]);
+      rmSync(script, { force: true });
+      writeFileSync(join(dir, 'screen.truth.json'), JSON.stringify(FIXTURES.screen.truth));
+    } },
 };
+
+// hsl -> #rrggbb for ffmpeg colour sources
+const hslHex = (h, sat, l) => { const a = sat * Math.min(l, 1 - l), f = (n) => { const k = (n + h / 30) % 12; return Math.round(255 * (l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)))); }; return '0x' + [f(0), f(8), f(4)].map((x) => x.toString(16).padStart(2, '0')).join(''); };
 
 const sha256 = (file) => new Promise((ok, bad) => { const h = createHash('sha256'); createReadStream(file).on('data', (d) => h.update(d)).on('end', () => ok(h.digest('hex'))).on('error', bad); });
 
