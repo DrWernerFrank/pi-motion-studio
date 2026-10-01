@@ -35,7 +35,13 @@ const HELP = `studio <command> <film> [options]
                          api = GEMINI_API_KEY vision. gemini = the Gemini CLI agent.
   login-gemini          browser login with your Google account (Pro/Code Assist quota, no API key)
   ship <film>            sound → gate → final render (all formats) → poster → sheets → loop check
-  gui                    start the Studio GUI (http://localhost:3142)`;
+  gui                    start the Studio GUI (http://localhost:3142)
+  regress [--write]      the four motion films still render identically (frame hashes + gate verdicts
+                         vs docs/editing/baseline.json); --write records the baseline
+  doctor [--fix]         probe the toolchain for editing real footage (ffmpeg, node, python, ASR, tracker, browser decode)
+  verify-edit [--quick] [--list] [--only <id>] [--clean]
+                         the real-video-editing contract: every check of the mission, measured → docs/editing/verify-last.json
+  help                   this text`;
 
 const argv = process.argv.slice(2);
 const cmd = argv[0], key = argv[1] && !argv[1].startsWith('--') ? argv[1] : undefined;
@@ -191,7 +197,25 @@ async function main() {
       break;
     }
     case 'gui': await import('../studio-gui/server.mjs'); return;
-    default: console.log(HELP);
+    case 'regress': {
+      const R = await import('./regress.mjs');
+      if (opt('write')) { const f = await R.writeBaseline(); console.log(`baseline written for ${Object.keys(f).join(', ')} → ${rel(R.BASELINE)}`); break; }
+      const r = await R.compare();
+      for (const [k, v] of Object.entries(r.measured)) console.log(`${k.padEnd(24)} ${v}`);
+      for (const row of r.rows) console.log('DRIFT  ' + row);
+      console.log(r.pass ? 'regress: PASS' : 'regress: FAIL'); process.exitCode = r.pass ? 0 : 1; break;
+    }
+    case 'doctor': {
+      const { doctor, printDoctor } = await import('./doctor.mjs');
+      const r = await doctor({ fix: !!opt('fix') }); printDoctor(r); process.exitCode = r.ok ? 0 : 1; break;
+    }
+    case 'verify-edit': {
+      const { verifyEdit } = await import('./verify-edit.mjs');
+      const r = await verifyEdit({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
+      process.exitCode = r.pass ? 0 : 1; break;
+    }
+    case undefined: case 'help': case '--help': case '-h': console.log(HELP); break;
+    default: console.error(`studio: unknown command "${cmd}"\n`); console.error(HELP); process.exit(2);
   }
 }
 

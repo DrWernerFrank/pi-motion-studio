@@ -40,7 +40,7 @@ const meanAbs = (a, b) => { let s = 0; for (let i = 0; i < a.length; i++) s += M
 const std = (a) => { const m = a.reduce((x, y) => x + y, 0) / a.length; return Math.sqrt(a.reduce((x, y) => x + (y - m) ** 2, 0) / a.length); };
 const sha = (buf) => createHash('sha1').update(buf).digest('hex').slice(0, 12);
 
-export async function gates(key, { log = console.log } = {}) {
+export async function gates(key, { log = console.log, write = true } = {}) {
   const film = readFilm(key), cfg = film.cfg, D = cfg.duration, fmt = cfg.formats[0];
   const G = { maxStill: 1.5, maxNoNovelty: 4, ...(cfg.gates || {}) };
   const checks = [];
@@ -127,6 +127,6 @@ export async function gates(key, { log = console.log } = {}) {
   }
 
   const result = { at: new Date().toISOString(), pass: checks.every((c) => c.level !== 'fail'), checks };
-  writeJson(join(film.dir, 'gates.json'), result);
+  if (write) writeJson(join(film.dir, 'gates.json'), result);
   return result;
 }

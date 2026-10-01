@@ -32,3 +32,6 @@ Thumbs.db:encryptable
 
 # Template (re-generated per film)
 templates/film/index.html
+
+# verifier run output (regenerated)
+docs/editing/verify-last*.json
