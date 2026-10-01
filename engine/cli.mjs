@@ -38,6 +38,8 @@ const HELP = `studio <command> <film> [options]
   gui                    start the Studio GUI (http://localhost:3142)
   regress [--write]      the four motion films still render identically (frame hashes + gate verdicts
                          vs docs/editing/baseline.json); --write records the baseline
+  fixtures [--list] [--only a,b] [--force] [--verify]
+                         deterministic test media (barcode clips, VFR/rotated, HLG, long, subject …) → ~/.cache/pi-motion-studio/fixtures
   doctor [--fix]         probe the toolchain for editing real footage (ffmpeg, node, python, ASR, tracker, browser decode)
   verify-edit [--quick] [--list] [--only <id>] [--clean]
                          the real-video-editing contract: every check of the mission, measured → docs/editing/verify-last.json
@@ -213,6 +215,13 @@ async function main() {
       const { verifyEdit } = await import('./verify-edit.mjs');
       const r = await verifyEdit({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
       process.exitCode = r.pass ? 0 : 1; break;
+    }
+    case 'fixtures': {
+      const F = await import('./fixtures.mjs');
+      if (opt('list')) { const m = F.readManifest().fixtures; for (const [id, f] of Object.entries(F.FIXTURES)) console.log(`${id.padEnd(14)} ${(m[id] ? (m[id].bytes / 1e6).toFixed(1) + ' MB' : 'not built').padEnd(10)} ${f.desc}`); break; }
+      const r = await F.ensureFixtures({ only: opt('only') && opt('only') !== true ? String(opt('only')).split(',') : undefined, force: !!opt('force'), verify: !!opt('verify') });
+      for (const [id, e] of Object.entries(r)) console.log(`${id.padEnd(14)} ${(e.bytes / 1e6).toFixed(1).padStart(7)} MB  ${e.sha256.slice(0, 12)}  ${e.cached ? 'cached' : e.seconds + 's'}`);
+      break;
     }
     case undefined: case 'help': case '--help': case '-h': console.log(HELP); break;
     default: console.error(`studio: unknown command "${cmd}"\n`); console.error(HELP); process.exit(2);
