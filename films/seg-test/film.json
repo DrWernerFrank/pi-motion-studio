@@ -1,7 +1,7 @@
 {
   "kind": "edit",
-  "title": "verify-cidle",
-  "duration": 9.7,
+  "title": "seg-test",
+  "duration": 30,
   "fps": 30,
   "formats": [
     "16:9"

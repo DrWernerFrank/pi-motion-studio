@@ -2,7 +2,7 @@
   "version": 1,
   "rev": 2,
   "fps": "30",
-  "counter": 9,
+  "counter": 11,
   "sources": {
     "speech": {
       "path": "/home/werner/.cache/pi-motion-studio/fixtures/speech.mp4",
@@ -27,32 +27,39 @@
           "at": 0
         },
         {
-          "id": "c3",
+          "id": "c11",
           "src": "speech",
           "in": 1.766667,
-          "out": 6.833333,
+          "out": 6.466667,
           "at": 1.4
-        },
-        {
-          "id": "c5",
-          "src": "speech",
-          "in": 7.133333,
-          "out": 11.066667,
-          "at": 6.466667
-        },
-        {
-          "id": "c7",
-          "src": "speech",
-          "in": 11.933333,
-          "out": 26.333333,
-          "at": 10.4
         },
         {
           "id": "c9",
           "src": "speech",
-          "in": 26.433333,
+          "in": 6.766667,
+          "out": 10.4,
+          "at": 6.1
+        },
+        {
+          "id": "c7",
+          "src": "speech",
+          "in": 11.266667,
+          "out": 24.8,
+          "at": 9.733333
+        },
+        {
+          "id": "c5",
+          "src": "speech",
+          "in": 24.9,
+          "out": 29.566667,
+          "at": 23.266667
+        },
+        {
+          "id": "c3",
+          "src": "speech",
+          "in": 29.8,
           "out": 29.9,
-          "at": 24.8
+          "at": 27.933333
         }
       ]
     },

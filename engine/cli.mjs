@@ -136,7 +136,8 @@ async function main() {
     case 'poster': console.log(rel((await poster(key, { at: num('at', 0), fmt: opt('fmt') })).file)); break;
     case 'render': {
       const r = await renderFilm(key, { quality: opt('draft') ? 'draft' : 'final', fmt: opt('fmt'), from: opt('from') !== undefined ? num('from') : undefined,
-        to: opt('to') !== undefined ? num('to') : undefined, sub: opt('sub') !== undefined ? num('sub') : undefined, workers: opt('workers') ? num('workers') : undefined });
+        to: opt('to') !== undefined ? num('to') : undefined, sub: opt('sub') !== undefined ? num('sub') : undefined, workers: opt('workers') ? num('workers') : undefined,
+        bypassCache: argv.includes('--no-cache') });
       for (const x of r) console.log(rel(x.file));
       break;
     }

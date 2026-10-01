@@ -68,8 +68,8 @@ export const EDGE_FIXTURES = {
     await ff([...s.v, '-f', 'lavfi', '-i', BEEP(6, 48000), '-filter_complex', `${s.base},setsar=2,format=yuv420p[v]`, '-map', '[v]', '-map', '2:a',
       ...libx264(18), '-c:a', 'aac', '-b:a', '96k', '-ac', '2', ...ENC, out]);
   } },
-  // 120 fps: 5 s x 300 frames; conformed to a 30 fps timeline it must drop exactly 3 of every 4 frames
-  'edge-120fps': { file: 'edge-120fps.mp4', desc: '5 s 640x360@120 (300 frames, barcode), no audio', async build(out) {
+  // 120 fps: 5 s = 600 frames; conformed to a 30 fps timeline it must drop exactly 3 of every 4 frames
+  'edge-120fps': { file: 'edge-120fps.mp4', desc: '5 s 640x360@120 (600 frames, barcode), no audio', async build(out) {
     const s = strip({ w: 640, h: 360, fps: 120, dur: 5, cell: 20 });
     await ff([...s.v, '-filter_complex', `${s.base},format=yuv420p[v]`, '-map', '[v]', ...libx264(18, { preset: 'veryfast' }), '-an', ...ENC, out]);
   } },
@@ -129,18 +129,19 @@ export const EDGE_FIXTURES = {
     const s = strip({ w: 1280, h: 720, fps: 30, dur: 0.1 });
     await ff([...s.v, '-filter_complex', `${s.base},format=rgb24[v]`, '-map', '[v]', '-frames:v', '1', '-update', '1', '-f', 'image2', ...ENC, out]);
   } },
-  // container zoo: one 6 s master, re-muxed to .mov/.mkv/.mts (copy) and re-encoded to .webm (vp9+opus).
-  // All four must ingest and conform to the same frame count and barcode sequence.
+  // container zoo: one 6 s master, re-muxed to .mov/.mts (aac copy), .mkv (video copy + opus audio: a straight aac
+  // copy would shift the video +21 ms by the mp4 edit-list/mkv min-ts rule and pad one head frame) and re-encoded
+  // to .webm (vp9+opus). All four must ingest and conform to the same frame count and barcode sequence.
   'edge-containers': { file: 'edge-containers.mov', extra: ['edge-containers.mkv', 'edge-containers.webm', 'edge-containers.mts'],
-    desc: '6 s 1280x720@30 master re-muxed to .mov/.mkv/.mts and re-encoded to .webm (vp9+opus)', async build(out, dir) {
+    desc: '6 s 1280x720@30 master re-muxed to .mov/.mts and .mkv (opus), re-encoded to .webm (vp9+opus)', async build(out, dir) {
       const s = strip({ w: 1280, h: 720, fps: 30, dur: 6 }), master = join(dir, '.edge-containers-master.mp4');
       await ff([...s.v, '-f', 'lavfi', '-i', BEEP(6, 48000), '-filter_complex', `${s.base},format=yuv420p[v]`, '-map', '[v]', '-map', '2:a',
         ...libx264(18), '-c:a', 'aac', '-b:a', '96k', '-ac', '2', ...ENC, master]);
-      await ff(['-i', master, '-c', 'copy', ...ENC, out]);                                     // .mov
-      await ff(['-i', master, '-c', 'copy', ...ENC, join(dir, 'edge-containers.mkv')]);          // .mkv
-      await ff(['-i', master, '-c', 'copy', ...ENC, '-f', 'mpegts', join(dir, 'edge-containers.mts')]); // .mts
+      await ff(['-i', master, '-c', 'copy', ...ENC, out]);                                              // .mov (h264+aac)
+      await ff(['-i', master, '-c:v', 'copy', '-c:a', 'libopus', '-b:a', '64k', ...ENC, join(dir, 'edge-containers.mkv')]); // .mkv (h264+opus)
+      await ff(['-i', master, '-c', 'copy', ...ENC, '-f', 'mpegts', join(dir, 'edge-containers.mts')]);   // .mts (h264+aac)
       await ff(['-i', master, '-c:v', 'libvpx-vp9', '-deadline', 'realtime', '-cpu-used', '5', '-crf', '32', '-threads', '1',
-        '-c:a', 'libopus', '-b:a', '64k', ...ENC, '-f', 'webm', join(dir, 'edge-containers.webm')]);
+        '-c:a', 'libopus', '-b:a', '64k', ...ENC, '-f', 'webm', join(dir, 'edge-containers.webm')]);        // .webm (vp9+opus)
       rmSync(master, { force: true });
     } },
   // the >2 h marathon, represented by 25 minutes (a true 2 h PCM wav alone is 6.9 GB / an mp4 build is minutes):
