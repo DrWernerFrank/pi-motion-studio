@@ -2,7 +2,7 @@
 // Measured on the deliverable: beep onset = first audio energy above -30 dBFS at/after the expected time; flash =
 // the local luma spike near that time. |onset - flash| <= 20 ms at the start/middle/end of a 12-cut render, across
 // a 1.5x retime (pitch-preserving), and in the last 30 s of a 20-minute timeline built from `long`.
-import { closeSync, openSync, readSync, rmSync } from 'node:fs';
+import { closeSync, openSync, readSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildDialog, mixEdit, wavInfo } from '../edit-audio.mjs';
 import { renderFilm } from '../render.mjs';
@@ -12,13 +12,15 @@ import { applyOps, loadEdit, syncFilm } from '../lib/edit-store.mjs';
 import { grid } from '../lib/edit-ops.mjs';
 import { ingestSource } from '../ingest.mjs';
 import { fixturePath } from '../fixtures.mjs';
-import { tempFilm } from './_ingest.mjs';
+import { rmSync } from 'node:fs';
+import { FILMS } from '../lib/film.mjs';
 
 const SR = 48000;
 // the mp4's AAC audio as 16-bit PCM (decode only), plus its header info
 const decodeAudio = async (mp4, tmp) => { await run('ffmpeg', ['-y', '-v', 'error', '-i', mp4, '-vn', '-ac', '2', '-ar', '48000', '-c:a', 'pcm_s16le', tmp]); return wavInfo(tmp); };
 const absAt = (info, sample) => info.dataStart + sample * info.channels * 2;
 function onsetAt(file, info, fromSample, maxSamples) {
+  if (fromSample < 0) { maxSamples += fromSample; fromSample = 0; } // a window that starts before the file starts at 0
   const buf = Buffer.alloc(maxSamples * info.channels * 2), fd = openSync(file, 'r');
   try { readSync(fd, buf, 0, buf.length, absAt(info, fromSample)); } finally { closeSync(fd); }
   for (let i = 0; i < maxSamples; i++) for (let c = 0; c < Math.min(2, info.channels); c++) if (Math.abs(buf.readInt16LE((i * info.channels + c) * 2) / 32768) > 10 ** (-30 / 20)) return fromSample + i;
@@ -26,9 +28,13 @@ function onsetAt(file, info, fromSample, maxSamples) {
 }
 // luma per frame of the render; the flash is the local max within +-0.4 s of the expected time
 async function flashTime(mp4, expectS, fps) {
+  // metadata=print writes two lines per frame: "frame:N pts:P pts_time:T" then "lavfi.signalstats.YAVG=V"
   const { out } = await run('ffmpeg', ['-v', 'error', '-i', mp4, '-vf', 'signalstats,metadata=print:key=lavfi.signalstats.YAVG:file=-', '-f', 'null', '-']);
   let best = null;
-  for (const m of out.matchAll(/frame:(\d+)\s+pts:\S+.*YAVG=([\d.]+)/g)) { const t = +m[1] / fps; if (Math.abs(t - expectS) <= 0.4 && (!best || +m[2] > best.y)) best = { y: +m[2], t }; }
+  for (const m of out.matchAll(/frame:(\d+)\s+pts:\d+\s+pts_time:([\d.]+)\nlavfi\.signalstats\.YAVG=([\d.]+)/g)) {
+    const t = +m[2]; // pts_time is the deliverable's own clock
+    if (Math.abs(t - expectS) <= 0.4 && (!best || +m[3] > best.y)) best = { y: +m[3], t };
+  }
   return best?.t ?? null;
 }
 
@@ -69,15 +75,16 @@ export default async ({ quick } = {}) => {
 
   // the 20-minute timeline: one 19:30 clip then six cuts, so the tail is cut material from the end of `long`
   if (!quick) {
-    const K = 'verify-av-long', film2 = tempFilm(K);
-    await ingestSource(K, fixturePath('long'), { id: 'cam', log: () => {} });
+    const K = 'verify-av-long';
+    rmSync(join(FILMS, K), { recursive: true, force: true });
+    await (await import('../edit-cli.mjs')).createEditFilm(K, { fps: 30, title: K });
     const G2 = grid(loadEdit(K).edit);
     await applyOps(K, { op: 'add', src: 'cam', in: 0, out: G2.S(1170) });
     for (let i = 0; i < 6; i++) await applyOps(K, { op: 'add', src: 'cam', in: G2.S(1170 + i * 5), out: G2.S(1173 + i * 5) });
     syncFilm(K);
     await buildDialog(K, { log: () => {} }); await mixEdit(K);
     const [r2] = await renderFilm(K, { quality: 'draft', fmt: '16:9', workers: 2, log: () => {} });
-    const w2 = join(film2.out, '.av2.wav'), info2 = await decodeAudio(r2.file, w2);
+    const w2 = join((await import('../lib/film.mjs')).readFilm(K).out, '.av2.wav'), info2 = await decodeAudio(r2.file, w2);
     // the last flash inside the final cut (source frames 1185..1170+... -> n%60==0), timeline ~1170+15s
     const total = 1170 + 18, last = total - 1.2;
     const flash2 = await flashTime(r2.file, last, fps);
