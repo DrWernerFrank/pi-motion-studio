@@ -10,7 +10,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] **P2** Ingest: media.json, conform, proxy, peaks, filmstrip, scenes, silence map, caches, relink, doctor green
 - [x] **P3** Edit model + first vertical slice: edit.json, ops + undo, edit.js (footage, __prepare), new --edit, render, edit_look + core edit_* tools; tag slice-1
 - [ ] **P4** Transcribe + text-based editing
-- [ ] **P5** Cut intelligence + seams
+- [x] **P5** Cut intelligence + seams
 - [x] **P6** Captions + on-footage graphics
 - [ ] **P7** Reframe + formats
 - [x] **P8** Audio chain + color
@@ -37,7 +37,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [ ] `transcribe` (P4) WER <= 15% on speech; monotonic words; >= 90% in speech; cache hit; offline
 - [ ] `transcript-edit` (P4) word-range delete cuts within 30 ms; retimed transcript >= 90% within 150 ms
 - [ ] `cut-silence` (P5) no pause beyond max + pad, no clipped word start, no word lost
-- [ ] `cut-cleanup` (P5) ums removed, flub removed with last take kept, everything else kept, removed text listed
+- [x] `cut-cleanup` (P5) ums removed, flub removed with last take kept, everything else kept, removed text listed
 - [x] `cut-idle` (P5) no frozen stretch beyond max; active stretches untouched; speed-up keeps audio locked
 - [x] `seams` (P5) no clicks at 20 cuts, micro-fade >= 5 ms, no black/frozen at seams, J/L offsets honored
 - [x] `captions` (P6) layout in en/fa/ar+en/long word at 4 formats; safe area, <= 2 lines, >= 3.2u, no tofu, SRT/VTT valid
