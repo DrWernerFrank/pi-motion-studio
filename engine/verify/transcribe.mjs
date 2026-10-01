@@ -28,9 +28,9 @@ export default async () => {
   await ingestSource(KEY, fixturePath('speech'), { id: ID, log: () => {} });
 
   const t0 = Date.now(), r = await transcribe(KEY, ID, { force: true, log: () => {} });
-  const secs = Date.now() - t0;
+  const secs = Math.max(0, Date.now() - t0); // ms
   need(r.language === 'en', `language ${r.language}, not en`);
-  const truth = JSON.parse(readFileSync(fixturePath('speech') + '.truth.json', 'utf8'));
+  const truth = JSON.parse(readFileSync(join(fixturePath('speech').replace(/[\\/][^\\/]+$/, ''), 'speech.truth.json'), 'utf8'));
   const ref = norm(truth.items.filter((i) => i.kind === 'sentence' || i.kind === 'flub').map((i) => i.text).join(' '));
   const hyp = norm(r.words.map((w) => w.text).join(' '));
   const { errs, n } = wer(ref, hyp);
@@ -45,6 +45,6 @@ export default async () => {
   const t1 = Date.now(), again = await transcribe(KEY, ID, { log: () => {} });
   need(again.cached && Date.now() - t1 < 2000, `second transcribe not a cache hit (${Date.now() - t1} ms)`);
   need(existsSync(transcriptFile(readFilm(KEY), ID)), 'transcript.json missing');
-  facts.push(`WER ${(100 * errs / n).toFixed(1)}% (${n} ref words), ${r.words.length} words, lang en@${r.language_probability}, ${inside}/${r.words.length} in speech, first pass ${secs} s, cache hit ${Date.now() - t1} ms`);
+  facts.push(`WER ${(100 * errs / n).toFixed(1)}% (${n} ref words), ${r.words.length} words, lang en@${r.language_probability}, ${inside}/${r.words.length} in speech, first pass ${(secs / 1000).toFixed(1)} s, cache hit ${Date.now() - t1} ms`);
   return { pass: bad.length === 0, measured: bad.length ? bad.join('; ') : facts.join('; ') };
 };

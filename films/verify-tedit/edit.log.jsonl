@@ -1,0 +1,2 @@
+{"rev":1,"at":"2026-10-01T17:25:26.710Z","who":"cli","ops":[{"op":"add","src":"speech","in":0,"out":29.9}]}
+{"rev":2,"at":"2026-10-01T17:25:43.945Z","who":"cli","ops":[{"op":"ripple-delete","track":"V1","from":24.849999999999998,"to":25.91,"all":true}]}

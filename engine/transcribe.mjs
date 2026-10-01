@@ -20,7 +20,7 @@ export async function transcribe(filmKey, id, { model = 'small', language = 'aut
   if (!force && existing && existing.__key === key) { log(`transcript: cached (${existing.words.length} words, ${existing.model})`); return { ...existing, cached: true, file: out }; }
   if (!bin.sources[id].has_audio) throw new Error(`source "${id}" has no audio to transcribe`);
   const wav = join(mediaDir(film, id), 'audio.wav');
-  const script = join(await import('node:path').then((p) => p.dirname(new URL('.', import.meta.url).pathname).replace(/\/$/, '')), 'asr.py');
+  const script = new URL('./asr.py', import.meta.url).pathname; // asr.py lives next to this module, in engine/
   await run(pythonFor('ml'), [script, '--in', wav, '--out', out, '--model', model, '--language', language, '--refine', refine ? 'on' : 'off', ...(force ? ['--force'] : [])]);
   const doc = readJson(out, null);
   if (!doc) throw new Error('transcription failed (asr.py wrote nothing)');
