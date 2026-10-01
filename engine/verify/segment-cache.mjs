@@ -102,11 +102,12 @@ async function arbitrate(film, suspects, mp4a, mp4b, scratch) {
 export default async () => {
   const bad = [], facts = [], need = (ok, what) => { if (!ok) bad.push(what); };
   const film0 = () => readFilm(KEY);
-  const scratch = join(FILMS, KEY, 'out', '.segcheck'); // computed before the film exists (cutEdit makes it below)
-  const { mkdirSync } = await import('node:fs'); mkdirSync(scratch, { recursive: true });
+  const scratch = join(FILMS, KEY, 'out', '.segcheck'); // under the film's gitignored out/, made after cutEdit (which wipes the film dir)
+  const { mkdirSync } = await import('node:fs');
   try {
     // a 30.0 s edit (5 cuts x 6 s at 30 fps = 900 frames = 6 segments of 150) on real footage
     const { film } = await cutEdit(KEY, 'real-talking-head', { fps: 30, cuts: 5, cutLen: 180, gap: 40, fmt: ['16:9'], log: () => {} });
+    mkdirSync(scratch, { recursive: true }); // cutEdit just wiped films/<key>; the md5s and arbiter pngs live here
     const TOTAL = Math.round(film.cfg.duration * 30); // 900, asserted below
     need(film.cfg.duration === 30, `test film is ${film.cfg.duration}s, wanted 30.0s (5x6s at 30fps)`);
 

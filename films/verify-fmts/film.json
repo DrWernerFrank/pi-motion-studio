@@ -1,11 +1,13 @@
 {
   "kind": "edit",
-  "title": "verify-reframe",
-  "duration": 20,
-  "fps": 30,
+  "title": "verify-fmts",
+  "duration": 15.015,
+  "fps": "30000/1001",
   "formats": [
+    "9:16",
+    "1:1",
     "16:9",
-    "9:16"
+    "4:5"
   ],
   "loop": false,
   "background": "#000000",

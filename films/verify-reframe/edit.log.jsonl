@@ -1,4 +1,0 @@
-{"rev":1,"at":"2026-10-01T21:13:46.095Z","who":"cli","ops":[{"op":"add","src":"subject","in":0,"out":10}]}
-{"rev":2,"at":"2026-10-01T21:13:46.142Z","who":"cli","ops":[{"op":"add","src":"subject","in":10,"out":20}]}
-{"rev":3,"at":"2026-10-01T21:13:46.203Z","who":"cli","ops":[{"op":"cam","id":"c1","mode":"follow"}]}
-{"rev":4,"at":"2026-10-01T21:13:46.249Z","who":"cli","ops":[{"op":"cam","id":"c2","mode":"follow"}]}

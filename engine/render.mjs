@@ -143,7 +143,8 @@ export async function renderFilm(key, opts = {}) {
 
 async function encodePart(page, file, { a, b, FPS, SUB, q, tick, lut = '', tOf }) {
   // setparams: the scale filter only tags the matrix; the encoder takes primaries/transfer/range from the frames, not from the -color_* flags
-  const bt709 = 'scale=out_color_matrix=bt709:out_range=tv,setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv';
+  // setsar first: a canvas-fed encode has no SAR of its own, and the deliverable must say 1:1
+  const bt709 = 'setsar=1,scale=out_color_matrix=bt709:out_range=tv,setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv';
   const vf = SUB > 1
     ? `tmix=frames=${SUB},select='eq(mod(n\\,${SUB})\\,${SUB - 1})',setpts=N*${FPS.den}/${FPS.num}/TB,${bt709}${lut}`
     : bt709 + lut;
