@@ -2,13 +2,27 @@
 // This is the "look at your own frames" loop. Sheets land in films/<key>/out/sheets/.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { activeClip, clipFrames, grid, mapFrame } from './lib/edit-ops.mjs';
 import { fmtSlug, openStudio, readFilm, readJson, stillPng } from './lib/film.mjs';
 
 // Pick the moments to look at. Returns [{ t, label }].
 export function pickTimes(film, { mode = 'every', every = 0.5, times, at = 0, n = 12, max = 36 } = {}) {
-  const { cfg, dir } = film, D = cfg.duration, fps = cfg.fps;
+  const { cfg, dir } = film, D = cfg.duration, fps = film.fps.value;
   const clampT = (t) => Math.min(Math.max(0, t), D - 1 / fps);
+  const edit = cfg.kind === 'edit' ? readJson(join(dir, 'edit.json')) : null;
   let out;
+  if (mode === 'cuts') {
+    // both sides of every cut on the video tracks: the last frame of the clip that ends and the first of the one that starts
+    if (!edit) throw new Error('mode "cuts" is for edit films (films with an edit.json)');
+    const { F, S } = grid(edit), pts = [];
+    for (const t of edit.tracks.filter((x) => x.kind === 'video')) {
+      const cs = [...t.clips].sort((a, b) => F(a.at) - F(b.at));
+      cs.forEach((c, i) => { const end = F(c.at) + clipFrames(edit, c), nx = cs[i + 1]; if (nx && F(nx.at) === end) pts.push(end - 1, end); });
+    }
+    const uniq = [...new Set(pts)].slice(0, max);
+    if (!uniq.length) throw new Error('no cuts to look at: the timeline has fewer than two adjacent clips');
+    out = uniq.map((k) => ({ t: clampT(S(k) + 0.5 / fps), label: '' }));
+  } else
   if (mode === 'times') out = (times || []).map((t) => ({ t: clampT(t), label: `${(+t).toFixed(2)}s` }));
   else if (mode === 'strip') out = Array.from({ length: n }, (_, i) => ({ t: clampT(at + i / fps), label: `${(at + i / fps).toFixed(3)}s` }));
   else if (mode === 'beats') {
@@ -29,6 +43,10 @@ export function pickTimes(film, { mode = 'every', every = 0.5, times, at = 0, n 
     const count = Math.min(max, Math.floor(D / every));
     const step = D / count;
     out = Array.from({ length: count }, (_, i) => ({ t: clampT(i * step + step / 2), label: `${(i * step + step / 2).toFixed(2)}s` }));
+  }
+  if (edit) { // say which source timecode each frame shows
+    const { F, S } = grid(edit), v = edit.tracks.find((x) => x.kind === 'video');
+    out = out.map((m) => { const k = Math.floor(m.t * film.fps.num / film.fps.den + 1e-6), c = v && activeClip(edit, v, k); return { ...m, label: `${m.label ? m.label + ' · ' : `${m.t.toFixed(2)}s · `}${c ? `${c.id} ${c.src} ${S(mapFrame(edit, c, k)).toFixed(2)}s` : 'gap'}` }; });
   }
   return out;
 }

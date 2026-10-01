@@ -55,14 +55,14 @@ export async function gates(key, { log = console.log, write = true } = {}) {
     const a = await studio.page(film, fmt, 0.5), b = await studio.page(film, fmt, 0.5);
     const T = [0.11, 0.37, 0.73, 0.94].map((p) => +(p * D).toFixed(3));
     const ha = []; for (const t of T) ha.push(sha(await stillPng(a, t)));
-    const hb = []; for (const t of [...T].reverse()) { await b.evaluate((x) => window.seek(x), D * 0.5); hb.unshift(sha(await stillPng(b, t))); }
+    const hb = []; for (const t of [...T].reverse()) { await b.evaluate(async (x) => { if (window.__prepare) await window.__prepare(x); window.seek(x); }, D * 0.5); hb.unshift(sha(await stillPng(b, t))); }
     const bad = T.filter((_, i) => ha[i] !== hb[i]);
     add('determinism', bad.length === 0, bad.length ? `frames differ depending on seek history at ${bad.join(', ')}s: state is carried between frames` : `4 frames identical across seek orders`);
     await b.close();
 
     // Motion scan at 10 samples/s on a 64px signature.
     const step = 0.1, sigs = [], times = [];
-    for (let t = 0; t < D; t += step) { times.push(+t.toFixed(2)); sigs.push(await a.evaluate(([t]) => window.__sig(t, 64), [t])); }
+    for (let t = 0; t < D; t += step) { times.push(+t.toFixed(2)); sigs.push(await a.evaluate(([t]) => window.__sigFrame(t, 64), [t])); }
     const diffs = sigs.slice(1).map((s, i) => meanAbs(s, sigs[i]));
 
     // Dead time: runs where nothing moves.
@@ -92,9 +92,9 @@ export async function gates(key, { log = console.log, write = true } = {}) {
 
     // Loop seam: frame(D) must equal frame(0) and the frame before the seam must be close to it.
     if (cfg.loop) {
-      const s0 = await a.evaluate(() => window.__sig(0, 64));
-      const sD = await a.evaluate((d) => window.__sig(d, 64), D);
-      const sPrev = await a.evaluate((d) => window.__sig(d, 64), D - 1 / cfg.fps);
+      const s0 = await a.evaluate(() => window.__sigFrame(0, 64));
+      const sD = await a.evaluate((d) => window.__sigFrame(d, 64), D);
+      const sPrev = await a.evaluate((d) => window.__sigFrame(d, 64), D - 1 / film.fps.value);
       const seam = meanAbs(sD, s0), jump = meanAbs(sPrev, s0);
       add('loop-seam', seam < 1 && jump < 4, `frame(${D}) vs frame(0) differ by ${seam.toFixed(2)} (want <1); last frame → first ${jump.toFixed(2)} (want <4)`);
     }

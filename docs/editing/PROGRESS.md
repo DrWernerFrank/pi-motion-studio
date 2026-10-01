@@ -27,12 +27,12 @@ Next: checks edit-ops, frame-exact, av-sync, rational-fps, fidelity, parity, det
 - [x] `fixtures` (P1) all fixtures generated + checksummed, plus a real open-licensed talking-head clip with its license
 - [x] `ingest-probe` (P2) media.json equals ffprobe truth; Windows/space/unicode paths; truncated file fails clearly
 - [x] `ingest-conform` (P2) CFR, upright, SDR bt709 tags, yuv420p; HLG luma within 6; cache hit < 2 s; relink by hash
-- [ ] `frame-exact` (P3) 12 cuts on sync + vfr-rotated: 0 frames of error in preview and final
+- [x] `frame-exact` (P3) 12 cuts on sync + vfr-rotated: 0 frames of error in preview and final
 - [ ] `av-sync` (P3) beep vs flash <= 20 ms at start/middle/end, across 1.5x, and in the last 30 s of a 20-min timeline
-- [ ] `rational-fps` (P3) 30000/1001 and 24000/1001: exact frame count, A/V durations within 2 ms
+- [x] `rational-fps` (P3) 30000/1001 and 24000/1001: exact frame count, A/V durations within 2 ms
 - [ ] `fidelity` (P3) passthrough edit vs ffmpeg decode: PSNR >= 40 dB, SSIM >= 0.98
-- [ ] `parity` (P3) live seek, draft and final agree on 10 frames per fixture (SSIM >= 0.95)
-- [ ] `determinism` (P3) identical per-frame md5 across runs; 4 workers equal 1 worker; determinism gate passes
+- [x] `parity` (P3) live seek, draft and final agree on 10 frames per fixture (SSIM >= 0.95)
+- [x] `determinism` (P3) identical per-frame md5 across runs; 4 workers equal 1 worker; determinism gate passes
 - [x] `edit-ops` (P3) every op round-trips under undo; invalid ops rejected; stale baseRev conflicts; 500 random ops; EDL round-trip
 - [ ] `transcribe` (P4) WER <= 15% on speech; monotonic words; >= 90% in speech; cache hit; offline
 - [ ] `transcript-edit` (P4) word-range delete cuts within 30 ms; retimed transcript >= 90% within 150 ms

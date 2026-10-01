@@ -1,0 +1,16 @@
+{
+  "kind": "edit",
+  "title": "verify-av",
+  "duration": 1,
+  "fps": 30,
+  "formats": [
+    "16:9"
+  ],
+  "loop": false,
+  "background": "#000000",
+  "motionBlur": 1,
+  "gates": {
+    "maxStill": 4,
+    "maxNoNovelty": 8
+  }
+}

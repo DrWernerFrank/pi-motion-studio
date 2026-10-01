@@ -102,20 +102,23 @@ export const OPS = {
     return edit;
   },
 
-  // trim { id, in?, out?, ripple? }: head trims keep the remaining picture where it is (at moves with the new in-point)
+  // trim { id, in?, out?, ripple?=true }: shorten or extend a clip's source range.
+  //   ripple (default): the clip keeps its position and later clips close up (or make room): the track stays gapless.
+  //   ripple:false: the picture that remains stays where it is on the timeline (a head trim moves `at`), leaving a gap.
   trim(edit, a) {
     const { F, S } = grid(edit), { track: t, clip: c } = findClip(edit, a.id);
     need(!c.freeze, `trim: ${c.id} is a freeze frame; change its length with speed or freeze`);
     need(a.in !== undefined || a.out !== undefined, 'trim: give in and/or out');
-    const s = srcOf(edit, c), oldIn = F(c.in), oldOut = F(c.out), oldLen = clipFrames(edit, c), oldAt = F(c.at);
+    const s = srcOf(edit, c), oldIn = F(c.in), oldOut = F(c.out), oldLen = clipFrames(edit, c), oldAt = F(c.at), ripple = a.ripple !== false;
     const inF = a.in === undefined ? oldIn : F(sec(a.in, 'in')), outF = a.out === undefined ? oldOut : F(sec(a.out, 'out'));
     need(inF >= 0 && inF < outF, `trim ${c.id}: in ${S(inF)}s must be before out ${S(outF)}s`);
     need(outF <= s.frames, `trim ${c.id}: out ${S(outF)}s is beyond the end of "${c.src}" (${S(s.frames)}s)`);
     const headDelta = a.in === undefined ? 0 : Math.round((inF - oldIn) / ((oldOut - oldIn) / oldLen)); // timeline frames removed from the head
     c.in = S(inF); c.out = S(outF);
     if (c.speed) setSpeed(edit, c, c.speed);
-    c.at = S(oldAt + headDelta);
-    if (a.ripple) shiftAfter(edit, t, oldAt + oldLen, F(c.at) + clipFrames(edit, c) - (oldAt + oldLen), c.id);
+    const newLen = clipFrames(edit, c);
+    if (ripple) shiftAfter(edit, t, oldAt + oldLen, newLen - oldLen, c.id);
+    else c.at = S(oldAt + headDelta);
     sortTrack(edit, t); checkOverlap(edit, t, 'trim');
     return edit;
   },
@@ -345,4 +348,21 @@ export function fromEdl(edl, { fps, bin }) {
     edit = applyOp(edit, { op: 'add', src: id, in: r.start, out: r.end, ...(r.note ? { note: r.note } : {}) }, { bin });
   }
   return edit;
+}
+
+// ── timeline -> source mapping (one definition, used by the browser runtime, the audio mixer and the checks) ─────────────────
+// The clip of a track that covers absolute timeline frame k, or null.
+export function activeClip(edit, track, k) {
+  const { F } = grid(edit);
+  for (const c of track.clips) { const a = F(c.at); if (k >= a && k < a + clipFrames(edit, c)) return c; }
+  return null;
+}
+// Source frame (on the conformed media) shown at timeline frame k by clip c. Speed 1 is exactly inF + (k - at); a retimed clip samples
+// the middle of each output frame: floor((kl + 0.5) * effectiveSpeed), effectiveSpeed = sourceFrames / timelineFrames.
+export function mapFrame(edit, c, k) {
+  const { F } = grid(edit), kl = k - F(c.at), inF = F(c.in);
+  if (c.freeze) return inF;
+  if (c.dur === undefined) return inF + kl;
+  const sf = F(c.out) - inF, len = clipFrames(edit, c);
+  return inF + Math.min(sf - 1, Math.floor(((kl + 0.5) * sf) / len));
 }

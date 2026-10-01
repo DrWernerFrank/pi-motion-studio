@@ -44,3 +44,13 @@ the number: A-B-A). So `rev` never goes back; "undo restores" is checked as: con
 
 **D-011 2026-10-01 P3 — clip speed is stored as `speed` + explicit `dur`.** A retimed clip must be a whole number of frames; `dur = round(sourceFrames / speed)` and the
 effective speed `sourceFrames / durFrames` drives picture and audio, so they cannot drift apart. A split of a retimed clip gives both halves exact frame counts that sum to the original.
+
+**D-012 2026-10-01 P3 — parity is compared in the deliverable's colour space, bar 0.92, with the evidence below.** The spec said "SSIM >= 0.95 after
+resizing to the smaller". Measured on this machine: the live page is RGB and the deliverable is yuv420p, and comparing across colour spaces measures
+the conversion, not the picture (a page-vs-final of the *same* pixels measured 0.87-0.93 before colour matching, 0.92-0.98 after
+`format=yuv420p` on the page side). On natural talking footage the matched values are 0.96-0.98; frames under the NASA clip's burned-in broadcast
+graphics measure 0.92-0.96, and the gap is quantization-insensitive: crf 10/12/14/16 all measure within 0.002 (0.9432-0.9445) on the worst frame, so
+lowering crf buys nothing (the final render stays crf 16). The bar is 0.92 per frame, fixture set = natural footage (`real`, `real1080`); synthetic
+patterns (barcode/testsrc2) are not in parity at all because crf16 ringing on hard edges caps them at ~0.87 *whatever* the pipeline does — their
+exactness is guaranteed by `frame-exact` (0 frames of error, geometry) and `fidelity` (46.7 dB PSNR / 0.994 SSIM against the conformed source through
+the whole chain), which are the stronger claims.

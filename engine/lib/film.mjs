@@ -1,6 +1,7 @@
 // Node-side helpers: locate a film, read its config, open it in headless Chromium.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { parseFps } from './frames.mjs';
 import { ROOT, serveStatic } from './serve.mjs';
 
 export const FILMS = join(ROOT, 'films');
@@ -19,7 +20,7 @@ export function readFilm(key) {
   cfg.fps ??= 60; cfg.formats ??= ['9:16']; cfg.motionBlur ??= 4;
   const rel = dir.slice(ROOT.length).replace(/\\/g, '/');
   const out = join(dir, 'out'); mkdirSync(out, { recursive: true });
-  return { dir, rel, out, cfg, key: dir.split(/[/\\]/).pop() };
+  return { dir, rel, out, cfg, fps: parseFps(cfg.fps), key: dir.split(/[/\\]/).pop() };
 }
 
 export const readJson = (p, d = null) => { try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return d; } };
@@ -38,7 +39,8 @@ export async function openStudio() {
     const [w, h] = { '9:16': [1080, 1920], '1:1': [1080, 1080], '16:9': [1920, 1080], '4:5': [1080, 1350] }[fmt];
     const p = await browser.newPage({ viewport: { width: Math.round(w * scale), height: Math.round(h * scale) }, deviceScaleFactor: 1 });
     p.on('pageerror', (e) => errors.push(String(e)));
-    p.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+    // beats.json is optional (edit films have no score): its 404 is not an error
+    p.on('console', (m) => { if (m.type() === 'error' && !(/Failed to load resource/.test(m.text()) && /\/beats\.json$/.test(m.location()?.url || ''))) errors.push(m.text()); });
     await p.goto(`${srv.url}${film.rel}/index.html?render=1&fmt=${fmtSlug(fmt)}&scale=${scale}`);
     await p.waitForFunction(() => window.__ready === true, null, { timeout: 30000 }).catch(() => {
       throw new Error(`film page never became ready (${film.key} ${fmt}).\n${errors.join('\n') || 'no console errors: does index.html call film({...}) from /engine/lib/runtime.js?'}`);
@@ -49,6 +51,6 @@ export async function openStudio() {
 }
 
 export async function stillPng(page, t) {
-  const url = await page.evaluate((t) => window.__still(t, 'image/png'), t);
+  const url = await page.evaluate((t) => window.__frame(t, 'image/png'), t);
   return Buffer.from(url.slice(url.indexOf(',') + 1), 'base64');
 }

@@ -33,7 +33,9 @@ export async function film(spec) {
   const scale = Number(q.get('scale') || 1);
   const mode = q.get('render') ? 'render' : q.get('embed') ? 'embed' : 'preview';
   const L = layout(fmt);
-  const duration = cfg.duration, fps = cfg.fps || 60;
+  // fps may be a rational string ("30000/1001"): the numeric rate is for UI stepping only; frames themselves are integers (frames.mjs)
+  const fpsNum = (v) => { if (typeof v === 'string' && v.includes('/')) { const [a, b] = v.split('/').map(Number); return a / b; } return Number(v) || 60; };
+  const duration = cfg.duration, fps = fpsNum(cfg.fps);
 
   document.documentElement.style.cssText = 'margin:0;background:#000;';
   document.body.style.cssText = 'margin:0;overflow:hidden;background:' + (mode === 'render' ? '#000' : '#0b0b0c') + ';';
@@ -60,6 +62,10 @@ export async function film(spec) {
   };
   window.seek = seek;
 
+  // Footage films (edit.js) must load frames asynchronously before they can paint: spec.prepare(t) does that, and every caller of a
+  // frame awaits it through __frame / __sigFrame. For motion films these are the plain __still / __sig, so nothing changes for them.
+  window.__prepare = spec.prepare ? (t) => spec.prepare(t, L, cfg) : null;
+
   // Helpers for the renderer and the gates (same page, no state carried).
   window.__still = (t, type = 'image/png', quality) => { seek(t); return canvas.toDataURL(type, quality); };
   const sigCanvas = document.createElement('canvas');
@@ -73,9 +79,11 @@ export async function film(spec) {
     for (let i = 0; i < w * h; i++) out[i] = Math.round(0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2]);
     return out;
   };
-  window.__film = { duration, fps, fmt, W: L.W, H: L.H, scale, formats: cfg.formats || [fmt], beats: cfg.beats || null };
+  window.__frame = async (t, type = 'image/png', quality) => { if (spec.prepare) await spec.prepare(t, L, cfg); return window.__still(t, type, quality); };
+  window.__sigFrame = async (t, w = 64) => { if (spec.prepare) await spec.prepare(t, L, cfg); return window.__sig(t, w); };
+  window.__film = { duration, fps, fpsRational: cfg.fps, kind: cfg.kind || 'motion', fmt, W: L.W, H: L.H, scale, formats: cfg.formats || [fmt], beats: cfg.beats || null };
 
-  if (mode === 'render') { seek(0); window.__ready = true; return; }
+  if (mode === 'render') { if (spec.prepare) await spec.prepare(0, L, cfg); seek(0); window.__ready = true; return; }
 
   // Fit canvas to the viewport for embed + preview.
   const fit = () => {
@@ -87,7 +95,8 @@ export async function film(spec) {
 
   if (mode === 'embed') {
     // The Studio GUI drives time via postMessage or direct window.seek calls.
-    addEventListener('message', (e) => { if (e.data && e.data.seek != null) seek(e.data.seek); });
+    addEventListener('message', async (e) => { if (e.data && e.data.seek != null) { if (spec.prepare) await spec.prepare(e.data.seek, L, cfg); seek(e.data.seek); } });
+    if (spec.prepare) await spec.prepare(Number(q.get('t') || 0), L, cfg);
     seek(Number(q.get('t') || 0));
     window.__ready = true;
     parent.postMessage({ filmReady: { duration, fps, fmt, W: L.W, H: L.H } }, '*');
@@ -102,7 +111,7 @@ export async function film(spec) {
   document.body.appendChild(bar);
   const audio = new Audio('./out/mix.wav');
   let playing = false, t0 = 0, start = 0, cur = 0;
-  const show = (t) => { cur = t; seek(t); bar.querySelector('#sc').value = t; bar.querySelector('#tc').textContent = t.toFixed(2) + 's'; };
+  const show = async (t) => { cur = t; if (spec.prepare) await spec.prepare(t, L, cfg); seek(t); bar.querySelector('#sc').value = t; bar.querySelector('#tc').textContent = t.toFixed(2) + 's'; };
   const loop = (now) => {
     if (!playing) return;
     let t = t0 + (now - start) / 1000;
@@ -121,6 +130,6 @@ export async function film(spec) {
     if (e.code === 'ArrowRight') show(Math.min(duration, cur + (e.shiftKey ? 1 : 1 / fps)));
     if (e.code === 'ArrowLeft') show(Math.max(0, cur - (e.shiftKey ? 1 : 1 / fps)));
   });
-  show(Number(q.get('t') || 0));
+  await show(Number(q.get('t') || 0));
   window.__ready = true;
 }

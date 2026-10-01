@@ -163,6 +163,12 @@ export const FIXTURES = {
       rmSync(script, { force: true });
       writeFileSync(join(dir, 'screen.truth.json'), JSON.stringify(FIXTURES.screen.truth));
     } },
+  // The real clip at 1080p (natural content at the size the fidelity check needs). Derived, so also public domain.
+  'real1080': { file: 'real/real1080.mp4', desc: 'REAL footage (NASA, public domain) 12 s from 6.0 s, scaled to 1920x1080, 30000/1001, bt709 tags, with audio', async build(out) {
+    await ensureFixtures({ only: ['real-talking-head'], log: () => {} });
+    await ff(['-ss', '6', '-t', '12', '-i', fixturePath('real-talking-head'), '-vf', 'fps=30000/1001,scale=1920:1080:flags=lanczos:out_color_matrix=bt709:out_range=tv,setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv,format=yuv420p',
+      '-c:v', 'libx264', '-preset', 'slow', '-crf', '12', '-g', '30', '-bf', '0', '-pix_fmt', 'yuv420p', ...['-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv'], '-c:a', 'aac', '-b:a', '128k', '-ac', '1', ...ENC, out]);
+  } },
 };
 
 // hsl -> #rrggbb for ffmpeg colour sources

@@ -15,6 +15,8 @@ const HELP = `studio <command> <film> [options]
 
   new <key> [--title T] [--duration 15] [--formats 9:16,1:1,16:9] [--bpm 120] [--loop]
                          scaffold films/<key> from templates/film
+  new <key> --edit [--fps 30000/1001] [--formats 16:9,9:16]
+                         scaffold an edit film (real footage): film.json kind=edit, edit.json, index.html
   list                   films with their status
   look <film> [--mode every|beats|shots|strip|times|phone] [--every 0.5] [--at 4.2] [--times 1,2.5]
                [--fmt 9:16] [--width 270]
@@ -42,6 +44,8 @@ const HELP = `studio <command> <film> [options]
                          deterministic test media (barcode clips, VFR/rotated, HLG, long, subject …) → ~/.cache/pi-motion-studio/fixtures
   ingest <film> <file...> [--id cam] [--fps 30000/1001] [--max 1920] [--audio-stream N] [--no-proxy] [--force]
                          conform footage (CFR, upright, SDR bt709, short GOP) + proxy, audio, peaks, filmstrip, scenes, silence map
+  edit <film> [show | ops '<json array>' | undo | redo | sync | export-edl [f] | import-edl <f> | <op> --k v …] [--base-rev N]
+                         the timeline as data: add trim split delete ripple-delete move reorder speed freeze volume fade xfade crop-keyframe overlay caption-style marker snap
   media <film>           the media bin: sources, kinds, durations, whether the originals are still where they were
   relink <film> [--search dir ...]   find moved originals by size + sha256 and repair the bin (and edit.json)
   cache [gc [--dry] [--fixtures]]   disk use of media/outputs/caches; gc removes temp films, orphan media, interrupted-ingest leftovers
@@ -59,6 +63,12 @@ const rel = (f) => f.startsWith(ROOT) ? f.slice(ROOT.length + 1) : f;
 async function main() {
   switch (cmd) {
     case 'new': {
+      if (argv.includes('--edit')) {
+        const E = await import('./edit-cli.mjs');
+        const dir = E.createEditFilm(key, { title: opt('title', key), fps: opt('fps') && opt('fps') !== true ? String(opt('fps')) : 30, formats: opt('formats') && opt('formats') !== true ? String(opt('formats')).split(',') : ['16:9'] });
+        console.log(`created ${rel(dir)} (edit film)\n  next: studio ingest ${key} <your footage> --id cam   then   studio edit ${key} add --src cam --in 0 --out 10   then   studio look ${key}\n  preview: studio gui`);
+        break;
+      }
       if (!key || !/^[a-z0-9][a-z0-9-]*$/.test(key)) throw new Error('studio new <key>: lowercase letters, digits, dashes');
       const dir = join(FILMS, key);
       if (existsSync(dir)) throw new Error(`films/${key} already exists`);
@@ -256,6 +266,7 @@ async function main() {
       if (argv[1] === 'gc') C.gc({ dry: !!opt('dry'), fixtures: !!opt('fixtures') }); else C.printReport();
       break;
     }
+    case 'edit': { const E = await import('./edit-cli.mjs'); await E.editCommand(key, argv.slice(2)); break; }
     case undefined: case 'help': case '--help': case '-h': console.log(HELP); break;
     default: console.error(`studio: unknown command "${cmd}"\n`); console.error(HELP); process.exit(2);
   }
@@ -263,6 +274,11 @@ async function main() {
 
 async function sound(key) {
   const film = readFilm(key);
+  if (film.cfg.kind === 'edit') { // an edit film's sound is its dialog bus (+ music/sfx when the film has them)
+    const A = await import('./edit-audio.mjs');
+    const d = await A.buildDialog(key, { log: (m) => console.log(m) }), x = await A.mixEdit(key);
+    console.log(`${rel(x.file)}  ${x.lufs} LUFS, true peak ${x.truePeak} dBFS`); void d; return;
+  }
   if (!existsSync(join(film.dir, 'beats.json'))) film.cfg.track ? await measureBeats(key) : gridBeats(key);
   const m = buildMusic(key); if (m.file) console.log(rel(m.file));
   const s = buildSfx(key); console.log(`${rel(s.file)} (${s.cues} cues)`);

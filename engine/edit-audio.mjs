@@ -1,0 +1,102 @@
+// The dialog bus (mission D4): the edit's audio as one sample-accurate stem, composited in Node from each source's audio.wav
+// (48 kHz 16-bit PCM from ingest). Frame boundaries map to sample boundaries with one rounding rule everywhere:
+//   sampleAt(frame) = round(frame * den * 48000 / num)     (NTSC: 1601.6 samples per frame, so lengths are exact to one sample)
+// so a clip that starts at frame n starts at sampleAt(n) and an A/V offset can only come from the encoder, never from here.
+import { closeSync, existsSync, openSync, readSync, rmSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { normalize, writeWav } from './audio.mjs';
+import { clipFrames, grid, timelineFrames } from './lib/edit-ops.mjs';
+import { loadEdit } from './lib/edit-store.mjs';
+import { mediaDir } from './ingest.mjs';
+import { run } from './lib/proc.mjs';
+
+const SR = 48000;
+
+// header of a PCM WAV: finds the data chunk wherever ffmpeg put it (LIST chunks, etc.)
+export function wavInfo(file) {
+  const fd = openSync(file, 'r'), head = Buffer.alloc(4096);
+  try {
+    readSync(fd, head, 0, 4096, 0);
+    if (head.toString('ascii', 0, 4) !== 'RIFF') throw new Error(`${file} is not a WAV`);
+    let o = 12, ch = 0, rate = 0, bits = 0, fmt = 0;
+    while (o + 8 <= head.length) {
+      const id = head.toString('ascii', o, o + 4), size = head.readUInt32LE(o + 4);
+      if (id === 'fmt ') { fmt = head.readUInt16LE(o + 8); ch = head.readUInt16LE(o + 10); rate = head.readUInt32LE(o + 12); bits = head.readUInt16LE(o + 22); }
+      if (id === 'data') return { channels: ch, rate, bits, format: fmt, dataStart: o + 8, bytes: size === 0xffffffff || size === 0 ? null : size };
+      o += 8 + size + (size & 1);
+    }
+    throw new Error(`${file}: no data chunk in the first 4 KB`);
+  } finally { closeSync(fd); }
+}
+
+// samples [a, b) of a 16-bit PCM wav as per-channel Float32Arrays (zeros past the end of the file)
+function readSegment(file, info, a, b) {
+  const n = b - a, ch = info.channels, out = Array.from({ length: ch }, () => new Float32Array(n)), bytes = Buffer.alloc(n * ch * 2);
+  const fd = openSync(file, 'r');
+  try { readSync(fd, bytes, 0, bytes.length, info.dataStart + a * ch * 2); } finally { closeSync(fd); }
+  for (let i = 0; i < n; i++) for (let c = 0; c < ch; c++) out[c][i] = bytes.readInt16LE((i * ch + c) * 2) / 32768;
+  return out;
+}
+
+// pitch-preserving retime of a segment to exactly dst samples (atempo chain; each stage is within 0.5..100)
+async function stretch(chans, dst, tmp) {
+  const ch = chans.length, n = chans[0].length, pcm = Buffer.alloc(n * ch * 2);
+  for (let i = 0; i < n; i++) for (let c = 0; c < ch; c++) pcm.writeInt16LE(Math.max(-32768, Math.min(32767, Math.round(chans[c][i] * 32767))), (i * ch + c) * 2);
+  const inF = `${tmp}.in.raw`, outF = `${tmp}.out.raw`; writeFileSync(inF, pcm);
+  let r = n / dst; const chain = [];
+  while (r < 0.5) { chain.push('atempo=0.5'); r /= 0.5; } while (r > 100) { chain.push('atempo=100'); r /= 100; } chain.push(`atempo=${r.toFixed(8)}`);
+  try {
+    await run('ffmpeg', ['-y', '-v', 'error', '-f', 's16le', '-ar', String(SR), '-ac', String(ch), '-i', inF, '-af', chain.join(','), '-f', 's16le', '-ar', String(SR), '-ac', String(ch), outF]);
+    const buf = (await import('node:fs')).readFileSync(outF), got = Math.floor(buf.length / (ch * 2)), res = Array.from({ length: ch }, () => new Float32Array(dst));
+    for (let i = 0; i < Math.min(got, dst); i++) for (let c = 0; c < ch; c++) res[c][i] = buf.readInt16LE((i * ch + c) * 2) / 32768;
+    return res;
+  } finally { rmSync(inF, { force: true }); rmSync(outF, { force: true }); }
+}
+
+// two clips of one track that are the same continuous speech (no cut between them): no micro-fade at the join
+const continuous = (a, b) => a.src === b.src && a.speed === b.speed && !a.freeze && !b.freeze && a.out === b.in && a.at + 0 <= b.at;
+
+// Build out/dialog.wav. Returns { file, samples, frames, clips }.
+export async function buildDialog(filmKey, { log = () => {} } = {}) {
+  const { film, edit } = loadEdit(filmKey), G = grid(edit), { fps } = G, sampleAt = (f) => Math.round((f * fps.den * SR) / fps.num);
+  const frames = timelineFrames(edit), total = sampleAt(frames), L = new Float32Array(total), R = new Float32Array(total);
+  let placed = 0;
+  for (const track of edit.tracks) {
+    const cs = [...track.clips].sort((a, b) => G.F(a.at) - G.F(b.at));
+    for (let i = 0; i < cs.length; i++) {
+      const c = cs[i], s = edit.sources[c.src];
+      if (c.freeze || !s.has_audio || c.audio?.mute) continue;
+      const wav = join(mediaDir(film, c.src), 'audio.wav');
+      if (!existsSync(wav)) throw new Error(`no audio.wav for source "${c.src}": re-run \`studio ingest ${film.key} <file> --id ${c.src}\``);
+      const info = wavInfo(wav), a0 = sampleAt(G.F(c.in)), a1 = sampleAt(G.F(c.out)), d0 = sampleAt(G.F(c.at)), d1 = sampleAt(G.F(c.at) + clipFrames(edit, c)), dst = d1 - d0;
+      let seg = readSegment(wav, info, a0, a1);
+      if (c.dur !== undefined || a1 - a0 !== dst) seg = await stretch(seg, dst, join(film.out, `.stretch-${c.id}`));
+      const gain = 10 ** ((c.audio?.gain_db ?? 0) / 20), [fi, fo] = c.audio?.fade_ms ?? [8, 8];
+      const prev = cs[i - 1], next = cs[i + 1];
+      const nIn = prev && G.F(prev.at) + clipFrames(edit, prev) === G.F(c.at) && continuous(prev, c) ? 0 : Math.round((fi * SR) / 1000);
+      const nOut = next && G.F(c.at) + clipFrames(edit, c) === G.F(next.at) && continuous(c, next) ? 0 : Math.round((fo * SR) / 1000);
+      const mono = seg.length === 1;
+      for (let k = 0; k < dst; k++) {
+        let g = gain; if (k < nIn) g *= 0.5 - 0.5 * Math.cos((Math.PI * k) / nIn); if (k >= dst - nOut) g *= 0.5 - 0.5 * Math.cos((Math.PI * (dst - 1 - k)) / nOut);
+        L[d0 + k] += seg[0][k] * g; R[d0 + k] += (mono ? seg[0][k] : seg[1][k]) * g;
+      }
+      placed++;
+    }
+  }
+  const file = join(film.out, 'dialog.wav'); writeWav(file, L, R);
+  log(`dialog.wav: ${placed} clips, ${total} samples (${(total / SR).toFixed(3)}s) = ${frames} frames`);
+  return { file, samples: total, frames, clips: placed };
+}
+
+// dialog.wav (+ the synthesized/supplied music bed and sfx when the film has them) -> out/mix.wav at the loudness target
+export async function mixEdit(filmKey, { target } = {}) {
+  const { film } = loadEdit(filmKey), cfg = film.cfg, lufs = target ?? cfg.mix?.lufs ?? -14, pre = join(film.out, '.premix.wav'), file = join(film.out, 'mix.wav');
+  const dialog = join(film.out, 'dialog.wav'), extras = [join(film.out, 'music.wav'), join(film.out, 'sfx.wav')].filter((f) => existsSync(f) && (cfg.music || cfg.track));
+  const inputs = [dialog, ...extras], D = film.fps.den * timelineFramesOf(filmKey) / film.fps.num;
+  await run('ffmpeg', ['-y', '-v', 'error', ...inputs.flatMap((f) => ['-i', f]), '-filter_complex',
+    `${inputs.map((_, i) => `[${i}:a]aresample=${SR}[a${i}]`).join(';')};${inputs.map((_, i) => `[a${i}]`).join('')}amix=inputs=${inputs.length}:normalize=0[m]`, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
+  const l = await normalize(pre, file, lufs);
+  rmSync(pre, { force: true });
+  return { file, ...l, duration: D };
+}
+const timelineFramesOf = (k) => timelineFrames(loadEdit(k).edit);

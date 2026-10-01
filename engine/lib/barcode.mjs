@@ -13,12 +13,15 @@ export const bitsToIndex = (px, off = 0, bits = BARCODE.bits) => { let n = 0; fo
 
 // Barcode of every decoded frame of `file` (ffmpeg decode, autorotate on, no frame duplication).
 // Returns [{ i: decodedIndex, n: barcodeNumber }] in decode order; pass `x`,`y` if the strip is not at 0,0.
-export function readBarcodes(file, { x = 0, y = 0, bits = BARCODE.bits, cell = BARCODE.cell, from, to, lowres = false } = {}) {
+// `scale`: the factor the output was cover-scaled by (cells grew by the same amount).
+// Pick a format whose geometry shows the whole source (landscape source -> 16:9, portrait -> 9:16) or the strip is cropped away.
+export function readBarcodes(file, { x = 0, y = 0, bits = BARCODE.bits, cell = BARCODE.cell, scale = 1, from, to } = {}) {
   const args = ['-v', 'error'];
   if (from !== undefined) args.push('-ss', String(from));
   args.push('-i', file);
   if (to !== undefined) args.push('-t', String(to - (from || 0)));
-  args.push('-fps_mode', 'passthrough', '-vf', `crop=${bits * cell}:${cell}:${x}:${y},scale=${bits}:1:flags=area,format=gray`, '-f', 'rawvideo', '-');
+  const w = Math.round(bits * cell * scale), h = Math.round(cell * scale);
+  args.push('-fps_mode', 'passthrough', '-vf', `crop=${w}:${h}:${Math.round(x * scale)}:${Math.round(y * scale)},scale=${bits}:1:flags=area,format=gray`, '-f', 'rawvideo', '-');
   return new Promise((ok, bad) => {
     const p = spawn('ffmpeg', args), chunks = []; let err = '';
     p.stdout.on('data', (d) => chunks.push(d)); p.stderr.on('data', (d) => (err += d));
