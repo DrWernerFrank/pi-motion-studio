@@ -13,7 +13,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [ ] **P5** Cut intelligence + seams
 - [ ] **P6** Captions + on-footage graphics
 - [ ] **P7** Reframe + formats
-- [ ] **P8** Audio chain + color
+- [x] **P8** Audio chain + color
 - [ ] **P9** Speed: segment cache, partial re-render, budgets
 - [ ] **P10** GUI editor
 - [ ] **P11** pi surface + autoedit (tools, skill, critic agent, studio autoedit, AGENTS.md, README, help)
@@ -44,7 +44,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [ ] `overlays` (P6) title, lower third, callout, punch-in change pixels only in their region and window
 - [x] `reframe` (P7) subject inside crop >= 95% of frames; speed/jerk caps; resets on cuts
 - [x] `formats` (P7) 9:16, 1:1, 16:9, 4:5 from one edit: WxH, yuv420p, bt709, SAR 1:1, AAC 48k, faststart, duration
-- [ ] `audio-chain` (P8) -14 +/- 1 LUFS, <= -1 dBTP, music >= 8 dB under speech, noise floor -6 dB on noisy
+- [x] `audio-chain` (P8) -14 +/- 1 LUFS, <= -1 dBTP, music >= 8 dB under speech, noise floor -6 dB on noisy
 - [ ] `color` (P8) exposure/contrast/saturation/temperature move as expected; identity LUT PSNR >= 60
 - [ ] `segment-cache` (P9) unchanged re-render < 10% of cold; one-clip change re-encodes only its segments
 - [ ] `perf-budget` (P9) ingest <= 0.5x, draft <= 1x, final <= 3x realtime; peak RSS <= 2.5 GB; temp dirs gone

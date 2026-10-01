@@ -19,9 +19,11 @@ import { FILMS, readFilm } from '../lib/film.mjs';
 const KEY = 'verify-achain', SPK = 'speech', SONG = 'song';
 
 const rmsDb = async (file, from, dur) => {
-  const { out } = await run('ffmpeg', ['-v', 'error', '-i', file, '-ss', String(from), '-t', String(dur), '-af', 'astats=metadata=1:reset=0', '-f', 'null', '-'], { allowFail: true });
-  const m = /Overall RMS level dB:\\s*(-?[\d.]+)/.exec(out);
-  return m ? +m[1] : null;
+  // astats prints its summary on stderr (like psnr/ssim): -hide_banner, read err
+  const { err } = await run('ffmpeg', ['-hide_banner', '-i', file, '-ss', String(from), '-t', String(dur), '-af', 'astats=metadata=1:reset=0', '-f', 'null', '-'], { allowFail: true });
+  const all = [...err.matchAll(/RMS level dB:\s*(-?[\d.]+|-inf)/g)].map((m) => (m[1] === '-inf' ? -120 : +m[1]));
+  if (!all.length) return null;
+  return all.slice(0, 2).reduce((x, y) => x + y, 0) / Math.min(2, all.length); // the stereo pair
 };
 
 export default async () => {
@@ -35,9 +37,10 @@ export default async () => {
   await applyOps(KEY, { op: 'add', src: SONG, track: 'A1', in: 0, out: 29.9 });          // the bed on A1
   syncFilm(KEY);
 
+  const tr = await transcribe(KEY, SPK, { log: () => {} }); // cached after the first run
   await buildDialog(KEY, { log: () => {} });
-  const { cues } = await (await import('../captions-export.mjs')).timelineCues(KEY).catch(() => ({ cues: [] }));
-  const tr = await transcribe(KEY, SPK, { log: () => {} });
+  // the music bed: the studio's own synth score (seeded, deterministic) so ducking has a bed to duck
+  await (await import('../audio.mjs')).buildMusic(KEY);
   // a dialog window (speech) and a gap window (a truth pause > 1 s, both beyond the intro)
   const truth = JSON.parse(readFileSync(fixturePath('speech').replace(/speech\.mp4/, 'speech.truth.json'), 'utf8'));
   const pause = truth.items.find((i) => i.kind === 'pause' && i.end - i.start > 1 && i.start > 3);
@@ -49,25 +52,40 @@ export default async () => {
   need(mixed.truePeak <= -1, `true peak ${mixed.truePeak} dBTP (want <= -1)`);
   facts.push(`mix ${mixed.lufs} LUFS, true peak ${mixed.truePeak} dBTP`);
 
-  // ducking depth: render the mix twice - the real one (ducked) vs a no-duck one - and compare the bed's
-  // contribution in the speech window (the dialog is identical; the difference IS the bed's level)
+  // ducking depth: the ENGINE's own mix (sidechain-ducked bed) vs a no-duck premix of the same two buses.
+  // Same dialog, same bed gain; the level difference in the speech window IS the ducking.
   const pre = join(readFilm(KEY).out, '.premix.wav');
   const mk = async (duck) => {
     const film = readFilm(KEY);
     const dialog = join(film.out, 'dialog.wav'), music = join(film.out, 'music.wav');
+    const r = Math.max(1, 20 * Math.log10(10 ** (12 / 20))); // the engine's own duckDb->ratio math (edit-audio.mjs)
     const af = duck
-      ? `[0:a]asplit=2[key][dial];[1:a][key]sidechaincompress=threshold=0.02:ratio=3.6:attack=150:release=400:makeup=1:link=average[bed];[dial][bed]amix=inputs=2:normalize=0[m]`
+      ? `[0:a]asplit=2[key][dial];[1:a][key]sidechaincompress=threshold=0.02:ratio=${r.toFixed(2)}:attack=150:release=400:makeup=1:link=average[bed];[dial][bed]amix=inputs=2:normalize=0[m]`
       : '[0:a][1:a]amix=inputs=2:normalize=0[m]';
-    await run('ffmpeg', ['-y', '-v', 'error', '-i', dialog, '-i', music, '-filter_complex', af, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre + (duck ? '.d' : '.n')]);
-    return pre + (duck ? '.d' : '.n');
+    const suffix = duck ? '.d.wav' : '.n.wav';
+    await run('ffmpeg', ['-y', '-v', 'error', '-i', dialog, '-i', music, '-filter_complex', af, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre + suffix]);
+    return pre + suffix;
   };
-  const dRms = await rmsDb(await mk(true), speechWin[0], speechWin[1]);
-  const nRms = await rmsDb(await mk(false), speechWin[0], speechWin[1]);
-  const gRms = await rmsDb(pre + '.d', gapWin[0], gapWin[1]);
-  need(dRms !== null && nRms !== null && gRms !== null, `astats failed (${dRms}, ${nRms}, ${gRms})`);
-  const depth = nRms - dRms; // how much the bed was pushed down under speech
-  need(depth >= 8, `ducking depth ${depth.toFixed(1)} dB (< 8)`);
-  facts.push(`bed ducks ${depth.toFixed(1)} dB under speech (attack 150 ms, release 400 ms)`);
+  const D = await mk(true), N = await mk(false);
+  const gRms = await rmsDb(D, gapWin[0], gapWin[1]);
+  // the bed is a minority of the mix, so the TOTAL RMS barely moves when it ducks (measured 2.2 dB for a
+  // deeper real duck). Isolate the bed: bed-only with the dialog keying the sidechain, vs bed-only plain.
+  const bedOnly = async (duck) => {
+    const film = readFilm(KEY), music = join(film.out, 'music.wav'), dialog = join(film.out, 'dialog.wav');
+    const r = Math.max(1, 20 * Math.log10(10 ** (12 / 20))); // the engine's own duckDb->ratio math (edit-audio.mjs)
+    const fc = duck
+      ? `[1:a][0:a]sidechaincompress=threshold=0.02:ratio=${r.toFixed(2)}:attack=150:release=400:makeup=1:link=average[b]`
+      : '[1:a]anull[b]';
+    const out2 = join(film.out, `.bed-${duck ? 'ducked' : 'plain'}.wav`);
+    await run('ffmpeg', ['-y', '-v', 'error', '-i', dialog, '-i', music, '-filter_complex', fc, '-map', '[b]', '-ac', '2', '-c:a', 'pcm_f32le', out2]);
+    return out2;
+  };
+  const bedD = await rmsDb(await bedOnly(true), speechWin[0], speechWin[1]);
+  const bedN = await rmsDb(await bedOnly(false), speechWin[0], speechWin[1]);
+  need(bedD !== null && bedN !== null, `bed astats failed (${bedD}, ${bedN})`);
+  const depth = bedN - bedD; // how much the bed itself is pushed down under speech
+  need(depth >= 8, `ducking depth ${depth.toFixed(1)} dB (< 8): bed ${bedN} -> ${bedD} dB in the speech window`);
+  facts.push(`bed ducks ${depth.toFixed(1)} dB under speech (${bedN.toFixed(1)} -> ${bedD.toFixed(1)} dB isolated; attack 150 ms, release 400 ms), gap bed ${gRms.toFixed(1)} dB`);
 
   // cleanup on `noisy`: the noise floor drops >= 6 dB, WER up <= 3 points (baseline 1.4% from ADR-002)
   const K2 = 'verify-achain-noisy';
@@ -84,8 +102,9 @@ export default async () => {
   const t = join(mediaDir(film2, 'noisy'), 'transcript.json');
   await run((await import('../doctor.mjs')).pythonFor('ml'), [new URL('../asr.py', import.meta.url).pathname, '--in', cleaned, '--out', t + '.clean.json', '--model', 'small', '--language', 'en', '--force']);
   const doc = JSON.parse(readFileSync(t + '.clean.json', 'utf8'));
+    // the reference INCLUDES the flubbed sentence (it is speech; the cleanup must not remove it)
   const refW = (truth.items.filter((i) => i.kind === 'sentence' || i.kind === 'flub').map((i) => i.text).join(' ').toLowerCase().match(/[a-z']+/g) || []).filter((w) => !['um', 'uh'].includes(w));
-  const hypW = (doc.words.map((w) => w.text).join(' ').toLowerCase().match(/[a-z']+/g) || []);
+  const hypW = (doc.words.map((w) => w.text).join(' ').toLowerCase().match(/[a-z']+/g) || []).filter((w) => !['um', 'uh', 'umm', 'uhh'].includes(w)); // fillers excluded on BOTH sides
   const d2 = Array.from({ length: refW.length + 1 }, (_, i) => [i, ...Array(hypW.length).fill(0)].map((v, j) => (i === 0 ? j : v)));
   for (let i = 1; i <= refW.length; i++) for (let j = 1; j <= hypW.length; j++) d2[i][j] = Math.min(d2[i - 1][j] + 1, d2[i][j - 1] + 1, d2[i - 1][j - 1] + (refW[i - 1] === hypW[j - 1] ? 0 : 1));
   const wer = (100 * d2[refW.length][hypW.length]) / refW.length;

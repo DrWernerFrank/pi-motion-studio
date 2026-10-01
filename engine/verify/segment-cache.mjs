@@ -8,6 +8,8 @@
 // partial [from,to) render that MIXES cached and freshly encoded parts is frame-exact against the full render
 // (PSNR >= 40 dB, the fidelity bar: parts starting at the window's edge instead of a grid boundary
 // legitimately re-quantize — measured 46-50 dB for identical frames encoded with different part boundaries).
+// Overlays are window inputs as well: a callout's add and its text change each re-encode exactly the segment
+// its window covers, on the draft path too.
 //
 // Equality between two INDEPENDENT encodes (cold vs --no-cache, unchanged vs changed) is exposed to a
 // pre-existing, load-dependent painting nondeterminism in the footage runtime (measured on this machine: a
@@ -39,9 +41,9 @@ const MAX_ARBITRATED = 4; // frames per comparison allowed to be pre-existing pa
 
 const framemd5 = async (mp4, out) => { await run('ffmpeg', ['-y', '-v', 'error', '-i', mp4, '-map', '0:v', '-f', 'framemd5', out]); return readFileSync(out, 'utf8').split('\n').filter((l) => l.startsWith('0,')).map((l) => l.split(',').at(-1)); };
 
-// { '<a>-<b>': { hash, at, mtime } } for every segment sidecar of this render
-const sidecars = (film) => {
-  const dir = join(film.out, '.cache', 'segments', '16x9', 'final'), o = {};
+// { '<a>-<b>': { hash, at, mtime } } for every segment sidecar of one quality's cache
+const sidecars = (film, quality = 'final') => {
+  const dir = join(film.out, '.cache', 'segments', '16x9', quality), o = {};
   if (!existsSync(dir)) return o;
   for (const f of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
     const s = JSON.parse(readFileSync(join(dir, f), 'utf8'));
@@ -205,6 +207,47 @@ export default async () => {
     const db = Number(/average:([\d.]+)/.exec(psnr.err)?.[1] ?? 0);
     need(db >= 40, `partial [1,14)s render vs the full render's frames 30-419: PSNR ${db} dB, wanted >= 40 (a mixed concat is out of order or wrong)`);
     facts.push(`partial [1,14)s render: 390 frames, 1 cached + 2 encoded parts, PSNR ${db.toFixed(1)} dB vs the full render's frames 30-419 (>= 40)`);
+
+    // (6) overlays are window inputs too (a window's hash covers the overlays that overlap it), proven on the
+    //     DRAFT path (300-frame segments: [0,300) [300,600) [600,900)): adding an overlay inside one segment,
+    //     then changing its text, re-encodes exactly that segment and nothing else, and changes pixels only
+    //     inside the overlay's window (within the same lookahead/part-boundary allowance as the trim stage).
+    //     md5s are captured per render: every draft render writes out/draft-16x9.mp4 over the last one.
+    const dmd5 = async (name) => { const [d] = await renderFilm(KEY, { quality: 'draft', fmt: '16:9', workers: WORKERS, log: () => {} }); return framemd5(d.file, join(scratch, name)); };
+    const d0 = await dmd5('d0.md5');
+    need(Object.keys(sidecars(film0(), 'draft')).length === 3, `draft render wrote ${Object.keys(sidecars(film0(), 'draft')).length} segments, wanted 3 (draft segments are 300 frames)`);
+    const atF = 156, durF = 100, DRAFT_N = 300; // the overlay's window [156,256) lives inside draft segment [0,300)
+    await applyOps(KEY, { op: 'overlay', type: 'callout', at: atF / 30, dur: durF / 30, props: { text: 'cache check', x: 0.74, y: 0.36 }, id: 'oC' });
+    syncFilm(KEY);
+    const before6 = sidecars(film0(), 'draft');
+    const d1 = await dmd5('d1.md5');
+    const after6 = sidecars(film0(), 'draft');
+    const re6 = [], reu6 = [];
+    for (const k of Object.keys(after6)) (JSON.stringify(before6[k]) === JSON.stringify(after6[k]) ? reu6 : re6).push(k);
+    need(re6.join(',') === '0-300', `adding an overlay in [156,256) re-encoded [${re6.join(',') || 'nothing'}], wanted exactly 0-300 (overlays are not window inputs!)`);
+    need(reu6.sort().join(',') === '300-600,600-900', `segments outside the overlay's window were not reused unchanged: [${reu6.join(',')}]`);
+    const d6 = d1.map((h, i) => (h === d0[i] ? null : i)).filter((x) => x !== null);
+    need(d6.length > 0, 'the draft render after adding the overlay is framemd5-identical to before (the overlay changed no pixels)');
+    const outside6 = d6.filter((i) => i < atF - LOOKBACK || i >= DRAFT_N);
+    if (outside6.length) {
+      need(outside6.length <= MAX_ARBITRATED, `${outside6.length} frames outside the overlay's window [${atF - LOOKBACK},${DRAFT_N}) differ: [${outside6.slice(0, 8).join(',')}…] — too many for the known painting nondeterminism`);
+      const { stale, wrong } = await arbitrate(film0(), outside6, join(film0().out, 'draft-16x9.mp4'), join(film0().out, 'draft-16x9.mp4'), scratch);
+      need(wrong.length === 0, `overlay-stage frames ${wrong.map((w) => w.i).join(',')} deliver pixels the film never paints nearby (best PSNR ${wrong.map((w) => `${w.i}:${w.a}/${w.b}dB`).join(', ')}): the cache served wrong content`);
+      facts.push(`overlay-stage out-of-window diffs: ${stale.length} frame(s) ${stale.map((s) => s.i).join(',')} arbitrated as the pre-existing painting nondeterminism (${stale.map((s) => `${s.i}:${s.a}/${s.b}dB`).join(', ')})`);
+    }
+    facts.push(`overlays: a callout in [${atF},${atF + durF}) (draft) re-encoded exactly 0-300 (300-600 and 600-900 reused, hashes unchanged); ` +
+      `${d6.length}/${TOTAL} frames changed, all in [${Math.min(...d6)}..${Math.max(...d6)}] ⊆ [${atF - LOOKBACK},${DRAFT_N})`);
+    // an overlay PROPERTY change (same window) must invalidate its segment too
+    const before6b = sidecars(film0(), 'draft');
+    await applyOps(KEY, { op: 'overlay', action: 'update', id: 'oC', props: { text: 'changed text' } });
+    syncFilm(KEY);
+    const d2 = await dmd5('d2.md5');
+    const after6b = sidecars(film0(), 'draft');
+    const re6b = Object.keys(after6b).filter((k) => JSON.stringify(before6b[k]) !== JSON.stringify(after6b[k]));
+    need(re6b.join(',') === '0-300', `changing the overlay's text re-encoded [${re6b.join(',') || 'nothing'}], wanted exactly 0-300 (overlay props are not hashed!)`);
+    const d6b = d2.map((h, i) => (h === d1[i] ? null : i)).filter((x) => x !== null);
+    need(d6b.length > 0, 'the draft render after the text change is framemd5-identical to before (overlay props are not hashed)');
+    facts.push(`the overlay's text change re-encoded 0-300 again (${d6b.length} frames changed); a re-render never comes back identical when pixels changed`);
   } finally {
     for (const f of existsSync(FILMS) ? readdirSync(FILMS) : []) if (f.startsWith('seg-test')) rmSync(join(FILMS, f), { recursive: true, force: true });
   }

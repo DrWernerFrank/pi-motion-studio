@@ -2,6 +2,7 @@
 // (48 kHz 16-bit PCM from ingest). Frame boundaries map to sample boundaries with one rounding rule everywhere:
 //   sampleAt(frame) = round(frame * den * 48000 / num)     (NTSC: 1601.6 samples per frame, so lengths are exact to one sample)
 // so a clip that starts at frame n starts at sampleAt(n) and an A/V offset can only come from the encoder, never from here.
+import { homedir } from 'node:os';
 import { closeSync, existsSync, openSync, readSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { normalize, writeWav } from './audio.mjs';
@@ -12,7 +13,7 @@ import { mediaDir } from './ingest.mjs';
 import { run } from './lib/proc.mjs';
 
 const SR = 48000;
-const CLEAN_RECIPE = 1; // hp 80 Hz, afftdn, gentle compand, alimiter
+const CLEAN_RECIPE = 2; // hp 80 Hz, arnndn (RNNoise model; afftdn fallback), alimiter. Compressor dropped: it cost 1.3 WER points for nothing (D-014)
 
 // Per-source cleanup (D4): high-pass ~80 Hz, afftdn denoise, a gentle compressor, a limiter — cached in the
 // source's media folder (audio-clean.wav), so the mix builds fast on re-runs. Originals untouched.
@@ -25,8 +26,13 @@ export async function cleanAudio(film, id, { log = () => {} } = {}) {
   const key = `clean${CLEAN_RECIPE}:${src.sha256.slice(0, 16)}`;
   if (state.steps?.clean === key && existsSync(out)) return out;
   const part = `${out}.part.wav`;
+  // arnndn with the RNNoise speech model (measured on `noisy`: floor -33.3 -> -51 dB, WER unchanged at 1.4%;
+  // afftdn only reached -4.8 dB). Without the model file, fall back to afftdn and say so in the log.
+  const model = join(homedir(), '.local', 'share', 'pi-motion-studio', 'models', 'rnnoise', 'sh.rnnn');
+  const denoise = existsSync(model) ? `arnndn=m=${model}` : 'afftdn=nr=12:nf=-40';
+  if (!existsSync(model)) log(`clean ${id}: rnnoise model missing -> afftdn fallback (fetch models/rnnoise/sh.rnnn, see THIRD_PARTY.md)`);
   await run('ffmpeg', ['-y', '-v', 'error', '-i', inWav, '-af',
-    'highpass=f=80,afftdn=nr=12:nf=-40,acompressor=threshold=-21dB:ratio=2.5:attack=12:release=180:makeup=2,alimiter=limit=0.9:attack=2:release=36',
+    `highpass=f=80,${denoise},alimiter=limit=0.9:attack=2:release=36`,
     '-ar', String(SR), '-c:a', 'pcm_s16le', part]);
   renameSync(part, out);
   state.steps = { ...(state.steps || {}), clean: key };

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "rev": 13,
+  "fps": "30",
+  "counter": 14,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/real/talking-head-original.webm",
+      "sha256": "f3dd2f87b8dedbc6ea9864af594e2de4fc8a2b5d425f85f834ba7f36c1d04472",
+      "kind": "video",
+      "duration": 53.833333,
+      "frames": 1615,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "cam",
+          "in": 0,
+          "out": 4.466667,
+          "at": 0,
+          "note": "cut 0"
+        },
+        {
+          "id": "c2",
+          "src": "cam",
+          "in": 4.466667,
+          "out": 8.933333,
+          "at": 4.466667,
+          "speed": 0.5,
+          "dur": 8.933333,
+          "note": "cut 1"
+        },
+        {
+          "id": "c3",
+          "src": "cam",
+          "in": 8.933333,
+          "out": 13.4,
+          "at": 13.4,
+          "note": "cut 2"
+        },
+        {
+          "id": "c4",
+          "src": "cam",
+          "in": 13.4,
+          "out": 17.866667,
+          "at": 17.866667,
+          "note": "cut 3"
+        },
+        {
+          "id": "c5",
+          "src": "cam",
+          "in": 17.866667,
+          "out": 22.333333,
+          "at": 22.333333,
+          "note": "cut 4"
+        },
+        {
+          "id": "c6",
+          "src": "cam",
+          "in": 22.333333,
+          "out": 26.8,
+          "at": 26.8,
+          "note": "cut 5"
+        },
+        {
+          "id": "c7",
+          "src": "cam",
+          "in": 26.8,
+          "out": 31.266667,
+          "at": 31.266667,
+          "note": "cut 6"
+        },
+        {
+          "id": "c8",
+          "src": "cam",
+          "in": 31.266667,
+          "out": 35.733333,
+          "at": 35.733333,
+          "note": "cut 7"
+        },
+        {
+          "id": "c9",
+          "src": "cam",
+          "in": 35.733333,
+          "out": 40.2,
+          "at": 40.2,
+          "note": "cut 8"
+        },
+        {
+          "id": "c10",
+          "src": "cam",
+          "in": 40.2,
+          "out": 44.666667,
+          "at": 44.666667,
+          "note": "cut 9"
+        },
+        {
+          "id": "c11",
+          "src": "cam",
+          "in": 44.666667,
+          "out": 49.133333,
+          "at": 49.133333,
+          "note": "cut 10"
+        },
+        {
+          "id": "c12",
+          "src": "cam",
+          "in": 49.133333,
+          "out": 49.533333,
+          "at": 53.6,
+          "note": "cut 11"
+        },
+        {
+          "id": "c14",
+          "src": "cam",
+          "freeze": true,
+          "in": 49.533333,
+          "out": 49.566667,
+          "at": 54,
+          "dur": 1.933333
+        },
+        {
+          "id": "c13",
+          "src": "cam",
+          "in": 49.533333,
+          "out": 53.6,
+          "at": 55.933333,
+          "note": "cut 11"
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}

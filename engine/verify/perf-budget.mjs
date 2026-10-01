@@ -70,6 +70,10 @@ export default async ({ quick = false } = {}) => {
       ingestS = (performance.now() - t) / 1000;
       need(ingestS <= BUDGET.ingest, `ingest+conform of the 20-min fixture took ${ingestS.toFixed(0)}s, budget ${BUDGET.ingest}s (0.5x realtime)`);
       facts.push(`ingest long (20min 1080p30, ${rec.ingest.conform.frames} frames): ${ingestS.toFixed(0)}s = ${(ingestS / REALTIME_LONG).toFixed(2)}x realtime (budget 0.50x)`);
+      // the long film's own cleanliness, checked before it is deleted (the budget's temp-dir clause)
+      need(!existsSync(join(readFilm(KEY_LONG).out, '.parts')), 'films/perf-test-long/out/.parts left behind by the ingest');
+      const longLeft = partLeftovers(join(FILMS, KEY_LONG, 'assets'));
+      need(longLeft.length === 0, `temp files left behind by the ingest: ${longLeft.join(', ')}`);
       rmSync(join(FILMS, KEY_LONG), { recursive: true, force: true }); // the measurement is the point; the film is not needed
     } else facts.push('ingest long: skipped by --quick');
 

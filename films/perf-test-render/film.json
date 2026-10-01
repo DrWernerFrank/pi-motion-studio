@@ -1,0 +1,32 @@
+{
+  "kind": "edit",
+  "title": "perf-test-render",
+  "duration": 60,
+  "fps": 30,
+  "formats": [
+    "16:9"
+  ],
+  "loop": false,
+  "background": "#000000",
+  "motionBlur": 1,
+  "music": {
+    "bpm": 120,
+    "key": "A minor",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "style": "drive",
+    "seed": 7
+  },
+  "mix": {
+    "music": 0.35,
+    "duck_db": -12
+  },
+  "gates": {
+    "maxStill": 4,
+    "maxNoNovelty": 8
+  }
+}

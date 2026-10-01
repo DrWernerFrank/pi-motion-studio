@@ -18,6 +18,7 @@ Everything fetched for the editing pipeline: URL, license, sha256. Nothing here 
 | Piper voice `fa_IR-amir-medium.onnx(.json)` | same repo (fa/fa_IR/amir/medium) | CC0 (model card) | `fb815380d969ea37` |
 | YuNet `face_detection_yunet_2023mar.onnx` | https://github.com/opencv/opencv_zoo (models/face_detection_yunet) | MIT | `8f2383e4dd3cfbb4` |
 | Vazirmatn Regular/Bold woff2 (Persian/Arabic captions) | https://github.com/rastikerdar/vazirmatn v33.003 | SIL Open Font License 1.1 | `e382101336c6eb32` / `836fae7d42d83faa` |
+| RNNoise speech model `sh.rnnn` (arnndn denoise) | https://github.com/GregorR/rnnoise-models (somnolent-hogwash-2018-09-01) | BSD-style, trained-model release (info.txt in the repo) | see `~/.local/share/pi-motion-studio/models/rnnoise/` |
 | faster-whisper `small` (CTranslate2 int8) | https://huggingface.co/Systran/faster-whisper-small, fetched by faster-whisper | MIT | (cached by huggingface_hub) |
 
 ## Python packages (ML venv, user space)

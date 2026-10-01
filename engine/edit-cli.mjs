@@ -22,7 +22,7 @@ export function createEditFilm(key, { title, fps = 30, formats = ['16:9'] } = {}
   if (existsSync(dir)) throw new Error(`films/${key} already exists`);
   mkdirSync(dir, { recursive: true });
   const f = parseFps(fps);
-  writeJson(join(dir, 'film.json'), { kind: 'edit', title: title || key, duration: 1, fps: f.den === 1 ? f.num : f.str, formats, loop: false, background: '#000000', motionBlur: 1, gates: { maxStill: 4, maxNoNovelty: 8 } });
+  writeJson(join(dir, 'film.json'), { kind: 'edit', title: title || key, duration: 1, fps: f.den === 1 ? f.num : f.str, formats, loop: false, background: '#000000', motionBlur: 1, music: { bpm: 120, key: 'A minor', progression: ['i', 'VI', 'III', 'VII'], style: 'drive', seed: 7 }, mix: { music: 0.35, duck_db: -12 }, gates: { maxStill: 4, maxNoNovelty: 8 } });
   for (const x of ['index.html', 'design.json', 'brief.md']) copyFileSync(join(ROOT, 'templates', 'edit', x), join(dir, x));
   writeJson(join(dir, 'beats.json'), { bpm: 0, source: 'none', beats: [], downbeats: [], hits: [] }); // no score yet: music/montage edits replace it
   createEdit(key, { fps: f.str });
