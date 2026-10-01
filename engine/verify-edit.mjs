@@ -49,6 +49,7 @@ export const CHECKS = [
   ['docs', 'P11', 'studio help lists every command; README, AGENTS.md, skill, critic agent exist; THIRD_PARTY.md complete'],
   ['golden-path', 'P11', 'studio autoedit on every preset, unattended; talking-head exports 4 formats; gate PASS', true],
   ['montage', 'P11', 'every cut within 1 frame of a beat; no clip twice; duration = target +/- 1 beat'],
+  ['hardening', 'P12', 'the edge matrix: VFR/rotated/HLG/10-bit/4K/120fps/odd/SAR/interlaced/multi-audio/containers/sub-1s/still/start-offset; loud failures'],
   ['review', 'P13', 'demo reviews.json: >= 3 rounds, last by edit-critic, every score >= 8, sheets exist'],
 ].map(([id, phase, title, slow = false]) => ({ id, phase, title, slow }));
 

@@ -46,6 +46,19 @@ function timelineSpans(edit, G, srcId, sFrom, sTo) {
 const timelineSpan = (edit, G, srcId, a, b) => timelineSpans(edit, G, srcId, a, b)[0] ?? null; // single-piece convenience
 
 const wordsBetween = (words, a, b) => words.filter((w) => w.start >= a - 0.02 && w.end <= b + 0.02);
+
+// A cut edge never sits inside a word (D6). `dir` is the SAFE direction the edge may move: 'lo' (a `from`
+// edge may move earlier, away from the word it approaches) or 'hi' (a `to` edge may move later). An edge never
+// moves toward a word — that would extend the cut into speech.
+function snapEdge(t, words, dir, tol = 0.12) {
+  let best = null;
+  for (const w of words) for (const edge of [w.start - 0.04, w.end + 0.04]) {
+    if (dir === 'lo' && edge > t) continue;   // a `from` edge only moves back, out of the way of the next word
+    if (dir === 'hi' && edge < t) continue;   // a `to` edge only moves forward
+    if (Math.abs(edge - t) <= tol && (best === null || Math.abs(edge - t) < Math.abs(best - t))) best = edge;
+  }
+  return best ?? t;
+}
 const fmtList = (ws) => (ws.length ? ws.map((w) => w.text).join(' ') : '(silence)');
 
 // ── silence: no internal pause longer than max-gap + pad, keeping keep-breath of breath ────────────────────────────────
@@ -69,12 +82,13 @@ export async function cutSilence(filmKey, { src, maxGap = 0.5, keepBreath = 0.15
       if (to - from >= 0.1) stretches.push({ from, to });
     }
     for (const st of stretches) {
-      const keep = Math.min(keepBreath, (st.to - st.from) / 3);
-      const from = st.from, to = st.to - keep;   // keep breath at the end of the empty stretch
+      // snap both edges to word edges (a stretch boundary is already outside words by construction; this
+      // catches envelope-vs-transcript disagreements like a refined start 20 ms inside the clip edge)
+      const from = snapEdge(st.from, words, 'lo'), to = snapEdge(st.to - Math.min(keepBreath, (st.to - st.from) / 3), words, 'hi');
       if (to - from < 0.05) continue;
       const span = timelineSpan(edit, G, id, from, to);
       if (!span) continue;
-      props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `pause ${gap.duration.toFixed(2)}s (max ${maxGap}s), the words around it kept`, removedText: fmtList(wordsBetween(words, from, to)), confidence: gap.duration >= maxGap * 2 ? 0.95 : 0.8, ...span });
+      props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `pause ${gap.duration.toFixed(2)}s (max ${maxGap}s), edges snapped to words`, removedText: fmtList(wordsBetween(words, from, to)), confidence: gap.duration >= maxGap * 2 ? 0.95 : 0.8, ...span });
     }
   }
   return finish(filmKey, props, { apply, kind: 'silence', log });
@@ -95,7 +109,7 @@ export async function cutFillers(filmKey, { src, extra = [], apply = false, log 
     // verified against the audio: a gap (or the clip edges) right after the filler, so the cut lands in quiet
     const gapAfter = sil.gaps.find((g) => g.start < w.end + 0.15 && g.end > w.end - 0.05);
     if (!gapAfter && next && next.start - w.end < 0.12) { props.push({ skipped: true, reason: `no measured gap after "${w.text}" (next word ${Math.round((next.start - w.end) * 1000)} ms later): would click`, at: w.start }); continue; }
-    const from = Math.max(w.start - 0.04, prev ? prev.end + 0.02 : 0), to = Math.min(next ? next.start - 0.02 : w.end + 0.06, (gapAfter ? gapAfter.end - 0.12 : w.end + 0.04));
+    const from = snapEdge(Math.max(w.start - 0.04, prev ? prev.end + 0.02 : 0), doc.words, 'lo'), to = snapEdge(Math.min(next ? next.start - 0.02 : w.end + 0.06, gapAfter ? gapAfter.end - 0.12 : w.end + 0.04), doc.words, 'hi');
     if (to - from < 0.05) continue;
     const span = timelineSpan(edit, G, id, from, to);
     if (span) props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `filler "${w.text}"`, removedText: w.text, confidence: 0.9, ...span });
@@ -125,7 +139,7 @@ export async function cutTakes(filmKey, { src, window: win = 20, apply = false, 
     // a retake: the same opening, the earlier one left unfinished, the later one complete
     const retake = !terminal(a) && terminal(b) && opens(a, b) >= 3;
     if (dup || retake) {
-      const from = Math.max(0, a[0].start - 0.1), to = b[0].start - 0.05; // the first take and the pause before the retake
+      const from = snapEdge(Math.max(0, a[0].start - 0.1), doc.words, 'lo'), to = snapEdge(b[0].start - 0.05, doc.words, 'hi'); // the first take and the pause before the retake (edges off words)
       // earlier cuts may have split the flub region into several clips: one op per piece, later pieces first
       // (their coordinates stay valid while earlier pieces are still untouched)
       const pieces = timelineSpans(edit, G, id, from, to).reverse();

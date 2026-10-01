@@ -737,7 +737,10 @@ function onDown(e) {
   if (!E.edit || e.button !== 0) return;
   const p = pos(e), h = hit(p.x, p.y), g = G(), S = ctx.S;
   try { big.setPointerCapture(e.pointerId); } catch { /* a capture-less drag still works */ }
-  if (h.zone === 'marker') { ctx.pause(); ctx.seek(h.marker.t); return; }
+  if (h.zone === 'marker') {
+    if (e.shiftKey) return mutate([{ op: 'marker', action: 'remove', id: h.marker.id }]);   // shift-click a marker to remove it
+    ctx.pause(); ctx.seek(h.marker.t); return;
+  }
   if (h.zone === 'ruler' || h.zone === 'gutter' || h.zone === 'void' || h.zone === 'lane') {
     if (h.zone === 'lane') { E.sel = null; refreshInspector(); }
     E.drag = { kind: 'scrub' };
@@ -1105,8 +1108,8 @@ function renderTr() {
     const hit = re ? re.test(w.text) : true;
     if (re && hit) hits++;
     const sel = E.trSel && i >= Math.min(E.trSel.a, E.trSel.b) && i <= Math.max(E.trSel.a, E.trSel.b);
-    const title = `timeline ${w.start.toFixed(2)}–${w.end.toFixed(2)}s${w.__clip ? ` · clip ${w.__clip}` : ''} · conf ${(w.confidence ?? 1).toFixed(2)}${isFill ? ' · filler' : ''}`;
-    return `<span class="w${isFill ? ' fill' : ''}${re && !hit ? ' dim2' : ''}${re && hit ? ' hit' : ''}${sel ? ' sel' : ''}" data-i="${i}" title="${ctx.esc(title)}">${ctx.esc(w.text)}</span> `;
+    const title = `timeline ${w.start.toFixed(2)}–${w.end.toFixed(2)}s${w.__clip ? ` · clip ${w.__clip}` : ''} · conf ${(w.confidence ?? 1).toFixed(2)}${isFill ? ' · filler' : ''}${w.partial ? ' · partially cut at a clip edge' : ''}`;
+    return `<span class="w${isFill ? ' fill' : ''}${w.partial ? ' part' : ''}${re && !hit ? ' dim2' : ''}${re && hit ? ' hit' : ''}${sel ? ' sel' : ''}" data-i="${i}" title="${ctx.esc(title)}">${ctx.esc(w.text)}</span> `;
   }).join('');
   const selN = E.trSel ? Math.abs(E.trSel.b - E.trSel.a) + 1 : 0;
   const selS = E.trSel ? (() => { const ws = words.slice(Math.min(E.trSel.a, E.trSel.b), Math.max(E.trSel.a, E.trSel.b) + 1); return ws.length ? (ws.at(-1).end - ws[0].start) : 0; })() : 0;

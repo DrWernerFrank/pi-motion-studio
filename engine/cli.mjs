@@ -44,6 +44,14 @@ const HELP = `studio <command> <film> [options]
                          deterministic test media (barcode clips, VFR/rotated, HLG, long, subject …) → ~/.cache/pi-motion-studio/fixtures
   ingest <film> <file...> [--id cam] [--fps 30000/1001] [--max 1920] [--audio-stream N] [--no-proxy] [--force]
                          conform footage (CFR, upright, SDR bt709, short GOP) + proxy, audio, peaks, filmstrip, scenes, silence map
+  transcribe <film> <src-id> [--model small] [--language auto] [--force]
+                         word-level transcript of an ingested source (local faster-whisper, cached, refined)
+  transcript <film> <src-id> [--from 10 --to 40] [--grep um] [--format compact|words|srt]
+                         read the transcript back in ranges/greps an agent can use
+  cut <film> <silence|fillers|takes|idle|tighten> [--src cam] [--max-gap 0.5] [--apply] [--target 45]
+                         measured cut proposals with the removed text (dry run; --apply goes through edit-ops)
+  captions <film> [--format srt|vtt]
+                         caption export (.srt/.vtt) from the same chunks the screen shows
   edit <film> [show | ops '<json array>' | undo | redo | sync | export-edl [f] | import-edl <f> | <op> --k v …] [--base-rev N]
                          the timeline as data: add trim split delete ripple-delete move reorder speed freeze volume fade xfade crop-keyframe overlay caption-style marker snap
   autoedit <film> --preset talking-head|screen|audiogram|montage [--src <file>…] [--id cam] [--target 60] [--final]
