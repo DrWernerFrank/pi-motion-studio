@@ -26,24 +26,38 @@ const truthOf = (film, id) => { const t = join(mediaDir(film, id), 'transcript.j
 
 // Map a source-time span onto the timeline. Earlier cuts may have split the source into several clips, so one
 // span can come back as several pieces (ordered); empty array = none of it is on the timeline any more.
-function timelineSpans(edit, G, srcId, sFrom, sTo) {
-  const pieces = [], fpsV = G.fps.num / G.fps.den;
+// `words` (optional): transcript words in SOURCE time, fencing the frame rounding (D6). Math.round can move
+// an edge half a frame; if that lands it inside a word's [start-0.02, end+0.02] the edge is stepped one
+// frame AWAY from the word — a `from` edge later, a `to` edge earlier — so a cut only ever shrinks around
+// speech, never into it (the word keeps its attack and tail off the splice).
+function timelineSpans(edit, G, srcId, sFrom, sTo, words = null) {
+  const pieces = [], fpsV = G.fps.num / G.fps.den, PAD = 0.02;
   for (const t of edit.tracks) {
     if (t.kind !== 'video') continue;
     for (const c of [...t.clips].sort((a, b) => G.F(a.at) - G.F(b.at))) {
       if (c.src !== srcId || c.freeze) continue;
       const k = c.dur !== undefined ? (G.F(c.out) - G.F(c.in)) / clipFrames(edit, c) : 1; // source frames per timeline frame
-      const atF = G.F(c.at);
+      const atF = G.F(c.at), endF = atF + clipFrames(edit, c);
       const sA = Math.max(sFrom, c.in), sB = Math.min(sTo, c.out); // the part of the span inside this clip
       if (sB - sA < 1e-9) continue;
-      const a = atF + Math.round(((sA - c.in) * fpsV) / k), b = atF + Math.round(((sB - c.in) * fpsV) / k);
-      const endF = atF + clipFrames(edit, c);
+      let a = atF + Math.round(((sA - c.in) * fpsV) / k), b = atF + Math.round(((sB - c.in) * fpsV) / k);
+      if (words) { // padded word zones, in this clip's timeline frames
+        const zones = words.filter((w) => w.end + PAD > c.in && w.start - PAD < c.out)
+          .map((w) => [atF + ((Math.max(w.start - PAD, c.in) - c.in) * fpsV) / k, atF + ((Math.min(w.end + PAD, c.out) - c.in) * fpsV) / k]);
+        for (let moved = true; moved && b > a;) { // an edge inside a zone steps out of it, away from its word
+          moved = false;
+          for (const [zA, zB] of zones) {
+            if (a > zA + 1e-6 && a < zB - 1e-6) { a = Math.ceil(zB - 1e-6); moved = true; }   // `from`: leave the word behind
+            if (b > zA + 1e-6 && b < zB - 1e-6) { b = Math.floor(zA + 1e-6); moved = true; } // `to`: back off before the word
+          }
+        }
+      }
       if (a >= atF && b <= endF && b > a) pieces.push({ from: G.S(a), to: G.S(b), frames: b - a });
     }
   }
   return pieces;
 }
-const timelineSpan = (edit, G, srcId, a, b) => timelineSpans(edit, G, srcId, a, b)[0] ?? null; // single-piece convenience
+const timelineSpan = (edit, G, srcId, a, b, words = null) => timelineSpans(edit, G, srcId, a, b, words)[0] ?? null; // single-piece convenience
 
 const wordsBetween = (words, a, b) => words.filter((w) => w.start >= a - 0.02 && w.end <= b + 0.02);
 
@@ -86,7 +100,7 @@ export async function cutSilence(filmKey, { src, maxGap = 0.5, keepBreath = 0.15
       // catches envelope-vs-transcript disagreements like a refined start 20 ms inside the clip edge)
       const from = snapEdge(st.from, words, 'lo'), to = snapEdge(st.to - Math.min(keepBreath, (st.to - st.from) / 3), words, 'hi');
       if (to - from < 0.05) continue;
-      const span = timelineSpan(edit, G, id, from, to);
+      const span = timelineSpan(edit, G, id, from, to, words); // words fence the rounding: an edge never lands in a word
       if (!span) continue;
       props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `pause ${gap.duration.toFixed(2)}s (max ${maxGap}s), edges snapped to words`, removedText: fmtList(wordsBetween(words, from, to)), confidence: gap.duration >= maxGap * 2 ? 0.95 : 0.8, ...span });
     }
@@ -111,7 +125,7 @@ export async function cutFillers(filmKey, { src, extra = [], apply = false, log 
     if (!gapAfter && next && next.start - w.end < 0.12) { props.push({ skipped: true, reason: `no measured gap after "${w.text}" (next word ${Math.round((next.start - w.end) * 1000)} ms later): would click`, at: w.start }); continue; }
     const from = snapEdge(Math.max(w.start - 0.04, prev ? prev.end + 0.02 : 0), doc.words, 'lo'), to = snapEdge(Math.min(next ? next.start - 0.02 : w.end + 0.06, gapAfter ? gapAfter.end - 0.12 : w.end + 0.04), doc.words, 'hi');
     if (to - from < 0.05) continue;
-    const span = timelineSpan(edit, G, id, from, to);
+    const span = timelineSpan(edit, G, id, from, to, doc.words); // words fence the rounding: an edge never lands in a word
     if (span) props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `filler "${w.text}"`, removedText: w.text, confidence: 0.9, ...span });
   }
   return finish(filmKey, props, { apply, kind: 'fillers', log });
@@ -142,7 +156,7 @@ export async function cutTakes(filmKey, { src, window: win = 20, apply = false, 
       const from = snapEdge(Math.max(0, a[0].start - 0.1), doc.words, 'lo'), to = snapEdge(b[0].start - 0.05, doc.words, 'hi'); // the first take and the pause before the retake (edges off words)
       // earlier cuts may have split the flub region into several clips: one op per piece, later pieces first
       // (their coordinates stay valid while earlier pieces are still untouched)
-      const pieces = timelineSpans(edit, G, id, from, to).reverse();
+      const pieces = timelineSpans(edit, G, id, from, to, doc.words).reverse(); // words fence the rounding: an edge never lands in a word
       for (const span of pieces) props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: retake ? `abandoned take (same opening "${a.slice(0, 3).map((w) => w.text).join(' ')} …", the retake is complete)` : `duplicate take (kept the later, complete one)`, removedText: a.map((w) => w.text).join(' '), confidence: retake ? 0.85 : 0.9, ...span });
       if (pieces.length) { i = j; break; } // a take only pairs once
     }
@@ -155,14 +169,25 @@ export async function cutIdle(filmKey, { src, maxIdle = 1.0, speedUp = false, sp
   const { film, edit } = loadEdit(filmKey), G = grid(edit);
   const id = src ?? firstSource(edit, 'video'); if (!id) return { proposals: [], note: 'no video clips' };
   // frame-difference scan on the proxy (freezedetect with a strict noise floor: -75 dB caught typing at the fixture build)
-  const proxy = join(mediaDir(film, id), 'proxy.mp4');
+  // idleness is measured on the CONFORMED file: the proxy's extra encode generation adds noise that keeps
+  // freezedetect's diff meter above -75 dB through true idle stretches (measured: proxy reports 3.9-8.33 where the
+  // conformed correctly reports 3.9-10).
+  const proxy = join(mediaDir(film, id), 'conformed.mp4');
   const { err } = await run('ffmpeg', ['-nostdin', '-v', 'info', '-i', proxy, '-vf', `freezedetect=n=-75dB:d=${Math.max(0.4, maxIdle / 3)}s`, '-an', '-f', 'null', '-'], { allowFail: true });
-  const frozen = [...err.matchAll(/freeze_start:([\d.]+)\s*\n\s*freeze_end:([\d.]+|\N*)/g)].map((m) => ({ start: +m[1], end: m[2] ? +m[2] : Infinity })).filter((f) => f.end - f.start >= maxIdle);
+  // pair starts/ends sequentially (an unterminated trailing freeze runs to the end of the media)
+  const events = [...err.matchAll(/lavfi\.freezedetect\.freeze_(start|end):\s*(-?[\d.]+)/g)].map((m) => ({ k: m[1], t: +m[2] })); // full key + the space before the number
+  const dur = (await import('./lib/film.mjs')).readJson(join(mediaDir(film, id), 'media.json')).source.container_duration ?? 30;
+  const frozen = [];
+  for (const e of events) {
+    if (e.k === 'start') frozen.push({ start: e.t, end: dur });
+    else if (frozen.length && frozen.at(-1).end === dur) frozen.at(-1).end = e.t;   // closes the open freeze
+  }
+  const spans = frozen.filter((f) => f.end - f.start >= maxIdle);
   const props = [];
-  for (const f of frozen) {
+  for (const f of spans) {
     const from = f.start, to = Math.min(f.end, timelineSeconds(edit));
     const span = timelineSpan(edit, G, id, from, to);
-    if (!span) continue;
+    if (!span || span.frames < 15) continue; // >= 0.5 s: slivers are detection noise, not idle
     if (speedUp) props.push({ op: 'speed', id: clipAt(edit, span.from)?.id, speed, reason: `idle ${((to - from)).toFixed(1)}s sped up x${speed}`, removedText: '(idle stretch kept, faster)', confidence: 0.8, span });
     else props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `frozen ${(to - from).toFixed(1)}s (max ${maxIdle}s)`, removedText: '(nothing happening)', confidence: 0.9, ...span });
   }
@@ -182,7 +207,7 @@ export async function tighten(filmKey, { target, apply = false, log = () => {} }
     const save = Math.min(gap.duration - 0.2, need); // leave 0.2 s of the pause
     if (save < 0.1) break;
     const from = gap.start + 0.05, to = from + save;
-    const span = timelineSpan(edit, G, id, from, to);
+    const span = timelineSpan(edit, G, id, from, to, words); // words fence the rounding: an edge never lands in a word
     if (span) { props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `tighten: trim ${save.toFixed(2)}s of a ${gap.duration.toFixed(2)}s pause`, removedText: fmtList(wordsBetween(words, from, to)), confidence: 0.7, ...span }); need -= span.to - span.from; }
   }
   return finish(filmKey, props, { apply, kind: 'tighten', log });
@@ -196,7 +221,10 @@ const jaccard = (a, b) => { const A = new Set(a.split(' ')), B = new Set(b.split
 function finish(filmKey, props, { apply, kind, log }) {
   const actionable = props.filter((p) => !p.skipped);
   if (apply && actionable.length) {
-    applyOps(filmKey, actionable.map(({ op, ...p }) => ({ op, ...p })), { who: `cut:${kind}` });
+    // LATEST-FIRST: each ripple-delete shifts later material, so applying from the end keeps earlier
+    // coordinates valid. (A batch's coordinates are computed against the edit the proposals were measured on.)
+    const ordered = [...actionable].sort((x, y) => y.from - x.from);
+    applyOps(filmKey, ordered.map(({ op, ...p }) => ({ op, ...p })), { who: `cut:${kind}` });
     const sync = (async () => (await import('./lib/edit-store.mjs')).syncFilm(filmKey))();
     void sync;
     log(`cut ${kind}: applied ${actionable.length} proposals`);

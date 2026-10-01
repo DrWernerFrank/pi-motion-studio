@@ -103,7 +103,14 @@ function play() {
   if (audio.src) { audio.currentTime = S.t; audio.play().catch(() => {}); }
   requestAnimationFrame(tick);
 }
-function pause() { if (EDIT.handles(S)) EDIT.pause(); S.playing = false; $('#play').textContent = '▶'; audio.pause(); video.pause(); }
+function pause() {
+  if (EDIT.handles(S)) EDIT.pause();
+  S.playing = false; $('#play').textContent = '▶';
+  // pausing an element that is already paused would still CANCEL its in-flight preload request
+  // (an ERR_ABORTED in the request log), so only pause the ones that are actually playing.
+  if (!audio.paused) audio.pause();
+  if (!video.paused) video.pause();
+}
 function tick(now) {
   if (!S.playing || S.view !== 'live') return;
   const D = S.d.cfg.duration;

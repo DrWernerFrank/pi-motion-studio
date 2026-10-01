@@ -272,15 +272,24 @@ const server = createServer(async (req, res) => {
       }
       return json(res, 200, { key: film.key, edit, rev: edit.rev, editMtime: mtime(join(film.dir, 'edit.json')),
         history: historyDepth(key), sources,
+        ops: OP_NAMES,   // what THIS engine build can do: the editor shows/hides affordances accordingly (e.g. a clip-note op)
         cfg: { title: film.cfg.title, fps: film.cfg.fps, duration: film.cfg.duration, formats: film.cfg.formats } });
     }
+    // Peaks and transcripts are OPTIONAL per-source ingest products: a source without audio has no
+    // peaks, one without speech has no transcript, and a stale edit can name a source the bin lost.
+    // Missing = a first-class empty state (the film page treats its own optional fetches the same way,
+    // see film.mjs), so these answer 200 with an empty document instead of 404: the editor then draws
+    // no waveform / shows the transcribe affordance, and no legitimate state logs a failed request.
+    // Malformed ids (traversal, absolute, dotfile) still answer 400.
     if ((p === '/api/peaks' || p === '/api/transcript') && req.method === 'GET') {
       const key = editId(url.searchParams.get('film')), src = String(url.searchParams.get('src') ?? '');
       if (!key) return json(res, 404, { error: 'no such edit film (films/<key>/edit.json)' });
       if (!ID_RE.test(src)) return json(res, 400, { error: 'src: a source id from the media bin' });
       const file = join(FILMS, key, 'assets', 'media', src, p === '/api/peaks' ? 'peaks.json' : 'transcript.json');
-      if (!existsSync(file)) return json(res, 404, { error: `no ${p === '/api/peaks' ? 'peaks.json' : `transcript.json`} for "${src}"${p === '/api/transcript' ? ` — transcribe it first` : ''}` });
-      return sendFile(req, res, file);
+      if (existsSync(file)) return sendFile(req, res, file);
+      return json(res, 200, p === '/api/peaks'
+        ? { rate: 100, scale: 127, channels: 1, buckets: 0, data: [], src }       // no peaks: nothing to draw
+        : { version: 1, language: null, words: [], transcribed: false, src });   // no transcript yet: the pane offers to transcribe
     }
     if (p === '/api/edit-ops' && req.method === 'POST') {
       const key = editId(url.searchParams.get('film'));

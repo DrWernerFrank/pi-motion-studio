@@ -178,3 +178,7 @@ svg.chart { width: 100%; height: 150px; display: block; }
 .w.sel { background: #ff4d5e26; color: #ff8d99; text-decoration: line-through; }
 .w.hit { outline: 1px solid var(--accent); }
 .w.part { opacity: .55; border-bottom: 1px dotted #6b6b75; }
+
+/* transcript empty state (an affordance, not an error) */
+.trEmpty { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; padding: 10px 12px; background: var(--bg3); border: 1px dashed var(--line); border-radius: 8px; }
+.trEmpty p { margin: 0; }

@@ -135,7 +135,7 @@ export function setFilm(S, d) {
   if (!d || !d.edit) return unmount(S);
   if (E.key !== d.key) {
     Object.assign(E, { key: d.key, edit: null, rev: -1, editMtime: 0, sources: {}, loadedOnce: false, sel: null, io: null, drag: null,
-      peaks: {}, imgs: {}, tr: null, trSrc: null, trSel: null, trSig: '', cuts: null, zoom: 60, scroll: 0, playing: false, rate: 0,
+      peaks: {}, imgs: {}, tr: null, trSrc: null, trSel: null, trSig: '', cuts: null, zoom: 60, scroll: 0, playing: false, rate: 0, opNames: [],
       _fitted: false, _ssig: null, hoverSig: null, dropX: null, binDrag: null });
   }
   mount(S);
@@ -168,7 +168,8 @@ async function load() {
   const ssig = JSON.stringify(Object.entries(r.sources || {}).map(([id, s]) => [id, s.kind, s.duration, s.has_transcript, s.original_here]));
   if (r.rev !== E.rev || ssig !== E._ssig) {
     const had = E.loadedOnce;
-    Object.assign(E, { edit: r.edit, rev: r.rev, editMtime: r.editMtime, sources: r.sources || {}, history: r.history || E.history, _ssig: ssig, loadedOnce: true });
+    Object.assign(E, { edit: r.edit, rev: r.rev, editMtime: r.editMtime, sources: r.sources || {}, history: r.history || E.history, _ssig: ssig, loadedOnce: true,
+      opNames: r.ops || E.opNames || [] });
     if (E.sel && !findClip(E.sel)) E.sel = null;                      // selection survives only if the clip does
     if (E.tr && !E.tr.missing) retimeTranscript();
     if (had) ctx.reloadPreview();                                     // the film page reads edit.json at setup: reload it
@@ -180,7 +181,7 @@ async function load() {
     if (el('#tabBody').__editRoot === E.key) refreshPanel();
     else if (ctx.S.tab === 'edit') renderTab(ctx.S, el('#tabBody'));
   } else E.history = r.history || E.history;
-  draw(); updateTools();
+  refresh();
   return r;
 }
 
@@ -189,7 +190,7 @@ function adopt(r) {   // a mutation of ours came back: swap in the new edit, kee
   E.edit = r.edit; E.rev = r.rev; E.history = r.history || E.history; E.editMtime = Date.now();   // the edit is now newer than any mix
   if (E.sel && !findClip(E.sel)) E.sel = null;
   if (E.tr && !E.tr.missing) retimeTranscript();
-  draw(); updateTools();
+  refresh();
   ctx.reloadPreview();
   refreshPanel();
 }
@@ -259,7 +260,7 @@ export function play() {
 export function pause() {
   E.playing = false; E.rate = 0; ctx.S.playing = false; el('#play').textContent = '▶';
   cancelAnimationFrame(E.raf); E.raf = 0;
-  try { ctx.audio.pause(); } catch {}
+  if (!ctx.audio.paused) { try { ctx.audio.pause(); } catch {} }   // pausing a paused element would cancel its preload (ERR_ABORTED)
   if (E.edit) ctx.seek(ctx.S.t);
 }
 function loop(now) {
@@ -278,7 +279,7 @@ function showT(t) {   // editor-local time set: tc + both canvases + a throttled
   const S = ctx.S;
   S.t = clamp(t, 0, S.d.cfg.duration || dur());
   el('#tc').textContent = S.t.toFixed(2) + 's';
-  draw();
+  refresh();
   const now = performance.now();
   if (now - E.lastPost >= 60 && S.frameReady) { E.lastPost = now; try { ctx.iframe.contentWindow.postMessage({ seek: S.t }, '*'); } catch {} }
 }
@@ -652,8 +653,11 @@ function drawDropGhost(c, H) {
   c.restore();
 }
 
-// ── the minimap (the transport bar's small canvas, app.js delegates here) ─────────────────────
-export function drawTimeline(S) {
+// ── the minimap (the transport bar's small canvas, app.js delegates here) ─────────────────────────
+// Every path that changes time ends in refresh(): BOTH canvases + the dock timecode move together,
+// whether the change came from here (playback, drags) or from app.js (word click, arrows, SSE reload).
+function refresh() { draw(); drawMini(ctx.S); }
+function drawMini(S) {
   const t = el('#timeline'); if (!t) return;
   const dpr = devicePixelRatio || 1, W = t.clientWidth, H = 64;
   if (t.width !== W * dpr) { t.width = W * dpr; t.height = H * dpr; }
@@ -682,6 +686,8 @@ export function drawTimeline(S) {
   // playhead
   c.fillStyle = '#fff'; c.fillRect(S.t * k - 1, 0, 2, H);
 }
+// app.js calls this on every seek (its own transport, notes, reviews…): the minimap AND the big canvas.
+export function drawTimeline(S) { drawMini(S); draw(); }
 
 export function miniDown(e) {
   const t = el('#timeline'), r = t.getBoundingClientRect(), S = ctx.S;
@@ -867,7 +873,8 @@ function fetchPeaks(src) {
   E.peaks[src] = null;                                       // mark in flight
   fetch(`/api/peaks?film=${E.key}&src=${src}`, { cache: 'no-store' })
     .then((r) => (r.ok ? r.json() : null))
-    .then((p) => { E.peaks[src] = p && p.data ? { rate: p.rate || 100, scale: p.scale || 127, data: p.data } : null; draw(); });
+    // an empty peaks document (a 200: audio-less source, or a stale bin entry) is simply "no waveform"
+    .then((p) => { E.peaks[src] = p && Array.isArray(p.data) && p.data.length ? { rate: p.rate || 100, scale: p.scale || 127, data: p.data } : null; draw(); });
   return null;
 }
 function fetchImg(src) {
@@ -967,6 +974,9 @@ function renderInspector() {
   const c = E.sel && E.edit ? findClip(E.sel) : null;
   if (!c) { host.innerHTML = '<p class="dim">Select a clip on the timeline. Trim its edges, drag it, S splits at the playhead, Del ripple-deletes.</p>'; return; }
   const col = { ...COLOR_DEFAULTS, ...(c.color || {}) };
+  // The clip note: edit-ops has no op that changes it after `add` (engine gap, reported) — this build's
+  // op list comes from the server, so the field flips to editable the moment a `note` op lands there.
+  const noteOp = (E.opNames || []).includes('note');
   const num = (k, v, attrs = '') => `<input data-k="${k}" type="number" step="any" ${attrs} value="${v}">`;
   host.innerHTML = `
     <div class="insp">
@@ -980,7 +990,9 @@ function renderInspector() {
       <label>contrast</label>${num('contrast', col.contrast, 'min="0.5" max="2" step="0.05"')}
       <label>saturation</label>${num('saturation', col.saturation, 'min="0" max="2" step="0.05"')}
       <label>temperature</label>${num('temperature', col.temperature, 'min="-1" max="1" step="0.05"')}
-      <label>note</label><input data-k="note" value="${ctx.esc(c.note ?? '')}" readonly title="read-only: edit-ops has no op that changes a clip's note after add (engine gap, reported)">
+      <label>note</label><input data-k="note" value="${ctx.esc(c.note ?? '')}" ${noteOp
+        ? 'placeholder="why this clip is here"'
+        : `readonly title="read-only in this build: no op changes a clip note after add (engine gap, reported) — editable automatically once edit-ops ships a note op"`}>
     </div>
     <div class="inspBtns">
       <button class="primary" id="inspSave">Save (one ops batch)</button>
@@ -1000,6 +1012,10 @@ function renderInspector() {
     let cdirty = false;
     for (const k of Object.keys(COLOR_DEFAULTS)) if (v(k) !== col[k]) { color[k] = v(k); cdirty = true; }
     if (cdirty) ops.push({ op: 'color', id: c.id, ...color });
+    if (noteOp) {   // rides the same batch the moment the engine has the op (assumed shape: { op:'note', id, note })
+      const note = host.querySelector('[data-k="note"]').value;
+      if (note !== (c.note ?? '')) ops.push({ op: 'note', id: c.id, note });
+    }
     if (!ops.length) return msg('nothing changed');
     el('#inspSave').blur();
     const r = await mutate(ops);
@@ -1069,7 +1085,11 @@ async function loadTranscript(src) {
   if (!E.trSrc) return;
   const r = await fetch(`/api/transcript?film=${E.key}&src=${E.trSrc}`, { cache: 'no-store' }).then((x) => (x.ok ? x.json() : null)).catch(() => null);
   if (E.key !== ctx.S.key) return;
-  E.tr = r && !r.error ? { src: E.trSrc, language: r.language, words: r.words || [], mapped: [] } : { src: E.trSrc, missing: true, error: r?.error || 'no transcript' };
+  // A missing transcript is a 200 empty state from the server ({ words: [], transcribed: false }), never a 404:
+  // the pane shows the transcribe affordance instead of an error. A real transcript has words and no flag.
+  const present = !!(r && !r.error && r.transcribed !== false && Array.isArray(r.words));
+  E.tr = present ? { src: E.trSrc, language: r.language, words: r.words, mapped: [] }
+    : { src: E.trSrc, missing: true, empty: !!(r && !r.error), error: r?.error || null };
   retimeTranscript();
 }
 function retimeTranscript() {   // source word times -> timeline times, through the SAME retimer the captions use
@@ -1088,13 +1108,15 @@ function renderTr() {
   const tr = E.tr;
   if (!tr) { host.innerHTML = '<p class="dim">loading transcript…</p>'; return; }
   if (tr.missing) {
-    host.innerHTML = `<div class="trHead"><select id="trSrc">${cands.map((id) => `<option ${id === tr.src ? 'selected' : ''}>${id}</option>`).join('')}</select><span class="dim">${ctx.esc(tr.error)}</span></div>
-      <button id="trDo" class="binTrans2">transcribe ${ctx.esc(tr.src)} (local ASR)</button>`;
+    // the empty state is an affordance, not an error: nothing to read yet, so offer to make it
+    const why = tr.empty ? 'no transcript yet — transcribe it (local ASR, cached by media hash) to cut by words and flag fillers' : (tr.error || 'no transcript');
+    host.innerHTML = `<div class="trHead"><select id="trSrc">${cands.map((id) => `<option ${id === tr.src ? 'selected' : ''}>${id}</option>`).join('')}</select><span class="dim">${ctx.esc(tr.src)}</span></div>
+      <div class="trEmpty"><p class="dim">${ctx.esc(why)}</p><button id="trDo" class="primary">✎ transcribe ${ctx.esc(tr.src)}</button></div>`;
     host.querySelector('#trSrc').onchange = (e) => loadTranscript(e.target.value);
     host.querySelector('#trDo').onclick = async (e) => {
       e.target.disabled = true; e.target.textContent = 'transcribing…';
       try { const r = await ctx.post(`/api/edit-transcribe?film=${E.key}`, { src: tr.src }); msg(`transcribed ${r.words} words (${r.language})`, true); await load(); await loadTranscript(tr.src); }
-      catch (err) { fail(err); e.target.disabled = false; e.target.textContent = 'transcribe'; }
+      catch (err) { fail(err); e.target.disabled = false; e.target.textContent = '✎ transcribe ' + tr.src; }
     };
     return;
   }

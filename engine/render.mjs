@@ -41,11 +41,23 @@ export async function renderFilm(key, opts = {}) {
         const pct = Math.floor((100 * ++done) / frames);
         if (pct !== lastPct && pct % 10 === 0) { lastPct = pct; log(`[${fmt}] ${pct}%  (${done}/${frames} frames)`); }
       };
+      // a whole-output 3D LUT (edit.color.lut), resolved once here: encodePart appends it to the filter chain
+      let lut = '';
+      if (film.cfg.kind === 'edit') {
+        const { readJson } = await import('./lib/film.mjs');
+        const edit = readJson(join(film.dir, 'edit.json'));
+        if (edit?.color?.lut) {
+          const { safePath } = await import('./lib/serve.mjs');
+          const full = safePath(edit.color.lut.replace(/^\//, ''));
+          if (!full || !existsSync(full)) throw new Error(`edit.color.lut "${edit.color.lut}" does not resolve inside the repo`);
+          lut = `,lut3d=file='${full}':interp=nearest`;
+        }
+      }
       await Promise.all(Array.from({ length: n }, async (_, w) => {
         const a = w * chunk, b = Math.min(frames, a + chunk);
         if (a >= b) return;
         const page = await studio.page(film, fmt, q.scale);
-        await encodePart(page, join(partsDir, `part-${String(w).padStart(2, '0')}.mp4`), { a, b, FPS, SUB, from, q, tick });
+        await encodePart(page, join(partsDir, `part-${String(w).padStart(2, '0')}.mp4`), { a, b, FPS, SUB, from, q, tick, lut });
         await page.close();
       }));
       if (studio.errors.length) throw new Error('film threw while rendering:\n' + studio.errors.slice(0, 5).join('\n'));
@@ -76,21 +88,9 @@ export async function renderFilm(key, opts = {}) {
   return results;
 }
 
-async function encodePart(page, file, { a, b, FPS, SUB, from, q, tick }) {
+async function encodePart(page, file, { a, b, FPS, SUB, from, q, tick, lut = '' }) {
   // setparams: the scale filter only tags the matrix; the encoder takes primaries/transfer/range from the frames, not from the -color_* flags
   const bt709 = 'scale=out_color_matrix=bt709:out_range=tv,setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv';
-  // a whole-output 3D LUT (edit.color.lut): applied at encode. The file must live inside the repo (safePath).
-  let lut = '';
-  if (film.cfg.kind === 'edit') {
-    const { readJson } = await import('./lib/film.mjs');
-    const edit = readJson(join(film.dir, 'edit.json'));
-    if (edit?.color?.lut) {
-      const { safePath } = await import('./lib/serve.mjs');
-      const full = safePath(edit.color.lut.replace(/^\//, ''));
-      if (!full || !existsSync(full)) throw new Error(`edit.color.lut "${edit.color.lut}" does not resolve inside the repo`);
-      lut = `,lut3d=file='${full}':interp=nearest`;
-    }
-  }
   const vf = SUB > 1
     ? `tmix=frames=${SUB},select='eq(mod(n\\,${SUB})\\,${SUB - 1})',setpts=N*${FPS.den}/${FPS.num}/TB,${bt709}${lut}`
     : bt709 + lut;
