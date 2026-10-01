@@ -36,3 +36,11 @@ at 1080p vs 24 at 720p) and every export is <= 1920 wide. Cost: a 4K source refr
 
 **D-009 2026-10-01 P2 — A/V start alignment.** ffmpeg normalizes a file so its earliest stream starts at 0. The conform pads the video head with clones
 (`fps ... start_time=0`) and the audio head with silence (`aresample first_pts=0`), so both files start at 0 and share one clock; media.json keeps the source start times.
+
+**D-010 2026-10-01 P3 — `rev` is monotonic; undo restores content and bumps `rev`.** The mission's sketch carries `baseRev` for 409 conflicts and the GUI check says
+"undo restores rev". If undo restored the old number, a stale client could match a revision whose content has since changed (apply -> undo -> a different apply reuses
+the number: A-B-A). So `rev` never goes back; "undo restores" is checked as: content deep-equals the pre-edit state. Applied ops (and undo/redo) each append a line to
+`edit.log.jsonl`; history snapshots live in `films/<key>/.edit/history.json` (100 deep, gitignored).
+
+**D-011 2026-10-01 P3 — clip speed is stored as `speed` + explicit `dur`.** A retimed clip must be a whole number of frames; `dur = round(sourceFrames / speed)` and the
+effective speed `sourceFrames / durFrames` drives picture and audio, so they cannot drift apart. A split of a retimed clip gives both halves exact frame counts that sum to the original.

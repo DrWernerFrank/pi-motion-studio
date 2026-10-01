@@ -33,7 +33,7 @@ Next: checks edit-ops, frame-exact, av-sync, rational-fps, fidelity, parity, det
 - [ ] `fidelity` (P3) passthrough edit vs ffmpeg decode: PSNR >= 40 dB, SSIM >= 0.98
 - [ ] `parity` (P3) live seek, draft and final agree on 10 frames per fixture (SSIM >= 0.95)
 - [ ] `determinism` (P3) identical per-frame md5 across runs; 4 workers equal 1 worker; determinism gate passes
-- [ ] `edit-ops` (P3) every op round-trips under undo; invalid ops rejected; stale baseRev conflicts; 500 random ops; EDL round-trip
+- [x] `edit-ops` (P3) every op round-trips under undo; invalid ops rejected; stale baseRev conflicts; 500 random ops; EDL round-trip
 - [ ] `transcribe` (P4) WER <= 15% on speech; monotonic words; >= 90% in speech; cache hit; offline
 - [ ] `transcript-edit` (P4) word-range delete cuts within 30 ms; retimed transcript >= 90% within 150 ms
 - [ ] `cut-silence` (P5) no pause beyond max + pad, no clipped word start, no word lost

@@ -143,7 +143,7 @@ export async function ingestSource(filmKey, srcArg, opt = {}) {
     const wavDur = au ? (statSync(f('audio.wav')).size - 44) / (48000 * 2 * Math.min(2, au.channels)) : null; // 16-bit PCM at 48 kHz, <= 2 channels
     const rec = { ...m, id, ingest: { key, recipe: RECIPE, params, at: new Date().toISOString(), conform, audio_duration: wavDur, products: readdirSync(dir).filter((x) => !x.startsWith('.') && !x.includes('.part.') && x !== 'ingest.json').sort() } };
     writeJson(f('media.json'), rec);
-    bin.sources[id] = { path: src, sha256: m.source.sha256, hash_kind: m.source.hash_kind, size: m.source.size, mtimeMs: m.source.mtimeMs, kind: m.kind, duration: conform?.duration ?? wavDur, fps: fps?.str ?? null, key, ingested_at: rec.ingest.at };
+    bin.sources[id] = { path: src, sha256: m.source.sha256, hash_kind: m.source.hash_kind, size: m.source.size, mtimeMs: m.source.mtimeMs, kind: m.kind, duration: conform?.duration ?? wavDur, frames: conform?.frames ?? null, has_audio: m.audio_used !== null, fps: fps?.str ?? null, key, ingested_at: rec.ingest.at };
     writeBin(film, bin);
     const secs = ((Date.now() - t0) / 1000).toFixed(1);
     log(made.length ? `ingest ${id}: done in ${secs}s (${made.join(', ')})` : `ingest ${id}: cache hit (${secs}s): nothing to do`);
