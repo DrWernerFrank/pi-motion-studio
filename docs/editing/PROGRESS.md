@@ -15,7 +15,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [ ] **P7** Reframe + formats
 - [x] **P8** Audio chain + color
 - [ ] **P9** Speed: segment cache, partial re-render, budgets
-- [ ] **P10** GUI editor
+- [x] **P10** GUI editor
 - [ ] **P11** pi surface + autoedit (tools, skill, critic agent, studio autoedit, AGENTS.md, README, help)
 - [ ] **P12** Hardening: edge matrix, loud failures, cache gc, security pass
 - [ ] **P13** Demo + review rounds, cold full verify, FINAL_REPORT.md
@@ -48,8 +48,8 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] `color` (P8) exposure/contrast/saturation/temperature move as expected; identity LUT PSNR >= 60
 - [ ] `segment-cache` (P9) unchanged re-render < 10% of cold; one-clip change re-encodes only its segments
 - [ ] `perf-budget` (P9) ingest <= 0.5x, draft <= 1x, final <= 3x realtime; peak RSS <= 2.5 GB; temp dirs gone
-- [ ] `gui-smoke` (P10) Playwright on a spare port: editor flows, zero console errors, zero failed requests
-- [ ] `gui-security` (P10) no token gives 403; traversal/absolute/dotfile/unknown id rejected on every new endpoint
+- [x] `gui-smoke` (P10) Playwright on a spare port: editor flows, zero console errors, zero failed requests
+- [x] `gui-security` (P10) no token gives 403; traversal/absolute/dotfile/unknown id rejected on every new endpoint
 - [x] `tools` (P11) every edit_* tool registers with a valid schema and runs on a fixture; skill + agent front matter parse
 - [x] `docs` (P11) studio help lists every command; README, AGENTS.md, skill, critic agent exist; THIRD_PARTY.md complete
 - [ ] `golden-path` (P11) studio autoedit on every preset, unattended; talking-head exports 4 formats; gate PASS

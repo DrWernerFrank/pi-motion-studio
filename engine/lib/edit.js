@@ -135,8 +135,10 @@ export async function editFilm(hooks = {}) {
         cues = captionChunks(tl, { maxChars: edit.captions.maxChars, maxGap: edit.captions.maxGap });
         state.captions = { cues, style: edit.captions.style || 'pop', lang: edit.captions.lang || doc.language };
       }
-      // track.json per source (face or seeded): the `follow` camera reads it
-      for (const id of new Set(edit.tracks.flatMap((x) => x.clips.map((c) => c.src)))) {
+      // track.json per source, fetched ONLY when some clip actually follows (an untracked source is the
+      // common case: no eager 404s - the smoke's zero-failed-requests bar)
+      const wants = new Set(edit.tracks.flatMap((x) => x.clips.filter((c) => c.cam === 'follow').map((c) => c.src)));
+      for (const id of wants) {
         const doc = await fetch(`./assets/media/${id}/track.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
         if (doc) tracks[id] = doc;
       }

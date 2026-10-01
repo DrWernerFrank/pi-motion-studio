@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "rev": 2,
+  "rev": 3,
   "fps": "30",
-  "counter": 2,
+  "counter": 1,
   "sources": {
     "speech": {
       "path": "/home/werner/.cache/pi-motion-studio/fixtures/speech.mp4",
@@ -36,11 +36,5 @@
   ],
   "overlays": [],
   "captions": null,
-  "markers": [
-    {
-      "id": "m2",
-      "t": 2,
-      "label": "x"
-    }
-  ]
+  "markers": []
 }
