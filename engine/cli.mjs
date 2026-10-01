@@ -40,6 +40,11 @@ const HELP = `studio <command> <film> [options]
                          vs docs/editing/baseline.json); --write records the baseline
   fixtures [--list] [--only a,b] [--force] [--verify]
                          deterministic test media (barcode clips, VFR/rotated, HLG, long, subject …) → ~/.cache/pi-motion-studio/fixtures
+  ingest <film> <file...> [--id cam] [--fps 30000/1001] [--max 1920] [--audio-stream N] [--no-proxy] [--force]
+                         conform footage (CFR, upright, SDR bt709, short GOP) + proxy, audio, peaks, filmstrip, scenes, silence map
+  media <film>           the media bin: sources, kinds, durations, whether the originals are still where they were
+  relink <film> [--search dir ...]   find moved originals by size + sha256 and repair the bin (and edit.json)
+  cache [gc [--dry] [--fixtures]]   disk use of media/outputs/caches; gc removes temp films, orphan media, interrupted-ingest leftovers
   doctor [--fix]         probe the toolchain for editing real footage (ffmpeg, node, python, ASR, tracker, browser decode)
   verify-edit [--quick] [--list] [--only <id>] [--clean]
                          the real-video-editing contract: every check of the mission, measured → docs/editing/verify-last.json
@@ -221,6 +226,34 @@ async function main() {
       if (opt('list')) { const m = F.readManifest().fixtures; for (const [id, f] of Object.entries(F.FIXTURES)) console.log(`${id.padEnd(14)} ${(m[id] ? (m[id].bytes / 1e6).toFixed(1) + ' MB' : 'not built').padEnd(10)} ${f.desc}`); break; }
       const r = await F.ensureFixtures({ only: opt('only') && opt('only') !== true ? String(opt('only')).split(',') : undefined, force: !!opt('force'), verify: !!opt('verify') });
       for (const [id, e] of Object.entries(r)) console.log(`${id.padEnd(14)} ${(e.bytes / 1e6).toFixed(1).padStart(7)} MB  ${e.sha256.slice(0, 12)}  ${e.cached ? 'cached' : e.seconds + 's'}`);
+      break;
+    }
+    case 'ingest': {
+      const I = await import('./ingest.mjs');
+      const srcs = argv.slice(2).filter((x, i, a) => !x.startsWith('--') && !['--id', '--fps', '--max', '--audio-stream', '--still-seconds'].includes(a[i - 1]));
+      if (!key || !srcs.length) throw new Error('studio ingest <film> <source file...> [--id cam] [--fps 30000/1001] [--max 1920] [--audio-stream N] [--no-proxy] [--force]');
+      for (const src of srcs) {
+        const r = await I.ingestSource(key, src, { id: srcs.length === 1 && opt('id') ? String(opt('id')) : undefined, fps: opt('fps') && opt('fps') !== true ? String(opt('fps')) : undefined, max: opt('max'), force: !!opt('force'),
+          proxy: !argv.includes('--no-proxy'), audioStream: opt('audio-stream'), stillSeconds: opt('still-seconds') });
+        console.log(`${r.id}: ${r.kind} ${r.ingest.conform ? `${r.ingest.conform.width}x${r.ingest.conform.height} @ ${r.ingest.conform.fps} (${r.ingest.conform.frames} frames, ${r.ingest.conform.duration.toFixed(2)}s)` : `${(r.ingest.audio_duration || 0).toFixed(2)}s audio`}  ${r.cached ? 'cached' : r.seconds + 's'}  → ${rel(r.dir)}`);
+      }
+      break;
+    }
+    case 'media': {
+      const I = await import('./ingest.mjs'), film = readFilm(key), bin = I.readBin(film);
+      const ids = Object.keys(bin.sources); if (!ids.length) console.log(`no media yet: studio ingest ${key} <file>`);
+      for (const id of ids) { const s = bin.sources[id]; console.log(`${id.padEnd(18)} ${s.kind.padEnd(6)} ${String(s.duration?.toFixed?.(1) ?? '-').padStart(7)}s ${String(s.fps ?? '-').padEnd(11)} ${existsSync(s.path) ? 'ok     ' : 'MISSING'} ${s.path}`); }
+      break;
+    }
+    case 'relink': {
+      const I = await import('./ingest.mjs');
+      const search = []; argv.forEach((x, i) => { if (x === '--search' && argv[i + 1]) search.push(argv[i + 1]); });
+      const r = await I.relink(key, { search });
+      console.log(`relink: ${r.ok.length} ok, ${r.repaired.length} repaired, ${r.missing.length} missing`); process.exitCode = r.missing.length ? 1 : 0; break;
+    }
+    case 'cache': {
+      const C = await import('./cache.mjs');
+      if (argv[1] === 'gc') C.gc({ dry: !!opt('dry'), fixtures: !!opt('fixtures') }); else C.printReport();
       break;
     }
     case undefined: case 'help': case '--help': case '-h': console.log(HELP); break;

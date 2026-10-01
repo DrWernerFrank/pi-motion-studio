@@ -21,3 +21,18 @@ the runner owns the table (`CHECKS` in `engine/verify-edit.mjs`: id, delivering 
 never edit the runner.
 
 **D-005 2026-10-01 P0 — unknown commands.** `studio <unknown>` prints help to stderr and exits 2; `studio`, `help`, `--help`, `-h` exit 0.
+
+**D-006 2026-10-01 P2 — HDR (HLG/PQ) to SDR uses `zscale npl=100` + `tonemap=mobius:param=0.9:desat=0`.** The `hlg` fixture was built by encoding a known SDR
+pattern to HLG, so the round trip has a ground truth: mean luma of the original pattern 126.1. Measured on the same frames: `hable` (the common recipe) 86.0
+(a 33% darker look), `reinhard` 105, naive tag swap 102.9, `mobius` default param 112, **`mobius:param=0.9` 124.8**, `clip` 126.2 (exact here, but hard-clips real
+highlights). param=0.9 keeps everything under 0.9 linear untouched and rolls off only what is above it. The `ingest-conform` check compares against the original
+pattern (primary) and reports the hable reference alongside.
+
+**D-007 2026-10-01 P2 — conformed resolution cap 1920 on the long side** (`--max` overrides). Browser decode and per-frame seeks scale with pixels (ADR-001: 33 ms/frame
+at 1080p vs 24 at 720p) and every export is <= 1920 wide. Cost: a 4K source reframed to 9:16 is upscaled from 1080p; use `--max 2560` for those.
+
+**D-008 2026-10-01 P2 — project rate for a source.** `--fps` wins; then an edit film's own `fps`; otherwise the standard rate nearest to the source's base rate
+(`r_frame_rate` for VFR sources, because their average rate is dragged down by dropped frames: the VFR fixture averages 24.04 but is a 30 fps clip).
+
+**D-009 2026-10-01 P2 — A/V start alignment.** ffmpeg normalizes a file so its earliest stream starts at 0. The conform pads the video head with clones
+(`fps ... start_time=0`) and the audio head with silence (`aresample first_pts=0`), so both files start at 0 and share one clock; media.json keeps the source start times.

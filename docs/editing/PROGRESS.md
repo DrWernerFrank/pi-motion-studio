@@ -1,13 +1,13 @@
 # Progress
 
-Now: P2 ingest: engine/ingest.mjs (media.json from ffprobe, conform to CFR/upright/bt709 yuv420p short-GOP, proxy, peaks, filmstrip, scenes, silence map), content-hash cache, relink, studio ingest/cache commands
-Next: checks ingest-probe, ingest-conform; then P3 edit model + first vertical slice (edit.json, ops, edit.js, render)
+Now: P3 edit model + first vertical slice: engine/lib/edit-ops.mjs (ops, undo, baseRev, EDL), edit.json schema, engine/lib/edit.js (footage, __prepare), studio new --edit, preview + render with exact frames + locked sound, edit_look, core edit_* tools
+Next: checks edit-ops, frame-exact, av-sync, rational-fps, fidelity, parity, determinism; tag slice-1
 
 ## Phases
 
 - [x] **P0** Orientation: read code, INSPIRATION.md, branch, baseline, PROGRESS/DECISIONS, verify-edit + doctor skeletons, unknown commands exit non-zero
 - [x] **P1** Spikes S1 (footage in Chromium) S2 (ASR) S3 (tracking) + fixtures generator; ADR-001..003
-- [ ] **P2** Ingest: media.json, conform, proxy, peaks, filmstrip, scenes, silence map, caches, relink, doctor green
+- [x] **P2** Ingest: media.json, conform, proxy, peaks, filmstrip, scenes, silence map, caches, relink, doctor green
 - [ ] **P3** Edit model + first vertical slice: edit.json, ops + undo, edit.js (footage, __prepare), new --edit, render, edit_look + core edit_* tools; tag slice-1
 - [ ] **P4** Transcribe + text-based editing
 - [ ] **P5** Cut intelligence + seams
@@ -25,8 +25,8 @@ Next: checks ingest-probe, ingest-conform; then P3 edit model + first vertical s
 - [x] `env` (P2) doctor resolves ffmpeg, ffprobe, node, ML python, ASR model, tracker model, Chromium H.264 decode
 - [x] `regress-films` (P0) the four motion films: gate verdicts and baseline frame hashes unchanged
 - [x] `fixtures` (P1) all fixtures generated + checksummed, plus a real open-licensed talking-head clip with its license
-- [ ] `ingest-probe` (P2) media.json equals ffprobe truth; Windows/space/unicode paths; truncated file fails clearly
-- [ ] `ingest-conform` (P2) CFR, upright, SDR bt709 tags, yuv420p; HLG luma within 6; cache hit < 2 s; relink by hash
+- [x] `ingest-probe` (P2) media.json equals ffprobe truth; Windows/space/unicode paths; truncated file fails clearly
+- [x] `ingest-conform` (P2) CFR, upright, SDR bt709 tags, yuv420p; HLG luma within 6; cache hit < 2 s; relink by hash
 - [ ] `frame-exact` (P3) 12 cuts on sync + vfr-rotated: 0 frames of error in preview and final
 - [ ] `av-sync` (P3) beep vs flash <= 20 ms at start/middle/end, across 1.5x, and in the last 30 s of a 20-min timeline
 - [ ] `rational-fps` (P3) 30000/1001 and 24000/1001: exact frame count, A/V durations within 2 ms

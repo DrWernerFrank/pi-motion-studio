@@ -35,3 +35,6 @@ templates/film/index.html
 
 # verifier run output (regenerated)
 docs/editing/verify-last*.json
+
+# derived media (conformed footage, proxies, audio): rebuilt by `studio ingest`
+films/*/assets/media/
