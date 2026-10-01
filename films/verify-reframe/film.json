@@ -1,10 +1,11 @@
 {
   "kind": "edit",
-  "title": "seg-load-b",
-  "duration": 30,
+  "title": "verify-reframe",
+  "duration": 20,
   "fps": 30,
   "formats": [
-    "16:9"
+    "16:9",
+    "9:16"
   ],
   "loop": false,
   "background": "#000000",

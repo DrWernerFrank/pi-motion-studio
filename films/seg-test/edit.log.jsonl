@@ -1,5 +1,5 @@
-{"rev":1,"at":"2026-10-01T20:55:18.478Z","who":"cli","ops":[{"op":"add","src":"cam","in":0,"out":6,"note":"cut 0"}]}
-{"rev":2,"at":"2026-10-01T20:55:18.559Z","who":"cli","ops":[{"op":"add","src":"cam","in":7.333333,"out":13.333333,"note":"cut 1"}]}
-{"rev":3,"at":"2026-10-01T20:55:18.618Z","who":"cli","ops":[{"op":"add","src":"cam","in":14.666667,"out":20.666667,"note":"cut 2"}]}
-{"rev":4,"at":"2026-10-01T20:55:18.688Z","who":"cli","ops":[{"op":"add","src":"cam","in":22,"out":28,"note":"cut 3"}]}
-{"rev":5,"at":"2026-10-01T20:55:18.763Z","who":"cli","ops":[{"op":"add","src":"cam","in":29.333333,"out":35.333333,"note":"cut 4"}]}
+{"rev":1,"at":"2026-10-01T21:15:34.411Z","who":"cli","ops":[{"op":"add","src":"cam","in":0,"out":6,"note":"cut 0"}]}
+{"rev":2,"at":"2026-10-01T21:15:34.455Z","who":"cli","ops":[{"op":"add","src":"cam","in":7.333333,"out":13.333333,"note":"cut 1"}]}
+{"rev":3,"at":"2026-10-01T21:15:34.499Z","who":"cli","ops":[{"op":"add","src":"cam","in":14.666667,"out":20.666667,"note":"cut 2"}]}
+{"rev":4,"at":"2026-10-01T21:15:34.542Z","who":"cli","ops":[{"op":"add","src":"cam","in":22,"out":28,"note":"cut 3"}]}
+{"rev":5,"at":"2026-10-01T21:15:34.584Z","who":"cli","ops":[{"op":"add","src":"cam","in":29.333333,"out":35.333333,"note":"cut 4"}]}

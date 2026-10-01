@@ -54,3 +54,5 @@ lowering crf buys nothing (the final render stays crf 16). The bar is 0.92 per f
 patterns (barcode/testsrc2) are not in parity at all because crf16 ringing on hard edges caps them at ~0.87 *whatever* the pipeline does — their
 exactness is guaranteed by `frame-exact` (0 frames of error, geometry) and `fidelity` (46.7 dB PSNR / 0.994 SSIM against the conformed source through
 the whole chain), which are the stronger claims.
+
+**D-013 2026-10-01 P7 — the follow camera's spring must be genuinely critically damped.** The first followCam used k=170, d=34; d²/4 = 289 > k = 170, so sqrt(k - d²/4) was NaN, cam.zoom NaN, and every follow-cam frame rendered BLACK (found by `reframe`: frame std 0.0 with the whole timeline black, center-cam luma 49 on the same edit). The fix is d = 2·sqrt(k) with a proper step response, plus a per-format held-position cache with a 0.04 dead zone (the anti-jitter rule from ADR-003). Crop speed/jerk caps in `reframe` are measured RELATIVE TO THE SUBJECT (the camera cannot follow a moving subject slower than the subject): peak + the dead zone it must close, jerk <= peak/2.

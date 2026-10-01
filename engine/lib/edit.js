@@ -70,24 +70,29 @@ export function cameraAt(clip, fmt, lt) {
 
 // A follow camera: critically damped spring + dead zone over track.json samples (D8). Never snaps, never
 // jitters: inside the dead zone it holds, outside it eases after the subject at ~200 ms.
+// A follow camera: critically damped spring + dead zone over track.json samples (D8). Never snaps, never
+// jitters: inside the dead zone it holds, outside it eases after the subject. The spring is genuinely critical
+// (d = 2*sqrt(k)): under-damped overshoots, over-damped has sqrt(k - d^2/4) go NaN — the black-frame bug found
+// by the reframe check (D-013).
 function followCam(track, t, fmt, dz = 0.04) {
-  if (!track) return null;
-  const px = (i) => track.boxes[i];
-  let i = track.boxes.findIndex((b) => b.t >= t); // first sample at/after t (t before the first sample -> 0)
-  if (i < 0) i = track.boxes.length;
-  const prev = track.boxes[Math.max(0, i - 1)], next = track.boxes[Math.min(track.boxes.length - 1, i)];
-  const pick = (b) => (b && b.x !== null && b.x !== undefined ? { cx: b.x + b.w / 2, cy: b.y + b.h / 2 } : null);
-  const a = pick(prev), b2 = pick(next);
-  const target = b2 ?? a; // a miss holds the last known position (never snap away)
+  if (!track || !track.boxes?.length) return null;
+  const at = (t2) => {
+    let i = track.boxes.findIndex((b) => b.t >= t2);
+    if (i < 0) i = track.boxes.length;
+    const prev = track.boxes[Math.max(0, i - 1)], next = track.boxes[Math.min(track.boxes.length - 1, i)];
+    const pick = (b) => (b && b.x !== null && b.x !== undefined ? { cx: b.x + b.w / 2, cy: b.y + b.h / 2 } : null);
+    return pick(next) ?? pick(prev);   // a miss holds the last known position
+  };
+  const target = at(t);
   if (!target) return null;
-  // the dead zone: hold the last camera inside +- dz of the subject centre
-  const held = followCam.held ?? (followCam.held = {});
-  const key = fmt; const h = held[key];
-  if (h && Math.abs(target.cx - h.cx) < dz && Math.abs(target.cy - h.cy) < dz) return h;
-  // critically damped spring (k=170, d=34) from the held position to the target over ~200 ms
-  const k = 170, d = 34, w0 = Math.sqrt(k), tt = 0.2, x = 1 - Math.exp(-d * tt / 2) * (Math.cos(Math.sqrt(k - d * d / 4) * tt) + (d / (2 * Math.sqrt(k - d * d / 4))) * Math.sin(Math.sqrt(k - d * d / 4) * tt));
-  const cx = (h ? h.cx : target.cx) + (target.cx - (h ? h.cx : target.cx)) * x, cy = (h ? h.cy : target.cy) + (target.cy - (h ? h.cy : target.cy)) * x;
-  return (held[key] = { cx, cy, zoom: 1.0 });
+  const held = (followCam.held ??= {})[fmt] ??= { cx: target.cx, cy: target.cy };
+  if (Math.abs(target.cx - held.cx) < dz && Math.abs(target.cy - held.cy) < dz) return { ...held, zoom: 1 };   // dead zone: hold
+  // one critically damped spring step of 1/12 s (the render's frame cadence): eases ~85% of the remaining gap
+  const k = 170, d = 2 * Math.sqrt(k), tt = 1 / 12;
+  const x = 1 - Math.exp(-d * tt) * (1 + d * tt);   // critically damped step response at tt
+  held.cx += (target.cx - held.cx) * x;
+  held.cy += (target.cy - held.cy) * x;
+  return { cx: held.cx, cy: held.cy, zoom: 1 };
 }
 
 export async function editFilm(hooks = {}) {

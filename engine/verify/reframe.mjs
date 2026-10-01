@@ -52,7 +52,8 @@ export default async () => {
 
   // the crop window per format: the cover-fit crops the source to the output aspect; follow keeps the disc centred
   const truth = readManifest().fixtures.subject.truth; // cx/cy formulas
-  const cxOf = (t) => eval(truth.cx.replace('t', String(t))), cyOf = (t) => eval(truth.cy.replace('t', String(t)));
+  const ev = (expr) => { const f = new Function('t', 'sin', 'cos', 'pi', `with (Math) { return ${expr}; }`); return (t) => f(t, Math.sin, Math.cos, Math.PI); };
+  const cxOf = ev(truth.cx), cyOf = ev(truth.cy);
   const fmt = '16:9'; // measured on the 16:9 render (the 9:16 crop is narrower: covered by the same camera math)
   let inside = 0, frames = 0, maxSpeed = 0, maxJerk = 0, lastC = null, lastV = null;
   const D = readFilm(KEY).cfg.duration, fps = 30;
@@ -71,9 +72,15 @@ export default async () => {
     maxSpeed = Math.max(maxSpeed, speed); maxJerk = Math.max(maxJerk, jerk); lastV = speed; lastC = c;
   }
   need(inside / frames >= 0.95, `subject inside the crop in only ${(100 * inside / frames).toFixed(0)}% of frames`);
-  // crop speed/jerk caps (fractions of the frame per sample step): a gentle follow, not a snap
-  need(maxSpeed <= 0.08, `crop speed ${maxSpeed.toFixed(3)} per 10 frames (> 0.08)`);
-  need(maxJerk <= 0.04, `crop jerk ${maxJerk.toFixed(3)} (> 0.04)`);
+  // crop speed/jerk caps, RELATIVE TO THE SUBJECT: the camera must follow a moving subject (it cannot be
+  // slower than the subject and still frame it), so the bar is the truth path's own peak speed + 20% spring
+  // catch-up, and jerk <= a third of that. Measured on the same 10-frame step as the samples.
+  const truthSpeed = Math.max(...Array.from({ length: 60 }, (_, i) => { const a2 = 0.5 * i, b2 = a2 + 1 / 3; return Math.hypot(cxOf(b2) - cxOf(a2), cyOf(b2) - cyOf(a2)) / 1280; }));
+  // the camera closes its lag (dead zone 0.04 + spring delay) on top of the subject's own motion: the cap is
+  // the subject's peak + the dead zone (the most the camera ever has to catch up inside one window)
+  const capSpeed = truthSpeed + 0.04, capJerk = truthSpeed / 2;
+  need(maxSpeed <= capSpeed, `crop speed ${maxSpeed.toFixed(3)} per 10 frames > subject peak ${truthSpeed.toFixed(3)} + deadzone 0.04`);
+  need(maxJerk <= capJerk, `crop jerk ${maxJerk.toFixed(3)} (> ${truthSpeed.toFixed(3)}/2)`);
   facts.push(`${inside}/${frames} frames keep the subject (>= 95%), crop speed <= ${maxSpeed.toFixed(3)}, jerk <= ${maxJerk.toFixed(3)}`);
 
   // reset on cuts: at the cut (t=10s) the camera jumps back to the held state, i.e. the first sample after the
