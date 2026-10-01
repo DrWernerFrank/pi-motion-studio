@@ -67,3 +67,20 @@ sheets, scores, notes).
 ## Secrets
 API keys live in `.env` (never in a prompt, brief or screenshot). Refer to them by name:
 "the ElevenLabs key is `ELEVENLABS_API_KEY` in `.env`".
+
+## Real footage
+
+`studio new <key> --edit` starts an edit film: real footage (phone clips, talking heads, podcasts,
+screen recordings) cut in the same studio, same loop, same gates. Pipeline and craft rules:
+`.pi/skills/video-edit/SKILL.md`. The last review round is the `edit-critic` agent.
+
+- Originals are read-only (sha-pinned in the media bin; `studio relink` repairs a moved one by hash).
+  Ingest conforms (CFR, upright, SDR bt709, short GOP); `media.json` and the silence map are the truth
+  about a source, conformed media is a cache.
+- `films/<key>/edit.json` is the timeline as data: ops only (`studio edit <film> <op> --k v`, undo/redo,
+  stale `base-rev` conflicts), every op frame-snapped at the project's rational fps. Never hand-edit it.
+- Cut points are measured from the audio (noise floor, gaps), never from word boundaries. Every
+  automated cut (`studio cut <kind>`) runs dry first and lists its removed text so a human can veto.
+- Captions are design, not subtitles: 3 styles from `design.json`, the per-format safe area, the phone test.
+- Audio first: the dialog bus is built from the timeline, the music bed ducks 10-14 dB under speech, and
+  -14 LUFS / -1 dBTP is the mixer's job (`studio sound`), never a hand-tuned guess.

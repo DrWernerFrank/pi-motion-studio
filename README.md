@@ -97,3 +97,31 @@ dead time · novelty (a visual event every ≤ 4 s) · hook · blank frames · l
 - The two earlier attempts on the Desktop (`motion-studio`, `motion-studio-google`) were left untouched.
 - Inspired by the "Opus 5.5 motion design" course (movez) and veedstudio/open-edit (per-run folders,
   design system written first, mechanical gates, preview server).
+
+## Real footage
+
+The studio also edits real videos — phone clips, talking heads, interviews, podcasts, screen recordings —
+from raw file to platform-ready cut, with the same design system, gates and critique loop. In pi it is one
+sentence (the `video-edit` skill):
+
+```
+/skill:video-edit cut the dead air and the ums out of ~/Videos/interview.mp4, add captions, give me 9:16 and 16:9
+/skill:video-edit here is a 40-minute podcast (cam.mp4 + audio.m4a): three 45-second vertical highlights, hook and captions
+/skill:video-edit reframe this widescreen interview to vertical and keep the speaker framed
+/skill:video-edit make this screen recording snappy: cut the pauses, speed the boring part 1.5x, punch-ins, a music bed
+```
+
+The CLI underneath (`./studio help` lists everything):
+
+| Command | Example |
+|---|---|
+| `./studio new <key> --edit` | scaffold an edit film (`film.json` kind=edit + `edit.json`) |
+| `./studio ingest <key> file.mp4 --id cam` | conform (CFR, upright, SDR bt709) + proxy, waveform, filmstrip, silence map |
+| `./studio transcribe <key> cam` | local word-level transcript (cached); `./studio transcript <key> cam --grep "…" --format srt` reads it in chunks |
+| `./studio cut <key> silence \|fillers\|takes\|idle\|tighten` | measured cuts — dry run first, each proposal lists its removed text; `--apply` to accept |
+| `./studio edit <key> add --src cam --in 61.2 --out 64.9 --at 0` | the timeline as data (ops, undo/redo, frame-snapped) |
+| `./studio captions <key> --format srt\|vtt` | export the captions; `./studio look <key> --mode cuts\|phone` to look at the edit |
+| `./studio sound <key>` → `./studio gate <key>` → `./studio ship <key>` | dialog bus + ducked music at -14 LUFS → edit gates → final renders, all formats |
+
+Originals stay untouched (sha-pinned; `./studio relink` repairs a moved file). Pipeline and craft rules:
+`.pi/skills/video-edit/SKILL.md`; the fresh-eyes final review: `.pi/agents/edit-critic.md`.
