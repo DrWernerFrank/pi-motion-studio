@@ -78,6 +78,7 @@ export default async ({ quick } = {}) => {
     const K = 'verify-av-long';
     rmSync(join(FILMS, K), { recursive: true, force: true });
     await (await import('../edit-cli.mjs')).createEditFilm(K, { fps: 30, title: K });
+    await ingestSource(K, fixturePath('long'), { id: 'cam', log: () => {} });
     const G2 = grid(loadEdit(K).edit);
     await applyOps(K, { op: 'add', src: 'cam', in: 0, out: G2.S(1170) });
     for (let i = 0; i < 6; i++) await applyOps(K, { op: 'add', src: 'cam', in: G2.S(1170 + i * 5), out: G2.S(1173 + i * 5) });

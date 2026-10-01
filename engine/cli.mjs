@@ -267,6 +267,19 @@ async function main() {
       break;
     }
     case 'edit': { const E = await import('./edit-cli.mjs'); await E.editCommand(key, argv.slice(2)); break; }
+    case 'transcribe': {
+      const T = await import('./transcribe.mjs');
+      const r = await T.transcribe(key, argv[2], { model: opt('model') && opt('model') !== true ? String(opt('model')) : 'small', language: opt('language') && opt('language') !== true ? String(opt('language')) : 'auto', force: !!opt('force') });
+      console.log(`${argv[2]}: ${r.cached ? 'cached' : 'fresh'} ${r.words.length} words, lang ${r.language} (${r.language_probability})  → ${rel(r.file)}`);
+      break;
+    }
+    case 'transcript': {
+      const T = await import('./transcribe.mjs');
+      const o = { from: opt('from') !== undefined && opt('from') !== true ? +opt('from') : undefined, to: opt('to') !== undefined && opt('to') !== true ? +opt('to') : undefined,
+        grep: opt('grep') !== undefined && opt('grep') !== true ? String(opt('grep')) : undefined, format: opt('format') && opt('format') !== true ? String(opt('format')) : 'compact' };
+      console.log(T.readTranscript(key, argv[2], o));
+      break;
+    }
     case undefined: case 'help': case '--help': case '-h': console.log(HELP); break;
     default: console.error(`studio: unknown command "${cmd}"\n`); console.error(HELP); process.exit(2);
   }

@@ -3,7 +3,7 @@
 // required check passed. A check lives in engine/verify/<id>.mjs (default export: async (ctx) => { pass,
 // measured, skip? }); a check without a file is "pending" and counts as red.
 //   studio verify-edit [--quick] [--list] [--only a,b] [--clean]
-import { existsSync, readdirSync, rmSync } from 'node:fs';
+import { existsSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -57,10 +57,15 @@ const gitHead = async () => {
   return `${h.out.trim() || 'none'}${d.out.trim() ? '+dirty' : ''}`;
 };
 
-// Temp films the checks create live under films/verify-*; they are always removed.
+// Temp films the checks create live under films/verify-*; they are removed at the end of a run — but only ones
+// that existed before this process started (mtime guard), so two concurrent verify invocations (a full run and a
+// --only debug) never delete each other's films mid-check.
+export const RUN_STARTED = Date.now();
 export function cleanTemp() {
   const gone = [];
-  if (existsSync(FILMS)) for (const f of readdirSync(FILMS)) if (/^verify-[a-z0-9-]+$/.test(f)) { rmSync(join(FILMS, f), { recursive: true, force: true }); gone.push(`films/${f}`); }
+  if (existsSync(FILMS)) for (const f of readdirSync(FILMS)) {
+    if (/^verify-[a-z0-9-]+$/.test(f) && statSync(join(FILMS, f)).mtimeMs < RUN_STARTED - 2000) { rmSync(join(FILMS, f), { recursive: true, force: true }); gone.push(`films/${f}`); }
+  }
   if (existsSync(VERIFY_CACHE)) { rmSync(VERIFY_CACHE, { recursive: true, force: true }); gone.push(VERIFY_CACHE.replace(homedir(), '~')); }
   return gone;
 }
