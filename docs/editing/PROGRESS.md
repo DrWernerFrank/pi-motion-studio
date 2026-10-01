@@ -1,14 +1,14 @@
 # Progress
 
-Now: P3 edit model + first vertical slice: engine/lib/edit-ops.mjs (ops, undo, baseRev, EDL), edit.json schema, engine/lib/edit.js (footage, __prepare), studio new --edit, preview + render with exact frames + locked sound, edit_look, core edit_* tools
-Next: checks edit-ops, frame-exact, av-sync, rational-fps, fidelity, parity, determinism; tag slice-1
+Now: P5-P7 checks burn-down serially (cut-silence, cut-cleanup, cut-idle, seams, captions, overlays, reframe, formats) while two subagents author the GUI editor and the pi surface
+Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subagent work, P10 gui-smoke/security
 
 ## Phases
 
 - [x] **P0** Orientation: read code, INSPIRATION.md, branch, baseline, PROGRESS/DECISIONS, verify-edit + doctor skeletons, unknown commands exit non-zero
 - [x] **P1** Spikes S1 (footage in Chromium) S2 (ASR) S3 (tracking) + fixtures generator; ADR-001..003
 - [x] **P2** Ingest: media.json, conform, proxy, peaks, filmstrip, scenes, silence map, caches, relink, doctor green
-- [ ] **P3** Edit model + first vertical slice: edit.json, ops + undo, edit.js (footage, __prepare), new --edit, render, edit_look + core edit_* tools; tag slice-1
+- [x] **P3** Edit model + first vertical slice: edit.json, ops + undo, edit.js (footage, __prepare), new --edit, render, edit_look + core edit_* tools; tag slice-1
 - [ ] **P4** Transcribe + text-based editing
 - [ ] **P5** Cut intelligence + seams
 - [ ] **P6** Captions + on-footage graphics
@@ -28,9 +28,9 @@ Next: checks edit-ops, frame-exact, av-sync, rational-fps, fidelity, parity, det
 - [x] `ingest-probe` (P2) media.json equals ffprobe truth; Windows/space/unicode paths; truncated file fails clearly
 - [x] `ingest-conform` (P2) CFR, upright, SDR bt709 tags, yuv420p; HLG luma within 6; cache hit < 2 s; relink by hash
 - [x] `frame-exact` (P3) 12 cuts on sync + vfr-rotated: 0 frames of error in preview and final
-- [ ] `av-sync` (P3) beep vs flash <= 20 ms at start/middle/end, across 1.5x, and in the last 30 s of a 20-min timeline
+- [x] `av-sync` (P3) beep vs flash <= 20 ms at start/middle/end, across 1.5x, and in the last 30 s of a 20-min timeline
 - [x] `rational-fps` (P3) 30000/1001 and 24000/1001: exact frame count, A/V durations within 2 ms
-- [ ] `fidelity` (P3) passthrough edit vs ffmpeg decode: PSNR >= 40 dB, SSIM >= 0.98
+- [x] `fidelity` (P3) passthrough edit vs ffmpeg decode: PSNR >= 40 dB, SSIM >= 0.98
 - [x] `parity` (P3) live seek, draft and final agree on 10 frames per fixture (SSIM >= 0.95)
 - [x] `determinism` (P3) identical per-frame md5 across runs; 4 workers equal 1 worker; determinism gate passes
 - [x] `edit-ops` (P3) every op round-trips under undo; invalid ops rejected; stale baseRev conflicts; 500 random ops; EDL round-trip

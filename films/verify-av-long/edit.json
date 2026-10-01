@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "rev": 7,
+  "fps": "30",
+  "counter": 7,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/long.mp4",
+      "sha256": "9891c8fd413beda5da49f50fcdc2f7c608aff4c9740a72bc5239b0360e1dd053",
+      "kind": "video",
+      "duration": 1200,
+      "frames": 36000,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "cam",
+          "in": 0,
+          "out": 1170,
+          "at": 0
+        },
+        {
+          "id": "c2",
+          "src": "cam",
+          "in": 1170,
+          "out": 1173,
+          "at": 1170
+        },
+        {
+          "id": "c3",
+          "src": "cam",
+          "in": 1175,
+          "out": 1178,
+          "at": 1173
+        },
+        {
+          "id": "c4",
+          "src": "cam",
+          "in": 1180,
+          "out": 1183,
+          "at": 1176
+        },
+        {
+          "id": "c5",
+          "src": "cam",
+          "in": 1185,
+          "out": 1188,
+          "at": 1179
+        },
+        {
+          "id": "c6",
+          "src": "cam",
+          "in": 1190,
+          "out": 1193,
+          "at": 1182
+        },
+        {
+          "id": "c7",
+          "src": "cam",
+          "in": 1195,
+          "out": 1198,
+          "at": 1185
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}

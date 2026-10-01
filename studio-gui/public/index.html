@@ -36,6 +36,37 @@
       <div id="renderWrap" hidden><video id="video" controls playsinline></video><div id="noRender" class="empty small" hidden>Not rendered in this format yet.</div></div>
     </div>
 
+    <div id="editDock" hidden>
+      <div id="editTools">
+        <button id="eUndo" title="undo (Ctrl+Z)">⤺</button>
+        <button id="eRedo" title="redo (Ctrl+Y)">⤻</button>
+        <span class="vr"></span>
+        <button id="eSplit" title="split every clip under the playhead (S)">✂ split</button>
+        <button id="eRdel" title="ripple-delete: selected words / clip / I–O range (Del)">⇤ ripple</button>
+        <button id="eMark" title="marker at the playhead (M)">⚑</button>
+        <label class="dim" for="eSnap">snap</label>
+        <select id="eSnap" title="what drag/trim/drop positions snap to (within ~0.1 s)">
+          <option value="all" selected>all</option>
+          <option value="cuts">cuts</option>
+          <option value="words">words</option>
+          <option value="beats">beats</option>
+          <option value="frames">frames</option>
+          <option value="off">off</option>
+        </select>
+        <span class="vr"></span>
+        <button id="eZoomOut" title="zoom out">−</button>
+        <button id="eZoomIn" title="zoom in">+</button>
+        <button id="eFit" title="fit the whole timeline">fit</button>
+        <span id="eTc"></span>
+        <span id="eMeta" class="dim"></span>
+        <span id="eMsg"></span>
+        <span class="grow"></span>
+        <button id="eDraft" class="primary" title="half-res draft render of the edit (shows in the Run tab)">▶ draft</button>
+      </div>
+      <canvas id="editTl"></canvas>
+      <div id="editHint" class="dim">L/K/J play·pause·shuttle · I/O marks · S split · Del ripple · arrows frame step · drag clip edges to trim (ripple) · Alt = leave a gap · drag a source from the bin onto a track</div>
+    </div>
+
     <div id="transport">
       <button id="play" title="Space">▶</button>
       <span id="tc">0.00s</span>
@@ -48,6 +79,7 @@
 <aside id="panel" hidden>
   <nav id="tabs">
     <button data-tab="overview" class="on">Overview</button>
+    <button data-tab="edit" id="editTabBtn" hidden>Edit</button>
     <button data-tab="reviews">Reviews</button>
     <button data-tab="gates">Gates</button>
     <button data-tab="sheets">Sheets</button>

@@ -79,9 +79,21 @@ export async function renderFilm(key, opts = {}) {
 async function encodePart(page, file, { a, b, FPS, SUB, from, q, tick }) {
   // setparams: the scale filter only tags the matrix; the encoder takes primaries/transfer/range from the frames, not from the -color_* flags
   const bt709 = 'scale=out_color_matrix=bt709:out_range=tv,setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv';
+  // a whole-output 3D LUT (edit.color.lut): applied at encode. The file must live inside the repo (safePath).
+  let lut = '';
+  if (film.cfg.kind === 'edit') {
+    const { readJson } = await import('./lib/film.mjs');
+    const edit = readJson(join(film.dir, 'edit.json'));
+    if (edit?.color?.lut) {
+      const { safePath } = await import('./lib/serve.mjs');
+      const full = safePath(edit.color.lut.replace(/^\//, ''));
+      if (!full || !existsSync(full)) throw new Error(`edit.color.lut "${edit.color.lut}" does not resolve inside the repo`);
+      lut = `,lut3d=file='${full}':interp=nearest`;
+    }
+  }
   const vf = SUB > 1
-    ? `tmix=frames=${SUB},select='eq(mod(n\\,${SUB})\\,${SUB - 1})',setpts=N*${FPS.den}/${FPS.num}/TB,${bt709}`
-    : bt709;
+    ? `tmix=frames=${SUB},select='eq(mod(n\\,${SUB})\\,${SUB - 1})',setpts=N*${FPS.den}/${FPS.num}/TB,${bt709}${lut}`
+    : bt709 + lut;
   const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-c:v', q.img === 'png' ? 'png' : 'mjpeg',
     '-framerate', `${FPS.num * SUB}/${FPS.den}`, '-i', '-', '-vf', vf, '-r', FPS.str,
     '-c:v', 'libx264', '-preset', q.preset, '-crf', String(q.crf), '-pix_fmt', 'yuv420p',

@@ -5,12 +5,36 @@
 import { closeSync, existsSync, openSync, readSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { normalize, writeWav } from './audio.mjs';
+import { readBin } from './ingest.mjs';
 import { clipFrames, grid, timelineFrames } from './lib/edit-ops.mjs';
 import { loadEdit } from './lib/edit-store.mjs';
 import { mediaDir } from './ingest.mjs';
 import { run } from './lib/proc.mjs';
 
 const SR = 48000;
+const CLEAN_RECIPE = 1; // hp 80 Hz, afftdn, gentle compand, alimiter
+
+// Per-source cleanup (D4): high-pass ~80 Hz, afftdn denoise, a gentle compressor, a limiter — cached in the
+// source's media folder (audio-clean.wav), so the mix builds fast on re-runs. Originals untouched.
+export async function cleanAudio(film, id, { log = () => {} } = {}) {
+  const bin = readBin(film), src = bin.sources[id];
+  if (!src) throw new Error(`no source "${id}"`);
+  const dir = mediaDir(film, id), inWav = join(dir, 'audio.wav'), out = join(dir, 'audio-clean.wav');
+  const stateFile = join(dir, 'ingest.json');
+  const state = JSON.parse(readFileSync(stateFile, 'utf8'));
+  const key = `clean${CLEAN_RECIPE}:${src.sha256.slice(0, 16)}`;
+  if (state.steps?.clean === key && existsSync(out)) return out;
+  const part = `${out}.part.wav`;
+  await run('ffmpeg', ['-y', '-v', 'error', '-i', inWav, '-af',
+    'highpass=f=80,afftdn=nr=12:nf=-40,acompressor=threshold=-21dB:ratio=2.5:attack=12:release=180:makeup=2,alimiter=limit=0.9:attack=2:release=36',
+    '-ar', String(SR), '-c:a', 'pcm_s16le', part]);
+  const { renameSync } = await import('node:fs');
+  renameSync(part, out);
+  state.steps = { ...(state.steps || {}), clean: key };
+  writeFileSync(stateFile, JSON.stringify(state, null, 1));
+  log(`clean ${id}: denoise + hp + compressor -> audio-clean.wav`);
+  return out;
+}
 
 // header of a PCM WAV: finds the data chunk wherever ffmpeg put it (LIST chunks, etc.)
 export function wavInfo(file) {
@@ -66,7 +90,8 @@ export async function buildDialog(filmKey, { log = () => {} } = {}) {
     for (let i = 0; i < cs.length; i++) {
       const c = cs[i], s = edit.sources[c.src];
       if (c.freeze || !s.has_audio || c.audio?.mute) continue;
-      const wav = join(mediaDir(film, c.src), 'audio.wav');
+      // the cleanup chain runs once per source (cached); the mix always reads the cleaned copy
+      const wav = await cleanAudio(film, c.src, { log });
       if (!existsSync(wav)) throw new Error(`no audio.wav for source "${c.src}": re-run \`studio ingest ${film.key} <file> --id ${c.src}\``);
       const info = wavInfo(wav), a0 = sampleAt(G.F(c.in)), a1 = sampleAt(G.F(c.out)), d0 = sampleAt(G.F(c.at)), d1 = sampleAt(G.F(c.at) + clipFrames(edit, c)), dst = d1 - d0;
       let seg = readSegment(wav, info, a0, a1);
@@ -99,9 +124,17 @@ export async function buildDialog(filmKey, { log = () => {} } = {}) {
 export async function mixEdit(filmKey, { target } = {}) {
   const { film } = loadEdit(filmKey), cfg = film.cfg, lufs = target ?? cfg.mix?.lufs ?? -14, pre = join(film.out, '.premix.wav'), file = join(film.out, 'mix.wav');
   const dialog = join(film.out, 'dialog.wav'), extras = [join(film.out, 'music.wav'), join(film.out, 'sfx.wav')].filter((f) => existsSync(f) && (cfg.music || cfg.track));
-  const inputs = [dialog, ...extras], D = film.fps.den * timelineFramesOf(filmKey) / film.fps.num;
-  await run('ffmpeg', ['-y', '-v', 'error', ...inputs.flatMap((f) => ['-i', f]), '-filter_complex',
-    `${inputs.map((_, i) => `[${i}:a]aresample=${SR}[a${i}]`).join(';')};${inputs.map((_, i) => `[a${i}]`).join('')}amix=inputs=${inputs.length}:normalize=0[m]`, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
+  const D = (film.fps.den * timelineFramesOf(filmKey)) / film.fps.num;
+  const duckDb = cfg.mix?.duck_db ?? -12, duckAtt = 150, duckRel = 400; // craft rule: 10-14 dB, ~150/400 ms
+  const inputs = [dialog, ...extras];
+  // the dialog bus keys the sidechain that ducks the bed (D4); music never fights the voice
+  const chain = inputs.map((_, i) => `[${i}:a]aresample=${SR}[a${i}]`).join(';');
+  const r = Math.max(1, 20 * Math.log10(10 ** (-duckDb / 20))); // duckDb -> compression ratio at a fixed threshold
+  const mix = inputs.length === 1
+    ? '[a0]anull[m]'
+    : `[a0]asplit=2[key][dial];[a1][key]sidechaincompress=threshold=0.02:ratio=${r.toFixed(2)}:attack=${Math.round(duckAtt)}:release=${Math.round(duckRel)}:makeup=1:link=average[bed];[dial][bed]amix=inputs=2:normalize=0[m]`;
+  const extraCh = inputs.slice(2).map((_, i) => `;[a${i + 2}]anull[b${i}]`).join('') + (inputs.length > 2 ? `;[m]${inputs.slice(2).map((_, i) => `[b${i}]`).join('')}amix=inputs=${inputs.length - 1}:normalize=0[m]` : '');
+  await run('ffmpeg', ['-y', '-v', 'error', ...inputs.flatMap((f) => ['-i', f]), '-filter_complex', `${chain};${mix}${extraCh}`, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
   const l = await normalize(pre, file, lufs);
   rmSync(pre, { force: true });
   return { file, ...l, duration: D };

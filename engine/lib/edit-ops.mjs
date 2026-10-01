@@ -212,6 +212,37 @@ export const OPS = {
   // volume { id, db }
   volume(edit, a) { const { clip: c } = findClip(edit, a.id); need(typeof a.db === 'number' && a.db >= -60 && a.db <= 24, `volume: db must be -60..24, got ${a.db}`); c.audio = { ...(c.audio || {}), gain_db: a.db }; if (a.db === 0 && !c.audio.fade_ms && !c.audio.mute) delete c.audio; return edit; },
 
+  // color { id, exposure? (-2..2), contrast? (0.5..2), saturation? (0..2), temperature? (-1..1, warm +) }:
+  // the per-clip grade, rendered as canvas filters. `lut { id, file, at }` sets a whole-output 3D LUT (ffmpeg lut3d).
+  color(edit, a) {
+    const { clip: c } = findClip(edit, a.id);
+    const cur = c.color || {};
+    const next = { ...cur };
+    for (const k of ['exposure', 'contrast', 'saturation', 'temperature']) {
+      if (a[k] !== undefined) { const v = a[k]; need(typeof v === 'number' && Number.isFinite(v), `color: ${k} must be a number, got ${v}`); next[k] = +v.toFixed(4); }
+    }
+    const R = { exposure: [-2, 2], contrast: [0.5, 2], saturation: [0, 2], temperature: [-1, 1] };
+    for (const [k, [lo, hi]] of Object.entries(R)) if (next[k] !== undefined) need(next[k] >= lo && next[k] <= hi, `color: ${k} ${next[k]} outside ${lo}..${hi}`);
+    if (!Object.keys(next).length) delete c.color; else c.color = next;
+    return edit;
+  },
+  // lut { file }: a 3D LUT over the whole output (applied at encode; the file must live inside the repo)
+  lut(edit, a) {
+    need(typeof a.file === 'string' && /\.(cube|3dl)$/i.test(a.file), `lut: file must be a .cube/.3dl inside the repo, got ${JSON.stringify(a.file)}`);
+    edit.color = { ...(edit.color || {}), lut: a.file };
+    if (a.file === null || a.clear === true) { if (edit.color) { delete edit.color.lut; if (!Object.keys(edit.color).length) delete edit.color; } }
+    return edit;
+  },
+
+  // cam { id, mode }: the crop mode for one clip - 'center' (default), 'follow' (subject tracking, needs
+  // track.json), 'blurfill' (sharp clip over a blurred copy), or 'keyframes' (explicit crop keyframes).
+  cam(edit, a) {
+    const { clip: c } = findClip(edit, a.id);
+    need(['center', 'follow', 'blurfill', 'keyframes'].includes(a.mode), `cam: mode must be center, follow, blurfill or keyframes, got ${a.mode}`);
+    if (a.mode === 'center') delete c.cam; else c.cam = a.mode;
+    return edit;
+  },
+
   // jcut { id, ms }: J/L-cut offset - the audio of this clip starts ms after its picture (negative: audio leads).
   // The edit stays frame-snapped; the offset is honored to the sample in the dialog bus.
   jcut(edit, a) {

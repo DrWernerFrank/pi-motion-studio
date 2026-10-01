@@ -38,16 +38,13 @@ export default async () => {
   await applyOps(KEY, { op: 'add', src: ID, in: 0, out: 10 });
   await applyOps(KEY, { op: 'add', src: ID, in: 10, out: 20 });
   // follow camera on both clips (clip.cam)
-  const { applyOps: AO } = await import('../lib/edit-store.mjs');
-  for (const c of loadEdit(KEY).edit.tracks[0].clips) await AO(KEY, { op: 'move', id: c.id, at: c.at }); // (no-op: ids fresh below)
+  for (const c of loadEdit(KEY).edit.tracks[0].clips) await applyOps(KEY, { op: 'cam', id: c.id, mode: 'follow' });
   syncFilm(KEY);
-  // set cam:'follow' directly (an op for it is GUI work; the model field is the contract)
-  { const edit = JSON.parse(readFileSync(join(FILMS, KEY, 'edit.json'), 'utf8'));
-    for (const t of edit.tracks) for (const c of t.clips) c.cam = 'follow';
-    (await import('node:fs')).writeFileSync(join(FILMS, KEY, 'edit.json'), JSON.stringify(edit, null, 2)); }
   // the track file for the source (seeded at the disc's start position)
   const { spawn: sp } = await import('node:child_process');
-  await new Promise((ok, bad2) => { const p = sp(pythonFor('ml'), [join(await (await import('node:path')).dirname(new URL('.', import.meta.url).pathname), '..', 'track.mjs'), '--in', join(mediaDir(readFilm(KEY), ID), 'conformed.mp4'), '--out', join(mediaDir(readFilm(KEY), ID), 'track.json'), '--seed', '0.44,0.43,0.19,0.17'], { cwd: process.cwd() }); p.on('close', (c) => (c ? bad2(new Error(`track.mjs exited ${c}`)) : ok())); });
+  const trackScript = new URL('../track.mjs', import.meta.url).pathname, media = mediaDir(readFilm(KEY), ID);
+  const trkArgs = [trackScript, '--in', join(media, 'conformed.mp4'), '--out', join(media, 'track.json'), '--seed', '0.44,0.43,0.19,0.17'];
+  await new Promise((ok, bad2) => { const p = sp(pythonFor('ml'), trkArgs); p.on('close', (c) => (c ? bad2(new Error(`track.mjs exited ${c}`)) : ok())); p.on('error', bad2); });
 
   // renders: 16:9 and 9:16 from the same edit
   const outs = {};

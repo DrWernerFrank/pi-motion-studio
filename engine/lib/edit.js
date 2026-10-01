@@ -33,6 +33,17 @@ import { drawOverlays, punchInZoom } from './overlays.js';
 });
 
 // Paint `video` into rect {x,y,w,h}. fit: 'cover' (fill, crop) | 'contain'. cam {cx, cy, zoom}: where in the source the crop is centred (0..1) and how far in.
+// a clip's colour grade (D8) as a canvas filter string: exposure=brightness, contrast, saturation, warm/cool
+export const colorFilter = (col) => {
+  if (!col) return 'none';
+  const f = [];
+  if (col.exposure) f.push(`brightness(${Math.max(0.05, 2 ** col.exposure).toFixed(4)})`);
+  if (col.contrast) f.push(`contrast(${col.contrast.toFixed(4)})`);
+  if (col.saturation !== undefined) f.push(`saturate(${col.saturation.toFixed(4)})`);
+  if (col.temperature) f.push(`sepia(${(Math.abs(col.temperature) * 0.35).toFixed(3)}) saturate(${col.temperature > 0 ? '1.25' : '0.85'}) hue-rotate(${col.temperature < 0 ? -12 : 0}deg)`);
+  return f.length ? f.join(' ') : 'none';
+};
+
 export function footage(ctx, video, rect, { fit = 'cover', cam = { cx: 0.5, cy: 0.5, zoom: 1 }, radius = 0, filter } = {}) {
   const vw = video.videoWidth, vh = video.videoHeight;
   if (!vw) return;
@@ -143,7 +154,7 @@ export async function editFilm(hooks = {}) {
         let cam = ly.clip.crop?.[L.fmt] ? cameraAt(ly.clip, L.fmt, lt) : trk && (ly.clip.cam === 'follow' || edit.captions?.cam === 'follow') ? followCam(trk, (ly.clip.in + lt * (ly.clip.speed || 1)), L.fmt) : { cx: 0.5, cy: 0.5, zoom: 1 };
         if (ly.clip.cam === 'follow' && trk) cam = { ...(cam ?? {}), ...followCam(trk, ly.clip.in + lt * (ly.clip.speed || 1), L.fmt) };
         for (const p of punches) { const lt2 = t - p.at; cam = { ...cam, zoom: cam.zoom * punchInZoom(lt2, { dur: p.dur, zoom: p.props.zoom ?? 1.18 }), cx: p.props.cx ?? cam.cx, cy: p.props.cy ?? cam.cy }; break; }
-        footage(ctx, ly.video, { x: 0, y: 0, w: L.W, h: L.H }, { cam });
+        footage(ctx, ly.video, { x: 0, y: 0, w: L.W, h: L.H }, { cam, filter: colorFilter(ly.clip.color) });
       }
       drawOverlays(ctx, t, L, D, edit.overlays, cfg);
       if (state.captions) captions(ctx, t, { cues: state.captions.cues, style: state.captions.style, lang: state.captions.lang, face: state.face ?? undefined, D }, L);

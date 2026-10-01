@@ -7,6 +7,9 @@ import { appendFileSync, existsSync, readdirSync, readFileSync, statSync } from 
 import { createServer } from 'node:http';
 import { join } from 'node:path';
 import { FILMS, readJson } from '../engine/lib/film.mjs';
+import { OP_NAMES, OpError } from '../engine/lib/edit-ops.mjs';
+import { applyOps, historyDepth, loadEdit, redo, syncFilm, undo } from '../engine/lib/edit-store.mjs';
+import { binDir, readBin } from '../engine/ingest.mjs';
 import { geminiRead } from '../engine/lib/gemini.mjs';
 import { askAntigravity, antigravityAvailable } from '../engine/lib/antigravity.mjs';
 import { claudeRead, claudeVisionAvailable } from '../engine/lib/claude-vision.mjs';
@@ -15,6 +18,10 @@ import { ROOT, safePath, sendFile } from '../engine/lib/serve.mjs';
 const PORT = Number(process.env.STUDIO_PORT || 3142);
 const TOKEN = randomBytes(16).toString('hex');
 const PUB = join(ROOT, 'studio-gui', 'public');
+// ids the edit endpoints accept: film keys and media-bin source ids. No dots, no slashes, no leading
+// dash, so a client id can never traverse, go absolute, or name a dotfile — the server joins the rest.
+const ID_RE = /^[a-z0-9][a-z0-9-]*$/;
+const OP_SNAP = [...OP_NAMES, 'snap'];  // 'snap' rides along in a batch as a query (applyOps answers it, changes nothing)
 const read = (p) => { try { return readFileSync(p, 'utf8'); } catch { return null; } };
 const mtime = (p) => { try { return statSync(p).mtimeMs; } catch { return 0; } };
 
@@ -46,6 +53,7 @@ function summary(key) {
   const files = outFiles(dir);
   return {
     key, title: cfg.title || key, duration: cfg.duration, formats: cfg.formats || ['9:16'],
+    edit: existsSync(join(dir, 'edit.json')),
     review: reviews.length ? { round: reviews.length, min: reviews.at(-1).min, pass: reviews.at(-1).pass } : null,
     gates: gates ? { pass: gates.pass, warns: gates.checks.filter((c) => c.level === 'warn').length, at: gates.at } : null,
     finals: files.filter((f) => /^final-[^.]*\.mp4$/.test(f.name)).map((f) => f.name),
@@ -221,6 +229,108 @@ const server = createServer(async (req, res) => {
         return json(res, 200, notes);
       }
     }
+
+    // ── the edit tab: edit.json in-process through edit-ops/edit-store, never a CLI per click ────────
+    // Ids only, validated: film keys and source ids match ^[a-z0-9][a-z0-9-]*$ (no dots, slashes or
+    // leading dash), so no client string can traverse, name an absolute path or reach a dotfile. The
+    // server resolves every id under films/<key>/ itself.
+    const editId = (v) => { const k = String(v ?? ''); if (!ID_RE.test(k)) return null; const d = join(FILMS, k); return existsSync(join(d, 'film.json')) && existsSync(join(d, 'edit.json')) ? k : null; };
+    const opFail = (e, res2, key) => {
+      const status = e.code === 'conflict' ? 409 : e.code === 'notfound' ? 404 : 400;
+      const cur = status === 409 ? (() => { try { return loadEdit(key).edit; } catch { return null; } })() : null;
+      return json(res2, status, { error: String(e.message || e), code: e.code || 'invalid', ...(cur ? { edit: cur, rev: cur.rev } : {}) });
+    };
+    // A batch from the browser is ids + numbers. The one op that names a file (lut) is checked against
+    // the repo root before edit-ops ever sees it; unknown ops/ids are rejected up front for a clean 400.
+    const checkOps = (ops) => {
+      if (!Array.isArray(ops) || !ops.length || ops.length > 500) throw new OpError('ops: an array of 1-500 ops');
+      for (const o of ops) {
+        if (!o || typeof o !== 'object' || Array.isArray(o)) throw new OpError('each op is an object { op, ... }');
+        const name = o.op ?? o.name;
+        if (!OP_SNAP.includes(name)) throw new OpError(`unknown op "${name}" (ops: ${OP_NAMES.join(', ')})`);
+        if (o.src !== undefined && (typeof o.src !== 'string' || !ID_RE.test(o.src))) throw new OpError(`bad source id ${JSON.stringify(o.src)}`);
+        if (typeof o.file === 'string') {
+          const full = safePath('/' + o.file.replace(/^[\\/]+/, '').replace(/\\/g, '/'));
+          if (!full || !/\.(cube|3dl)$/i.test(o.file)) throw new OpError(`lut file must be a .cube/.3dl inside the repo, got ${JSON.stringify(o.file)}`);
+        }
+      }
+      return ops;
+    };
+
+    if (p === '/api/edit' && req.method === 'GET') {
+      const key = editId(url.searchParams.get('film'));
+      if (!key) return json(res, 404, { error: 'no such edit film (films/<key>/edit.json)' });
+      let r; try { r = loadEdit(key); } catch (e) { return e instanceof OpError ? opFail(e, res, key) : json(res, 500, { error: String(e.message || e) }); }
+      const { film, edit } = r;
+      const sources = {};
+      for (const [id, s] of Object.entries(readBin(film).sources || {})) {
+        const md = join(binDir(film), id), mj = readJson(join(md, 'media.json'), null);
+        sources[id] = { ...s, original_here: existsSync(s.path), has_transcript: existsSync(join(md, 'transcript.json')),
+          has_filmstrip: existsSync(join(md, 'filmstrip.jpg')), has_peaks: existsSync(join(md, 'peaks.json')), ingest: mj?.ingest ?? null };
+      }
+      return json(res, 200, { key: film.key, edit, rev: edit.rev, editMtime: mtime(join(film.dir, 'edit.json')),
+        history: historyDepth(key), sources,
+        cfg: { title: film.cfg.title, fps: film.cfg.fps, duration: film.cfg.duration, formats: film.cfg.formats } });
+    }
+    if ((p === '/api/peaks' || p === '/api/transcript') && req.method === 'GET') {
+      const key = editId(url.searchParams.get('film')), src = String(url.searchParams.get('src') ?? '');
+      if (!key) return json(res, 404, { error: 'no such edit film (films/<key>/edit.json)' });
+      if (!ID_RE.test(src)) return json(res, 400, { error: 'src: a source id from the media bin' });
+      const file = join(FILMS, key, 'assets', 'media', src, p === '/api/peaks' ? 'peaks.json' : 'transcript.json');
+      if (!existsSync(file)) return json(res, 404, { error: `no ${p === '/api/peaks' ? 'peaks.json' : `transcript.json`} for "${src}"${p === '/api/transcript' ? ` — transcribe it first` : ''}` });
+      return sendFile(req, res, file);
+    }
+    if (p === '/api/edit-ops' && req.method === 'POST') {
+      const key = editId(url.searchParams.get('film'));
+      if (!key) return json(res, 404, { error: 'no such edit film (films/<key>/edit.json)' });
+      const b = await body(req), ops = Array.isArray(b) ? b : b.ops;
+      try {
+        checkOps(ops);
+        const r = applyOps(key, ops, { baseRev: b.baseRev, who: 'gui' });
+        let sync = null; if (r.changed) { try { sync = syncFilm(key); } catch { /* film.json unchanged; the next op syncs */ } }
+        return json(res, 200, { ...r, history: historyDepth(key), sync });
+      } catch (e) { if (e instanceof OpError) return opFail(e, res, key); return json(res, 500, { error: String(e.message || e) }); }
+    }
+    if ((p === '/api/edit-undo' || p === '/api/edit-redo') && req.method === 'POST') {
+      const key = editId(url.searchParams.get('film'));
+      if (!key) return json(res, 404, { error: 'no such edit film (films/<key>/edit.json)' });
+      const b = await body(req);
+      try {
+        const r = (p === '/api/edit-undo' ? undo : redo)(key, { baseRev: b.baseRev });
+        try { syncFilm(key); } catch { /* keep the edit; film.json catches up on the next op */ }
+        return json(res, 200, { edit: r.edit, rev: r.rev, history: historyDepth(key) });
+      } catch (e) { if (e instanceof OpError) return opFail(e, res, key); return json(res, 500, { error: String(e.message || e) }); }
+    }
+    // Cut proposals, dry: the same measured cuts the CLI lists, for the review panel (accept = one op)
+    if (p === '/api/edit-cuts' && req.method === 'POST') {
+      const key = editId(url.searchParams.get('film'));
+      if (!key) return json(res, 404, { error: 'no such edit film (films/<key>/edit.json)' });
+      const b = await body(req), kind = String(b.kind ?? 'silence');
+      const C = await import('../engine/cut.mjs');
+      const fns = { silence: C.cutSilence, fillers: C.cutFillers, takes: C.cutTakes, idle: C.cutIdle, tighten: C.tighten };
+      if (!fns[kind]) return json(res, 400, { error: 'kind: silence, fillers, takes, idle or tighten' });
+      if (b.src !== undefined && !ID_RE.test(String(b.src))) return json(res, 400, { error: 'src: a source id from the media bin' });
+      const num = (v, lo, hi, d) => (v === undefined || v === null || v === '' ? d : Math.min(hi, Math.max(lo, Number(v)) || d));
+      const opts = { src: b.src, apply: false, log: () => {},
+        ...(kind === 'silence' ? { maxGap: num(b.maxGap, 0.1, 10, 0.5), keepBreath: num(b.keepBreath, 0, 1, 0.15) } : {}),
+        ...(kind === 'takes' ? { window: num(b.window, 2, 120, 20) } : {}),
+        ...(kind === 'idle' ? { maxIdle: num(b.maxIdle, 0.2, 10, 1), speedUp: !!b.speedUp, speed: num(b.speed, 1, 16, 4) } : {}),
+        ...(kind === 'tighten' && b.target !== undefined && b.target !== null && b.target !== '' ? { target: num(b.target, 1, 24 * 3600, 60) } : {}) };
+      try { return json(res, 200, await fns[kind](key, opts)); } catch (e) { return json(res, 500, { error: String(e.message || e) }); }
+    }
+    if (p === '/api/edit-transcribe' && req.method === 'POST') {  // local ASR, cached by (sha, model, language)
+      const key = editId(url.searchParams.get('film'));
+      if (!key) return json(res, 404, { error: 'no such edit film (films/<key>/edit.json)' });
+      const b = await body(req);
+      if (typeof b.src !== 'string' || !ID_RE.test(b.src)) return json(res, 400, { error: 'src: a source id from the media bin' });
+      const model = ['tiny', 'base', 'small', 'medium'].includes(b.model) ? b.model : 'small';
+      const language = typeof b.language === 'string' && /^[a-z]{2,3}$/.test(b.language) ? b.language : 'auto';
+      try {
+        const r = await (await import('../engine/transcribe.mjs')).transcribe(key, b.src, { model, language });
+        return json(res, 200, { language: r.language, words: r.words.length, cached: !!r.cached });
+      } catch (e) { return json(res, 500, { error: String(e.message || e) }); }
+    }
+
     json(res, 404, { error: 'not found' });
   } catch (e) { json(res, 500, { error: String(e.message || e) }); }
 });
