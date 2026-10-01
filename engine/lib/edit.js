@@ -115,7 +115,7 @@ export async function editFilm(hooks = {}) {
       })));
       if (missing.length) throw new Error(`footage failed to load (re-run \`studio ingest\`?):\n${missing.join('\n')}`);
       // design.json drives the caption/overlay look; captions come from the `from` source's transcript (retimed)
-      try { D = await fetch('./design.json', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)); } catch { D = null; }
+      try { D = await (await import('./design.js')).loadDesign('./design.json'); } catch { D = null; } // the wrapper (D.px/D.c/D.fonts), not the raw file
       if (edit.captions) {
         const from = edit.captions.from ?? edit.tracks.find((x) => x.kind === 'video')?.clips[0]?.src;
         const doc = from && await fetch(`./assets/media/${from}/transcript.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);

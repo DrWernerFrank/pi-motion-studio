@@ -2,7 +2,7 @@
 // (48 kHz 16-bit PCM from ingest). Frame boundaries map to sample boundaries with one rounding rule everywhere:
 //   sampleAt(frame) = round(frame * den * 48000 / num)     (NTSC: 1601.6 samples per frame, so lengths are exact to one sample)
 // so a clip that starts at frame n starts at sampleAt(n) and an A/V offset can only come from the encoder, never from here.
-import { closeSync, existsSync, openSync, readSync, rmSync, writeFileSync } from 'node:fs';
+import { closeSync, existsSync, openSync, readSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { normalize, writeWav } from './audio.mjs';
 import { readBin } from './ingest.mjs';
@@ -28,7 +28,6 @@ export async function cleanAudio(film, id, { log = () => {} } = {}) {
   await run('ffmpeg', ['-y', '-v', 'error', '-i', inWav, '-af',
     'highpass=f=80,afftdn=nr=12:nf=-40,acompressor=threshold=-21dB:ratio=2.5:attack=12:release=180:makeup=2,alimiter=limit=0.9:attack=2:release=36',
     '-ar', String(SR), '-c:a', 'pcm_s16le', part]);
-  const { renameSync } = await import('node:fs');
   renameSync(part, out);
   state.steps = { ...(state.steps || {}), clean: key };
   writeFileSync(stateFile, JSON.stringify(state, null, 1));

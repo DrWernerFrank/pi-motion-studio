@@ -56,7 +56,13 @@ export async function editCommand(filmKey, argv, log = console.log) {
   const show = () => { const { film, edit } = loadEdit(filmKey); log(describe(film, edit)); };
   try {
     switch (sub) {
-      case 'show': show(); return;
+      case 'show': {
+        // --json: the edit state as data (edit_status reads this). One line, machine-shaped.
+        if (flags.json) { const { film, edit } = loadEdit(filmKey); log(JSON.stringify({ key: film.key, rev: edit.rev, fps: edit.fps, sources: edit.sources,
+          tracks: edit.tracks.map((t) => ({ id: t.id, kind: t.kind, clips: t.clips.length })), frames: timelineFrames(edit), seconds: timelineSeconds(edit),
+          overlays: edit.overlays, captions: edit.captions, markers: edit.markers, history: historyDepth(film.key) })); return; }
+        show(); return;
+      }
       case 'undo': { const r = undo(filmKey, { baseRev }); syncFilm(filmKey); log(`undone → rev ${r.rev}`); show(); return; }
       case 'redo': { const r = redo(filmKey, { baseRev }); syncFilm(filmKey); log(`redone → rev ${r.rev}`); show(); return; }
       case 'sync': { const r = syncFilm(filmKey); log(`film.json: ${r.frames} frames = ${r.duration}s @ ${r.fps}`); return; }

@@ -118,7 +118,7 @@ export function init(c) {
   big.addEventListener('pointerdown', onDown);
   big.addEventListener('pointermove', onMove);
   big.addEventListener('pointerup', onUp);
-  big.addEventListener('pointerleave', () => { if (!E.drag) { E.hover = null; big.style.cursor = 'default'; draw(); } });
+  big.addEventListener('pointerleave', () => { if (!E.drag) { E.hover = null; E.hoverSig = null; big.style.cursor = 'default'; draw(); } });
   big.addEventListener('dblclick', onDbl);
   big.addEventListener('wheel', (e) => {
     e.preventDefault();
@@ -134,8 +134,9 @@ export function init(c) {
 export function setFilm(S, d) {
   if (!d || !d.edit) return unmount(S);
   if (E.key !== d.key) {
-    Object.assign(E, { edit: null, rev: -1, editMtime: 0, sources: {}, loadedOnce: false, sel: null, io: null, drag: null,
-      peaks: {}, imgs: {}, tr: null, trSrc: null, trSel: null, trSig: '', cuts: null, zoom: 60, scroll: 0, playing: false, rate: 0 });
+    Object.assign(E, { key: d.key, edit: null, rev: -1, editMtime: 0, sources: {}, loadedOnce: false, sel: null, io: null, drag: null,
+      peaks: {}, imgs: {}, tr: null, trSrc: null, trSel: null, trSig: '', cuts: null, zoom: 60, scroll: 0, playing: false, rate: 0,
+      _fitted: false, _ssig: null, hoverSig: null, dropX: null, binDrag: null });
   }
   mount(S);
   load().catch((e) => fail(e));
@@ -172,6 +173,10 @@ async function load() {
     if (E.tr && !E.tr.missing) retimeTranscript();
     if (had) ctx.reloadPreview();                                     // the film page reads edit.json at setup: reload it
     if (!E._fitted) { fit(); E._fitted = true; }
+    if (!E.trSrc && E.sources) {                                      // the transcript pane follows the film
+      const first = E.edit.tracks.find((t) => t.kind === 'video')?.clips?.[0]?.src || trCandidates()[0];
+      if (first) loadTranscript(first);
+    }
     if (el('#tabBody').__editRoot === E.key) refreshPanel();
     else if (ctx.S.tab === 'edit') renderTab(ctx.S, el('#tabBody'));
   } else E.history = r.history || E.history;
@@ -181,7 +186,7 @@ async function load() {
 
 function adopt(r) {   // a mutation of ours came back: swap in the new edit, keep the view state
   if (!r || r.rev === undefined) return;
-  E.edit = r.edit; E.rev = r.rev; E.history = r.history || E.history;
+  E.edit = r.edit; E.rev = r.rev; E.history = r.history || E.history; E.editMtime = Date.now();   // the edit is now newer than any mix
   if (E.sel && !findClip(E.sel)) E.sel = null;
   if (E.tr && !E.tr.missing) retimeTranscript();
   draw(); updateTools();
@@ -318,6 +323,7 @@ export function keys(e) {
 }
 
 function setIO(which) {
+  if (!E.edit) return;
   const t = frameSnap(ctx.S.t);
   E.io = E.io || {};
   E.io[which] = t;
@@ -326,6 +332,7 @@ function setIO(which) {
 }
 
 async function splitAtPlayhead() {
+  if (!E.edit) return;
   const g = G(), t = frameSnap(ctx.S.t), ops = [];
   for (const tr of E.edit.tracks) for (const c of tr.clips) {
     const a = g.F(c.at), b = a + clipFrames(E.edit, c), k = g.F(t);
@@ -337,6 +344,7 @@ async function splitAtPlayhead() {
 }
 
 async function delSelection() {   // word range > selected clip > I/O range
+  if (!E.edit) return;
   if (E.trSel && E.tr && !E.tr.missing) {
     const ws = E.tr.mapped.slice(Math.min(E.trSel.a, E.trSel.b), Math.max(E.trSel.a, E.trSel.b) + 1).filter(Boolean);
     if (!ws.length) { E.trSel = null; } else {
@@ -362,8 +370,9 @@ async function delSelection() {   // word range > selected clip > I/O range
 }
 
 async function addMarker() {
-  const label = prompt('marker label (shown on the ruler)', '') ?? '';
-  if (label === null) return;
+  if (!E.edit) return;
+  const label = prompt('marker label (shown on the ruler)');
+  if (label === null) return;   // prompt returns null only on cancel
   await mutate([{ op: 'marker', t: frameSnap(ctx.S.t), label }]);
 }
 
@@ -412,6 +421,7 @@ function draw() {
     c.font = '600 11px Inter, sans-serif';
   }
   c.textBaseline = 'alphabetic';
+  updateTools();   // tc + rev + undo/redo state ride along with every redraw
 }
 
 const RULER_STEPS = [1 / 30, 0.1, 0.2, 0.5, 1, 2, 5, 10, 15, 30, 60, 120, 300, 600, 1800, 3600];
@@ -598,7 +608,7 @@ function drawDragPreview(c, W, H) {
     const l = lanes().find((x) => x.track.id === d.trackId);
     if (!l) return;
     const cl = findClip(d.id);
-    const lenF = d.p.outF - d.p.inF, at = d.edge === 'l' && !d.ripple ? g.S(g.F(cl.at) + (d.p.inF - d.in0F)) : cl.at;
+    const lenF = d.p.outF - d.p.inF, at = d.p.at ?? cl.at;
     const x0 = X(at), x1 = X(g.S(g.F(at) + lenF));
     c.save(); c.globalAlpha = .9;
     c.strokeStyle = '#ff6a3d'; c.setLineDash([4, 3]); c.lineWidth = 1.5;
@@ -675,17 +685,25 @@ export function drawTimeline(S) {
 
 export function miniDown(e) {
   const t = el('#timeline'), r = t.getBoundingClientRect(), S = ctx.S;
+  if (!E.edit || !t) return;   // still loading (or a film switch raced): nothing sane to scrub yet
   const x = e.clientX - r.left, d = dur(), k = r.width / Math.max(d, 0.001);
   const vx = (E.scroll / d) * r.width, vw = Math.max(6, (visT() / d) * r.width);
   const mode = x >= vx && x <= vx + vw ? 'pan' : 'scrub';
   const sx = x, s0 = E.scroll;
-  t.setPointerCapture(e.pointerId);
+  let moved = false;
+  try { t.setPointerCapture(e.pointerId); } catch { /* synthetic/edge: proceed without capture */ }
   const move = (ev) => {
     const ex = ev.clientX - r.left;
+    moved = true;
     if (mode === 'pan') { E.scroll = clamp(s0 - ((ex - sx) / r.width) * d, 0, Math.max(0, d - visT())); draw(); }
     else { ctx.pause(); const tt = clamp((ex / r.width) * d, 0, d); ctx.seek(tt); E.scroll = clamp(tt - visT() / 2, 0, Math.max(0, d - visT())); draw(); }
   };
-  const up = () => { removeEventListener('pointermove', move); removeEventListener('pointerup', up); };
+  const up = (ev) => {
+    removeEventListener('pointermove', move); removeEventListener('pointerup', up);
+    if (mode === 'pan' && !moved) {   // a plain click inside the viewport still seeks
+      ctx.pause(); ctx.seek(clamp((x / r.width) * d, 0, d)); draw();
+    }
+  };
   addEventListener('pointermove', move); addEventListener('pointerup', up);
   if (mode === 'scrub') { ctx.pause(); ctx.seek(clamp((x / r.width) * d, 0, d)); E.scroll = clamp(((x / r.width) * d) - visT() / 2, 0, Math.max(0, d - visT())); draw(); }
 }
@@ -718,7 +736,7 @@ function hit(x, y) {
 function onDown(e) {
   if (!E.edit || e.button !== 0) return;
   const p = pos(e), h = hit(p.x, p.y), g = G(), S = ctx.S;
-  big.setPointerCapture(e.pointerId);
+  try { big.setPointerCapture(e.pointerId); } catch { /* a capture-less drag still works */ }
   if (h.zone === 'marker') { ctx.pause(); ctx.seek(h.marker.t); return; }
   if (h.zone === 'ruler' || h.zone === 'gutter' || h.zone === 'void' || h.zone === 'lane') {
     if (h.zone === 'lane') { E.sel = null; refreshInspector(); }
@@ -765,7 +783,8 @@ function onMove(e) {
       else {
         const atT = snapT(d.at0 + delta);                       // non-ripple: the head moves, snap its new position
         const inF = clamp(g.F(d.in0 + (atT - d.at0) * k), 0, d.out0F - 1);
-        d.p = { in: g.S(inF), out: d.out0, inF, outF: d.out0F };
+        const atF = clamp(d.at0F + Math.round((inF - d.in0F) / k), 0, 1e9);
+        d.p = { in: g.S(inF), out: d.out0, inF, outF: d.out0F, at: g.S(atF) };
       }
     }
     d.lenDeltaF = (d.p.outF - d.p.inF) - d.len0F;
@@ -831,6 +850,7 @@ function onDrop(e) {
 }
 
 function zoomAt(px, f) {
+  if (!E.edit) return;
   const t = T(px);
   E.zoom = clamp(E.zoom * f, 0.02, 700);
   E.scroll = t - (px - GUT) / E.zoom;
@@ -840,12 +860,11 @@ function fit() { if (!E.edit || !big) return; E.zoom = clamp((big.clientWidth - 
 
 function fetchPeaks(src) {
   const st = E.peaks[src];
-  if (st) return st.data ? st : null;
-  if (!E.sources[src]?.has_peaks || st === null) { if (st === undefined) { E.peaks[src] = null; fetch(`/api/peaks?film=${E.key}&src=${src}`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).then((p) => { E.peaks[src] = p && p.data ? { rate: p.rate || 100, scale: p.scale || 127, data: p.data } : null; draw(); }); } return null; }
-  if (st === undefined) {
-    E.peaks[src] = null;
-    fetch(`/api/peaks?film=${E.key}&src=${src}`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).then((p) => { E.peaks[src] = p && p.data ? { rate: p.rate || 100, scale: p.scale || 127, data: p.data } : null; draw(); });
-  }
+  if (st !== undefined) return st && st.data ? st : null;   // loaded, or tried and there is none
+  E.peaks[src] = null;                                       // mark in flight
+  fetch(`/api/peaks?film=${E.key}&src=${src}`, { cache: 'no-store' })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((p) => { E.peaks[src] = p && p.data ? { rate: p.rate || 100, scale: p.scale || 127, data: p.data } : null; draw(); });
   return null;
 }
 function fetchImg(src) {
@@ -914,11 +933,13 @@ function renderBin() {
       const cv = document.createElement('canvas'); cv.width = 152; cv.height = 92; n.innerHTML = ''; n.appendChild(cv);
       fetchImg(id);
       const paint = () => {
-        const img = E.imgs[id]?.img; if (!img || !img.complete) return setTimeout(paint, 120);
+        const st = E.imgs[id];
+        if (!st || (!st.img && !st.none)) return setTimeout(paint, 120);   // still loading
+        if (!st.img || !st.img.complete || !st.img.naturalWidth) return;   // none or broken: keep the ♪/⋯ placeholder card
         const fs = s.ingest?.conform?.filmstrip; if (!fs) return;
         const idx = clamp(Math.floor((s.duration || 0) / 2 / fs.step), 0, fs.count - 1);
         const cc = cv.getContext('2d');
-        cc.drawImage(img, (idx % fs.cols) * fs.thumb_width, Math.floor(idx / fs.cols) * fs.thumb_height, fs.thumb_width, fs.thumb_height, 0, 0, cv.width, cv.height);
+        cc.drawImage(st.img, (idx % fs.cols) * fs.thumb_width, Math.floor(idx / fs.cols) * fs.thumb_height, fs.thumb_width, fs.thumb_height, 0, 0, cv.width, cv.height);
       };
       paint();
     }
@@ -940,7 +961,7 @@ function renderInspector() {
   if (host.__rev === E.rev && host.__sel === E.sel) return;
   if (host.contains(document.activeElement) && document.activeElement.tagName !== 'BUTTON') return;   // typing: don't clobber
   host.__rev = E.rev; host.__sel = E.sel;
-  const c = E.sel ? findClip(E.sel) : null;
+  const c = E.sel && E.edit ? findClip(E.sel) : null;
   if (!c) { host.innerHTML = '<p class="dim">Select a clip on the timeline. Trim its edges, drag it, S splits at the playhead, Del ripple-deletes.</p>'; return; }
   const col = { ...COLOR_DEFAULTS, ...(c.color || {}) };
   const num = (k, v, attrs = '') => `<input data-k="${k}" type="number" step="any" ${attrs} value="${v}">`;
@@ -1009,7 +1030,7 @@ function renderCuts() {
         <span class="btns"><button class="acc" title="apply this one as a ripple-delete">✂ accept</button><button class="rej">✕</button></span>
       </div>`;
     }).join('') : `<p class="dim">no ${E.cuts.kind} cuts found (nothing safe to remove).</p>`) +
-      `<p class="dim">${E.cuts.actionable ?? 0} actionable · ${(E.cuts.framesRemoved / 30).toFixed?.(2) ?? ''}s of frames</p>`;
+      `<p class="dim">${E.cuts.actionable ?? 0} actionable${E.cuts.framesRemoved ? ` · ${(E.cuts.framesRemoved / 30).toFixed(2)}s of frames` : ''}</p>`;
     host.querySelectorAll('.cutRow[data-i] .acc').forEach((b) => (b.onclick = () => acceptCut(+b.closest('.cutRow').dataset.i)));
     host.querySelectorAll('.cutRow[data-i] .rej').forEach((b) => (b.onclick = () => { const p = E.cuts.proposals[+b.closest('.cutRow').dataset.i]; p.__rejected = true; renderCuts(); }));
   }
@@ -1051,19 +1072,17 @@ async function loadTranscript(src) {
 function retimeTranscript() {   // source word times -> timeline times, through the SAME retimer the captions use
   if (!E.tr) return;
   if (E.tr.missing) { renderTr(); return; }
-  const keep = E.trSel;
   E.tr.mapped = retimeWords(E.edit, E.tr.src, E.tr.words);
   E.trSel = null;
-  renderTr(keep);
+  renderTr();
 }
-function renderTr(keepSel) {
+function renderTr() {
   const host = el('#ebTr'); if (!host) return;
   const sig = JSON.stringify([E.trSrc, E.tr?.missing, E.tr?.mapped?.length, E.rev, E.trSel?.a, E.trSel?.b]);
   if (host.__sig === sig) return;
   host.__sig = sig;
   const cands = trCandidates();
   const tr = E.tr;
-  const searchVal = host.querySelector?.('#trSearch')?.value ?? E.trSearch;
   if (!tr) { host.innerHTML = '<p class="dim">loading transcript…</p>'; return; }
   if (tr.missing) {
     host.innerHTML = `<div class="trHead"><select id="trSrc">${cands.map((id) => `<option ${id === tr.src ? 'selected' : ''}>${id}</option>`).join('')}</select><span class="dim">${ctx.esc(tr.error)}</span></div>
@@ -1086,7 +1105,7 @@ function renderTr(keepSel) {
     const hit = re ? re.test(w.text) : true;
     if (re && hit) hits++;
     const sel = E.trSel && i >= Math.min(E.trSel.a, E.trSel.b) && i <= Math.max(E.trSel.a, E.trSel.b);
-    const title = `source ${w.start.toFixed(2)}–${w.end.toFixed(2)}s${w.__clip ? ` · clip ${w.__clip}` : ''} · conf ${(w.confidence ?? 1).toFixed(2)}${isFill ? ' · filler' : ''}`;
+    const title = `timeline ${w.start.toFixed(2)}–${w.end.toFixed(2)}s${w.__clip ? ` · clip ${w.__clip}` : ''} · conf ${(w.confidence ?? 1).toFixed(2)}${isFill ? ' · filler' : ''}`;
     return `<span class="w${isFill ? ' fill' : ''}${re && !hit ? ' dim2' : ''}${re && hit ? ' hit' : ''}${sel ? ' sel' : ''}" data-i="${i}" title="${ctx.esc(title)}">${ctx.esc(w.text)}</span> `;
   }).join('');
   const selN = E.trSel ? Math.abs(E.trSel.b - E.trSel.a) + 1 : 0;
@@ -1105,7 +1124,19 @@ function renderTr(keepSel) {
   wordsEl.onscroll = () => { host.__scroll = wordsEl.scrollTop; };
   host.querySelector('#trSrc').onchange = (e) => loadTranscript(e.target.value);
   const si = host.querySelector('#trSearch');
-  si.oninput = () => { E.trSearch = si.value; host.__sig = ''; renderTr(); };
+  // search without rebuilding the pane: focus and scroll stay where they are
+  si.oninput = () => {
+    E.trSearch = si.value;
+    let re2 = null; try { re2 = new RegExp(E.trSearch, 'i'); } catch { re2 = null; }
+    let hits2 = 0;
+    host.querySelectorAll('.w').forEach((n) => {
+      const hit = re2 ? re2.test(words[+n.dataset.i].text) : true;
+      if (re2 && hit) hits2++;
+      n.classList.toggle('dim2', !!re2 && !hit);
+      n.classList.toggle('hit', !!re2 && hit);
+    });
+    host.querySelector('#trCount').textContent = `${tr.language} · ${tr.words.length} words · ${words.length} on the timeline${E.trSearch ? ` · ${hits2} hits` : ''}`;
+  };
   host.querySelector('#trCut')?.addEventListener('click', () => delSelection());
   host.querySelector('#trClr')?.addEventListener('click', () => { E.trSel = null; host.__sig = ''; renderTr(); });
   host.querySelectorAll('.w').forEach((n) => {
@@ -1127,16 +1158,21 @@ function updateTools() {
   el('#eRedo').disabled = !E.history.redo;
 }
 
-// hooks from load(): make sure a transcript follows the film
-export function ensureTranscript() {
-  if (!E.tr && !E.trSrc && E.edit) {
-    const first = E.edit.tracks.find((t) => t.kind === 'video')?.clips?.[0]?.src || trCandidates()[0];
-    if (first) loadTranscript(first);
-  } else if (E.tr && !E.tr.missing) retimeTranscript();
+// clear + force a transcript pane rebuild (used after cuts and word-selection changes)
+function refreshTr() { const h = el('#ebTr'); if (h) { h.__sig = ''; renderTr(); } }
+
+// select the clip -> the inspector follows (used from the canvas handlers). Switches the transcript pane to
+// the clip's source when that source has words, so clicking around a multi-source edit follows the picture.
+function refreshInspector() {
+  const host = el('#ebInsp');
+  if (host) { host.__rev = null; renderInspector(); }
+  const c = E.sel ? findClip(E.sel) : null;
+  if (c && E.tr && !E.tr.missing && E.tr.src !== c.src && E.sources[c.src]?.has_transcript) loadTranscript(c.src);
 }
 
-// select the transcript's source when the user picks a clip (called from onDown via refreshInspector)
-setInterval(() => {   // keep the inspector's stale-rev guard honest while the user types
+// a slow poll so the inspector catches up once the user blurs an input it was protecting
+// (its own refresh refuses to rebuild the form while an input inside it is focused)
+setInterval(() => {
   const host = el('#ebInsp');
-  if (host && host.__rev !== E.rev && !(host.contains(document.activeElement) && document.activeElement.tagName !== 'BUTTON')) renderInspector();
-}, 1200);
+  if (host && E.edit && host.__rev !== E.rev && !(host.contains(document.activeElement) && document.activeElement.tagName !== 'BUTTON')) renderInspector();
+}, 1500);

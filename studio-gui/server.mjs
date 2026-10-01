@@ -142,7 +142,7 @@ const server = createServer(async (req, res) => {
       const html = readFileSync(join(PUB, 'index.html'), 'utf8').replace('__TOKEN__', TOKEN);
       res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' }); return res.end(html);
     }
-    if (p === '/app.js' || p === '/style.css') return sendFile(req, res, join(PUB, p.slice(1)));
+    if (p === '/app.js' || p === '/edit.js' || p === '/style.css') return sendFile(req, res, join(PUB, p.slice(1)));
     // Project files at their real paths: films import /engine/lib/*.js absolutely.
     if (/^\/(films|engine|refs|templates)\//.test(p)) { const full = safePath(p); if (!full) { res.writeHead(403); return res.end(); } return sendFile(req, res, full); }
 
@@ -249,9 +249,11 @@ const server = createServer(async (req, res) => {
         const name = o.op ?? o.name;
         if (!OP_SNAP.includes(name)) throw new OpError(`unknown op "${name}" (ops: ${OP_NAMES.join(', ')})`);
         if (o.src !== undefined && (typeof o.src !== 'string' || !ID_RE.test(o.src))) throw new OpError(`bad source id ${JSON.stringify(o.src)}`);
-        if (typeof o.file === 'string') {
-          const full = safePath('/' + o.file.replace(/^[\\/]+/, '').replace(/\\/g, '/'));
-          if (!full || !/\.(cube|3dl)$/i.test(o.file)) throw new OpError(`lut file must be a .cube/.3dl inside the repo, got ${JSON.stringify(o.file)}`);
+        if (typeof o.file === 'string') {   // lut { file }: the one op that names a file — relative, inside the repo, .cube/.3dl
+          const f = o.file.replace(/\\/g, '/');
+          if (f.includes('..') || /^[a-z]:/i.test(f) || f.startsWith('/') || !/^(?!\/)([\w][\w .\-()]*\/)*[\w][\w .\-()]*\.(cube|3dl)$/i.test(f))
+            throw new OpError(`lut file must be a repo-relative .cube/.3dl path (no .., no absolute), got ${JSON.stringify(o.file)}`);
+          if (!safePath('/' + f)) throw new OpError(`lut file does not resolve inside the repo: ${JSON.stringify(o.file)}`);
         }
       }
       return ops;

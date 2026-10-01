@@ -56,12 +56,26 @@ export async function cutSilence(filmKey, { src, maxGap = 0.5, keepBreath = 0.15
   const props = [];
   for (const gap of sil.gaps) {
     if (gap.duration < maxGap) continue;
-    const keep = Math.min(keepBreath, gap.duration / 3);
-    const from = gap.start + Math.min(pad, gap.duration * 0.2), to = gap.end - keep; // cut into the gap, keep breath at the end
-    const span = timelineSpan(edit, G, id, from, to);
-    if (!span) continue; // the gap is not on the timeline (already cut, or outside clips)
-    props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `pause ${gap.duration.toFixed(2)}s (max ${maxGap}s)`,
-      removedText: fmtList(wordsBetween(words, from, to)), confidence: gap.duration >= maxGap * 2 ? 0.95 : 0.8, ...span });
+    // The gap is measured, the WORDS are the fence: a cut may only remove span no word occupies. Quiet words
+    // (a low-energy "um", a speech tail under the envelope's threshold) sit inside a "silence" gap — the
+    // transcript fences them and the cut takes the truly empty stretches: before the first word, after the
+    // last word, and between every pair of neighbouring words inside the gap.
+    const inside = words.filter((w) => w.start < gap.end - 0.03 && w.end > gap.start + 0.03).sort((a, b) => a.start - b.start);
+    const edges = [gap.start, ...inside.flatMap((w) => [w.start, w.end]), gap.end];
+    const stretches = [];
+    for (let i = 0; i + 1 < edges.length; i += 2) {   // (gapStart, w1.start), (w1.end, w2.start), ... (last.end, gapEnd)
+      const from = i === 0 ? edges[0] : edges[i] + 0.04;          // 40 ms of room tone after a word
+      const to = i + 1 === edges.length - 1 ? edges.at(-1) : edges[i + 1] - 0.04;   // ... and before the next
+      if (to - from >= 0.1) stretches.push({ from, to });
+    }
+    for (const st of stretches) {
+      const keep = Math.min(keepBreath, (st.to - st.from) / 3);
+      const from = st.from, to = st.to - keep;   // keep breath at the end of the empty stretch
+      if (to - from < 0.05) continue;
+      const span = timelineSpan(edit, G, id, from, to);
+      if (!span) continue;
+      props.push({ op: 'ripple-delete', track: 'V1', from: span.from, to: span.to, reason: `pause ${gap.duration.toFixed(2)}s (max ${maxGap}s), the words around it kept`, removedText: fmtList(wordsBetween(words, from, to)), confidence: gap.duration >= maxGap * 2 ? 0.95 : 0.8, ...span });
+    }
   }
   return finish(filmKey, props, { apply, kind: 'silence', log });
 }

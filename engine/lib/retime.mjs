@@ -12,7 +12,13 @@ export function retimeWords(edit, srcId, words) {
     for (const c of [...t.clips].sort((a, b) => F(a.at) - F(b.at))) {
       if (c.src !== srcId || c.freeze) continue;
       const k = speedOf(edit, c), at = c.at, inS = c.in;
-      for (const w of words) if (w.start >= inS - 1e-6 && w.end <= c.out + 1e-6) out.push({ ...w, start: at + (w.start - inS) / k, end: at + (w.end - inS) / k, __clip: c.id });
+      // a word that STRADDLES a clip edge is still on the timeline (partially): keep it, clipped to the clip
+      // (its outside part is genuinely gone with the cut). Full words keep their exact times.
+      for (const w of words) {
+        if (w.end <= c.in + 1e-6 || w.start >= c.out - 1e-6) continue;      // entirely outside this clip
+        const sA = Math.max(w.start, c.in), sB = Math.min(w.end, c.out);
+        out.push({ ...w, start: at + (sA - c.in) / k, end: at + (sB - c.in) / k, __clip: c.id, partial: sA > w.start + 1e-6 || sB < w.end - 1e-6 });
+      }
     }
   }
   return out.sort((a, b) => a.start - b.start);

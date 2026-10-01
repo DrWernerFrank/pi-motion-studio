@@ -41,7 +41,7 @@ async function selectFilm(key, { keepTime = false } = {}) {
   S.key = key;
   history.replaceState(null, '', `#film=${key}`);
   const d = await api(`/api/films/${key}`);
-  if (d.error) return;
+  if (d.error || key !== S.key) return;   // a newer selection (or film churn) superseded this response
   const codeChanged = !S.d || S.d.code !== d.code || changed;
   S.d = d;
   if (changed) { S.fmt = d.formats[0]; if (!keepTime) S.t = 0; pause(); }
@@ -126,7 +126,8 @@ $('#viewSeg').querySelectorAll('button').forEach((b) => (b.onclick = () => {
 addEventListener('keydown', (e) => {
   if (!S.d || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
   if (EDIT.handles(S) && EDIT.keys(e)) return;   // J/K/L · I/O · S · Del · Ctrl+Z/Y · frame step
-  const step = e.shiftKey ? 1 : 1 / (S.d.cfg.fps || 60);
+  const fps = Number(S.d.cfg.fps);   // edit films carry a rational rate ("30000/1001"): never let step go NaN
+  const step = e.shiftKey ? 1 : 1 / (Number.isFinite(fps) && fps > 0 ? fps : 60);
   if (e.code === 'Space') { e.preventDefault(); S.playing ? pause() : play(); }
   if (e.code === 'ArrowRight') { pause(); seek(S.t + step); }
   if (e.code === 'ArrowLeft') { pause(); seek(S.t - step); }

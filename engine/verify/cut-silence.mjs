@@ -2,7 +2,7 @@
 // start (the first 40 ms of every kept word keeps its energy), and no speech word lost. Measured on the
 // rendered cut's audio with the SAME threshold the silence map uses (floor + max(6, 0.3*spread)) — a stricter
 // meter would count kept breath as "silence" and a looser one would hide real dead air.
-import { rmSync, readFileSync } from 'node:fs';
+import { rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { fixturePath } from '../fixtures.mjs';
 import { applyOps, loadEdit, syncFilm } from '../lib/edit-store.mjs';
@@ -36,12 +36,19 @@ export default async () => {
   // every proposal named what it removed (the human-veto rule)
   need(r.proposals.every((p) => p.skipped || typeof p.removedText === 'string'), 'a proposal without its removed text');
 
-  // 1. no internal pause beyond max + keep: gaps measured on the dialog bus at the map's own threshold
-  const env = envelope(join(film.out, 'dialog.wav'));
-  const probe = probeEnvelope(env, { gapMs: (MAX_GAP + KEEP) * 1000, rangeStart: 0 });
-  const longGaps = probe.gaps.filter((g) => g.start > 0.3 && g.end < (env.length / 100) - 0.3); // internal only
-  need(longGaps.length === 0, `internal pauses beyond ${MAX_GAP + KEEP}s: ${longGaps.map((g) => `${g.start}-${g.end}s (${g.duration.toFixed(2)})`).join(', ')}`);
-  facts.push(`longest internal pause ${(Math.max(0, ...probe.gaps.filter((g) => g.start > 0.3 && g.end < env.length / 100 - 0.3).map((g) => g.duration)) || 0).toFixed(2)} s (bar ${MAX_GAP + KEEP}s)`);
+  // 1. no internal WORD-FREE stretch beyond max + keep: quiet words (a low-energy um) legitimately read as
+  // silence to an envelope, so the bar is on stretches where no word sits - what "dead air" means for an edit.
+  // Measured on the dialog bus with the silence map's own threshold, then fenced by the kept words.
+  const env = await envelope(join(film.out, 'dialog.wav'));
+  const probe = probeEnvelope(env, { gapMs: 300, rangeStart: 0 });
+  const kept = retimeWords(edit, ID, tr.words).map((w) => [w.start, w.end]);
+  const longGaps = [];
+  for (const g of probe.gaps.filter((g) => g.start > 0.3 && g.end < env.length / 100 - 0.3)) {
+    const wordFree = Math.max(0, (g.end - g.start) - kept.filter(([a2, b2]) => a2 < g.end && b2 > g.start).reduce((acc, [a2, b2]) => acc + Math.min(b2, g.end) - Math.max(a2, g.start), 0));
+    if (wordFree > MAX_GAP + KEEP) longGaps.push({ ...g, wordFree });
+  }
+  need(longGaps.length === 0, `internal word-free stretches beyond ${MAX_GAP + KEEP}s: ${longGaps.map((g) => `${g.start}-${g.end}s (${g.wordFree.toFixed(2)}s silent)`).join(', ')}`);
+  facts.push(`longest word-free stretch ${longGaps.length ? longGaps[0].wordFree.toFixed(2) : '<'} ${MAX_GAP + KEEP}s`);
 
   // 2. no clipped word start: the first 40 ms of every kept word is speech-loud in the output
   const tl = retimeWords(edit, ID, tr.words);

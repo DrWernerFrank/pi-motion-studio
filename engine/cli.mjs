@@ -46,6 +46,9 @@ const HELP = `studio <command> <film> [options]
                          conform footage (CFR, upright, SDR bt709, short GOP) + proxy, audio, peaks, filmstrip, scenes, silence map
   edit <film> [show | ops '<json array>' | undo | redo | sync | export-edl [f] | import-edl <f> | <op> --k v …] [--base-rev N]
                          the timeline as data: add trim split delete ripple-delete move reorder speed freeze volume fade xfade crop-keyframe overlay caption-style marker snap
+  autoedit <film> --preset talking-head|screen|audiogram|montage [--src <file>…] [--id cam] [--target 60] [--final]
+                         the deterministic pipeline, no LLM: ingest → transcribe → measured cuts → captions →
+                         reframe → sound → gates → draft renders of every format (--final ships finals)
   media <film>           the media bin: sources, kinds, durations, whether the originals are still where they were
   relink <film> [--search dir ...]   find moved originals by size + sha256 and repair the bin (and edit.json)
   cache [gc [--dry] [--fixtures]]   disk use of media/outputs/caches; gc removes temp films, orphan media, interrupted-ingest leftovers
@@ -247,6 +250,15 @@ async function main() {
           proxy: !argv.includes('--no-proxy'), audioStream: opt('audio-stream'), stillSeconds: opt('still-seconds') });
         console.log(`${r.id}: ${r.kind} ${r.ingest.conform ? `${r.ingest.conform.width}x${r.ingest.conform.height} @ ${r.ingest.conform.fps} (${r.ingest.conform.frames} frames, ${r.ingest.conform.duration.toFixed(2)}s)` : `${(r.ingest.audio_duration || 0).toFixed(2)}s audio`}  ${r.cached ? 'cached' : r.seconds + 's'}  → ${rel(r.dir)}`);
       }
+      break;
+    }
+    case 'autoedit': {
+      const A = await import('./autoedit.mjs');
+      const srcs = []; argv.forEach((x, i) => { if (x === '--src' && argv[i + 1]) srcs.push(argv[i + 1]); });
+      const r = await A.autoedit(key, { preset: opt('preset') === true ? undefined : String(opt('preset') ?? ''),
+        target: opt('target') !== undefined && opt('target') !== true ? num('target') : undefined,
+        srcs, id: opt('id') === true ? undefined : opt('id'), final: !!opt('final'), log: console.log });
+      process.exitCode = r.pass ? 0 : 1;  // gates decide, like `studio gate`
       break;
     }
     case 'media': {

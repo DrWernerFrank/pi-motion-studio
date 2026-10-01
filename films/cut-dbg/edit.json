@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "rev": 2,
+  "fps": "30",
+  "counter": 13,
+  "sources": {
+    "speech": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/speech.mp4",
+      "sha256": "3128d4a66f6be8b0ef0311129ef14af14892ee38cb028cad16c5472ed59892de",
+      "kind": "video",
+      "duration": 29.9,
+      "frames": 897,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "speech",
+          "in": 0,
+          "out": 1.3,
+          "at": 0
+        },
+        {
+          "id": "c3",
+          "src": "speech",
+          "in": 2.1,
+          "out": 7.133333,
+          "at": 1.3
+        },
+        {
+          "id": "c5",
+          "src": "speech",
+          "in": 7.633333,
+          "out": 11.5,
+          "at": 6.333333
+        },
+        {
+          "id": "c7",
+          "src": "speech",
+          "in": 12.766667,
+          "out": 17.366667,
+          "at": 10.2
+        },
+        {
+          "id": "c9",
+          "src": "speech",
+          "in": 17.8,
+          "out": 23.166667,
+          "at": 14.8
+        },
+        {
+          "id": "c11",
+          "src": "speech",
+          "in": 23.933333,
+          "out": 28.433333,
+          "at": 20.166667
+        },
+        {
+          "id": "c13",
+          "src": "speech",
+          "in": 28.866667,
+          "out": 29.9,
+          "at": 24.666667
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}
