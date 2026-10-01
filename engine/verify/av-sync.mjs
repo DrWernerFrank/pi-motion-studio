@@ -9,7 +9,7 @@ import { renderFilm } from '../render.mjs';
 import { run } from '../lib/proc.mjs';
 import { cutEdit } from './_editslice.mjs';
 import { applyOps, loadEdit, syncFilm } from '../lib/edit-store.mjs';
-import { grid } from '../lib/edit-ops.mjs';
+import { grid, timelineSeconds } from '../lib/edit-ops.mjs';
 import { ingestSource } from '../ingest.mjs';
 import { fixturePath } from '../fixtures.mjs';
 import { rmSync } from 'node:fs';
@@ -86,8 +86,15 @@ export default async ({ quick } = {}) => {
     await buildDialog(K, { log: () => {} }); await mixEdit(K);
     const [r2] = await renderFilm(K, { quality: 'draft', fmt: '16:9', workers: 2, log: () => {} });
     const w2 = join((await import('../lib/film.mjs')).readFilm(K).out, '.av2.wav'), info2 = await decodeAudio(r2.file, w2);
-    // the last flash inside the final cut (source frames 1185..1170+... -> n%60==0), timeline ~1170+15s
-    const total = 1170 + 18, last = total - 1.2;
+    // the spot: the last flash that is actually ON the timeline (flashes are every 60 source frames; the tail
+    // cuts may not straddle one, so search the clips from the end)
+    const spots2 = [];
+    for (const c of [...loadEdit(K).edit.tracks[0].clips].sort((a, b) => a.at - b.at)) {
+      const g2 = grid(loadEdit(K).edit), inF = g2.F(c.in), outF = g2.F(c.out);
+      for (let f = Math.floor(outF / 60) * 60; f >= inF; f -= 60) { spots2.push({ tl: c.at + (f - inF) / 30, src: f }); break; }
+    }
+    const total = timelineSeconds(loadEdit(K).edit), last = spots2.at(-1)?.tl;
+    need(last !== undefined && total - last <= 30, `the last flash on the timeline is at ${last}s, not within the final 30 s of ${total.toFixed(0)}s`);
     const flash2 = await flashTime(r2.file, last, fps);
     const on2 = onsetAt(w2, info2, Math.floor((last - 0.3) * SR), Math.floor(0.5 * SR)) / SR;
     need(flash2 !== null && on2 > 0, `20-min tail: no flash (${flash2}) or beep (${on2}) near ${last.toFixed(1)}s`);

@@ -75,10 +75,17 @@ export async function buildDialog(filmKey, { log = () => {} } = {}) {
       const prev = cs[i - 1], next = cs[i + 1];
       const nIn = prev && G.F(prev.at) + clipFrames(edit, prev) === G.F(c.at) && continuous(prev, c) ? 0 : Math.round((fi * SR) / 1000);
       const nOut = next && G.F(c.at) + clipFrames(edit, c) === G.F(next.at) && continuous(c, next) ? 0 : Math.round((fo * SR) / 1000);
+      const jcutS = (c.audio?.j_cut_ms ?? 0) / 1000; // J/L offset: this clip's audio starts after its picture
+      const d0j = Math.max(0, d0 + Math.round(jcutS * SR));
+      const dstJ = Math.min(total, d1 + Math.round(jcutS * SR));
+      const dst2 = Math.max(0, dstJ - d0j);
+      if (dst2 <= 0) { placed++; continue; }
+      if (seg[0].length > dst2) seg = seg.map((ch) => ch.subarray(0, dst2)); else if (seg[0].length < dst2) seg = seg.map((ch) => { const o = new Float32Array(dst2); o.set(ch); return o; });
       const mono = seg.length === 1;
-      for (let k = 0; k < dst; k++) {
-        let g = gain; if (k < nIn) g *= 0.5 - 0.5 * Math.cos((Math.PI * k) / nIn); if (k >= dst - nOut) g *= 0.5 - 0.5 * Math.cos((Math.PI * (dst - 1 - k)) / nOut);
-        L[d0 + k] += seg[0][k] * g; R[d0 + k] += (mono ? seg[0][k] : seg[1][k]) * g;
+      const D = d0j, N = dst2;
+      for (let k = 0; k < N; k++) {
+        let g = gain; if (k < nIn) g *= 0.5 - 0.5 * Math.cos((Math.PI * k) / nIn); if (k >= N - nOut) g *= 0.5 - 0.5 * Math.cos((Math.PI * (N - 1 - k)) / nOut);
+        L[D + k] += seg[0][k] * g; R[D + k] += (mono ? seg[0][k] : seg[1][k]) * g;
       }
       placed++;
     }

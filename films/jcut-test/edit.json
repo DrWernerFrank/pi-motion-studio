@@ -2,7 +2,7 @@
   "version": 1,
   "rev": 2,
   "fps": "30",
-  "counter": 3,
+  "counter": 1,
   "sources": {
     "speech": {
       "path": "/home/werner/.cache/pi-motion-studio/fixtures/speech.mp4",
@@ -23,15 +23,11 @@
           "id": "c1",
           "src": "speech",
           "in": 0,
-          "out": 24.866667,
-          "at": 0
-        },
-        {
-          "id": "c3",
-          "src": "speech",
-          "in": 25.9,
-          "out": 29.9,
-          "at": 24.866667
+          "out": 2,
+          "at": 0,
+          "audio": {
+            "j_cut_ms": 200
+          }
         }
       ]
     },

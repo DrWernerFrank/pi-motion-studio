@@ -280,6 +280,24 @@ async function main() {
       console.log(T.readTranscript(key, argv[2], o));
       break;
     }
+    case 'cut': {
+      const C = await import('./cut.mjs');
+      const kind = argv[2], opts = { src: opt('src') && opt('src') !== true ? String(opt('src')) : undefined, apply: !!opt('apply'), log: console.log };
+      if (!['silence', 'fillers', 'takes', 'idle', 'tighten'].includes(kind)) throw new Error('studio cut <film> <silence|fillers|takes|idle|tighten> [--src cam] [--max-gap 0.5] [--apply] …');
+      let r;
+      if (kind === 'silence') r = await C.cutSilence(key, { ...opts, maxGap: num('max-gap', 0.5), keepBreath: num('keep-breath', 0.15) });
+      else if (kind === 'fillers') r = await C.cutFillers(key, { ...opts, extra: opt('also') && opt('also') !== true ? String(opt('also')).split(',') : [] });
+      else if (kind === 'takes') r = await C.cutTakes(key, { ...opts, window: num('window', 20) });
+      else if (kind === 'idle') r = await C.cutIdle(key, { ...opts, maxIdle: num('max-idle', 1.0), speedUp: !!opt('speed-up'), speed: num('speed', 4) });
+      else r = await C.tighten(key, { ...opts, target: opt('target') !== undefined && opt('target') !== true ? num('target') : undefined });
+      for (const p of r.proposals) {
+        if (p.skipped) console.log(`  SKIP  @${p.at.toFixed(2)}s  ${p.reason}`);
+        else console.log(`  CUT   ${p.from}s-${p.to}s (${p.frames}f)  ${p.reason}  removed: "${p.removedText}"`);
+      }
+      console.log(`cut ${kind}: ${r.actionable} proposals, ${(r.framesRemoved / 30).toFixed(2)}s total${r.applied ? ' (applied)' : ' (dry run: --apply)'}`);
+      if (r.removedText) console.log(`removed text: ${r.removedText}`);
+      break;
+    }
     case undefined: case 'help': case '--help': case '-h': console.log(HELP); break;
     default: console.error(`studio: unknown command "${cmd}"\n`); console.error(HELP); process.exit(2);
   }

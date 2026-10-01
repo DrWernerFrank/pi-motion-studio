@@ -212,6 +212,17 @@ export const OPS = {
   // volume { id, db }
   volume(edit, a) { const { clip: c } = findClip(edit, a.id); need(typeof a.db === 'number' && a.db >= -60 && a.db <= 24, `volume: db must be -60..24, got ${a.db}`); c.audio = { ...(c.audio || {}), gain_db: a.db }; if (a.db === 0 && !c.audio.fade_ms && !c.audio.mute) delete c.audio; return edit; },
 
+  // jcut { id, ms }: J/L-cut offset - the audio of this clip starts ms after its picture (negative: audio leads).
+  // The edit stays frame-snapped; the offset is honored to the sample in the dialog bus.
+  jcut(edit, a) {
+    const { clip: c } = findClip(edit, a.id), ms = Number(a.ms);
+    need(Number.isFinite(ms) && ms >= -2000 && ms <= 2000 && Math.abs(ms) >= 1, `jcut: ms must be -2000..2000 (and not 0), got ${a.ms}`);
+    const lenMs = (clipFrames(edit, c) * grid(edit).fps.den * 1000) / grid(edit).fps.num;
+    need(Math.abs(ms) < lenMs, `jcut: ${ms} ms is longer than the clip (${Math.floor(lenMs)} ms)`);
+    if (ms >= 0) c.audio = { ...(c.audio || {}), j_cut_ms: Math.round(ms) }; else { delete (c.audio ||= {}).j_cut_ms; if (!Object.keys(c.audio).length) delete c.audio; }
+    return edit;
+  },
+
   // fade { id, in_ms?, out_ms? }: audio fades at the clip's edges (default micro-fade 8 ms)
   fade(edit, a) {
     const { clip: c } = findClip(edit, a.id), cur = c.audio?.fade_ms || [8, 8], len = clipFrames(edit, c);

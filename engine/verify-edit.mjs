@@ -3,7 +3,7 @@
 // required check passed. A check lives in engine/verify/<id>.mjs (default export: async (ctx) => { pass,
 // measured, skip? }); a check without a file is "pending" and counts as red.
 //   studio verify-edit [--quick] [--list] [--only a,b] [--clean]
-import { existsSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -12,6 +12,7 @@ import { run } from './lib/proc.mjs';
 import { ROOT } from './lib/serve.mjs';
 
 const OUT = join(ROOT, 'docs', 'editing');
+const CACHE = join(homedir(), '.cache', 'pi-motion-studio');
 export const VERIFY_CACHE = join(homedir(), '.cache', 'pi-motion-studio', 'verify');
 
 // id, phase that delivers it, what must hold (short), slow = skipped by --quick (20-minute fixture, finals).
@@ -77,7 +78,27 @@ async function load(id) {
 
 const SYMBOL = { passed: 'PASS', failed: 'FAIL', pending: 'TODO', skipped: 'skip', error: 'ERR ' };
 
+// One verify run at a time: a second process would collect the first one's temp films mid-check.
+// The lock is a pid: a stale lock (dead process) is taken over with a warning.
+const LOCK = join(CACHE, 'verify.lock');
+const pidAlive = (pid) => { try { process.kill(pid, 0); return true; } catch (e) { return e.code === 'EPERM'; } };
+function takeLock() {
+  mkdirSync(CACHE, { recursive: true });
+  const cur = readJson(LOCK);
+  if (cur?.pid && cur.pid !== process.pid && pidAlive(cur.pid)) throw new Error(`another verify-edit is running (pid ${cur.pid}, started ${cur.at}): wait for it; stale locks are taken over automatically`);
+  if (cur?.pid && cur.pid !== process.pid) console.error(`verify-edit: taking over a stale lock (pid ${cur.pid} from ${cur.at})`);
+  writeFileSync(LOCK, JSON.stringify({ pid: process.pid, at: new Date().toISOString() }));
+}
+const dropLock = () => { try { const cur = readJson(LOCK); if (cur?.pid === process.pid) rmSync(LOCK, { force: true }); } catch { /* not ours */ } };
+
 export async function verifyEdit({ quick = false, list = false, only, clean = false } = {}) {
+  takeLock();
+  try {
+  return await runVerify({ quick, list, only, clean });
+  } finally { dropLock(); }
+}
+
+async function runVerify({ quick = false, list = false, only, clean = false } = {}) {
   const last = readJson(join(OUT, 'verify-last.json'), { checks: {} });
   if (clean) { const gone = cleanTemp(); console.log(gone.length ? `removed ${gone.join(', ')}` : 'nothing to clean'); return { pass: true }; }
   if (list) {
