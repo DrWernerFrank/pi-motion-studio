@@ -80,8 +80,9 @@ export default async ({ quick } = {}) => {
     await (await import('../edit-cli.mjs')).createEditFilm(K, { fps: 30, title: K });
     await ingestSource(K, fixturePath('long'), { id: 'cam', log: () => {} });
     const G2 = grid(loadEdit(K).edit);
-    await applyOps(K, { op: 'add', src: 'cam', in: 0, out: G2.S(1170) });
-    for (let i = 0; i < 6; i++) await applyOps(K, { op: 'add', src: 'cam', in: G2.S(1170 + i * 5), out: G2.S(1173 + i * 5) });
+    // op in/out args are SECONDS (snapped to frames by the op itself); G2.S() takes frames — do not mix them
+    await applyOps(K, { op: 'add', src: 'cam', in: 0, out: 1170 });
+    for (let i = 0; i < 6; i++) await applyOps(K, { op: 'add', src: 'cam', in: 1170 + i * 5, out: 1173 + i * 5 });
     syncFilm(K);
     await buildDialog(K, { log: () => {} }); await mixEdit(K);
     const [r2] = await renderFilm(K, { quality: 'draft', fmt: '16:9', workers: 2, log: () => {} });
@@ -91,7 +92,7 @@ export default async ({ quick } = {}) => {
     const spots2 = [];
     for (const c of [...loadEdit(K).edit.tracks[0].clips].sort((a, b) => a.at - b.at)) {
       const g2 = grid(loadEdit(K).edit), inF = g2.F(c.in), outF = g2.F(c.out);
-      for (let f = Math.floor(outF / 60) * 60; f >= inF; f -= 60) { spots2.push({ tl: c.at + (f - inF) / 30, src: f }); break; }
+      for (let f = Math.floor((outF - 1) / 60) * 60; f >= inF; f -= 60) { spots2.push({ tl: c.at + (f - inF) / 30, src: f }); break; } // strictly inside the clip
     }
     const total = timelineSeconds(loadEdit(K).edit), last = spots2.at(-1)?.tl;
     need(last !== undefined && total - last <= 30, `the last flash on the timeline is at ${last}s, not within the final 30 s of ${total.toFixed(0)}s`);

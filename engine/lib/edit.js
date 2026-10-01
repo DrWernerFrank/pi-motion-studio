@@ -8,8 +8,25 @@
 // (edit.json, media files, t): no timers, no wall clock, no carried state beyond "which source frame each element currently shows".
 import { film } from './runtime.js';
 import { activeClip, clipFrames, grid, mapFrame } from './edit-ops.mjs';
+import { captionChunks, captions } from './captions.js';
+import { drawOverlays, punchInZoom } from './overlays.js';
 
-const once = (el, ev, ms = 20000) => new Promise((ok, bad) => {
+// source-word times -> timeline times for the caption chunks (same rule as engine/lib/retime.mjs)
+  const retime = (ed, srcId, words) => {
+    const out = [];
+    for (const t of ed.tracks) {
+      if (t.kind !== 'video') continue;
+      for (const c of [...t.clips].sort((a, b) => G2(ed).F(a.at) - G2(ed).F(b.at))) {
+        if (c.src !== srcId || c.freeze) continue;
+        const g = G2(ed), sf = g.F(c.out) - g.F(c.in), k = sf ? sf / clipFrames(ed, c) : 1;
+        for (const w of words) if (w.start >= c.in - 1e-6 && w.end <= c.out + 1e-6) out.push({ ...w, start: c.at + (w.start - c.in) / k, end: c.at + (w.end - c.in) / k });
+      }
+    }
+    return out.sort((a, b) => a.start - b.start);
+  };
+  const G2 = (ed) => grid(ed);
+
+  const once = (el, ev, ms = 20000) => new Promise((ok, bad) => {
   const to = setTimeout(() => bad(new Error(`timeout (${ms} ms) waiting for ${ev} on ${el.currentSrc || el.src}`)), ms); // failure guard only
   el.addEventListener(ev, (e) => { clearTimeout(to); ok(e); }, { once: true });
   el.addEventListener('error', () => { clearTimeout(to); bad(new Error(`cannot decode ${el.currentSrc || el.src}: ${el.error && el.error.message}`)); }, { once: true });
@@ -40,8 +57,30 @@ export function cameraAt(clip, fmt, lt) {
   return kf.at(-1);
 }
 
+// A follow camera: critically damped spring + dead zone over track.json samples (D8). Never snaps, never
+// jitters: inside the dead zone it holds, outside it eases after the subject at ~200 ms.
+function followCam(track, t, fmt, dz = 0.04) {
+  if (!track) return null;
+  const px = (i) => track.boxes[i];
+  let i = track.boxes.findIndex((b) => b.t >= t); // first sample at/after t (t before the first sample -> 0)
+  if (i < 0) i = track.boxes.length;
+  const prev = track.boxes[Math.max(0, i - 1)], next = track.boxes[Math.min(track.boxes.length - 1, i)];
+  const pick = (b) => (b && b.x !== null && b.x !== undefined ? { cx: b.x + b.w / 2, cy: b.y + b.h / 2 } : null);
+  const a = pick(prev), b2 = pick(next);
+  const target = b2 ?? a; // a miss holds the last known position (never snap away)
+  if (!target) return null;
+  // the dead zone: hold the last camera inside +- dz of the subject centre
+  const held = followCam.held ?? (followCam.held = {});
+  const key = fmt; const h = held[key];
+  if (h && Math.abs(target.cx - h.cx) < dz && Math.abs(target.cy - h.cy) < dz) return h;
+  // critically damped spring (k=170, d=34) from the held position to the target over ~200 ms
+  const k = 170, d = 34, w0 = Math.sqrt(k), tt = 0.2, x = 1 - Math.exp(-d * tt / 2) * (Math.cos(Math.sqrt(k - d * d / 4) * tt) + (d / (2 * Math.sqrt(k - d * d / 4))) * Math.sin(Math.sqrt(k - d * d / 4) * tt));
+  const cx = (h ? h.cx : target.cx) + (target.cx - (h ? h.cx : target.cx)) * x, cy = (h ? h.cy : target.cy) + (target.cy - (h ? h.cy : target.cy)) * x;
+  return (held[key] = { cx, cy, zoom: 1.0 });
+}
+
 export async function editFilm(hooks = {}) {
-  let edit, G, vids = {}, total = 0, strict = false;
+  let edit, G, vids = {}, total = 0, strict = false, cues = null, D = null, tracks = {};
   const state = { edit: null, layers: [] };
 
   // the layers visible at absolute frame k: [{ track, clip, srcFrame, video }] bottom to top
@@ -64,6 +103,21 @@ export async function editFilm(hooks = {}) {
         try { await once(v, 'loadeddata'); } catch (e) { missing.push(`${src}: ${e.message}`); }
       })));
       if (missing.length) throw new Error(`footage failed to load (re-run \`studio ingest\`?):\n${missing.join('\n')}`);
+      // design.json drives the caption/overlay look; captions come from the `from` source's transcript (retimed)
+      try { D = await fetch('./design.json', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)); } catch { D = null; }
+      if (edit.captions) {
+        const from = edit.captions.from ?? edit.tracks.find((x) => x.kind === 'video')?.clips[0]?.src;
+        const doc = from && await fetch(`./assets/media/${from}/transcript.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+        if (!doc) throw new Error(`edit.json wants captions from "${from}" but there is no transcript: run \`studio transcribe ${'<film>'} ${from}\``);
+        const tl = retime(edit, from, doc.words);
+        cues = captionChunks(tl, { maxChars: edit.captions.maxChars, maxGap: edit.captions.maxGap });
+        state.captions = { cues, style: edit.captions.style || 'pop', lang: edit.captions.lang || doc.language };
+      }
+      // track.json per source (face or seeded): the `follow` camera reads it
+      for (const id of new Set(edit.tracks.flatMap((x) => x.clips.map((c) => c.src)))) {
+        const doc = await fetch(`./assets/media/${id}/track.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+        if (doc) tracks[id] = doc;
+      }
       if (hooks.setup) await hooks.setup(L, cfg, state);
     },
     // Seek every video element this frame needs to the middle of its source frame, and wait for it. Repeated sub-frame times hit the cache.
@@ -80,11 +134,19 @@ export async function editFilm(hooks = {}) {
       const k = frameOf(t), layers = layersAt(k);
       state.t = t; state.k = k; state.layers = layers; state.fps = G.fps;
       if (hooks.under) hooks.under(ctx, t, L, state);
+      // punch-ins are camera moves: the footage draw below consumes the active ones
+      const punches = (edit.overlays ?? []).filter((o) => o.type === 'punch-in' && t >= o.at && t <= o.at + o.dur);
       for (const ly of layers) {
         if (strict && ly.video.__j !== ly.srcFrame) throw new Error(`footage not prepared for t=${t}: ${ly.clip.src} shows source frame ${ly.video.__j}, needs ${ly.srcFrame} (await __prepare(t) before seek(t))`);
         const lt = (k - G.F(ly.clip.at)) * G.fps.den / G.fps.num;
-        footage(ctx, ly.video, { x: 0, y: 0, w: L.W, h: L.H }, { cam: cameraAt(ly.clip, L.fmt, lt) });
+        const trk = tracks[ly.clip.src];
+        let cam = ly.clip.crop?.[L.fmt] ? cameraAt(ly.clip, L.fmt, lt) : trk && (ly.clip.cam === 'follow' || edit.captions?.cam === 'follow') ? followCam(trk, (ly.clip.in + lt * (ly.clip.speed || 1)), L.fmt) : { cx: 0.5, cy: 0.5, zoom: 1 };
+        if (ly.clip.cam === 'follow' && trk) cam = { ...(cam ?? {}), ...followCam(trk, ly.clip.in + lt * (ly.clip.speed || 1), L.fmt) };
+        for (const p of punches) { const lt2 = t - p.at; cam = { ...cam, zoom: cam.zoom * punchInZoom(lt2, { dur: p.dur, zoom: p.props.zoom ?? 1.18 }), cx: p.props.cx ?? cam.cx, cy: p.props.cy ?? cam.cy }; break; }
+        footage(ctx, ly.video, { x: 0, y: 0, w: L.W, h: L.H }, { cam });
       }
+      drawOverlays(ctx, t, L, D, edit.overlays, cfg);
+      if (state.captions) captions(ctx, t, { cues: state.captions.cues, style: state.captions.style, lang: state.captions.lang, face: state.face ?? undefined, D }, L);
       if (hooks.over) hooks.over(ctx, t, L, state);
     },
   });

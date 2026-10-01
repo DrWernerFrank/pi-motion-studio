@@ -298,6 +298,16 @@ async function main() {
       if (r.removedText) console.log(`removed text: ${r.removedText}`);
       break;
     }
+    case 'captions': {
+      const C = await import('./captions-export.mjs');
+      const fmt = opt('format') && opt('format') !== true ? String(opt('format')) : 'srt';
+      if (!['srt', 'vtt'].includes(fmt)) throw new Error('studio captions <film> [--format srt|vtt]');
+      const { film } = readFilm(key), { cues, lang, src } = C.timelineCues(key);
+      const out = join(film.out, `captions.${fmt}`);
+      writeFileSync(out, fmt === 'srt' ? C.toSrt(cues) : C.toVtt(cues));
+      console.log(`${cues.length} cues (${lang}, from ${src}) -> ${rel(out)}`);
+      break;
+    }
     case undefined: case 'help': case '--help': case '-h': console.log(HELP); break;
     default: console.error(`studio: unknown command "${cmd}"\n`); console.error(HELP); process.exit(2);
   }

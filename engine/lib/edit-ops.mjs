@@ -271,8 +271,9 @@ export const OPS = {
     edit.overlays.sort((p, q) => F(p.at) - F(q.at) || (p.id < q.id ? -1 : 1)); return edit;
   },
 
-  // caption-style { style?, from?, font?, accent?, position?, overrides? }
+  // caption-style { style?, from?, font?, accent?, position?, overrides? } — from: null turns captions off
   'caption-style'(edit, a) {
+    if (a.from === null) { edit.captions = null; return edit; }
     if (a.style !== undefined) need(CAPTION_STYLES.includes(a.style), `caption-style: style must be one of ${CAPTION_STYLES.join(', ')}, got ${a.style}`);
     if (a.overrides !== undefined) need(Array.isArray(a.overrides) && a.overrides.every((o) => Number.isInteger(o.word) && typeof o.text === 'string'), 'caption-style: overrides is [{ word: <index>, text }]');
     const { op, ...rest } = a; void op;

@@ -39,8 +39,10 @@ export async function openStudio() {
     const [w, h] = { '9:16': [1080, 1920], '1:1': [1080, 1080], '16:9': [1920, 1080], '4:5': [1080, 1350] }[fmt];
     const p = await browser.newPage({ viewport: { width: Math.round(w * scale), height: Math.round(h * scale) }, deviceScaleFactor: 1 });
     p.on('pageerror', (e) => errors.push(String(e)));
-    // beats.json is optional (edit films have no score): its 404 is not an error
-    p.on('console', (m) => { if (m.type() === 'error' && !(/Failed to load resource/.test(m.text()) && /\/beats\.json$/.test(m.location()?.url || ''))) errors.push(m.text()); });
+    // optional files (beats.json for edit films, track.json / transcript.json when not yet made): their 404s
+    // are not errors — a missing optional input is a first-class state, not a broken render
+    const OPTIONAL = /\/(beats|track|transcript)\.json$/;
+    p.on('console', (m) => { if (m.type() === 'error' && !(/Failed to load resource/.test(m.text()) && OPTIONAL.test(m.location()?.url || ''))) errors.push(m.text()); });
     await p.goto(`${srv.url}${film.rel}/index.html?render=1&fmt=${fmtSlug(fmt)}&scale=${scale}`);
     await p.waitForFunction(() => window.__ready === true, null, { timeout: 30000 }).catch(() => {
       throw new Error(`film page never became ready (${film.key} ${fmt}).\n${errors.join('\n') || 'no console errors: does index.html call film({...}) from /engine/lib/runtime.js?'}`);

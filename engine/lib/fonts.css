@@ -9,3 +9,7 @@
 @font-face { font-family: 'Instrument Serif'; src: url('/engine/fonts/InstrumentSerif-Regular.ttf') format('truetype'); font-style: normal; }
 @font-face { font-family: 'Instrument Serif'; src: url('/engine/fonts/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; }
 @font-face { font-family: 'JetBrains Mono'; src: url('/engine/fonts/JetBrainsMono.ttf') format('truetype'); font-weight: 100 800; }
+
+/* multi-script captions: Persian/Arabic (Vazirmatn, OFL) */
+@font-face { font-family: 'Vazirmatn'; src: url('/engine/fonts/Vazirmatn-Regular.woff2') format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Vazirmatn'; src: url('/engine/fonts/Vazirmatn-Bold.woff2') format('woff2'); font-weight: 700; }

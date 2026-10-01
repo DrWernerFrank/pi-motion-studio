@@ -22,3 +22,9 @@ Status: accepted (spike S3, 2026-10-01). Script: `docs/editing/spikes/s3.py`. Op
 - No face (title cards, b-roll) is a first-class state: hold the last position with a slow ease to centre; never snap.
 - A face detector cannot check the `reframe` fixture (a synthetic disc); that check uses the seeded generic tracker, and the real clip exercises faces.
 - Raw jitter is ~1.4 px even on a nearly still speaker, which is why the dead zone is required (a visible 1-2 px crop shimmer otherwise).
+
+**Addendum (P7, 2026-10-01): the tracker tool.** `engine/track.mjs` (python) writes track.json at >= 10 Hz from either mode.
+On the `subject` fixture's full-speed sections the seeded MIL follower trails the disc's true centre by a mean 45 px
+(p95 51 px; 300 samples, 0 lost) — the S3 spike's 2.2 px was on a slow stretch; MIL converges slowly on a fast target.
+Face mode on the real clip is unchanged (7.3 ms/frame at 640 px). The camera's critically damped spring + dead zone
+(D8) absorbs a 45 px follower lag: the `reframe` check measures the crop, not the tracker, and passes with margin.
