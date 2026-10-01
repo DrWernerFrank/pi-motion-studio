@@ -11,7 +11,17 @@ const READING = 17; // chars/s, the comfortable adult reading speed; a faster cu
 // words: [{ text, start, end }] -> cues [{ start, end, words, text, rtl }]
 export function captionChunks(words, { maxChars = 42, maxGap = 0.35, maxDur = 2.8, minDur = 0.55, lead = 0.05 } = {}) {
   const cues = []; let cur = [];
-  const flush = () => { if (!cur.length) return; cues.push({ start: Math.max(0, cur[0].start - lead), end: cur.at(-1).end + 0.12, words: cur, text: cur.map((w) => w.text).join(' ') }); cur = []; };
+  const flush = () => {
+    if (!cur.length) return;
+    // no cue may overlap the next (the spec's bar): the cosmetic 120 ms tail is clamped to the next cue's
+    // start + 20 ms, and the lead never crosses the previous cue's end
+    const next0 = words[words.indexOf(cur.at(-1)) + 1];
+    const end = next0 ? Math.min(cur.at(-1).end + 0.12, next0.start + 0.02) : cur.at(-1).end + 0.12;
+    const prev = cues.at(-1);
+    const start = prev ? Math.max(cur[0].start - lead, prev.end - 0.02) : Math.max(0, cur[0].start - lead);
+    cues.push({ start, end, words: cur, text: cur.map((w) => w.text).join(' ') });
+    cur = [];
+  };
   for (let i = 0; i < words.length; i++) {
     const w = words[i], prev = cur.at(-1);
     const punct = /[.!?،؛؟]$/.test(w.text);

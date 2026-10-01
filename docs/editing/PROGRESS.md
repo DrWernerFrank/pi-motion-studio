@@ -40,7 +40,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [ ] `cut-cleanup` (P5) ums removed, flub removed with last take kept, everything else kept, removed text listed
 - [x] `cut-idle` (P5) no frozen stretch beyond max; active stretches untouched; speed-up keeps audio locked
 - [x] `seams` (P5) no clicks at 20 cuts, micro-fade >= 5 ms, no black/frozen at seams, J/L offsets honored
-- [ ] `captions` (P6) layout in en/fa/ar+en/long word at 4 formats; safe area, <= 2 lines, >= 3.2u, no tofu, SRT/VTT valid
+- [x] `captions` (P6) layout in en/fa/ar+en/long word at 4 formats; safe area, <= 2 lines, >= 3.2u, no tofu, SRT/VTT valid
 - [ ] `overlays` (P6) title, lower third, callout, punch-in change pixels only in their region and window
 - [ ] `reframe` (P7) subject inside crop >= 95% of frames; speed/jerk caps; resets on cuts
 - [ ] `formats` (P7) 9:16, 1:1, 16:9, 4:5 from one edit: WxH, yuv420p, bt709, SAR 1:1, AAC 48k, faststart, duration

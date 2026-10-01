@@ -28,8 +28,11 @@ export async function renderFilm(key, opts = {}) {
   const from = opts.from ?? 0, to = Math.min(opts.to ?? film.cfg.duration, film.cfg.duration);
   const workers = opts.workers || Math.max(1, Math.min(4, Math.floor(cpus().length / 3)));
   const log = opts.log || console.log;
-  let studio = null; // opened lazily: a fully cached (warm) render never needs a browser
-  const pages = async (fmt, scale) => (studio ??= await openStudio()).page(film, fmt, scale);
+  let studio = null, opening = null; // one browser for the whole render, opened on first need (single-flight: the worker groups race)
+  const pages = async (fmt, scale) => {
+    if (!studio) { opening ??= openStudio().then((s) => (studio = s)); await opening; }
+    return studio.page(film, fmt, scale);
+  };
   const results = [];
   try {
     for (const fmt of fmts) {
@@ -89,7 +92,7 @@ export async function renderFilm(key, opts = {}) {
         const n = Math.min(workers, enc.length), target = enc.reduce((s, u) => s + u.b - u.a, 0) / n;
         const groups = []; let cur = [], acc = 0;
         for (const u of enc) { cur.push(u); acc += u.b - u.a; if (acc >= target && groups.length < n - 1) { groups.push(cur); cur = []; acc = 0; } }
-        groups.push(cur);
+        if (cur.length) groups.push(cur);
         await Promise.all(groups.map(async (group) => {
           const page = await pages(fmt, q.scale);
           for (const u of group) {
