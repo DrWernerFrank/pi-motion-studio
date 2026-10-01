@@ -26,7 +26,9 @@ async function diffBox(a, b) {
     const b2 = []; p.stdout.on('data', (d) => b2.push(d)); p.stderr.on('data', () => {}); p.on('close', () => {
       const buf = Buffer.concat(b2), W = 960, H = 540; // draft half-res
       let x0 = W, y0 = H, x1 = 0, y1 = 0, count = 0;
-      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (buf[y * W + x] > 24) { count++; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      // threshold 60: overlays are white type / accent bars on footage (delta >> 100); two independent
+      // x264 encodes of the same content differ by up to ~40 luma on hard edges (GOP placement) - 60 kills that
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (buf[y * W + x] > 60) { count++; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
       ok({ count, x0, y0, x1, y1, w: x1 - x0 + 1, h: y1 - y0 + 1 });
     });
     p.on('error', bad);
@@ -41,44 +43,54 @@ export default async () => {
   await ingestSource(KEY, fixturePath('real-talking-head'), { id: ID, log: () => {} });
   // one 12 s clip (the talking section), overlays across it
   await applyOps(KEY, { op: 'add', src: ID, in: 5, out: 17 });
+  // NON-overlapping windows so each diff is attributable to exactly one overlay (a punch-in is a camera
+  // move: it changes the whole frame, so anything else must be outside its window)
   const OV = [
-    { op: 'overlay', type: 'title', at: 0.4, dur: 2.4, props: { text: 'How we edit video' }, id: 'oT' },
-    { op: 'overlay', type: 'lower-third', at: 3.4, dur: 4.0, props: { name: 'Scott Kelly', role: 'NASA astronaut' }, id: 'oL' },
-    { op: 'overlay', type: 'callout', at: 8.0, dur: 3.0, props: { text: 'listen first', x: 0.74, y: 0.36 }, id: 'oC' },
+    { op: 'overlay', type: 'title', at: 0.4, dur: 2.4, props: { text: 'How we edit video' }, id: 'oT' },        // 0.4-2.8 s
+    { op: 'overlay', type: 'lower-third', at: 3.2, dur: 2.6, props: { name: 'Scott Kelly', role: 'NASA astronaut' }, id: 'oL' }, // 3.2-5.8 s
+    { op: 'overlay', type: 'callout', at: 6.2, dur: 2.6, props: { text: 'listen first', x: 0.74, y: 0.36 }, id: 'oC' }, // 6.2-8.8 s
   ];
   for (const o of OV) await applyOps(KEY, o);
   // punch-in on the second half of the clip
   const { timelineSeconds } = await import('../lib/edit-ops.mjs');
-  await applyOps(KEY, { op: 'overlay', type: 'punch-in', at: timelineSeconds(loadEdit(KEY).edit) / 2, dur: 4.0, props: { zoom: 1.22, cx: 0.5, cy: 0.42 }, id: 'oP' });
+  await applyOps(KEY, { op: 'overlay', type: 'punch-in', at: 9.2, dur: 3.0, props: { zoom: 1.22, cx: 0.5, cy: 0.42 }, id: 'oP' }); // 9.2-12.2 s: after everything else
   syncFilm(KEY);
   const fps = 30, D = readFilm(KEY).cfg.duration;
 
   const renderAt = async () => (await renderFilm(KEY, { quality: 'draft', fmt: '16:9', workers: 2, log: () => {} }))[0].file;
   const WITH = await renderAt();
+  // both renders write the SAME output path (draft-16x9.mp4): keep the WITH copy before rendering WITHOUT
+  // (the first draft of this check diffed the file against itself - found by perf-speed)
+  const WITHCOPY = '/tmp/ovl-with.mp4';
+  await run('ffmpeg', ['-y', '-v', 'error', '-i', WITH, '-c', 'copy', WITHCOPY]);
   // a no-overlay render: undo every overlay op (edit-store undo takes the whole batch back per call, so one undo per op)
   const rev0 = loadEdit(KEY).edit.rev;
   for (let i = 0; i < OV.length + 1; i++) (await import('../lib/edit-store.mjs')).undo(KEY);
   syncFilm(KEY);
   const WITHOUT = await renderAt();
+  void rev0;
   for (let i = 0; i < OV.length + 1; i++) (await import('../lib/edit-store.mjs')).redo(KEY); // restore for the record
   syncFilm(KEY);
 
   // each overlay's time window: inside -> diff in a bounded region; outside (before its at) -> no diff
-  const grab = async (file, k) => { const o = `/tmp/ovl-${k}.png`; await px(file, k, fps, o); return o; };
+  // A and B must not share a path: the second grab would overwrite the first and the diff would be 0
+  // (exactly the class of bug the check exists to catch, found in the check itself)
+  const grab = async (file, k, side) => { const o = `/tmp/ovl-${side}-${k}.png`; await px(file, k, fps, o); return o; };
+  // probe frames INSIDE each overlay's own window (none overlap), plus one outside each
   const cases = [
-    { o: 'title', at: [10, 40], off: [5], expect: (b) => b.count > 200 && b.w >= 300 && b.h >= 80 && b.x0 > 200, what: 'title card: a big centred region' },
-    { o: 'lower-third', at: [120, 170], off: [95], expect: (b) => b.count > 300 && b.y0 > 300, what: 'lower third: lower-left region' },
-    { o: 'callout', at: [250, 300], off: [230], expect: (b) => b.count > 100 && b.x0 > 500, what: 'callout: right-side region' },
-    { o: 'punch-in', at: [215], off: [205], expect: (b) => b.count > 50000, what: 'punch-in: the whole frame (a camera move)' },
+    { o: 'title', at: [20, 60], off: [8], expect: (b) => b.count > 200 && b.w >= 250 && b.h >= 60, what: 'title card: a big centred region' },   // 0.67/2.0 s
+    { o: 'lower-third', at: [110, 140], off: [95], expect: (b) => b.count > 250 && b.y0 > 250 && b.x0 < 400, what: 'lower third: lower-left region' }, // 3.7/4.7 s
+    { o: 'callout', at: [200, 250], off: [185], expect: (b) => b.count > 100 && b.x0 > 400, what: 'callout: right-side region' },               // 6.7/8.3 s
+    { o: 'punch-in', at: [305, 330], off: [262], expect: (b) => b.count > 50000, what: 'punch-in: the whole frame (a camera move)' }, // 262 = 8.73 s: before the punch-in (9.2 s)           // 10.2/11.0 s
   ];
   for (const c of cases) {
     for (const k of c.at) {
-      const A = await grab(WITH, k), B = await grab(WITHOUT, k), box = await diffBox(A, B);
+      const A = await grab(WITHCOPY, k, 'a'), B = await grab(WITHOUT, k, 'b'), box = await diffBox(A, B);
       if (!c.expect(box)) bad.push(`${c.o} @frame ${k}: diff box ${JSON.stringify(box)} does not match "${c.what}"`);
     }
     for (const k of c.off) {
-      const A = await grab(WITH, k), B = await grab(WITHOUT, k), box = await diffBox(A, B);
-      if (box.count > 30) bad.push(`${c.o} @frame ${k} (outside its window): ${box.count} pixels differ`);
+      const A = await grab(WITHCOPY, k, 'a'), B = await grab(WITHOUT, k, 'b'), box = await diffBox(A, B);
+      if (box.count > 60) bad.push(`${c.o} @frame ${k} (outside its window): ${box.count} pixels differ (encode noise bar: 60)`);
     }
   }
   facts.push('title/lower-third/callout change pixels only in their region and window; punch-in changes the frame');

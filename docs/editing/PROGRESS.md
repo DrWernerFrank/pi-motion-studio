@@ -11,7 +11,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] **P3** Edit model + first vertical slice: edit.json, ops + undo, edit.js (footage, __prepare), new --edit, render, edit_look + core edit_* tools; tag slice-1
 - [ ] **P4** Transcribe + text-based editing
 - [ ] **P5** Cut intelligence + seams
-- [ ] **P6** Captions + on-footage graphics
+- [x] **P6** Captions + on-footage graphics
 - [ ] **P7** Reframe + formats
 - [x] **P8** Audio chain + color
 - [ ] **P9** Speed: segment cache, partial re-render, budgets
@@ -41,7 +41,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] `cut-idle` (P5) no frozen stretch beyond max; active stretches untouched; speed-up keeps audio locked
 - [x] `seams` (P5) no clicks at 20 cuts, micro-fade >= 5 ms, no black/frozen at seams, J/L offsets honored
 - [x] `captions` (P6) layout in en/fa/ar+en/long word at 4 formats; safe area, <= 2 lines, >= 3.2u, no tofu, SRT/VTT valid
-- [ ] `overlays` (P6) title, lower third, callout, punch-in change pixels only in their region and window
+- [x] `overlays` (P6) title, lower third, callout, punch-in change pixels only in their region and window
 - [x] `reframe` (P7) subject inside crop >= 95% of frames; speed/jerk caps; resets on cuts
 - [x] `formats` (P7) 9:16, 1:1, 16:9, 4:5 from one edit: WxH, yuv420p, bt709, SAR 1:1, AAC 48k, faststart, duration
 - [x] `audio-chain` (P8) -14 +/- 1 LUFS, <= -1 dBTP, music >= 8 dB under speech, noise floor -6 dB on noisy

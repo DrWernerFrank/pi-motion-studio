@@ -1,7 +1,7 @@
 {
   "kind": "edit",
-  "title": "verify-harden-audio",
-  "duration": 1,
+  "title": "verify-ovl",
+  "duration": 12,
   "fps": 30,
   "formats": [
     "16:9"
