@@ -56,7 +56,7 @@ export async function renderFilm(key, opts = {}) {
           const { safePath } = await import('./lib/serve.mjs');
           const full = safePath(edit.color.lut.replace(/^\//, ''));
           if (!full || !existsSync(full)) throw new Error(`edit.color.lut "${edit.color.lut}" does not resolve inside the repo`);
-          lut = `,lut3d=file='${full}':interp=nearest`;
+          lut = `,lut3d=file='${full}'`; // default trilinear: exact for identity cubes (nearest quantizes to lattice nodes, ~36 dB loss)
         }
       }
 
@@ -121,7 +121,9 @@ export async function renderFilm(key, opts = {}) {
       const list = join(partsDir, 'list.txt');
       writeFileSync(list, parts.map((p) => `file '${basename(p.part)}'`).join('\n'));
       await run('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', '-movflags', '+faststart', silent]);
-      rmSync(partsDir, { recursive: true, force: true });
+      // the temp dir is gone, not just emptied: nothing of a finished render stays behind (a failed render keeps
+      // its parts for `cache gc` to collect). With fmt=all the next format recreates .parts for itself.
+      rmSync(join(film.out, '.parts'), { recursive: true, force: true });
 
       const final = join(film.out, `${name}.mp4`);
       const mixWav = join(film.out, 'mix.wav');

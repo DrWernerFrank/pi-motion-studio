@@ -249,7 +249,8 @@ export default async () => {
     need(d6b.length > 0, 'the draft render after the text change is framemd5-identical to before (overlay props are not hashed)');
     facts.push(`the overlay's text change re-encoded 0-300 again (${d6b.length} frames changed); a re-render never comes back identical when pixels changed`);
   } finally {
-    for (const f of existsSync(FILMS) ? readdirSync(FILMS) : []) if (f.startsWith('seg-test')) rmSync(join(FILMS, f), { recursive: true, force: true });
+    // exactly the films THIS CHECK created (a prefix sweep could eat a sibling agent's films/seg-test-* mid-test)
+    for (const k of [KEY]) rmSync(join(FILMS, k), { recursive: true, force: true });
   }
   return { pass: bad.length === 0, measured: (bad.length ? 'FAIL: ' + bad.join('; ') + ' — ' : '') + facts.join('; ') };
 };

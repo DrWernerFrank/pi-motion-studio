@@ -63,6 +63,7 @@ export default async ({ quick = false } = {}) => {
     // ── ingest + conform of the 20-minute fixture (skipped by --quick) ─────────────────────────────
     let ingestS = null;
     if (!quick) {
+     try {
       rmSync(join(FILMS, KEY_LONG), { recursive: true, force: true });
       createEditFilm(KEY_LONG, { fps: 30, title: KEY_LONG, formats: ['16:9'] });
       const t = performance.now();
@@ -75,6 +76,7 @@ export default async ({ quick = false } = {}) => {
       const longLeft = partLeftovers(join(FILMS, KEY_LONG, 'assets'));
       need(longLeft.length === 0, `temp files left behind by the ingest: ${longLeft.join(', ')}`);
       rmSync(join(FILMS, KEY_LONG), { recursive: true, force: true }); // the measurement is the point; the film is not needed
+     } catch (e) { bad.push(`ingest of the 20-min fixture failed: ${String(e.message || e).split('\n')[0]}`); rmSync(join(FILMS, KEY_LONG), { recursive: true, force: true }); }
     } else facts.push('ingest long: skipped by --quick');
 
     // ── a 60.0 s talking-head excerpt (12 cuts, one at half speed, one 58-frame freeze -> exactly 1800 frames) ─
@@ -85,33 +87,44 @@ export default async ({ quick = false } = {}) => {
     need(film.cfg.duration === 60, `the excerpt is ${film.cfg.duration}s, wanted exactly 60.0s (1800 frames at 30fps)`);
 
     // ── draft: <= 1x realtime ──────────────────────────────────────────────────────────────────────
-    let t = performance.now();
-    await renderFilm(KEY_R, { quality: 'draft', fmt: '16:9', workers: 4, log: () => {} });
-    const draftS = (performance.now() - t) / 1000;
-    need(draftS <= BUDGET.draft, `draft render of 60s took ${draftS.toFixed(0)}s, budget ${BUDGET.draft}s (1x realtime)`);
-    facts.push(`draft 60s (workers 4): ${draftS.toFixed(0)}s = ${(draftS / 60).toFixed(2)}x realtime (budget 1.00x)`);
+    let draftS = null;
+    try {
+      const t = performance.now();
+      await renderFilm(KEY_R, { quality: 'draft', fmt: '16:9', workers: 4, log: () => {} });
+      draftS = (performance.now() - t) / 1000;
+      need(draftS <= BUDGET.draft, `draft render of 60s took ${draftS.toFixed(0)}s, budget ${BUDGET.draft}s (1x realtime)`);
+      facts.push(`draft 60s (workers 4): ${draftS.toFixed(0)}s = ${(draftS / 60).toFixed(2)}x realtime (budget 1.00x)`);
+    } catch (e) { bad.push(`draft render failed: ${String(e.message || e).split('\n')[0]}`); } // crash-proof: a failed render is a FAIL with numbers, never a lost log
 
     // ── final: <= 3x realtime, peak RSS <= 2.5 GB (sampled at 1 Hz over the render node + its ffmpeg/chromium children) ─
     const fin = await sampled('node', ['engine/cli.mjs', 'render', KEY_R, '--fmt', '16:9', '--workers', '4']);
-    need(fin.code === 0, `final render exited ${fin.code}: ${fin.tail}`);
-    need(fin.samples > 0, 'the RSS sampler never ran (the render finished inside its first tick?)');
-    need(fin.wall <= BUDGET.final, `final render of 60s took ${fin.wall.toFixed(0)}s, budget ${BUDGET.final}s (3x realtime)`);
-    need(fin.maxHwm <= BUDGET.rss, `peak RSS ${MB(fin.maxHwm)} (single process VmHWM), budget ${MB(BUDGET.rss)}`);
-    facts.push(`final 60s (workers 4): ${fin.wall.toFixed(0)}s = ${(fin.wall / 60).toFixed(2)}x realtime (budget 3.00x); peak RSS ${MB(fin.maxHwm)} (budget ${MB(BUDGET.rss)}), whole-tree sampled ${MB(fin.maxTree)} over ${fin.samples} ticks`);
+    facts.push(`final 60s (workers 4): exit ${fin.code}, ${fin.wall.toFixed(0)}s = ${(fin.wall / 60).toFixed(2)}x realtime (budget 3.00x)` +
+      `; peak RSS ${MB(fin.maxHwm)} (budget ${MB(BUDGET.rss)}), whole-tree sampled ${MB(fin.maxTree)} over ${fin.samples} ticks`);
+    if (fin.code !== 0) bad.push(`final render exited ${fin.code}: ${fin.tail}`); // the budget facts stay readable even when the render failed
+    else {
+      need(fin.wall <= BUDGET.final, `final render of 60s took ${fin.wall.toFixed(0)}s, budget ${BUDGET.final}s (3x realtime)`);
+      need(fin.samples > 0, 'the RSS sampler never ran (the render finished inside its first tick?)');
+      need(fin.maxHwm <= BUDGET.rss, `peak RSS ${MB(fin.maxHwm)} (single process VmHWM), budget ${MB(BUDGET.rss)}`);
+    }
 
-    // the final render must actually be the film (not a fast path gone wrong)
+    // the final render must actually be the film (not a fast path gone wrong); probed only when it exists — a
+    // failed render is already a FAIL above and must not crash the check before its numbers are returned
+    if (fin.code === 0) {
     const probe = JSON.parse((await run('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=nb_frames:format=duration', '-of', 'json', join(readFilm(KEY_R).out, 'final-16x9.mp4')])).out);
     need(Number(probe.streams[0].nb_frames) === 1800, `final render has ${probe.streams[0].nb_frames} frames, wanted 1800`);
 
     // ── no temp dirs left behind ───────────────────────────────────────────────────────────────────
     const rf = readFilm(KEY_R);
-    need(!existsSync(join(rf.out, '.parts')), 'films/perf-test-render/out/.parts was left behind');
+    const partsGone = !existsSync(join(rf.out, '.parts'));
+    need(partsGone, 'films/perf-test-render/out/.parts was left behind');
     const leftovers = partLeftovers(join(FILMS, KEY_R, 'assets'));
     need(leftovers.length === 0, `temp files left behind: ${leftovers.join(', ')}`);
-    facts.push(`temp dirs: .parts gone, no *.part.* under assets; final probed 1800 frames / ${Number(probe.format.duration).toFixed(3)}s`);
+    facts.push(`temp dirs: .parts ${partsGone ? 'gone' : 'LEFT BEHIND'}, ${leftovers.length} *.part.* leftovers; final probed ${probe.streams[0].nb_frames} frames / ${Number(probe.format.duration).toFixed(3)}s`);
+    } else facts.push('temp dirs: not probed (the final render failed)');
     facts.push(`on a ${cpus().length}-core machine (the budgets assume 12)`);
   } finally {
-    for (const f of existsSync(FILMS) ? readdirSync(FILMS) : []) if (f.startsWith('perf-test')) rmSync(join(FILMS, f), { recursive: true, force: true });
+    // exactly the films THIS CHECK created (never a sweep: another agent may own a neighbouring key)
+    for (const k of [KEY_LONG, KEY_R]) rmSync(join(FILMS, k), { recursive: true, force: true });
   }
   return { pass: bad.length === 0, measured: (bad.length ? 'FAIL: ' + bad.join('; ') + ' — ' : '') + facts.join('; ') };
 };

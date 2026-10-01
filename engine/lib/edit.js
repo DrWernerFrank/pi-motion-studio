@@ -40,7 +40,13 @@ export const colorFilter = (col) => {
   if (col.exposure) f.push(`brightness(${Math.max(0.05, 2 ** col.exposure).toFixed(4)})`);
   if (col.contrast) f.push(`contrast(${col.contrast.toFixed(4)})`);
   if (col.saturation !== undefined) f.push(`saturate(${col.saturation.toFixed(4)})`);
-  if (col.temperature) f.push(`sepia(${(Math.abs(col.temperature) * 0.35).toFixed(3)}) saturate(${col.temperature > 0 ? '1.25' : '0.85'}) hue-rotate(${col.temperature < 0 ? -12 : 0}deg)`);
+  if (col.temperature) {
+    // warm: sepia toward red; cool: hue-rotate toward blue + a slight desat. sepia only ever warms, so the
+    // cool path never uses it (the color check caught exactly that: cool pushed V UP instead of down)
+    const t = col.temperature;
+    if (t > 0) f.push(`sepia(${(t * 0.35).toFixed(3)}) saturate(1.25)`);   // warm: toward red
+    else f.push(`hue-rotate(${(-t * 35).toFixed(1)}deg) saturate(0.92)`); // cool: toward blue (measured: U +9/test-card at -20deg; natural footage needs more)
+  }
   return f.length ? f.join(' ') : 'none';
 };
 
