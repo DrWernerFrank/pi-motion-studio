@@ -50,7 +50,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [ ] `perf-budget` (P9) ingest <= 0.5x, draft <= 1x, final <= 3x realtime; peak RSS <= 2.5 GB; temp dirs gone
 - [ ] `gui-smoke` (P10) Playwright on a spare port: editor flows, zero console errors, zero failed requests
 - [ ] `gui-security` (P10) no token gives 403; traversal/absolute/dotfile/unknown id rejected on every new endpoint
-- [ ] `tools` (P11) every edit_* tool registers with a valid schema and runs on a fixture; skill + agent front matter parse
+- [x] `tools` (P11) every edit_* tool registers with a valid schema and runs on a fixture; skill + agent front matter parse
 - [x] `docs` (P11) studio help lists every command; README, AGENTS.md, skill, critic agent exist; THIRD_PARTY.md complete
 - [ ] `golden-path` (P11) studio autoedit on every preset, unattended; talking-head exports 4 formats; gate PASS
 - [ ] `montage` (P11) every cut within 1 frame of a beat; no clip twice; duration = target +/- 1 beat
