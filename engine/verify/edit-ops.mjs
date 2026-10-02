@@ -14,6 +14,8 @@ const strip = (e) => { const c = structuredClone(e); delete c.rev; return c; };
 function setup(fps) {
   const dir = join(FILMS, KEY); rmSync(dir, { recursive: true, force: true }); mkdirSync(join(dir, 'assets', 'media'), { recursive: true });
   writeFileSync(join(dir, 'film.json'), JSON.stringify({ title: KEY, duration: 10, fps: 30, formats: ['16:9'], kind: 'edit' }));
+  // a tiny identity .cube so the lut op has a real file to point at (repo-relative, safePath-legal)
+  { let cube = 'TITLE "identity"\nLUT_3D_SIZE 2\n\n'; for (const b of [0, 1]) for (const g of [0, 1]) for (const r of [0, 1]) cube += `${r} ${g} ${b}\n`; writeFileSync(join(dir, 'id.cube'), cube); }
   const f = fps === '30' ? 30 : 30000 / 1001;
   const src = (id, frames, kind = 'video') => ({ path: `/nowhere/${id}.mp4`, sha256: `${kind}${frames}`, kind, duration: frames / f, frames, fps: kind === 'video' ? fps : null, has_audio: true });
   const bin = { version: 1, sources: { cam: src('cam', 900), b: src('b', 240), song: { ...src('song', 1200, 'audio'), path: '/nowhere/song.wav' }, old: { ...src('old', 300), fps: '24' } } };
@@ -35,6 +37,11 @@ export default async () => {
       { op: 'reorder', track: 'V1', order: ['c1', 'c3', 'c5', 'c2'] }, { op: 'move', id: 'c2', at: 30 }, (e) => ({ op: 'freeze', id: 'c3', t: e.tracks[0].clips.find((c) => c.id === 'c3').at + 0.3, dur: 1 }),
       { op: 'crop-keyframe', id: 'c1', fmt: '9:16', t: 0.5, cx: 0.4, cy: 0.5, zoom: 1.3 }, { op: 'overlay', type: 'title', at: 0.5, dur: 2, props: { text: 'Hi' } },
       { op: 'caption-style', style: 'karaoke', accent: '#ff5a1f' }, { op: 'marker', t: 4.2, label: 'beat' }, { op: 'delete', id: 'c2' }, { op: 'ripple-delete', track: 'V1', from: 1, to: 2 },
+      // the newer ops (added after this check first ran): cam, color, jcut, lut
+      { op: 'cam', id: 'c1', mode: 'follow' }, { op: 'cam', id: 'c1', mode: 'center' },
+      { op: 'color', id: 'c1', exposure: 0.4, saturation: 1.3, temperature: -0.5 },
+      { op: 'jcut', id: 'c1', ms: 120 }, { op: 'jcut', id: 'c1', ms: -1 },
+      { op: 'lut', file: 'films/verify-edit-ops/id.cube' },
     ];
     const seen = new Set();
     for (const spec of seq) {
@@ -64,6 +71,8 @@ export default async () => {
       [{ op: 'fade', id: first.id, in_ms: 9000, out_ms: 9000 }, /longer than the clip/], [{ op: 'xfade', a: ids[0], b: ids.at(-1), ms: 50 }, /does not start exactly|different tracks/], [{ op: 'crop-keyframe', id: first.id, fmt: '4:3', cx: 0.5, cy: 0.5 }, /fmt must be/],
       [{ op: 'overlay', type: 'confetti', at: 0, dur: 1 }, /type must be one of/], [{ op: 'caption-style', style: 'comic' }, /style must be one of/], [{ op: 'marker', t: -1 }, /t must be/], [{ op: 'freeze', id: first.id, t: 999, dur: 1 }, /must fall on a frame/],
       [{ op: 'trim', id: first.id }, /give in and\/or out/], [{ op: 'frobnicate' }, /unknown op/], [{ op: 'add', src: 'cam', at: -1 }, /at must be >= 0|beyond|overlaps/],
+      // the newer ops' rejections
+      [{ op: 'cam', id: first.id, mode: 'spiral' }, /mode must be/], [{ op: 'color', id: first.id, exposure: 9 }, /outside/], [{ op: 'jcut', id: first.id, ms: 0 }, /ms must be/],
     ];
     for (const [op, re] of rejects) expectReject(op, re, `reject ${op.op}`);
     facts.push(`${rejects.length} invalid ops rejected with specific messages`);

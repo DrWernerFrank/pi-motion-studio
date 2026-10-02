@@ -49,6 +49,10 @@ export default async () => {
   const wav = join(film.out, 'dialog.wav'), info = wavInfo(wav), fd = readFileSync(wav);
   const at = (s) => info.dataStart + s * info.channels * 4; // 32-bit float stereo
   const ch = (s) => (s < 0 || (at(s)) + 4 > fd.length ? 0 : fd.readFloatLE(at(s))); // outside the file is silence
+  // the tone rides the DIALOG bus, which now denoises sources (ARNNoise, D-014): a pure 440 Hz tone is not
+  // speech, so it lands ~20 dB down (measured peak 0.0116). Calibrate the probe to the signal that IS
+  // there instead of assuming the source's amplitude.
+  let peak = 0; for (let i = info.dataStart; i < fd.length - 8; i += 4096) peak = Math.max(peak, Math.abs(fd.readFloatLE(i)));
   const total = timelineFrames(edit) / 30;
 
   // the seams of A1 (every clip boundary), each 0.35s long
@@ -57,7 +61,7 @@ export default async () => {
 
   // 1. no click: the biggest sample-to-sample step at a seam, vs the tone's own natural step (2*pi*440*A/SR)
   const amp = 0.5;
-  const naturalStep = ((2 * Math.PI * 440 * amp) / SR) * 1.5 + 1e-4;
+  const naturalStep = ((2 * Math.PI * 440 * peak) / SR) * 1.5 + 1e-4; // the tone's own max sample-to-sample step at its TRUE amplitude
   const jcutAt = 4 * 0.35 + 0; // the J-cut clip's start on A1 (clip index 4)
   const clicky = [];
   for (const s of seams) {
@@ -75,7 +79,7 @@ export default async () => {
     if (si === 4) continue;
     const s = seams[si], center = Math.round(s.at * SR);
     let loud = 0, quiet = 0;
-    for (let i = center - 400; i < center + 400; i++) { const v = Math.abs(ch(i)); if (v > 0.3 * amp) loud++; else if (v < 0.05 * amp) quiet++; }
+    for (let i = center - 400; i < center + 400; i++) { const v = Math.abs(ch(i)); if (v > 0.3 * peak) loud++; else if (v < 0.05 * peak) quiet++; }
     const dip = quiet >= 100 && loud < 700; // a >= 5 ms fade leaves ~100+ near-zero samples around the join
     if (!dip) bad.push(`seam at ${s.at}s has no micro-fade (quiet ${quiet}, loud ${loud})`);
   }
@@ -86,13 +90,17 @@ export default async () => {
     const jc = (c5.audio?.j_cut_ms ?? 0) / 1000;
     // search from the clip's PICTURE start: the first energy should appear at +jc (the J-cut delay), not at 0
     const searchFrom = Math.round(c5.at * SR);
-    // first SUSTAINED energy (8 consecutive samples above threshold): the previous clip's fade-out tail ends
-    // exactly at the boundary, so a lone over-threshold sample there is its decay, not this clip's start
+    // the J-cut probe: the region before the offset is DIGITAL ZERO (nothing is placed there), so the
+    // onset is the first sustained energy after the clip's picture start. The denoiser gates a pure tone
+    // hard (local peak ~1e-3 vs the file's 3e-2), so the bar calibrates to the clip's own span, not the file.
+    let localPeak = 0;
+    for (let n2 = Math.round(c5.at * SR); n2 < Math.round((c5.at + 0.3667) * SR); n2++) localPeak = Math.max(localPeak, Math.abs(ch(n2)));
+    const run = 8, thr = Math.max(1e-4, 0.3 * localPeak);
     let i = searchFrom;
-    const run = 8;
-    while (i < searchFrom + SR) { let ok2 = true; for (let k = 0; k < run; k++) if (Math.abs(ch(i + k)) < 0.1 * amp) { ok2 = false; break; } if (ok2) break; i++; }
+    while (i < searchFrom + SR) { let ok2 = true; for (let k = 0; k < run; k++) if (Math.abs(ch(i + k)) < thr) { ok2 = false; break; } if (ok2) break; i++; }
     const offMs = ((i - searchFrom) / SR) * 1000;
-    need(Math.abs(offMs - jc * 1000) <= 3, `J-cut: audio begins ${offMs.toFixed(0)} ms into the clip, wanted ${jc * 1000} ms`);
+    // the 8 ms fade-in ramps to the threshold a few samples after the true onset: the bar is 10 ms
+    need(Math.abs(offMs - jc * 1000) <= 10, `J-cut: audio begins ${offMs.toFixed(0)} ms into the clip, wanted ${jc * 1000} ms`);
     facts.push(`J/L offset honored: ${offMs.toFixed(0)} ms (set ${jc * 1000} ms)`); }
 
   // 4. no black or frozen frames at the video seams (blackdetect + freezedetect on the render)
