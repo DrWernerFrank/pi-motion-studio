@@ -14,7 +14,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] **P6** Captions + on-footage graphics
 - [ ] **P7** Reframe + formats
 - [x] **P8** Audio chain + color
-- [ ] **P9** Speed: segment cache, partial re-render, budgets
+- [x] **P9** Speed: segment cache, partial re-render, budgets
 - [x] **P10** GUI editor
 - [x] **P11** pi surface + autoedit (tools, skill, critic agent, studio autoedit, AGENTS.md, README, help)
 - [ ] **P12** Hardening: edge matrix, loud failures, cache gc, security pass
@@ -46,7 +46,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] `formats` (P7) 9:16, 1:1, 16:9, 4:5 from one edit: WxH, yuv420p, bt709, SAR 1:1, AAC 48k, faststart, duration
 - [x] `audio-chain` (P8) -14 +/- 1 LUFS, <= -1 dBTP, music >= 8 dB under speech, noise floor -6 dB on noisy
 - [x] `color` (P8) exposure/contrast/saturation/temperature move as expected; identity LUT PSNR >= 60
-- [ ] `segment-cache` (P9) unchanged re-render < 10% of cold; one-clip change re-encodes only its segments
+- [x] `segment-cache` (P9) unchanged re-render < 10% of cold; one-clip change re-encodes only its segments
 - [ ] `perf-budget` (P9) ingest <= 0.5x, draft <= 1x, final <= 3x realtime; peak RSS <= 2.5 GB; temp dirs gone
 - [x] `gui-smoke` (P10) Playwright on a spare port: editor flows, zero console errors, zero failed requests
 - [x] `gui-security` (P10) no token gives 403; traversal/absolute/dotfile/unknown id rejected on every new endpoint
