@@ -22,7 +22,7 @@ export default async () => {
   facts.push(`${reviews.length} rounds (${criticRounds} by edit-critic), final scores ${keys.map((k) => `${k} ${last.scores[k]}`).join(', ')}`);
   // the sheets the loop looked at exist
   const sheetsDir = join(dir, 'out', 'sheets');
-  for (const s of ['every-16x9.png', 'cuts-16x9-420.png', 'every-9:16-360.png']) need(existsSync(join(sheetsDir, s)), `missing sheet ${s}`);
+  for (const s of ['every-16x9.png', 'cuts-16x9-420.png', 'every-9x16-360.png']) need(existsSync(join(sheetsDir, s)), `missing sheet ${s}`);
   // the deliverables exist and are current (mtime at/after the last review)
   for (const f of ['draft-16x9.mp4', 'draft-9x16.mp4', 'captions.srt']) need(existsSync(join(dir, 'out', f)), `missing deliverable ${f}`);
   facts.push('the review loop\'s sheets and the deliverables are on disk');
