@@ -1,7 +1,7 @@
 # Progress
 
-Now: the FULL cold verify run, then FINAL_REPORT.md
-Next: ship: final renders of demo-cut, the report, done
+Now: DONE: verify-last.json pass:true, all 34 checks green
+Next: nothing left
 
 ## Phases
 

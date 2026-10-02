@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "rev": 8,
+  "fps": "30",
+  "counter": 8,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/real/talking-head-original.webm",
+      "sha256": "f3dd2f87b8dedbc6ea9864af594e2de4fc8a2b5d425f85f834ba7f36c1d04472",
+      "kind": "video",
+      "duration": 53.833333,
+      "frames": 1615,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "cam",
+          "in": 0,
+          "out": 2,
+          "at": 0,
+          "note": "cut 0"
+        },
+        {
+          "id": "c2",
+          "src": "cam",
+          "in": 3.333333,
+          "out": 5.333333,
+          "at": 2,
+          "note": "cut 1"
+        },
+        {
+          "id": "c3",
+          "src": "cam",
+          "in": 6.666667,
+          "out": 8.666667,
+          "at": 4,
+          "note": "cut 2"
+        },
+        {
+          "id": "c4",
+          "src": "cam",
+          "in": 10,
+          "out": 12,
+          "at": 6,
+          "note": "cut 3"
+        },
+        {
+          "id": "c5",
+          "src": "cam",
+          "in": 13.333333,
+          "out": 15.333333,
+          "at": 8,
+          "note": "cut 4"
+        },
+        {
+          "id": "c6",
+          "src": "cam",
+          "in": 16.666667,
+          "out": 18.666667,
+          "at": 10,
+          "note": "cut 5"
+        },
+        {
+          "id": "c7",
+          "src": "cam",
+          "in": 20,
+          "out": 22,
+          "at": 12,
+          "note": "cut 6"
+        },
+        {
+          "id": "c8",
+          "src": "cam",
+          "in": 23.333333,
+          "out": 25.333333,
+          "at": 14,
+          "note": "cut 7"
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}

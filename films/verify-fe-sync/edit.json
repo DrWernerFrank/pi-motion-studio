@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "rev": 12,
+  "fps": "30",
+  "counter": 12,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/sync.mp4",
+      "sha256": "f391d16576aeb351e01097da0de507143b5c93c9ee2b5b43237bb4735715e4a5",
+      "kind": "video",
+      "duration": 30,
+      "frames": 900,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "cam",
+          "in": 0,
+          "out": 0.5,
+          "at": 0,
+          "note": "cut 0"
+        },
+        {
+          "id": "c2",
+          "src": "cam",
+          "in": 1.833333,
+          "out": 2.333333,
+          "at": 0.5,
+          "note": "cut 1"
+        },
+        {
+          "id": "c3",
+          "src": "cam",
+          "in": 3.666667,
+          "out": 4.166667,
+          "at": 1,
+          "note": "cut 2"
+        },
+        {
+          "id": "c4",
+          "src": "cam",
+          "in": 5.5,
+          "out": 6,
+          "at": 1.5,
+          "note": "cut 3"
+        },
+        {
+          "id": "c5",
+          "src": "cam",
+          "in": 7.333333,
+          "out": 7.833333,
+          "at": 2,
+          "note": "cut 4"
+        },
+        {
+          "id": "c6",
+          "src": "cam",
+          "in": 9.166667,
+          "out": 9.666667,
+          "at": 2.5,
+          "note": "cut 5"
+        },
+        {
+          "id": "c7",
+          "src": "cam",
+          "in": 11,
+          "out": 11.5,
+          "at": 3,
+          "note": "cut 6"
+        },
+        {
+          "id": "c8",
+          "src": "cam",
+          "in": 12.833333,
+          "out": 13.333333,
+          "at": 3.5,
+          "note": "cut 7"
+        },
+        {
+          "id": "c9",
+          "src": "cam",
+          "in": 14.666667,
+          "out": 15.166667,
+          "at": 4,
+          "note": "cut 8"
+        },
+        {
+          "id": "c10",
+          "src": "cam",
+          "in": 16.5,
+          "out": 17,
+          "at": 4.5,
+          "note": "cut 9"
+        },
+        {
+          "id": "c11",
+          "src": "cam",
+          "in": 18.333333,
+          "out": 18.833333,
+          "at": 5,
+          "note": "cut 10"
+        },
+        {
+          "id": "c12",
+          "src": "cam",
+          "in": 20.166667,
+          "out": 20.666667,
+          "at": 5.5,
+          "note": "cut 11"
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}
