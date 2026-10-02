@@ -20,7 +20,7 @@ export default async ({ quick } = {}) => {
     { preset: 'talking-head', key: 'gp-talk', src: fixturePath('speech'), id: 'speech', formats: ['16:9', '9:16', '1:1', '4:5'] },
     { preset: 'screen', key: 'gp-screen', src: fixturePath('screen'), id: 'screen' },
     ...(quick ? [] : [
-      { preset: 'audiogram', key: 'gp-audio', src: fixturePath('podcast.m4a'), id: 'podcast' },
+      { preset: 'audiogram', key: 'gp-audio', src: fixturePath('podcast'), id: 'podcast' },
       { preset: 'montage', key: 'gp-montage', srcs: [...((await import('node:fs')).readdirSync(join(fixturePath('clips12'), '..')).filter((f) => f.endsWith('.mp4')).sort().map((f) => join(fixturePath('clips12'), '..', f))), fixturePath('song')] },
     ]),
   ];

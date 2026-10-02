@@ -281,12 +281,18 @@ async function audiogram(ctx) {
   const chosen = densestWindow(spans, ctx.target ?? 60);
   if (!chosen.length) throw new Error(`no speech spans in "${srcId}": the transcript is empty`);
   clearClips(ctx);
+  // Each clip's span snaps to whole frames when the op applies, so the NEXT clip's `at` must come from the
+  // PREVIOUS clip's snapped length, not from float accumulation (the first draft accumulated floats and
+  // later clips overlapped their neighbours by a frame - found by the golden-path check).
+  const G = grid(loadEdit(filmKey).edit);
   let at = 0;
-  applyOps(filmKey, chosen.map((s) => {
-    const op = { op: 'add', src: srcId, track: 'A1', in: s.from, out: s.to, at, note: `autoedit: ${s.words} words, ${fmtS(s.to - s.from)}` };
-    at += s.to - s.from;
-    return op;
-  }), { who: 'autoedit' });
+  const ops = [];
+  for (const s of chosen) {
+    const inF = G.F(s.from), outF = G.F(s.to), lenF = outF - inF;
+    ops.push({ op: 'add', src: srcId, track: 'A1', in: s.from, out: s.to, at: G.S(at), note: `autoedit: ${s.words} words, ${fmtS(s.to - s.from)}` });
+    at += lenF;
+  }
+  applyOps(filmKey, ops, { who: 'autoedit' });
   ctx.step(`speech: ${chosen.length} sentence clip(s), ${fmtS(at)} of ${fmtS(dur)} (${chosen.reduce((a, s) => a + s.words, 0)} words) — the densest window`);
 
   // the picture (the honest minimal path, documented in brief.md): the engine retimes caption words through

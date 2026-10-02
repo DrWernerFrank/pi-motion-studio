@@ -37,7 +37,10 @@ export async function openStudio() {
   const errors = [];
   async function page(film, fmt, scale = 1) {
     const [w, h] = { '9:16': [1080, 1920], '1:1': [1080, 1080], '16:9': [1920, 1080], '4:5': [1080, 1350] }[fmt];
-    const p = await browser.newPage({ viewport: { width: Math.round(w * scale), height: Math.round(h * scale) }, deviceScaleFactor: 1 });
+    // draft halves the frame: 4:5 is 1080x1350 -> 540x675, and an ODD canvas breaks x264 (yuv420 needs even
+    // dims). The page rounds the scaled canvas DOWN to even; edit.js's draw maps WxH onto it exactly.
+    const even = (n) => Math.max(2, Math.floor(n / 2) * 2);
+    const p = await browser.newPage({ viewport: { width: even(w * scale), height: even(h * scale) }, deviceScaleFactor: 1 });
     p.on('pageerror', (e) => errors.push(String(e)));
     // optional files (beats.json for edit films, track.json / transcript.json when not yet made): their 404s
     // are not errors — a missing optional input is a first-class state, not a broken render

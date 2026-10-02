@@ -16,7 +16,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] **P8** Audio chain + color
 - [ ] **P9** Speed: segment cache, partial re-render, budgets
 - [x] **P10** GUI editor
-- [ ] **P11** pi surface + autoedit (tools, skill, critic agent, studio autoedit, AGENTS.md, README, help)
+- [x] **P11** pi surface + autoedit (tools, skill, critic agent, studio autoedit, AGENTS.md, README, help)
 - [ ] **P12** Hardening: edge matrix, loud failures, cache gc, security pass
 - [ ] **P13** Demo + review rounds, cold full verify, FINAL_REPORT.md
 
@@ -52,7 +52,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] `gui-security` (P10) no token gives 403; traversal/absolute/dotfile/unknown id rejected on every new endpoint
 - [x] `tools` (P11) every edit_* tool registers with a valid schema and runs on a fixture; skill + agent front matter parse
 - [x] `docs` (P11) studio help lists every command; README, AGENTS.md, skill, critic agent exist; THIRD_PARTY.md complete
-- [ ] `golden-path` (P11) studio autoedit on every preset, unattended; talking-head exports 4 formats; gate PASS
+- [x] `golden-path` (P11) studio autoedit on every preset, unattended; talking-head exports 4 formats; gate PASS
 - [x] `montage` (P11) every cut within 1 frame of a beat; no clip twice; duration = target +/- 1 beat
 - [ ] `review` (P13) demo reviews.json: >= 3 rounds, last by edit-critic, every score >= 8, sheets exist
 

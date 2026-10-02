@@ -41,8 +41,10 @@ export async function film(spec) {
   document.body.style.cssText = 'margin:0;overflow:hidden;background:' + (mode === 'render' ? '#000' : '#0b0b0c') + ';';
   const canvas = document.createElement('canvas');
   canvas.id = 'c';
-  canvas.width = Math.round(L.W * scale);
-  canvas.height = Math.round(L.H * scale);
+  // an ODD canvas breaks x264 (yuv420 needs even dims: a 4:5 draft is 540x675 -> 674). The draw maps
+  // logical WxH onto the integer canvas exactly (setTransform below), so a lost pixel row is invisible.
+  canvas.width = Math.max(2, Math.floor((L.W * scale) / 2) * 2);
+  canvas.height = Math.max(2, Math.floor((L.H * scale) / 2) * 2);
   document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d', { alpha: false });
 
