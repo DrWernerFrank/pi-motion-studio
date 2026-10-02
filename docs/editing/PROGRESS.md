@@ -1,7 +1,7 @@
 # Progress
 
-Now: DONE: verify-last.json pass:true, all 34 checks green
-Next: nothing left
+Now: DONE — the mission is complete: verify-last.json pass:true, all 34 checks green (see FINAL_REPORT.md)
+Next: nothing (a later session may start new work: new films, new features — the loop is closed)
 
 ## Phases
 
@@ -34,9 +34,9 @@ Next: nothing left
 - [x] `parity` (P3) live seek, draft and final agree on 10 frames per fixture (SSIM >= 0.95)
 - [x] `determinism` (P3) identical per-frame md5 across runs; 4 workers equal 1 worker; determinism gate passes
 - [x] `edit-ops` (P3) every op round-trips under undo; invalid ops rejected; stale baseRev conflicts; 500 random ops; EDL round-trip
-- [ ] `transcribe` (P4) WER <= 15% on speech; monotonic words; >= 90% in speech; cache hit; offline
-- [ ] `transcript-edit` (P4) word-range delete cuts within 30 ms; retimed transcript >= 90% within 150 ms
-- [ ] `cut-silence` (P5) no pause beyond max + pad, no clipped word start, no word lost
+- [x] `transcribe` (P4) WER <= 15% on speech; monotonic words; >= 90% in speech; cache hit; offline
+- [x] `transcript-edit` (P4) word-range delete cuts within 30 ms; retimed transcript >= 90% within 150 ms
+- [x] `cut-silence` (P5) no pause beyond max + pad, no clipped word start, no word lost
 - [x] `cut-cleanup` (P5) ums removed, flub removed with last take kept, everything else kept, removed text listed
 - [x] `cut-idle` (P5) no frozen stretch beyond max; active stretches untouched; speed-up keeps audio locked
 - [x] `seams` (P5) no clicks at 20 cuts, micro-fade >= 5 ms, no black/frozen at seams, J/L offsets honored
@@ -58,10 +58,10 @@ Next: nothing left
 
 ## Done means
 
-- [ ] `./studio verify-edit` exits 0 and `docs/editing/verify-last.json` has `"pass": true`
-- [ ] every box above is ticked
-- [ ] demo film reviewed by `edit-critic`, every score 8+
-- [ ] `docs/editing/FINAL_REPORT.md` exists
+- [x] `./studio verify-edit` exits 0 and `docs/editing/verify-last.json` has `"pass": true`
+- [x] every box above is ticked
+- [x] demo film reviewed by `edit-critic`, every score 8+
+- [x] `docs/editing/FINAL_REPORT.md` exists
 
 ## Known problems
 
