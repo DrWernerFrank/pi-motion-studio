@@ -53,7 +53,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] `tools` (P11) every edit_* tool registers with a valid schema and runs on a fixture; skill + agent front matter parse
 - [x] `docs` (P11) studio help lists every command; README, AGENTS.md, skill, critic agent exist; THIRD_PARTY.md complete
 - [ ] `golden-path` (P11) studio autoedit on every preset, unattended; talking-head exports 4 formats; gate PASS
-- [ ] `montage` (P11) every cut within 1 frame of a beat; no clip twice; duration = target +/- 1 beat
+- [x] `montage` (P11) every cut within 1 frame of a beat; no clip twice; duration = target +/- 1 beat
 - [ ] `review` (P13) demo reviews.json: >= 3 rounds, last by edit-critic, every score >= 8, sheets exist
 
 ## Done means
