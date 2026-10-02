@@ -47,7 +47,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] `audio-chain` (P8) -14 +/- 1 LUFS, <= -1 dBTP, music >= 8 dB under speech, noise floor -6 dB on noisy
 - [x] `color` (P8) exposure/contrast/saturation/temperature move as expected; identity LUT PSNR >= 60
 - [x] `segment-cache` (P9) unchanged re-render < 10% of cold; one-clip change re-encodes only its segments
-- [ ] `perf-budget` (P9) ingest <= 0.5x, draft <= 1x, final <= 3x realtime; peak RSS <= 2.5 GB; temp dirs gone
+- [x] `perf-budget` (P9) ingest <= 0.5x, draft <= 1x, final <= 3x realtime; peak RSS <= 2.5 GB; temp dirs gone
 - [x] `gui-smoke` (P10) Playwright on a spare port: editor flows, zero console errors, zero failed requests
 - [x] `gui-security` (P10) no token gives 403; traversal/absolute/dotfile/unknown id rejected on every new endpoint
 - [x] `tools` (P11) every edit_* tool registers with a valid schema and runs on a fixture; skill + agent front matter parse
