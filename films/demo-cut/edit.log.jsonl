@@ -1,0 +1,10 @@
+{"rev":1,"at":"2026-10-02T01:06:38.775Z","who":"autoedit","ops":[{"op":"add","src":"cam","note":"autoedit: the whole source, before the cuts"}]}
+{"rev":2,"at":"2026-10-02T01:06:49.013Z","who":"cut:silence","ops":[{"op":"ripple-delete","track":"V1","from":48.7,"to":53.7,"reason":"pause 5.14s (max 0.5s), edges snapped to words","removedText":"(silence)","confidence":0.95,"frames":150}]}
+{"rev":3,"at":"2026-10-02T01:06:49.202Z","who":"autoedit","ops":[{"op":"overlay","type":"title","id":"title","at":0.4,"dur":2.4,"props":{"text":"Hi"}}]}
+{"rev":4,"at":"2026-10-02T01:06:49.246Z","who":"autoedit","ops":[{"op":"caption-style","style":"pop","from":"cam"}]}
+{"rev":5,"at":"2026-10-02T01:07:05.007Z","who":"autoedit","ops":[{"op":"cam","id":"c1","mode":"follow"},{"op":"cam","id":"c3","mode":"follow"}]}
+{"rev":6,"at":"2026-10-02T01:10:06.554Z","who":"cli","ops":[{"op":"caption-style","style":"pop","from":"cam","lang":"en"},{"op":"overlay","type":"title","at":0.4,"dur":2.4,"props":{"text":"How we edit video"},"id":"oT"}]}
+{"rev":7,"at":"2026-10-02T01:10:17.775Z","who":"cli","ops":[{"op":"overlay","type":"punch-in","at":6,"dur":3,"props":{"zoom":1.12,"cx":0.5,"cy":0.42},"id":"oP1"},{"op":"overlay","type":"punch-in","at":20,"dur":3,"props":{"zoom":1.15,"cx":0.5,"cy":0.42},"id":"oP2"},{"op":"overlay","type":"lower-third","at":3,"dur":4,"props":{"name":"Scott Kelly","role":"NASA astronaut"},"id":"oL"}]}
+{"rev":8,"at":"2026-10-02T01:10:56.470Z","who":"cli","ops":[{"op":"ripple-delete","id":"c1"}]}
+{"rev":9,"at":"2026-10-02T01:11:06.984Z","who":"cli","ops":[{"op":"ripple-delete","id":"c3"}]}
+{"rev":10,"at":"2026-10-02T01:11:07.289Z","who":"cli","ops":[{"op":"add","src":"cam","in":38.3,"out":41.9,"note":"HOOK: the strongest line, cold open"},{"op":"add","src":"cam","in":9.3,"out":15.08,"note":"the story"},{"op":"add","src":"cam","in":17.04,"out":22.4,"note":"which was wrong; never okay"},{"op":"add","src":"cam","in":25.01,"out":29.16,"note":"you can make a difference"},{"op":"add","src":"cam","in":32.23,"out":35.49,"note":"work together"},{"op":"add","src":"cam","in":38.52,"out":42.9,"note":"the hook line, resolved"}]}

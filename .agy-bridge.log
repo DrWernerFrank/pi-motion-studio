@@ -1,0 +1,6 @@
+ERROR: logging before google.Init: I1002 04:41:56.896419       1 server.go:1584] Starting language server process with pid 16580
+ERROR: logging before google.Init: I1002 04:41:56.902925       1 server.go:465] Setting GOMAXPROCS to 4
+ERROR: logging before google.Init: I1002 04:41:56.906114       1 server.go:1635] Language server version: 1.0.0
+ERROR: logging before google.Init: I1002 04:41:56.906114       1 server.go:616] Language server will attempt to listen on host localhost
+ERROR: logging before google.Init: I1002 04:41:56.922760       1 server.go:631] Language server listening on fixed port at 5387 for HTTPS (gRPC)
+ERROR: logging before google.Init: I1002 04:41:56.923273       1 server.go:639] Language server listening on fixed port at 55100 for HTTP

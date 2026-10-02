@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // studio: the command surface of the motion studio. `studio help` lists everything.
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildMusic, buildSfx, gridBeats, measureBeats, mix } from './audio.mjs';
 import { gates } from './gates.mjs';
@@ -323,7 +323,7 @@ async function main() {
       const C = await import('./captions-export.mjs');
       const fmt = opt('format') && opt('format') !== true ? String(opt('format')) : 'srt';
       if (!['srt', 'vtt'].includes(fmt)) throw new Error('studio captions <film> [--format srt|vtt]');
-      const { film } = readFilm(key), { cues, lang, src } = C.timelineCues(key);
+      const film = readFilm(key), { cues, lang, src } = C.timelineCues(key);
       const out = join(film.out, `captions.${fmt}`);
       writeFileSync(out, fmt === 'srt' ? C.toSrt(cues) : C.toVtt(cues));
       console.log(`${cues.length} cues (${lang}, from ${src}) -> ${rel(out)}`);

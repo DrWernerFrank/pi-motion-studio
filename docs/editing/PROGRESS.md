@@ -9,15 +9,15 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] **P1** Spikes S1 (footage in Chromium) S2 (ASR) S3 (tracking) + fixtures generator; ADR-001..003
 - [x] **P2** Ingest: media.json, conform, proxy, peaks, filmstrip, scenes, silence map, caches, relink, doctor green
 - [x] **P3** Edit model + first vertical slice: edit.json, ops + undo, edit.js (footage, __prepare), new --edit, render, edit_look + core edit_* tools; tag slice-1
-- [ ] **P4** Transcribe + text-based editing
+- [x] **P4** Transcribe + text-based editing
 - [x] **P5** Cut intelligence + seams
 - [x] **P6** Captions + on-footage graphics
-- [ ] **P7** Reframe + formats
+- [x] **P7** Reframe + formats
 - [x] **P8** Audio chain + color
 - [x] **P9** Speed: segment cache, partial re-render, budgets
 - [x] **P10** GUI editor
 - [x] **P11** pi surface + autoedit (tools, skill, critic agent, studio autoedit, AGENTS.md, README, help)
-- [ ] **P12** Hardening: edge matrix, loud failures, cache gc, security pass
+- [x] **P12** Hardening: edge matrix, loud failures, cache gc, security pass
 - [ ] **P13** Demo + review rounds, cold full verify, FINAL_REPORT.md
 
 ## Checks (mirrors `studio verify-edit --list`; tick when it passes in a full run)
