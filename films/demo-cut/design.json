@@ -1,5 +1,5 @@
 {
-  "direction": "ONE LINE: what the viewer should feel at the end. Every decision is checked against it.",
+  "direction": "Warm minimal: ink on plate, one accent, punch-ins on emphasized words, a slow push through the confession.",
   "fonts": {
     "display": "Bricolage Grotesque",
     "ui": "Inter",
@@ -55,11 +55,15 @@
   },
   "devices": [
     {
-      "name": "example-device",
-      "purpose": "what it does for the viewer, in one line"
+      "name": "punch-in",
+      "purpose": "land emphasized words with a spring zoom, never across a cut"
+    },
+    {
+      "name": "slow push",
+      "purpose": "hold energy through the calm confession beat"
     }
   ],
-  "reference": "what was taken from the reference (grammar only, never content)",
+  "reference": "NASA PSA footage; the studio design system (Inter, ink/plate/accent).",
   "banned": [
     "centered title on gradient",
     "everything fading in",

@@ -23,9 +23,10 @@ export function drawOverlays(ctx, t, L, D, overlays, cfg) {
       out.push({ o, box: { x: L.cx - u * 40, y: L.cy - px, w: u * 80, h: px * 2 } });
     } else if (o.type === 'lower-third') { // name + role, bottom left, a bar in the accent
       const px = u * 4.6, x = L.safe.x, y = L.safe.y + L.safe.h - u * 16;
-      ctx.globalAlpha = a; font(px * 0.42, 500); ctx.fillStyle = c.accent; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      // both lines clear the 3.2u floor (AGENTS.md) and the NAME stays the hierarchy's top (px*0.42 was 1.93u)
+      ctx.globalAlpha = a; font(px * 0.70, 500); ctx.fillStyle = c.accent; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
       ctx.fillText(String(o.props.role ?? '').toUpperCase(), x + px * 0.9, y + px * 0.4);
-      font(px * 0.62, 700); ctx.fillStyle = c.ink; ctx.fillText(String(o.props.name ?? ''), x + px * 0.9, y);
+      font(px * 0.80, 700); ctx.fillStyle = c.ink; ctx.fillText(String(o.props.name ?? ''), x + px * 0.9, y); // 3.68u, above the role
       ctx.fillStyle = c.accent; ctx.fillRect(x, y - px * 0.55, Math.max(u * 0.6, 2) * 8 * Math.min(1, lt / 0.2), px * 1.15);
       out.push({ o, box: { x, y: y - px * 0.6, w: px * 14, h: px * 1.6 } });
     } else if (o.type === 'callout') { // a pointer label for a detail: dot + line + label at props.x/y (fractions)

@@ -336,8 +336,9 @@ async function main() {
 
 async function sound(key) {
   const film = readFilm(key);
-  if (film.cfg.kind === 'edit') { // an edit film's sound is its dialog bus (+ music/sfx when the film has them)
+  if (film.cfg.kind === 'edit') { // an edit film's sound is its dialog bus over the ducked music bed
     const A = await import('./edit-audio.mjs');
+    if (film.cfg.music && !film.cfg.track) { const m = buildMusic(key); if (m.file) console.log(rel(m.file)); }
     const d = await A.buildDialog(key, { log: (m) => console.log(m) }), x = await A.mixEdit(key);
     console.log(`${rel(x.file)}  ${x.lufs} LUFS, true peak ${x.truePeak} dBFS`); void d; return;
   }

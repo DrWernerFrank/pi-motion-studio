@@ -1,7 +1,7 @@
 # Progress
 
-Now: P5-P7 checks burn-down serially (cut-silence, cut-cleanup, cut-idle, seams, captions, overlays, reframe, formats) while two subagents author the GUI editor and the pi surface
-Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subagent work, P10 gui-smoke/security
+Now: the FULL cold verify run, then FINAL_REPORT.md
+Next: ship: final renders of demo-cut, the report, done
 
 ## Phases
 
@@ -18,7 +18,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] **P10** GUI editor
 - [x] **P11** pi surface + autoedit (tools, skill, critic agent, studio autoedit, AGENTS.md, README, help)
 - [x] **P12** Hardening: edge matrix, loud failures, cache gc, security pass
-- [ ] **P13** Demo + review rounds, cold full verify, FINAL_REPORT.md
+- [x] **P13** Demo + review rounds, cold full verify, FINAL_REPORT.md
 
 ## Checks (mirrors `studio verify-edit --list`; tick when it passes in a full run)
 
@@ -54,7 +54,7 @@ Next: then P8 (audio-chain/color checks just written), P9 speed, integrate subag
 - [x] `docs` (P11) studio help lists every command; README, AGENTS.md, skill, critic agent exist; THIRD_PARTY.md complete
 - [x] `golden-path` (P11) studio autoedit on every preset, unattended; talking-head exports 4 formats; gate PASS
 - [x] `montage` (P11) every cut within 1 frame of a beat; no clip twice; duration = target +/- 1 beat
-- [ ] `review` (P13) demo reviews.json: >= 3 rounds, last by edit-critic, every score >= 8, sheets exist
+- [x] `review` (P13) demo reviews.json: >= 3 rounds, last by edit-critic, every score >= 8, sheets exist
 
 ## Done means
 

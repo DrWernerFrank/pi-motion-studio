@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-02T01:11:25.215Z",
+  "at": "2026-10-02T05:06:49.515Z",
   "pass": true,
   "checks": [
     {
@@ -30,7 +30,7 @@
       "name": "hook",
       "pass": true,
       "level": "pass",
-      "detail": "first frame contrast 52.5 (want >3), max change in first 2s 11.8 (want >8)"
+      "detail": "first frame contrast 53.3 (want >3), max change in first 2s 29.3 (want >8)"
     },
     {
       "name": "blank-frames",
@@ -42,7 +42,7 @@
       "name": "loudness",
       "pass": true,
       "level": "pass",
-      "detail": "-14 LUFS (want -14 ±1), true peak -3.7 dBFS"
+      "detail": "-13.9 LUFS (want -14 ±1), true peak -3 dBFS"
     }
   ]
 }

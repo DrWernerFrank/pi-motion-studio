@@ -61,6 +61,11 @@ export async function film(spec) {
     ctx.fillStyle = cfg.background || '#000';
     ctx.fillRect(0, 0, L.W, L.H);
     spec.draw(ctx, t, L, cfg);
+    // film.json fade: { in: seconds, out: seconds } - a fade to/from the background at the ends (a close
+    // never hard-cuts to black: every polished edit fades its last frame)
+    const fin = cfg.fade?.in ?? 0, fout = cfg.fade?.out ?? 0;
+    if (fin > 0 && t < fin) { ctx.globalAlpha = 1 - t / fin; ctx.fillStyle = cfg.background || '#000'; ctx.fillRect(0, 0, L.W, L.H); ctx.globalAlpha = 1; }
+    if (fout > 0 && t > duration - fout) { ctx.globalAlpha = (t - (duration - fout)) / fout; ctx.fillStyle = cfg.background || '#000'; ctx.fillRect(0, 0, L.W, L.H); ctx.globalAlpha = 1; }
   };
   window.seek = seek;
 

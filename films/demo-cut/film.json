@@ -1,7 +1,7 @@
 {
   "kind": "edit",
   "title": "demo-cut",
-  "duration": 26.533333,
+  "duration": 34.633333,
   "fps": 30,
   "formats": [
     "16:9",
@@ -31,5 +31,8 @@
   "gates": {
     "maxStill": 4,
     "maxNoNovelty": 8
+  },
+  "fade": {
+    "out": 0.35
   }
 }

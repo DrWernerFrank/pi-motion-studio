@@ -139,7 +139,12 @@ export async function mixEdit(filmKey, { target } = {}) {
     ? '[a0]anull[m]'
     : `[a0]asplit=2[key][dial];[a1][key]sidechaincompress=threshold=0.02:ratio=${r.toFixed(2)}:attack=${Math.round(duckAtt)}:release=${Math.round(duckRel)}:makeup=1:link=average[bed];[dial][bed]amix=inputs=2:normalize=0[m]`;
   const extraCh = inputs.slice(2).map((_, i) => `;[a${i + 2}]anull[b${i}]`).join('') + (inputs.length > 2 ? `;[m]${inputs.slice(2).map((_, i) => `[b${i}]`).join('')}amix=inputs=${inputs.length - 1}:normalize=0[m]` : '');
-  await run('ffmpeg', ['-y', '-v', 'error', ...inputs.flatMap((f) => ['-i', f]), '-filter_complex', `${chain};${mix}${extraCh}`, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
+  // the close never stops dead: a 400 ms fade on the premix's tail (craft rule: fade out at the end)
+  const fade = `afade=t=out:st=${Math.max(0, D - 0.4).toFixed(3)}:d=0.4`;
+  const finalMix = inputs.length === 1
+    ? `${chain};[a0]${fade}[m]`
+    : `${chain};${mix.replace(/\[m\]$/, `,${fade}[m]`)}${extraCh}`;
+  await run('ffmpeg', ['-y', '-v', 'error', ...inputs.flatMap((f) => ['-i', f]), '-filter_complex', finalMix, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
   const l = await normalize(pre, file, lufs);
   rmSync(pre, { force: true });
   return { file, ...l, duration: D };
