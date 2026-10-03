@@ -150,7 +150,7 @@ export default async () => {
     if (!(await renderSlot())) return { pass: false, skip: 'the render slot stayed busy for 120 s (a sibling agent is rendering) — where check not run' };
     const out = await renderMathFilm(KEY, { quality: 'draft', fmt: '16:9' });
     const fmt = '16:9';
-    facts.push(`fixture: ${v.sentences.length} sentences voiced (${v.duration.toFixed(2)} s), draft ${fmt} rendered in ${out[0].seconds.toFixed(2)} s (${out[0].rendered} scenes)`);
+    facts.push(`fixture: ${v.sentences.length} sentences voiced (${v.duration.toFixed(2)} s), draft ${fmt} = ${out[0].seconds.toFixed(2)} s of film (${out[0].rendered + out[0].cached} scenes: ${out[0].rendered} fresh + ${out[0].cached} cached)`);
 
     // -- the truth, re-derived from the records (NOT through engine/where.mjs) -----------------
     // scene order + lengths straight from records/<fmt>/ (the render order: sorted scene files)
