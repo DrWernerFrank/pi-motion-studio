@@ -1,8 +1,10 @@
-// math.mjs — the math-film orchestrator (mission M4, first slice of P2).
+// math.mjs — the math-film orchestrator (mission M4).
+// Scene cache: content-addressed per (scene, format, quality) — mission §3.8.
 // Per scene+format: a scratch media dir (ADR-004's race fix), a generated film_state.json the scene
 // reads (design, format, timing slice), one `manim render` through the memory guard (capped.mjs —
 // D-007: nothing here can ever take the machine down), then a lossless concat and a single mux
 // with bt709 tags (Manim's own MP4s carry none — measured in ADR-004).
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, utimesSync, writeFileSync, copyFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -13,6 +15,9 @@ import { run } from './lib/proc.mjs';
 import { ROOT } from './lib/serve.mjs';
 
 export const SCRATCH = join(homedir(), '.cache', 'pi-motion-studio', 'scratch', 'math');
+export const SCENE_CACHE = join(homedir(), '.cache', 'pi-motion-studio', 'math-scenes');
+const CACHE_VERSION = 2;
+const SENTENCE_GAP = 0.15; // the narration bus's inter-sentence gap (narration.mjs) — hashed into keys
 export const FORMATS = { // studio geometry (short side 8 units — studio_manim/layout.py agrees)
   '16:9': [1920, 1080], '9:16': [1080, 1920], '1:1': [1080, 1080], '4:5': [1080, 1350],
 };
@@ -32,13 +37,53 @@ export function readMathFilm(key) {
 
 const sceneId = (f) => f.replace(/\.py$/, '');
 
+// -- the scene cache (§3.8: scene source + kit + design + format + the timing slice it consumes
+// + manim version; one changed sentence re-renders only its scene) -----------------------------
+/** The scene's OWN sentences REBASED to their starts — everything the clock reads. Absolute film
+ * times shift with upstream edits but change nothing a scene draws, so an s01 sentence edit
+ * re-renders ONLY s01; later scenes keep their keys and the concat absorbs the shift. */
+function rebasedSlice(timing, sceneIdOfFilm, gap) {
+  const own = (timing?.sentences ?? []).filter((s) => s.scene === sceneIdOfFilm);
+  return own.map((s) => ({
+    id: s.id, text: s.text, spoken: s.spoken, samples: s.samples,
+    duration: +((s.end ?? 0) - (s.start ?? 0)).toFixed(6),
+    words: (s.words ?? []).map((w) => [w.w, +(w.start - s.start).toFixed(5), +(w.end - s.start).toFixed(5)]),
+    bookmarks: (s.bookmarks ?? []).map((b) => [b.id, b.t, b.word ?? null]),
+  })).concat([['gap', gap]]);
+}
+
+function sceneCacheKey({ sceneSource, kit, design, filmCfg, fmt, quality, fps, px, timing, sceneId: sid, manimVer }) {
+  const h = createHash('sha256');
+  h.update(`v${CACHE_VERSION}\n${sceneSource}\0`);
+  for (const [p, c] of kit) h.update(`${p}\0${c}\0`);
+  h.update(JSON.stringify(design) + '\0');
+  const { duration: _d, ...cfgRest } = filmCfg;  // derived: never a cache invalidator
+  h.update(JSON.stringify(cfgRest) + '\0');
+  h.update(`${fmt}|${quality}|${fps}|${px[0]}x${px[1]}|${manimVer}\n`);
+  h.update(JSON.stringify(rebasedSlice(timing, sid, SENTENCE_GAP)));
+  return h.digest('hex').slice(0, 32);
+}
+
+const _mv = new Map();
+async function manimVersion(py) {
+  if (!_mv.has(py)) { const { out } = await run(py, ['-c', 'import manim; print(manim.__version__)'], { allowFail: true }); _mv.set(py, (out || 'unknown').trim()); }
+  return _mv.get(py);
+}
+
+function kitSources() {
+  const dir = join(ROOT, 'engine', 'manim', 'studio_manim');
+  return readdirSync(dir).filter((f) => f.endsWith('.py')).sort()
+    .map((f) => [`studio_manim/${f}`, readFileSync(join(dir, f), 'utf8')]);
+}
+
 // -- the render ---------------------------------------------------------------------------
-export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene } = {}) {
+export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCache = false } = {}) {
   const film = readMathFilm(key);
   const formats = fmt ? [fmt] : film.cfg.formats;
   if (film.scenes.length === 0) throw new Error(`films/${key}/scenes/ holds no .py files: nothing to render`);
   const pool = new MemPool();
   const results = [];
+  const counters = { rendered: 0, cached: 0 };
   for (const f of formats) {
     if (!FORMATS[f]) throw new Error(`unknown format ${f}: one of ${Object.keys(FORMATS)}`);
     const [W, H] = FORMATS[f];
@@ -53,6 +98,7 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
     const wanted = scene ? film.scenes.filter((s) => s.id === scene) : film.scenes;
     if (scene && !wanted.length) throw new Error(`no scene "${scene}" in films/${key}/scenes/ (${film.scenes.map((s) => s.id).join(', ')})`);
 
+    const timingAll = readJson(join(film.dir, 'timing.json'), {});
     const partials = [];
     for (const s of wanted) {
       const work = join(SCRATCH, key, f, s.id);
@@ -61,11 +107,26 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
       const records = join(work, 'records'); mkdirSync(records, { recursive: true });
       const state = {
         format: f, design: readJson(join(film.dir, 'design.json'), {}),
-        timing: { sentences: readJson(join(film.dir, 'timing.json'), {}).sentences ?? [] },
+        timing: { sentences: timingAll.sentences ?? [] },
         records_dir: records, claims_file: join(records, `${s.id}-claims.json`),
         scene: { id: s.id, file: s.file },
       };
       const stateFile = join(work, 'film_state.json'); writeJson(stateFile, state);
+      // -- cache: content-addressed per (scene source, kit, design, cfg, fmt/quality/fps/px,
+      //    the scene's REBASED timing slice, manim version). A hit reuses the partial + records.
+      const key32 = noCache ? null : sceneCacheKey({
+        sceneSource: readFileSync(s.file, 'utf8'), kit: kitSources(),
+        design: state.design, filmCfg: film.cfg, fmt: f, quality, fps, px,
+        timing: timingAll, sceneId: s.id, manimVer: await manimVersion(pythonFor('manim')),
+      });
+      const cdir = key32 && join(SCENE_CACHE, key32);
+      if (cdir && existsSync(join(cdir, `${s.id}.mp4`))) {
+        copyFileSync(join(cdir, `${s.id}.mp4`), join(work, `${s.id}.mp4`));
+        for (const x of readdirSync(join(cdir, 'records'))) copyFileSync(join(cdir, 'records', x), join(records, x));
+        counters.cached += 1;
+        partials.push({ scene: s, mp4: join(work, `${s.id}.mp4`), records, work });
+        continue;
+      }
       const r = await pool.run({
         cmd: pythonFor('manim'), args: ['-m', 'manim', 'render', s.file, 'Scene',
           '--media_dir', work, '-o', `${s.id}.mp4`, '--fps', String(fps), '--resolution', `${px[0]},${px[1]}`],
@@ -78,7 +139,16 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
         throw new Error(msg);
       }
       const mp4 = find(join(work, 'videos'), `${s.id}.mp4`);
-      if (!mp4) throw new Error(`manim produced no ${s.id}.mp4 under ${work}/videos (cwd ${work})\n${(r.err || '').split('\n').slice(-8).join('\n')}`);
+      if (!mp4) throw new Error(`manim produced no ${s.id}.mp4 under ${work}/videos (cwd ${work}) — an empty scene adds no frames; give the scene content\n${(r.err || '').split('\n').slice(-8).join('\n')}`);
+      counters.rendered += 1;
+      if (cdir) { // populate the cache entry (atomic-ish: write a tmp dir, then rename)
+        const tmp = `${cdir}.tmp-${Date.now()}`;
+        mkdirSync(join(tmp, 'records'), { recursive: true });
+        copyFileSync(mp4, join(tmp, `${s.id}.mp4`));
+        for (const x of readdirSync(records)) copyFileSync(join(records, x), join(tmp, 'records', x));
+        try { rmSync(cdir, { recursive: true, force: true }); mkdirSync(join(SCENE_CACHE), { recursive: true }); (await import('node:fs')).renameSync(tmp, cdir); }
+        catch { rmSync(tmp, { recursive: true, force: true }); } // partial write: never serve it
+      }
       partials.push({ scene: s, mp4, records, work });
     }
     if (!partials.length) continue;
@@ -124,7 +194,7 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
     }
   }
   rmSync(join(SCRATCH, key), { recursive: true, force: true }); // hygiene: scratch is disposable
-  return results;
+  return results.map((r) => ({ ...r, ...counters }));
 }
 
 function find(dir, name) {

@@ -11,7 +11,8 @@
 //   { version, voice: "piper:<name>" | "human", length_scale, sample_rate, gap, gap_samples, duration, timing,
 //     narration?: <wav, human only>,
 //     sentences: [{ id, scene, text, spoken, start, end, start_sample, samples, words: [{w, start, end}],
-//                   bookmarks: [{id, t, word}], audio?, hash? }] }   (times in seconds on the film clock)
+//                   bookmarks: [{id, t, word}], audio?, hash? }] }   (film seconds; a bookmark's t is seconds
+//                   from its sentence's start — D-016)
 // Sentences play in script order; sentence i starts GAP_S (0.15 s, rounded to whole samples) after the
 // previous one ends, so start_sample_i = sum over j < i of (samples_j + gap_samples), exactly. A bookmark's
 // t is the start of the first word after its span (the sentence end when the span closes the sentence).
@@ -188,7 +189,8 @@ function assembleTiming(sentences, keys, v) {
     if (i > 0) cursor += gap;
     const start = cursor / sr, n = meta.samples, end = (cursor + n) / sr;
     const words = meta.words.map((w) => ({ w: w.w, start: +(start + w.start).toFixed(5), end: +(start + w.end).toFixed(5) }));
-    const bookmarks = s.bookmarks.map((b) => ({ id: b.id, t: b.at_word < words.length ? words[b.at_word].start : +end.toFixed(6), word: b.at_word < words.length ? words[b.at_word].w : null }));
+    // D-016: a bookmark's t is seconds FROM ITS SENTENCE'S START (words are film seconds)
+    const bookmarks = s.bookmarks.map((b) => ({ id: b.id, t: +((b.at_word < words.length ? words[b.at_word].start : end) - start).toFixed(6), word: b.at_word < words.length ? words[b.at_word].w : null }));
     out.push({ id: s.id, scene: s.scene, text: s.text, spoken: s.spoken, start: +start.toFixed(6), end: +end.toFixed(6),
       start_sample: cursor, samples: n, words, bookmarks, timing: meta.timing, audio: join(k.dir, 'audio.wav'), hash: k.hash });
     cursor += n;
@@ -349,7 +351,7 @@ export async function alignNarration(key, wavPath) {
     const start = words[0].start, end = words.at(-1).end;
     return { id: s.id, scene: s.scene, text: s.text, spoken: s.spoken, start, end,
       start_sample: Math.round(start * sr), samples: Math.round((end - start) * sr), words,
-      bookmarks: s.bookmarks.map((b) => ({ id: b.id, t: b.at_word < words.length ? words[b.at_word].start : end, word: b.at_word < words.length ? words[b.at_word].w : null })),
+      bookmarks: s.bookmarks.map((b) => ({ id: b.id, t: +((b.at_word < words.length ? words[b.at_word].start : end) - start).toFixed(6), word: b.at_word < words.length ? words[b.at_word].w : null })),
       timing: 'asr' };
   });
   const timing = { version: 1, voice: 'human', narration: wav, sample_rate: sr, gap: null, gap_samples: null,

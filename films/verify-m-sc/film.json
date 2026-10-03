@@ -1,12 +1,12 @@
 {
   "kind": "math",
-  "title": "The determinant, starter",
+  "title": "scene-cache fixture",
   "fps": 60,
   "formats": [
     "16:9",
     "9:16"
   ],
-  "duration": 20.826,
+  "duration": 0,
   "lang": "en",
   "voice": "piper:en_US-ljspeech-medium",
   "captions": "auto",

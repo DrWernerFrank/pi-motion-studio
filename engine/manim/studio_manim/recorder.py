@@ -45,6 +45,34 @@ class Recorder:
             })
         self._sentence, self._sentence_start_t = None, None
 
+    def bookmark(self, name: str, t_in_sentence: float, sentence: dict | None):
+        """A bookmark the scene USED (at()/until()) and when (film time). The sync check's truth."""
+        t = None
+        try:
+            base = (sentence or {}).get("start")
+            if base is not None:
+                t = float(base) + float(t_in_sentence)
+        except Exception:
+            t = None
+        if t is None:
+            try:
+                t = self._t_now()
+            except Exception:
+                t = 0.0
+        self.trace.append({"kind": "bookmark", "t": round(t, 3), "id": name,
+                           "sentence": (sentence or {}).get("id"), "scene": self.scene_id})
+
+    def overrun(self, sentence: dict | None, seconds: float):
+        """The scene's animations ran `seconds` past the sentence's end (never rewound)."""
+        self.trace.append({"kind": "overrun", "t": round(self._t_now(), 3),
+                           "sentence": (sentence or {}).get("id"), "seconds": round(float(seconds), 3),
+                           "scene": self.scene_id})
+
+    def _t_now(self) -> float:
+        if self.trace:
+            return float(self.trace[-1].get("t", 0.0))
+        return 0.0
+
     # -- per-animation snapshot ----------------------------------------------------
     def animation(self, scene, name: str, t0: float | None, *, seconds: float | None = None):
         t = None

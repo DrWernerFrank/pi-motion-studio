@@ -8,12 +8,36 @@
   "animation": "Write"
  },
  {
+  "kind": "bookmark",
+  "t": 9.74,
+  "id": "formula_lands",
+  "sentence": "s02.1",
+  "scene": "s02_meaning"
+ },
+ {
   "kind": "animation",
-  "t": 2.5,
+  "t": 3.4,
   "i": 2,
   "scene": "s02_meaning",
   "sentence": "s02.1",
   "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.667,
+  "i": 3,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.667,
+  "i": 4,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "wait",
+  "seconds": 1.279
  },
  {
   "t": 0.8999999999999999,
@@ -23,29 +47,7 @@
  },
  {
   "kind": "animation",
-  "t": 3.9,
-  "i": 3,
-  "scene": "s02_meaning",
-  "sentence": "s02.2",
-  "animation": "Write"
- },
- {
-  "kind": "animation",
-  "t": 4.7,
-  "i": 4,
-  "scene": "s02_meaning",
-  "sentence": "s02.2",
-  "animation": "Write"
- },
- {
-  "t": 3.899999999999996,
-  "kind": "sentence_end",
-  "scene": "s02_meaning",
-  "sentence": "s02.2"
- },
- {
-  "kind": "animation",
-  "t": 5.2,
+  "t": 4.8,
   "i": 5,
   "scene": "s02_meaning",
   "sentence": null,
@@ -53,8 +55,61 @@
  },
  {
   "kind": "animation",
-  "t": 5.2,
+  "t": 4.8,
   "i": 6,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.162
+ },
+ {
+  "kind": "bookmark",
+  "t": 14.615,
+  "id": "lands",
+  "sentence": "s02.2",
+  "scene": "s02_meaning"
+ },
+ {
+  "kind": "animation",
+  "t": 8.233,
+  "i": 7,
+  "scene": "s02_meaning",
+  "sentence": "s02.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 9.033,
+  "i": 8,
+  "scene": "s02_meaning",
+  "sentence": "s02.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "overrun",
+  "t": 9.033,
+  "sentence": "s02.2",
+  "seconds": 0.269,
+  "scene": "s02_meaning"
+ },
+ {
+  "t": 8.23333333333332,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.2"
+ },
+ {
+  "kind": "animation",
+  "t": 9.533,
+  "i": 9,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.533,
+  "i": 10,
   "scene": "s02_meaning",
   "sentence": null,
   "animation": "wait",

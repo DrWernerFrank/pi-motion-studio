@@ -5,7 +5,7 @@
   "sample_rate": 22050,
   "gap": 0.15,
   "gap_samples": 3308,
-  "duration": 20.326349,
+  "duration": 19.432381,
   "timing": "native",
   "sentences": [
     {
@@ -14,254 +14,254 @@
       "text": "What does a determinant actually do? {shows}Watch the unit square{applies} as a matrix acts on the plane.",
       "spoken": "What does a determinant actually do? Watch the unit square as a matrix acts on the plane.",
       "start": 0,
-      "end": 6.222948,
+      "end": 5.874649,
       "start_sample": 0,
-      "samples": 137216,
+      "samples": 129536,
       "words": [
         {
           "w": "What",
           "start": 0.04644,
-          "end": 0.31347
+          "end": 0.32508
         },
         {
           "w": "does",
-          "start": 0.42957,
-          "end": 0.67338
+          "start": 0.4644,
+          "end": 0.71982
         },
         {
           "w": "a",
-          "start": 0.70821,
-          "end": 0.76626
+          "start": 0.75465,
+          "end": 0.80109
         },
         {
           "w": "determinant",
-          "start": 0.8127,
-          "end": 1.79955
+          "start": 0.84753,
+          "end": 1.49769
         },
         {
           "w": "actually",
-          "start": 1.84599,
-          "end": 2.35683
+          "start": 1.54413,
+          "end": 2.04336
         },
         {
           "w": "do?",
-          "start": 2.4381,
-          "end": 2.78639
+          "start": 2.12463,
+          "end": 2.4381
         },
         {
           "w": "Watch",
-          "start": 2.93732,
-          "end": 3.22757
+          "start": 2.58902,
+          "end": 2.87927
         },
         {
           "w": "the",
-          "start": 3.2624,
-          "end": 3.35528
+          "start": 2.9141,
+          "end": 3.00698
         },
         {
           "w": "unit",
-          "start": 3.40172,
-          "end": 3.73841
+          "start": 3.05342,
+          "end": 3.39011
         },
         {
           "w": "square",
-          "start": 3.85451,
-          "end": 4.21442
+          "start": 3.50621,
+          "end": 3.86612
         },
         {
           "w": "as",
-          "start": 4.29569,
-          "end": 4.38857
+          "start": 3.94739,
+          "end": 4.04027
         },
         {
           "w": "a",
-          "start": 4.43501,
-          "end": 4.48145
+          "start": 4.08671,
+          "end": 4.13315
         },
         {
           "w": "matrix",
-          "start": 4.52789,
-          "end": 5.05034
+          "start": 4.17959,
+          "end": 4.70204
         },
         {
           "w": "acts",
-          "start": 5.12,
-          "end": 5.43347
+          "start": 4.7717,
+          "end": 5.08517
         },
         {
           "w": "on",
-          "start": 5.47991,
-          "end": 5.61923
+          "start": 5.13161,
+          "end": 5.27093
         },
         {
           "w": "the",
-          "start": 5.61923,
-          "end": 5.68889
+          "start": 5.27093,
+          "end": 5.34059
         },
         {
           "w": "plane.",
-          "start": 5.73533,
-          "end": 6.11846
+          "start": 5.38703,
+          "end": 5.77016
         }
       ],
       "bookmarks": [
         {
           "id": "shows",
-          "t": 2.93732,
+          "t": 2.58902,
           "word": "Watch"
         },
         {
           "id": "applies",
-          "t": 4.29569,
+          "t": 3.94739,
           "word": "as"
         }
       ],
       "timing": "native",
-      "audio": "/home/werner/.cache/pi-motion-studio/voice/8e8c94ca3e83c8e2a6bf15e8ab9e2686c8ac2cf96ad4281ce8166e70e0734fd9/audio.wav",
-      "hash": "8e8c94ca3e83c8e2a6bf15e8ab9e2686c8ac2cf96ad4281ce8166e70e0734fd9"
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/7be48cf8d828125f49ad31d7f26305d0078c269961ea2b8747f448cf28a9250b/audio.wav",
+      "hash": "7be48cf8d828125f49ad31d7f26305d0078c269961ea2b8747f448cf28a9250b"
     },
     {
       "id": "s02.1",
       "scene": "s02_meaning",
       "text": "For a two by two matrix, the determinant is {formula_lands}ad minus bc.",
       "spoken": "For a two by two matrix, the determinant is ad minus bc.",
-      "start": 6.372971,
-      "end": 11.051791,
-      "start_sample": 140524,
-      "samples": 103168,
+      "start": 6.024671,
+      "end": 10.564172,
+      "start_sample": 132844,
+      "samples": 100096,
       "words": [
         {
           "w": "For",
-          "start": 6.41941,
-          "end": 6.5239
+          "start": 6.08272,
+          "end": 6.18721
         },
         {
           "w": "a",
-          "start": 6.5239,
-          "end": 6.62839
+          "start": 6.18721,
+          "end": 6.30331
         },
         {
           "w": "two",
-          "start": 6.69805,
-          "end": 7.05796
+          "start": 6.37297,
+          "end": 6.73288
         },
         {
           "w": "by",
-          "start": 7.13923,
-          "end": 7.29016
+          "start": 6.80254,
+          "end": 6.95347
         },
         {
           "w": "two",
-          "start": 7.37143,
-          "end": 7.52236
+          "start": 7.03474,
+          "end": 7.18567
         },
         {
           "w": "matrix,",
-          "start": 7.55719,
-          "end": 8.18413
+          "start": 7.2205,
+          "end": 7.84744
         },
         {
           "w": "the",
-          "start": 8.60209,
-          "end": 8.67175
+          "start": 8.28862,
+          "end": 8.34667
         },
         {
           "w": "determinant",
-          "start": 8.71819,
-          "end": 9.54249
+          "start": 8.3815,
+          "end": 9.04326
         },
         {
           "w": "is",
-          "start": 9.56571,
-          "end": 9.6702
+          "start": 9.07809,
+          "end": 9.18258
         },
         {
           "w": "ad",
-          "start": 9.73986,
-          "end": 9.93723
+          "start": 9.25224,
+          "end": 9.46122
         },
         {
           "w": "minus",
-          "start": 9.98367,
-          "end": 10.40163
+          "start": 9.50766,
+          "end": 9.91401
         },
         {
           "w": "bc.",
-          "start": 10.44807,
-          "end": 10.97052
+          "start": 9.96045,
+          "end": 10.4829
         }
       ],
       "bookmarks": [
         {
           "id": "formula_lands",
-          "t": 3.366889,
+          "t": 3.227569,
           "word": "ad"
         }
       ],
       "timing": "native",
-      "audio": "/home/werner/.cache/pi-motion-studio/voice/32b83e44c37cbad3907245f5f6467e4de04837ec0b6641a55e17b588b87bd880/audio.wav",
-      "hash": "32b83e44c37cbad3907245f5f6467e4de04837ec0b6641a55e17b588b87bd880"
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/b2d0606f6828f07e92359837a6e2363fc32774f77de15f67980ab5a65346da24/audio.wav",
+      "hash": "b2d0606f6828f07e92359837a6e2363fc32774f77de15f67980ab5a65346da24"
     },
     {
       "id": "s02.2",
       "scene": "s02_meaning",
       "text": "Here: three times two, minus one times one. {lands}Five.",
       "spoken": "Here: three times two, minus one times one. Five.",
-      "start": 11.201814,
-      "end": 15.137596,
-      "start_sample": 247000,
+      "start": 10.714195,
+      "end": 14.649977,
+      "start_sample": 236248,
       "samples": 86784,
       "words": [
         {
           "w": "Here:",
-          "start": 11.22503,
-          "end": 11.63138
+          "start": 10.73742,
+          "end": 11.14377
         },
         {
           "w": "three",
-          "start": 12.0029,
-          "end": 12.28154
+          "start": 11.51529,
+          "end": 11.79393
         },
         {
           "w": "times",
-          "start": 12.32798,
-          "end": 12.71111
+          "start": 11.84037,
+          "end": 12.2235
         },
         {
           "w": "two,",
-          "start": 12.80399,
-          "end": 13.00136
+          "start": 12.31638,
+          "end": 12.51375
         },
         {
           "w": "minus",
-          "start": 13.09424,
-          "end": 13.47737
+          "start": 12.60663,
+          "end": 12.98976
         },
         {
           "w": "one",
-          "start": 13.53542,
-          "end": 13.7444
+          "start": 13.04781,
+          "end": 13.25679
         },
         {
           "w": "times",
-          "start": 13.79083,
-          "end": 14.15074
+          "start": 13.30322,
+          "end": 13.66313
         },
         {
           "w": "one.",
-          "start": 14.20879,
-          "end": 14.46421
+          "start": 13.72118,
+          "end": 13.9766
         },
         {
           "w": "Five.",
-          "start": 14.61514,
-          "end": 15.06793
+          "start": 14.12753,
+          "end": 14.58032
         }
       ],
       "bookmarks": [
         {
           "id": "lands",
-          "t": 3.413326,
+          "t": 3.413335,
           "word": "Five."
         }
       ],
@@ -274,81 +274,81 @@
       "scene": "s03_recap",
       "text": "A determinant is the area scale factor. Five means five times the area.",
       "spoken": "A determinant is the area scale factor. Five means five times the area.",
-      "start": 15.287619,
-      "end": 20.326349,
-      "start_sample": 337092,
-      "samples": 111104,
+      "start": 14.8,
+      "end": 19.432381,
+      "start_sample": 326340,
+      "samples": 102144,
       "words": [
         {
           "w": "A",
-          "start": 15.32245,
-          "end": 15.3805
+          "start": 14.83483,
+          "end": 14.86966
         },
         {
           "w": "determinant",
-          "start": 15.43855,
-          "end": 16.34413
+          "start": 14.9161,
+          "end": 15.51982
         },
         {
           "w": "is",
-          "start": 16.37896,
-          "end": 16.47184
+          "start": 15.56626,
+          "end": 15.64753
         },
         {
           "w": "the",
-          "start": 16.50667,
-          "end": 16.64599
+          "start": 15.68236,
+          "end": 15.79846
         },
         {
           "w": "area",
-          "start": 16.70404,
-          "end": 17.07556
+          "start": 15.8449,
+          "end": 16.1932
         },
         {
           "w": "scale",
-          "start": 17.19166,
-          "end": 17.50513
+          "start": 16.3093,
+          "end": 16.61116
         },
         {
           "w": "factor.",
-          "start": 17.55157,
-          "end": 18.00435
+          "start": 16.6576,
+          "end": 17.11039
         },
         {
           "w": "Five",
-          "start": 18.14367,
-          "end": 18.48036
+          "start": 17.24971,
+          "end": 17.58639
         },
         {
           "w": "means",
-          "start": 18.5268,
-          "end": 18.84027
+          "start": 17.63283,
+          "end": 17.9463
         },
         {
           "w": "five",
-          "start": 18.89832,
-          "end": 19.20018
+          "start": 18.00435,
+          "end": 18.30621
         },
         {
           "w": "times",
-          "start": 19.24662,
-          "end": 19.5717
+          "start": 18.35265,
+          "end": 18.67773
         },
         {
           "w": "the",
-          "start": 19.61814,
-          "end": 19.75746
+          "start": 18.72417,
+          "end": 18.86349
         },
         {
           "w": "area.",
-          "start": 19.81551,
-          "end": 20.21025
+          "start": 18.92154,
+          "end": 19.31628
         }
       ],
       "bookmarks": [],
       "timing": "native",
-      "audio": "/home/werner/.cache/pi-motion-studio/voice/221016cc5820ea3054f38562e2175b52a6d4928d395de279cb66913d1e3c1756/audio.wav",
-      "hash": "221016cc5820ea3054f38562e2175b52a6d4928d395de279cb66913d1e3c1756"
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3/audio.wav",
+      "hash": "52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3"
     }
   ]
 }

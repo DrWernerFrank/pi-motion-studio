@@ -4,37 +4,74 @@
   "t": 1.2,
   "i": 1,
   "scene": "s01_hook",
-  "sentence": null,
+  "sentence": "s01.1",
   "animation": "Write"
  },
  {
-  "kind": "animation",
-  "t": 2.2,
-  "i": 2,
-  "scene": "s01_hook",
-  "sentence": null,
-  "animation": "Create"
+  "kind": "bookmark",
+  "t": 2.937,
+  "id": "shows",
+  "sentence": "s01.1",
+  "scene": "s01_hook"
  },
  {
   "kind": "animation",
-  "t": 4.2,
+  "t": 2.967,
+  "i": 2,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "bookmark",
+  "t": 4.296,
+  "id": "applies",
+  "sentence": "s01.1",
+  "scene": "s01_hook"
+ },
+ {
+  "kind": "animation",
+  "t": 4.3,
   "i": 3,
   "scene": "s01_hook",
-  "sentence": null,
+  "sentence": "s01.1",
   "animation": "Transform; Write"
  },
  {
   "kind": "animation",
-  "t": 4.7,
+  "t": 6.2,
   "i": 4,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 6.2,
+  "i": 5,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "wait",
+  "seconds": 1.923
+ },
+ {
+  "t": 1.2000000000000004,
+  "kind": "sentence_end",
+  "scene": "s01_hook",
+  "sentence": "s01.1"
+ },
+ {
+  "kind": "animation",
+  "t": 6.7,
+  "i": 6,
   "scene": "s01_hook",
   "sentence": null,
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 4.7,
-  "i": 5,
+  "t": 6.7,
+  "i": 7,
   "scene": "s01_hook",
   "sentence": null,
   "animation": "wait",

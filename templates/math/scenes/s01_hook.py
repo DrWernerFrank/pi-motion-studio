@@ -35,7 +35,7 @@ class Scene(StudioScene):
         self.add(plane)
         with self.say("s01.1"):
             self.play(Write(q), run_time=1.2)
-            self.play(Create(sq), run_time=1.0)
-            self.play(Transform(sq, par), Write(five), run_time=2.0)
+            self.play(Create(sq), run_time=self.until("shows"))       # "Watch the unit square"
+            self.play(Transform(sq, par), Write(five), run_time=self.until("applies"))  # "as a matrix acts"
             claim("Matrix([[3, 1], [1, 2]]).det() == 5", about="area scale", says="s01.1")
         self.wait(0.5)

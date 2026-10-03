@@ -39,7 +39,7 @@
   ]
  },
  {
-  "t": 2.2,
+  "t": 2.967,
   "objects": [
    {
     "kind": "NumberPlane",
@@ -95,7 +95,7 @@
   ]
  },
  {
-  "t": 4.2,
+  "t": 4.3,
   "objects": [
    {
     "kind": "NumberPlane",
@@ -168,7 +168,7 @@
   ]
  },
  {
-  "t": 4.7,
+  "t": 6.2,
   "objects": [
    {
     "kind": "NumberPlane",
@@ -241,7 +241,7 @@
   ]
  },
  {
-  "t": 4.7,
+  "t": 6.2,
   "objects": [
    {
     "kind": "NumberPlane",
@@ -297,6 +297,152 @@
    {
     "kind": "Eq",
     "id": "5:3",
+    "bbox": [
+     1.773,
+     -1.399,
+     1.738,
+     0.344
+    ],
+    "height_u": 4.3,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 6.7,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "6:0",
+    "bbox": [
+     -5.945,
+     -2.809,
+     11.89,
+     4.408
+    ],
+    "height_u": 55.1,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "6:1",
+    "bbox": [
+     -3.272,
+     2.636,
+     6.544,
+     0.507
+    ],
+    "height_u": 6.34,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Square",
+    "id": "6:2",
+    "bbox": [
+     0.0,
+     -0.605,
+     5.284,
+     2.405
+    ],
+    "height_u": 30.06,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "6:3",
+    "bbox": [
+     1.773,
+     -1.399,
+     1.738,
+     0.344
+    ],
+    "height_u": 4.3,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 6.7,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "7:0",
+    "bbox": [
+     -5.945,
+     -2.809,
+     11.89,
+     4.408
+    ],
+    "height_u": 55.1,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "7:1",
+    "bbox": [
+     -3.272,
+     2.636,
+     6.544,
+     0.507
+    ],
+    "height_u": 6.34,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Square",
+    "id": "7:2",
+    "bbox": [
+     0.0,
+     -0.605,
+     5.284,
+     2.405
+    ],
+    "height_u": 30.06,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "7:3",
     "bbox": [
      1.773,
      -1.399,

@@ -29,9 +29,9 @@ class Scene(StudioScene):
 
         with self.say("s02.1"):
             self.play(Write(head), run_time=0.9)
-            self.play(Write(A), run_time=1.6)
+            self.play(Write(A), run_time=self.until("formula_lands"))
         with self.say("s02.2"):
-            self.play(Write(ex), run_time=1.4)
+            self.play(Write(ex), run_time=self.until("lands"))     # "Five."
             claim("3 * 2 - 1 * 1 == 5", about="worked example", says="s02.2")
             claim("Matrix([[3, 1], [1, 2]]).det() == 5", about="the same number, computed", says="s02.2")
             self.play(Write(note), run_time=0.8)

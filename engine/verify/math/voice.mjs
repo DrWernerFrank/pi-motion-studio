@@ -62,11 +62,12 @@ export default async () => {
     // -- 3. lexicon + normalizer (no synthesis) --------------------------------------------------
     const starterLex = join(dir, 'lexicon.json');
     const d1 = await dry('The determinant of x^2 is 5, and λ ≤ π', starterLex);
-    for (const want of ['duh-TUR-muh-nuhnt', 'squared', ' lambda', ' at most', ' pi']) if (!d1.text_normalized.includes(want)) bad.push(`normalizer/lexicon: "${want}" missing from ${JSON.stringify(d1.text_normalized)}`);
+    // 'determinant' intentionally NOT respelled (D-017: the respelling measurably hurt, WER 4.7% vs 2.3%)
+    for (const want of ['squared', ' lambda', ' at most', ' pi']) if (!d1.text_normalized.includes(want)) bad.push(`normalizer/lexicon: "${want}" missing from ${JSON.stringify(d1.text_normalized)}`);
     const fxLex = join(dir, 'lexicon-fixture.json');
     writeJson(fxLex, { ...readJson(starterLex), Euler: 'OY-ler', Cauchy: 'koh-SHEE' });
     const d2 = await dry('Euler and Cauchy knew each eigenvector; det(A) = ∫ x dx over 1/2 of a 2x2 grid', fxLex);
-    for (const want of ['OY-ler', 'koh-SHEE', 'EYE-gen-veck-tor', 'the duh-TUR-muh-nuhnt of A', 'equals', 'the integral of', 'one half', 'two by two']) if (!d2.text_normalized.includes(want)) bad.push(`normalizer/lexicon: "${want}" missing from ${JSON.stringify(d2.text_normalized)}`);
+    for (const want of ['OY-ler', 'koh-SHEE', 'EYE-gen-veck-tor', 'the determinant of A', 'equals', 'the integral of', 'one half', 'two by two']) if (!d2.text_normalized.includes(want)) bad.push(`normalizer/lexicon: "${want}" missing from ${JSON.stringify(d2.text_normalized)}`);
     // the synthesizer gets the respellings lower-cased (espeak spells an upper-case syllable letter by letter)
     if (!d2.synth_text.includes('oy-ler') || d2.synth_text.includes('OY-ler')) bad.push(`espeak-safe respelling: ${d2.synth_text}`);
     facts.push(`3 lexicon+normalizer: "${d1.text_normalized}" | "${d2.text_normalized}"`);
@@ -98,7 +99,7 @@ export default async () => {
       worst = Math.max(worst, Math.abs(s.start * sr - cum), Math.abs(s.end * sr - (cum + pcm.length)));
       cum += pcm.length;
       for (const w of s.words) if (w.start < s.start - 1e-6 || w.end > s.end + 1e-4 || w.end < w.start) bad.push(`${s.id}: word ${w.w} [${w.start}, ${w.end}] outside the sentence`);
-      for (const bm of s.bookmarks) if (!s.words.some((w) => w.start === bm.t) && bm.t !== s.end) bad.push(`${s.id}: bookmark ${bm.id} t=${bm.t} is not a word start`);
+      for (const bm of s.bookmarks) if (!s.words.some((w) => Math.abs(w.start - +(s.start + bm.t).toFixed(5)) <= 1e-4) && Math.abs(s.start + bm.t - s.end) > 1e-4) bad.push(`${s.id}: bookmark ${bm.id} t=${bm.t} is not a word start`);
     }
     if (worst > 1) bad.push(`offsets: seconds vs samples differ by ${worst.toFixed(3)} samples (> 1)`);
     if (timing.gap_samples !== Math.round(N.GAP_S * sr)) bad.push(`gap ${timing.gap_samples} samples != round(${N.GAP_S} * ${sr})`);
@@ -164,7 +165,7 @@ export default async () => {
     const worstAl = Math.max(...errs);
     if (worstAl > 0.15) bad.push(`narration align: a sentence start is ${(worstAl * 1000).toFixed(0)} ms off (> 150): ${errs.map((e) => (e * 1000).toFixed(0)).join(', ')} ms`);
     if (al.sentences.map((s) => s.id).join() !== truth.sentences.map((s) => s.id).join()) bad.push('narration align: sentence ids differ');
-    const bmErr = truth.sentences.flatMap((s, i) => s.bookmarks.map((bm, k) => Math.abs(al.sentences[i].bookmarks[k].t - bm.t)));
+    const bmErr = truth.sentences.flatMap((s, i) => s.bookmarks.map((bm, k) => Math.abs(al.sentences[i].start + al.sentences[i].bookmarks[k].t - (s.start + bm.t))));
     facts.push(`9 narration.wav aligned in ${((Date.now() - t1) / 1000).toFixed(1)} s: sentence starts within ${(worstAl * 1000).toFixed(0)} ms of truth (${(al.matched * 100).toFixed(1)}% words matched; bookmarks within ${(Math.max(...bmErr) * 1000).toFixed(0)} ms, informational)`);
     const tr = readJson(join(dir, 'out', 'narration.transcript.json'));
     const w = N.wer(truth.sentences.map((s) => s.spoken).join(' '), tr.words.map((x) => x.text).join(' '));

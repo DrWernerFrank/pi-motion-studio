@@ -4,7 +4,7 @@
   "t": 0.7,
   "i": 1,
   "scene": "s03_recap",
-  "sentence": null,
+  "sentence": "s03.1",
   "animation": "Write"
  },
  {
@@ -12,7 +12,7 @@
   "t": 1.5,
   "i": 2,
   "scene": "s03_recap",
-  "sentence": null,
+  "sentence": "s03.1",
   "animation": "Create"
  },
  {
@@ -20,7 +20,7 @@
   "t": 2.3,
   "i": 3,
   "scene": "s03_recap",
-  "sentence": null,
+  "sentence": "s03.1",
   "animation": "Create"
  },
  {
@@ -28,21 +28,44 @@
   "t": 3.1,
   "i": 4,
   "scene": "s03_recap",
-  "sentence": null,
+  "sentence": "s03.1",
   "animation": "Create"
  },
  {
   "kind": "animation",
-  "t": 4.3,
+  "t": 5.033,
   "i": 5,
+  "scene": "s03_recap",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.033,
+  "i": 6,
+  "scene": "s03_recap",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 1.939
+ },
+ {
+  "t": 0.7,
+  "kind": "sentence_end",
+  "scene": "s03_recap",
+  "sentence": "s03.1"
+ },
+ {
+  "kind": "animation",
+  "t": 6.233,
+  "i": 7,
   "scene": "s03_recap",
   "sentence": null,
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 4.3,
-  "i": 6,
+  "t": 6.233,
+  "i": 8,
   "scene": "s03_recap",
   "sentence": null,
   "animation": "wait",
