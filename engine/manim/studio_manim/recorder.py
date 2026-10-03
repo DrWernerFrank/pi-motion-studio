@@ -14,6 +14,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
+from manim import DL, UR
+
 
 class Recorder:
     def __init__(self, out_dir: Path, *, scene_id: str, fmt: str):
@@ -68,30 +71,38 @@ class Recorder:
 
         out = []
         for m in scene.mobjects:
+            # GEOMETRY: Manim CE 0.21 has no Mobject.get_bounding_box (ManimGL-only — the first draft
+            # called it, the bare except swallowed every object, and every layout frame recorded
+            # objects: []; found by two wave-1 workers). get_corner(DL/UR) is the CE API that works.
             try:
-                bbox = m.get_bounding_box()
-                corners = [(float(bbox[0][0]), float(bbox[0][1])),
-                           (float(bbox[1][0]), float(bbox[1][1])),
-                           (float(bbox[2][0]), float(bbox[2][1]))]
-                xs = [c[0] for c in corners]
-                ys = [c[1] for c in corners]
-                x, y = min(xs), min(ys)
-                w, h = max(xs) - x, max(ys) - y
+                dl, ur = m.get_corner(DL), m.get_corner(UR)
+                x, y = float(dl[0]), float(dl[1])
+                w, h = float(ur[0]) - x, float(ur[1]) - y
             except Exception:
                 continue  # a mobject without geometry (camera etc) is not a layout object
+            if w <= 0 or h <= 0 or not np.isfinite(w) or not np.isfinite(h):
+                continue  # zero-area / degenerate mobject: no layout object
             try:
                 color = m.color.hex if hasattr(m, "color") else None
             except Exception:
                 color = None
             kind = type(m).__name__
-            # a text/math object is one the lint sizes: Text/MathTypst/label-like mobjects
-            is_text = kind in ("Text", "MathTypst", "Typst", "Paragraph", "MarkupText", "Tex", "MathTex")
+            # a text/math object is one the lint sizes: any manim text base OR a studio subclass of
+            # one (Txt/Eq subclass Text/MathTypst — the first draft's exact-name test was False for
+            # them). MRO walk, not name match.
+            TEXT_BASES = {"Text", "MathTypst", "Typst", "Paragraph", "MarkupText", "Tex", "MathTex"}
+            is_text = any(c.__name__ in TEXT_BASES for c in type(m).__mro__)
+            # role + nominal size for the lint's size rule: the studio classes stash their ladder
+            # role on construction (Txt/Eq set _studio_role + _studio_nominal_u; other mobjects
+            # carry none and the lint applies its floors by kind)
+            role = getattr(m, "_studio_role", None)
+            nominal_u = getattr(m, "_studio_nominal_u", None)
             height_u = (h / L.u) if L.u else 0.0
             out.append({
                 "kind": kind, "id": f"{self._anim_i}:{out.__len__()}",
                 "bbox": [round(x, 3), round(y, 3), round(w, 3), round(h, 3)],
-                "height_u": round(height_u, 2), "color": color, "z": len(out), "alive": True,
-                "text": is_text,
+                "height_u": round(height_u, 2), "nominal_u": nominal_u, "role": role,
+                "color": color, "z": len(out), "alive": True, "text": is_text,
             })
         return out
 

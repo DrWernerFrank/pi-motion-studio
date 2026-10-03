@@ -12,7 +12,10 @@ import { FILMS, readJson } from '../../lib/film.mjs';
 
 const KEY = 'verify-m-fmt';
 const FMTS = ['16:9', '9:16', '1:1', '4:5'];
-const DRAFT_PX = { '16:9': [960, 540], '9:16': [540, 960], '1:1': [540, 540], '4:5': [540, 675] };
+// draft = half the final geometry, EVEN-rounded (math.mjs: 540x675 segfaults cairo/x264, so 4:5 is 540x674)
+const DRAFT_PX = { '16:9': [960, 540], '9:16': [540, 960], '1:1': [540, 540], '4:5': [540, 674] };
+// the text kinds the recorder emits (the kit's Txt/Eq subclass Text/MathTypst; `text: true` is the recorder's flag)
+const isText = (o) => o.text === true || /^(Text|Txt|MarkupText|Paragraph)$/.test(o.kind);
 
 export default async () => {
   const bad = [], facts = [];
@@ -25,15 +28,16 @@ export default async () => {
       const file = r[0].file;
       durations[fmt] = r[0].seconds;
       const { out } = await run('ffprobe', ['-v', 'error', '-show_entries',
-        'stream=width,height,pix_fmt,color_primaries,color_transfer,color_space,sample_aspect_ratio,avg_frame_rate,codec_name:format=duration', '-of', 'json', file]);
+        'stream=codec_type,width,height,pix_fmt,color_primaries,color_transfer,color_space,sample_aspect_ratio,avg_frame_rate,codec_name:format=duration', '-of', 'json', file]);
       const p = JSON.parse(out);
-      const v = p.streams.find((s) => s.codec_type === undefined || s.codec_type === 'video') || p.streams[0];
+      const v = p.streams.find((s) => s.codec_type === 'video');
+      if (!v) { bad.push(`${fmt}: no video stream`); continue; }
       const [W, H] = DRAFT_PX[fmt];
       const want = (k, val) => { if (v[k] !== val) bad.push(`${fmt}: ${k}=${v[k]}, wanted ${val}`); };
       want('width', W); want('height', H); want('pix_fmt', 'yuv420p');
       want('color_primaries', 'bt709'); want('color_transfer', 'bt709'); want('color_space', 'bt709');
       want('sample_aspect_ratio', '1:1');
-      if (!/30/.test(v.avg_frame_rate)) bad.push(`${fmt}: fps ${v.avg_frame_rate}, wanted 30 (draft cap)`);
+      if (v.avg_frame_rate !== '30/1') bad.push(`${fmt}: fps ${v.avg_frame_rate}, wanted 30 (draft cap)`);
       // faststart: the moov atom before mdat
       const fd = readFileSync(file);
       const moov = fd.indexOf(Buffer.from('moov')), mdat = fd.indexOf(Buffer.from('mdat'));
@@ -49,7 +53,7 @@ export default async () => {
       const rec = join(FILMS, KEY, 'records', fmt, 's01_hook-layout.json');
       if (!existsSync(rec)) return null;
       const frames = readJson(rec, []);
-      for (const f of frames) { const t = f.objects.find((o) => o.kind === 'Text');
+      for (const f of frames) { const t = (f.objects || []).find(isText);
         if (t) return +(t.bbox[1] + t.bbox[3] / 2).toFixed(2); }
       return null;
     };
@@ -65,6 +69,20 @@ export default async () => {
       if (Math.abs(frac16 - frac9) < 1e-6) bad.push('portrait title sits at the landscape fraction: looks like a scaled copy, not a re-composition');
       if (frac9 < 0.08 || frac9 > 0.30) bad.push(`portrait title fraction ${frac9.toFixed(2)} outside the safe title band`);
     }
+    // text >= 3.2u: every text object's NOMINAL size (the kit's role size, recorded as nominal_u) in all
+    // four formats. A bbox height is not a type size (descenders, multi-line), so only nominal_u is judged.
+    let minU = Infinity, nText = 0;
+    for (const fmt of FMTS) for (const scene of ['s01_hook', 's02_meaning', 's03_recap']) {
+      for (const f of readJson(join(FILMS, KEY, 'records', fmt, `${scene}-layout.json`), [])) {
+        for (const o of (f.objects || []).filter(isText)) {
+          if (typeof o.nominal_u !== 'number') continue;
+          nText++; minU = Math.min(minU, o.nominal_u);
+          if (o.nominal_u < 3.2) bad.push(`${fmt} ${scene}: ${o.kind} ${o.id} at ${o.nominal_u}u < 3.2u`);
+        }
+      }
+    }
+    if (!nText) bad.push('no text object with nominal_u in any format\'s records (recorder schema)');
+    else facts.push(`${nText} text snapshots, min nominal ${minU.toFixed(2)}u`);
     return { pass: bad.length === 0, measured: bad.length ? bad.join('; ').slice(0, 600) : facts.join('; ') };
   } finally { rmSync(join(FILMS, KEY), { recursive: true, force: true }); }
 };

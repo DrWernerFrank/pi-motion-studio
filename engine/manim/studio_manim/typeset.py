@@ -186,6 +186,10 @@ class Eq(MathTypst):
                 part = self.part(name)
                 part.set_color(_color(design_role))
         self.labels = labels
+        # the recorder + lint read these (size rule: math floor 3.2u)
+        from .theme import size_u
+        self._studio_role = "math"
+        self._studio_nominal_u = size_u("math")
 
     def part(self, name: str):
         """The submobject group of one named part (``{{…}}`` -> p1, p2, … in order)."""
@@ -223,6 +227,9 @@ class Txt(Text):
                                  else _font_size(role), color=c, **kw)
         if self.width > L.safe.w:
             self.scale_to_fit_width(L.safe.w * 0.98)
+        # the recorder + lint read these (size rule: floors by role)
+        self._studio_role = role
+        self._studio_nominal_u = size_u(role)
 
 
 def font_path(family: str) -> str | None:

@@ -35,6 +35,7 @@ export function draftStale(film, draft) {
   const srcs = [
     ...film.scenes.map((s) => s.file),
     join(film.dir, 'design.json'), join(film.dir, 'film.json'), join(film.dir, 'script.md'),
+    join(film.dir, 'timing.json'), // the scenes read their timing slice: new timing = new picture
     join(ROOT, 'engine', 'manim', 'requirements.lock'),
     ...readdirSync(join(ROOT, 'engine', 'manim', 'studio_manim')).filter((f) => f.endsWith('.py'))
       .map((f) => join(ROOT, 'engine', 'manim', 'studio_manim', f)),
@@ -56,49 +57,71 @@ export function sceneMap(film, fmt) {
   return out;
 }
 
-function pickTimes(D, { mode = 'every', every = 0.5, times, at = 0, n = 12, max = 36 } = {}) {
-  const clamp = (t) => Math.min(Math.max(0, t), Math.max(0, D - 0.05));
-  if (mode === 'times') return (times || []).map((t) => ({ t: clamp(t), label: `${(+t).toFixed(2)}s` }));
-  if (mode === 'strip') return Array.from({ length: n }, (_, i) => ({ t: clamp(at + i / 30), label: `${(at + i / 30).toFixed(2)}s` }));
-  const step = mode === 'phone' ? 1 : every;
-  const count = Math.min(max, Math.floor(D / step) || 1);
-  const out = [];
-  for (let i = 0; i < count; i++) out.push({ t: clamp(i * step + step / 2), label: `${(i * step + step / 2).toFixed(2)}s` });
-  return out;
+// timing.json (frozen contract, generated in P5): sentence start/end are FILM seconds; a bookmark's t is
+// seconds from its sentence's start (StudioScene.at() reads it that way), so its film time is start + t.
+export function readTiming(film) {
+  const timing = readJson(join(film.dir, 'timing.json'), null);
+  return Array.isArray(timing?.sentences) ? timing.sentences : null;
 }
 
+const LOOK_MODES = ['every', 'sentences', 'bookmarks', 'sections', 'phone', 'strip', 'times'];
+
+function pickTimes(D, { mode = 'every', every = 0.5, times, at = 0, n = 12, max = 36 } = {}, { smap, sentences } = {}) {
+  const clamp = (t) => Math.min(Math.max(0, t), Math.max(0, D - 0.05));
+  const needTiming = () => { if (!sentences?.length) throw new Error(`look --mode ${mode} needs timing.json with sentences (studio voice <film> writes it)`); };
+  if (mode === 'times') return (times || []).map((t) => ({ t: clamp(t) }));
+  if (mode === 'strip') return Array.from({ length: n }, (_, i) => ({ t: clamp(at + i / 30) }));
+  if (mode === 'sections') return smap.filter((s) => s.seconds > 0).map((s) => ({ t: clamp((s.start + s.end) / 2), scene: s.scene }));
+  if (mode === 'sentences') { needTiming(); return sentences.map((s) => ({ t: clamp((s.start + s.end) / 2), sentence: s })); }
+  if (mode === 'bookmarks') {
+    needTiming();
+    const out = sentences.flatMap((s) => (s.bookmarks || []).map((b) => ({ t: clamp(s.start + b.t), sentence: s, bookmark: b.id })));
+    if (!out.length) throw new Error('look --mode bookmarks: timing.json has no bookmarks ({name} in script.md)');
+    return out;
+  }
+  const step = mode === 'phone' ? 1 : every;
+  const count = Math.min(max, Math.floor(D / step) || 1);
+  return Array.from({ length: count }, (_, i) => ({ t: clamp(i * step + step / 2) }));
+}
+
+const pngSize = (buf) => [buf.readUInt32BE(16), buf.readUInt32BE(20)]; // IHDR
+
 export async function lookMath(key, opts = {}) {
-  const film = readMathFilm(key);
+  let film = readMathFilm(key);
   const fmt = opts.fmt || film.cfg.formats[0];
   const mode = opts.mode || 'every';
+  if (!LOOK_MODES.includes(mode)) throw new Error(`look --mode ${mode}: one of ${LOOK_MODES.join('|')}`);
   const draft = join(film.out, `draft-${fmt}.mp4`);
-  if (draftStale(film, draft)) {
+  const stale = draftStale(film, draft);
+  if (stale) { // a stale draft is re-rendered FIRST: the sheet never shows yesterday's picture
     await renderMathFilm(key, { quality: 'draft', fmt });
-    film.cfg = readJson(join(film.dir, 'film.json')); // duration synced by the render
+    film = readMathFilm(key); // duration synced by the render
   }
-  const D = film.cfg.duration || (JSON.parse((await run('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', draft])).out));
-  const moments = pickTimes(+D, { ...opts, mode });
+  const D = +((await run('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', draft])).out.trim());
+  const smap = sceneMap(film, fmt), sentences = readTiming(film);
+  const moments = pickTimes(D, { ...opts, mode }, { smap, sentences });
   const width = opts.width || (mode === 'phone' ? 360 : moments.length > 12 ? 270 : 360);
-  const smap = sceneMap(film, fmt);
-  const sentenceAt = (t) => { // timing.json (P5) labels frames with the spoken sentence when present
-    const timing = readJson(join(film.dir, 'timing.json'), null);
-    if (!timing?.sentences) return '';
-    const s = timing.sentences.find((x) => t >= x.start && t < x.end);
-    return s ? ` · ${s.id} ${s.text.slice(0, 40)}` : '';
-  };
+  const sentenceAt = (t) => sentences?.find((x) => t >= x.start && t < x.end) ?? null;
   const frames = [];
   for (const m of moments) {
     const png = await runBuf('ffmpeg', ['-loglevel', 'error', '-ss', String(m.t), '-i', draft,
       '-frames:v', '1', '-vf', `scale=${width}:-2`, '-f', 'image2pipe', '-vcodec', 'png', 'pipe:1']);
-    const sc = smap.find((x) => m.t >= x.start && m.t < x.end);
-    frames.push({ png: png.toString('base64'), label: `${m.label}${sc ? ` · ${sc.scene}` : ''}${sentenceAt(m.t)}` });
+    const scene = m.scene || smap.find((x) => m.t >= x.start && m.t < x.end)?.scene || '';
+    const s = m.sentence || sentenceAt(m.t);
+    // two lines: time · scene · sentence id{bookmark} — then the narration text
+    const head = [`${m.t.toFixed(2)}s`, scene, s ? `${s.id}${m.bookmark ? `{${m.bookmark}}` : ''}` : ''].filter(Boolean).join(' · ');
+    const text = s ? (s.text.length > 60 ? s.text.slice(0, 59) + '…' : s.text) : '';
+    frames.push({ png: png.toString('base64'), size: pngSize(png), label: text ? `${head}\n${text}` : head,
+      t: +m.t.toFixed(3), scene, sentence: s?.id ?? null, bookmark: m.bookmark ?? null });
   }
   const file = await composeSheet(frames, {
     title: `${film.key} · ${fmt} · ${mode}${opts.title ? ' · ' + opts.title : ''}`,
-    name: opts.name || `${mode}${mode === 'strip' ? '-' + (+opts.at).toFixed(2) : ''}-${fmtSlug(fmt)}`,
+    name: opts.name || `${mode}${mode === 'strip' ? '-' + (+opts.at || 0).toFixed(2) : ''}-${fmtSlug(fmt)}`,
     out: join(film.out, 'sheets'),
   });
-  return { file, count: frames.length, times: moments.map((m) => +m.t.toFixed(3)) };
+  return { file, count: frames.length, times: frames.map((f) => f.t), rendered: stale, fmt, mode,
+    frameSize: frames[0]?.size ?? null, labels: frames.map((f) => f.label),
+    frames: frames.map(({ t, scene, sentence, bookmark, label }) => ({ t, scene, sentence, bookmark, label })) };
 }
 
 // One labelled contact sheet from PNG buffers, painted by a bare Chromium page.
@@ -113,7 +136,8 @@ async function composeSheet(frames, { title, name, out }) {
       const imgs = await Promise.all(frames.map((f) => new Promise((ok) => {
         const i = new Image(); i.onload = () => ok(i); i.src = 'data:image/png;base64,' + f.png;
       })));
-      const w = imgs[0].width, h = imgs[0].height, gap = 8, lab = 26, head = 40;
+      const w = imgs[0].width, h = imgs[0].height, gap = 8, head = 40;
+      const lab = 10 + 15 * Math.max(...frames.map((f) => f.label.split('\n').length));
       const rows = Math.ceil(imgs.length / cols);
       const c = document.querySelector('canvas');
       c.width = cols * w + (cols + 1) * gap; c.height = head + rows * (h + lab + gap) + gap;
@@ -125,10 +149,14 @@ async function composeSheet(frames, { title, name, out }) {
         x.drawImage(img, cx, cy);
         x.strokeStyle = '#2c2c31'; x.lineWidth = 1; x.strokeRect(cx - 0.5, cy - 0.5, w + 1, h + 1);
         x.fillStyle = '#9a9aa2'; x.font = '12px "JetBrains Mono", monospace';
-        x.fillText(frames[i].label, cx + 2, cy + h + 16);
+        frames[i].label.split('\n').forEach((ln, k) => {
+          x.fillStyle = k ? '#c8c8ce' : '#9a9aa2';
+          let s = ln; while (s.length > 1 && x.measureText(s).width > w - 4) s = s.slice(0, -2) + '…';
+          x.fillText(s, cx + 2, cy + h + 16 + 15 * k);
+        });
       });
       return c.toDataURL('image/png');
-    }, { frames, cols, title });
+    }, { frames: frames.map(({ png, label }) => ({ png, label })), cols, title });
     mkdirSync(out, { recursive: true });
     const file = join(out, `${name}.png`);
     const { writeFileSync: wf } = await import('node:fs');
