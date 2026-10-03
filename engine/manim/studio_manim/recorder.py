@@ -83,7 +83,11 @@ class Recorder:
             if w <= 0 or h <= 0 or not np.isfinite(w) or not np.isfinite(h):
                 continue  # zero-area / degenerate mobject: no layout object
             try:
-                color = m.color.hex if hasattr(m, "color") else None
+                # ManimColor on this build exposes to_hex() (NOT .hex — the recorder's color lookup
+                # came back null for every text object and the lint's contrast rule never ran on
+                # real output; found from the P3 worker's report)
+                c = m.color if hasattr(m, "color") else None
+                color = c.to_hex() if c is not None else None
             except Exception:
                 color = None
             kind = type(m).__name__

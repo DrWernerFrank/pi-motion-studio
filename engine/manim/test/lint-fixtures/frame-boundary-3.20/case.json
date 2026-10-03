@@ -1,0 +1,24 @@
+{
+ "name": "frame-boundary-3.20",
+ "kind": "seeded",
+ "allow_pairs": null,
+ "control": null,
+ "variants": [
+  {
+   "fmt": "16:9",
+   "fps": 30,
+   "expect": [
+    {
+     "rule": "overlap",
+     "level": "fail",
+     "t": 3.2,
+     "ids": [
+      "2:1",
+      "2:2"
+     ],
+     "source_line": "scenes/s01.py:13"
+    }
+   ]
+  }
+ ]
+}

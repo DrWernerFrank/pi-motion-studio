@@ -1,0 +1,102 @@
+{
+ "version": 1,
+ "scenes": [
+  {
+   "id": "s01_hook",
+   "title": "the question"
+  },
+  {
+   "id": "s02_meaning",
+   "title": "the formula"
+  },
+  {
+   "id": "s03_recap",
+   "title": "the takeaway"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01.1",
+   "scene": "s01_hook",
+   "text": "What does a determinant actually do? {shows}Watch the unit square{applies} as a matrix acts on the plane.",
+   "spoken": "What does a determinant actually do? Watch the unit square as a matrix acts on the plane.",
+   "bookmarks": [
+    {
+     "id": "shows",
+     "at_word": 6
+    },
+    {
+     "id": "applies",
+     "at_word": 10
+    }
+   ],
+   "line": 4
+  },
+  {
+   "id": "s02.1",
+   "scene": "s02_meaning",
+   "text": "For a two by two matrix, the determinant is ad minus bc.",
+   "spoken": "For a two by two matrix, the determinant is ad minus bc.",
+   "bookmarks": [],
+   "line": 7
+  },
+  {
+   "id": "s02.2",
+   "scene": "s02_meaning",
+   "text": "Here: three times two, minus one times one. {lands}Five.",
+   "spoken": "Here: three times two, minus one times one. Five.",
+   "bookmarks": [
+    {
+     "id": "lands",
+     "at_word": 8
+    }
+   ],
+   "line": 8
+  },
+  {
+   "id": "s02.3",
+   "scene": "s02_meaning",
+   "text": "If we swap the two columns, the determinant becomes one minus six, which is minus five, so the plane {flips}flips its orientation.",
+   "spoken": "If we swap the two columns, the determinant becomes one minus six, which is minus five, so the plane flips its orientation.",
+   "bookmarks": [
+    {
+     "id": "flips",
+     "at_word": 19
+    }
+   ],
+   "line": 9
+  },
+  {
+   "id": "s02.4",
+   "scene": "s02_meaning",
+   "text": "The eigenvalues satisfy lambda squared minus five lambda plus six equals zero, so lambda is two or three.",
+   "spoken": "The eigenvalues satisfy lambda squared minus five lambda plus six equals zero, so lambda is two or three.",
+   "bookmarks": [],
+   "line": 10
+  },
+  {
+   "id": "s03.1",
+   "scene": "s03_recap",
+   "text": "A determinant is the area scale factor. Five means five times the area.",
+   "spoken": "A determinant is the area scale factor. Five means five times the area.",
+   "bookmarks": [],
+   "line": 13
+  },
+  {
+   "id": "s03.2",
+   "scene": "s03_recap",
+   "text": "Each eigenvector keeps its direction and is only stretched by its eigenvalue.",
+   "spoken": "Each eigenvector keeps its direction and is only stretched by its eigenvalue.",
+   "bookmarks": [],
+   "line": 14
+  },
+  {
+   "id": "s03.3",
+   "scene": "s03_recap",
+   "text": "The sum of the first n odd numbers is exactly n squared, and you can see it by wrapping L shapes around a growing square.",
+   "spoken": "The sum of the first n odd numbers is exactly n squared, and you can see it by wrapping L shapes around a growing square.",
+   "bookmarks": [],
+   "line": 15
+  }
+ ]
+}

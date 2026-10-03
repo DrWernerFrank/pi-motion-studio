@@ -26,7 +26,7 @@ CLI (for the layout-lint check and ``studio check``):
     python -m studio_manim.lint <records-dir> <design.json> <fmt> [--allow a,b ...]
 
 prints a JSON list of violations over every ``<scene>-layout.json`` in the directory (each carries a
-``scene`` key).
+``scene`` key). ``--allow`` pairs ADD to ``DEFAULT_ALLOW`` here (the function's argument replaces it).
 """
 from __future__ import annotations
 

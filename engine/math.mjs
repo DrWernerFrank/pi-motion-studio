@@ -3,7 +3,7 @@
 // reads (design, format, timing slice), one `manim render` through the memory guard (capped.mjs —
 // D-007: nothing here can ever take the machine down), then a lossless concat and a single mux
 // with bt709 tags (Manim's own MP4s carry none — measured in ADR-004).
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync, copyFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, utimesSync, writeFileSync, copyFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { CAPS, TIMEOUTS, MemPool, killedMessage } from './lib/capped.mjs';
@@ -97,7 +97,14 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
     }
     const out = join(film.out, `${quality}-${f}.mp4`); mkdirSync(film.out, { recursive: true });
     const mix = join(film.out, 'mix.wav');
-    const tags = ['-c:v', 'libx264', '-preset', 'medium', '-crf', '16', '-pix_fmt', 'yuv420p',
+    // The -color_* flags alone are NOT enough (measured, ffmpeg 8: primaries/transfer came out `unknown`,
+    // SAR N/A): the encoder takes them from the frames, so setparams stamps them (as render.mjs does) and
+    // setsar=1 gives the deliverable a SAR. Manim's partials are untagged yuv420p converted by PyAV with
+    // swscale's default BT.601 matrix, so the scale CONVERTS 601->709 — a bare retag shifted a saturated
+    // ink #C0452B to (202,78,38); the conversion keeps it at (188,65,39) vs (191,67,41) at the source.
+    const vf = 'setsar=1,scale=in_color_matrix=bt601:in_range=tv:out_color_matrix=bt709:out_range=tv,' +
+      'setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv';
+    const tags = ['-vf', vf, '-c:v', 'libx264', '-preset', 'medium', '-crf', '16', '-pix_fmt', 'yuv420p',
       '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
       '-movflags', '+faststart'];
     await run('ffmpeg', ['-y', '-v', 'error', '-i', silent,
@@ -110,7 +117,10 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
   if (results.length && !scene) {
     const total = results[0].seconds;
     if (Math.abs((film.cfg.duration ?? 0) - total) > 0.01) {
-      film.cfg.duration = +total.toFixed(3); writeJson(join(film.dir, 'film.json'), film.cfg);
+      // duration is DERIVED data: keep film.json's mtime, or draftStale (math-cli.mjs) would see a "source"
+      // newer than the draft it just made and every look would re-render (measured: the look check caught it)
+      const fj = join(film.dir, 'film.json'), { atime, mtime } = statSync(fj);
+      film.cfg.duration = +total.toFixed(3); writeJson(fj, film.cfg); utimesSync(fj, atime, mtime);
     }
   }
   rmSync(join(SCRATCH, key), { recursive: true, force: true }); // hygiene: scratch is disposable

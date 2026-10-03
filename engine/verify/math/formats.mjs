@@ -43,6 +43,7 @@ export default async () => {
       const moov = fd.indexOf(Buffer.from('moov')), mdat = fd.indexOf(Buffer.from('mdat'));
       if (moov < 0 || (mdat >= 0 && moov > mdat)) bad.push(`${fmt}: not faststart (moov@${moov}, mdat@${mdat})`);
     }
+    facts.push(FMTS.map((f) => DRAFT_PX[f].join('x')).join('/') + ' yuv420p bt709 SAR1:1 30/1 faststart');
     const durs = Object.values(durations).map((d) => +d.toFixed(2));
     if (new Set(durs).size !== 1) bad.push(`formats disagree on duration: ${JSON.stringify(durations)}`);
     else facts.push(`4 geometries, all tagged, durations equal (${durs[0]}s)`);
@@ -53,15 +54,19 @@ export default async () => {
       const rec = join(FILMS, KEY, 'records', fmt, 's01_hook-layout.json');
       if (!existsSync(rec)) return null;
       const frames = readJson(rec, []);
-      for (const f of frames) { const t = (f.objects || []).find(isText);
+      // the recorder stamps `role` on kit text (title/body/math/label/caption): the title slot is the proof
+      for (const f of frames) { const objs = f.objects || [];
+        const t = objs.find((o) => o.role === 'title') || objs.find(isText);
         if (t) return +(t.bbox[1] + t.bbox[3] / 2).toFixed(2); }
       return null;
     };
     const y16 = titleY('16:9'), y9 = titleY('9:16');
     if (y16 === null || y9 === null) bad.push('no Text object found in records for the re-composition proof');
     else {
-      // 16:9 frame: 14.222x8 (centered: y from -4..4); 9:16: 8x14.222 (y from -7.111..7.111)
-      const frac16 = (y16 + 4) / 8, frac9 = (y9 + 7.111) / 14.222;
+      // 16:9 frame: 14.222x8 (centered: y from -4..4); 9:16: 8x14.222 (y from -7.111..7.111). Manim's y
+      // points UP (D-008), so the fraction FROM THE TOP of the frame is (H/2 - y) / H — the title band
+      // (0.08-0.30) and the safe-area rules are measured from the top.
+      const frac16 = (4 - y16) / 8, frac9 = (64 / 9 - y9) / (128 / 9);
       facts.push(`title y: 16:9 ${frac16.toFixed(2)} vs 9:16 ${frac9.toFixed(2)} of frame height`);
       // same FRACTION would mean a scaled copy; the portrait rule (safe y 10% + title strip) puts
       // it at ~0.155 in portrait vs ~0.135 in landscape — close but derived from different rules;

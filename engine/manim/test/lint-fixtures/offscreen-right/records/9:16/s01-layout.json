@@ -1,0 +1,63 @@
+[
+ {
+  "t": 0.5,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "1:0",
+    "bbox": [
+     -3,
+     2,
+     6,
+     0.6
+    ],
+    "height_u": 7.5,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 1.5,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "2:0",
+    "bbox": [
+     -3,
+     2,
+     6,
+     0.6
+    ],
+    "height_u": 7.5,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:1",
+    "bbox": [
+     2.14,
+     -0.2,
+     1.6,
+     0.4
+    ],
+    "height_u": 5,
+    "nominal_u": 3.6,
+    "role": "body",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

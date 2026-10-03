@@ -1,0 +1,23 @@
+{
+ "name": "tiny-text",
+ "kind": "seeded",
+ "allow_pairs": null,
+ "control": null,
+ "variants": [
+  {
+   "fmt": "16:9",
+   "fps": 30,
+   "expect": [
+    {
+     "rule": "size",
+     "level": "fail",
+     "t": 1,
+     "ids": [
+      "2:1"
+     ],
+     "source_line": "scenes/s01.py:13"
+    }
+   ]
+  }
+ ]
+}

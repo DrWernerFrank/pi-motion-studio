@@ -1,0 +1,40 @@
+{
+ "name": "text-over-text",
+ "kind": "seeded",
+ "allow_pairs": null,
+ "control": null,
+ "variants": [
+  {
+   "fmt": "16:9",
+   "fps": 30,
+   "expect": [
+    {
+     "rule": "overlap",
+     "level": "fail",
+     "t": 1.25,
+     "ids": [
+      "2:1",
+      "2:2"
+     ],
+     "source_line": "scenes/s01.py:13"
+    }
+   ]
+  },
+  {
+   "fmt": "9:16",
+   "fps": 30,
+   "expect": [
+    {
+     "rule": "overlap",
+     "level": "fail",
+     "t": 1.25,
+     "ids": [
+      "2:1",
+      "2:2"
+     ],
+     "source_line": "scenes/s01.py:13"
+    }
+   ]
+  }
+ ]
+}

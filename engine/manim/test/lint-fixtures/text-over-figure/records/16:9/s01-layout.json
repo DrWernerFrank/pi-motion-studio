@@ -1,0 +1,63 @@
+[
+ {
+  "t": 0.5,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "1:0",
+    "bbox": [
+     -2,
+     -1.5,
+     4,
+     2.5
+    ],
+    "height_u": 31.25,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 0,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 2.5,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "2:0",
+    "bbox": [
+     -2,
+     -1.5,
+     4,
+     2.5
+    ],
+    "height_u": 31.25,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "2:1",
+    "bbox": [
+     -0.8,
+     -0.2,
+     1.6,
+     0.4
+    ],
+    "height_u": 5,
+    "nominal_u": 3.2,
+    "role": "label",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]
