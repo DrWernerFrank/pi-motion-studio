@@ -1,0 +1,118 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 1,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 9.252,
+  "id": "formula_lands",
+  "sentence": "s02.1",
+  "scene": "s02_meaning"
+ },
+ {
+  "kind": "animation",
+  "t": 3.233,
+  "i": 2,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.533,
+  "i": 3,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.533,
+  "i": 4,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "wait",
+  "seconds": 1.306
+ },
+ {
+  "t": 0.8999999999999999,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.1"
+ },
+ {
+  "kind": "animation",
+  "t": 4.667,
+  "i": 5,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.667,
+  "i": 6,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.156
+ },
+ {
+  "kind": "bookmark",
+  "t": 14.128,
+  "id": "lands",
+  "sentence": "s02.2",
+  "scene": "s02_meaning"
+ },
+ {
+  "kind": "animation",
+  "t": 8.1,
+  "i": 7,
+  "scene": "s02_meaning",
+  "sentence": "s02.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 8.9,
+  "i": 8,
+  "scene": "s02_meaning",
+  "sentence": "s02.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "overrun",
+  "t": 8.9,
+  "sentence": "s02.2",
+  "seconds": 0.275,
+  "scene": "s02_meaning"
+ },
+ {
+  "t": 8.099999999999987,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.2"
+ },
+ {
+  "kind": "animation",
+  "t": 9.4,
+  "i": 9,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.4,
+  "i": 10,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.5
+ }
+]

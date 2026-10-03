@@ -5,7 +5,7 @@
   "sample_rate": 22050,
   "gap": 0.15,
   "gap_samples": 3308,
-  "duration": 19.432381,
+  "duration": 20.08254,
   "timing": "native",
   "sentences": [
     {
@@ -272,12 +272,12 @@
     {
       "id": "s03.1",
       "scene": "s03_recap",
-      "text": "A determinant is the area scale factor. Five means five times the area.",
-      "spoken": "A determinant is the area scale factor. Five means five times the area.",
+      "text": "A determinant is the area scale factor. Five means five times the area, always.",
+      "spoken": "A determinant is the area scale factor. Five means five times the area, always.",
       "start": 14.8,
-      "end": 19.432381,
+      "end": 20.08254,
       "start_sample": 326340,
-      "samples": 102144,
+      "samples": 116480,
       "words": [
         {
           "w": "A",
@@ -317,38 +317,43 @@
         {
           "w": "Five",
           "start": 17.24971,
-          "end": 17.58639
+          "end": 17.57478
         },
         {
           "w": "means",
-          "start": 17.63283,
-          "end": 17.9463
+          "start": 17.60961,
+          "end": 17.92308
         },
         {
           "w": "five",
-          "start": 18.00435,
-          "end": 18.30621
+          "start": 17.96952,
+          "end": 18.24816
         },
         {
           "w": "times",
-          "start": 18.35265,
-          "end": 18.67773
+          "start": 18.2946,
+          "end": 18.61968
         },
         {
           "w": "the",
-          "start": 18.72417,
-          "end": 18.86349
+          "start": 18.65451,
+          "end": 18.77061
         },
         {
-          "w": "area.",
-          "start": 18.92154,
-          "end": 19.31628
+          "w": "area,",
+          "start": 18.84027,
+          "end": 19.2234
+        },
+        {
+          "w": "always.",
+          "start": 19.37433,
+          "end": 19.97805
         }
       ],
       "bookmarks": [],
       "timing": "native",
-      "audio": "/home/werner/.cache/pi-motion-studio/voice/52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3/audio.wav",
-      "hash": "52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3"
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/ecb984126657a8f9643b5fe20296478952917802503e5dda2b832a8e1f9d3bf2/audio.wav",
+      "hash": "ecb984126657a8f9643b5fe20296478952917802503e5dda2b832a8e1f9d3bf2"
     }
   ]
 }

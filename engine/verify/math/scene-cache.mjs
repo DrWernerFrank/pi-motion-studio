@@ -41,13 +41,17 @@ export default async () => {
     if (warmMd5 !== coldMd5) bad.push(`warm output differs from cold (${warmMd5} vs ${coldMd5}) — the cache is not transparent`);
     facts.push(`cold ${tCold.toFixed(1)}s (3 rendered) → warm ${tWarm.toFixed(1)}s (${((tWarm / tCold) * 100).toFixed(1)}%, 3 cached), md5 identical`);
 
-    // 3. touch ONE scene's source → only it re-renders
+    // 3. touch ONE scene's source → only it re-renders; then RESTORE + re-prime (the restore is
+    // itself a content change — without re-priming, the next clause would count it)
     const s01 = join(dir, 'scenes', 's01_hook.py');
-    writeFileSync(s01, readFileSync(s01, 'utf8') + '\n# a comment: content change\n');
+    const s01Original = readFileSync(s01, 'utf8');
+    writeFileSync(s01, s01Original + '\n# a comment: content change\n');
     const r3 = await renderMathFilm(KEY, { quality: 'draft', fmt: '16:9' });
     if (r3[0].rendered !== 1 || r3[0].cached !== 2) bad.push(`one scene changed: rendered ${r3[0].rendered} cached ${r3[0].cached} (wanted 1/2)`);
     facts.push('one scene source changed -> 1 rendered, 2 cached');
-    writeFileSync(s01, readFileSync(s01, 'utf8').replace('\n# a comment: content change\n', '\n')); // restore
+    writeFileSync(s01, s01Original);
+    const r3b = await renderMathFilm(KEY, { quality: 'draft', fmt: '16:9' });
+    if (r3b[0].rendered !== 1 || r3b[0].cached !== 2) bad.push(`restore re-prime: rendered ${r3b[0].rendered} cached ${r3b[0].cached} (wanted 1/2)`);
 
     // 4. change ONE SENTENCE (in s03 — the last scene): re-voice only it, re-render only its scene
     const before = Date.now();

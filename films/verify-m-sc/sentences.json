@@ -61,8 +61,8 @@
   {
    "id": "s03.1",
    "scene": "s03_recap",
-   "text": "A determinant is the area scale factor. Five means five times the area.",
-   "spoken": "A determinant is the area scale factor. Five means five times the area.",
+   "text": "A determinant is the area scale factor. Five means five times the area, always.",
+   "spoken": "A determinant is the area scale factor. Five means five times the area, always.",
    "bookmarks": [],
    "line": 11
   }

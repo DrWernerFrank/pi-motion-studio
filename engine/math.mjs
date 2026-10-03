@@ -77,7 +77,7 @@ function kitSources() {
 }
 
 // -- the render ---------------------------------------------------------------------------
-export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCache = false } = {}) {
+export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCache = false, timeoutS: timeoutOverride } = {}) {
   const film = readMathFilm(key);
   const formats = fmt ? [fmt] : film.cfg.formats;
   if (film.scenes.length === 0) throw new Error(`films/${key}/scenes/ holds no .py files: nothing to render`);
@@ -130,7 +130,7 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
       const r = await pool.run({
         cmd: pythonFor('manim'), args: ['-m', 'manim', 'render', s.file, 'Scene',
           '--media_dir', work, '-o', `${s.id}.mp4`, '--fps', String(fps), '--resolution', `${px[0]},${px[1]}`],
-        memoryMb: capMb, timeoutS, cwd: work, label: `${key} ${s.id} ${f}`,
+        memoryMb: capMb, timeoutS: timeoutOverride ?? timeoutS, cwd: work, label: `${key} ${s.id} ${f}`,
         env: { STUDIO_FILM_STATE: stateFile, STUDIO_FORMAT: f, PYTHONPATH: join(ROOT, 'engine', 'manim') },
       });
       if (r.killed || r.code !== 0) {

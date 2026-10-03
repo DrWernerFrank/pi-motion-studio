@@ -23,6 +23,12 @@ const HELP = `studio <command> <film> [options]
                          render ONE scene of a math film (default draft) through the memory guard
   check <film> [--scene <id>]
                          math films: run scenes with --dry_run (typesetting + claims, no video)
+  where <film> --t <seconds> [--fmt 9:16]
+                         math films: which scene, sentence, animation and file owns a timecode
+  sound <film>           math films: voice → timing → the narration mix at mix.lufs (a quiet bed if
+                         music is set); edit films: the dialog bus + ducked bed at -14 LUFS
+  gate <film>            math films: the math gates (layout, claims, typeset, narration, sync, pace,
+                         captions, loudness, deliverable, deterministic) → gates.json
   where <film> <t>       math films: which scene, sentence and file owns a timecode
   list                   films with their status
   look <film> [--mode every|beats|shots|strip|times|phone] [--every 0.5] [--at 4.2] [--times 1,2.5]
@@ -192,14 +198,28 @@ async function main() {
     }
     case 'grid': { const r = gridBeats(key); console.log(`${rel(r.file)}: ${r.beats} beats at ${r.bpm} bpm`); break; }
     case 'beats': { const r = await measureBeats(key); console.log(`${rel(r.file)}: ${r.beats} beats, ${r.hits} hits, ${r.bpm.toFixed(1)} bpm`); break; }
+    case 'where': {
+      if (readFilm(key).cfg.kind !== 'math') throw new Error('studio where is for math films (kind: math) — edit films have edit_status');
+      const W = await import('./where.mjs');
+      const t = num('t', 0);
+      const r = W.resolveWhere(key, t, opt('fmt') === true ? undefined : opt('fmt'));
+      console.log(`${r.t}s → scene ${r.scene} (scene_t ${r.scene_t}s) · ${r.sentence ? `${r.sentence.id} “${r.sentence.text.slice(0, 48)}”` : 'no sentence'}${r.bookmark ? ` · near {${r.bookmark.id}}@${r.bookmark.t}s` : ''}${r.overrun ? ' · OVERRUN nearby' : ''}\n  animation: ${r.animation ? `#${r.animation.i} ${r.animation.name} @${r.animation.t}s` : 'none'}\n  code: ${r.file}${r.line ? ':' + r.line : ''}`);
+      break;
+    }
     case 'sound': {
-      if (readFilm(key).cfg.kind === 'math')
-        throw new Error('math film sound lands with the narration pipeline (P5): voice + timing + the narration bus. Loud stop, never a silent pass.');
+      if (readFilm(key).cfg.kind === 'math') { // the math narration bus: voice → timing → mix at mix.lufs
+        const N = await import('./narration.mjs');
+        const v = await N.buildVoice(key); console.log(`voice: ${v.sentences.length} sentences, ${v.duration.toFixed(2)}s, timing ${v.timing}`);
+        const m = await N.buildMix(key); console.log(`${rel(m.file)}  ${m.lufs} LUFS, true peak ${m.truePeak} dBTP${m.warning ? '  (warning: ' + m.warning + ')' : ''}`);
+        break;
+      }
       await sound(key); break;
     }
     case 'gate': {
-      if (readFilm(key).cfg.kind === 'math')
-        throw new Error('math film gates land in P8 (layout, claims, narration, sync, pace, captions, loudness, deliverable). The Canvas gates do not apply. Loud stop, never a silent pass.');
+      if (readFilm(key).cfg.kind === 'math') {
+        const { runMathGates } = await import('./math-gates.mjs');
+        const g = await runMathGates(key); console.log(g.pass ? '\ngates: PASS' : '\ngates: FAIL'); process.exitCode = g.pass ? 0 : 1; break;
+      }
       const r = await gates(key); console.log(r.pass ? '\ngates: PASS' : '\ngates: FAIL'); process.exitCode = r.pass ? 0 : 1; break;
     }
     case 'review': {
@@ -208,8 +228,31 @@ async function main() {
       break;
     }
     case 'ship': {
-      if (readFilm(key).cfg.kind === 'math')
-        throw new Error('math film ship lands in P8 (gates first, then finals + claims.md). Loud stop, never a silent pass.');
+      if (readFilm(key).cfg.kind === 'math') {
+        // gates first (FAIL blocks), then finals in every format, then claims.md (every verified claim)
+        console.log('── gates'); const { runMathGates } = await import('./math-gates.mjs');
+        const g = await runMathGates(key);
+        if (!g.pass) throw new Error('math gates failed: fix the FAIL lines above before shipping');
+        console.log('── render'); const M = await import('./math.mjs');
+        const r = await M.renderMathFilm(key, { quality: 'final' });
+        console.log('── claims');
+        // the film-level ledger: every records/<fmt>/*-claims.json, deduped by (expr, says) — D-011
+        const { writeFileSync, readdirSync: rd, existsSync: ex, readFileSync: rf } = await import('node:fs');
+        const recDir = join(readFilm(key).dir, 'records');
+        const led = [];
+        if (ex(recDir)) for (const fmtDir of rd(recDir).filter((f) => ex(join(recDir, f)))) {
+          for (const x of rd(join(recDir, fmtDir))) {
+            if (!x.endsWith('-claims.json')) continue;
+            for (const c of (JSON.parse(rf(join(recDir, fmtDir, x), 'utf8')) || []))
+              if (!led.some((y) => y.expr === c.expr && y.says === c.says)) led.push(c);
+          }
+        }
+        writeFileSync(join(readFilm(key).dir, 'out', 'claims.md'),
+          `# Verified claims — ${key}\n\nEvery mathematical statement in this film, evaluated exactly (sympy) at render time.\n\n${led.map((c) => `- ${c.ok ? '✓' : '✗'} \`${c.expr}\`${c.about ? ` — ${c.about}` : ''}${c.says ? ` (${c.says})` : ''}`).join('\n')}\n`);
+        console.log(`${led.length} claims → ${rel(join(readFilm(key).dir, 'out', 'claims.md'))}`);
+        console.log('── shipped'); for (const x of r) console.log(`${rel(x.file)}  (${x.seconds}s)`);
+        break;
+      }
       const film = readFilm(key);
       console.log('── sound'); await sound(key);
       console.log('── gates'); const g = await gates(key);
