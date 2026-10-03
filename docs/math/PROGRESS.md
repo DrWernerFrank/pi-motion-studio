@@ -1,10 +1,10 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: P2 slice 1 committed (183c364) — the starter film renders in both formats and passes its
-phone test after 4 look-fix rounds; the memory guard (D-007) covers every scene process.
-Next: P2 checks — `typeset` (the 40-formula battery through Eq + labels + determinism + a broken
-formula's error), `render-determinism` (two cold draft renders md5-identical), `formats` (all four
-geometries, lint clean, portrait a re-composition), `look` (every mode) — then tag slice-1
+Now: wave 1 (orchestrated) — layout-lint, claims, typeset, render-determinism GREEN (committed 15b9232,
+recorder live: get_corner geometry, MRO text, role+nominal_u, to_hex color). Running: p2 (formats+look),
+p5 (script+voice), p7 (kit). Next: integrate their results, verify each, commit, tag slice-1
+Next after: wave 2 — narration wiring (scene clock say/at/until, sync, where), scene-cache/errors/perf,
+library+captions checks, math gates (P8)
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
 Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio verify-math --list`.
@@ -29,12 +29,12 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 
 - [x] `regress` (P0) `studio regress` passes and `verify-edit --only env,edit-ops,gui-security,tools,docs` passes *(verified via `--only regress` at P0; no full run can pass yet)*
 - [ ] `env` (P1) doctor resolves Manim (pinned), cairo/pango, a typesetting backend, ffmpeg, a TTS voice, ASR, sympy, the bundled fonts as Pango sees them
-- [ ] `typeset` (P2) 40 formulas compile deterministically; named parts select+color; Persian shapes RTL; a broken formula fails with formula + file:line
-- [ ] `render-determinism` (P2) fixture scene twice from cold cache, 2 formats: identical framemd5; 1 worker == 3 workers *(slow)*
+- [x] `typeset` (P2) *verified --only* 40 formulas compile deterministically; named parts select+color; Persian shapes RTL; a broken formula fails with formula + file:line
+- [x] `render-determinism` (P2) *verified --only* fixture scene twice from cold cache, 2 formats: identical framemd5; 1 worker == 3 workers *(slow)*
 - [ ] `formats` (P2) one scene → 4 exact geometries; lint clean; text >= 3.2u; portrait is a re-composition *(slow)*
 - [ ] `look` (P2) every mode works for all formats, frames labelled, a stale draft re-rendered first
-- [ ] `layout-lint` (P3) 12 seeded violations reported with ids + time ± 1 frame; 0 false positives on 6 clean scenes; the solver places 8 crowded labels
-- [ ] `claims` (P4) 30 true / 15 false claims; unparseable = error; `num()` computed; `--independent` agrees on all 45
+- [x] `layout-lint` (P3) *verified --only* 12 seeded violations reported with ids + time ± 1 frame; 0 false positives on 6 clean scenes; the solver places 8 crowded labels
+- [x] `claims` (P4) *verified --only* 30 true / 15 false claims; unparseable = error; `num()` computed; `--independent` agrees on all 45
 - [ ] `script` (P5) stable sentence ids; bookmarks parse; dup/missing/unknown rejected with line numbers; round-trips; lint flags raw symbols
 - [ ] `voice` (P5) byte-identical TTS; offsets ± 1 sample; lexicon + normalizer; WER <= 10% round trip; one-sentence re-voice; offline; fa voice; `narration.wav` aligns
 - [ ] `sync` (P5) 6 bookmarks within 1 frame of `timing.json` and 80 ms of ASR word onset; scenes cover narration; A/V end <= 1 frame
