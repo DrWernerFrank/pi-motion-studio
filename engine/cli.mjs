@@ -63,6 +63,9 @@ const HELP = `studio <command> <film> [options]
   doctor [--fix]         probe the toolchain for editing real footage (ffmpeg, node, python, ASR, tracker, browser decode)
   verify-edit [--quick] [--list] [--only <id>] [--clean]
                          the real-video-editing contract: every check of the mission, measured → docs/editing/verify-last.json
+  verify-math [--quick] [--list] [--only <id>,…] [--clean]
+                         the math-video contract: every check of the mission (env, typeset, claims, gates,
+                         demos …) → docs/math/verify-last.json
   help                   this text`;
 
 const argv = process.argv.slice(2);
@@ -241,6 +244,11 @@ async function main() {
     case 'verify-edit': {
       const { verifyEdit } = await import('./verify-edit.mjs');
       const r = await verifyEdit({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
+      process.exitCode = r.pass ? 0 : 1; break;
+    }
+    case 'verify-math': {
+      const { verifyMath } = await import('./verify-math.mjs');
+      const r = await verifyMath({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
       process.exitCode = r.pass ? 0 : 1; break;
     }
     case 'fixtures': {
