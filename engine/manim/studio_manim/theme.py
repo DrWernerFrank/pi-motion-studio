@@ -74,8 +74,20 @@ def font_for(role: str) -> str:
 
 
 def size_u(role: str) -> float:
-    """A ladder size in u (1% of the short side) — the same fraction in every format."""
-    return design().get("ladder", {}).get(role, 3.6)
+    """A ladder size in u (1% of the short side) — the same fraction in every format.
+
+    PORTRAIT grows type (×1.5 for math/body, ×1.3 for titles): u is a fraction of the SHORT side,
+    so in a tall frame the same u fills a much smaller share of the frame's height — the Canvas
+    determinant film did this by hand in 9:16 ("15u matrix, 11u formula"); the kit does it by rule.
+    The floors still hold everywhere (body >= 3.2u, tick/legend >= 2.6u — the lint's job, P3).
+    """
+    base = design().get("ladder", {}).get(role, 3.6)
+    from .layout import L
+    if not L.portrait:
+        return base
+    mult = {"math": 1.5, "body": 1.5, "label": 1.5, "caption": 1.5,
+            "title": 1.3, "hero": 1.2}.get(role, 1.0)
+    return base * mult
 
 
 def background() -> str:

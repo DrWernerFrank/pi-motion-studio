@@ -8,7 +8,12 @@ This is its Manim analogue, with one fixed convention:
       9:16  ->  8.000 x 14.222  (portrait: swap — the SHORT side is always 8 units)
       1:1   -> 11.314 x 11.314  (equal-area square; short side still 8)
       4:5   ->  9.800 x 12.250
-    So ``L.u`` (1% of the short side) is 0.08 units in every format: a 3.2u label is the same
+    COORDINATES are Manim's: ORIGIN (0, 0) is the FRAME CENTER — x ∈ [-W/2, +W/2],
+    y ∈ [-H/2, +H/2] (NOT the Canvas engine's bottom-left origin: the first draft used it and every
+    object landed pushed into the top-right corner, half off-frame — the sheet caught it).
+    All boxes are derived from the safe area, so they carry the centered convention automatically.
+
+    ``L.u`` (1% of the short side) is 0.08 units in every format: a 3.2u label is the same
     fraction of the frame everywhere, and portrait is a REAL re-composition because panels stack
     in a 14.2-unit-tall frame, not an 8-unit one.
 
@@ -57,18 +62,22 @@ class _Layout:
             raise ValueError(f"unknown format {fmt!r}: one of {sorted(FRAMES)}")
         self.fmt = fmt
         self.W, self.H = FRAMES[fmt]
-        self.cx, self.cy = self.W / 2, self.H / 2
+        # Manim's origin (0, 0) is the CENTER of the frame: x ∈ [-W/2, +W/2], y ∈ [-H/2, +H/2].
+        self.cx, self.cy = 0.0, 0.0
+        self.left, self.right = -self.W / 2, self.W / 2
+        self.bottom, self.top = -self.H / 2, self.H / 2
         self.portrait = self.H > self.W
         # 1% of the SHORT side — the Canvas engine's u, identical across formats (0.08 units).
         self.u = min(self.W, self.H) / 100
 
         # Safe area, the same fractions as engine/lib/runtime.js: portrait x 7%, y 10%, w 86%, h 72%;
         # others x 6%, y 8%, w 88%, h 84%. (Captions live BELOW it, in their own band.)
+        # Boxes are expressed in the CENTERED convention: x = -W/2 + sx*W, y = -H/2 + sy*H.
         if self.portrait:
             sx, sy, sw, sh = 0.07, 0.10, 0.86, 0.72
         else:
             sx, sy, sw, sh = 0.06, 0.08, 0.88, 0.84
-        self.safe = _Box(sx * self.W, sy * self.H, sw * self.W, sh * self.H)
+        self.safe = _Box(self.left + sx * self.W, self.bottom + sy * self.H, sw * self.W, sh * self.H)
 
         # Slots. ``title``: a headline strip at the top of the safe area.
         self.title = _Box(self.safe.x, self.safe.y + self.safe.h * 0.86, self.safe.w, self.safe.h * 0.14)
@@ -76,8 +85,7 @@ class _Layout:
         self.stage = _Box(self.safe.x, self.safe.y, self.safe.w, self.safe.h * 0.82)
         # ``caption``: the band under the safe area (portrait keeps it bigger).
         cap_h = 0.09 * self.H
-        self.caption = _Box(sx * self.W, sy * self.H - cap_h, sw * self.W, cap_h)
-        # ``panel(i, n)``: an even split of the stage (portrait stacks, landscape side-by-side).
+        self.caption = _Box(self.safe.x, self.safe.y - cap_h, self.safe.w, cap_h)
         self._panel_n = None
 
     def panel(self, i: int, n: int) -> _Box:

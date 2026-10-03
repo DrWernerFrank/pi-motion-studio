@@ -1,0 +1,9 @@
+[
+ {
+  "expr": "Matrix([[3, 1], [1, 2]]).det() == 5",
+  "about": "area scale",
+  "says": "s01.1",
+  "scene": null,
+  "ok": true
+ }
+]

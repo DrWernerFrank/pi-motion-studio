@@ -1,0 +1,43 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.2,
+  "i": 1,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.2,
+  "i": 2,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 4.2,
+  "i": 3,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "Transform; Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.7,
+  "i": 4,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.7,
+  "i": 5,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.5
+ }
+]

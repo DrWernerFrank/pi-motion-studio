@@ -1,0 +1,51 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 1,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.5,
+  "i": 2,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 3.9,
+  "i": 3,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.7,
+  "i": 4,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 5.2,
+  "i": 5,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.2,
+  "i": 6,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.5
+ }
+]

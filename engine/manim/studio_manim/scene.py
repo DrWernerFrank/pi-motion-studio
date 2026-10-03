@@ -39,6 +39,9 @@ class StudioScene(Scene):
         w, h = FRAMES[self.state.get("format", "16:9")]
         self.camera.frame_width = w
         self.camera.frame_height = h
+        # the theme's background (PAPER is cream — the first draft rendered black: never set).
+        # The setter re-inits the background pixel array, so this works post-init.
+        self.camera.background_color = background()
         # the recorder writes next to the render output (the runner moves them into the film folder)
         out = Path(self.state.get("records_dir") or os.environ.get("STUDIO_RECORDS_DIR", "."))
         out.mkdir(parents=True, exist_ok=True)
@@ -87,7 +90,10 @@ class StudioScene(Scene):
     # -- recording (the lint, `where` and the GUI read these) ----------------------
     def play(self, *animations, **kw):
         name = "; ".join(type(a).__name__ for a in animations) or kw.get("_name", "wait")
-        t0 = self.renderer.time if self.renderer else 0.0
+        try:
+            t0 = self.renderer.time  # renderer.time exists on 0.21 (verified); defensive anyway
+        except Exception:
+            t0 = None
         super().play(*animations, **kw)
         if getattr(self, "rec", None):
             self.rec.animation(self, name, t0)

@@ -74,13 +74,35 @@ class _TypesetError(ValueError):
         self.tex, self.why = tex, why
 
 
+def _label_end(tex: str, start: int) -> int:
+    """Index of the ``}}`` that closes the label opened at ``start`` (``{{`` at start).
+
+    Brace-AWARE: label content may nest ``{}`` (``{{\\text{area}}}`` — the first draft matched the
+    ``\text``'s closing brace against the label's opener and chopped the formula). Depth counts
+    inner braces; a ``}`` at depth 0 only closes the label if another ``}`` follows immediately.
+    """
+    i, depth = start + 2, 0
+    while i < len(tex):
+        c = tex[i]
+        if c == "{":
+            depth += 1
+        elif c == "}":
+            if depth == 0:
+                if i + 1 < len(tex) and tex[i + 1] == "}":
+                    return i
+                raise _TypesetError(tex, f"unbalanced braces in a {{{{…}}}} label at {start} (a single }} at depth 0)")
+            depth -= 1
+        i += 1
+    raise _TypesetError(tex, f"unterminated {{{{…}}}} label at {start}")
+
+
 def _split_labels(tex: str) -> list[tuple[str, str | None]]:
     """Split on ``{{…}}`` spans: ``[("text", None), ("ad", "p1"), …]``.
 
-    Single FORWARD pass, strictly bounded: each iteration consumes at least the two braces it
-    matched, so the scan position only advances (``pos = end + 2``) and the loop always
-    terminates. (The first draft's ``while "{{" in out`` never re-tested a shrinking `out`
-    and grew `labels`/`auto` without bound — the OOM; see module docstring.)
+    Single FORWARD pass, strictly bounded: each iteration consumes at least the braces it matched,
+    so the scan position only advances (``pos = end + 2``) and the loop always terminates. (The
+    first draft's ``while "{{" in out`` never re-tested a shrinking `out` and grew without bound
+    — the OOM; see D-006.)
     """
     pieces: list[tuple[str, str | None]] = []
     pos = i = 0
@@ -90,12 +112,10 @@ def _split_labels(tex: str) -> list[tuple[str, str | None]]:
             if pos < len(tex):
                 pieces.append((tex[pos:], None))
             return pieces
-        end = tex.find("}}", start + 2)
-        if end < 0:
-            raise _TypesetError(tex, "unbalanced {{ … }} label: no closing }}")
+        end = _label_end(tex, start)
         content = tex[start + 2:end].strip()
         if not content:
-            raise _TypesetError(tex, "empty {{}} label at position %d" % start)
+            raise _TypesetError(tex, f"empty {{{{}}}} label at position {start}")
         i += 1
         if start > pos:
             pieces.append((tex[pos:start], None))
@@ -113,10 +133,13 @@ def _compose(tex: str) -> tuple[str, dict[str, str]]:
     labels: dict[str, str] = {}
     for content, name in _split_labels(tex):
         if name is None:
-            out.append(_to_typst(content) if content.strip() else content)
+            conv = _to_typst(content) if content.strip() else content
+            # pad: the converter sometimes strips spaces around symbols ("\\times" -> "times"),
+            # and `}}times{{` could glue into one identifier. Typst math ignores padding.
+            out.append(f" {conv} " if conv.strip() else conv)
         else:
             labels[name] = content
-            out.append("{{ " + _to_typst(content) + " : " + name + " }}")
+            out.append(f" {{{{ {_to_typst(content)} : {name} }}}} ")
     return "".join(out), labels
 
 
@@ -149,13 +172,15 @@ class Eq(MathTypst):
     def __init__(self, tex: str, *, font_size: float | None = None,
                  roles: dict[str, str] | None = None, role: str | None = None, **kw):
         typst, labels = _compose(tex)
+        from .theme import color_for
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
+            # default color = the theme's INK (MathTypst's own default is white — on the paper
+            # theme it was near-invisible; the first sheet caught it)
             super().__init__(typst, font_size=font_size if font_size is not None
-                             else _font_size("math"), **kw)
-        c = _color(role)
-        if c is not None:
-            self.set_color(c)
+                             else _font_size("math"), color=color_for("ink"), **kw)
+        if role:
+            self.set_color(color_for(role))
         if roles:
             for name, design_role in roles.items():
                 part = self.part(name)
@@ -171,11 +196,17 @@ class Eq(MathTypst):
 
 
 class Txt(Text):
-    """Typeset text through Pango at a design-ladder size, in a design font."""
+    """Typeset text through Pango at a design-ladder size, in a design font.
+
+    KIT RULE: never wider than the safe area — a line that does not fit is SCALED to fit (the
+    lint's `offscreen` rule would flag it otherwise; the first portrait sheet caught the s01 title
+    running off both edges at the portrait type multiplier).
+    """
 
     def __init__(self, text: str, *, role: str = "body", font: str | None = None,
                  font_size: float | None = None, color=None, **kw):
         from .theme import font_for, size_u
+        from .layout import L
         family = font or font_for(role)
         c = color if color is not None else _color(role)
         file = font_path(family)
@@ -190,6 +221,8 @@ class Txt(Text):
                 super().__init__(text, font=family,
                                  font_size=font_size if font_size is not None
                                  else _font_size(role), color=c, **kw)
+        if self.width > L.safe.w:
+            self.scale_to_fit_width(L.safe.w * 0.98)
 
 
 def font_path(family: str) -> str | None:
