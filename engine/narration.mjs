@@ -309,15 +309,31 @@ export async function alignNarration(key, wavPath) {
     f.start = f.start === null ? w.start : Math.min(f.start, w.start);
     f.end = f.end === null ? w.end : Math.max(f.end, w.end);
   }
-  // ASR word starts drift INTO the preceding silence (asr.py's refine moves a start to the deepest energy
-  // dip before it — measured 130-390 ms early at sentence starts): snap each matched start forward to the
-  // speech onset (first 10 ms frame above the speech threshold), never past the word's own end.
-  const env = await envelope(wav), hop = 0.01;
-  const loud = (t) => env.db[Math.min(env.db.length - 1, Math.max(0, Math.floor(t / hop)))] >= env.thr;
-  for (const f of flat) {
-    if (f.start === null || loud(f.start)) continue;
+  // ASR word starts drift INTO the preceding silence or the previous word's tail (asr.py's refine moves a
+  // start to an energy dip; measured 130-390 ms early at sentence starts). Two snaps, both measured on the
+  // audio: a sentence's first word starts at the onset after the longest pause within -0.3..+0.6 s of the
+  // ASR start (sentences are separated by pauses); any other word that starts in silence moves forward
+  // to the first frame of speech, never past its own end.
+  const env = await envelope(wav), hop = 0.01, N = env.db.length;
+  const fr = (t) => Math.min(N - 1, Math.max(0, Math.floor(t / hop)));
+  const loud = (t) => env.db[fr(t)] >= env.thr;
+  flat.forEach((f, i) => {
+    if (f.start === null) return;
+    if (f.ti === 0) {
+      const lo = fr(f.start - 0.3), hi = fr(f.start + 0.6);
+      let best = null, runStart = null;
+      for (let k = lo; k <= hi + 1; k++) {
+        const quiet = k <= hi && env.db[k] < env.thr;
+        if (quiet && runStart === null) runStart = k;
+        // the file's start counts as an endless pause (the first sentence has no pause before it to find)
+        const len = (a, b) => (a === 0 ? Infinity : b - a);
+        if (!quiet && runStart !== null) { if (!best || len(runStart, k) > len(...best)) best = [runStart, k]; runStart = null; }
+      }
+      if (best && best[1] - best[0] >= (best[0] === 0 ? 1 : 5) && best[1] < hi + 1) { f.start = +(best[1] * hop).toFixed(3); f.end = Math.max(f.end, f.start + 0.05); return; }
+    }
+    if (loud(f.start)) return;
     for (let t = f.start; t < Math.min(f.end, f.start + 0.4); t += hop) if (loud(t)) { f.start = +t.toFixed(3); break; }
-  }
+  });
   const matched = flat.filter((f) => f.start !== null).length;
   if (matched < flat.length * 0.5) throw new Error(`narration ${wavPath}: only ${matched}/${flat.length} script words were found in it — is it the narration of this script?`);
   for (let i = 0; i < flat.length; i++) {
@@ -342,8 +358,8 @@ export async function alignNarration(key, wavPath) {
   return timing;
 }
 
-// 10 ms energy envelope (dBFS) of any audio file at 16 kHz + the speech threshold asr.py uses
-// (noise floor + max(6, 0.3 * spread)) — so alignment and ASR agree on what is speech.
+// 10 ms energy envelope (dBFS) of any audio file at 16 kHz + a speech threshold (asr.py's noise-floor rule,
+// floored at 35 dB under the speech level).
 async function envelope(file) {
   const raw = await runBuf('ffmpeg', ['-v', 'error', '-i', file, '-vn', '-ac', '1', '-ar', '16000', '-f', 'f32le', '-']);
   const x = new Float32Array(raw.buffer.slice(raw.byteOffset, raw.byteOffset + (raw.length & ~3))), w = 160, n = Math.floor(x.length / w);
@@ -351,7 +367,8 @@ async function envelope(file) {
   for (let i = 0; i < n; i++) { let s = 0; for (let k = i * w; k < (i + 1) * w; k++) s += x[k] * x[k]; db[i] = 10 * Math.log10(s / w + 1e-12); }
   const sorted = [...db].sort((a, b) => a - b), pct = (p) => sorted[Math.min(n - 1, Math.floor(p * n))];
   const floor = pct(0.10), hi = pct(0.95);
-  return { db, thr: floor + Math.max(6, 0.3 * (hi - floor)) };
+  // asr.py's rule, floored at 35 dB under the speech level (a TTS gap is digital silence: floor ~ -120 dB)
+  return { db, thr: Math.max(floor + Math.max(6, 0.3 * (hi - floor)), hi - 35) };
 }
 
 // -- the mix ------------------------------------------------------------------------------------

@@ -16,10 +16,13 @@ export function createMathFilm(key, { title, formats, lang = 'en', voice } = {})
   if (!existsSync(join(tpl, 'film.json'))) throw new Error('templates/math/film.json is missing: the repo is incomplete');
   cpSync(tpl, dir, { recursive: true });
   const cfg = readJson(join(dir, 'film.json'));
+  // an fa film with no explicit voice gets the Persian piper voice (P5's finding: the template's
+  // en default used to leak into fa scaffolds)
+  const voiceOrDefault = voice || (lang === 'fa' ? 'piper:fa_IR-amir-medium' : cfg.voice);
   Object.assign(cfg, {
     title: title || key,
     formats: formats?.length ? formats : cfg.formats,
-    lang, voice: voice || cfg.voice,
+    lang, voice: voiceOrDefault,
   });
   writeJson(join(dir, 'film.json'), cfg);
   return dir;
@@ -36,7 +39,7 @@ export function draftStale(film, draft) {
     ...film.scenes.map((s) => s.file),
     join(film.dir, 'design.json'), join(film.dir, 'film.json'), join(film.dir, 'script.md'),
     join(film.dir, 'timing.json'), // the scenes read their timing slice: new timing = new picture
-    join(ROOT, 'engine', 'manim', 'requirements.lock'),
+    join(ROOT, 'engine', 'manim', 'requirements.lock'), join(ROOT, 'engine', 'math.mjs'), // the mux is part of the picture
     ...readdirSync(join(ROOT, 'engine', 'manim', 'studio_manim')).filter((f) => f.endsWith('.py'))
       .map((f) => join(ROOT, 'engine', 'manim', 'studio_manim', f)),
   ].map(mtimeOf);

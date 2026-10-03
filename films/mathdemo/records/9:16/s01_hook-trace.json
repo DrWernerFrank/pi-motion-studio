@@ -4,7 +4,7 @@
   "t": 1.2,
   "i": 1,
   "scene": "s01_hook",
-  "sentence": null,
+  "sentence": "s01.1",
   "animation": "Write"
  },
  {
@@ -12,7 +12,7 @@
   "t": 2.2,
   "i": 2,
   "scene": "s01_hook",
-  "sentence": null,
+  "sentence": "s01.1",
   "animation": "Create"
  },
  {
@@ -20,8 +20,14 @@
   "t": 4.2,
   "i": 3,
   "scene": "s01_hook",
-  "sentence": null,
+  "sentence": "s01.1",
   "animation": "Transform; Write"
+ },
+ {
+  "t": 1.2000000000000004,
+  "kind": "sentence_end",
+  "scene": "s01_hook",
+  "sentence": "s01.1"
  },
  {
   "kind": "animation",

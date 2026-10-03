@@ -83,9 +83,13 @@ class _Layout:
         self.title = _Box(self.safe.x, self.safe.y + self.safe.h * 0.86, self.safe.w, self.safe.h * 0.14)
         # ``stage``: the main content area (everything below the title).
         self.stage = _Box(self.safe.x, self.safe.y, self.safe.w, self.safe.h * 0.82)
-        # ``caption``: the band under the safe area (portrait keeps it bigger).
+        # ``caption``: the band under the safe area. It is INSIDE THE FRAME in every format (the
+        # first draft subtracted a 9% band from an 8%-inset safe bottom — in 16:9 that starts 1%
+        # BELOW the frame bottom; captions were born offscreen. Below-safe is intended for portrait
+        # feed UI; never outside the frame itself.)
         cap_h = 0.09 * self.H
-        self.caption = _Box(self.safe.x, self.safe.y - cap_h, self.safe.w, cap_h)
+        self.caption = _Box(self.safe.x, max(self.bottom + 0.02 * self.H, self.safe.y - cap_h),
+                            self.safe.w, cap_h)
         self._panel_n = None
 
     def panel(self, i: int, n: int) -> _Box:

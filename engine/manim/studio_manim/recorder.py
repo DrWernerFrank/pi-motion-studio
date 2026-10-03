@@ -70,35 +70,34 @@ class Recorder:
         from .layout import L
 
         out = []
-        for m in scene.mobjects:
-            # GEOMETRY: Manim CE 0.21 has no Mobject.get_bounding_box (ManimGL-only — the first draft
-            # called it, the bare except swallowed every object, and every layout frame recorded
-            # objects: []; found by two wave-1 workers). get_corner(DL/UR) is the CE API that works.
+
+        def record(m, depth=0):
+            # KIT COMPOSITES: a top-level mobject carrying _studio_parts is recorded BY ITS PARTS
+            # (recursively) — the kit builds PlaneLab/GraphLab/Callout as groups whose whole-bbox
+            # would span a panel and text inside would lint as text-over-figure. Parts may declare
+            # _studio_kind = "NumberPlane"|"Axes"|"Grid"|"NumberLine" (furniture); real shapes
+            # (Polygon, curve, gnomons) stay figures so the lint still catches labels ON a shape.
+            parts = getattr(m, "_studio_parts", None)
+            if parts and depth < 3:
+                for p in parts:
+                    record(p, depth + 1)
+                return
             try:
                 dl, ur = m.get_corner(DL), m.get_corner(UR)
                 x, y = float(dl[0]), float(dl[1])
                 w, h = float(ur[0]) - x, float(ur[1]) - y
             except Exception:
-                continue  # a mobject without geometry (camera etc) is not a layout object
+                return  # a mobject without geometry (camera etc) is not a layout object
             if w <= 0 or h <= 0 or not np.isfinite(w) or not np.isfinite(h):
-                continue  # zero-area / degenerate mobject: no layout object
+                return  # zero-area / degenerate mobject: no layout object
             try:
-                # ManimColor on this build exposes to_hex() (NOT .hex — the recorder's color lookup
-                # came back null for every text object and the lint's contrast rule never ran on
-                # real output; found from the P3 worker's report)
                 c = m.color if hasattr(m, "color") else None
                 color = c.to_hex() if c is not None else None
             except Exception:
                 color = None
-            kind = type(m).__name__
-            # a text/math object is one the lint sizes: any manim text base OR a studio subclass of
-            # one (Txt/Eq subclass Text/MathTypst — the first draft's exact-name test was False for
-            # them). MRO walk, not name match.
+            kind = getattr(m, "_studio_kind", None) or type(m).__name__
             TEXT_BASES = {"Text", "MathTypst", "Typst", "Paragraph", "MarkupText", "Tex", "MathTex"}
             is_text = any(c.__name__ in TEXT_BASES for c in type(m).__mro__)
-            # role + nominal size for the lint's size rule: the studio classes stash their ladder
-            # role on construction (Txt/Eq set _studio_role + _studio_nominal_u; other mobjects
-            # carry none and the lint applies its floors by kind)
             role = getattr(m, "_studio_role", None)
             nominal_u = getattr(m, "_studio_nominal_u", None)
             height_u = (h / L.u) if L.u else 0.0
@@ -108,6 +107,9 @@ class Recorder:
                 "height_u": round(height_u, 2), "nominal_u": nominal_u, "role": role,
                 "color": color, "z": len(out), "alive": True, "text": is_text,
             })
+
+        for m in scene.mobjects:
+            record(m)
         return out
 
     # -- flush ------------------------------------------------------------------

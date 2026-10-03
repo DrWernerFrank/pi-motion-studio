@@ -91,7 +91,9 @@ except Exception as ex:
     print(json.dumps({"persian": False, "err": str(ex)[:120]}))
 `);
   const r = await pool.run({
-    cmd: py, args: [prog], cwd: join(ROOT, 'engine', 'manim'),
+    cmd: py, args: [prog], cwd: join(ROOT, 'engine', 'manim', 'test'),
+    // ^ cwd inside engine/manim/test (NOT engine/manim: Manim writes a media/ (Pango cache) into
+    // its cwd and that leaked 388 KB of cache into the repo — the P2 worker found it)
     input: JSON.stringify({ items: BATTERY }), memoryMb: CAPS.check, timeoutS: TIMEOUTS.check * 2,
     label: 'typeset battery',
     env: { STUDIO_FORMAT: '16:9' },

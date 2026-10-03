@@ -4,7 +4,7 @@
   "t": 0.9,
   "i": 1,
   "scene": "s02_meaning",
-  "sentence": null,
+  "sentence": "s02.1",
   "animation": "Write"
  },
  {
@@ -12,15 +12,21 @@
   "t": 2.5,
   "i": 2,
   "scene": "s02_meaning",
-  "sentence": null,
+  "sentence": "s02.1",
   "animation": "Write"
+ },
+ {
+  "t": 0.8999999999999999,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.1"
  },
  {
   "kind": "animation",
   "t": 3.9,
   "i": 3,
   "scene": "s02_meaning",
-  "sentence": null,
+  "sentence": "s02.2",
   "animation": "Write"
  },
  {
@@ -28,8 +34,14 @@
   "t": 4.7,
   "i": 4,
   "scene": "s02_meaning",
-  "sentence": null,
+  "sentence": "s02.2",
   "animation": "Write"
+ },
+ {
+  "t": 3.899999999999996,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.2"
  },
  {
   "kind": "animation",

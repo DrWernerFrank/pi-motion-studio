@@ -1,1 +1,12 @@
-{ "determinant": "duh-TUR-muh-nuhnt", "eigenvector": "EYE-gen-veck-tor", "eigenvalue": "EYE-gen-vay-loo", "perpendicular": "per-pen-DIK-yoo-lur", "parallelogram": "par-uh-LEL-uh-gram", "gnomon": "NOH-muhn" }
+{
+  "eigenvector": "EYE-gen-veck-tor",
+  "eigenvalue": "EYE-gen-vay-loo",
+  "perpendicular": "per-pen-DIK-yoo-lur",
+  "parallelogram": "par-uh-LEL-uh-gram",
+  "gnomon": "NOH-muhn",
+  "Euler": "OY-ler",
+  "Cauchy": "koh-SHEE",
+  "Pythagoras": "puh-THAG-uh-rus",
+  "Riemann": "REE-mahn",
+  "Gauss": "gowss"
+}

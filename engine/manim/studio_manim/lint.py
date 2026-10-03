@@ -165,6 +165,16 @@ def violations(records, trace, design, fmt, allow_pairs=DEFAULT_ALLOW):
                   f"{o.get('kind')} outside the FRAME by " + ", ".join(f"{k} {d}" for k, d in fr.items())
                   + f" (frame {L.W:.3f}x{L.H:.3f} centered)")
                 continue
+            # CAPTIONS are judged against their own band, not the safe area (the band sits below
+            # the safe area by design — portrait feed UI); anything else must stay inside `safe`.
+            if o.get("role") == "caption":
+                cb = L.caption
+                cs = _outside(b, cb.x, cb.y, cb.x + cb.w, cb.y + cb.h)
+                if cs:
+                    v("offscreen", "fail", [o["id"]],
+                      f"caption outside the CAPTION band by " + ", ".join(f"{k} {d}" for k, d in cs.items())
+                      + f" (band x {cb.x:.3f}..{cb.x + cb.w:.3f}, y {cb.y:.3f}..{cb.y + cb.h:.3f})")
+                continue
             sf = _outside(b, s.x, s.y, s.x + s.w, s.y + s.h)
             if sf:
                 v("offscreen", "fail", [o["id"]],
