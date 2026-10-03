@@ -26,9 +26,14 @@ within those frame bounds — the same A/V discipline as the edit pipeline. The 
 | Pango `Text` SVG cache under parallel renders | **races**: two processes share `media/Tex`, one reads the SVG another is writing → `ParseError: no element found`; a poisoned cache entry then fails every later run until `media/Tex` is cleared |
 
 The parallel leg's failure is the machine's real constraint, and the Tex race is a genuine Manim
-behavior: both feed the same rule — **per-scene `--media_dir` + a worker cap** (2 for finals; 3-4 only
-for draft/res ≤ 960×540 where RSS ~0.9 GB). Per-format partials never share a media dir, which also
-enforces the `scene-cache` check's "formats never share partials".
+behavior: both feed the same rule — **per-scene `--media_dir` + a worker cap**. The cap is set by
+MEMORY, not by CPU count: a 1080p60 scene measures 2.0-3.2 GB RSS, and 4× that on 6.8 GB RAM collapsed
+the whole WSL system (the OOM the human saw: hours of thrashing before the run was killed). Frozen
+rule: **finals run ONE at a time on this machine**; drafts (960×540, 0.92 GB measured) may run up to
+3-4; the M4 runner schedules by measured peak RSS with a total budget of ~4.5 GB (headroom for the
+OS and the studio's own processes), wraps every scene process in `nice` + a wall-clock timeout, and
+kills at the scene budget with the last animation named. Per-format partials never share a media
+dir, which also enforces the `scene-cache` check's "formats never share partials".
 
 **The frozen `perf-budget` numbers (the check's first guesses, now measured; raise-never-lower):**
 - draft ≤ 2× realtime on the demos in 16:9 — measured probe: **0.71× realtime** (13.6 s draft for 19 s of content at the draft shape; headroom for richer scenes).
