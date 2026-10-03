@@ -29,7 +29,13 @@ export const TIMEOUTS = { check: 180, draft: 300, final: 900 }; // s per scene, 
 let _systemd = null;
 async function hasSystemd() {
   if (_systemd !== null) return _systemd;
-  try { const r = await _run('systemd-run', ['--user', '--scope', '--quiet', 'true'], { allowFail: true, timeout: undefined }); _systemd = r.code === 0; }
+  // resolve systemd-run through a login shell if needed (it lives outside the studio's spawned
+  // env PATH — found by the 4:5 check: runCapped said ENOENT while the self-test had it)
+  try {
+    const which = await _run('bash', ['-lc', 'command -v systemd-run'], { allowFail: true });
+    if (which.code === 0 && which.out.trim()) { _systemd = { run: which.out.trim() }; return _systemd; }
+  } catch { /* not a login-shell box */ }
+  try { const r = await _run('systemd-run', ['--user', '--scope', '--quiet', 'true'], { allowFail: true }); if (r.code === 0) _systemd = { run: 'systemd-run' }; else _systemd = false; }
   catch { _systemd = false; }
   return _systemd;
 }
@@ -54,12 +60,10 @@ export function lastAnimation(err = '') {
 }
 
 export async function runCapped(cmd, args, { cwd, env, input, memoryMb = 1024, timeoutS = 300, label = '' } = {}) {
-  const systemd = await hasSystemd();
-  const wrap = systemd
-    ? ['systemd-run', '--user', '--scope', '--quiet', '-p', `MemoryMax=${memoryMb}M`, '-p', 'MemorySwapMax=0']
-    : [];
+  const sys = await hasSystemd();
+  const wrap = sys ? [sys.run, '--user', '--scope', '--quiet', '-p', `MemoryMax=${memoryMb}M`, '-p', 'MemorySwapMax=0'] : [];
   return new Promise((resolve) => {
-    const p = systemd
+    const p = sys
       ? spawn(wrap[0], [...wrap.slice(1), cmd, ...args], { cwd, env: detEnv(env), stdio: ['pipe', 'pipe', 'pipe'], detached: true })
       : spawn(cmd, args, { cwd, env: detEnv(env), stdio: ['pipe', 'pipe', 'pipe'], detached: true });
     let out = '', err = '', reason = null, done = false;

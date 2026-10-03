@@ -1,10 +1,10 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: P1 closing — S1–S4 done and measured (ADR-001..004 written, THIRD_PARTY complete, doctor --math green,
-env check written). Committing P1, then P2: kit core + the first vertical slice
-Next: P2 — `new --math`, `templates/math/`, `StudioScene`, layout `L`, themes paper+chalk, typesetting API
-(`Eq`/`Txt`/`num` via tex2typst→MathTypst), the recorder, `render` + `look` for math films; milestone: the
-starter renders 16:9 + 9:16 and I look at its sheet; checks `typeset`, `render-determinism`, `formats`, `look`
+Now: P2 slice 1 committed (183c364) — the starter film renders in both formats and passes its
+phone test after 4 look-fix rounds; the memory guard (D-007) covers every scene process.
+Next: P2 checks — `typeset` (the 40-formula battery through Eq + labels + determinism + a broken
+formula's error), `render-determinism` (two cold draft renders md5-identical), `formats` (all four
+geometries, lint clean, portrait a re-composition), `look` (every mode) — then tag slice-1
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
 Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio verify-math --list`.

@@ -43,7 +43,11 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
     if (!FORMATS[f]) throw new Error(`unknown format ${f}: one of ${Object.keys(FORMATS)}`);
     const [W, H] = FORMATS[f];
     const draft = quality === 'draft';
-    const px = draft ? [Math.round(W / 2), Math.round(H / 2)] : [W, H];
+    // DRAFT dims are even-rounded: 4:5 halves to 540x675 (odd) and cairo/x264 SEGFAULTS at an odd
+    // dimension (measured: 540x675 rc=139, 540x676 fine — the Canvas engine hits the same wall,
+    // see its comment in lib/film.mjs). Final is already even (1920x1080 etc).
+    const even = (n) => Math.max(2, Math.floor(n / 2) * 2);
+    const px = draft ? [even(W / 2), even(H / 2)] : [W, H];
     const fps = draft ? Math.min(30, film.cfg.fps || 60) : (film.cfg.fps || 60);
     const capMb = CAPS[quality], timeoutS = TIMEOUTS[quality];
     const wanted = scene ? film.scenes.filter((s) => s.id === scene) : film.scenes;
@@ -68,7 +72,11 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, from, scene 
         memoryMb: capMb, timeoutS, cwd: work, label: `${key} ${s.id} ${f}`,
         env: { STUDIO_FILM_STATE: stateFile, STUDIO_FORMAT: f, PYTHONPATH: join(ROOT, 'engine', 'manim') },
       });
-      if (r.killed || r.code !== 0) throw new Error(killedMessage(r, { film: key, scene: s.id, fmt: f, quality }));
+      if (r.killed || r.code !== 0) {
+        const msg = r.killed ? killedMessage(r, { film: key, scene: s.id, fmt: f, quality })
+          : `${key} scene ${s.id} ${f} (${quality}) failed:\n${cleanError(r)}`;
+        throw new Error(msg);
+      }
       const mp4 = find(join(work, 'videos'), `${s.id}.mp4`);
       if (!mp4) throw new Error(`manim produced no ${s.id}.mp4 under ${work}/videos (cwd ${work})\n${(r.err || '').split('\n').slice(-8).join('\n')}`);
       partials.push({ scene: s, mp4, records, work });
@@ -150,8 +158,14 @@ export async function checkMathFilm(key, { scene } = {}) {
 }
 
 function cleanError(r) {
-  // keep the traceback's most informative lines: the exception, the file:line, and the studio hint
-  const lines = (r.err || r.out || '').replace(/\r/g, '\n').split('\n').filter(Boolean);
-  const pick = lines.filter((l) => /studio_manim|scene|Error|error|Exception|line \d+|raise|typesetting failed|CLAIM/i.test(l));
+  // keep the traceback's most informative lines: the exception, the file:line, and the studio hint.
+  // Progress-bar noise (\r-carriage "Animation N: …%|..." lines) is stripped first — one truncated
+  // bar fragment was all the 4:5 failure showed the first time (the real traceback was in the tail).
+  const lines = (r.err || r.out || '')
+    .replace(/\r/g, '\n')
+    .split('\n')
+    .filter((l) => !/Animation \d+|it\/s|it\]|s\/it\]|\s+\d+%\|/.test(l))
+    .filter(Boolean);
+  const pick = lines.filter((l) => /studio_manim|scenes\/|Error|error|Exception|line \d+|raise|typesetting failed|CLAIM|Traceback/i.test(l));
   return (pick.length ? pick : lines).slice(-10).join('\n');
 }
