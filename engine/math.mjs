@@ -5,7 +5,7 @@
 // D-007: nothing here can ever take the machine down), then a lossless concat and a single mux
 // with bt709 tags (Manim's own MP4s carry none — measured in ADR-004).
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, utimesSync, writeFileSync, copyFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, utimesSync, writeFileSync, copyFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { CAPS, TIMEOUTS, MemPool, killedMessage } from './lib/capped.mjs';
@@ -69,6 +69,8 @@ async function manimVersion(py) {
   if (!_mv.has(py)) { const { out } = await run(py, ['-c', 'import manim; print(manim.__version__)'], { allowFail: true }); _mv.set(py, (out || 'unknown').trim()); }
   return _mv.get(py);
 }
+
+const sha = (s) => createHash('sha256').update(s).digest('hex');
 
 function kitSources() {
   const dir = join(ROOT, 'engine', 'manim', 'studio_manim');
@@ -157,7 +159,22 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
     const recDir = join(film.dir, 'records', f); mkdirSync(recDir, { recursive: true });
     for (const p of partials) for (const x of readdirSync(p.records)) copyFileSync(join(p.records, x), join(recDir, x));
 
-    // concat the scene partials losslessly, then ONE transcode with the delivery tags
+    // concat the scene partials losslessly, then ONE transcode with the delivery tags.
+    // The whole downstream stage is content-addressed too: when EVERY partial came from the scene
+    // cache AND the mix is unchanged, the muxed output is byte-reproducible, so a MUX-CACHE entry
+    // (keyed on the partial set + mix mtime/size + quality/fmt) skips concat+encode entirely —
+    // the warm re-render path (measured: mux dominated it at 18% of cold; the §3.8 target is <10%).
+    const out = join(film.out, `${quality}-${f}.mp4`); mkdirSync(film.out, { recursive: true });
+    const mix = join(film.out, 'mix.wav');
+    const mixSig = existsSync(mix) ? `${statSync(mix).mtimeMs.toFixed(0)}:${statSync(mix).size}` : 'none';
+    const muxKey = sha(`v${CACHE_VERSION}|${quality}|${f}|${mixSig}|${partials.map((p) => `${p.scene.id}:${sha(readFileSync(p.mp4))}`).join('|')}`);
+    const muxCache = join(SCENE_CACHE, 'mux', muxKey);
+    if (!noCache && existsSync(join(muxCache, 'out.mp4'))) {
+      copyFileSync(join(muxCache, 'out.mp4'), out);
+      const dur = await secondsOf(out);
+      results.push({ file: out, fmt: f, quality, scenes: partials.length, seconds: dur });
+      continue;
+    }
     const silent = join(SCRATCH, key, f, 'silent.mp4');
     const listFile = join(SCRATCH, key, f, 'list.txt');
     if (partials.length === 1) copyFileSync(partials[0].mp4, silent);
@@ -165,8 +182,6 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
       writeFileSync(listFile, partials.map((p) => `file '${p.mp4.replace(/'/g, "'\\''")}'`).join('\n'));
       await run('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', silent]);
     }
-    const out = join(film.out, `${quality}-${f}.mp4`); mkdirSync(film.out, { recursive: true });
-    const mix = join(film.out, 'mix.wav');
     // The -color_* flags alone are NOT enough (measured, ffmpeg 8: primaries/transfer came out `unknown`,
     // SAR N/A): the encoder takes them from the frames, so setparams stamps them (as render.mjs does) and
     // setsar=1 gives the deliverable a SAR. Manim's partials are untagged yuv420p converted by PyAV with
@@ -180,6 +195,13 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
     await run('ffmpeg', ['-y', '-v', 'error', '-i', silent,
       ...(existsSync(mix) ? ['-i', mix, '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest'] : []),
       ...tags, out]);
+    if (!noCache) { // populate the mux cache (tmp + rename: a partial entry is never served)
+      const tmp = `${muxCache}.tmp-${Date.now()}`;
+      mkdirSync(join(SCENE_CACHE, 'mux'), { recursive: true });
+      mkdirSync(tmp, { recursive: true });
+      try { copyFileSync(out, join(tmp, 'out.mp4')); renameSync(tmp, muxCache); }
+      catch { rmSync(tmp, { recursive: true, force: true }); }
+    }
     const dur = await secondsOf(out);
     results.push({ file: out, fmt: f, quality, scenes: partials.length, seconds: dur });
   }

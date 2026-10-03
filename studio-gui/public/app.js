@@ -1,6 +1,8 @@
 // Motion Studio GUI. Watches films/ over SSE; the live view calls the film's own window.seek(t).
-// The Edit tab (films with an edit.json) lives in edit.js and is mounted from here.
+// The Edit tab (films with an edit.json) lives in edit.js and is mounted from here; the math view
+// (films with kind: math) lives in math.js and is mounted the same way.
 import * as EDIT from './edit.js';
+import * as MATH from './math.js';
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -12,7 +14,9 @@ const post = (u, b) => fetch(u, { method: 'POST', headers: { 'content-type': 'ap
 });
 const slug = (f) => f.replace(':', 'x');
 const RUBRIC = ['hook', 'readability', 'motion', 'variety', 'composition', 'brand', 'sound'];
-const COLORS = { hook: '#ff6a3d', readability: '#5ab0ff', motion: '#3ecf8e', variety: '#c77dff', composition: '#f5b841', brand: '#ff7eb6', sound: '#7ee0d0' };
+const MATH_KEYS = ['correctness', 'clarity'];   // math films carry two more (film_review takes extra keys, min()s over all)
+const rubric = (d) => (d?.math ? [...RUBRIC, ...MATH_KEYS] : RUBRIC);   // one chart, both worlds
+const COLORS = { hook: '#ff6a3d', readability: '#5ab0ff', motion: '#3ecf8e', variety: '#c77dff', composition: '#f5b841', brand: '#ff7eb6', sound: '#7ee0d0', correctness: '#f5e041', clarity: '#9ad6ff' };
 const CUE_COLORS = { impact: '#ff4d5e', thump: '#ff4d5e', drop: '#ff4d5e', whoosh: '#5ab0ff', swipe: '#5ab0ff', riser: '#c77dff', click: '#ececef', tick: '#ececef', pop: '#f5b841', type: '#8b8b94', chime: '#3ecf8e', glitch: '#ff7eb6', shutter: '#ececef' };
 
 const S = { films: [], key: null, d: null, fmt: null, view: 'live', tab: 'overview', t: 0, playing: false, jobs: {}, running: new Set(), frameReady: false };
@@ -47,6 +51,7 @@ async function selectFilm(key, { keepTime = false } = {}) {
   if (changed) { S.fmt = d.formats[0]; if (!keepTime) S.t = 0; pause(); }
   if (changed && d.edit) S.tab = 'edit';              // an edit film opens on its editor
   EDIT.setFilm(S, d);                                 // mounts the editor dock + Edit tab (no-op for motion films)
+  MATH.setFilm(S, d);                                 // mounts the math view (no-op for non-math films)
   if (!d.formats.includes(S.fmt)) S.fmt = d.formats[0];
   $('#empty').hidden = true; $('#film').hidden = false; $('#panel').hidden = false;
   $('#fTitle').textContent = d.title;
@@ -206,7 +211,7 @@ function renderTab() {
     const rs = d.reviews, last = rs.at(-1);
     el.innerHTML = !last ? '<p class="dim">No critique rounds yet. pi records them with the <code>film_review</code> tool (or <code>studio review</code>).</p>' : `
       <h3>Round ${last.round} · ${last.pass ? '<span style="color:var(--ok)">pass</span>' : 'not yet'} · ${esc(last.reviewer)}</h3>
-      <div class="scores">${RUBRIC.map((k) => `<div>${k}<div class="bar"><i style="width:${last.scores[k] * 10}%;background:${last.scores[k] >= 8 ? 'var(--ok)' : last.scores[k] >= 6 ? 'var(--warn)' : 'var(--bad)'}"></i></div></div><b>${last.scores[k]}</b>`).join('')}</div>
+      <div class="scores">${rubric(d).map((k) => `<div>${k}<div class="bar"><i style="width:${last.scores[k] * 10}%;background:${last.scores[k] >= 8 ? 'var(--ok)' : last.scores[k] >= 6 ? 'var(--warn)' : 'var(--bad)'}"></i></div></div><b>${last.scores[k]}</b>`).join('')}</div>
       <h3>Problems (click to jump)</h3>
       ${(last.problems || []).map((p) => `<div class="problem" data-t="${esc(p.t)}"><b>${esc(p.t)}s</b>${esc(p.issue)}${p.fix ? `<div class="fix">fix: ${esc(p.fix)}</div>` : ''}</div>`).join('') || '<p class="dim">none listed</p>'}
       ${last.notes ? `<p class="dim">${esc(last.notes)}</p>` : ''}
@@ -257,12 +262,13 @@ async function job(kind) {
 
 function chart(rs) {
   if (rs.length < 1) return '';
+  const R = rubric(S.d).filter((k) => rs.some((r) => r.scores[k] != null));   // rounds predate a rubric key: skip it
   const W = 340, H = 150, P = 18, n = Math.max(2, rs.length);
   const X = (i) => P + (i / (n - 1)) * (W - 2 * P), Y = (v) => H - P - ((v - 1) / 9) * (H - 2 * P);
-  const lines = RUBRIC.map((k) => `<polyline fill="none" stroke="${COLORS[k]}" stroke-width="1.6" opacity=".85" points="${rs.map((r, i) => `${X(i)},${Y(r.scores[k])}`).join(' ')}"><title>${k}</title></polyline>`).join('');
+  const lines = R.map((k) => `<polyline fill="none" stroke="${COLORS[k]}" stroke-width="1.6" opacity=".85" points="${rs.map((r, i) => r.scores[k] != null ? `${X(i)},${Y(r.scores[k])}` : '').join(' ')}"><title>${k}</title></polyline>`).join('');
   const pass = `<line x1="${P}" x2="${W - P}" y1="${Y(8)}" y2="${Y(8)}" stroke="#3ecf8e" stroke-dasharray="3 3" opacity=".6"/>`;
   const labels = rs.map((r, i) => `<text x="${X(i)}" y="${H - 3}" fill="#8b8b94" font-size="9" text-anchor="middle">r${r.round}</text>`).join('');
-  const legend = RUBRIC.map((k, i) => `<text x="${P + (i % 4) * 82}" y="${10 + Math.floor(i / 4) * 11}" fill="${COLORS[k]}" font-size="9">${k}</text>`).join('');
+  const legend = R.map((k, i) => `<text x="${P + (i % 4) * 82}" y="${10 + Math.floor(i / 4) * 11}" fill="${COLORS[k]}" font-size="9">${k}</text>`).join('');
   return `<svg class="chart" viewBox="0 0 ${W} ${H}">${pass}${lines}${labels}${legend}</svg>`;
 }
 
@@ -350,5 +356,7 @@ $('#newForm').onsubmit = async (e) => {
 
 // ── the edit tab (films with an edit.json) gets the same helpers the motion tabs use ────
 EDIT.init({ S, esc, post, api, seek, pause, selectFilm, job, reloadPreview: () => reloadMedia(true), audio, iframe });
+// the math view (films with kind: math) gets the same helpers (its stage replaces the live view)
+MATH.init({ S, esc, post, api, seek, pause, selectFilm, job, renderTab });
 
 loadFilms(); connect();

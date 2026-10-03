@@ -96,6 +96,20 @@ def _clamp(m, box):
     return m
 
 
+def _record_by_parts(m, *parts):
+    """Declare a composite's RECORDING parts (the recorder's contract, recorder.py ``_snapshot``).
+
+    A top-level kit group must be recorded BY ITS PARTS, never as one whole-bbox object: the
+    group's bbox spans a panel, so text near it would lint as text-over-figure, and the text
+    INSIDE it (matrix entries, tick and callout labels) would be invisible to the size, contrast
+    and density rules. Parts may set ``_studio_kind`` to a furniture kind ("Grid"…); real shapes
+    (the parallelogram, plotted curves, gnomons) stay figures so labels ON them are still caught.
+    Read live at every snapshot, so a plain attribute (or property) of the CURRENT children works.
+    """
+    m._studio_parts = list(parts)
+    return m
+
+
 def _place(labels, anchors, avoid=(), prefer=None, buff=None, box=None) -> str:
     """Place label mobjects near their anchors without overlapping ``avoid`` (or each other).
 
@@ -302,6 +316,12 @@ class Matrix(_ManimMatrix):
                 m.entry(i, j).set_color(e.get_color())
         return m
 
+    @property
+    def _studio_parts(self):
+        """Recorded BY ENTRY (each an ``Eq``: the size/contrast/density rules see the entries) plus
+        the bracket paths — never as one whole-bbox object."""
+        return [m for row in self.mob_matrix for m in row] + list(self.brackets)
+
     def into(self, box, fill: float = 0.9) -> "Matrix":
         """Scale DOWN to fit ``fill`` of an L box (never wider than it) and center there."""
         return into(self, box, fill)
@@ -370,6 +390,11 @@ class PlaneLab(VGroup):
         self.i_hat = Arrow(ORIGIN, RIGHT, buff=0)
         self.j_hat = Arrow(ORIGIN, UP, buff=0)
         self.add(self.plane, self.grid, self.square, self.i_hat, self.j_hat)
+        # the transformed lattice is PAGE FURNITURE like the plane under it (labels sit on the grid
+        # legally — D-010); the square and the arrows stay figures. Recorded BY PARTS so a label
+        # next to the lab is never "text over figure" on the group's whole-panel bbox.
+        self.grid._studio_kind = "Grid"
+        _record_by_parts(self, self.plane, self.grid, self.square, self.i_hat, self.j_hat)
         self._set(self.M)
         self.tags = None
         self.area_label = None
@@ -427,7 +452,12 @@ class PlaneLab(VGroup):
             if lab is not None:
                 anims.append(FadeOut(lab, shift=UP * L.u * 3, rate_func=lambda t: smooth(min(1, 4 * t))))
         self.tags = self.area_label = None
-        return AnimationGroup(*anims, run_time=run_time)
+        # ``group=self``: Scene.play ADDS a non-introducer AnimationGroup's ``.group`` to the scene
+        # (scene.py add_mobjects_from_animations) — a bare Group wrapper would nest the lab one
+        # level deep and DEFEAT the recorder's parts contract (a whole-panel "figure" bbox that
+        # every label inside lints against). With group=self the lab itself is the animation's
+        # mobject: already in the scene family, so nothing is wrapped or restructured.
+        return AnimationGroup(*anims, group=self, run_time=run_time)
 
     def area_value(self):
         """The signed area of the image of the unit square: the exact sympy determinant."""
@@ -446,9 +476,15 @@ class PlaneLab(VGroup):
             raise ValueError(f"show_area({shown!r}) but the plane's det is {truth} — compute it, never type it")
         role = "result" if truth >= 0 else "negative"
         lab = Eq(tex.replace("{}", shown), role=role, font_size=_font_size("math") * 0.55)
+        # anchor at the square's EDGE on the open side (anchoring at a big shape's CENTER makes
+        # every solver candidate land inside it — PlacementError by construction); pushed a little
+        # into the open side so the first ring clears the arrow that runs along that edge.
         ctr = self.square.get_center()
-        prefer = [DOWN if ctr[1] > self.origin[1] else UP]
-        self.placed_by = _place([lab], [self.square], self._obstacles(), prefer=prefer,
+        below = ctr[1] > self.origin[1]
+        prefer = [DOWN if below else UP]
+        edge = self.square.get_bottom() if below else self.square.get_top()
+        anchor = edge + np.array([0.0, (-1 if below else 1) * L.u * 2, 0.0])
+        self.placed_by = _place([lab], [anchor], self._obstacles(), prefer=prefer,
                                 buff=L.u * 3, box=self.box)
         self.area_label = lab
         return lab
@@ -512,10 +548,18 @@ class GraphLab(VGroup):
         self.add(self.axes)
         self.h = ValueTracker(1.0)
 
+    @property
+    def _studio_parts(self):
+        """Recorded by parts (the axes are furniture, the curve a figure): read live so the
+        curve appears in the records from the moment ``plot()`` keeps it in the lab."""
+        return [self.axes, self.curve]
+
     def plot(self, run_time: float = 1.5):
-        """Create the curve (and keep it in the lab)."""
+        """Create the axes, then the curve — the lab INTRODUCES ITSELF (the axes live inside the
+        lab; ``scene.add(lab)`` would also work but never ``scene.add(lab.curve)`` alone: the axes
+        would not render). Returns the Succession; the curve is kept in the lab either way."""
         self.add(self.curve)
-        return Create(self.curve, run_time=run_time)
+        return Succession(Create(self.axes), Create(self.curve), run_time=run_time)
 
     def _line(self, x0: float, slope: float, color) -> Line:
         """A slope line through (x0, f(x0)) clipped to the axes rectangle."""
@@ -565,6 +609,7 @@ class GraphLab(VGroup):
                             mob_class=MathTypst, font_size=fs, color=math_role("result"))
         val.next_to(head, RIGHT, buff=L.u * 1.5)
         lock = VGroup(head, val).move_to(self.readout_slot)
+        _record_by_parts(lock, head, val)   # the Eq and the number are recorded as text, not one box
         anchor = head.get_right()
 
         def upd(m):
@@ -597,7 +642,7 @@ class GraphLab(VGroup):
         lab = Eq(rf"S_{{ {n} }} = {num(total, places=3)} \quad \int = {num(truth, places=3)}", font_size=fs)
         lab.move_to(self.readout_slot)
         self.sum_value, self.integral_value = total, truth
-        return VGroup(rects, lab)
+        return _record_by_parts(VGroup(rects, lab), rects, lab)
 
 
 # -- 4. EqSteps -------------------------------------------------------------------------------
@@ -682,6 +727,7 @@ class Callout(VGroup):
             raise ValueError(f"Callout kind {kind!r}: 'brace' or 'box'")
         super().__init__(shape, lab)
         self.shape, self.label = shape, lab
+        _record_by_parts(self, shape, lab)   # played via create() the parts enter individually anyway
 
     def create(self, run_time: float = 1.0):
         grow = GrowFromCenter(self.shape) if isinstance(self.shape, Brace) else Create(self.shape)
@@ -716,11 +762,16 @@ class NumberLineLab(VGroup):
         widest = max(m.width for m in labs)
         every = max(1, int(np.ceil((widest + L.u * 2) / spacing)))
         self.ticks = VGroup()
+        kept = []
         for i, (v, m) in enumerate(zip(vals, labs)):
             if i % every == 0:
                 m.next_to(self.line.n2p(v), DOWN, buff=L.u * 2.2)
                 self.ticks.add(m)
+                kept.append(m)
+        # the tick labels are recorded INDIVIDUALLY (a VGroup of Txt is not text to the recorder)
+        _record_by_parts(self.ticks, *kept)
         self.add(self.line, self.ticks)
+        _record_by_parts(self, self.line, self.ticks)
         self.range = (a, b)
 
     def sequence(self, a_n, n_range=(1, 6), role: str = "positive"):
@@ -743,7 +794,8 @@ class NumberLineLab(VGroup):
                     placed.append(_bbox(t))
                     labels.add(t)
                     break
-        return VGroup(dots, labels)
+        # dots are one figure; every value label is recorded as text
+        return _record_by_parts(VGroup(dots, labels), dots, *labels)
 
 
 # -- 7. Geometry / dissection -----------------------------------------------------------------
@@ -814,6 +866,7 @@ def chapter(title: str, kicker: str | None = None):
     g.scale(s)
     g.move_to([L.title.x + g.width / 2, L.title.cy, 0])
     g.title, g.kicker = t, k
+    _record_by_parts(g, *([t, k] if k is not None else [t]))
 
     def enter(run_time: float = 1.2):
         anims = [Write(t, run_time=run_time * 0.7)]
@@ -844,6 +897,7 @@ def recap(lines: list):
         cur.next_to(prev, DOWN, buff=buff)
     g = VGroup(*mobs)
     into(g, L.stage, fill=0.9)
+    _record_by_parts(g, *mobs)   # each line is recorded (body Txt / Eq), not the whole card
 
     def reveal(each: float = 0.8):
         return Succession(*[FadeIn(m, shift=UP * L.u * 3, run_time=each) for m in mobs])

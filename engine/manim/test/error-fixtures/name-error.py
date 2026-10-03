@@ -1,4 +1,4 @@
-# errors fixture: a NameError at construct time (undefined_thing on line 11).
+# errors fixture: a NameError at construct time (undefined_thing on line 12).
 from manim import Create, Square
 
 from studio_manim import StudioScene

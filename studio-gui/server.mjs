@@ -14,6 +14,13 @@ import { geminiRead } from '../engine/lib/gemini.mjs';
 import { askAntigravity, antigravityAvailable } from '../engine/lib/antigravity.mjs';
 import { claudeRead, claudeVisionAvailable } from '../engine/lib/claude-vision.mjs';
 import { ROOT, safePath, sendFile } from '../engine/lib/serve.mjs';
+// math films (kind: math): the math view's endpoints + jobs. All additive; the edit/motion paths are untouched.
+import { writeFileSync } from 'node:fs';
+import { runCapped } from '../engine/lib/capped.mjs';
+import { pythonFor } from '../engine/doctor.mjs';
+import { readMathFilm } from '../engine/math.mjs';
+import { buildVoice } from '../engine/narration.mjs';
+import { resolveWhere } from '../engine/where.mjs';
 
 const PORT = Number(process.env.STUDIO_PORT || 3142);
 const TOKEN = randomBytes(16).toString('hex');
@@ -54,6 +61,7 @@ function summary(key) {
   return {
     key, title: cfg.title || key, duration: cfg.duration, formats: cfg.formats || ['9:16'],
     edit: existsSync(join(dir, 'edit.json')),
+    math: cfg.kind === 'math',   // the math view mounts on this (M7), like edit.json mounts the editor
     review: reviews.length ? { round: reviews.length, min: reviews.at(-1).min, pass: reviews.at(-1).pass } : null,
     gates: gates ? { pass: gates.pass, warns: gates.checks.filter((c) => c.level === 'warn').length, at: gates.at } : null,
     finals: files.filter((f) => /^final-[^.]*\.mp4$/.test(f.name)).map((f) => f.name),
@@ -110,10 +118,12 @@ const JOBS = {
   draft: (k) => ['render', k, '--draft'],
   render: (k) => ['render', k, '--fmt', 'all'],
   sound: (k) => ['sound', k],
+  check: (k) => ['check', k],   // math films: studio check (typeset + claims, dry-run; errors loudly on non-math)
   gate: (k) => ['gate', k],
   ship: (k) => ['ship', k],
 };
 const jobs = [];
+const revoicing = new Set();   // films with a sentence re-voice in flight (one at a time, like the job guard)
 function startJob(key, kind, extra = []) {
   if (jobs.some((j) => j.key === key && j.code === undefined)) throw Object.assign(new Error('a job is already running for this film'), { status: 409 });
   const args = [...JOBS[kind](key), ...extra];
@@ -142,7 +152,7 @@ const server = createServer(async (req, res) => {
       const html = readFileSync(join(PUB, 'index.html'), 'utf8').replace('__TOKEN__', TOKEN);
       res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' }); return res.end(html);
     }
-    if (p === '/app.js' || p === '/edit.js' || p === '/style.css') return sendFile(req, res, join(PUB, p.slice(1)));
+    if (p === '/app.js' || p === '/edit.js' || p === '/math.js' || p === '/style.css') return sendFile(req, res, join(PUB, p.slice(1)));
     // Project files at their real paths: films import /engine/lib/*.js absolutely.
     if (/^\/(films|engine|refs|templates)\//.test(p)) { const full = safePath(p); if (!full) { res.writeHead(403); return res.end(); } return sendFile(req, res, full); }
 
@@ -340,6 +350,142 @@ const server = createServer(async (req, res) => {
         const r = await (await import('../engine/transcribe.mjs')).transcribe(key, b.src, { model, language });
         return json(res, 200, { language: r.language, words: r.words.length, cached: !!r.cached });
       } catch (e) { return json(res, 500, { error: String(e.message || e) }); }
+    }
+
+    // ── the math film endpoints (kind: math — M7's view) ────────────────────────────────
+    // Same rules as the edit tab: ids only, validated — film keys match ^[a-z0-9][a-z0-9-]*$ (the
+    // route regex AND mathId re-check it), sentence ids the parser's own ^s\d+\.\d+$. No client
+    // string ever reaches a path join as a free value: the server resolves everything under
+    // films/<key>/ itself, so traversal, absolute paths and dotfiles are impossible by construction.
+    // Scene code NEVER runs here: the one python child of a request (the syntax probe) parses
+    // scenes/*.py with ast — no import, no exec — and the layout lint reads records only. Both go
+    // through runCapped (the engine's memory/time guard), exactly like the engine's own calls.
+    const SENT_RE = /^s\d{1,4}\.\d{1,4}$/;   // studio_manim.script's own sentence-id grammar
+    const mathId = (v) => {
+      const k = String(v ?? '');
+      if (!ID_RE.test(k)) return null;
+      const d = join(FILMS, k);
+      return existsSync(join(d, 'film.json')) && readJson(join(d, 'film.json'), {}).kind === 'math' ? k : null;
+    };
+    const mM = /^\/api\/film\/([a-z0-9-]+)\/(script|sentence|records|where)$/.exec(p);
+    if (mM) {
+      const [, keyRaw, sub] = mM;
+      const k = mathId(keyRaw);
+      if (!k) return json(res, 404, { error: 'no such math film (films/<key> with kind: math)' });
+      const dir = join(FILMS, k);
+
+      // GET script — script.md raw + sentences.json + timing.json, one document for the Script tab
+      if (sub === 'script' && req.method === 'GET') {
+        const doc = readJson(join(dir, 'sentences.json'), {});
+        return json(res, 200, { key: k, script: read(join(dir, 'script.md')) ?? '',
+          scenes: doc.scenes ?? [], doc: doc.sentences ?? [], timing: readJson(join(dir, 'timing.json'), {}) });
+      }
+
+      // POST sentence { id, text } — rewrite that ONE [id] line in script.md, re-voice it, return the
+      // new timing entry. Runs in-process (like the edit tab's ops — never a CLI per click; measured
+      // ~5 s), guarded per film: one re-voice at a time and never while a job runs for that film.
+      // If the new prose breaks the script grammar, the line is rolled back and the parser's own
+      // line-numbered errors come back with a 400.
+      if (sub === 'sentence' && req.method === 'POST') {
+        const b = await body(req);
+        if (typeof b.id !== 'string' || !SENT_RE.test(b.id)) return json(res, 400, { error: 'id: a sentence id like s02.1' });
+        if (typeof b.text !== 'string' || !b.text.trim() || b.text.length > 1000) return json(res, 400, { error: 'text: the sentence prose, 1-1000 characters' });
+        const text = b.text.replace(/[\r\n]+/g, ' ').trim();
+        if (jobs.some((j) => j.key === k && j.code === undefined)) return json(res, 409, { error: 'a job is already running for this film' });
+        if (revoicing.has(k)) return json(res, 409, { error: 'a sentence re-voice is already running for this film' });
+        const file = join(dir, 'script.md'), src = read(file);
+        if (src == null) return json(res, 404, { error: `no script.md in films/${k}` });
+        const lines = src.split('\n');
+        const i = lines.findIndex((l) => l.trim() === `[${b.id}]` || l.trim().startsWith(`[${b.id}] `));
+        if (i < 0) return json(res, 404, { error: `no sentence ${b.id} in films/${k}/script.md` });
+        const before = lines[i];
+        lines[i] = `[${b.id}] ${text}`;
+        writeFileSync(file, lines.join('\n'));
+        revoicing.add(k);
+        try {
+          let r;
+          try { r = await buildVoice(k, { only: b.id }); }
+          catch (e) {
+            lines[i] = before; writeFileSync(file, lines.join('\n'));
+            return json(res, 400, { error: `script.md rejected the new sentence:\n  ${(e.errors || [e.message || e]).join('\n  ')}` });
+          }
+          return json(res, 200, { ok: true, id: b.id, voiced: r.voiced, duration: r.duration,
+            sentence: (r.sentences || []).find((s) => s.id === b.id) ?? null });
+        } finally { revoicing.delete(k); }
+      }
+
+      // GET records — the scenes table (timeline seconds + last render per format + a SYNTAX
+      // probe: ast.parse, never an import), the layout lint (the same capped studio_manim.lint CLI
+      // the checks run, per format), the claims ledger (records/<fmt>/*-claims.json) and gates.json.
+      if (sub === 'records' && req.method === 'GET') {
+        const film = readMathFilm(k);
+        const SYNTAX_PY = ['import ast, json, sys', 'out = []',
+          'for f in sys.argv[1:]:',
+          '    try:',
+          '        ast.parse(open(f, encoding="utf-8").read(), filename=f)',
+          '        out.append({"file": f, "ok": True})',
+          '    except SyntaxError as e:',
+          '        out.append({"file": f, "ok": False, "message": e.msg or str(e), "line": e.lineno, "offset": e.offset})',
+          'print("RESULT " + json.dumps(out))'].join('\n');
+        const rels = film.scenes.map((s) => `scenes/${s.id}.py`);
+        // the probe + one lint per format: independent capped children, run together (measured ~2 s)
+        const syntaxP = runCapped(pythonFor('manim'), ['-c', SYNTAX_PY, ...rels],
+          { cwd: dir, memoryMb: 512, timeoutS: 20, label: `gui syntax ${k}` }).catch(() => null);
+        const lintPs = (film.cfg.formats || []).map((f) => {
+          const rd = join(dir, 'records', f);
+          if (!existsSync(rd)) return Promise.resolve(null);   // never rendered in this format
+          return runCapped(pythonFor('manim'), ['-m', 'studio_manim.lint', rd, join(dir, 'design.json'), f],
+            { cwd: ROOT, memoryMb: 512, timeoutS: 30, label: `gui lint ${k} ${f}`, env: { PYTHONPATH: join(ROOT, 'engine', 'manim') } }).catch(() => null);
+        });
+        const [syntax, ...lintRs] = await Promise.all([syntaxP, ...lintPs]);
+        let syn = {};
+        if (syntax && syntax.code === 0) {
+          try { syn = Object.fromEntries(JSON.parse((syntax.out || '').trim().replace(/^.*RESULT /s, '')).map((x) => [x.file, x])); } catch { /* shown as unprobed below */ }
+        }
+        const lint = {};
+        (film.cfg.formats || []).forEach((f, i) => {
+          const r = lintRs[i];
+          if (r === null) { lint[f] = null; return; }   // no records dir for this format
+          try { lint[f] = { violations: JSON.parse((r.out || '').trim()), source: 'studio_manim.lint (capped, 30s)' }; }
+          catch { lint[f] = { error: `lint ${f} failed (rc ${r.code}): ${(r.err || r.out || '').trim().split('\n').slice(-2).join(' ')}` }; }
+        });
+        const claims = [];
+        for (const f of film.cfg.formats || []) {
+          const rd = join(dir, 'records', f);
+          if (!existsSync(rd)) continue;
+          for (const file of readdirSync(rd)) {
+            if (!file.endsWith('-claims.json')) continue;
+            for (const c of readJson(join(rd, file), [])) claims.push({ fmt: f, scene: file.replace(/-claims\.json$/, ''), ...c });
+          }
+        }
+        const scenes = film.scenes.map((s) => {
+          const probe = syn[`scenes/${s.id}.py`];
+          const row = { id: s.id, file: `scenes/${s.id}.py`, seconds: {}, lastRender: {}, claims: claims.filter((c) => c.scene === s.id).length,
+            error: probe && !probe.ok ? { file: `scenes/${s.id}.py`, line: probe.line, message: probe.message } : null };
+          for (const f of film.cfg.formats || []) {
+            const tl = join(dir, 'records', f, `${s.id}-timeline.json`);
+            if (existsSync(tl)) { row.seconds[f] = readJson(tl, {}).seconds ?? null; row.lastRender[f] = mtime(tl); }
+          }
+          return row;
+        });
+        return json(res, 200, { key: k, formats: film.cfg.formats || [], scenes, lint, claims,
+          gates: readJson(join(dir, 'gates.json'), null),
+          note: 'syntax: ast.parse (capped, no import); lint: studio_manim.lint (capped)' });
+      }
+
+      // GET where?t=<s>[&fmt=] — resolveWhere: the scene, sentence, animation and file:line that own
+      // a timecode (the Notes tab's resolver — a note pinned at 49.27 s leads straight to the code).
+      if (sub === 'where' && req.method === 'GET') {
+        const rawT = url.searchParams.get('t');
+        const t = Number(rawT);
+        if (rawT == null || rawT.trim() === '' || !Number.isFinite(t) || t < 0 || t > 1e6)
+          return json(res, 400, { error: 't: seconds since 0 — a finite number >= 0 (e.g. ?t=12.34)' });
+        const fmt = url.searchParams.get('fmt');
+        const formats = readJson(join(dir, 'film.json'), {}).formats || [];
+        if (fmt != null && !formats.includes(fmt)) return json(res, 400, { error: `fmt: one of ${formats.join(', ')}` });   // '' is malformed, not absent
+        const r = resolveWhere(k, t, fmt || undefined);
+        return r && r.error ? json(res, 404, { error: r.error }) : json(res, 200, r);
+      }
     }
 
     json(res, 404, { error: 'not found' });

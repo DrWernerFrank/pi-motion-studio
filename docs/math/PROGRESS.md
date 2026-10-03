@@ -1,10 +1,11 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: wave 1 (orchestrated) — layout-lint, claims, typeset, render-determinism GREEN (committed 15b9232,
-recorder live: get_corner geometry, MRO text, role+nominal_u, to_hex color). Running: p2 (formats+look),
-p5 (script+voice), p7 (kit). Next: integrate their results, verify each, commit, tag slice-1
-Next after: wave 2 — narration wiring (scene clock say/at/until, sync, where), scene-cache/errors/perf,
-library+captions checks, math gates (P8)
+Now: wave 3 (GLM-5.3-max orchestrated — claude-bridge rate-limited until 21:30): glm-kit (P7
+audit+complete+showcase), glm-sync-where, glm-errors-perf, glm-gates (P8), glm-pi-surface (P9),
+glm-gui (P10). Mine in parallel: scene-cache re-run, CLI wiring (done: where/sound/gate/ship +
+help, fe52716), then wave 4: library+captions+starter checks, P11 hygiene, P12 demos + review +
+full verify + FINAL_REPORT
+Next: integrate + verify each GLM result as it lands (run their checks myself), commit per phase
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
 Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio verify-math --list`.

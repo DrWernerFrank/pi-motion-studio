@@ -1,0 +1,136 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.0,
+  "i": 1,
+  "scene": "s02_steps",
+  "sentence": "s02.1",
+  "animation": "Succession"
+ },
+ {
+  "kind": "bookmark",
+  "t": 11.48,
+  "id": "writes",
+  "sentence": "s02.1",
+  "scene": "s02_steps"
+ },
+ {
+  "kind": "animation",
+  "t": 2.467,
+  "i": 2,
+  "scene": "s02_steps",
+  "sentence": "s02.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.533,
+  "i": 3,
+  "scene": "s02_steps",
+  "sentence": "s02.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.533,
+  "i": 4,
+  "scene": "s02_steps",
+  "sentence": "s02.1",
+  "animation": "wait",
+  "seconds": 2.096
+ },
+ {
+  "t": 0.9999999999999999,
+  "kind": "sentence_end",
+  "scene": "s02_steps",
+  "sentence": "s02.1"
+ },
+ {
+  "kind": "animation",
+  "t": 4.7,
+  "i": 5,
+  "scene": "s02_steps",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.7,
+  "i": 6,
+  "scene": "s02_steps",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.179
+ },
+ {
+  "kind": "animation",
+  "t": 5.4,
+  "i": 7,
+  "scene": "s02_steps",
+  "sentence": "s02.2",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "bookmark",
+  "t": 15.137,
+  "id": "collects",
+  "sentence": "s02.2",
+  "scene": "s02_steps"
+ },
+ {
+  "kind": "animation",
+  "t": 6.133,
+  "i": 8,
+  "scene": "s02_steps",
+  "sentence": "s02.2",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "animation",
+  "t": 7.133,
+  "i": 9,
+  "scene": "s02_steps",
+  "sentence": "s02.2",
+  "animation": "Succession"
+ },
+ {
+  "kind": "animation",
+  "t": 8.233,
+  "i": 10,
+  "scene": "s02_steps",
+  "sentence": "s02.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.233,
+  "i": 11,
+  "scene": "s02_steps",
+  "sentence": "s02.2",
+  "animation": "wait",
+  "seconds": 1.132
+ },
+ {
+  "t": 5.399999999999999,
+  "kind": "sentence_end",
+  "scene": "s02_steps",
+  "sentence": "s02.2"
+ },
+ {
+  "kind": "animation",
+  "t": 9.433,
+  "i": 12,
+  "scene": "s02_steps",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.433,
+  "i": 13,
+  "scene": "s02_steps",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 1.2
+ }
+]

@@ -51,7 +51,10 @@ export default async () => {
     facts.push('one scene source changed -> 1 rendered, 2 cached');
     writeFileSync(s01, s01Original);
     const r3b = await renderMathFilm(KEY, { quality: 'draft', fmt: '16:9' });
-    if (r3b[0].rendered !== 1 || r3b[0].cached !== 2) bad.push(`restore re-prime: rendered ${r3b[0].rendered} cached ${r3b[0].cached} (wanted 1/2)`);
+    // restoring previously-rendered content is a CACHE HIT — the original entry never expired.
+    // This is content addressing working in BOTH directions; rendered 0 / cached 3 proves it.
+    if (r3b[0].rendered !== 0 || r3b[0].cached !== 3) bad.push(`restore: rendered ${r3b[0].rendered} cached ${r3b[0].cached} (wanted 0/3 — the original key is still cached)`);
+    facts.push('restore to rendered content -> 0 rendered, 3 cached (content addressing, both directions)');
 
     // 4. change ONE SENTENCE (in s03 — the last scene): re-voice only it, re-render only its scene
     const before = Date.now();

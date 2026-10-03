@@ -125,3 +125,36 @@ The CLI underneath (`./studio help` lists everything):
 
 Originals stay untouched (sha-pinned; `./studio relink` repairs a moved file). Pipeline and craft rules:
 `.pi/skills/video-edit/SKILL.md`; the fresh-eyes final review: `.pi/agents/edit-critic.md`.
+
+## Math videos
+
+The studio also makes **narrated math films** — explainers, worked examples, visual proofs,
+step-by-step derivations — animated with Manim, every number verified by sympy, narrated with
+deterministic local voices (Piper; bring your own narration.wav too), in every format. In pi it
+is one sentence (the `math-video` skill):
+
+```
+/skill:math-video explain Bayes' theorem with a medical-test example, narrated, 16:9 and 9:16
+/skill:math-video derive the quadratic formula step by step, vertical, with captions
+/skill:math-video here is my script.md: animate it
+/skill:math-video put a Persian title and Persian captions on it
+```
+
+The CLI underneath (the math rows that exist today):
+
+| Command | Example |
+|---|---|
+| `./studio new <key> --math [--formats 16:9,9:16] [--lang fa]` | scaffold a math film (script.md, three scenes, design.json, lexicon.json) |
+| `./studio look <key> --mode every\|sentences\|bookmarks\|sections\|phone\|strip\|times` | labelled contact sheets of the draft (a stale draft re-renders first) |
+| `./studio render <key> --draft` | half-res 30 fps, cached per scene; `--final` at film fps |
+| `./studio scene <key> <scene-id> [--draft] [--fmt 9:16]` | render ONE scene and look at its own sheet |
+| `./studio check <key> [--scene <id>]` | the dry run: typesetting + every claim true, no video |
+| `./studio where <key> --t 49.27` | the scene, sentence, animation and file:line that own a timecode |
+| `./studio sound <key>` | narration voice + mix at −16 LUFS → out/mix.wav (word timings are native) |
+
+Every mathematical statement on screen is a registered `claim` evaluated with sympy (`out/claims.md`
+when shipped); layout is measured (offscreen/overlap/size/contrast lint) not hoped for; the
+narration script is the timing source of truth (scenes wait for the voice). The pipeline, the
+kit API (`engine/manim/kit.md`) and the craft rules: `.pi/skills/math-video/SKILL.md`; the
+fresh-eyes final review (it re-derives every number by hand): `.pi/agents/math-critic.md`.
+Gates and `./studio ship <key>` are wired for math films (gates → finals → `out/claims.md`).

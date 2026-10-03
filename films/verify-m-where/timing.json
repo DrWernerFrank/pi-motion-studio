@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "voice": "piper:en_US-ljspeech-medium",
+  "length_scale": 1,
+  "sample_rate": 22050,
+  "gap": 0.15,
+  "gap_samples": 3308,
+  "duration": 10.389116,
+  "timing": "native",
+  "sentences": [
+    {
+      "id": "s01.1",
+      "scene": "s01_hook",
+      "text": "Watch the small squares appear one by one across the plane.",
+      "spoken": "Watch the small squares appear one by one across the plane.",
+      "start": 0,
+      "end": 3.482993,
+      "start_sample": 0,
+      "samples": 76800,
+      "words": [
+        {
+          "w": "Watch",
+          "start": 0.02322,
+          "end": 0.32508
+        },
+        {
+          "w": "the",
+          "start": 0.37152,
+          "end": 0.45279
+        },
+        {
+          "w": "small",
+          "start": 0.53406,
+          "end": 0.83592
+        },
+        {
+          "w": "squares",
+          "start": 0.9288,
+          "end": 1.36998
+        },
+        {
+          "w": "appear",
+          "start": 1.42803,
+          "end": 1.77633
+        },
+        {
+          "w": "one",
+          "start": 1.84599,
+          "end": 2.05497
+        },
+        {
+          "w": "by",
+          "start": 2.10141,
+          "end": 2.25234
+        },
+        {
+          "w": "one",
+          "start": 2.31039,
+          "end": 2.46132
+        },
+        {
+          "w": "across",
+          "start": 2.50776,
+          "end": 2.86766
+        },
+        {
+          "w": "the",
+          "start": 2.9141,
+          "end": 2.97215
+        },
+        {
+          "w": "plane.",
+          "start": 3.01859,
+          "end": 3.3785
+        }
+      ],
+      "bookmarks": [],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/2d5edbdda420eb1566c06d97beeb8532d01dd109f6139fac292dd61b128accc8/audio.wav",
+      "hash": "2d5edbdda420eb1566c06d97beeb8532d01dd109f6139fac292dd61b128accc8"
+    },
+    {
+      "id": "s02.1",
+      "scene": "s02_meaning",
+      "text": "Each mark {hits}lands where the voice says it should land.",
+      "spoken": "Each mark lands where the voice says it should land.",
+      "start": 3.633016,
+      "end": 6.82576,
+      "start_sample": 80108,
+      "samples": 70400,
+      "words": [
+        {
+          "w": "Each",
+          "start": 3.66785,
+          "end": 3.92327
+        },
+        {
+          "w": "mark",
+          "start": 3.94649,
+          "end": 4.21352
+        },
+        {
+          "w": "lands",
+          "start": 4.29479,
+          "end": 4.70114
+        },
+        {
+          "w": "where",
+          "start": 4.74758,
+          "end": 4.86368
+        },
+        {
+          "w": "the",
+          "start": 4.89851,
+          "end": 4.97978
+        },
+        {
+          "w": "voice",
+          "start": 5.02622,
+          "end": 5.38613
+        },
+        {
+          "w": "says",
+          "start": 5.57189,
+          "end": 5.8157
+        },
+        {
+          "w": "it",
+          "start": 5.88536,
+          "end": 5.98985
+        },
+        {
+          "w": "should",
+          "start": 6.03629,
+          "end": 6.19882
+        },
+        {
+          "w": "land.",
+          "start": 6.25687,
+          "end": 6.72127
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "hits",
+          "t": 0.661774,
+          "word": "lands"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/81b84dac09ae58c5f4cae5b1a09fc090ec5704cf7174d050ebc39d3b8e0be25c/audio.wav",
+      "hash": "81b84dac09ae58c5f4cae5b1a09fc090ec5704cf7174d050ebc39d3b8e0be25c"
+    },
+    {
+      "id": "s03.1",
+      "scene": "s03_recap",
+      "text": "The last row fills the frame and the film ends.",
+      "spoken": "The last row fills the frame and the film ends.",
+      "start": 6.975782,
+      "end": 10.389116,
+      "start_sample": 153816,
+      "samples": 75264,
+      "words": [
+        {
+          "w": "The",
+          "start": 6.999,
+          "end": 7.08027
+        },
+        {
+          "w": "last",
+          "start": 7.13832,
+          "end": 7.55628
+        },
+        {
+          "w": "row",
+          "start": 7.60272,
+          "end": 7.83492
+        },
+        {
+          "w": "fills",
+          "start": 7.91619,
+          "end": 8.25288
+        },
+        {
+          "w": "the",
+          "start": 8.29932,
+          "end": 8.41542
+        },
+        {
+          "w": "frame",
+          "start": 8.48508,
+          "end": 8.90304
+        },
+        {
+          "w": "and",
+          "start": 9.13524,
+          "end": 9.27456
+        },
+        {
+          "w": "the",
+          "start": 9.30939,
+          "end": 9.42549
+        },
+        {
+          "w": "film",
+          "start": 9.48354,
+          "end": 9.76217
+        },
+        {
+          "w": "ends.",
+          "start": 9.80861,
+          "end": 10.27301
+        }
+      ],
+      "bookmarks": [],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/9704e747c263527b6c65c3399b6cecf47fc18da00e94cdc9d23238b4bc83278b/audio.wav",
+      "hash": "9704e747c263527b6c65c3399b6cecf47fc18da00e94cdc9d23238b4bc83278b"
+    }
+  ]
+}

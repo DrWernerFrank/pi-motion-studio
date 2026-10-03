@@ -15,7 +15,9 @@ Components are built INTO an `L` box and only ever scale DOWN; portrait stacks `
 type by the theme's multiplier. Labels are placed by the solver (`studio_manim.solver`, late import)
 with `next_to` as the fallback — never on the shape they annotate. Transitions are morphs,
 directional exits or collapses; never a simultaneous cross-fade. No LaTeX exists here (ADR-002):
-brackets, digits and tick labels are paths, `Eq`/`MathTypst` or `Txt`.
+brackets, digits and tick labels are paths, `Eq`/`MathTypst` or `Txt`. Composites are RECORDED BY
+THEIR PARTS (`_studio_parts`): the lint sees the plane as furniture, the square and curves as
+figures, and every text inside a group (matrix entries, tick labels) as text.
 
 Every block below is executed by `engine/manim/test/kit-examples.py` (a fresh namespace per block
 with `scene` = a dry-run `StudioScene`). A block may set `SKIP = "reason"` to report a skip.
@@ -54,9 +56,10 @@ for m in (area, *tags):  # labels stay in the panel
 ```
 
 ### GraphLab
-Axes in a box, `plot()`, `secant(x0, x1)`, `tangent(x0)` = the secant sliding to the limit (tracker
-`lab.h`), `slope_readout()` = live Eq + DecimalNumber from the tracker, `riemann(n)` = rectangles with
-the computed sum beside the exact integral. The box's top row holds the readouts.
+Axes in a box, `plot()` = Create the axes then the curve (the lab introduces itself), `secant(x0, x1)`,
+`tangent(x0)` = the secant sliding to the limit (tracker `lab.h`), `slope_readout()` = live Eq +
+DecimalNumber from the tracker, `riemann(n)` = rectangles with the computed sum beside the exact
+integral. The box's top row holds the readouts.
 ```python
 from studio_manim import L
 from studio_manim.kit import GraphLab

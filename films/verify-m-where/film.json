@@ -1,0 +1,21 @@
+{
+  "kind": "math",
+  "title": "where fixture",
+  "fps": 60,
+  "formats": [
+    "16:9",
+    "9:16"
+  ],
+  "duration": 0,
+  "lang": "en",
+  "voice": "piper:en_US-ljspeech-medium",
+  "captions": "auto",
+  "music": "none",
+  "mix": {
+    "lufs": -16
+  },
+  "gates": {
+    "maxStill": 3,
+    "maxSentenceGap": 6
+  }
+}

@@ -140,6 +140,15 @@ class _Say:
     def __enter__(self):
         s = self.scene
         own = s._scene_sentences()
+        if not own:
+            # UNVOICED films / `check` runs (the runner passes no timing): a pass-through context —
+            # animations run at their own run_times (D-019's documented check path). A film whose
+            # timing.json exists but lacks THIS scene's sentences is also silent-leg (the sentence
+            # belongs to another scene or the film was re-scripted): pad nothing, say nothing.
+            s._current_sentence = None
+            s._current_local_start = None
+            s.rec.sentence_start(None)
+            return s
         if self.want_id:
             sent = s.sentence(self.want_id)
             if sent is None:

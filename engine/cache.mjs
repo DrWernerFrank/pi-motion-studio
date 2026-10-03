@@ -1,15 +1,27 @@
 // studio cache: where the disk went, and garbage collection of what nothing references.
-//   studio cache                 size report
-//   studio cache gc [--dry] [--fixtures]
+//   studio cache                 size report (incl. the math caches: entry count + size)
+//   studio cache gc [--dry] [--fixtures] [--math-scenes]
+//     --math-scenes  remove the WHOLE math scene cache (content-addressed: rebuilt on demand)
+//     by default, math scene-cache entries not touched in 14 days are collected (keys are
+//     content-addressed, so orphans are stale BY CONSTRUCTION and age is the cheap proxy — D-020)
 import { existsSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { CACHE, DATA } from './doctor.mjs';
 import { binDir, dirSize, readBin } from './ingest.mjs';
+import { SCENE_CACHE } from './math.mjs';            // the math render cache (content-addressed per scene)
+import { VOICE_CACHE } from './narration.mjs';      // the math voice cache (content-addressed per sentence)
 import { FILMS, readFilm, readJson } from './lib/film.mjs';
 
 const mb = (n) => `${(n / 1e6).toFixed(1)} MB`;
 const films = () => (existsSync(FILMS) ? readdirSync(FILMS).filter((f) => existsSync(join(FILMS, f, 'film.json'))) : []);
+
+// The math caches (math.mjs SCENE_CACHE / narration.mjs VOICE_CACHE — imported so they can never
+// drift). Entries are content-addressed (sha256 of everything the entry depends on): a needed
+// entry removed by gc is simply re-rendered/re-voiced on its next miss, and an orphan is stale by
+// construction — mtime age is the cheap proxy for "nothing needed it lately" (D-020).
+const SCENE_STALE_MS = 14 * 86400e3;
+const cacheEntries = (d) => (existsSync(d) ? readdirSync(d).filter((f) => /^[0-9a-f]{32}$/.test(f) || /^[0-9a-f]{64}$/.test(f)) : []);
 
 export function report() {
   const rows = [];
@@ -23,7 +35,10 @@ export function report() {
 }
 
 // What gc would remove, as [path, bytes, why]. Never touches sources, edit.json, transcripts, or anything referenced by a media bin.
-export function plan({ fixtures = false } = {}) {
+// mathScenes defaults from argv (the CLI forwards only --dry/--fixtures today): --math-scenes takes
+// the whole scene cache; without it, scene-cache entries older than 14 days are collected anyway.
+export function plan({ fixtures = false, mathScenes } = {}) {
+  const allScenes = mathScenes ?? process.argv.includes('--math-scenes');
   const items = [], add = (p, why) => { if (existsSync(p)) items.push([p, statSync(p).isDirectory() ? dirSize(p) : statSync(p).size, why]); };
   for (const k of films()) {
     const dir = join(FILMS, k);
@@ -43,11 +58,20 @@ export function plan({ fixtures = false } = {}) {
   }
   add(join(CACHE, 'verify'), 'verify scratch');
   if (fixtures) add(join(CACHE, 'fixtures'), 'fixtures (rebuilt on demand)');
+  // the math scene cache: whole (--math-scenes) or the 14-day-stale entries (age = the orphan proxy)
+  if (allScenes) add(SCENE_CACHE, 'the whole math scene cache (--math-scenes: content-addressed, rebuilt on demand)');
+  else if (existsSync(SCENE_CACHE)) {
+    const cutoff = Date.now() - SCENE_STALE_MS;
+    for (const e of readdirSync(SCENE_CACHE)) {
+      const p = join(SCENE_CACHE, e);
+      if (statSync(p).mtimeMs < cutoff) add(p, `math scene cache entry not touched in 14 days (content-addressed: orphans are stale by construction)${/\.tmp-/.test(e) ? ' — an unfinished cache write' : ''}`);
+    }
+  }
   return items;
 }
 
-export function gc({ dry = false, fixtures = false, log = console.log } = {}) {
-  const items = plan({ fixtures });
+export function gc({ dry = false, fixtures = false, mathScenes, log = console.log } = {}) {
+  const items = plan({ fixtures, mathScenes });
   let freed = 0;
   for (const [p, bytes, why] of items) { log(`${dry ? 'would remove' : 'removed'}  ${mb(bytes).padStart(10)}  ${p.replace(homedir(), '~')}  (${why})`); freed += bytes; if (!dry) rmSync(p, { recursive: true, force: true }); }
   log(items.length ? `${dry ? 'would free' : 'freed'} ${mb(freed)}` : 'nothing to collect');
@@ -58,5 +82,9 @@ export function printReport() {
   const r = report();
   for (const f of r.films) console.log(`${f.where.padEnd(34)} media ${mb(f.media).padStart(10)}   out ${mb(f.out).padStart(10)}`);
   for (const o of r.other) console.log(`${o.where.padEnd(34)} ${mb(o.bytes).padStart(10)}`);
+  // the math caches: entry count + size (films/outputs above are the media; these are the caches
+  // that make math iteration cheap — the scene render cache and the voice cache)
+  for (const [dir, name] of [[SCENE_CACHE, 'math scene cache'], [VOICE_CACHE, 'math voice cache']])
+    if (existsSync(dir)) console.log(`${dir.replace(homedir(), '~').padEnd(34)} ${String(cacheEntries(dir).length).padStart(9)} entries ${mb(dirSize(dir)).padStart(10)}  (${name})`);
 }
 void readJson;

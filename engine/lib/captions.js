@@ -13,12 +13,14 @@ export function captionChunks(words, { maxChars = 42, maxGap = 0.35, maxDur = 2.
   const cues = []; let cur = [];
   const flush = () => {
     if (!cur.length) return;
-    // no cue may overlap the next (the spec's bar): the cosmetic 120 ms tail is clamped to the next cue's
-    // start + 20 ms, and the lead never crosses the previous cue's end
+    // no cue may overlap the next (the spec's bar): the cosmetic 120 ms tail is clamped to JUST
+    // BEFORE the next cue's start (− 20 ms), and the lead never crosses the previous cue's end.
+    // (The first draft clamped to next.start + 0.02 — a 20 ms OVERLAP on every tail-clamped cue;
+    // the math captions check measures what the editing mission only asserted.)
     const next0 = words[words.indexOf(cur.at(-1)) + 1];
-    const end = next0 ? Math.min(cur.at(-1).end + 0.12, next0.start + 0.02) : cur.at(-1).end + 0.12;
+    const end = next0 ? Math.min(cur.at(-1).end + 0.12, Math.max(cur[0].start + 0.1, next0.start - 0.02)) : cur.at(-1).end + 0.12;
     const prev = cues.at(-1);
-    const start = prev ? Math.max(cur[0].start - lead, prev.end - 0.02) : Math.max(0, cur[0].start - lead);
+    const start = prev ? Math.max(cur[0].start - lead, prev.end + 0.02) : Math.max(0, cur[0].start - lead);
     cues.push({ start, end, words: cur, text: cur.map((w) => w.text).join(' ') });
     cur = [];
   };
