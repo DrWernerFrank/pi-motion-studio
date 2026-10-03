@@ -13,7 +13,7 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 
 - [x] **P0** Orientation: read AGENTS/README/editing docs/engine/GUI/`.pi` + the whole determinant film; `git switch -c feat/math-videos`; `verify-edit --clean` (29 leftover films removed); baseline `studio regress` PASS; PROGRESS/DECISIONS; `verify-math` runner + `regress` check green, all other checks present and red
 - [x] **P1** Spikes S1–S4 (toolchain, typesetting, voice, render) + `studio doctor --math` probes; ADR-001..004; `env` written (green on this machine; ticked when the full run proves it)
-- [ ] **P2** Kit core + first vertical slice: `new --math`, `templates/math/`, `StudioScene`, layout `L`, themes (paper, chalk), typesetting API, the recorder, `render` + `look` for math. Milestone: the starter renders 16:9 + 9:16 and I look at its sheet. Checks: `typeset`, `render-determinism`, `formats`, `look`. Commit + tag `slice-1`
+- [x] **P2** Kit core + first vertical slice: `new --math`, `templates/math/`, `StudioScene`, layout `L`, themes (paper, chalk), typesetting API, the recorder, `render` + `look` for math. Milestone: the starter renders 16:9 + 9:16 and I look at its sheet. Checks: `typeset`, `render-determinism`, `formats`, `look`. Commit + tag `slice-1`
 - [ ] **P3** Layout lint + label solver (fixtures with seeded violations). Check: `layout-lint`
 - [ ] **P4** Claims (ledger, restricted sympy namespace, coverage, `--independent`). Check: `claims`
 - [ ] **P5** Script, voice, timing, sync, `where`, bring-your-own narration. Checks: `script`, `voice`, `sync`, `where`
@@ -32,11 +32,11 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] `typeset` (P2) *verified --only* 40 formulas compile deterministically; named parts select+color; Persian shapes RTL; a broken formula fails with formula + file:line
 - [x] `render-determinism` (P2) *verified --only* fixture scene twice from cold cache, 2 formats: identical framemd5; 1 worker == 3 workers *(slow)*
 - [ ] `formats` (P2) one scene → 4 exact geometries; lint clean; text >= 3.2u; portrait is a re-composition *(slow)*
-- [ ] `look` (P2) every mode works for all formats, frames labelled, a stale draft re-rendered first
+- [x] `look` (P2) *verified --only* every mode works for all formats, frames labelled, a stale draft re-rendered first
 - [x] `layout-lint` (P3) *verified --only* 12 seeded violations reported with ids + time ± 1 frame; 0 false positives on 6 clean scenes; the solver places 8 crowded labels
 - [x] `claims` (P4) *verified --only* 30 true / 15 false claims; unparseable = error; `num()` computed; `--independent` agrees on all 45
-- [ ] `script` (P5) stable sentence ids; bookmarks parse; dup/missing/unknown rejected with line numbers; round-trips; lint flags raw symbols
-- [ ] `voice` (P5) byte-identical TTS; offsets ± 1 sample; lexicon + normalizer; WER <= 10% round trip; one-sentence re-voice; offline; fa voice; `narration.wav` aligns
+- [x] `script` (P5) *verified --only* stable sentence ids; bookmarks parse; dup/missing/unknown rejected with line numbers; round-trips; lint flags raw symbols
+- [x] `voice` (P5) *verified --only* byte-identical TTS; offsets ± 1 sample; lexicon + normalizer; WER <= 10% round trip; one-sentence re-voice; offline; fa voice; `narration.wav` aligns
 - [ ] `sync` (P5) 6 bookmarks within 1 frame of `timing.json` and 80 ms of ASR word onset; scenes cover narration; A/V end <= 1 frame
 - [ ] `where` (P5) 20 random times resolve to scene/sentence/animation/`file:line` agreeing with `trace.json`
 - [ ] `scene-cache` (P6) unchanged re-render < 10% cold; one scene change re-renders only it; one sentence re-voices one; palette invalidates all; formats never share *(slow)*
