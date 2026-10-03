@@ -1,9 +1,10 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: P0 complete — branch `feat/math-videos`, baseline green, `verify-math` runner with all 27 checks
-(regress green, the rest red by design until their phase lands)
-Next: P1 — spikes S1 (Manim toolchain, rootless routes in order), S2 (typesetting backend), S3 (voice),
-S4 (render + perf calibration); `studio doctor` math probes; ADR-001..004
+Now: P1 closing — S1–S4 done and measured (ADR-001..004 written, THIRD_PARTY complete, doctor --math green,
+env check written). Committing P1, then P2: kit core + the first vertical slice
+Next: P2 — `new --math`, `templates/math/`, `StudioScene`, layout `L`, themes paper+chalk, typesetting API
+(`Eq`/`Txt`/`num` via tex2typst→MathTypst), the recorder, `render` + `look` for math films; milestone: the
+starter renders 16:9 + 9:16 and I look at its sheet; checks `typeset`, `render-determinism`, `formats`, `look`
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
 Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio verify-math --list`.
@@ -11,7 +12,7 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 ## Phases
 
 - [x] **P0** Orientation: read AGENTS/README/editing docs/engine/GUI/`.pi` + the whole determinant film; `git switch -c feat/math-videos`; `verify-edit --clean` (29 leftover films removed); baseline `studio regress` PASS; PROGRESS/DECISIONS; `verify-math` runner + `regress` check green, all other checks present and red
-- [ ] **P1** Spikes S1–S4 (toolchain, typesetting, voice, render) + `studio doctor` additions; ADR-001..004. Check: `env`
+- [x] **P1** Spikes S1–S4 (toolchain, typesetting, voice, render) + `studio doctor --math` probes; ADR-001..004; `env` written (green on this machine; ticked when the full run proves it)
 - [ ] **P2** Kit core + first vertical slice: `new --math`, `templates/math/`, `StudioScene`, layout `L`, themes (paper, chalk), typesetting API, the recorder, `render` + `look` for math. Milestone: the starter renders 16:9 + 9:16 and I look at its sheet. Checks: `typeset`, `render-determinism`, `formats`, `look`. Commit + tag `slice-1`
 - [ ] **P3** Layout lint + label solver (fixtures with seeded violations). Check: `layout-lint`
 - [ ] **P4** Claims (ledger, restricted sympy namespace, coverage, `--independent`). Check: `claims`

@@ -60,7 +60,8 @@ const HELP = `studio <command> <film> [options]
   media <film>           the media bin: sources, kinds, durations, whether the originals are still where they were
   relink <film> [--search dir ...]   find moved originals by size + sha256 and repair the bin (and edit.json)
   cache [gc [--dry] [--fixtures]]   disk use of media/outputs/caches; gc removes temp films, orphan media, interrupted-ingest leftovers
-  doctor [--fix]         probe the toolchain for editing real footage (ffmpeg, node, python, ASR, tracker, browser decode)
+  doctor [--fix] [--math]  probe the toolchain: editing by default; --math adds Manim, typesetting,
+                         voice, sympy and font probes (docs/math/ADR-001..004)
   verify-edit [--quick] [--list] [--only <id>] [--clean]
                          the real-video-editing contract: every check of the mission, measured → docs/editing/verify-last.json
   verify-math [--quick] [--list] [--only <id>,…] [--clean]
@@ -239,7 +240,7 @@ async function main() {
     }
     case 'doctor': {
       const { doctor, printDoctor } = await import('./doctor.mjs');
-      const r = await doctor({ fix: !!opt('fix') }); printDoctor(r); process.exitCode = r.ok ? 0 : 1; break;
+      const r = await doctor({ fix: !!opt('fix'), math: !!opt('math') }); printDoctor(r); process.exitCode = r.ok ? 0 : 1; break;
     }
     case 'verify-edit': {
       const { verifyEdit } = await import('./verify-edit.mjs');

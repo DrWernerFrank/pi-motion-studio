@@ -12,23 +12,28 @@ export const MODELS = join(DATA, 'models');
 export const whisperDir = () => join(MODELS, 'whisper');
 export const yunetModel = () => join(MODELS, 'opencv', 'yunet.onnx');
 
-// Python resolution, in one place: STUDIO_PYTHON (audio analysis), STUDIO_ML_PYTHON (ASR, tracking), then the venvs.
+// Python resolution, in one place: STUDIO_PYTHON (audio analysis), STUDIO_ML_PYTHON (ASR, tracking),
+// STUDIO_MANIM_PYTHON (math films), then the venvs.
 export const pythonFor = (kind = 'audio') => {
-  const env = process.env[kind === 'ml' ? 'STUDIO_ML_PYTHON' : 'STUDIO_PYTHON'];
-  const ml = join(DATA, 'ml-venv', 'bin', 'python'), repo = join(ROOT, '.venv', 'bin', 'python');
+  const env = process.env[kind === 'ml' ? 'STUDIO_ML_PYTHON' : kind === 'manim' ? 'STUDIO_MANIM_PYTHON' : 'STUDIO_PYTHON'];
+  const ml = join(DATA, 'ml-venv', 'bin', 'python'), manim = join(DATA, 'manim-venv', 'bin', 'python'), repo = join(ROOT, '.venv', 'bin', 'python');
   if (env && existsSync(env)) return env;
   if (kind === 'ml' && existsSync(ml)) return ml;
+  if (kind === 'manim' && existsSync(manim)) return manim;
   return existsSync(repo) ? repo : 'python3';
 };
 
+export const manimVenv = () => join(DATA, 'manim-venv');
+export const piperVoices = () => join(MODELS, 'piper');
+
 const first = (s) => s.split('\n')[0].trim();
-const probe = async (cmd, args) => { try { const r = await run(cmd, args, { allowFail: true }); return r.code === 0 ? (r.out || r.err) : null; } catch { return null; } };
+const probe = async (cmd, args, opts = {}) => { try { const r = await run(cmd, args, { allowFail: true, ...opts }); return r.code === 0 ? (r.out || r.err) : null; } catch { return null; } };
 
 // Filters the editing pipeline leans on (mission section 3).
 const FILTERS = ['silencedetect', 'loudnorm', 'ebur128', 'xfade', 'acrossfade', 'sidechaincompress', 'afftdn', 'arnndn', 'atempo',
   'scdet', 'blackdetect', 'freezedetect', 'signalstats', 'psnr', 'ssim', 'zscale', 'tonemap', 'lut3d', 'overlay', 'subtitles', 'vidstabdetect'];
 
-export async function doctor({ fix = false } = {}) {
+export async function doctor({ fix = false, math = false } = {}) {
   const items = [], add = (id, label, ok, detail, extra = {}) => items.push({ id, label, ok, detail, required: true, ...extra });
   const fixed = [];
 
@@ -84,6 +89,36 @@ export async function doctor({ fix = false } = {}) {
   add('gpu', 'GPU (optional)', true, gpu ? first(gpu) : 'none (CPU int8 path)', { required: false });
   const dirs = [CACHE, DATA].map((d) => `${d.replace(homedir(), '~')} ${existsSync(d) ? 'ok' : 'missing'}`);
   add('dirs', 'cache + data dirs', existsSync(CACHE) && existsSync(DATA), dirs.join(', '), { fixable: true });
+
+  // Math-film probes (docs/math/ADR-001..004). Added ONLY when {math} is set, so the editing
+  // pipeline's `studio doctor` (and verify-edit's env check) never pays for — or is gated by — them.
+  // pythonFor('manim') is the exception: it resolves harmlessly for everyone.
+  if (math) {
+    let locked = null; try { locked = /^manim==([0-9.]+)$/m.exec(readFileSync(join(ROOT, 'engine', 'manim', 'requirements.lock'), 'utf8'))?.[1]; } catch { /* no lock file */ }
+    const mp = pythonFor('manim'), mv = await probe(mp, ['--version']);
+    const manim = mv && await probe(mp, ['-c', 'import manim; print("manim", manim.__version__)']);
+    add('manim', `Manim ${locked ? '== ' + locked : '(no requirements.lock pin!)'}`, !!manim && (!locked || first(manim) === `manim ${locked}`), manim ? `${first(manim)}  ${mp}` : `not importable (${mp}); see docs/math/ADR-001-toolchain.md`);
+    const cairo = mv && await probe(mp, ['-c', 'import cairo, manimpango; print("pycairo", cairo.version, "+ manimpango", manimpango.__version__)']);
+    add('cairo-pango', 'pycairo + manimpango (built wheels)', !!cairo, cairo ? first(cairo) : 'not installed; rebuild via docs/math/ADR-001-toolchain.md');
+    const sympy = mv && await probe(mp, ['-c', 'import sympy; print("sympy", sympy.__version__)']);
+    add('sympy', 'sympy (claims)', !!sympy, sympy ? first(sympy) : `missing: install into ${manimVenv().replace(homedir(), '~')}`);
+    // a probe formula through the default backend -> SVG (ADR-002). Manim logs to stderr: match the
+    // probe's own marker line, not the first line of stdout.
+    const typeset = mv && await probe(mp, ['-c', 'import warnings; warnings.filterwarnings("ignore")\nfrom manim import logger\nlogger.disabled = True\nfrom manim import MathTypst\nm = MathTypst("det mat(3, 1; 1, 2) = 5", font_size=48)\nprint("PROBE svg", len(m.submobjects) > 0 and m.width > 0, round(float(m.width), 2))'], { cwd: CACHE });
+    add('typeset', 'typesetting backend (Typst)', !!typeset && /PROBE svg True/.test(typeset), (typeset ? [...typeset.matchAll(/PROBE svg.*/g)].map((m) => m[0])[0] : null) || 'MathTypst compile failed (ADR-002)');
+    // the bundled studio fonts as Pango sees them (register_font works headless — measured in S1)
+    const fonts = mv && await probe(mp, ['-c', 'import warnings; warnings.filterwarnings("ignore")\nimport os\nfrom manim import logger\nlogger.disabled = True\nfrom manim import Text, register_font\nwith register_font(os.path.abspath("engine/fonts/Inter.ttf")):\n    t = Text("Handgloves 0123", font="Inter", font_size=48)\n    print("PROBE pango", round(float(t.width), 2))'], { cwd: ROOT });
+    add('fonts', 'bundled fonts via Pango', !!fonts && /PROBE pango [0-9]/.test(fonts), (fonts ? [...fonts.matchAll(/PROBE pango.*/g)].map((m) => m[0])[0] : null) || 'Pango cannot load engine/fonts (register_font)');
+    // a TTS voice that actually speaks (ADR-003: piper in the ML venv) + the fa voice present
+    const vp = pythonFor('ml'), vv = await probe(vp, ['--version']);
+    const enVoice = join(piperVoices(), 'en_US-ljspeech-medium.onnx'), faVoice = join(piperVoices(), 'fa_IR-amir-medium.onnx');
+    const PY = 'import warnings; warnings.filterwarnings("ignore")\nfrom piper import PiperVoice, SynthesisConfig\nv = PiperVoice.load(%j, include_alignments=True)\nch = [c for c in v.synthesize("five", syn_config=SynthesisConfig(noise_scale=0.0, noise_w_scale=0.0)) if len(c.audio_float_array) > 0]\nprint("PROBE speaks", len(ch[0].audio_float_array) if ch else 0)';
+    const speaks = vv && await probe(vp, ['-c', PY.replace('%j', JSON.stringify(enVoice))]);
+    add('voice', 'a TTS voice speaks (piper)', !!speaks && /PROBE speaks [1-9]/.test(speaks), (speaks ? [...speaks.matchAll(/PROBE speaks.*/g)].map((m) => m[0])[0] : null) || 'piper failed or missing voice model (ADR-003)');
+    add('voice-fa', 'the Persian voice (piper)', existsSync(faVoice), faVoice ? faVoice.replace(homedir(), '~') : `missing: ${faVoice.replace(homedir(), '~')} (language fa films need it)`, { required: false });
+    const kokoro = join(MODELS, 'kokoro', 'kokoro-v1.0.onnx');
+    add('kokoro', 'kokoro (optional fallback voice)', existsSync(kokoro), kokoro ? kokoro.replace(homedir(), '~') : 'not installed (optional — ADR-003)', { required: false });
+  }
 
   return { ok: items.filter((i) => i.required).every((i) => i.ok), items, fixed };
 }
