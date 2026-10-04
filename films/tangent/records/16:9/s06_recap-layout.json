@@ -1,54 +1,156 @@
 [
  {
-  "t": 0.6,
-  "objects": []
+  "t": 0.033,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "1:0",
+    "bbox": [
+     -6.257,
+     2.575,
+     3.36,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "1:1",
+    "bbox": [
+     -4.362,
+     0.607,
+     2.877,
+     1.144
+    ],
+    "height_u": 14.3,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "1:2",
+    "bbox": [
+     -4.362,
+     -1.177,
+     3.104,
+     1.144
+    ],
+    "height_u": 14.3,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "1:3",
+    "bbox": [
+     -4.415,
+     -2.961,
+     3.842,
+     1.144
+    ],
+    "height_u": 14.3,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   }
+  ]
  },
  {
-  "t": 1.4,
+  "t": 0.033,
   "objects": [
    {
     "kind": "Txt",
     "id": "2:0",
     "bbox": [
-     -5.381,
-     0.84,
-     10.763,
-     0.755
+     -6.257,
+     2.575,
+     3.36,
+     0.63
     ],
-    "height_u": 9.44,
+    "height_u": 7.87,
     "nominal_u": 9,
     "role": "title",
     "color": "#000000",
     "z": 0,
     "alive": true,
     "text": true
-   }
-  ]
- },
- {
-  "t": 2.367,
-  "objects": [
+   },
    {
-    "kind": "Txt",
-    "id": "3:0",
+    "kind": "Eq",
+    "id": "2:1",
     "bbox": [
-     -5.381,
-     0.84,
-     10.763,
-     0.755
+     -4.362,
+     0.607,
+     2.877,
+     1.144
     ],
-    "height_u": 9.44,
+    "height_u": 14.3,
     "nominal_u": 9,
-    "role": "title",
-    "color": "#000000",
-    "z": 0,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:2",
+    "bbox": [
+     -4.362,
+     -1.177,
+     3.104,
+     1.144
+    ],
+    "height_u": 14.3,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:3",
+    "bbox": [
+     -4.415,
+     -2.961,
+     3.842,
+     1.144
+    ],
+    "height_u": 14.3,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
     "alive": true,
     "text": true
    }
   ]
  },
  {
-  "t": 2.367,
+  "t": 0.633,
+  "objects": []
+ },
+ {
+  "t": 1.433,
   "objects": [
    {
     "kind": "Txt",
@@ -70,7 +172,7 @@
   ]
  },
  {
-  "t": 3.167,
+  "t": 2.367,
   "objects": [
    {
     "kind": "Txt",
@@ -88,28 +190,11 @@
     "z": 0,
     "alive": true,
     "text": true
-   },
-   {
-    "kind": "Txt",
-    "id": "5:1",
-    "bbox": [
-     -4.984,
-     -0.386,
-     9.967,
-     0.755
-    ],
-    "height_u": 9.44,
-    "nominal_u": 9,
-    "role": "title",
-    "color": "#000000",
-    "z": 1,
-    "alive": true,
-    "text": true
    }
   ]
  },
  {
-  "t": 3.933,
+  "t": 2.367,
   "objects": [
    {
     "kind": "Txt",
@@ -127,28 +212,11 @@
     "z": 0,
     "alive": true,
     "text": true
-   },
-   {
-    "kind": "Txt",
-    "id": "6:1",
-    "bbox": [
-     -4.984,
-     -0.386,
-     9.967,
-     0.755
-    ],
-    "height_u": 9.44,
-    "nominal_u": 9,
-    "role": "title",
-    "color": "#000000",
-    "z": 1,
-    "alive": true,
-    "text": true
    }
   ]
  },
  {
-  "t": 3.933,
+  "t": 3.167,
   "objects": [
    {
     "kind": "Txt",
@@ -187,7 +255,7 @@
   ]
  },
  {
-  "t": 4.733,
+  "t": 3.933,
   "objects": [
    {
     "kind": "Txt",
@@ -222,28 +290,11 @@
     "z": 1,
     "alive": true,
     "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "8:2",
-    "bbox": [
-     -3.219,
-     -2.805,
-     6.437,
-     1.948
-    ],
-    "height_u": 24.35,
-    "nominal_u": 9,
-    "role": "math",
-    "color": "#17150F",
-    "z": 2,
-    "alive": true,
-    "text": true
    }
   ]
  },
  {
-  "t": 5.433,
+  "t": 3.933,
   "objects": [
    {
     "kind": "Txt",
@@ -278,28 +329,11 @@
     "z": 1,
     "alive": true,
     "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "9:2",
-    "bbox": [
-     -3.605,
-     -2.922,
-     7.21,
-     2.181
-    ],
-    "height_u": 27.27,
-    "nominal_u": 9,
-    "role": "math",
-    "color": "#17150F",
-    "z": 2,
-    "alive": true,
-    "text": true
    }
   ]
  },
  {
-  "t": 6.1,
+  "t": 4.733,
   "objects": [
    {
     "kind": "Txt",
@@ -339,12 +373,12 @@
     "kind": "Eq",
     "id": "10:2",
     "bbox": [
-     -3.605,
-     -2.922,
-     7.21,
-     2.181
+     -3.219,
+     -2.805,
+     6.437,
+     1.948
     ],
-    "height_u": 27.27,
+    "height_u": 24.35,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -355,7 +389,7 @@
   ]
  },
  {
-  "t": 6.1,
+  "t": 5.433,
   "objects": [
    {
     "kind": "Txt",
@@ -411,7 +445,7 @@
   ]
  },
  {
-  "t": 7.3,
+  "t": 6.1,
   "objects": [
    {
     "kind": "Txt",
@@ -467,7 +501,7 @@
   ]
  },
  {
-  "t": 7.3,
+  "t": 6.1,
   "objects": [
    {
     "kind": "Txt",
@@ -506,6 +540,118 @@
    {
     "kind": "Eq",
     "id": "13:2",
+    "bbox": [
+     -3.605,
+     -2.922,
+     7.21,
+     2.181
+    ],
+    "height_u": 27.27,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.3,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "14:0",
+    "bbox": [
+     -5.381,
+     0.84,
+     10.763,
+     0.755
+    ],
+    "height_u": 9.44,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "14:1",
+    "bbox": [
+     -4.984,
+     -0.386,
+     9.967,
+     0.755
+    ],
+    "height_u": 9.44,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "14:2",
+    "bbox": [
+     -3.605,
+     -2.922,
+     7.21,
+     2.181
+    ],
+    "height_u": 27.27,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.3,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "15:0",
+    "bbox": [
+     -5.381,
+     0.84,
+     10.763,
+     0.755
+    ],
+    "height_u": 9.44,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "15:1",
+    "bbox": [
+     -4.984,
+     -0.386,
+     9.967,
+     0.755
+    ],
+    "height_u": 9.44,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "15:2",
     "bbox": [
      -3.605,
      -2.922,

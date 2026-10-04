@@ -215,7 +215,10 @@ def rule_rows(x_eq):
     # the rows spanned 31% with the right 55% empty. The payoff budget is ROWS ONLY — the
     # derivation is gone by then; the rows own the whole column height.
     hsum_rows = sum(e.height for e, _ in out) + 2 * ROW_BUFF
-    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum_rows)  # r6 values restored (my r7 0.62 REGRESSED k)
+    # r13 (critic): the height term bound at k~1.2 -> 30.7% span with 55% dead right. The rows
+    # OWN the payoff now: scale to the column's width (the room), the height budget loosened to
+    # 2 rows' worth (3 rows at 2.4x still fit the stage height).
+    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum_rows)  # r13 final: the r6 values (the growth attempts overflowed: 2.4/1.76 then 1.9/1.30 collide the title/floor)
     for e, _ in out:
         e.scale(k)
         e.shift([x_eq - e.part("p1").get_center()[0], 0, 0])
@@ -247,11 +250,13 @@ def derivation():
     """EqSteps of the difference quotient. The column is the LEFT 58% of the stage (the graph
     callback owns the lower-right corner — critic r3's empty-canvas fix made them neighbours)."""
     from studio_manim.layout import _Box
-    left_box = _Box(L.stage.x, L.stage.y + L.stage.h * 0.14, L.stage.w * 0.70, L.stage.h * 0.86)
+    left_box = _Box(L.stage.x, L.stage.y + L.stage.h * 0.16, L.stage.w * 0.70, L.stage.h * 0.80)  # r13: lifted (the derivation sat 0.42u below safe)
     steps = EqSteps(STEPS, left_box, role="result")
     k = min(2.2, left_box.w * 0.94 / steps.width, left_box.h * 0.9 / max(steps.height, 1e-6))  # critic r4: the 1.5 cap bound first
     steps.scale(k)
-    steps.shift([left_box.cx - steps.get_center()[0], 0, 0])
+    # r13: center in the BOX on both axes (x-only left the stack's own arrangement 0.42u
+    # below the safe floor)
+    steps.move_to([left_box.cx, left_box.cy, 0])
     return steps
 
 
@@ -292,6 +297,17 @@ class Scene(StudioScene):
         rows[0][0].shift([0, yA[1] - rows[0][0].get_center()[1], 0])
         rows[1][0].shift([0, yB[1] - rows[1][0].get_center()[1], 0])
         rows[2][0].shift([0, yB[2] - rows[2][0].get_center()[1], 0])
+        # r13: the s05.1 block (steps + row0) can exceed the safe floor — clamp the WHOLE block
+        import manim as _mm
+        _grp = _mm.VGroup(*steps.eqs, rows[0][0])
+        _over = L.safe.y - _grp.get_bottom()[1]
+        if _over > 0:
+            _grp.shift([0, _over + L.u * 0.2, 0])
+        # r13b: the yB rule rows too (the x^n row's height at the new k dips 0.42u below)
+        _rows_g = _mm.VGroup(*[e for e, _ in rows])
+        _rov = L.safe.y - _rows_g.get_bottom()[1]
+        if _rov > 0:
+            _rows_g.shift([0, _rov + L.u * 0.2, 0])
         anims = steps.steps(write_time=1.0, morph_time=0.9)
         d = L.u * 5
 
