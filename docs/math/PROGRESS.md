@@ -1,10 +1,10 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: P12 closing — all 27 checks exist, 26 verified green; the three demos gates-PASS (determinant
-50.5s / tangent 63.8s / odd-squares 65.7s, 16:9+9:16 each); the review loop is converging (rounds
-recorded per film; the vision critics run now on the fixed films — the bar: every 8+, correctness 10)
-Next: the last review round per film (8+ everywhere), the full cold verify-math, the background full
-verify-edit, FINAL_REPORT.md
+Now: P12 convergence — 26 checks green; the three demos gates-PASS with every critic fix applied
+(det r4 fixes in+re-gated, tan r3 structural fixes in, odd r3 fixes in); the round-5/4/4 critics
+RUN NOW (the bar: every 8+, correctness 10 — review.mjs asserts it)
+Next: the critics' verdicts -> any last fixes -> review+demos checks -> the full cold verify-math
+-> the background full verify-edit -> FINAL_REPORT.md
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
 Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio verify-math --list`.
