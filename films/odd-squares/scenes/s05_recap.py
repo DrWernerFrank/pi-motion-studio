@@ -75,10 +75,12 @@ class Scene(StudioScene):
         # critic r3: the finale's SIZE hierarchy was still inverted (title 9u < math 12u in this
         # film's ladder). The takeaway is the film's HERO line — built at hero size, then the
         # stack fits its box (the order inversion of r2 + the scale inversion of r3, both closed).
-        from studio_manim.theme import size_u
         from studio_manim.typeset import _font_size
         hero = Txt("odd numbers\nstack into squares", role="title",
                    font_size=_font_size("hero"))
+        # critic r4: the portrait finale was still inverted — the hero's TWO LINES each fit the
+        # safe width (no shrink needed; the earlier inversion came from the GROUP fit shrinking
+        # everything equally). Build the hero at hero size and let recap()'s own fit do its work.
         lines = recap([
             hero,
             Eq(r"\sum_{k=1}^{n} (2k-1) = {{n^2}}", roles={"p1": "square"}),

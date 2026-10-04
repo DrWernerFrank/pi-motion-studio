@@ -217,7 +217,7 @@ class Scene(StudioScene):
 
         head = title("Shrink the gap")
         quot = Eq(r"\text{slope} = \frac{(1+h)^2 - 1^2}{h}")
-        fs = _font_size("math") * 0.8
+        fs = readout_fs()   # critic r4: the h-instrument was hardcoded 0.8x (9px@360 in 16:9)
         h_head = Eq("h =", font_size=fs)
         h_val = DecimalNumber(hv.get_value(), num_decimal_places=2, mob_class=MathTypst, font_size=fs,
                               color=math_role("negative"))
@@ -236,7 +236,7 @@ class Scene(StudioScene):
 
         h_val.add_updater(upd_h)
         readout = live_readout(lab, lambda: lab._slope(1, hv.get_value()))   # slope = 3.00, live
-        h_to0 = Eq(r"h \to 0", font_size=fs).scale(h_head.height / h_head_h0).move_to(h_lock)
+        h_to0 = Eq(r"h \to 0", font_size=fs, role="negative").scale(h_head.height / h_head_h0).move_to(h_lock)  # critic r4: red, not ink
         lim_e, lim = limit_eq()
         d = L.u * 5
 

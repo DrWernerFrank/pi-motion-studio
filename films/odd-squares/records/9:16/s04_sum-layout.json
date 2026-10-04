@@ -149,12 +149,12 @@
     "kind": "Eq",
     "id": "6:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -171,12 +171,12 @@
     "kind": "Eq",
     "id": "7:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -188,12 +188,12 @@
     "kind": "Eq",
     "id": "7:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -210,12 +210,12 @@
     "kind": "Eq",
     "id": "8:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -227,12 +227,12 @@
     "kind": "Eq",
     "id": "8:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -244,12 +244,12 @@
     "kind": "Eq",
     "id": "8:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -266,12 +266,12 @@
     "kind": "Eq",
     "id": "9:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -283,12 +283,12 @@
     "kind": "Eq",
     "id": "9:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -300,12 +300,12 @@
     "kind": "Eq",
     "id": "9:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -317,12 +317,12 @@
     "kind": "VGroup",
     "id": "9:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -339,12 +339,12 @@
     "kind": "Eq",
     "id": "10:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -356,12 +356,12 @@
     "kind": "Eq",
     "id": "10:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -373,12 +373,12 @@
     "kind": "Eq",
     "id": "10:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -390,12 +390,12 @@
     "kind": "VGroup",
     "id": "10:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -408,11 +408,11 @@
     "id": "10:4",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -429,12 +429,12 @@
     "kind": "Eq",
     "id": "11:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -446,12 +446,12 @@
     "kind": "Eq",
     "id": "11:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -463,12 +463,12 @@
     "kind": "Eq",
     "id": "11:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -480,12 +480,12 @@
     "kind": "VGroup",
     "id": "11:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -498,11 +498,11 @@
     "id": "11:4",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -519,12 +519,12 @@
     "kind": "Eq",
     "id": "12:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -536,12 +536,12 @@
     "kind": "Eq",
     "id": "12:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -553,12 +553,12 @@
     "kind": "Eq",
     "id": "12:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -570,12 +570,12 @@
     "kind": "VGroup",
     "id": "12:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -588,11 +588,11 @@
     "id": "12:4",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -609,12 +609,12 @@
     "kind": "Eq",
     "id": "13:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -626,12 +626,12 @@
     "kind": "Eq",
     "id": "13:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -643,12 +643,12 @@
     "kind": "Eq",
     "id": "13:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -660,12 +660,12 @@
     "kind": "VGroup",
     "id": "13:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -678,11 +678,11 @@
     "id": "13:4",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -699,12 +699,12 @@
     "kind": "Eq",
     "id": "14:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -716,12 +716,12 @@
     "kind": "Eq",
     "id": "14:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -733,12 +733,12 @@
     "kind": "Eq",
     "id": "14:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -750,12 +750,12 @@
     "kind": "VGroup",
     "id": "14:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -768,11 +768,11 @@
     "id": "14:4",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -789,12 +789,12 @@
     "kind": "Eq",
     "id": "15:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -806,12 +806,12 @@
     "kind": "Eq",
     "id": "15:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -823,12 +823,12 @@
     "kind": "Eq",
     "id": "15:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -840,12 +840,12 @@
     "kind": "VGroup",
     "id": "15:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -858,11 +858,11 @@
     "id": "15:4",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -879,12 +879,12 @@
     "kind": "Eq",
     "id": "16:0",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     -1.285,
+     0.691,
+     2.798,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -896,12 +896,12 @@
     "kind": "Eq",
     "id": "16:1",
     "bbox": [
-     -1.406,
-     -0.487,
-     2.885,
-     0.509
+     -1.313,
+     -0.508,
+     2.825,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -913,12 +913,12 @@
     "kind": "Eq",
     "id": "16:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -930,12 +930,12 @@
     "kind": "VGroup",
     "id": "16:3",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -948,11 +948,11 @@
     "id": "16:4",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -969,12 +969,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -986,12 +986,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1003,12 +1003,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1020,12 +1020,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1037,12 +1037,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1054,12 +1054,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -1071,12 +1071,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1088,12 +1088,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:7",
     "bbox": [
-     -0.239,
-     -0.474,
-     0.239,
-     0.399
+     -0.169,
+     -0.495,
+     0.235,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1105,12 +1105,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "17:8",
     "bbox": [
-     0.057,
-     -0.257,
-     0.186,
-     0.278
+     0.12,
+     -0.282,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1122,12 +1122,12 @@
     "kind": "Eq",
     "id": "17:9",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -1139,12 +1139,12 @@
     "kind": "VGroup",
     "id": "17:10",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1157,11 +1157,11 @@
     "id": "17:11",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -1173,12 +1173,12 @@
     "kind": "VGroup",
     "id": "17:12",
     "bbox": [
-     -0.272,
-     0.688,
-     0.573,
-     0.62
+     -0.203,
+     0.643,
+     0.561,
+     0.607
     ],
-    "height_u": 7.74,
+    "height_u": 7.58,
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
@@ -1190,12 +1190,12 @@
     "kind": "VGroup",
     "id": "17:13",
     "bbox": [
-     0.417,
-     -0.536,
-     1.18,
-     0.62
+     0.473,
+     -0.556,
+     1.155,
+     0.607
     ],
-    "height_u": 7.74,
+    "height_u": 7.58,
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
@@ -1212,12 +1212,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -1229,12 +1229,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1246,12 +1246,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1263,12 +1263,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1280,12 +1280,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1297,12 +1297,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -1314,12 +1314,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1331,12 +1331,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:7",
     "bbox": [
-     -0.239,
-     -0.474,
-     0.239,
-     0.399
+     -0.169,
+     -0.495,
+     0.235,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1348,12 +1348,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:8",
     "bbox": [
-     0.057,
-     -0.257,
-     0.186,
-     0.278
+     0.12,
+     -0.282,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1365,12 +1365,12 @@
     "kind": "Eq",
     "id": "18:9",
     "bbox": [
-     -1.401,
-     -1.711,
-     2.88,
-     0.509
+     -1.308,
+     -1.706,
+     2.821,
+     0.498
     ],
-    "height_u": 6.36,
+    "height_u": 6.23,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -1382,12 +1382,12 @@
     "kind": "VGroup",
     "id": "18:10",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1400,11 +1400,11 @@
     "id": "18:11",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -1421,12 +1421,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -1438,12 +1438,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1455,12 +1455,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1472,12 +1472,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1489,12 +1489,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1506,12 +1506,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -1523,12 +1523,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1540,12 +1540,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:7",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -1557,12 +1557,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:8",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1574,12 +1574,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:9",
     "bbox": [
-     -0.243,
-     -1.711,
-     0.248,
-     0.412
+     -0.174,
+     -1.706,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1591,12 +1591,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "19:10",
     "bbox": [
-     0.057,
+     0.12,
      -1.481,
-     0.186,
-     0.278
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1608,12 +1608,12 @@
     "kind": "VGroup",
     "id": "19:11",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1626,11 +1626,11 @@
     "id": "19:12",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -1642,12 +1642,12 @@
     "kind": "VGroup",
     "id": "19:13",
     "bbox": [
-     -0.299,
-     -0.536,
-     0.602,
-     0.62
+     -0.228,
+     -0.556,
+     0.589,
+     0.607
     ],
-    "height_u": 7.74,
+    "height_u": 7.58,
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
@@ -1659,12 +1659,12 @@
     "kind": "VGroup",
     "id": "19:14",
     "bbox": [
-     0.417,
-     -1.76,
-     1.18,
-     0.62
+     0.473,
+     -1.754,
+     1.155,
+     0.607
     ],
-    "height_u": 7.74,
+    "height_u": 7.58,
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
@@ -1681,12 +1681,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -1698,12 +1698,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1715,12 +1715,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1732,12 +1732,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1749,12 +1749,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1766,12 +1766,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -1783,12 +1783,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1800,12 +1800,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:7",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -1817,12 +1817,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:8",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1834,12 +1834,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:9",
     "bbox": [
-     -0.243,
-     -1.711,
-     0.248,
-     0.412
+     -0.174,
+     -1.706,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1851,12 +1851,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:10",
     "bbox": [
-     0.057,
+     0.12,
      -1.481,
-     0.186,
-     0.278
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1868,12 +1868,12 @@
     "kind": "VGroup",
     "id": "20:11",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1886,11 +1886,11 @@
     "id": "20:12",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -1907,12 +1907,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -1924,12 +1924,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1941,12 +1941,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1958,12 +1958,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1975,12 +1975,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1992,12 +1992,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -2009,12 +2009,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2026,12 +2026,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:7",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -2043,12 +2043,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "21:8",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2060,12 +2060,12 @@
     "kind": "VGroup",
     "id": "21:9",
     "bbox": [
-     -0.034,
-     -3.057,
-     0.067,
-     0.752
+     0.031,
+     -3.024,
+     0.066,
+     0.737
     ],
-    "height_u": 9.4,
+    "height_u": 9.21,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -2078,11 +2078,11 @@
     "id": "21:10",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -2099,12 +2099,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -2116,12 +2116,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2133,12 +2133,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2150,12 +2150,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2167,12 +2167,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2184,12 +2184,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -2201,12 +2201,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2218,12 +2218,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:7",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -2235,12 +2235,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:8",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2253,11 +2253,11 @@
     "id": "22:9",
     "bbox": [
      -3.096,
-     -4.078,
-     0.239,
-     0.399
+     -4.17,
+     0.135,
+     0.584
     ],
-    "height_u": 4.98,
+    "height_u": 7.3,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2269,12 +2269,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:10",
     "bbox": [
-     -2.608,
-     -4.078,
-     0.301,
-     0.265
+     -2.898,
+     -4.024,
+     0.235,
+     0.391
     ],
-    "height_u": 3.31,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2286,12 +2286,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:11",
     "bbox": [
-     -2.062,
-     -3.94,
-     0.399,
-     0.024
+     -2.617,
+     -4.031,
+     0.318,
+     0.266
     ],
-    "height_u": 0.3,
+    "height_u": 3.32,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2303,12 +2303,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:12",
     "bbox": [
-     -1.378,
-     -4.078,
-     0.198,
-     0.399
+     -2.119,
+     -3.889,
+     0.391,
+     0.023
     ],
-    "height_u": 4.98,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2320,12 +2320,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:13",
     "bbox": [
-     -0.9,
-     -3.998,
-     0.399,
-     0.14
+     -1.513,
+     -4.024,
+     0.193,
+     0.391
     ],
-    "height_u": 1.75,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2337,12 +2337,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:14",
     "bbox": [
-     -0.251,
-     -4.084,
-     0.325,
-     0.271
+     -1.239,
+     -4.17,
+     0.135,
+     0.584
     ],
-    "height_u": 3.39,
+    "height_u": 7.3,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2354,16 +2354,50 @@
     "kind": "VMobjectFromSVGPath",
     "id": "22:15",
     "bbox": [
-     0.117,
-     -3.86,
-     0.186,
-     0.278
+     -0.817,
+     -3.946,
+     0.391,
+     0.137
     ],
-    "height_u": 3.48,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
     "z": 15,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:16",
+    "bbox": [
+     -0.182,
+     -4.031,
+     0.318,
+     0.266
+    ],
+    "height_u": 3.32,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 16,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:17",
+    "bbox": [
+     0.179,
+     -3.811,
+     0.182,
+     0.273
+    ],
+    "height_u": 3.41,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 17,
     "alive": true,
     "text": false
    }
@@ -2376,12 +2410,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -2393,12 +2427,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2410,12 +2444,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2427,12 +2461,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2444,12 +2478,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2461,12 +2495,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -2478,12 +2512,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2495,12 +2529,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:7",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -2512,12 +2546,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:8",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2530,11 +2564,11 @@
     "id": "23:9",
     "bbox": [
      -3.096,
-     -4.078,
-     0.239,
-     0.399
+     -4.17,
+     0.135,
+     0.584
     ],
-    "height_u": 4.98,
+    "height_u": 7.3,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2546,12 +2580,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:10",
     "bbox": [
-     -2.608,
-     -4.078,
-     0.301,
-     0.265
+     -2.898,
+     -4.024,
+     0.235,
+     0.391
     ],
-    "height_u": 3.31,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2563,12 +2597,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:11",
     "bbox": [
-     -2.062,
-     -3.94,
-     0.399,
-     0.024
+     -2.617,
+     -4.031,
+     0.318,
+     0.266
     ],
-    "height_u": 0.3,
+    "height_u": 3.32,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2580,12 +2614,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:12",
     "bbox": [
-     -1.378,
-     -4.078,
-     0.198,
-     0.399
+     -2.119,
+     -3.889,
+     0.391,
+     0.023
     ],
-    "height_u": 4.98,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2597,12 +2631,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:13",
     "bbox": [
-     -0.9,
-     -3.998,
-     0.399,
-     0.14
+     -1.513,
+     -4.024,
+     0.193,
+     0.391
     ],
-    "height_u": 1.75,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2614,12 +2648,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:14",
     "bbox": [
-     -0.251,
-     -4.084,
-     0.325,
-     0.271
+     -1.239,
+     -4.17,
+     0.135,
+     0.584
     ],
-    "height_u": 3.39,
+    "height_u": 7.3,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2631,16 +2665,50 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:15",
     "bbox": [
-     0.117,
-     -3.86,
-     0.186,
-     0.278
+     -0.817,
+     -3.946,
+     0.391,
+     0.137
     ],
-    "height_u": 3.48,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
     "z": 15,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:16",
+    "bbox": [
+     -0.182,
+     -4.031,
+     0.318,
+     0.266
+    ],
+    "height_u": 3.32,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 16,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:17",
+    "bbox": [
+     0.179,
+     -3.811,
+     0.182,
+     0.273
+    ],
+    "height_u": 3.41,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 17,
     "alive": true,
     "text": false
    }
@@ -2653,12 +2721,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:0",
     "bbox": [
-     -1.378,
-     0.75,
-     0.198,
-     0.399
+     -1.285,
+     0.703,
+     0.193,
+     0.391
     ],
-    "height_u": 4.98,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#9A5A00",
@@ -2670,12 +2738,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:1",
     "bbox": [
-     -0.9,
-     0.829,
-     0.399,
-     0.14
+     -0.817,
+     0.781,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2687,12 +2755,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:2",
     "bbox": [
-     0.535,
-     0.887,
-     0.399,
-     0.024
+     0.588,
+     0.838,
+     0.391,
+     0.023
     ],
-    "height_u": 0.3,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2704,12 +2772,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:3",
     "bbox": [
-     0.991,
-     0.737,
-     0.252,
-     0.412
+     1.035,
+     0.691,
+     0.247,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2721,12 +2789,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:4",
     "bbox": [
-     1.293,
-     0.967,
-     0.186,
-     0.278
+     1.331,
+     0.916,
+     0.182,
+     0.273
     ],
-    "height_u": 3.48,
+    "height_u": 3.41,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2738,12 +2806,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:5",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -2755,12 +2823,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:6",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2772,12 +2840,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:7",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -2789,12 +2857,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:8",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2807,11 +2875,11 @@
     "id": "24:9",
     "bbox": [
      -3.096,
-     -4.078,
-     0.239,
-     0.399
+     -4.17,
+     0.135,
+     0.584
     ],
-    "height_u": 4.98,
+    "height_u": 7.3,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2823,12 +2891,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:10",
     "bbox": [
-     -2.608,
-     -4.078,
-     0.301,
-     0.265
+     -2.898,
+     -4.024,
+     0.235,
+     0.391
     ],
-    "height_u": 3.31,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2840,12 +2908,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:11",
     "bbox": [
-     -2.062,
-     -3.94,
-     0.399,
-     0.024
+     -2.617,
+     -4.031,
+     0.318,
+     0.266
     ],
-    "height_u": 0.3,
+    "height_u": 3.32,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2857,12 +2925,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:12",
     "bbox": [
-     -1.378,
-     -4.078,
-     0.198,
-     0.399
+     -2.119,
+     -3.889,
+     0.391,
+     0.023
     ],
-    "height_u": 4.98,
+    "height_u": 0.29,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2874,12 +2942,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:13",
     "bbox": [
-     -0.9,
-     -3.998,
-     0.399,
-     0.14
+     -1.513,
+     -4.024,
+     0.193,
+     0.391
     ],
-    "height_u": 1.75,
+    "height_u": 4.88,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2891,12 +2959,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:14",
     "bbox": [
-     -0.251,
-     -4.084,
-     0.325,
-     0.271
+     -1.239,
+     -4.17,
+     0.135,
+     0.584
     ],
-    "height_u": 3.39,
+    "height_u": 7.3,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2908,16 +2976,50 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:15",
     "bbox": [
-     0.117,
-     -3.86,
-     0.186,
-     0.278
+     -0.817,
+     -3.946,
+     0.391,
+     0.137
     ],
-    "height_u": 3.48,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
     "z": 15,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:16",
+    "bbox": [
+     -0.182,
+     -4.031,
+     0.318,
+     0.266
+    ],
+    "height_u": 3.32,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 16,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:17",
+    "bbox": [
+     0.179,
+     -3.811,
+     0.182,
+     0.273
+    ],
+    "height_u": 3.41,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 17,
     "alive": true,
     "text": false
    }
@@ -2930,12 +3032,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "25:0",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -2947,12 +3049,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "25:1",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2964,12 +3066,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "25:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -2981,12 +3083,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "25:3",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2998,12 +3100,12 @@
     "kind": "Eq",
     "id": "25:4",
     "bbox": [
-     -1.378,
-     0.688,
-     2.857,
-     0.62
+     -1.285,
+     0.643,
+     2.798,
+     0.607
     ],
-    "height_u": 7.74,
+    "height_u": 7.58,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -3016,11 +3118,11 @@
     "id": "25:5",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -3037,12 +3139,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "26:0",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -3054,12 +3156,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "26:1",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -3071,12 +3173,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "26:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -3088,12 +3190,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "26:3",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -3105,12 +3207,12 @@
     "kind": "Eq",
     "id": "26:4",
     "bbox": [
-     -1.378,
-     0.688,
-     2.857,
-     0.62
+     -1.285,
+     0.643,
+     2.798,
+     0.607
     ],
-    "height_u": 7.74,
+    "height_u": 7.58,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -3123,11 +3225,11 @@
     "id": "26:5",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -3144,12 +3246,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "27:0",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.313,
+     -0.508,
+     0.243,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
@@ -3161,12 +3263,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "27:1",
     "bbox": [
-     -0.9,
-     -0.394,
-     0.399,
-     0.14
+     -0.817,
+     -0.417,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -3178,12 +3280,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "27:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     -1.308,
+     -1.706,
+     0.234,
+     0.403
     ],
-    "height_u": 5.15,
+    "height_u": 5.04,
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
@@ -3195,12 +3297,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "27:3",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     -0.817,
+     -1.616,
+     0.391,
+     0.137
     ],
-    "height_u": 1.75,
+    "height_u": 1.72,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -3212,12 +3314,12 @@
     "kind": "Eq",
     "id": "27:4",
     "bbox": [
-     -1.378,
-     0.688,
-     2.857,
-     0.62
+     -1.285,
+     0.643,
+     2.798,
+     0.607
     ],
-    "height_u": 7.74,
+    "height_u": 7.58,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -3230,11 +3332,11 @@
     "id": "27:5",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.17,
+     6.192,
+     0.631
     ],
-    "height_u": 8.05,
+    "height_u": 7.88,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",

@@ -46,7 +46,7 @@ class Scene(StudioScene):
         rows = [Eq(r"{{1}} {{=}} {{1^2}} {{- 0^2}}", roles={"p1": "gnomon1"}),
                 Eq(r"{{3}} {{=}} {{2^2}} {{- 1^2}}", roles={"p1": "gnomon2"}),
                 Eq(r"{{5}} {{=}} {{3^2}} {{- 2^2}}", roles={"p1": "gnomon3"}),
-                Eq(r"{{2n-1}} {{=}} {{n^2}} {{- (n-1)^2}}")]
+                Eq(r"{{(2n-1)}} {{=}} {{n^2}} {{- (n-1)^2}}")]
         pitch = max(r.height for r in rows) * 1.9
         for i, r in enumerate(rows):
             r.shift([-r.part("p2").get_center()[0], -(i if i < 3 else 4) * pitch - r.get_center()[1], 0])
@@ -84,17 +84,17 @@ class Scene(StudioScene):
             self.wait(self.until("cancel"))
             pairs = [(rows[0].part("p3"), rows[1].part("p4")),     # +1^2 and -1^2
                      (rows[1].part("p3"), rows[2].part("p4"))]     # +2^2 and -2^2
+            pair_index = [0, 1]   # rows whose pair-half just vanished (for the dim)
             # critic R2: the cancellations read as 0.15 s flickers — PRE-FLASH each pair (the eye
             # finds them), STRETCH the vanishes (0.5 -> 0.75 s), and DIM the cancelled rows behind
             for a, b in pairs:
                 self.play(a.animate.set_color(math_role("result")).scale(1.25),
                           b.animate.set_color(math_role("negative")).scale(1.25), run_time=0.45)
                 vanish([a, b], mid(a, b), run_time=0.75)
-                # critic r3: dim the ROW the pair came from (the residue lines sat full-opacity
-                # ~3.5 s; the dim shows what is cancelled and what survives)
-                for row_e in rows:
-                    if a in row_e.submobjects or any(a in sub.submobjects for sub in row_e.submobjects):
-                        row_e.set_opacity(0.45)
+                # critic r4: identity tests never fired (part() returns a fresh wrapper) — dim the
+                # row whose INDEX matches the pair (pairs are (rows[0], rows[1]) then (rows[1], rows[2]))
+                for idx in pair_index:
+                    rows[idx].set_opacity(0.45)
             vanish([rows[2].part("p3")], dots.get_center(), run_time=0.7)   # +3^2 into the dots …
             vanish([dots, rows[3].part("p4")], mid(dots, rows[3].part("p4")), run_time=0.75)  # … which meet -(n-1)^2
             self.wait(self.until("survive"))

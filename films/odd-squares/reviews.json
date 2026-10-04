@@ -151,5 +151,48 @@
       "films/odd-squares/out/sheets/times-9x16.png",
       "films/odd-squares/out/sheets/phone-9x16.png"
     ]
+  },
+  {
+    "round": 5,
+    "at": "2026-10-04T18:55:21.134Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "hook": 8,
+      "readability": 7,
+      "motion": 8,
+      "variety": 8,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 47.5,
+        "issue": "The r4 'dim the cancelled rows to 0.45' fix is DEAD CODE — it never renders in either format: the cancelled rows sit full-opacity ('1 = −0²', '3 =', '5 =') for ~4.5 s until the collapse, so cancelled-vs-surviving still reads only through the indigo flash. Root cause found: Eq.part() returns MathTypst._select_label's fresh WRAPPER VGroup, so `a in row_e.submobjects or any(a in sub.submobjects …)` is never True (a wrapper object is not a list element) — row_e.set_opacity(0.45) never executes. Measured: row 0's ink luminance is constant (mean ~86, min ~8) from 44.5 s through 51.4 s; model reads of 49.6 s (both formats) see no dim anywhere.",
+        "fix": "Drop the membership test — the pairs are known by construction: after each pair's vanish, dim BOTH source rows by index (rows[0]+rows[1] after pair 1, rows[1]+rows[2] after pair 2). Note set_opacity(family=True) will also re-show the just-vanished parts at 0.45 — re-apply part.set_opacity(0) after the row dim (or dim only the surviving glyphs). The survivors' lit copies (lit0/lit3) are copies of DIMMED rows — set_opacity(1) on them before the Transform so the survivor contrast reads. Re-run strips 46–53 s in both formats."
+      },
+      {
+        "t": 47,
+        "issue": "The upright-'2k−1' defect is only HALF-fixed. Verified at 6× zoom: wherever the paren-wrap was APPLIED it works — s03's k+(k−1)=(2k−1) and k²−(k−1)²=(2k−1), and s04's SUM line (2n−1) all render tight italic with parentheses (r3 problem 2 closed on those instances). But s04_sum.py:49 still has the UNWRAPPED digit-leading {{2n-1}}: the general row of the proof renders '2 n − 1' — upright, wide-gapped, mixed with italic n²/(n−1)² in the SAME row (both formats; at 360 px it reads as two tokens). And s03's leading standalone {{k}} (s03_why.py:113) renders upright roman while every other k in the same equation is italic — confirmed at 4 zoom levels including the 360 px phone sheet.",
+        "fix": "Paren-wrap the last row too — Eq(r'{{(2n-1)}} {{=}} …') at s04_sum.py:49. Then the lone leading label: {{(k)}} or fix the selection path that uprights single-token label content. Re-check s03 at 32.5 s and s04 at 41–56 s at zoom in both formats."
+      },
+      {
+        "t": 62,
+        "issue": "The finale hero hierarchy holds in 16:9 ONLY. Measured 16:9: headline x-height 33 px vs formula digits 22–24 px — the takeaway is now clearly the biggest text (r3 problem 1 closed in landscape). Measured 9:16 — the phone-native format: headline x-height 21–22 px (ascenders 30–31) vs formula digits 23–25 px, parens 37–38 px, Σ glyph 51 px — the takeaway is STILL the smallest of the three finale lines; the hero enters the recap group pre-shrunk (headline 246 px wide vs the k-form's 353 px ≈ 11 u, below the math lines' 12 u — the Txt portrait width-fit fires at construction, then into() preserves the inverted ratio). Finale left edges also still ragged (16:9 x≈501/562/519; 9:16 x≈147/138/94).",
+        "fix": "In portrait, size the hero OUTSIDE the group fit: into() the two Eqs (l2/l3) first, then place l1 at ≥1.4× their on-screen glyph scale (capped by ebox width — exempt the hero from the Txt safe-area fit or re-fit after placement). Give the three lines one shared left edge. Re-measure finale glyph heights in BOTH formats."
+      }
+    ],
+    "notes": "round 4 by math-critic — re-derived BY HAND (all correct): 1=1²; 1+3=4=2²; 1+3+5=9=3²; +7=16=4²; +9=25=5²; 4th L = column 4 + row 3 = 7 = 2·4−1; k-th L = k+(k−1) = 2k−1; k²−(k−1)² = 2k−1 (16−9=7, 25−16=9); rows 1=1²−0², 3=2²−1², 5=3²−2², 2n−1=n²−(n−1)²; telescoping Σ(k²−(k−1)², 1..n)=n²−0²; Σ(2k−1, 1..n)=n² (n(n+1)−n=n²); n=100 → 100²=10000; Σ(2k−1, 1..5)=25. CHECK: 5/5 scenes typeset; independent re-evaluation 48/48 claims TRUE in fresh sympy processes from text alone; ledger 24 merged claims, 24 verified. R4 FIX VERIFICATION (full-res frame reads + pixel measurement, both formats): (1) finale HERO — VERIFIED in 16:9 (headline x-height 33 px vs formula digits 22–24 px; headline-first reveal order intact) but FAILS in 9:16 (headline 21–22 px < formula digits 23–25 px, parens 37–38, Σ 51 — still the smallest finale line; hero pre-shrunk by the portrait Txt fit before the group fit). (2) upright-2k−1 — paren-wrap VERIFIED working on every instance it was applied to (s03 both equations + s04 SUM line: tight italic, parentheses, 6× zoom); two instances MISSED: s04_sum.py:49's unwrapped {{2n-1}} (renders '2 n − 1' upright-gapped beside italic n² in the same row) and s03's leading {{k}} (upright vs italic k's in the same equation — visible even on the 360 px phone sheet). (3) cancelled-rows DIM — DEAD CODE, never renders (see problem 1; the fix exists in source but its membership test can never fire). ALSO VERIFIED STILL GOOD: cancellations read as pairs meeting (gold/red 1.25× pre-flash + 0.75 s travel, caught mid-flight at 47.8 s), survivors flash indigo (~51 s), the collapse overlaps with no blank beat (row-luminance trace continuous through 51.4→52.2 s), the Σ-line return and r0→r1 morph clean, the recap rebuild wraps on their words. REMAINS (r3 holds, untouched this round): 16:9 phone-width type scale — ² is a 5–6 px speck and digits ~10 px at 360 px ('2²' indistinguishable from '2' on the phone-16:9 sheet) — either scale the 16:9 equation slots into their empty cream or declare 16:9 the desktop cut and gate the phone test on 9:16 only; 9:16 under-fill/banding (square ~45% of width, ~33% dead top band, content compressed low); Σ limits ~14 px nearly illegible at phone size; s03.2 keeps 4+3=7 on screen ~3 s under the 'in general' narration; long static holds (8–10.5 s, finale frozen 62–65.5 s); sound is TTS-only, no music; captions sidecar SRT/VTT only. VERDICT vs the 8+ bar: FAILS on readability 7, composition 7, sound 7 (passes hook 8, motion 8, variety 8, brand 8, clarity 8, correctness 10). The algebra is airtight and the landscape finale finally reads words>formula; what keeps it off my feed: the phantom dim (dead code), the half-fixed upright labels on the proof's general row, the 9:16 finale still inverted, and the 16:9 phone-size specks.",
+    "sheets": [
+      "films/odd-squares/out/sheets/every-16x9.png",
+      "films/odd-squares/out/sheets/every-9x16.png",
+      "films/odd-squares/out/sheets/phone-16x9.png",
+      "films/odd-squares/out/sheets/phone-9x16.png",
+      "films/odd-squares/out/sheets/sentences-16x9.png"
+    ]
   }
 ]

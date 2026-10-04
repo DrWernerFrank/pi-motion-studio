@@ -174,5 +174,42 @@
       "films/determinant/out/sheets/phone-16x9.png",
       "films/determinant/out/sheets/phone-9x16.png"
     ]
+  },
+  {
+    "round": 5,
+    "at": "2026-10-04T18:56:40.553Z",
+    "reviewer": "math-critic (round 5, convergence)",
+    "scores": {
+      "brand": 8,
+      "clarity": 9,
+      "composition": 7,
+      "correctness": 10,
+      "hook": 9,
+      "motion": 8,
+      "readability": 8,
+      "sound": 9,
+      "variety": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "fix": "Raise the portrait grow cap to ≈2.2× against the stage (or give the portrait its own stage-box fit, as s05 now does) so the card fills ~0.85-0.9 of the portrait stage and anchors clear of the title band.",
+        "issue": "9:16 s02 formula card fills only ~58% of the tall stage (measured: content 42-76% H vs the 31-90% stage; ~106px hole under the title band, ~131px dead bottom) — the pre-scale grow is still capped at 1.6× so the card can never reach the stage, then into() re-centers it mid-stage. r4 #4, unfixed; the '90% stage fill' holds only in 16:9 (measured 87%).",
+        "t": 13.5
+      },
+      {
+        "fix": "Fit the recap group into the stage box at fill ~0.8 (the s05 pattern), reuse s02's colored formula ({{ad}}/{{bc}} roles) and the pmatrix notation for [3 1; 1 2].",
+        "issue": "s06 recap floats below mid-frame at 44-48% stage fill in BOTH formats (16:9 content 41-74% H; 9:16 47-74% H with ~157px voids above and below), the 2.4u heading is a fragment under the 14.3u formula (inverted hierarchy), the formula drops s02's amber-ad/red-bc term colors, and the matrix is [3,1;1,2] shorthand vs the pmatrix used everywhere else. r4 #5, unfixed.",
+        "t": 47.5
+      },
+      {
+        "fix": "Two-line the 16:9 equation (det matrix line, then '= 1·1 − 3·2 = −5') or drop the det() prefix so into() stops compressing; lift the two meaning-bearing notes to ~4.2u in 16:9 (9:16 already sits at 5.4u).",
+        "issue": "16:9 s03/s04 det lines at phone size: the 45% column landed digit ink at 3.15u — exactly AT the 3.2u floor (up from 2.9-3.1u) but short of r4's em ≥7u target (measured em ≈5.5u, ~0.62× s02's digits); at 360px the digits resolve but the · dots and − bars blur, and the 16:9 body notes (3.6u nominal, 2.6-3.2u ink) read as mush. The 9:16 det lines (≈4.9u digits) and 9:16 notes (5.4u nominal) pass the phone test cleanly.",
+        "t": 26
+      }
+    ],
+    "notes": "round 5 by math-critic — re-derived by hand: det[[3,1],[1,2]]=3·2−1·1=5; swapped [[1,3],[2,1]]=1·1−3·2=−5 (narration 'one minus six' = 1−6 ✓); [[2,4],[1,2]]=2·2−4·1=0; minors det[[3,1],[1,2]]=5, det[[1,1],[0,2]]=2, cofactors 2·5−1·2+0=8 (Sarrus cross-check 12−4=8 ✓); identity=1; unit-square area×5=5. check 6/6 scenes clean, 30/30 claims re-derived independently in fresh sympy processes, merged ledger 14/14; every on-screen number and spoken phrase cross-checked. R4 FIXES VERIFIED BY MEASUREMENT (git 986228d + records + 540p draft pixels): (1) s03/s04 columns 42→45% APPLIED — digit ink 2.9-3.1u → 3.15-3.21u, AT the 3.2u floor (+~8%), no wrap/clip/collision, plane clears the title by 18.7u; the claimed '≥0.8×' measures 0.62× vs s02's digits by ink (em ≈5.5u vs r4's 7u target — the lighter fix path), and the 9:16 det lines (≈4.9u digits) PASS the 360px phone test cleanly, every character; (2) s05 stage-below-title fit — 0.44u → 8.87u measured title-to-bracket clearance, even 8.9-12.3u inter-line rhythm, 12.3% bottom margin, stack spans 10-88% of frame height: exemplary; (3) s02 card 90% stage fill — TRUE in 16:9 (measured 87%, 3u title clearance, clean margins) but FALSE in 9:16: the portrait card measures 58% stage fill (content 42-76% H vs the 31-90% stage, ~106px hole under the title, ~131px dead bottom; the 1.6× grow cap is unchanged) — r4 #4 NOT fixed. PHONE TESTS: 9:16 passes everywhere (det lines, notes 5.4u, titles, formula, 3×3); 16:9 passes titles/s02/s05, det-line digits resolve at 360px but ·/− operators blur, the two 3.6u notes read as mush. Carried minors: red 0 in s04 (roles p1=negative on {{0}}) still stretches red=minus to a non-negative; three near-identical dark ambers (basis #A86400/positive #96610A/result #8F5B00); s03's red flip lands ~1.2s after the −5 is written (designed sequencing); s01's unit square dwells only ~0.5s as a true square before the shear sweeps it; s06's 3s hold is gate-legal. VERDICT vs the bar (every 8+, correctness 10): NOT YET — composition 7 because two r4-flagged defects persist by measurement (s02 9:16 at 58% fill, s06 recap at 44-48% float in both formats); one targeted pass (portrait s02 fill + recap stage fit, both the s05 pattern) clears it.",
+    "sheets": []
   }
 ]

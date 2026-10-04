@@ -204,7 +204,7 @@ def rule_rows(x_eq):
         x_eq = L.stage.x + L.stage.w * 0.35
         room = L.stage.w * 0.70 * 0.94
     hsum = sum(e.height for e, _ in out) + 2 * ROW_BUFF
-    k = min(1.6, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum)
+    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum)  # critic r4: fill the column
     for e, _ in out:
         e.scale(k)
         e.shift([x_eq - e.part("p1").get_center()[0], 0, 0])
@@ -227,7 +227,7 @@ def derivation():
     from studio_manim.layout import _Box
     left_box = _Box(L.stage.x, L.stage.y + L.stage.h * 0.14, L.stage.w * 0.70, L.stage.h * 0.86)
     steps = EqSteps(STEPS, left_box, role="result")
-    k = min(1.5, left_box.w * 0.94 / steps.width, left_box.h * 0.9 / max(steps.height, 1e-6))
+    k = min(2.2, left_box.w * 0.94 / steps.width, left_box.h * 0.9 / max(steps.height, 1e-6))  # critic r4: the 1.5 cap bound first
     steps.scale(k)
     steps.shift([left_box.cx - steps.get_center()[0], 0, 0])
     return steps

@@ -31,7 +31,9 @@ class Scene(StudioScene):
         from studio_manim.layout import _Box
         g = VGroup(A, formula, worked)
         grow = (L.stage.h * 0.92) / max(g.height, 1e-6)
-        g.scale(min(1.6, max(1.0, grow)), about_point=g.get_bottom())
+        # critic r5: the 1.6x cap left the portrait card at 58% fill — fit the STAGE box (like
+        # s05's exemplar) instead: grow as far as the box allows, cap only at the box.
+        g.scale(max(1.0, grow), about_point=g.get_bottom())
         into(g, _Box(L.safe.x, L.stage.y + L.stage.h * 0.04, L.safe.w, L.stage.h * 0.96), fill=0.94)
 
         with self.say("s02.1"):
