@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-04T22:18:23.550Z",
+  "at": "2026-10-04T22:48:08.162Z",
   "pass": true,
   "checks": [
     {
@@ -30,7 +30,7 @@
       "name": "sync",
       "pass": true,
       "level": "pass",
-      "detail": "20 trace bookmark(s) over 12 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded — the sync check surfaces those"
+      "detail": "20 trace bookmark(s) over 12 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded ; seams continuous"
     },
     {
       "name": "pace",

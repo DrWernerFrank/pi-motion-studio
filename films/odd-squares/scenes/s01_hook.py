@@ -16,8 +16,9 @@ def stage_boxes():
         return L.panel(0, 2), L.panel(1, 2)
     from studio_manim.layout import _Box
     # r9 + lint: a 0.5u gutter between the panels (the equation brushed the square's dashed edge)
-    return (_Box(L.stage.x, L.stage.y, L.stage.w * 0.40 - L.u * 0.25, L.stage.h),
-            _Box(L.stage.x + L.stage.w * 0.40 + L.u * 0.25, L.stage.y, L.stage.w * 0.60 - L.u * 0.25, L.stage.h))
+    # r10: under-dosed (7.49u vs the 8.5-9.6u prescription) — 36/64
+    return (_Box(L.stage.x, L.stage.y, L.stage.w * 0.36 - L.u * 0.25, L.stage.h),
+            _Box(L.stage.x + L.stage.w * 0.36 + L.u * 0.25, L.stage.y, L.stage.w * 0.64 - L.u * 0.25, L.stage.h))
 
 
 def unit_for(box, n=5, fill=0.86):
@@ -33,7 +34,7 @@ def corner(c, m, u):
 
 def ell(k, u):
     """The k-th L (gnomon), in its own color (design.json math.roles gnomon1..5)."""
-    return gnomon(k, u, role=f"gnomon{k}", opacity=0.55)
+    return gnomon(k, u, role=f"gnomon{k}", opacity=0.78)  # r10 (critic): the r1 fix landed in s03 only — 0.55 was 2.2:1
 
 
 def odd_eq(m):
@@ -80,7 +81,10 @@ class Scene(StudioScene):
         g2 = ell(2, u).shift(corner(c, 2, u))
         e1, e2 = odd_eqs(ebox, 2)
         # the question: where the next L would go (dashed, muted) — s02 fills it
-        ghost = DashedVMobject(ell(3, u)[0].shift(corner(c, 2, u)).set_fill(opacity=0)
+        # r10 (critic): the s02 ghost's sibling — the dashed 3rd L at the big unit brushes the
+        # hook equation; draw it at the pulled-back unit (stays home)
+        _u3 = unit_for(box, 3)
+        ghost = DashedVMobject(ell(3, _u3)[0].shift(corner(c, 3, _u3)).set_fill(opacity=0)
                                .set_stroke(color_for("muted"), 2.5), num_dashes=48)
 
         with self.say("s01.1"):

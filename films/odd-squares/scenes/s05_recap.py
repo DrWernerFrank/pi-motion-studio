@@ -16,8 +16,9 @@ def stage_boxes():
         return L.panel(0, 2), L.panel(1, 2)
     from studio_manim.layout import _Box
     # r9 + lint: a 0.5u gutter between the panels (the equation brushed the square's dashed edge)
-    return (_Box(L.stage.x, L.stage.y, L.stage.w * 0.40 - L.u * 0.25, L.stage.h),
-            _Box(L.stage.x + L.stage.w * 0.40 + L.u * 0.25, L.stage.y, L.stage.w * 0.60 - L.u * 0.25, L.stage.h))
+    # r10: under-dosed (7.49u vs the 8.5-9.6u prescription) — 36/64
+    return (_Box(L.stage.x, L.stage.y, L.stage.w * 0.36 - L.u * 0.25, L.stage.h),
+            _Box(L.stage.x + L.stage.w * 0.36 + L.u * 0.25, L.stage.y, L.stage.w * 0.64 - L.u * 0.25, L.stage.h))
 
 
 def unit_for(box, n=5, fill=0.86):
@@ -33,7 +34,7 @@ def corner(c, m, u):
 
 def ell(k, u):
     """The k-th L (gnomon), in its own color (design.json math.roles gnomon1..5)."""
-    return gnomon(k, u, role=f"gnomon{k}", opacity=0.55)
+    return gnomon(k, u, role=f"gnomon{k}", opacity=0.78)  # r10 (critic): the r1 fix landed in s03 only — 0.55 was 2.2:1
 
 
 def odd_eq(m):

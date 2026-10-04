@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-04T22:19:01.181Z",
+  "at": "2026-10-04T22:48:12.523Z",
   "pass": true,
   "checks": [
     {
@@ -30,13 +30,13 @@
       "name": "sync",
       "pass": true,
       "level": "pass",
-      "detail": "38 trace bookmark(s) over 10 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded — the sync check surfaces those"
+      "detail": "38 trace bookmark(s) over 10 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded ; seams continuous"
     },
     {
       "name": "pace",
       "pass": true,
       "level": "pass",
-      "detail": "9 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
+      "detail": "8 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
     },
     {
       "name": "captions",
@@ -58,16 +58,16 @@
     },
     {
       "name": "deterministic",
-      "pass": false,
-      "level": "warn",
-      "detail": "2 record file(s) changed since the last gates run (16:9/s02_pattern-layout.json, 9:16/s02_pattern-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "pass": true,
+      "level": "pass",
+      "detail": "10 layout record hash(es) identical to the last gates.json run",
       "hashes": {
-        "16:9/s01_hook-layout.json": "247992087bba",
-        "16:9/s02_pattern-layout.json": "c26ae0e53c82",
-        "16:9/s03_why-layout.json": "a950023113a4",
+        "16:9/s01_hook-layout.json": "8ffc38f7a931",
+        "16:9/s02_pattern-layout.json": "cf087aed43a5",
+        "16:9/s03_why-layout.json": "02545094a620",
         "16:9/s04_sum-layout.json": "74e34ee5ad33",
-        "16:9/s05_recap-layout.json": "994b6e5e02a4",
-        "9:16/s01_hook-layout.json": "aa82ae245442",
+        "16:9/s05_recap-layout.json": "0e0e661381c0",
+        "9:16/s01_hook-layout.json": "5fdb70a3a346",
         "9:16/s02_pattern-layout.json": "6f8284661e7b",
         "9:16/s03_why-layout.json": "67013fe99fb3",
         "9:16/s04_sum-layout.json": "002218108a34",

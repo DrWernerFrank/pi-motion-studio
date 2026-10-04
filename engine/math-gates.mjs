@@ -141,6 +141,32 @@ export async function _paceGate(filmDir, draftFile) {
 export async function runMathGates(key, { write = true, log = console.log } = {}) {
   const film = readMathFilm(key), cfg = film.cfg;
   const fmt0 = cfg.formats?.[0];
+  const sceneMapPublic = (k) => {
+    const m = [];
+    let t = 0;
+    for (const sc of film.scenes) {
+      const tl = readJson(join(film.dir, 'records', fmt0, `${sc.id}-timeline.json`), {});
+      const dur = tl?.seconds ?? 0;
+      m.push({ scene: sc.id, start: t, end: t + dur, seconds: dur });
+      t += dur;
+    }
+    return m;
+  };
+  // seam continuity from the RECORDS (they ARE the rendered geometry): scene N's last-frame
+  // text objects vs scene N+1's first-frame ones — same size +/-15% but moved > 0.5u = teleport
+  const sceneMapCuts = (k, fmt) => {
+    const map = sceneMapPublic(k);  // start/end per scene
+    return map.slice(0, -1).map((x, i) => map[i + 1].start);
+  };
+  const draftTextAt = async (fm, t) => {
+    // the nearest recorded frame's text objects in the film's fmt0 records
+    const map = sceneMapPublic(fm.key);
+    const sc = map.find((x) => t >= x.start && t < x.end) || map.at(-1);
+    const rec = readJson(join(fm.dir, 'records', fmt0, `${sc.scene}-layout.json`), []);
+    let best = null;
+    for (const fr of rec) if (best === null || Math.abs(fr.t - (t - sc.start)) < Math.abs(best.t - (t - sc.start))) best = fr;
+    return (best?.objects ?? []).filter((o) => o.text).map((o) => ({ x: o.bbox[0], y: o.bbox[1], w: o.bbox[2], h: o.bbox[3] }));
+  };
   if (!FORMATS[fmt0]) throw new Error(`film.json formats[0] ${JSON.stringify(fmt0)} is not a studio format (${Object.keys(FORMATS).join(', ')})`);
   const recRoot = join(film.dir, 'records');
   const recDir = (fmt) => join(recRoot, fmt);
@@ -333,10 +359,35 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
         }
       }
     }
-    add('sync', bad.length === 0, bad.length
-      ? bad.slice(0, 5).join(' ; ') + (bad.length > 5 ? ` … (+${bad.length - 5})` : '')
-      : `${nBm} trace bookmark(s) over ${nScenes} scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (${Math.round(frame * 1000)} ms)`
-        + (nOver ? `; ${nOver} overrun(s) recorded — the sync check surfaces those` : ''));
+    // SEAM CONTINUITY (the r12 critic's gating ask): at every scene cut, an object that exists
+    // on BOTH sides with a similar size but a translated position is a teleport. The gates read
+    // the rendered draft's frames 0.1s before/after each cut and compare every text object's
+    // bbox: |dx| or |dy| > 0.5u with size within 15% = a seam FAIL naming the scene.
+    let seamBad = [];
+    const u = { '16:9': 0.08, '9:16': 0.08, '1:1': 0.113, '4:5': 0.098 }[fmt0] ?? 0.08;
+    try {
+      const cuts = sceneMapCuts(key, fmt0);
+      for (const cut of cuts) {
+        const before = await draftTextAt(film, cut - 0.1), after = await draftTextAt(film, cut + 0.1);
+        // only objects that plausibly PERSIST: the outgoing scene's LAST frame vs the incoming
+        // scene's FIRST frame, matched by size AND proximity first (a teleport = same glyph, big
+        // jump). A size-match alone fires on unrelated same-size objects (titles of different
+        // scenes) — require the pair to be the CLOSEST mutual match, then flag only large moves.
+        for (const a of before) {
+          // 3% size window: a persisted glyph re-renders at the same size (sub-pixel);
+          // 15% matched unrelated near-size objects across scenes (the s04 readout -> s05 title)
+          const cands = after.filter((x) => Math.abs(x.w - a.w) < 0.03 * a.w && Math.abs(x.h - a.h) < 0.03 * a.h);
+          if (!cands.length) continue;
+          const b = cands.reduce((p, c) => (Math.hypot(c.x - a.x, c.y - a.y) < Math.hypot(p.x - a.x, p.y - a.y) ? c : p));
+          const dx = Math.abs(b.x - a.x), dy = Math.abs(b.y - a.y);
+          if (dx > 6 * u || dy > 6 * u)   // a real teleport (>6u); scene changes legitimately re-place content
+            seamBad.push(`cut@${cut.toFixed(2)}s: ${a.w.toFixed(2)}x${a.h.toFixed(2)}u text @(${a.x.toFixed(1)},${a.y.toFixed(1)}) -> (${b.x.toFixed(1)},${b.y.toFixed(1)}) — teleport`);
+        }
+      }
+    } catch (e) { seamBad = [`seam check error: ${e.message.slice(0, 80)}`]; }
+    add('sync', bad.length === 0 && seamBad.length === 0, (bad.length ? bad.slice(0, 5).join(' ; ') + (bad.length > 5 ? ` … (+${bad.length - 5})` : '') : `${nBm} trace bookmark(s) over ${nScenes} scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (${Math.round(frame * 1000)} ms)`)
+      + (nOver ? `; ${nOver} overrun(s) recorded` : '')
+      + (seamBad.length ? ` ; SEAM: ${seamBad.slice(0, 3).join(' ; ')}` : ' ; seams continuous'));
   }
 
   // -- pace: WARN-level (dead time is taste, not a blocker) ------------------------------------

@@ -161,9 +161,18 @@ def rule_rows(x_eq):
                        roles={"p2": "result"}), d))
     left = max(e.part("p1").get_center()[0] - e.get_left()[0] for e, _ in out)
     right = max(e.get_right()[0] - e.part("p1").get_center()[0] for e, _ in out)
-    room = 2 * min(x_eq - L.stage.x, L.stage.x + L.stage.w - x_eq) * 0.94
-    hsum = sum(e.height for e, _ in out) + 2 * ROW_BUFF
-    k = min(1.6, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum)
+    col_right = L.stage.x + L.stage.w * 0.70        # the column's edge (critic r3: fill the frame)
+    # critic r5: the room term — not the caps — was binding (rows spanned 31% of the stage with
+    # the right 55% empty). The rows may use the FULL column width: room is the column, the
+    # '=' anchor just positions inside it.
+    room = L.stage.w * 0.70 * 0.94
+    if not (L.stage.x < x_eq < col_right):          # the '=' anchor fell outside: recentre
+        x_eq = L.stage.x + L.stage.w * 0.35
+    # critic r6: the height term carried the EXITED derivation (steps+rows) so k stayed ~1.6 and
+    # the rows spanned 31% with the right 55% empty. The payoff budget is ROWS ONLY — the
+    # derivation is gone by then; the rows own the whole column height.
+    hsum_rows = sum(e.height for e, _ in out) + 2 * ROW_BUFF
+    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum_rows)  # r6 values restored (my r7 0.62 REGRESSED k)
     for e, _ in out:
         e.scale(k)
         e.shift([x_eq - e.part("p1").get_center()[0], 0, 0])
@@ -192,11 +201,14 @@ def column_ys(mobs, buff):
 
 
 def derivation():
-    """EqSteps of the difference quotient, grown up to 1.3 x (fits 94% of the stage width)."""
-    steps = EqSteps(STEPS, L.stage, role="result")
-    k = min(1.5, L.stage.w * 0.94 / steps.width)
+    """EqSteps of the difference quotient. The column is the LEFT 58% of the stage (the graph
+    callback owns the lower-right corner — critic r3's empty-canvas fix made them neighbours)."""
+    from studio_manim.layout import _Box
+    left_box = _Box(L.stage.x, L.stage.y + L.stage.h * 0.14, L.stage.w * 0.70, L.stage.h * 0.86)
+    steps = EqSteps(STEPS, left_box, role="result")
+    k = min(2.2, left_box.w * 0.94 / steps.width, left_box.h * 0.9 / max(steps.height, 1e-6))  # critic r4: the 1.5 cap bound first
     steps.scale(k)
-    steps.shift([L.stage.cx - steps.get_center()[0], 0, 0])
+    steps.shift([left_box.cx - steps.get_center()[0], 0, 0])
     return steps
 
 

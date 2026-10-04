@@ -429,5 +429,58 @@
       "films/odd-squares/out/sheets/phone-16x9.png",
       "films/odd-squares/out/sheets/phone-9x16.png"
     ]
+  },
+  {
+    "round": 11,
+    "at": "2026-10-04T22:35:46.741Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 8,
+      "variety": 8,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 5.5,
+        "issue": "NEW, and it is the round's own fix applied to the wrong sibling: the s01 ghost — s01_hook.py:83 still builds the dashed 3rd L the OLD way (ell(3, u) at corner(c, 2, u), the big 2x2 unit — also geometrically dishonest, pre-announcing the corner the 3rd L never lands on) — and in the new 40/60 layout the narrower square panel (right edge x395 at 960w) no longer contains it. Measured: the ghost's dashed column renders at x418-419, 24px past the panel edge into the equation panel's territory and 3px from the hook equation's '1' at x422 (1.1px at 360px); vision at phone width: 'the dashed box's right edge touches or overlaps the 1... a real collision'. Last round the same ghost had ~19px clearance (its then-wider half-panel held it) — the re-split closed the gap. It sits under s01.2 'Does it keep working?': the hook's closing question collides with the equation it asks about, in the 16:9 deliverable. 9:16 is clean (its ghost ends 225px above the equations, 13px under the empty title band).",
+        "fix": "Apply the round's own s02 one-liner to s01's ghost: _u3 = unit_for(box, 3); ghost = DashedVMobject(ell(3, _u3)[0].shift(corner(c, 3, _u3))...). It lands centered at the pulled-back unit — right edge ~x371 like s02's fixed ghost (24px inside the panel, 31px clear of the equation ink) — and it finally shows where the 3rd L actually lands. Re-run phone-16x9 at 4.5-6.5s and confirm the clearance."
+      },
+      {
+        "t": 14.5,
+        "issue": "The re-split is real but under-dosed, and the odd_eqs unification the r10 prescription ALSO asked for did not happen. The 40/60 split of the 12.52u stage gives the equation panel 7.49u — short of the prescribed 8.5-9.6u — so the width guard rose only to s=1.052 (prescribed 1.2-1.35): digits 32-34px (prescribed 38-43) and the 2 at 23px (prescribed 24-30) at 960w = 8.6px@360 — inside the 8-9px floor band for the first time in 8 rounds, but under the 9-11px prescription, and phone-16x9 vision still reads the e5 2 as 'marginal, leaning readable... I can't confirm it is a 2 and not a blob'. Meanwhile s01/s03/s05 still carry the OLD odd_eqs (cap 1.0, width 0.90): the hook 2 measures 7.9px@360 (sub-floor), s05's recap k-line 2 7.5px@360, s04's stack rows 2 6.8-7.5px@360 on digits of 9.4-10.5px. The un-unified copy is now VISIBLE at the s02|s03 seam: the carried-over e5 jumps +20px left edge and shrinks 8% mid-crossfade (t=19.5: x402-897, digits h32-34 -> t=20.2: x422-876, h29-31 — s02's 1.052 vs s03's old 0.965 sizing). The brief still ships 16:9+9:16 co-equal, so the phone test applies to the 16:9 cut.",
+        "fix": "Either deepen the split (~35:65 -> panel ~8.1u -> s~1.14, 2 ~9.4px@360) or give the equations their own full-width band under the square; AND unify odd_eqs across the five scene copies (the 'copied, never imported' convention is what keeps splitting them — hoist the helper into the kit) so the hook 2, the recap k-line and the seam all inherit the fix at once. Re-run phone-16x9 and re-measure digits/2 at 360px."
+      },
+      {
+        "t": 16.5,
+        "issue": "The gnomon fill contrast — the r1 defect — was fixed in s03 ONLY and has stood sub-3:1 in the other three gnomon scenes for ten rounds (the fills were never re-measured after r1; the r2 note 'contrast 0.78 applied' landed in one file of four). Measured this round at full res: s02/s05 render the L fills at opacity 0.55 — slate (134,152,176) 2.45:1, olive 2.34:1, raspberry 2.51:1, teal 2.30:1, amber 2.21:1, ALL below the 3:1 large-shape bar; s01's 2x2 fills 2.21-2.30:1 — while s03's 0.78 fills measure 3.23-3.93:1 (the fix works wherever it was applied). Teal-vs-slate fill dRGB is 44 (r1 asked ~90): at phone size the 2nd and 4th L's stay within misclassification distance. The color-is-meaning spine currently carries on the ink outlines and the full-opacity equation digits, not on the shapes themselves.",
+        "fix": "Set opacity=0.78 in s01_hook/s02_pattern/s05_recap's ell() (one constant, three files; s03 is the exemplar) — or deepen the five gnomon role colors in design.json so the 0.55 blend clears 3:1 and teal-vs-slate clears ~90 dRGB. Re-measure the fills in s02's rebuilt 5x5 at full res."
+      },
+      {
+        "t": 62.5,
+        "issue": "The r4-r10 finale + under-fill holds, untouched and re-measured: finale left starts 16:9 square 80 / hero 434 / k-line 454 / Sigma 503; 9:16 k-line 121 / hero 126 / square 147 / Sigma 159 — three-to-four different edges in both formats ('reads as accidental'; at 360px: 'slightly ragged... visible if you look for it'). The Sigma-with-limits block spans 104px at 960w — more vertical mass than any headline line (38-55px); its limits measure the n at 4.9px@360 (sub-floor) and k=1 at 7.9px in 16:9, 6.7-10.7px in 9:16 (marginal). The r3 portrait under-fill runs the whole film (top 33-41% empty — hook 37-41%, s04's stack 41.7%, finale 32.8%; the bottom fifth blank through the first half; the square 25-50% of frame width; phone-9x16: 'landscape content dropped into a portrait frame'), and 16:9 s04's text-only frames still use the middle 40.3% of the width.",
+        "fix": "The standing prescription: one shared left edge for hero + Sigma line + k-line in both formats; pre-scale the portrait formulas (~0.5-0.55x) so the hero's per-glyph lead is decisive and cap the Sigma's display size (its limits need their own floor — 4.9px@360 is not one); grow the portrait square/stack into the dead bands; or accept the hold and declare it a style choice in brief.md so the ledger stops carrying it as open."
+      },
+      {
+        "t": 0,
+        "issue": "Sound remains TTS-only (music 'none') — the below-bar key no render round has touched: the mix is clean (-16 LUFS, -1.1 dBTP, 65.667s audio = video exactly, frame-exact onsets) but with no bed under the narration the film reads sonically flat on social feeds.",
+        "fix": "Add a quiet music bed ~30-35dB under the voice (design.json music role), or declare the TTS-only choice in brief.md so the sound gate stops being an implicit fail."
+      }
+    ],
+    "notes": "round 10 by math-critic (READ-ONLY; drafts fresh — out/ 01:48:41/01:48:57 > sources 01:48:17; gates re-PASS 22:19Z, layout 0 violations, claims 24 merged/48 counted, coverage 100%; the gates' deterministic WARN is the s02 records legitimately changing with the re-split source — the full re-render ran at 01:48). METHOD: LOOKED at 5 sheets (every-16x9, every-9x16, phone-16x9, phone-9x16, times-16x9 at 360px) with vision reads of 8 crops, then MEASURED at full res: beat frames from both drafts + numpy connected-component ink analysis — the 2/digit blobs at four ink thresholds, a true 360px LANCZOS downscale re-measure, the equation ink spans vs the new panel, both ghosts' dash extents, the s02|s03 seam, the finale left edges + Sigma limits + glyph heights, the gnomon fill colors (contrast vs cream), the whole-film x/y content bands at 0.5s steps, a pair-2 spot-check — plus the layout records and the source diff (commit 4f29ad5). RE-DERIVED BY HAND, all correct: 1=1^2; 1+3=4=2^2; 1+3+5=9=3^2; +7=16=4^2; +9=25=5^2; 3=2*2-1; 4+3=7=2*4-1 (column 4 + row 3); 7=4^2-3^2; 9=5^2-4^2; k+(k-1)=2k-1; k^2-(k-1)^2=2k-1; rows 1=1^2-0^2, 3=2^2-1^2, 5=3^2-2^2, (2n-1)=n^2-(n-1)^2; telescoping Sum(k^2-(k-1)^2,1..n)=n^2-0^2; Sum(2k-1,1..n)=n^2; n=100 -> 100^2=10000; Sum(2k-1,1..5)=25. math_check 5/5 scenes clean; INDEPENDENT re-evaluation 48/48 claims TRUE in fresh sympy processes from text alone; captions srt/vtt re-verified clean of bookmark tokens. THE RE-SPLIT VERIFIED, RENDERING AND DELIVERING: the 16:9 equation panel went 6.26u -> 7.49u (40/60 of the 12.52u stage, 0.5u gutter), the width guard finally rose above 1.0 (s = 0.878 -> 1.052; the height term 7.26 still never binds — the r9 geometric truth — but it no longer needs to), and the equations now own their panel: the e5 line spans x402-897 = 98% of the panel = 51.6% of the frame (was 43.1%), the 16:9 stage fills to 87.5% of frame width through s02/s03 — the r3-r9 's02/s03 right-half dead air' hold is CLOSED. The 2 — the 7-round speck — is inside the 8-9px phone floor for the first time: 23px at 960w = 8.6px@360 (threshold-stable 22-23; ~9px re-measured on a true 360px downscale), digits 32-34px = 12.0-12.8px@360 (was 10.1); s03's slot identical (both its k^2/(k-1)^2 2s at 23px). Phone-16x9 vision moved from r9's '5^2 and 5 are close to indistinguishable' to 'marginal, leaning readable — clearly an exponent, not 52', and the k^2 2s at 360px 'look like 2s, though small'. THE S02 GHOST VERIFIED HOME: rightmost dash x371 vs the square panel edge x395 (24px spare), 31px clear of the equation ink — and now geometrically honest (drawn at corner(c,3,unit), where the real 3rd L actually lands; the old corner(c,2,u) placement pre-announced a corner the L never touches). The gutter holds s02-s05 (square ink <= x371-394, equation ink from x402). 9:16 UNCHANGED (portrait path untouched) and still passing: hook 2 12.7px@360, e5 2 14.0, s03 2 14.0 (the recap k-line 2 measures 9.3-10.7 — thinner than r9's ledger claim, but above floor). s04 UNTOUCHED-DETERMINISTIC: pair-2 re-verified both-sided (the live 2^2 holds dim-level ink through the 47.75 step-dim, pre-flashes at 48.3, both halves gone by 48.8), and the settled end state '= n^2' pixel-verified at 55.5 (a 52.8 sample I took first was 3 frames inside the r0->r1 morph's tail — transition, not a defect). BUT both of the round's claimed fixes landed on s02 only — problem 1 is the same ghost in s01, unfixed and now brushing the hook equation; problem 2 is the odd_eqs unification the prescription asked for and did not get (the seam pop + four sub-floor 2 populations). ALSO EXHUMED THIS ROUND by measuring fills nobody had re-measured since r1: the gnomon fill contrast split (problem 3) — the r1 fix exists in s03 alone. JUDGED-OPEN RESIDUALS, re-measured: the finale edges (16:9 80/434/454/503; 9:16 121/126/147/159); the Sigma block 104px > any headline line; Sigma limits 4.9-7.9px@360 in 16:9, 6.7-10.7 in 9:16; the r3 portrait under-fill (top 33-41% empty, bottom fifth blank, square 25-50% of width); 16:9 s04's text-only frames in the middle 40.3% of width; captions sidecar-only; TTS-only sound. VERDICT vs the 8+ bar: FAILS on hook 7, readability 7, composition 7, sound 7. PASSES motion 8, variety 8, brand 8, clarity 8, correctness 10 — earned: 48/48 independent, hand re-derived, every on-screen equation transcribes true, no mathematical error in ten rounds. The re-split is the real thing — the geometry finally admits a readable exponent and the 16:9 frame finally owns its width; what keeps it off my feed: the hook's own ghost now collides with the hook's own equation at phone width, the 2 sits at the floor's edge rather than the prescription, and the r1 fill contrast turns out to have been fixed in one scene of five.",
+    "sheets": [
+      "films/odd-squares/out/sheets/every-16x9.png",
+      "films/odd-squares/out/sheets/every-9x16.png",
+      "films/odd-squares/out/sheets/phone-16x9.png",
+      "films/odd-squares/out/sheets/phone-9x16.png",
+      "films/odd-squares/out/sheets/times-16x9.png"
+    ]
   }
 ]
