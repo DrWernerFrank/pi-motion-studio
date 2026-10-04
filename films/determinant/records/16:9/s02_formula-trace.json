@@ -48,7 +48,7 @@
   "seconds": 1.306
  },
  {
-  "t": 0.8999999999999999,
+  "t": 4.533,
   "kind": "sentence_end",
   "scene": "s02_formula",
   "sentence": "s02.1"
@@ -87,7 +87,7 @@
  },
  {
   "kind": "animation",
-  "t": 8.6,
+  "t": 8.767,
   "i": 9,
   "scene": "s02_formula",
   "sentence": "s02.2",
@@ -95,22 +95,22 @@
  },
  {
   "kind": "animation",
-  "t": 8.6,
+  "t": 8.767,
   "i": 10,
   "scene": "s02_formula",
   "sentence": "s02.2",
   "animation": "wait",
-  "seconds": 0.525
+  "seconds": 0.675
  },
  {
-  "t": 8.099999999999987,
+  "t": 8.767,
   "kind": "sentence_end",
   "scene": "s02_formula",
   "sentence": "s02.2"
  },
  {
   "kind": "animation",
-  "t": 9.0,
+  "t": 9.167,
   "i": 11,
   "scene": "s02_formula",
   "sentence": null,
@@ -118,11 +118,16 @@
  },
  {
   "kind": "animation",
-  "t": 9.0,
+  "t": 9.167,
   "i": 12,
   "scene": "s02_formula",
   "sentence": null,
   "animation": "wait",
   "seconds": 0.4
+ },
+ {
+  "kind": "scene_end",
+  "t": 9.167,
+  "scene": "s02_formula"
  }
 ]

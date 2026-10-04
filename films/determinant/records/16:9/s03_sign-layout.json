@@ -6,12 +6,12 @@
     "kind": "NumberPlane",
     "id": "1:0",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -45,12 +45,12 @@
     "kind": "NumberPlane",
     "id": "2:0",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -79,12 +79,12 @@
     "kind": "Eq",
     "id": "2:2",
     "bbox": [
-     -3.222,
-     -2.887,
-     6.444,
-     1.196
+     -2.745,
+     -2.549,
+     5.49,
+     1.019
     ],
-    "height_u": 14.95,
+    "height_u": 12.74,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -118,12 +118,12 @@
     "kind": "Eq",
     "id": "3:1",
     "bbox": [
-     -3.222,
-     -2.887,
-     6.444,
-     1.196
+     -2.745,
+     -2.549,
+     5.49,
+     1.019
     ],
-    "height_u": 14.95,
+    "height_u": 12.74,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -135,12 +135,12 @@
     "kind": "NumberPlane",
     "id": "3:2",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -177,7 +177,7 @@
     "height_u": 32.37,
     "nominal_u": null,
     "role": null,
-    "color": "#C0452B",
+    "color": "#B03D24",
     "z": 4,
     "alive": true,
     "text": false
@@ -242,12 +242,12 @@
     "kind": "Eq",
     "id": "4:1",
     "bbox": [
-     -3.222,
-     -2.887,
-     6.444,
-     1.196
+     -2.745,
+     -2.549,
+     5.49,
+     1.019
     ],
-    "height_u": 14.95,
+    "height_u": 12.74,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -259,12 +259,12 @@
     "kind": "NumberPlane",
     "id": "4:2",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -301,7 +301,7 @@
     "height_u": 32.37,
     "nominal_u": null,
     "role": null,
-    "color": "#C0452B",
+    "color": "#B03D24",
     "z": 4,
     "alive": true,
     "text": false
@@ -344,12 +344,12 @@
     "kind": "Txt",
     "id": "4:7",
     "bbox": [
-     -1.548,
-     -3.645,
-     3.096,
-     0.258
+     -1.319,
+     -3.195,
+     2.637,
+     0.22
     ],
-    "height_u": 3.22,
+    "height_u": 2.75,
     "nominal_u": 3.6,
     "role": "body",
     "color": "#000000",
@@ -360,7 +360,7 @@
   ]
  },
  {
-  "t": 9.567,
+  "t": 9.733,
   "objects": [
    {
     "kind": "Txt",
@@ -383,12 +383,12 @@
     "kind": "Eq",
     "id": "5:1",
     "bbox": [
-     -3.222,
-     -2.887,
-     6.444,
-     1.196
+     -2.745,
+     -2.549,
+     5.49,
+     1.019
     ],
-    "height_u": 14.95,
+    "height_u": 12.74,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -400,12 +400,12 @@
     "kind": "NumberPlane",
     "id": "5:2",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -442,7 +442,7 @@
     "height_u": 32.37,
     "nominal_u": null,
     "role": null,
-    "color": "#C0452B",
+    "color": "#B03D24",
     "z": 4,
     "alive": true,
     "text": false
@@ -485,12 +485,12 @@
     "kind": "Txt",
     "id": "5:7",
     "bbox": [
-     -1.548,
-     -3.645,
-     3.096,
-     0.258
+     -1.319,
+     -3.195,
+     2.637,
+     0.22
     ],
-    "height_u": 3.22,
+    "height_u": 2.75,
     "nominal_u": 3.6,
     "role": "body",
     "color": "#000000",
@@ -501,7 +501,7 @@
   ]
  },
  {
-  "t": 9.567,
+  "t": 9.733,
   "objects": [
    {
     "kind": "Txt",
@@ -524,12 +524,12 @@
     "kind": "Eq",
     "id": "6:1",
     "bbox": [
-     -3.222,
-     -2.887,
-     6.444,
-     1.196
+     -2.745,
+     -2.549,
+     5.49,
+     1.019
     ],
-    "height_u": 14.95,
+    "height_u": 12.74,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -541,12 +541,12 @@
     "kind": "NumberPlane",
     "id": "6:2",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -583,7 +583,7 @@
     "height_u": 32.37,
     "nominal_u": null,
     "role": null,
-    "color": "#C0452B",
+    "color": "#B03D24",
     "z": 4,
     "alive": true,
     "text": false
@@ -626,12 +626,12 @@
     "kind": "Txt",
     "id": "6:7",
     "bbox": [
-     -1.548,
-     -3.645,
-     3.096,
-     0.258
+     -1.319,
+     -3.195,
+     2.637,
+     0.22
     ],
-    "height_u": 3.22,
+    "height_u": 2.75,
     "nominal_u": 3.6,
     "role": "body",
     "color": "#000000",
@@ -642,7 +642,7 @@
   ]
  },
  {
-  "t": 9.967,
+  "t": 10.133,
   "objects": [
    {
     "kind": "Txt",
@@ -665,12 +665,12 @@
     "kind": "Eq",
     "id": "7:1",
     "bbox": [
-     -3.222,
-     -2.887,
-     6.444,
-     1.196
+     -2.745,
+     -2.549,
+     5.49,
+     1.019
     ],
-    "height_u": 14.95,
+    "height_u": 12.74,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -682,12 +682,12 @@
     "kind": "NumberPlane",
     "id": "7:2",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -724,7 +724,7 @@
     "height_u": 32.37,
     "nominal_u": null,
     "role": null,
-    "color": "#C0452B",
+    "color": "#B03D24",
     "z": 4,
     "alive": true,
     "text": false
@@ -767,12 +767,12 @@
     "kind": "Txt",
     "id": "7:7",
     "bbox": [
-     -1.548,
-     -3.645,
-     3.096,
-     0.258
+     -1.319,
+     -3.195,
+     2.637,
+     0.22
     ],
-    "height_u": 3.22,
+    "height_u": 2.75,
     "nominal_u": 3.6,
     "role": "body",
     "color": "#000000",
@@ -783,7 +783,7 @@
   ]
  },
  {
-  "t": 9.967,
+  "t": 10.133,
   "objects": [
    {
     "kind": "Txt",
@@ -806,12 +806,12 @@
     "kind": "Eq",
     "id": "8:1",
     "bbox": [
-     -3.222,
-     -2.887,
-     6.444,
-     1.196
+     -2.745,
+     -2.549,
+     5.49,
+     1.019
     ],
-    "height_u": 14.95,
+    "height_u": 12.74,
     "nominal_u": 9,
     "role": "math",
     "color": "#17150F",
@@ -823,12 +823,12 @@
     "kind": "NumberPlane",
     "id": "8:2",
     "bbox": [
-     -5.882,
-     -1.191,
-     11.764,
-     3.626
+     -5.012,
+     -1.104,
+     10.023,
+     3.089
     ],
-    "height_u": 45.32,
+    "height_u": 38.61,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -865,7 +865,7 @@
     "height_u": 32.37,
     "nominal_u": null,
     "role": null,
-    "color": "#C0452B",
+    "color": "#B03D24",
     "z": 4,
     "alive": true,
     "text": false
@@ -908,12 +908,12 @@
     "kind": "Txt",
     "id": "8:7",
     "bbox": [
-     -1.548,
-     -3.645,
-     3.096,
-     0.258
+     -1.319,
+     -3.195,
+     2.637,
+     0.22
     ],
-    "height_u": 3.22,
+    "height_u": 2.75,
     "nominal_u": 3.6,
     "role": "body",
     "color": "#000000",

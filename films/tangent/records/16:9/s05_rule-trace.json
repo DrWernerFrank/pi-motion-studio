@@ -127,7 +127,7 @@
   "seconds": 0.473
  },
  {
-  "t": 0.9999999999999999,
+  "t": 9.2,
   "kind": "sentence_end",
   "scene": "s05_rule",
   "sentence": "s05.1"
@@ -190,7 +190,7 @@
   "seconds": 0.798
  },
  {
-  "t": 10.133333333333315,
+  "t": 13.133,
   "kind": "sentence_end",
   "scene": "s05_rule",
   "sentence": "s05.2"
@@ -229,7 +229,7 @@
  },
  {
   "kind": "animation",
-  "t": 18.3,
+  "t": 18.467,
   "i": 22,
   "scene": "s05_rule",
   "sentence": "s05.3",
@@ -237,34 +237,22 @@
  },
  {
   "kind": "animation",
-  "t": 18.3,
+  "t": 18.467,
   "i": 23,
   "scene": "s05_rule",
   "sentence": "s05.3",
   "animation": "wait",
-  "seconds": 2.497
+  "seconds": 2.647
  },
  {
-  "t": 15.833333333333298,
+  "t": 18.467,
   "kind": "sentence_end",
   "scene": "s05_rule",
   "sentence": "s05.3"
  },
  {
-  "kind": "animation",
-  "t": 18.433,
-  "i": 24,
-  "scene": "s05_rule",
-  "sentence": null,
-  "animation": "Wait"
- },
- {
-  "kind": "animation",
-  "t": 18.433,
-  "i": 25,
-  "scene": "s05_rule",
-  "sentence": null,
-  "animation": "wait",
-  "seconds": 0.158
+  "kind": "scene_end",
+  "t": 18.467,
+  "scene": "s05_rule"
  }
 ]

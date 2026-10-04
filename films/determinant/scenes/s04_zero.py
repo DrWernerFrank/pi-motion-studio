@@ -25,7 +25,8 @@ class Scene(StudioScene):
         zero.next_to(lab.plane, DOWN, buff=0.5)
         note.next_to(zero, DOWN, buff=0.5)
         from manim import VGroup
-        VGroup(lab, zero, note).move_to([L.stage.cx, L.stage.cy, 0])
+        from studio_manim.kit import into
+        into(VGroup(lab, zero, note), L.stage, fill=0.94)  # scale to fit — never past the safe area
         self.add(lab.plane)
 
         with self.say("s04.1"):

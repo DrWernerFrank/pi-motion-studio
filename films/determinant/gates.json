@@ -1,12 +1,12 @@
 {
-  "at": "2026-10-04T05:00:06.508Z",
-  "pass": false,
+  "at": "2026-10-04T05:22:59.042Z",
+  "pass": true,
   "checks": [
     {
       "name": "layout",
-      "pass": false,
-      "level": "fail",
-      "detail": "25 FAIL violation(s): offscreen@s03_sign t=8.233s [4:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.567s [5:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.567s [6:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.967s [7:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.967s [8:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) … (+20); 22 warn (density@s02_formula t=2.1s, density@s02_formula t=3.233s, density@s02_formula t=4.533s …)"
+      "pass": true,
+      "level": "pass",
+      "detail": "0 fail-level violations over 6 scenes' records/16:9 (studio_manim.lint); 22 warn (density@s02_formula t=2.1s, density@s02_formula t=3.233s, density@s02_formula t=4.533s …)"
     },
     {
       "name": "claims",
@@ -60,20 +60,20 @@
       "name": "deterministic",
       "pass": false,
       "level": "warn",
-      "detail": "4 record file(s) changed since the last gates run (16:9/s03_sign-layout.json, 16:9/s04_zero-layout.json, 9:16/s03_sign-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "detail": "2 record file(s) changed since the last gates run (16:9/s05_3x3-layout.json, 9:16/s05_3x3-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
-        "16:9/s01_hook-layout.json": "0fe788294b57",
-        "16:9/s02_formula-layout.json": "4ff58e8acbc5",
-        "16:9/s03_sign-layout.json": "c4cde4a1884f",
-        "16:9/s04_zero-layout.json": "a905b5c6c082",
-        "16:9/s05_3x3-layout.json": "9bf7322b2bb4",
-        "16:9/s06_recap-layout.json": "f4e714d4ecdd",
-        "9:16/s01_hook-layout.json": "78f38ebd68b0",
-        "9:16/s02_formula-layout.json": "6a91a04bb5be",
-        "9:16/s03_sign-layout.json": "50137e2bd7ae",
-        "9:16/s04_zero-layout.json": "c9719253328b",
-        "9:16/s05_3x3-layout.json": "670eb0adcbf2",
-        "9:16/s06_recap-layout.json": "1400873cdcab"
+        "16:9/s01_hook-layout.json": "07652f46d163",
+        "16:9/s02_formula-layout.json": "2dc0d8e338d6",
+        "16:9/s03_sign-layout.json": "0af4acf284c3",
+        "16:9/s04_zero-layout.json": "d0adbd32ef72",
+        "16:9/s05_3x3-layout.json": "7ef5f90faad3",
+        "16:9/s06_recap-layout.json": "b04259861311",
+        "9:16/s01_hook-layout.json": "9ad5ea144c69",
+        "9:16/s02_formula-layout.json": "0934fb3b0388",
+        "9:16/s03_sign-layout.json": "9c14995daaf1",
+        "9:16/s04_zero-layout.json": "2ba266a47b1c",
+        "9:16/s05_3x3-layout.json": "c6f30ed1a0d0",
+        "9:16/s06_recap-layout.json": "b9c90e7fa259"
       }
     }
   ]

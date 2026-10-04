@@ -1,0 +1,80 @@
+{
+  "at": "2026-10-04T05:09:26.273Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "layout",
+      "pass": true,
+      "level": "pass",
+      "detail": "0 fail-level violations over 6 scenes' records/16:9 (studio_manim.lint); 7 warn (density@s04_slopes t=4.8s, density@s04_slopes t=5.5s, density@s04_slopes t=5.5s …)"
+    },
+    {
+      "name": "claims",
+      "pass": true,
+      "level": "pass",
+      "detail": "25 claims, all ok===true; coverage 100% (8/8 mathematical sentences linked; the 90% bar is the demos' P12 gate)"
+    },
+    {
+      "name": "typeset",
+      "pass": true,
+      "level": "pass",
+      "detail": "6 scenes x 2 format(s): every records layout.json non-empty; claims ledgers present — a typeset compile error itself surfaces at render time as a loud error (the formula + scene file:line)"
+    },
+    {
+      "name": "narration",
+      "pass": true,
+      "level": "pass",
+      "detail": "12 sentence(s): every script sentence in timing.json with start/end + audio, no overlaps, 6 scene timeline(s) cover their sentences' spans"
+    },
+    {
+      "name": "sync",
+      "pass": true,
+      "level": "pass",
+      "detail": "46 trace bookmark(s) over 12 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms)"
+    },
+    {
+      "name": "pace",
+      "pass": true,
+      "level": "pass",
+      "detail": "6 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
+    },
+    {
+      "name": "captions",
+      "pass": true,
+      "level": "pass",
+      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 12 sentence(s) with non-empty text — the deep caption check (layout, SRT/VTT) is P7's `captions` check"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-16 LUFS (want -16 +/- 1), true peak -1.4 dBTP (want <= -1)"
+    },
+    {
+      "name": "deliverable",
+      "pass": true,
+      "level": "pass",
+      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 64.20s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 64.20s"
+    },
+    {
+      "name": "deterministic",
+      "pass": true,
+      "level": "pass",
+      "detail": "first gates run: 12 layout record hash(es) stored (drift vs this baseline warns on the next run)",
+      "hashes": {
+        "16:9/s01_hook-layout.json": "c7910395728b",
+        "16:9/s02_secant-layout.json": "1463cbb1f9df",
+        "16:9/s03_limit-layout.json": "8bf8c1819425",
+        "16:9/s04_slopes-layout.json": "d9989aaaafcf",
+        "16:9/s05_rule-layout.json": "11ad18545cb5",
+        "16:9/s06_recap-layout.json": "ec059016b5bd",
+        "9:16/s01_hook-layout.json": "252f63003b60",
+        "9:16/s02_secant-layout.json": "c273b5d24746",
+        "9:16/s03_limit-layout.json": "14d139b82cc2",
+        "9:16/s04_slopes-layout.json": "5f550ce0697e",
+        "9:16/s05_rule-layout.json": "5755f67157a8",
+        "9:16/s06_recap-layout.json": "eef072414e64"
+      }
+    }
+  ]
+}

@@ -99,7 +99,7 @@
     "height_u": 25.74,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -240,7 +240,7 @@
     "height_u": 25.74,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -398,7 +398,7 @@
     "height_u": 25.74,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -483,7 +483,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 10,
     "alive": true,
     "text": false
@@ -517,7 +517,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 12,
     "alive": true,
     "text": false
@@ -624,7 +624,7 @@
     "height_u": 22.01,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -709,7 +709,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 10,
     "alive": true,
     "text": false
@@ -743,7 +743,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 12,
     "alive": true,
     "text": false
@@ -850,7 +850,7 @@
     "height_u": 19.03,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -935,7 +935,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 10,
     "alive": true,
     "text": false
@@ -969,7 +969,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 12,
     "alive": true,
     "text": false
@@ -1076,7 +1076,7 @@
     "height_u": 19.03,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -1161,7 +1161,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 10,
     "alive": true,
     "text": false
@@ -1195,7 +1195,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 12,
     "alive": true,
     "text": false
@@ -1302,7 +1302,7 @@
     "height_u": 19.03,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -1387,7 +1387,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 10,
     "alive": true,
     "text": false
@@ -1421,7 +1421,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 12,
     "alive": true,
     "text": false
@@ -1528,7 +1528,7 @@
     "height_u": 19.03,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -1613,7 +1613,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 10,
     "alive": true,
     "text": false
@@ -1647,7 +1647,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 12,
     "alive": true,
     "text": false
@@ -1754,7 +1754,7 @@
     "height_u": 19.03,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -1839,7 +1839,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 10,
     "alive": true,
     "text": false
@@ -1873,7 +1873,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 12,
     "alive": true,
     "text": false
@@ -1997,7 +1997,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -2082,7 +2082,7 @@
     "height_u": 4.59,
     "nominal_u": null,
     "role": null,
-    "color": "#B03A22",
+    "color": "#B03D24",
     "z": 11,
     "alive": true,
     "text": false
@@ -2116,7 +2116,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 13,
     "alive": true,
     "text": false
@@ -2223,7 +2223,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -2240,7 +2240,7 @@
     "height_u": 1.8,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -2308,7 +2308,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 10,
     "alive": true,
     "text": false
@@ -2432,7 +2432,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -2449,7 +2449,7 @@
     "height_u": 1.8,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -2517,7 +2517,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 10,
     "alive": true,
     "text": false
@@ -2641,7 +2641,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -2658,7 +2658,7 @@
     "height_u": 1.8,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -2726,7 +2726,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 10,
     "alive": true,
     "text": false
@@ -2850,7 +2850,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -2867,7 +2867,7 @@
     "height_u": 1.8,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -2918,7 +2918,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 9,
     "alive": true,
     "text": false
@@ -3025,7 +3025,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -3042,7 +3042,7 @@
     "height_u": 1.8,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -3093,7 +3093,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 9,
     "alive": true,
     "text": false
@@ -3118,7 +3118,7 @@
   ]
  },
  {
-  "t": 10.6,
+  "t": 10.767,
   "objects": [
    {
     "kind": "Axes",
@@ -3217,7 +3217,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -3234,7 +3234,7 @@
     "height_u": 1.8,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -3285,7 +3285,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 9,
     "alive": true,
     "text": false
@@ -3310,7 +3310,7 @@
   ]
  },
  {
-  "t": 10.6,
+  "t": 10.767,
   "objects": [
    {
     "kind": "Axes",
@@ -3409,7 +3409,7 @@
     "height_u": 18.29,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 5,
     "alive": true,
     "text": false
@@ -3426,7 +3426,7 @@
     "height_u": 1.8,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
@@ -3477,7 +3477,7 @@
     "height_u": 5.16,
     "nominal_u": null,
     "role": null,
-    "color": "#7A4E00",
+    "color": "#8F5B00",
     "z": 9,
     "alive": true,
     "text": false
@@ -3485,390 +3485,6 @@
    {
     "kind": "Eq",
     "id": "17:10",
-    "bbox": [
-     -3.096,
-     -4.317,
-     6.192,
-     1.455
-    ],
-    "height_u": 18.18,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 10,
-    "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 10.733,
-  "objects": [
-   {
-    "kind": "Axes",
-    "id": "18:0",
-    "bbox": [
-     -3.197,
-     -1.068,
-     6.394,
-     3.044
-    ],
-    "height_u": 38.05,
-    "nominal_u": null,
-    "role": null,
-    "color": "#FFFFFF",
-    "z": 0,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "ParametricFunction",
-    "id": "18:1",
-    "bbox": [
-     -3.133,
-     -1.004,
-     6.33,
-     2.774
-    ],
-    "height_u": 34.68,
-    "nominal_u": null,
-    "role": null,
-    "color": "#3E6F5C",
-    "z": 1,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Txt",
-    "id": "18:2",
-    "bbox": [
-     -1.193,
-     -1.34,
-     0.077,
-     0.24
-    ],
-    "height_u": 3.0,
-    "nominal_u": 4.4,
-    "role": "tick",
-    "color": "#000000",
-    "z": 2,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Txt",
-    "id": "18:3",
-    "bbox": [
-     0.765,
-     -1.338,
-     0.117,
-     0.237
-    ],
-    "height_u": 2.97,
-    "nominal_u": 4.4,
-    "role": "tick",
-    "color": "#000000",
-    "z": 3,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Txt",
-    "id": "18:4",
-    "bbox": [
-     2.749,
-     -1.341,
-     0.105,
-     0.241
-    ],
-    "height_u": 3.01,
-    "nominal_u": 4.4,
-    "role": "tick",
-    "color": "#000000",
-    "z": 4,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Line",
-    "id": "18:5",
-    "bbox": [
-     -2.144,
-     -1.004,
-     5.341,
-     1.463
-    ],
-    "height_u": 18.29,
-    "nominal_u": null,
-    "role": null,
-    "color": "#A86400",
-    "z": 5,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Dot",
-    "id": "18:6",
-    "bbox": [
-     -1.227,
-     -0.805,
-     0.144,
-     0.144
-    ],
-    "height_u": 1.8,
-    "nominal_u": null,
-    "role": null,
-    "color": "#A86400",
-    "z": 6,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Txt",
-    "id": "18:7",
-    "bbox": [
-     -3.44,
-     3.421,
-     4.265,
-     0.827
-    ],
-    "height_u": 10.34,
-    "nominal_u": 11.700000000000001,
-    "role": "title",
-    "color": "#000000",
-    "z": 7,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "18:8",
-    "bbox": [
-     -1.497,
-     2.098,
-     1.883,
-     0.533
-    ],
-    "height_u": 6.66,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 8,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "DecimalNumber",
-    "id": "18:9",
-    "bbox": [
-     0.506,
-     2.158,
-     0.982,
-     0.413
-    ],
-    "height_u": 5.16,
-    "nominal_u": null,
-    "role": null,
-    "color": "#7A4E00",
-    "z": 9,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Eq",
-    "id": "18:10",
-    "bbox": [
-     -3.096,
-     -4.317,
-     6.192,
-     1.455
-    ],
-    "height_u": 18.18,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 10,
-    "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 10.733,
-  "objects": [
-   {
-    "kind": "Axes",
-    "id": "19:0",
-    "bbox": [
-     -3.197,
-     -1.068,
-     6.394,
-     3.044
-    ],
-    "height_u": 38.05,
-    "nominal_u": null,
-    "role": null,
-    "color": "#FFFFFF",
-    "z": 0,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "ParametricFunction",
-    "id": "19:1",
-    "bbox": [
-     -3.133,
-     -1.004,
-     6.33,
-     2.774
-    ],
-    "height_u": 34.68,
-    "nominal_u": null,
-    "role": null,
-    "color": "#3E6F5C",
-    "z": 1,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Txt",
-    "id": "19:2",
-    "bbox": [
-     -1.193,
-     -1.34,
-     0.077,
-     0.24
-    ],
-    "height_u": 3.0,
-    "nominal_u": 4.4,
-    "role": "tick",
-    "color": "#000000",
-    "z": 2,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Txt",
-    "id": "19:3",
-    "bbox": [
-     0.765,
-     -1.338,
-     0.117,
-     0.237
-    ],
-    "height_u": 2.97,
-    "nominal_u": 4.4,
-    "role": "tick",
-    "color": "#000000",
-    "z": 3,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Txt",
-    "id": "19:4",
-    "bbox": [
-     2.749,
-     -1.341,
-     0.105,
-     0.241
-    ],
-    "height_u": 3.01,
-    "nominal_u": 4.4,
-    "role": "tick",
-    "color": "#000000",
-    "z": 4,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Line",
-    "id": "19:5",
-    "bbox": [
-     -2.144,
-     -1.004,
-     5.341,
-     1.463
-    ],
-    "height_u": 18.29,
-    "nominal_u": null,
-    "role": null,
-    "color": "#A86400",
-    "z": 5,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Dot",
-    "id": "19:6",
-    "bbox": [
-     -1.227,
-     -0.805,
-     0.144,
-     0.144
-    ],
-    "height_u": 1.8,
-    "nominal_u": null,
-    "role": null,
-    "color": "#A86400",
-    "z": 6,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Txt",
-    "id": "19:7",
-    "bbox": [
-     -3.44,
-     3.421,
-     4.265,
-     0.827
-    ],
-    "height_u": 10.34,
-    "nominal_u": 11.700000000000001,
-    "role": "title",
-    "color": "#000000",
-    "z": 7,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "19:8",
-    "bbox": [
-     -1.497,
-     2.098,
-     1.883,
-     0.533
-    ],
-    "height_u": 6.66,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 8,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "DecimalNumber",
-    "id": "19:9",
-    "bbox": [
-     0.506,
-     2.158,
-     0.982,
-     0.413
-    ],
-    "height_u": 5.16,
-    "nominal_u": null,
-    "role": null,
-    "color": "#7A4E00",
-    "z": 9,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Eq",
-    "id": "19:10",
     "bbox": [
      -3.096,
      -4.317,

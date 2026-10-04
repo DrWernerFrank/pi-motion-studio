@@ -1,0 +1,50 @@
+[
+ {
+  "expr": "4 + 3 == 7",
+  "about": "column of 4 plus row of 3",
+  "says": "s03.1",
+  "scene": "s03_why",
+  "ok": true,
+  "value": "7 == 7"
+ },
+ {
+  "expr": "7 == 2*4 - 1",
+  "about": "the 4th L has 7 cells (counted on the gnomon)",
+  "says": "s03.1",
+  "scene": "s03_why",
+  "ok": true,
+  "value": "7 == 7"
+ },
+ {
+  "expr": "k + (k - 1) == 2*k - 1",
+  "about": "column of k plus row of k-1",
+  "says": "s03.2",
+  "scene": "s03_why",
+  "ok": true,
+  "value": "2*k - 1 == 2*k - 1"
+ },
+ {
+  "expr": "25 == 5**2",
+  "about": "the L's counted on the kit's gnomons fill 5x5",
+  "says": "s03.2",
+  "scene": "s03_why",
+  "ok": true,
+  "value": "25 == 25"
+ },
+ {
+  "expr": "k**2 - (k - 1)**2 == 2*k - 1",
+  "about": "the L is the difference of two squares",
+  "says": "s03.3",
+  "scene": "s03_why",
+  "ok": true,
+  "value": "k**2 - (k - 1)**2 == 2*k - 1"
+ },
+ {
+  "expr": "4**2 - 3**2 == 7",
+  "about": "for the 4th L",
+  "says": "s03.3",
+  "scene": "s03_why",
+  "ok": true,
+  "value": "7 == 7"
+ }
+]

@@ -97,7 +97,7 @@
   "seconds": 0.814
  },
  {
-  "t": 0.7999999999999999,
+  "t": 4.7,
   "kind": "sentence_end",
   "scene": "s02_secant",
   "sentence": "s02.1"
@@ -184,7 +184,7 @@
  },
  {
   "kind": "animation",
-  "t": 11.367,
+  "t": 11.5,
   "i": 19,
   "scene": "s02_secant",
   "sentence": "s02.2",
@@ -192,22 +192,22 @@
  },
  {
   "kind": "animation",
-  "t": 11.367,
+  "t": 11.5,
   "i": 20,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "wait",
-  "seconds": 0.377
+  "seconds": 0.527
  },
  {
-  "t": 6.033333333333327,
+  "t": 11.5,
   "kind": "sentence_end",
   "scene": "s02_secant",
   "sentence": "s02.2"
  },
  {
   "kind": "animation",
-  "t": 11.5,
+  "t": 11.533,
   "i": 21,
   "scene": "s02_secant",
   "sentence": null,
@@ -215,11 +215,16 @@
  },
  {
   "kind": "animation",
-  "t": 11.5,
+  "t": 11.533,
   "i": 22,
   "scene": "s02_secant",
   "sentence": null,
   "animation": "wait",
-  "seconds": 0.158
+  "seconds": 0.025
+ },
+ {
+  "kind": "scene_end",
+  "t": 11.533,
+  "scene": "s02_secant"
  }
 ]

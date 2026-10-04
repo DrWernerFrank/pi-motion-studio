@@ -48,7 +48,7 @@
   "seconds": 1.789
  },
  {
-  "t": 0.8999999999999999,
+  "t": 5.667,
   "kind": "sentence_end",
   "scene": "s05_3x3",
   "sentence": "s05.1"
@@ -87,7 +87,7 @@
  },
  {
   "kind": "animation",
-  "t": 10.433,
+  "t": 10.6,
   "i": 9,
   "scene": "s05_3x3",
   "sentence": "s05.2",
@@ -95,22 +95,22 @@
  },
  {
   "kind": "animation",
-  "t": 10.433,
+  "t": 10.6,
   "i": 10,
   "scene": "s05_3x3",
   "sentence": "s05.2",
   "animation": "wait",
-  "seconds": 0.393
+  "seconds": 0.543
  },
  {
-  "t": 10.066666666666649,
+  "t": 10.6,
   "kind": "sentence_end",
   "scene": "s05_3x3",
   "sentence": "s05.2"
  },
  {
   "kind": "animation",
-  "t": 10.833,
+  "t": 11.0,
   "i": 11,
   "scene": "s05_3x3",
   "sentence": null,
@@ -118,11 +118,16 @@
  },
  {
   "kind": "animation",
-  "t": 10.833,
+  "t": 11.0,
   "i": 12,
   "scene": "s05_3x3",
   "sentence": null,
   "animation": "wait",
   "seconds": 0.4
+ },
+ {
+  "kind": "scene_end",
+  "t": 11.0,
+  "scene": "s05_3x3"
  }
 ]

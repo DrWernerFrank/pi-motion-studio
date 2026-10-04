@@ -1006,7 +1006,7 @@
   ]
  },
  {
-  "t": 18.3,
+  "t": 18.467,
   "objects": [
    {
     "kind": "Txt",
@@ -1079,7 +1079,7 @@
   ]
  },
  {
-  "t": 18.3,
+  "t": 18.467,
   "objects": [
    {
     "kind": "Txt",
@@ -1135,152 +1135,6 @@
    {
     "kind": "Eq",
     "id": "23:3",
-    "bbox": [
-     -2.915,
-     -4.365,
-     5.002,
-     1.49
-    ],
-    "height_u": 18.62,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 3,
-    "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 18.433,
-  "objects": [
-   {
-    "kind": "Txt",
-    "id": "24:0",
-    "bbox": [
-     -3.439,
-     3.425,
-     4.368,
-     0.819
-    ],
-    "height_u": 10.23,
-    "nominal_u": 11.700000000000001,
-    "role": "title",
-    "color": "#000000",
-    "z": 0,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "24:1",
-    "bbox": [
-     -2.846,
-     -0.106,
-     3.745,
-     1.49
-    ],
-    "height_u": 18.62,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 1,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "24:2",
-    "bbox": [
-     -2.846,
-     -2.235,
-     4.041,
-     1.49
-    ],
-    "height_u": 18.62,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 2,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "24:3",
-    "bbox": [
-     -2.915,
-     -4.365,
-     5.002,
-     1.49
-    ],
-    "height_u": 18.62,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 3,
-    "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 18.433,
-  "objects": [
-   {
-    "kind": "Txt",
-    "id": "25:0",
-    "bbox": [
-     -3.439,
-     3.425,
-     4.368,
-     0.819
-    ],
-    "height_u": 10.23,
-    "nominal_u": 11.700000000000001,
-    "role": "title",
-    "color": "#000000",
-    "z": 0,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "25:1",
-    "bbox": [
-     -2.846,
-     -0.106,
-     3.745,
-     1.49
-    ],
-    "height_u": 18.62,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 1,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "25:2",
-    "bbox": [
-     -2.846,
-     -2.235,
-     4.041,
-     1.49
-    ],
-    "height_u": 18.62,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 2,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "25:3",
     "bbox": [
      -2.915,
      -4.365,
