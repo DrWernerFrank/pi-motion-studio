@@ -375,5 +375,48 @@
       "films/tangent/out/sheets/strip-56.60-16x9.png",
       "films/tangent/out/sheets/strip-61.40-16x9.png"
     ]
+  },
+  {
+    "round": 10,
+    "at": "2026-10-04T21:37:03.580Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 7,
+      "variety": 7,
+      "composition": 6,
+      "brand": 7,
+      "sound": 9,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 6,
+    "pass": false,
+    "problems": [
+      {
+        "t": 56.767,
+        "issue": "The s05→s06 seam STILL TELEPORTS — 4th round of this ask, and the r10 fix made it marginally WORSE, not better. Pixel-exact at the cut (draft frames 1702→1703, t 56.733→56.767, both formats): the three payoff rows are pixel-stable glyphs (widths 194/209/259px and y-centers identical across the cut — the scale component stays dead) teleported +58px RIGHT in 16:9 (row left edges 185→244/185→244/182→240; r9: +51) and +36px RIGHT in 9:16 (44→80/44→80/40→76; r9: +28) in ONE frame — content-IoU 0.25 (16:9) / 0.32 (9:16) across the cut — the title holds, only the rows jump, then a uniform 0.6s fade. Root (code-read, this round): the fix mean-centers s06's whole column at stage.x+0.35·stage.w on the assumption that is s05's visible end state — but s05's rows are '='-anchored at the LEFT-58% derivation's final '=' (rule_rows(steps.eqs[-1].part('p2').get_center()[0])); that anchor sits INSIDE the stage so the 35% room-fallback never fires in s05, and the two x-paths still resolve ~0.86u ≈ 58px apart. The TRUE root the brief named (two different x-paths) is still unfixed — the round swapped one wrong path for another.",
+        "fix": "Make s06 open from s05's ACTUAL end state — one source of truth, not a re-derivation: export s05's end-state row bboxes (the layout records already carry them, ids 23:1-23:3) and build s06's opening rows from THOSE bboxes directly (or share s05's exact rule_rows anchor + derivation geometry verbatim into s06). Then no second path can drift. Verify: 2-frame native diff across the cut (56.733 vs 56.767) must return dx=0 with identical row bboxes, in BOTH formats."
+      },
+      {
+        "t": 52.5,
+        "issue": "The 16:9 payoff span, 7th round, mechanically re-confirmed from the layout records: the three rows hold the stage alone 48.4–56.8s (8.4s = 13% of the film) spanning x[−4.415,−0.573] = 3.842u = 30.7% of the 12.52u stage — bboxes pixel-identical to r9, unchanged; the column center sits at ~30% of the stage width and the right ~55% of the frame is empty cream the whole 8.4s, the title's left edge ~120px left of the rows'. The ≥45% span + centering ask is unmet and the r8/r9 fix options (height-cap raise toward (0.9·stage.h−2·ROW_BUFF)/Σheights, title-band budget, the live curve+tangent callback in the reserved right 30%) remain untried.",
+        "fix": "Restore the live curve+tangent callback in the reserved right 30% (the r3 ask, removed in 986228d and never replaced) or re-anchor the column at stage-center with the title band budgeted into the rows-alone state. Re-measure from the records after: rows span ≥45% of the 16:9 stage, column center 50%±5%, s06 opening identical (problem 1)."
+      },
+      {
+        "t": 15,
+        "issue": "The 9:16 plot proportion, 8th round, re-confirmed from the records: the visible Axes are 6.39×4.12u = 1.55:1 landscape at ~29–33% of the 960px frame height (unchanged in every s01–s04 snapshot), the bottom third of the portrait frame dead cream through s01–s02, the parabola reading as a gentle bowl at phone scale. The r9 collision evidence now MEASURED at the panel stack: at 17–19.5s the y=x² label and the slope-fraction block sit ≤4px apart (their ink sub-bands merge at draft scale — at 360px phone width they read as touching), with only 6–7px from the tick labels to that block; any window growth genuinely collides. The untried r9 directions stand: grow the plot UP into the 133px title-to-axes gap, or whole-stack re-proportion.",
+        "fix": "A re-layout, not a window parameter: move the title to a top band, grow the drawn Axes toward ~0.9:1 at 40–45% of the frame height into the recovered gap, and re-space the panel stack so the label/fraction block gets ≥12px clear of both the ticks and itself. Re-verify the drawn AXES bbox (not the reserved box) from the layout records in s01–s04."
+      }
+    ],
+    "notes": "round 10 by math-critic — re-derived the full claims ledger 54/54 TRUE in fresh sympy processes from text alone + check tangent 6/6 scenes clean; on-screen numbers re-verified from the sheets and native frames: secant (4−1)/(2−1)=3, the h-sweep continuous 2+h (2.63/2.10/2.00 exact at every sampled instant), tangents 2/4/6 at x=1/2/3, d/dx x²=2x, x³=3x², xⁿ=n xⁿ⁻¹, the recap formula; captions.srt token-free; the fresh drafts' audio streams bit-equal to each other (1,412,612 samples) with all 12 sentence onsets at their timing.json starts (pre-200ms bins near-silent) — the A/V frame-exact spine carries over. THE SEAM VERIFIED PIXEL-EXACTLY (the round's headline ask) — and the fix DID NOT LAND: the rows still teleport at the cut, +58px in 16:9 / +36px in 9:16 (~6% of frame width, rows-only, title holds), content-IoU 0.25/0.32, one frame, then the uniform fade; marginally WORSE than r9's +51/+28 because the fix's mean-center-at-35%·stage target models the wrong s05 end state (s05's rows sit at the left-58% derivation's '=' anchor, not the room fallback). WHAT DID LAND: the 26.5 settle flash (1.35→1.15) is now CLEAN — constant glyph size through the settle, no overprint of its own '=', no h-readout dropout (IoU ≥0.99 across 26.43–26.6 with constant ink; the 2.00 emphasis kept, still the film's biggest number); the finale pulse renders and is word-timed (smooth 61.5–62.2s ramp peaking ~4.6k changed px at 61.87, settling by 62.23). Adjudicated this round at native: the s03→s04 'ghost double-exposure' the every-sheet flagged at 31s is FALSE — direct frames 30.4–30.9 show a graceful single-layer dissolve (the thumbnail misread a mid-fade frame); the s02→s03 slot swap and 4 of 5 seams remain anchored. Residuals re-confirmed mechanically, unchanged from r9: the 30.7% payoff span (7th round), the 9:16 1.55:1 plot at 29–33% height + the ≤4px label/fraction stack jam (8th round), the 39–44 stage-wipe desert, the 16:9 s01/s02 dead right half, ticks ~5px mush at 360px (7th round of the phone-floor ask), the lim color inconsistency s03 vs s05, the upright-roman n/x with loose token gaps in the amber results, the hairline d/dx bars. Judged good: the instruments (slope readout + red h lockup) hold at 360px in both formats — every value transcribed correctly at phone scale; the recap card is word-timed end to end; the settle beat is now the cleanest emphasis in the film. Verdict vs the 8+ bar: NOT passing — correctness 10 (earned: 54/54 independent, nothing trusted from the scenes), sound 9 (bit-equal drafts, onsets verified on the fresh renders), clarity 8, but composition 6 (the three documented residuals all mechanically re-confirmed and the seam one marginally regressed despite this round's fix claim) and motion 7 (the hero rows still teleport at the climax cut in BOTH formats, 4th round). The brief's framing — 'judge what the film gets right (A/V frame-exact, correctness, the finale) against the residuals honestly' — lands here as: the spine and the math are exemplary and the settle fix is real, but the seam ask was claimed fixed and is not, measured pixel-exactly; the composition asks are real below-bar defects, not acceptable trades. The math spine, the A/V truth and the word-timing remain what stand between this film and 'good'; the hero seam is the one fix that unlocks motion and composition at once.",
+    "sheets": [
+      "films/tangent/out/sheets/every-16x9.png",
+      "films/tangent/out/sheets/every-9x16.png",
+      "films/tangent/out/sheets/phone-16x9.png",
+      "films/tangent/out/sheets/phone-9x16.png",
+      "films/tangent/out/sheets/strip-56.70-16x9.png"
+    ]
   }
 ]

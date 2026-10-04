@@ -311,4 +311,16 @@ class Scene(StudioScene):
             self.play(Write(rows[2][0]), run_time=self.until("rule") + 0.6)
             claim("diff(x**n, x) == n*x**(n - 1)", about="bring the power down, lower it by one", says="s05.3")
             claim("(n*x**(n - 1)).subs(n, 3) == diff(x**3, x)", about="the rule at n = 3", says="s05.3")
+        # r10 (critic): export the END-STATE geometry — s06 continues from THIS, one truth.
+        import json as _json, os as _os
+        _state = {
+            "rows": [{"x": e.get_center()[0], "y": e.get_center()[1],
+                      "w": e.width, "h": e.height} for e, _ in rows],
+        }
+        try:
+            _fmt = _os.environ.get("STUDIO_FORMAT", "16:9")
+            with open(_os.path.join(_os.path.dirname(__file__), "..", f"s06_handoff-{_fmt}.json"), "w") as _f:
+                _json.dump(_state, _f)
+        except OSError:
+            pass
         end_scene(self)

@@ -43,9 +43,12 @@ def odd_eqs(ebox, upto):
     """e_1..e_upto at ONE shared scale (fit for e_5), left-aligned: the line grows to the right."""
     widest = odd_eq(5)
     # r6 (critic): grow into the panel's height as well — the ² was a 6.8px speck at 360px
-    # r7 (critic, 5th round): the WIDTH term kept binding — the 2^2 is 6.4px at 360px.
-    # The equation owns its panel: the height term decides, width only guards overflow.
-    s = min(2.2, ebox.h * 0.44 / widest.height, ebox.w * 0.98 / widest.width)
+    # r8 (critic, mechanism proven): the width coefficient (~0.88) structurally < the height
+    # term — min() could never let height bind. The equations scale to the PANEL'S HEIGHT
+    # (they own it), with width as the overflow guard: s = height-scale, capped by width.
+    s = ebox.h * 0.8 / widest.height
+    if widest.width * s > ebox.w * 0.98:          # overflow: the panel is the guard
+        s = ebox.w * 0.98 / widest.width
     x0 = ebox.cx - widest.width * s / 2
     out = []
     for m in range(1, upto + 1):
