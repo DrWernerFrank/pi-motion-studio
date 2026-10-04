@@ -22,3 +22,27 @@ VERIFIED CLEAN: 0 text-text overlaps across all snapshots both formats; nothing 
 SMALLER NOTES (not top-3): chapter titles record #000000 vs theme ink #17150F (pure black vs warm black); design.json's "a fine grid" is never drawn (unit_grid unused — blank paper); s04 stack rows are the film's smallest main text (h_u 5.76 in 16:9; 6.36u ≈ 23px in 9:16 at 360px — OK there); s03 runs 48% held time (deliberate dissection pacing, but two holds >2s); s05's recap wraps at 0.4s each are brisk. Correctness 10 — no mathematical error found anywhere. Clarity 8 — the gnomon spine reads: wrap → count the arms → generalize → telescope → recap.
 
 sheets: films/odd-squares/out/sheets/every-16x9.png, films/odd-squares/out/sheets/every-9x16.png, films/odd-squares/out/sheets/phone-16x9.png, films/odd-squares/out/sheets/phone-9x16.png
+
+## Round 2 · 2026-10-04 15:02 · critic · not yet
+
+hook 8 · readability 8 · motion 8 · variety 8 · composition 8 · brand 8 · sound 7 · correctness 10 · clarity 8
+
+1. **0s** author round 1: critic R1 fixes applied (contrast 0.78 opacity, blank-beat overlap, captions written)  
+   fix: done
+
+author round 1 — odd-squares after critic-R1 fixes
+
+
+## Round 3 · 2026-10-04 15:15 · math-critic · not yet
+
+brand 8 · clarity 7 · composition 7 · correctness 10 · hook 9 · motion 8 · readability 7 · sound 7 · variety 8
+
+1. **14.5s** Exponents unreadable at 360px in both formats — the ² superscript is the film's punchline glyph and it renders as a ~5px speck ('2² vs 2 can't be told apart'); body equations legible but only just, s04's rows tiny; equations occupy only ~15–40% of frame width with large empty margins.  
+   fix: Scale the Eq slots ~1.6–2× into the empty cream (in 9:16 let the sum line span ~85% of width; in 16:9 widen the equation panel's share); raise superscript weight/size so ² reads at 360px; re-run the phone sheet to confirm.
+2. **46.5s** The telescoping cancellations — the key mechanism of the algebraic proof — read as 0.15s fade-flickers, not pairs meeting: each FadeOut(scale 0.1, target mid) loses readability in ~0.15s of its 0.5s run; four cancels flicker by in 1.7s, then the cancelled rows dangle as '3 =', '5 =' for ~2.5s; the mechanism is carried by narration, not seen.  
+   fix: Pre-flash each pair together (Indicate both glyphs in a shared tint), stretch each vanish to 0.6–0.8s so the travel-to-midpoint is visible, then dim or strike the fully-cancelled rows so the two survivors visibly stand alone before the collapse.
+3. **60.5s** 9:16 under-fill and hierarchy inversion: figure only 40–45% of width with dead bands above/below; three different left edges (title x≈15, equation x≈22, figure x≈50) and the chapter title alignment changes between s02 (centered) and s03 (left); at the finale the takeaway 'odd numbers stack into squares' is the smallest, lightest text on screen, dwarfed by the Σ line beneath it.  
+   fix: Enlarge the recap figure ~1.5× into the dead bands; align title/equation/figure blocks to one shared edge (or center all three) consistently across chapters; give the takeaway line true title scale and spacing so the closing hierarchy reads words > formula.
+
+Round 2 by math-critic (vision, read_image on 12 sheets + 5 slow-motion strips). R1 FIXES ALL HOLD: dissected-L 0.78 (code + s03 frames), dimmed floor 0.22 (code; pastels visible at 1080p, amber weakest at 360px), the 50.7s AnimationGroup verified frame-by-frame — NO empty frame at the collapse, clean morph to '= n²'; captions 35 cues, zero leaked markup in SRT/VTT (the {wrap}/{cancel}/{kth} tokens seen on sheets are the look tool's raw-text labels, not film captions — verified 0 braces in both files). RE-DERIVED BY HAND: 1=1²; 1+3=4=2² ('square of four'); 1+3+5=9=3²; +7=16=4²; +9=25=5²; 4th L = column 4 + row 3 = 7 = 2·4−1 (4th odd); k-th L = k+(k−1)=2k−1; k²−(k−1)² = 2k−1 (16−9=7, 25−16=9); rows 1=1²−0², 3=2²−1², 5=3²−2², 2n−1=n²−(n−1)²; telescoping Σ(k²−(k−1)²)=n²−0²; Σ(2k−1)=n² (2·n(n+1)/2−n = n²); n=100 → Σ=100²=10000. CHECK: 5/5 scenes typeset, independent re-evaluation 48/48 claims true in fresh sympy. CORRECTNESS 10 (also: narration sentence-by-sentence cross-checked, settled states verified in 1/30s strips — mid-animation 'dangling =' / '3 =' residues are standard transitional idioms, not errors). CLARITY 7: the geometric spine (odd numbers stack into squares) reads beautifully — each L lands on its word, colors = digits; but the telescoping cancellations (s04, 24% of runtime) don't read as pairs meeting and the residue rows dangle ~2.5s. Disconfirmed: 'double-printed math' (phone/every sheets) — 1/30s strips show clean cross-fades with ~0.4s dangling-'=' windows, no glyph overlap; 'misregistered L's' at 2.1/13.4/18.0s are mid-slide arrivals (intended). Minor, not top-3: ~0.3s near-empty beat at 43.4s where the sum line exits before the rows enter (same pattern R1 fixed at 50.7 — apply the same AnimationGroup overlap); dashed target clears ~0.4s before the L lands (7.5s); long static holds 8.25–10.75s under narration; dimmed amber L approaches cream at 360px. SOUND scored on structure (could not audition): full-length 48k stereo mix, peak −1.5 dB, RMS −19.7, 64.5/65.7s narration coverage, word-bookmarked sync; TTS-only, no music. VERDICT vs the 8+ bar: FAILS on 4 keys — readability 7, composition 7, clarity 7, sound 7 (passes hook 9, motion 8, variety 8, brand 8, correctness 10). The spine and the math are post-ready; the phone-size type scale, the s04 cancellation beat, and the 9:16 fill/hierarchy are what keep it off my feed.
+

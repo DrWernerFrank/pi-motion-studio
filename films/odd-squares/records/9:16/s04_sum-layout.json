@@ -963,7 +963,7 @@
   ]
  },
  {
-  "t": 6.333,
+  "t": 6.3,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
@@ -1168,11 +1168,45 @@
     "z": 11,
     "alive": true,
     "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "17:12",
+    "bbox": [
+     -0.272,
+     0.688,
+     0.573,
+     0.62
+    ],
+    "height_u": 7.74,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 12,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VGroup",
+    "id": "17:13",
+    "bbox": [
+     0.417,
+     -0.536,
+     1.18,
+     0.62
+    ],
+    "height_u": 7.74,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B03D24",
+    "z": 13,
+    "alive": true,
+    "text": false
    }
   ]
  },
  {
-  "t": 6.833,
+  "t": 7.067,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
@@ -1297,15 +1331,15 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:7",
     "bbox": [
-     -1.401,
-     -1.711,
+     -0.239,
+     -0.474,
      0.239,
-     0.412
+     0.399
     ],
-    "height_u": 5.15,
+    "height_u": 4.98,
     "nominal_u": null,
     "role": null,
-    "color": "#A8324F",
+    "color": "#17150F",
     "z": 7,
     "alive": true,
     "text": false
@@ -1314,12 +1348,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "18:8",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     0.057,
+     -0.257,
+     0.186,
+     0.278
     ],
-    "height_u": 1.75,
+    "height_u": 3.48,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1328,42 +1362,25 @@
     "text": false
    },
    {
-    "kind": "VMobjectFromSVGPath",
+    "kind": "Eq",
     "id": "18:9",
     "bbox": [
-     -0.243,
+     -1.401,
      -1.711,
-     0.248,
-     0.412
+     2.88,
+     0.509
     ],
-    "height_u": 5.15,
-    "nominal_u": null,
-    "role": null,
+    "height_u": 6.36,
+    "nominal_u": 18.0,
+    "role": "math",
     "color": "#17150F",
     "z": 9,
     "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "18:10",
-    "bbox": [
-     0.057,
-     -1.481,
-     0.186,
-     0.278
-    ],
-    "height_u": 3.48,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 10,
-    "alive": true,
-    "text": false
+    "text": true
    },
    {
     "kind": "VGroup",
-    "id": "18:11",
+    "id": "18:10",
     "bbox": [
      -0.034,
      -3.057,
@@ -1374,13 +1391,13 @@
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
-    "z": 11,
+    "z": 10,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "18:12",
+    "id": "18:11",
     "bbox": [
      -3.096,
      -4.226,
@@ -1391,14 +1408,14 @@
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
-    "z": 12,
+    "z": 11,
     "alive": true,
     "text": true
    }
   ]
  },
  {
-  "t": 7.3,
+  "t": 7.533,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
@@ -1554,8 +1571,42 @@
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "VMobjectFromSVGPath",
     "id": "19:9",
+    "bbox": [
+     -0.243,
+     -1.711,
+     0.248,
+     0.412
+    ],
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 9,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:10",
+    "bbox": [
+     0.057,
+     -1.481,
+     0.186,
+     0.278
+    ],
+    "height_u": 3.48,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VGroup",
+    "id": "19:11",
     "bbox": [
      -0.034,
      -3.057,
@@ -1566,13 +1617,13 @@
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
-    "z": 9,
+    "z": 11,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "19:10",
+    "id": "19:12",
     "bbox": [
      -3.096,
      -4.226,
@@ -1583,14 +1634,48 @@
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
-    "z": 10,
+    "z": 12,
     "alive": true,
     "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "19:13",
+    "bbox": [
+     -0.299,
+     -0.536,
+     0.602,
+     0.62
+    ],
+    "height_u": 7.74,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 13,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VGroup",
+    "id": "19:14",
+    "bbox": [
+     0.417,
+     -1.76,
+     1.18,
+     0.62
+    ],
+    "height_u": 7.74,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B03D24",
+    "z": 14,
+    "alive": true,
+    "text": false
    }
   ]
  },
  {
-  "t": 7.8,
+  "t": 8.3,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
@@ -1749,12 +1834,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:9",
     "bbox": [
-     -3.096,
-     -4.078,
-     0.239,
-     0.399
+     -0.243,
+     -1.711,
+     0.248,
+     0.412
     ],
-    "height_u": 4.98,
+    "height_u": 5.15,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1766,12 +1851,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "20:10",
     "bbox": [
-     -2.608,
-     -4.078,
-     0.301,
-     0.265
+     0.057,
+     -1.481,
+     0.186,
+     0.278
     ],
-    "height_u": 3.31,
+    "height_u": 3.48,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -1780,94 +1865,43 @@
     "text": false
    },
    {
-    "kind": "VMobjectFromSVGPath",
+    "kind": "VGroup",
     "id": "20:11",
     "bbox": [
-     -2.062,
-     -3.94,
-     0.399,
-     0.024
+     -0.034,
+     -3.057,
+     0.067,
+     0.752
     ],
-    "height_u": 0.3,
+    "height_u": 9.4,
     "nominal_u": null,
     "role": null,
-    "color": "#17150F",
+    "color": "#FFFFFF",
     "z": 11,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VMobjectFromSVGPath",
+    "kind": "Eq",
     "id": "20:12",
     "bbox": [
-     -1.378,
-     -4.078,
-     0.198,
-     0.399
+     -3.096,
+     -4.226,
+     6.191,
+     0.644
     ],
-    "height_u": 4.98,
-    "nominal_u": null,
-    "role": null,
+    "height_u": 8.05,
+    "nominal_u": 18.0,
+    "role": "math",
     "color": "#17150F",
     "z": 12,
     "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "20:13",
-    "bbox": [
-     -0.9,
-     -3.998,
-     0.399,
-     0.14
-    ],
-    "height_u": 1.75,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 13,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "20:14",
-    "bbox": [
-     -0.251,
-     -4.084,
-     0.325,
-     0.271
-    ],
-    "height_u": 3.39,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 14,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "20:15",
-    "bbox": [
-     0.117,
-     -3.86,
-     0.186,
-     0.278
-    ],
-    "height_u": 3.48,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 15,
-    "alive": true,
-    "text": false
+    "text": true
    }
   ]
  },
  {
-  "t": 8.0,
+  "t": 9.0,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
@@ -2023,128 +2057,43 @@
     "text": false
    },
    {
-    "kind": "VMobjectFromSVGPath",
+    "kind": "VGroup",
     "id": "21:9",
     "bbox": [
-     -3.096,
-     -4.078,
-     0.239,
-     0.399
+     -0.034,
+     -3.057,
+     0.067,
+     0.752
     ],
-    "height_u": 4.98,
+    "height_u": 9.4,
     "nominal_u": null,
     "role": null,
-    "color": "#17150F",
+    "color": "#FFFFFF",
     "z": 9,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VMobjectFromSVGPath",
+    "kind": "Eq",
     "id": "21:10",
     "bbox": [
-     -2.608,
-     -4.078,
-     0.301,
-     0.265
+     -3.096,
+     -4.226,
+     6.191,
+     0.644
     ],
-    "height_u": 3.31,
-    "nominal_u": null,
-    "role": null,
+    "height_u": 8.05,
+    "nominal_u": 18.0,
+    "role": "math",
     "color": "#17150F",
     "z": 10,
     "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "21:11",
-    "bbox": [
-     -2.062,
-     -3.94,
-     0.399,
-     0.024
-    ],
-    "height_u": 0.3,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 11,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "21:12",
-    "bbox": [
-     -1.378,
-     -4.078,
-     0.198,
-     0.399
-    ],
-    "height_u": 4.98,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 12,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "21:13",
-    "bbox": [
-     -0.9,
-     -3.998,
-     0.399,
-     0.14
-    ],
-    "height_u": 1.75,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 13,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "21:14",
-    "bbox": [
-     -0.251,
-     -4.084,
-     0.325,
-     0.271
-    ],
-    "height_u": 3.39,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 14,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "VMobjectFromSVGPath",
-    "id": "21:15",
-    "bbox": [
-     0.117,
-     -3.86,
-     0.186,
-     0.278
-    ],
-    "height_u": 3.48,
-    "nominal_u": null,
-    "role": null,
-    "color": "#17150F",
-    "z": 15,
-    "alive": true,
-    "text": false
+    "text": true
    }
   ]
  },
  {
-  "t": 8.0,
+  "t": 9.767,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
@@ -2421,21 +2370,21 @@
   ]
  },
  {
-  "t": 8.6,
+  "t": 9.967,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
     "id": "23:0",
     "bbox": [
-     -1.406,
-     -0.487,
-     0.248,
-     0.412
+     -1.378,
+     0.75,
+     0.198,
+     0.399
     ],
-    "height_u": 5.15,
+    "height_u": 4.98,
     "nominal_u": null,
     "role": null,
-    "color": "#2E6B5A",
+    "color": "#9A5A00",
     "z": 0,
     "alive": true,
     "text": false
@@ -2445,7 +2394,7 @@
     "id": "23:1",
     "bbox": [
      -0.9,
-     -0.394,
+     0.829,
      0.399,
      0.14
     ],
@@ -2461,15 +2410,15 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:2",
     "bbox": [
-     -1.401,
-     -1.711,
-     0.239,
-     0.412
+     0.535,
+     0.887,
+     0.399,
+     0.024
     ],
-    "height_u": 5.15,
+    "height_u": 0.3,
     "nominal_u": null,
     "role": null,
-    "color": "#A8324F",
+    "color": "#17150F",
     "z": 2,
     "alive": true,
     "text": false
@@ -2478,12 +2427,12 @@
     "kind": "VMobjectFromSVGPath",
     "id": "23:3",
     "bbox": [
-     -0.9,
-     -1.618,
-     0.399,
-     0.14
+     0.991,
+     0.737,
+     0.252,
+     0.412
     ],
-    "height_u": 1.75,
+    "height_u": 5.15,
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
@@ -2492,47 +2441,25 @@
     "text": false
    },
    {
-    "kind": "Eq",
+    "kind": "VMobjectFromSVGPath",
     "id": "23:4",
     "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
+     1.293,
+     0.967,
+     0.186,
+     0.278
     ],
-    "height_u": 6.36,
-    "nominal_u": 18.0,
-    "role": "math",
+    "height_u": 3.48,
+    "nominal_u": null,
+    "role": null,
     "color": "#17150F",
     "z": 4,
     "alive": true,
-    "text": true
+    "text": false
    },
    {
-    "kind": "Eq",
-    "id": "23:5",
-    "bbox": [
-     -3.096,
-     -4.226,
-     6.191,
-     0.644
-    ],
-    "height_u": 8.05,
-    "nominal_u": 18.0,
-    "role": "math",
-    "color": "#17150F",
-    "z": 5,
-    "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 9.0,
-  "objects": [
-   {
     "kind": "VMobjectFromSVGPath",
-    "id": "24:0",
+    "id": "23:5",
     "bbox": [
      -1.406,
      -0.487,
@@ -2543,6 +2470,198 @@
     "nominal_u": null,
     "role": null,
     "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:6",
+    "bbox": [
+     -0.9,
+     -0.394,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:7",
+    "bbox": [
+     -1.401,
+     -1.711,
+     0.239,
+     0.412
+    ],
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:8",
+    "bbox": [
+     -0.9,
+     -1.618,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:9",
+    "bbox": [
+     -3.096,
+     -4.078,
+     0.239,
+     0.399
+    ],
+    "height_u": 4.98,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 9,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:10",
+    "bbox": [
+     -2.608,
+     -4.078,
+     0.301,
+     0.265
+    ],
+    "height_u": 3.31,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:11",
+    "bbox": [
+     -2.062,
+     -3.94,
+     0.399,
+     0.024
+    ],
+    "height_u": 0.3,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:12",
+    "bbox": [
+     -1.378,
+     -4.078,
+     0.198,
+     0.399
+    ],
+    "height_u": 4.98,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:13",
+    "bbox": [
+     -0.9,
+     -3.998,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 13,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:14",
+    "bbox": [
+     -0.251,
+     -4.084,
+     0.325,
+     0.271
+    ],
+    "height_u": 3.39,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 14,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:15",
+    "bbox": [
+     0.117,
+     -3.86,
+     0.186,
+     0.278
+    ],
+    "height_u": 3.48,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 15,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 9.967,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:0",
+    "bbox": [
+     -1.378,
+     0.75,
+     0.198,
+     0.399
+    ],
+    "height_u": 4.98,
+    "nominal_u": null,
+    "role": null,
+    "color": "#9A5A00",
     "z": 0,
     "alive": true,
     "text": false
@@ -2552,7 +2671,7 @@
     "id": "24:1",
     "bbox": [
      -0.9,
-     -0.394,
+     0.829,
      0.399,
      0.14
     ],
@@ -2568,6 +2687,91 @@
     "kind": "VMobjectFromSVGPath",
     "id": "24:2",
     "bbox": [
+     0.535,
+     0.887,
+     0.399,
+     0.024
+    ],
+    "height_u": 0.3,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:3",
+    "bbox": [
+     0.991,
+     0.737,
+     0.252,
+     0.412
+    ],
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:4",
+    "bbox": [
+     1.293,
+     0.967,
+     0.186,
+     0.278
+    ],
+    "height_u": 3.48,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:5",
+    "bbox": [
+     -1.406,
+     -0.487,
+     0.248,
+     0.412
+    ],
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:6",
+    "bbox": [
+     -0.9,
+     -0.394,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:7",
+    "bbox": [
      -1.401,
      -1.711,
      0.239,
@@ -2577,13 +2781,13 @@
     "nominal_u": null,
     "role": null,
     "color": "#A8324F",
-    "z": 2,
+    "z": 7,
     "alive": true,
     "text": false
    },
    {
     "kind": "VMobjectFromSVGPath",
-    "id": "24:3",
+    "id": "24:8",
     "bbox": [
      -0.9,
      -1.618,
@@ -2594,48 +2798,133 @@
     "nominal_u": null,
     "role": null,
     "color": "#17150F",
-    "z": 3,
+    "z": 8,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Eq",
-    "id": "24:4",
-    "bbox": [
-     -1.378,
-     0.737,
-     2.857,
-     0.509
-    ],
-    "height_u": 6.36,
-    "nominal_u": 18.0,
-    "role": "math",
-    "color": "#17150F",
-    "z": 4,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "24:5",
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:9",
     "bbox": [
      -3.096,
-     -4.226,
-     6.191,
-     0.644
+     -4.078,
+     0.239,
+     0.399
     ],
-    "height_u": 8.05,
-    "nominal_u": 18.0,
-    "role": "math",
+    "height_u": 4.98,
+    "nominal_u": null,
+    "role": null,
     "color": "#17150F",
-    "z": 5,
+    "z": 9,
     "alive": true,
-    "text": true
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:10",
+    "bbox": [
+     -2.608,
+     -4.078,
+     0.301,
+     0.265
+    ],
+    "height_u": 3.31,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:11",
+    "bbox": [
+     -2.062,
+     -3.94,
+     0.399,
+     0.024
+    ],
+    "height_u": 0.3,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:12",
+    "bbox": [
+     -1.378,
+     -4.078,
+     0.198,
+     0.399
+    ],
+    "height_u": 4.98,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:13",
+    "bbox": [
+     -0.9,
+     -3.998,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 13,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:14",
+    "bbox": [
+     -0.251,
+     -4.084,
+     0.325,
+     0.271
+    ],
+    "height_u": 3.39,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 14,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:15",
+    "bbox": [
+     0.117,
+     -3.86,
+     0.186,
+     0.278
+    ],
+    "height_u": 3.48,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 15,
+    "alive": true,
+    "text": false
    }
   ]
  },
  {
-  "t": 9.0,
+  "t": 10.567,
   "objects": [
    {
     "kind": "VMobjectFromSVGPath",
@@ -2710,11 +2999,11 @@
     "id": "25:4",
     "bbox": [
      -1.378,
-     0.737,
+     0.688,
      2.857,
-     0.509
+     0.62
     ],
-    "height_u": 6.36,
+    "height_u": 7.74,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -2742,85 +3031,221 @@
   ]
  },
  {
-  "t": 9.9,
+  "t": 10.967,
   "objects": [
    {
-    "kind": "Eq",
+    "kind": "VMobjectFromSVGPath",
     "id": "26:0",
     "bbox": [
-     -3.165,
-     -1.331,
-     6.33,
-     0.55
+     -1.406,
+     -0.487,
+     0.248,
+     0.412
     ],
-    "height_u": 6.88,
-    "nominal_u": 18.0,
-    "role": "math",
-    "color": "#17150F",
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
     "z": 0,
     "alive": true,
-    "text": true
+    "text": false
    },
    {
-    "kind": "Eq",
+    "kind": "VMobjectFromSVGPath",
     "id": "26:1",
     "bbox": [
-     -1.125,
-     -2.2,
-     2.25,
-     0.47
+     -0.9,
+     -0.394,
+     0.399,
+     0.14
     ],
-    "height_u": 5.87,
-    "nominal_u": 18.0,
-    "role": "math",
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
     "color": "#17150F",
     "z": 1,
     "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 10.9,
-  "objects": [
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "26:2",
+    "bbox": [
+     -1.401,
+     -1.711,
+     0.239,
+     0.412
+    ],
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "26:3",
+    "bbox": [
+     -0.9,
+     -1.618,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
    {
     "kind": "Eq",
-    "id": "27:0",
+    "id": "26:4",
     "bbox": [
-     -3.165,
-     -1.331,
-     6.33,
-     0.55
+     -1.378,
+     0.688,
+     2.857,
+     0.62
     ],
-    "height_u": 6.88,
+    "height_u": 7.74,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
-    "z": 0,
+    "z": 4,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "27:1",
+    "id": "26:5",
     "bbox": [
-     -1.125,
-     -2.2,
-     2.25,
-     0.47
+     -3.096,
+     -4.226,
+     6.191,
+     0.644
     ],
-    "height_u": 5.87,
+    "height_u": 8.05,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
-    "z": 1,
+    "z": 5,
     "alive": true,
     "text": true
    }
   ]
  },
  {
-  "t": 10.9,
+  "t": 10.967,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "27:0",
+    "bbox": [
+     -1.406,
+     -0.487,
+     0.248,
+     0.412
+    ],
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "27:1",
+    "bbox": [
+     -0.9,
+     -0.394,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "27:2",
+    "bbox": [
+     -1.401,
+     -1.711,
+     0.239,
+     0.412
+    ],
+    "height_u": 5.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "27:3",
+    "bbox": [
+     -0.9,
+     -1.618,
+     0.399,
+     0.14
+    ],
+    "height_u": 1.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "27:4",
+    "bbox": [
+     -1.378,
+     0.688,
+     2.857,
+     0.62
+    ],
+    "height_u": 7.74,
+    "nominal_u": 18.0,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "27:5",
+    "bbox": [
+     -3.096,
+     -4.226,
+     6.191,
+     0.644
+    ],
+    "height_u": 8.05,
+    "nominal_u": 18.0,
+    "role": "math",
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 11.867,
   "objects": [
    {
     "kind": "Eq",
@@ -2859,7 +3284,7 @@
   ]
  },
  {
-  "t": 11.033,
+  "t": 12.067,
   "objects": [
    {
     "kind": "Eq",
@@ -2898,7 +3323,7 @@
   ]
  },
  {
-  "t": 11.033,
+  "t": 12.067,
   "objects": [
    {
     "kind": "Eq",
@@ -2937,7 +3362,7 @@
   ]
  },
  {
-  "t": 11.233,
+  "t": 12.867,
   "objects": [
    {
     "kind": "Eq",
@@ -2961,11 +3386,11 @@
     "id": "31:1",
     "bbox": [
      -1.125,
-     -2.2,
-     2.25,
-     0.47
+     -2.194,
+     1.11,
+     0.464
     ],
-    "height_u": 5.87,
+    "height_u": 5.79,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -2976,7 +3401,7 @@
   ]
  },
  {
-  "t": 11.233,
+  "t": 15.667,
   "objects": [
    {
     "kind": "Eq",
@@ -3000,11 +3425,11 @@
     "id": "32:1",
     "bbox": [
      -1.125,
-     -2.2,
-     2.25,
-     0.47
+     -2.194,
+     1.11,
+     0.464
     ],
-    "height_u": 5.87,
+    "height_u": 5.79,
     "nominal_u": 18.0,
     "role": "math",
     "color": "#17150F",
@@ -3015,7 +3440,7 @@
   ]
  },
  {
-  "t": 12.033,
+  "t": 15.667,
   "objects": [
    {
     "kind": "Eq",
@@ -3054,7 +3479,7 @@
   ]
  },
  {
-  "t": 15.667,
+  "t": 15.8,
   "objects": [
    {
     "kind": "Eq",
@@ -3093,7 +3518,7 @@
   ]
  },
  {
-  "t": 15.667,
+  "t": 15.8,
   "objects": [
    {
     "kind": "Eq",
@@ -3115,84 +3540,6 @@
    {
     "kind": "Eq",
     "id": "35:1",
-    "bbox": [
-     -1.125,
-     -2.194,
-     1.11,
-     0.464
-    ],
-    "height_u": 5.79,
-    "nominal_u": 18.0,
-    "role": "math",
-    "color": "#17150F",
-    "z": 1,
-    "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 15.8,
-  "objects": [
-   {
-    "kind": "Eq",
-    "id": "36:0",
-    "bbox": [
-     -3.165,
-     -1.331,
-     6.33,
-     0.55
-    ],
-    "height_u": 6.88,
-    "nominal_u": 18.0,
-    "role": "math",
-    "color": "#17150F",
-    "z": 0,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "36:1",
-    "bbox": [
-     -1.125,
-     -2.194,
-     1.11,
-     0.464
-    ],
-    "height_u": 5.79,
-    "nominal_u": 18.0,
-    "role": "math",
-    "color": "#17150F",
-    "z": 1,
-    "alive": true,
-    "text": true
-   }
-  ]
- },
- {
-  "t": 15.8,
-  "objects": [
-   {
-    "kind": "Eq",
-    "id": "37:0",
-    "bbox": [
-     -3.165,
-     -1.331,
-     6.33,
-     0.55
-    ],
-    "height_u": 6.88,
-    "nominal_u": 18.0,
-    "role": "math",
-    "color": "#17150F",
-    "z": 0,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "Eq",
-    "id": "37:1",
     "bbox": [
      -1.125,
      -2.194,

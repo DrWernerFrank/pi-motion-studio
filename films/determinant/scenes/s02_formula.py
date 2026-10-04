@@ -25,7 +25,14 @@ class Scene(StudioScene):
         worked.next_to(formula, DOWN, buff=step * 0.8)
         from manim import VGroup
         from studio_manim.kit import into
-        into(VGroup(A, formula, worked), L.safe, fill=0.86)  # the SAFE box: portrait margins cleared (critic R2)
+        # critic R3: the card sat small in the top half, bottom 50% empty. Lift it toward the
+        # stage's full height (into() only shrinks — pre-scale against the STAGE box, anchored
+        # at the group's bottom so it grows DOWN, not into the title band), then fit the safe box.
+        from studio_manim.layout import _Box
+        g = VGroup(A, formula, worked)
+        grow = (L.stage.h * 0.92) / max(g.height, 1e-6)
+        g.scale(min(1.6, max(1.0, grow)), about_point=g.get_bottom())
+        into(g, _Box(L.safe.x, L.stage.y + L.stage.h * 0.04, L.safe.w, L.stage.h * 0.96), fill=0.94)
 
         with self.say("s02.1"):
             self.play(Write(head), run_time=0.9)

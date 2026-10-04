@@ -7,11 +7,11 @@
     "id": "1:0",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -46,11 +46,11 @@
     "id": "2:0",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -79,12 +79,12 @@
     "kind": "Polygon",
     "id": "2:2",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -119,11 +119,11 @@
     "id": "3:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -136,11 +136,11 @@
     "id": "3:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -152,12 +152,12 @@
     "kind": "Polygon",
     "id": "3:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -169,12 +169,12 @@
     "kind": "Arrow",
     "id": "3:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -186,12 +186,12 @@
     "kind": "Arrow",
     "id": "3:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -226,11 +226,11 @@
     "id": "4:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -243,11 +243,11 @@
     "id": "4:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -259,12 +259,12 @@
     "kind": "Polygon",
     "id": "4:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -276,12 +276,12 @@
     "kind": "Arrow",
     "id": "4:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -293,12 +293,12 @@
     "kind": "Arrow",
     "id": "4:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -333,11 +333,11 @@
     "id": "5:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -350,11 +350,11 @@
     "id": "5:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -366,12 +366,12 @@
     "kind": "Polygon",
     "id": "5:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -383,12 +383,12 @@
     "kind": "Arrow",
     "id": "5:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -400,12 +400,12 @@
     "kind": "Arrow",
     "id": "5:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -440,11 +440,11 @@
     "id": "6:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -457,11 +457,11 @@
     "id": "6:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -473,12 +473,12 @@
     "kind": "Polygon",
     "id": "6:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -490,12 +490,12 @@
     "kind": "Arrow",
     "id": "6:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -507,12 +507,12 @@
     "kind": "Arrow",
     "id": "6:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -547,11 +547,11 @@
     "id": "7:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -564,11 +564,11 @@
     "id": "7:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -580,12 +580,12 @@
     "kind": "Polygon",
     "id": "7:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -597,12 +597,12 @@
     "kind": "Arrow",
     "id": "7:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -614,12 +614,12 @@
     "kind": "Arrow",
     "id": "7:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -654,11 +654,11 @@
     "id": "8:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -671,11 +671,11 @@
     "id": "8:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -687,12 +687,12 @@
     "kind": "Polygon",
     "id": "8:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -704,12 +704,12 @@
     "kind": "Arrow",
     "id": "8:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -721,12 +721,12 @@
     "kind": "Arrow",
     "id": "8:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -738,15 +738,15 @@
     "kind": "Eq",
     "id": "8:6",
     "bbox": [
-     -0.917,
-     -2.575,
-     1.479,
-     0.284
+     -1.345,
+     -5.191,
+     2.69,
+     0.516
     ],
-    "height_u": 3.55,
+    "height_u": 6.45,
     "nominal_u": 13.5,
     "role": "math",
-    "color": "#8F5B00",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": true
@@ -778,11 +778,11 @@
     "id": "9:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -795,11 +795,11 @@
     "id": "9:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -811,12 +811,12 @@
     "kind": "Polygon",
     "id": "9:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -828,12 +828,12 @@
     "kind": "Arrow",
     "id": "9:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -845,12 +845,12 @@
     "kind": "Arrow",
     "id": "9:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -862,15 +862,15 @@
     "kind": "Eq",
     "id": "9:6",
     "bbox": [
-     -0.917,
-     -2.575,
-     1.479,
-     0.284
+     -1.345,
+     -5.191,
+     2.69,
+     0.516
     ],
-    "height_u": 3.55,
+    "height_u": 6.45,
     "nominal_u": 13.5,
     "role": "math",
-    "color": "#8F5B00",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": true
@@ -902,11 +902,11 @@
     "id": "10:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -919,11 +919,11 @@
     "id": "10:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -935,12 +935,12 @@
     "kind": "Polygon",
     "id": "10:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -952,12 +952,12 @@
     "kind": "Arrow",
     "id": "10:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -969,12 +969,12 @@
     "kind": "Arrow",
     "id": "10:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -986,15 +986,15 @@
     "kind": "Eq",
     "id": "10:6",
     "bbox": [
-     -0.917,
-     -2.575,
-     1.479,
-     0.284
+     -1.345,
+     -5.191,
+     2.69,
+     0.516
     ],
-    "height_u": 3.55,
+    "height_u": 6.45,
     "nominal_u": 13.5,
     "role": "math",
-    "color": "#8F5B00",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": true
@@ -1026,11 +1026,11 @@
     "id": "11:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1043,11 +1043,11 @@
     "id": "11:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1059,12 +1059,12 @@
     "kind": "Polygon",
     "id": "11:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -1076,12 +1076,12 @@
     "kind": "Arrow",
     "id": "11:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -1093,12 +1093,12 @@
     "kind": "Arrow",
     "id": "11:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -1110,15 +1110,15 @@
     "kind": "Eq",
     "id": "11:6",
     "bbox": [
-     -0.917,
-     -2.575,
-     1.479,
-     0.284
+     -1.345,
+     -5.191,
+     2.69,
+     0.516
     ],
-    "height_u": 3.55,
+    "height_u": 6.45,
     "nominal_u": 13.5,
     "role": "math",
-    "color": "#8F5B00",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": true
@@ -1150,11 +1150,11 @@
     "id": "12:1",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1167,11 +1167,11 @@
     "id": "12:2",
     "bbox": [
      -3.234,
-     -2.993,
+     -2.668,
      6.467,
-     5.525
+     5.209
     ],
-    "height_u": 69.06,
+    "height_u": 65.12,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1183,12 +1183,12 @@
     "kind": "Polygon",
     "id": "12:3",
     "bbox": [
-     -2.487,
-     -2.097,
-     4.975,
-     3.731
+     -2.481,
+     -1.923,
+     4.961,
+     3.721
     ],
-    "height_u": 46.64,
+    "height_u": 46.51,
     "nominal_u": null,
     "role": null,
     "color": "#B9DE6E",
@@ -1200,12 +1200,12 @@
     "kind": "Arrow",
     "id": "12:4",
     "bbox": [
-     -2.487,
-     -2.097,
-     3.731,
-     1.287
+     -2.481,
+     -1.923,
+     3.721,
+     1.284
     ],
-    "height_u": 16.09,
+    "height_u": 16.05,
     "nominal_u": null,
     "role": null,
     "color": "#A86400",
@@ -1217,12 +1217,12 @@
     "kind": "Arrow",
     "id": "12:5",
     "bbox": [
-     -2.487,
-     -2.097,
-     1.244,
-     2.487
+     -2.481,
+     -1.923,
+     1.24,
+     2.481
     ],
-    "height_u": 31.09,
+    "height_u": 31.01,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -1234,15 +1234,15 @@
     "kind": "Eq",
     "id": "12:6",
     "bbox": [
-     -0.917,
-     -2.575,
-     1.479,
-     0.284
+     -1.345,
+     -5.191,
+     2.69,
+     0.516
     ],
-    "height_u": 3.55,
+    "height_u": 6.45,
     "nominal_u": 13.5,
     "role": "math",
-    "color": "#8F5B00",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": true

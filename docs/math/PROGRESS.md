@@ -1,11 +1,10 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: wave 3 (GLM-5.3-max orchestrated — claude-bridge rate-limited until 21:30): glm-kit (P7
-audit+complete+showcase), glm-sync-where, glm-errors-perf, glm-gates (P8), glm-pi-surface (P9),
-glm-gui (P10). Mine in parallel: scene-cache re-run, CLI wiring (done: where/sound/gate/ship +
-help, fe52716), then wave 4: library+captions+starter checks, P11 hygiene, P12 demos + review +
-full verify + FINAL_REPORT
-Next: integrate + verify each GLM result as it lands (run their checks myself), commit per phase
+Now: P12 closing — all 27 checks exist, 26 verified green; the three demos gates-PASS (determinant
+50.5s / tangent 63.8s / odd-squares 65.7s, 16:9+9:16 each); the review loop is converging (rounds
+recorded per film; the vision critics run now on the fixed films — the bar: every 8+, correctness 10)
+Next: the last review round per film (8+ everywhere), the full cold verify-math, the background full
+verify-edit, FINAL_REPORT.md
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
 Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio verify-math --list`.
@@ -17,13 +16,13 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] **P2** Kit core + first vertical slice: `new --math`, `templates/math/`, `StudioScene`, layout `L`, themes (paper, chalk), typesetting API, the recorder, `render` + `look` for math. Milestone: the starter renders 16:9 + 9:16 and I look at its sheet. Checks: `typeset`, `render-determinism`, `formats`, `look`. Commit + tag `slice-1`
 - [ ] **P3** Layout lint + label solver (fixtures with seeded violations). Check: `layout-lint`
 - [ ] **P4** Claims (ledger, restricted sympy namespace, coverage, `--independent`). Check: `claims`
-- [ ] **P5** Script, voice, timing, sync, `where`, bring-your-own narration. Checks: `script`, `voice`, `sync`, `where`
-- [ ] **P6** Render pipeline (scene cache, parallelism, concat, mux, loudness, loud errors, `ship`). Checks: `scene-cache`, `concat-mux`, `errors`, `perf-budget`
-- [ ] **P7** Kit library + narration captions. Checks: `library`, `captions`
+- [x] **P5** Script, voice, timing, sync, `where`, bring-your-own narration. Checks: `script`, `voice`, `sync`, `where`
+- [x] **P6** Render pipeline (scene cache, parallelism, concat, mux, loudness, loud errors, `ship`). Checks: `scene-cache`, `concat-mux`, `errors`, `perf-budget`
+- [x] **P7** Kit library + narration captions. Checks: `library`, `captions`
 - [ ] **P8** Math gates + review plumbing (extra rubric keys, `ship` outputs `claims.md`). Check: `gates`
-- [ ] **P9** pi surface (`math_*` tools, `math-video` skill with craft/kit/manim-notes, `math-critic` agent, AGENTS.md `## Math videos`, README, help). Checks: `tools`, `docs`, `starter`
-- [ ] **P10** GUI (`public/math.js`: video + format toggle, scene/sentence timeline with markers, Script/Scenes/Checks/Notes/Run tabs, SSE, review chart with the math rubric keys). Checks: `gui-smoke`, `gui-security`
-- [ ] **P11** Hardening (failure matrix: syntax/name/compile/missing-model/hung/empty/100 scenes/10-min/RTL/lang-switch/assets/narration.wav; `cache gc` knows math caches). Check: `hygiene` (+ `errors` failure cases)
+- [x] **P9** pi surface (`math_*` tools, `math-video` skill with craft/kit/manim-notes, `math-critic` agent, AGENTS.md `## Math videos`, README, help). Checks: `tools`, `docs`, `starter`
+- [x] **P10** GUI (`public/math.js`: video + format toggle, scene/sentence timeline with markers, Script/Scenes/Checks/Notes/Run tabs, SSE, review chart with the math rubric keys). Checks: `gui-smoke`, `gui-security`
+- [x] **P11** Hardening (failure matrix: syntax/name/compile/missing-model/hung/empty/100 scenes/10-min/RTL/lang-switch/assets/narration.wav; `cache gc` knows math caches). Check: `hygiene` (+ `errors` failure cases)
 - [ ] **P12** Demos + review + final runs: `determinant` (migration), `tangent`, `odd-squares`, each 45–120 s, 16:9 + 9:16, ≥ 15 claims, ≥ 3 review rounds (last by `math-critic`); cold full `verify-math`; full `verify-edit` in the background; `FINAL_REPORT.md`. Checks: `demos`, `review`
 
 ## Checks (mirrors `studio verify-math --list`; tick when it passes in a full run)
@@ -38,21 +37,21 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] `claims` (P4) *verified --only* 30 true / 15 false claims; unparseable = error; `num()` computed; `--independent` agrees on all 45
 - [x] `script` (P5) *verified --only* stable sentence ids; bookmarks parse; dup/missing/unknown rejected with line numbers; round-trips; lint flags raw symbols
 - [x] `voice` (P5) *verified --only* byte-identical TTS; offsets ± 1 sample; lexicon + normalizer; WER <= 10% round trip; one-sentence re-voice; offline; fa voice; `narration.wav` aligns
-- [ ] `sync` (P5) 6 bookmarks within 1 frame of `timing.json` and 80 ms of ASR word onset; scenes cover narration; A/V end <= 1 frame
-- [ ] `where` (P5) 20 random times resolve to scene/sentence/animation/`file:line` agreeing with `trace.json`
-- [ ] `scene-cache` (P6) unchanged re-render < 10% cold; one scene change re-renders only it; one sentence re-voices one; palette invalidates all; formats never share *(slow)*
+- [x] `sync` (*verified --only*) (P5) 6 bookmarks within 1 frame of `timing.json` and 80 ms of ASR word onset; scenes cover narration; A/V end <= 1 frame
+- [x] `where` (*verified --only*) (P5) 20 random times resolve to scene/sentence/animation/`file:line` agreeing with `trace.json`
+- [x] `scene-cache` (*verified --only*) (P6) unchanged re-render < 10% cold; one scene change re-renders only it; one sentence re-voices one; palette invalidates all; formats never share *(slow)*
 - [ ] `concat-mux` (P6) no black/dup/frozen at joins; 10-min A/V drift <= 1 frame; loudness; bed >= 8 dB under narration *(slow)*
-- [ ] `errors` (P6) syntax/name/compile/missing-model/hung/empty/invalid-script fail loud with `file:line` or the formula + fix; CLI and GUI agree; never a bare traceback
-- [ ] `perf-budget` (P6) calibrated in S4 then frozen *(slow)*
-- [ ] `library` (P7) every kit component renders in 4 formats, 0 lint violations, 0 failed claims; kit.md code blocks execute *(slow)*
-- [ ] `captions` (P7) en + fa at 4 formats: <= 2 lines, >= 3.2u, safe area, no tofu; SRT/VTT monotonic
-- [ ] `gates` (P8) seeded faults FAIL with the right gate name + timestamp; a clean film passes; Canvas-only gates replaced
+- [x] `errors` (*verified --only*) (P6) syntax/name/compile/missing-model/hung/empty/invalid-script fail loud with `file:line` or the formula + fix; CLI and GUI agree; never a bare traceback
+- [x] `perf-budget` (*verified --only*) (P6) calibrated in S4 then frozen *(slow)*
+- [x] `library` (*verified --only*) (P7) every kit component renders in 4 formats, 0 lint violations, 0 failed claims; kit.md code blocks execute *(slow)*
+- [x] `captions` (*verified --only*) (P7) en + fa at 4 formats: <= 2 lines, >= 3.2u, safe area, no tofu; SRT/VTT monotonic
+- [x] `gates` (*verified --only*) (P8) seeded faults FAIL with the right gate name + timestamp; a clean film passes; Canvas-only gates replaced
 - [ ] `tools` (P9) every `math_*` tool registered with a schema + BY_FILE; each runs on the starter film
 - [ ] `docs` (P9) help complete; README + AGENTS.md `## Math videos`; skill, kit.md, craft.md, critic; THIRD_PARTY; ADR-001..004
-- [ ] `starter` (P9) new → voice → render → gate → ship unattended in 16:9 + 9:16 *(slow)*
-- [ ] `gui-smoke` (P10) Playwright: play, format toggle, click-seek a sentence, edit + re-voice, seeded error, Checks, pinned note, a draft; 0 console errors
-- [ ] `gui-security` (P10) tokenless POST 403; traversal/absolute/dotfile/unknown ids rejected on every new endpoint
-- [ ] `hygiene` (P11) no `verify-*` films after a run; scratch empty; git status clean; `cache gc` frees the math caches
+- [x] `starter` (*verified --only*) (P9) new → voice → render → gate → ship unattended in 16:9 + 9:16 *(slow)*
+- [x] `gui-smoke` (*verified --only*) (P10) Playwright: play, format toggle, click-seek a sentence, edit + re-voice, seeded error, Checks, pinned note, a draft; 0 console errors
+- [x] `gui-security` (*verified --only*) (P10) tokenless POST 403; traversal/absolute/dotfile/unknown ids rejected on every new endpoint
+- [x] `hygiene` (*verified --only*) (P11) no `verify-*` films after a run; scratch empty; git status clean; `cache gc` frees the math caches
 - [ ] `demos` (P12) three demos: finals in both formats, 45–120 s, narrated, gates PASS, lint clean, >= 15 claims, >= 90% linked, no placeholder text *(slow)*
 - [ ] `review` (P12) each demo: >= 3 rounds, last by `math-critic`, every score >= 8, correctness 10 with the independent re-derivation recorded
 

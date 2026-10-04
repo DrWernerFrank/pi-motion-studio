@@ -72,5 +72,49 @@
       "out/sheets/phone-16x9.png",
       "out/sheets/phone-9x16.png"
     ]
+  },
+  {
+    "round": 3,
+    "at": "2026-10-04T15:13:52.092Z",
+    "reviewer": "math-critic (round 3, vision)",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 6,
+      "variety": 7,
+      "composition": 7,
+      "brand": 7,
+      "sound": 8,
+      "correctness": 10,
+      "clarity": 7
+    },
+    "min": 6,
+    "pass": false,
+    "problems": [
+      {
+        "t": 13.5,
+        "issue": "s02 wastes the frame in BOTH formats: in 16:9 the whole card (matrix [3 1; 1 2] + det(a b; c d) = ad − bc + worked line) sits small in the top half with the bottom ~50% empty; in 9:16 content ends at ~64% height leaving ~36% dead at the bottom (~57% total empty) — the film's own gates log 44 density warns for this scene.",
+        "fix": "Lift the card ~1.4–1.5× and recenter vertically (the math lines run 9–11u; the room is there), or fill the lower half with a small unit-square→parallelogram figure under the formula that pre-echoes s01."
+      },
+      {
+        "t": 7,
+        "issue": "Round-2's sub-floor text fix landed in 9:16 only: records show the portrait lifted (area label 3.55u, s04 note 3.41u, s06 heading 3.6u) but 16:9 kept 'area = 5' at 2.37u (t≈7), the s04 note 'no inverse — it cannot be undone' at 2.58u (t≈33) and the s06 recap heading at 2.58u (t≈46) — all under the design's 3.2u label floor (measured 2.59–2.78u ink in the rendered 540p draft, unreadable on the phone-16:9 sheet), and these carry the hook payoff and both takeaway notes.",
+        "fix": "Apply the same per-format lift to the 16:9 stack: compose the notes outside the into()-scaled group (as done in 9:16), or raise nominal sizes until the MEASURED height_u ≥ 3.2 in both formats — and make the lint fail (not warn) below floor."
+      },
+      {
+        "t": 4.9,
+        "issue": "Motion holds under active narration: the s01 shear completes at ~4.0s then the plane freezes ~1.9s exactly under 'as a matrix acts on the plane' (the payoff line), and the pace gate still counts 6 freeze runs ≥3s while narrating (~20% of runtime static; the recap card is frozen 46.9–49.7s).",
+        "fix": "Pace the shear to end on the 'acts' bookmark (or keep a slow grid drift/breathing through the hold), and give the recap a final settle — the 5 easing in, or a faint plane echo — so the closer is not 3s of stillness."
+      }
+    ],
+    "notes": "round 3 by math-critic (vision) — RE-DERIVED FROM THE SHEETS: det[[3,1],[1,2]] = 3*2−1*1 = 5 (s01 'area = 5', s02 worked line, s06 recap — all amber); swapped det[[1,3],[2,1]] = 1*1−3*2 = −5 (red; narration 'one minus six' matches 1−6); det[[2,4],[1,2]] = 2*2−4*1 = 0 (plane collapses to a line); 3×3 [2 1 0; 1 3 1; 0 1 2] first-row cofactors: minor1 det[[3,1],[1,2]] = 5, minor2 det[[1,1],[0,2]] = 2, sum 2*5−1*2+0 = 8 = full det (amber 8; 'Two times five, minus one times two, plus zero. Eight.' matches); identity det = 1; unit-square area ×5 = 5. Ledger 14/14 verified, check 6/6 scenes clean, narration cross-checked sentence-by-sentence. ROUND-2 FIXES VERIFIED BY LOOKING: (1) A/V seam desync FIXED — every scene's title/card now lands with its own sentence (s02 title starts typing 8.9s vs sentence 8.84; s04 title 27.3 vs sentence 27.32; s05 34.3 vs 34.73; 'Eight' at 44.8 lands on the 8 completed at 44.1; the recap card appears 45.5 under its sentence at 45.6 and keeps a ~3s hold to the 50.47 end); joins verified frame-by-frame at 30ms — no flash, no black, no ghost, no double-draw. (2) 9:16 margins FIXED — 0 fail-level layout violations across both formats, the s02 formula clears ~13% side margins. (3) The recap '5' now wears its amber role (#9A6A0A ≈ result #8F5B00). (4) s03's note lifted to 3.22u and all three 9:16 small texts to 3.41–3.6u; the 9:16 is a genuine recomposition (s03/s04 verified at full res: plane panel top, equation+note bottom; portrait recap formula 20.9u). REMAINING beyond the 3 problems: red '0' in s04 stretches red=negative to a non-negative (round-2 secondary, still there); the recap formula renders ad/bc in ink, dropping the term colors s02 established; three near-identical dark ambers (basis #A86400 / positive #96610A / result #8F5B00) still blur roles — in s01 the amber basis arrow and amber 'area = 5' label sit ~2u apart in the same hue; the 9:16 s02 title runs to ~8% side margins (under the 12% safe target, no fail); math-line write-in mid-states look scrappy in stills (hollow glyphs, stroke fragments) but resolve crisply at full res — reads as handwriting in motion, no persistent artifact; the look tool's caption strip renders sentences.json template text ('{five}five') — captions.srt/vtt are clean, the overlay should use 'spoken'. VERDICT: not yet at the 8+ bar — sound 8 and correctness 10 carry their keys; hook/readability/variety/composition/brand/clarity at 7 and motion at 6, each with one concrete fix left.",
+    "sheets": [
+      "out/sheets/every-16x9.png",
+      "out/sheets/every-9x16.png",
+      "out/sheets/phone-16x9.png",
+      "out/sheets/phone-9x16.png",
+      "out/sheets/strip-8.90-16x9.png",
+      "out/sheets/strip-41.50-9x16.png"
+    ]
   }
 ]

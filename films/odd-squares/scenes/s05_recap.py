@@ -70,13 +70,15 @@ class Scene(StudioScene):
         box, ebox = stage_boxes()
         c = np.array([box.cx, box.cy, 0.0])
         gs = [ell(k, unit_for(box, k)).shift(corner(c, k, unit_for(box, k))) for k in range(1, 6)]
+        # critic R2: the takeaway was the smallest text on screen — the hierarchy inverts it:
+        # the headline IS the takeaway, at title size, revealed FIRST; the formulas support it
         lines = recap([
             Txt("odd numbers\nstack into squares", role="title"),
-            Eq(r"{{k^2}} - {{(k-1)^2}} = 2k-1", roles={"p1": "square", "p2": "square"}),
             Eq(r"\sum_{k=1}^{n} (2k-1) = {{n^2}}", roles={"p1": "square"}),
+            Eq(r"{{k^2}} - {{(k-1)^2}} = 2k-1", roles={"p1": "square", "p2": "square"}),
         ])
         into(lines, ebox, fill=0.9)
-        l1, l2, l3 = lines.submobjects
+        l1, l2, l3 = lines.submobjects  # headline, the sum (the payoff), the k-th L
 
         with self.say("s05.1"):
             self.add(gs[0])
@@ -85,9 +87,9 @@ class Scene(StudioScene):
                 self.play(*wrap(gs[:k - 1], gs[k - 1], c, k, box), run_time=0.4)
             claim("summation(2*k - 1, (k, 1, 5)) == 5**2", about="the rebuilt square: five L's", says="s05.1")
             self.wait(self.until("kth"))
-            self.play(FadeIn(l2, shift=UP * L.u * 3), run_time=0.7)
-            claim("k**2 - (k - 1)**2 == 2*k - 1", about="recap: the k-th L", says="s05.1")
-            self.wait(self.until("sum"))
-            self.play(FadeIn(l3, shift=UP * L.u * 3), run_time=0.7)
+            self.play(FadeIn(l2, shift=UP * L.u * 3), run_time=0.7)   # the SUM lands on "kth"
             claim("summation(2*k - 1, (k, 1, n)) == n**2", about="recap: the sum", says="s05.1")
+            self.wait(self.until("sum"))
+            self.play(FadeIn(l3, shift=UP * L.u * 3), run_time=0.7)  # the k-th L closes
+            claim("k**2 - (k - 1)**2 == 2*k - 1", about="recap: the k-th L", says="s05.1")
         hold(self, 1.6)

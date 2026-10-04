@@ -25,8 +25,9 @@ class Scene(StudioScene):
                   roles={"p1": "negative"})
         note = Txt("no inverse — it cannot be undone", role="body")
         _into(zero, eq_col, fill=0.84)
-        note.next_to(zero, DOWN, buff=0.55)
-        _into(__import__("manim").VGroup(zero, note), eq_col, fill=0.86)
+        # critic R3: the note composes at FULL nominal size below the (scaled) equation — into()
+        # group-scaling shrank it to 2.58u, under the 3.2u floor
+        note.next_to(zero, DOWN, buff=0.6)
         self.add(lab.plane)
 
         with self.say("s04.1"):

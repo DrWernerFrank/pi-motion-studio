@@ -84,10 +84,14 @@ class Scene(StudioScene):
             self.wait(self.until("cancel"))
             pairs = [(rows[0].part("p3"), rows[1].part("p4")),     # +1^2 and -1^2
                      (rows[1].part("p3"), rows[2].part("p4"))]     # +2^2 and -2^2
+            # critic R2: the cancellations read as 0.15 s flickers — PRE-FLASH each pair (the eye
+            # finds them), STRETCH the vanishes (0.5 -> 0.75 s), and DIM the cancelled rows behind
             for a, b in pairs:
-                vanish([a, b], mid(a, b))
-            vanish([rows[2].part("p3")], dots.get_center(), run_time=0.45)   # +3^2 into the dots …
-            vanish([dots, rows[3].part("p4")], mid(dots, rows[3].part("p4")))  # … which meet -(n-1)^2
+                self.play(a.animate.set_color(math_role("result")).scale(1.25),
+                          b.animate.set_color(math_role("negative")).scale(1.25), run_time=0.45)
+                vanish([a, b], mid(a, b), run_time=0.75)
+            vanish([rows[2].part("p3")], dots.get_center(), run_time=0.7)   # +3^2 into the dots …
+            vanish([dots, rows[3].part("p4")], mid(dots, rows[3].part("p4")), run_time=0.75)  # … which meet -(n-1)^2
             self.wait(self.until("survive"))
             lit0, lit3 = rows[0].copy(), rows[3].copy()     # the survivors take the square's color
             lit0.part("p4").set_color(math_role("square"))

@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-04T14:58:37.354Z",
+  "at": "2026-10-04T15:24:28.744Z",
   "pass": true,
   "checks": [
     {
@@ -30,7 +30,7 @@
       "name": "sync",
       "pass": true,
       "level": "pass",
-      "detail": "38 trace bookmark(s) over 10 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms)"
+      "detail": "38 trace bookmark(s) over 10 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded — the sync check surfaces those"
     },
     {
       "name": "pace",
@@ -65,13 +65,13 @@
         "16:9/s01_hook-layout.json": "e670ff5a83dc",
         "16:9/s02_pattern-layout.json": "3982a9952c3b",
         "16:9/s03_why-layout.json": "90d86dfc36a2",
-        "16:9/s04_sum-layout.json": "43bfe4cd9aa1",
-        "16:9/s05_recap-layout.json": "7b1d703e6f3b",
+        "16:9/s04_sum-layout.json": "aaba3be14562",
+        "16:9/s05_recap-layout.json": "8efc2451f209",
         "9:16/s01_hook-layout.json": "aa82ae245442",
         "9:16/s02_pattern-layout.json": "f2c024d0ab62",
         "9:16/s03_why-layout.json": "aff0de6c8344",
-        "9:16/s04_sum-layout.json": "b278ed6cf20a",
-        "9:16/s05_recap-layout.json": "69054c60f8ef"
+        "9:16/s04_sum-layout.json": "b2e50aaa99b7",
+        "9:16/s05_recap-layout.json": "951a899b91c7"
       }
     }
   ]

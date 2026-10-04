@@ -482,7 +482,7 @@ class PlaneLab(VGroup):
         if sp.nsimplify(shown) != sp.nsimplify(truth):
             raise ValueError(f"show_area({shown!r}) but the plane's det is {truth} — compute it, never type it")
         role = "result" if truth >= 0 else "negative"
-        lab = Eq(tex.replace("{}", shown), role=role, font_size=_font_size("math") * 0.55)
+        lab = Eq(tex.replace("{}", shown), role=role, font_size=_font_size("math"))  # full size: the 0.55x read 2.4u at phone width
         # anchor at the square's EDGE on the open side (anchoring at a big shape's CENTER makes
         # every solver candidate land inside it — PlacementError by construction); pushed a little
         # into the open side so the first ring clears the arrow that runs along that edge.
@@ -610,7 +610,7 @@ class GraphLab(VGroup):
         """``slope = 1.25`` — an Eq + DecimalNumber (Typst digits) lockup in the readout row that
         follows ``self.h`` (the secant's slope; at h = 0 the derivative). Never a typed number."""
         x0 = self.x0 if x0 is None else x0
-        fs = _font_size("math") * 0.5
+        fs = _font_size("math")  # critics: instruments at FULL math size (0.5x read 5-6px at 360px)
         head = Eq(r"\text{slope} =", font_size=fs)
         val = DecimalNumber(self._slope(x0, self.h.get_value()), num_decimal_places=2,
                             mob_class=MathTypst, font_size=fs, color=math_role("result"))
@@ -645,7 +645,7 @@ class GraphLab(VGroup):
             r = Rectangle(width=abs(p1[0] - p0[0]), height=max(abs(p1[1] - p0[1]), 1e-4))
             r.move_to((p0 + p1) / 2)
             rects.add(r.set_fill(math_role("area"), 0.55).set_stroke(color_for("ink"), _stroke("thin"), 0.6))
-        fs = _font_size("math") * 0.5
+        fs = _font_size("math")  # critics: instruments at FULL math size (0.5x read 5-6px at 360px)
         lab = Eq(rf"S_{{ {n} }} = {num(total, places=3)} \quad \int = {num(truth, places=3)}", font_size=fs)
         lab.move_to(self.readout_slot)
         self.sum_value, self.integral_value = total, truth
