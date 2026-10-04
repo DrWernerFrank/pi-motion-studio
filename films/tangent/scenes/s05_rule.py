@@ -222,6 +222,17 @@ def rule_rows(x_eq):
     return out
 
 
+def rule_anchor():
+    """The one true x for the rule rows: s05's DERIVATION anchor (the r11 critic derived it:
+    -2.635u/16:9, -1.440u/9:16 — the fallback's +0.35*stage.w was 0.757u/0.408u right of it).
+    Both scenes call THIS; the geometry can never diverge again."""
+    from studio_manim.layout import L
+    # s05's derivation: the left column's '=' — recomputed identically in both scenes
+    d = derivation()
+    return d.eqs[-1].part("p2").get_center()[0]
+
+
+
 ROW_BUFF = L.u * 8
 
 
@@ -272,7 +283,7 @@ class Scene(StudioScene):
 
         head = title("The power rule")
         steps = derivation()
-        rows = rule_rows(steps.eqs[-1].part("p2").get_center()[0])     # align on its '='
+        rows = rule_rows(rule_anchor())   # r11: the shared x-path (s06 continues from the same)
 
         yA = column_ys([steps.eqs[-1], rows[0][0]], L.u * 9)        # s05.1: derivation + x²
         yB = column_ys([e for e, _ in rows], ROW_BUFF)               # s05.2-3: the three rules

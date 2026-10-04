@@ -382,5 +382,52 @@
       "films/odd-squares/out/sheets/times-16x9.png",
       "films/odd-squares/out/sheets/times-9x16.png"
     ]
+  },
+  {
+    "round": 10,
+    "at": "2026-10-04T22:01:13.813Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "brand": 8,
+      "clarity": 8,
+      "composition": 7,
+      "correctness": 10,
+      "hook": 8,
+      "motion": 8,
+      "readability": 7,
+      "sound": 7,
+      "variety": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "fix": "Change the panel, not the coefficient: re-split the 16:9 stage so the equation panel is ~8.5-9.6u wide (a 40:60 split, or the equation in its own full-width band under the square) so the guard itself rises to s≈1.2-1.35 (digits 38-43px / ² 24-30px at 960w); unify odd_eqs across all five scene copies (s01/s05 still size at the old cap 1.0 / width 0.90 — their ² measures 6.8px at 360); or declare 16:9 the desktop cut in brief.md and gate the phone-readability test on 9:16 only (9:16 passes: ² 12.7-14.7px at 360). Re-run phone-16x9 and re-measure digits/² at 360px.",
+        "issue": "The r9 height-first fix is a NO-OP — the guard still binds; the ² speck is in its 7th round in the co-equal 16:9 cut. Computed from the delivered source: s02's height term ebox.h(5.51)×0.8/widest.height(0.607) = 7.26 vs the width guard ebox.w(6.26)×0.98/widest.width(6.98) = 0.878 — the guard decides; s03's slot identical (0.86-term 6.61 vs 0.870 — the same numbers as last round, so nothing could change). Render-measured on the new draft: digits 27px / ² 19-20px at 960w = 10.1 / 7.1-7.5px at 360px (last round 10.2 / 6.9-7.1 — method noise, no growth); the equation lines span 414/413px = 43.1% of frame = exactly 0.98× the unchanged 6.26u panel — commit 574a6de touched only the two scene files, no stage re-split. phone-16x9: '5² and 5 are close to indistinguishable at a glance'. The ² is the film's punchline glyph; the brief ships 16:9+9:16 co-equal, so the phone test applies.",
+        "t": 14.5
+      },
+      {
+        "fix": "One shared left edge for headline + both formula lines + the square in both formats; pre-scale the portrait formulas (~0.5-0.55×) so the hero's per-glyph lead is decisive and cap the Σ's display size; pull the recap group up into the dead top band (the ebox has the room). Re-measure finale glyph heights + left edges in both formats.",
+        "issue": "The r4-r9 finale composition hold, untouched and re-measured: left starts 16:9 square 107 / headline 501 / k-line 518 / Σ 562; 9:16 square 147 / headline 126 / k-line 121 / Σ 159 — three-to-four different left edges in both formats, 'reads as accidental'. The Σ-with-limits block spans 93px at 960w (16:9) / 80px at 540w (9:16) — more vertical mass than any headline line (48-60px); Σ limits measure 12-18px at 960w = 4.5-6.75px at 360px in 16:9 (sub-floor), 6.7-10.7px in 9:16 (marginal).",
+        "t": 62.5
+      },
+      {
+        "fix": "Let the portrait figure own 60%+ of the frame width, grow s04's stack into the dead top band, pull the s05 recap card up into the empty third; or accept the hold and declare it a style choice in brief.md so the ledger stops carrying it as an open defect.",
+        "issue": "The r3 portrait under-fill hold, untouched: 9:16 top 33-42% empty through the film (hook 37%, s04 42%, finale 33%), the figure ~20-25% of frame height, s04's stack confined to a 42-79% vertical band, bottom 12-23% dead; 16:9 s04's text-only frames use the middle 40% of the width (ink cols 286-673 of 960). The phone-9:16 read: 'the layout reads as a landscape layout stretched into portrait'.",
+        "t": 0
+      },
+      {
+        "fix": "Add a quiet music bed ~30-35dB under the voice (design.json music role), or declare the TTS-only choice in brief.md so the sound gate stops being an implicit fail.",
+        "issue": "Sound remains TTS-only (music 'none') — the below-bar key no render round has touched: the mix is clean (−16 LUFS, frame-exact onsets, 65.667s audio = video exactly) but with no bed under the narration the film reads sonically flat on social feeds.",
+        "t": 0
+      }
+    ],
+    "notes": "round 9 by math-critic (READ-ONLY; drafts fresh — out/ 01:18 > sources 01:06; gates re-PASS 21:48Z, layout 0 violations, claims 24 merged/48 counted, coverage 100%). METHOD: LOOKED at 4 sheets (every 16:9/9:16, phone 16:9/9:16) then MEASURED at full res: 30fps frame extraction + numpy ink/glyph analysis — the ² bounding boxes at the s02 5² line (t=16.5 AND 18.5), s03's ek2 ²s (t=39.5/40.3), the s01/s05 hook ²s, the equation ink spans vs panel, the finale sub-band left edges + Σ mass + limit sizes, the 9:16 vertical bands, onset series for the recap cues, a 5-frame pair-2 timeline, and the scale terms computed from the delivered source + git. RE-DERIVED BY HAND, all correct: 1=1²; 1+3=4=2²; 1+3+5=9=3²; +7=16=4²; +9=25=5²; 4th L = column 4 + row 3 = 7 = 2·4−1; k-th L = k+(k−1) = 2k−1 = k²−(k−1)² (16−9=7, 25−16=9); rows 1=1²−0², 3=2²−1², 5=3²−2², (2n−1)=n²−(n−1)²; telescoping Σ(k²−(k−1)²,1..n)=n²−0²; Σ(2k−1,1..n)=n²; n=100 → 100²=10000; Σ(2k−1,1..5)=25. math_check 5/5 scenes clean; INDEPENDENT re-evaluation 48/48 claims TRUE in fresh sympy processes from text alone. THE HEIGHT-SCALE VERIFIED FALSE: the r8 mechanism (min() removed, height-first, guard) is implemented exactly as prescribed — but it cannot bind: a one-line equation (aspect ~11.5:1) in a 6.26×5.51u half-frame panel pins the scale at the 0.98 width guard (s=0.878) whatever the height coefficient (7.26); s03's slot is the same (0.86-term 6.61 vs 0.870 — unchanged numbers both rounds). The render is pixel-equivalent to last round: digits 27px / ² 19-20px at 960w (7.1-7.5px at 360px, was 6.9-7.1 — method noise, no growth), equation spans 414/413px = 43.1% of frame = exactly 0.98× the unchanged 6.26u panel (commit 574a6de touched only the two scene files; no stage re-split, no engine change). 'The equations own their panels' is true only trivially: they still fill 98% of the same too-narrow panel. Phone-16x9 vision: '5² and 5 are close to indistinguishable at a glance' — the ² is the film's punchline glyph. 9:16 passes everywhere (² 12.7-14.7px at 360px, measured at the hook, 5², k², (k−1)² and the recap k-line). THE CLOSED ITEMS RE-VERIFIED (deterministic; s04/s05 unchanged since c164f9b): pair 2 both-sided — row1's live 2² holds 188px of dim-level ink through the 47.75 step-dim that used to kill it to 0, both halves pre-flash together (48.3: 163+300px) and vanish together (0/0 by 49.0); the recap cues un-crossed — k-line first ink 59.0-59.2 (solid 59.6) inside 'L number k adds two k minus one cells' on kth=58.783, Σ line 0 ink until 62.2 / first 62.4 (solid 62.6) inside 'and together the first n make n squared' on sum=61.976; the upright-k stays closed (s03's leading (k) paren-wrapped math italic, unchanged). JUDGED-OPEN RESIDUALS, all confirmed unchanged: the s01/s05 ² at 6.8px@360 in 16:9 (the old odd_eqs sizing: cap 1.0 / width 0.90 — the r9 fix was not propagated to s01/s05); the ~0.8s answerless '1+3+5+7 =' mid-morph window (the designed continuous growth, a pacing nit); s03's dimmed gnomons pastel at phone size (the 0.22/0.45 dims — the 16:9 phone sheet flags them again); brace labels small and low-contrast; captions sidecar-only. VERDICT vs the 8+ bar: FAILS on readability 7 (the 16:9 ² speck, 7th round — the claimed fix did not bind), composition 7 (the r3-r9 finale-edge + under-fill holds), sound 7 (TTS-only). PASSES hook 8, motion 8 (pair-2 re-verified closed this round), variety 8, brand 8, clarity 8 (recap cues re-verified closed), correctness 10 — earned: 48/48 independent, hand re-derived, every on-screen equation transcribes true, no mathematical error in nine rounds. The algebra spine is airtight and the proof's core beats hold; what keeps it off my feed is a glyph-size problem with a known GEOMETRIC fix that has now been attempted three times without touching the panel geometry — re-split the 16:9 stage or declare the desktop cut.",
+    "sheets": [
+      "films/odd-squares/out/sheets/every-16x9.png",
+      "films/odd-squares/out/sheets/every-9x16.png",
+      "films/odd-squares/out/sheets/phone-16x9.png",
+      "films/odd-squares/out/sheets/phone-9x16.png"
+    ]
   }
 ]

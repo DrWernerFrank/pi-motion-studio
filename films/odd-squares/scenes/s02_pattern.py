@@ -9,8 +9,15 @@ from studio_manim.kit import EqMorph, chapter, gnomon
 
 
 def stage_boxes():
-    """(square box, equation box): side by side in landscape, stacked in portrait (L.panel)."""
-    return L.panel(0, 2), L.panel(1, 2)
+    """(square box, equation box). r9 (critic, geometric): a one-line 11.5:1 equation can never
+    grow in a 6.26u half-panel — 16:9 re-splits 40/60 (the square keeps its visual weight at
+    0.8 fill; the equations own 60% and the 2^2 clears the phone floor). Portrait: stacked 50/50."""
+    if L.portrait:
+        return L.panel(0, 2), L.panel(1, 2)
+    from studio_manim.layout import _Box
+    # r9 + lint: a 0.5u gutter between the panels (the equation brushed the square's dashed edge)
+    return (_Box(L.stage.x, L.stage.y, L.stage.w * 0.40 - L.u * 0.25, L.stage.h),
+            _Box(L.stage.x + L.stage.w * 0.40 + L.u * 0.25, L.stage.y, L.stage.w * 0.60 - L.u * 0.25, L.stage.h))
 
 
 def unit_for(box, n=5, fill=0.86):
@@ -86,7 +93,10 @@ class Scene(StudioScene):
         for k in (3, 4, 5):                   # where each L lands, at its own (pulled-back) unit
             gs.append(ell(k, unit_for(box, k)).shift(corner(c, k, unit_for(box, k))))
         eqs = odd_eqs(ebox, 5)
-        ghost = DashedVMobject(ell(3, u)[0].shift(corner(c, 2, u)).set_fill(opacity=0)
+        # lint/r9: the dashed 3rd L (at the big 2x2 unit) reached 0.9u into the equation panel —
+        # draw the ghost at the PULLED-BACK unit (the one the real 3rd L will use) so it stays home
+        _u3 = unit_for(box, 3)
+        ghost = DashedVMobject(ell(3, _u3)[0].shift(corner(c, 3, _u3)).set_fill(opacity=0)
                                .set_stroke(color_for("muted"), 2.5), num_dashes=48)
         self.add(gs[0], gs[1], eqs[1], ghost)
         ch = chapter("Odd numbers make squares")

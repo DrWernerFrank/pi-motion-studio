@@ -170,6 +170,17 @@ def rule_rows(x_eq):
     return out
 
 
+def rule_anchor():
+    """The one true x for the rule rows: s05's DERIVATION anchor (the r11 critic derived it:
+    -2.635u/16:9, -1.440u/9:16 — the fallback's +0.35*stage.w was 0.757u/0.408u right of it).
+    Both scenes call THIS; the geometry can never diverge again."""
+    from studio_manim.layout import L
+    # s05's derivation: the left column's '=' — recomputed identically in both scenes
+    d = derivation()
+    return d.eqs[-1].part("p2").get_center()[0]
+
+
+
 ROW_BUFF = L.u * 8
 
 
@@ -208,18 +219,12 @@ class Scene(StudioScene):
         # r10 (critic): ONE SOURCE OF TRUTH — s05 exports its end-state row geometry to
         # s06_handoff.json; s06 places its rows EXACTLY there. No more guessed anchors (the
         # teleport survived 4 rounds of anchor guesses; this cannot drift by construction).
-        import json as _json, os as _os
-        rows = [e for e, _ in rule_rows(L.stage.x + L.stage.w * 0.35)]
-        _ho = _os.path.join(_os.path.dirname(__file__),
-                            f"s06_handoff-{_os.environ.get('STUDIO_FORMAT', '16:9')}.json")
-        if _os.path.exists(_ho):
-            with open(_ho) as _f:
-                _state = _json.load(_f)
-            for e, _geo in zip(rows, _state["rows"]):
-                e.move_to([_geo["x"], _geo["y"], 0])
-        else:
-            for e, y in zip(rows, column_ys(rows, ROW_BUFF)):
-                e.shift([0, y - e.get_center()[1], 0])
+        # r11 (critic): the pool renders s05/s06 CONCURRENTLY — the handoff file could never
+        # be read in time. The shared rule_anchor() (above, identical in both scene files)
+        # computes s05's derivation anchor directly: the one true x-path.
+        rows = [e for e, _ in rule_rows(rule_anchor())]
+        for e, y in zip(rows, column_ys(rows, ROW_BUFF)):
+            e.shift([0, y - e.get_center()[1], 0])
         self.add(head0, *rows)
         br = "\n" if L.portrait else " "
         last = Eq(r"\frac{d}{dx}\, x^n = {{n\, x^{n - 1}}}", roles={"p1": "result"},
