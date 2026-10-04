@@ -177,9 +177,34 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
     }
     const silent = join(SCRATCH, key, f, 'silent.mp4');
     const listFile = join(SCRATCH, key, f, 'list.txt');
-    if (partials.length === 1) copyFileSync(partials[0].mp4, silent);
+    // SEAM TRUTH (critic round 2: audio sits exactly at timing.json while each clip carried the
+    // PREVIOUS scenes' trailing waits — measured +0.40 s by s02, +1.96 s by s06; the payoff landed
+    // 1.2 s after its word and -shortest truncated the recap hold). Each scene's clip is trimmed
+    // to its OWN last-sentence end (frame-quantized): scenes butt at exact sentence boundaries and
+    // the video length matches the narration bus. The LAST scene keeps its full tail (its hold).
+    const timingAll2 = timingAll;
+    const sceneSpan = (sid) => {
+      const own = (timingAll2?.sentences ?? []).filter((x) => x.scene === sid);
+      if (!own.length) return null;
+      return +(own.at(-1).end - own[0].start).toFixed(3);
+    };
+    const trimmed = [];
+    for (const p of partials) {
+      const span = sceneSpan(p.scene.id);
+      const src = p.mp4;
+      if (span == null || p === partials.at(-1)) { trimmed.push(src); continue; }
+      const dst = join(SCRATCH, key, f, `trim-${p.scene.id}.mp4`);
+      const { out: fpsOut } = await run('ffprobe', ['-v', 'error', '-select_streams', 'v:0',
+        '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', src]);
+      const [n_, d_] = fpsOut.trim().split('/').map(Number);
+      const fps = n_ && d_ ? n_ / d_ : 30;
+      const frames = Math.round(span * fps);
+      await run('ffmpeg', ['-y', '-v', 'error', '-i', src, '-frames:v', String(frames), '-c', 'copy', dst]);
+      trimmed.push(dst);
+    }
+    if (trimmed.length === 1) copyFileSync(trimmed[0], silent);
     else {
-      writeFileSync(listFile, partials.map((p) => `file '${p.mp4.replace(/'/g, "'\\''")}'`).join('\n'));
+      writeFileSync(listFile, trimmed.map((m) => `file '${m.replace(/'/g, "'\\''")}'`).join('\n'));
       await run('ffmpeg', ['-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', silent]);
     }
     // The -color_* flags alone are NOT enough (measured, ffmpeg 8: primaries/transfer came out `unknown`,

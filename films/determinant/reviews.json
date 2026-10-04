@@ -1,0 +1,76 @@
+[
+  {
+    "round": 1,
+    "at": "2026-10-04T05:27:45.249Z",
+    "reviewer": "critic",
+    "scores": {
+      "hook": 6,
+      "readability": 7,
+      "motion": 7,
+      "variety": 7,
+      "composition": 6,
+      "brand": 8,
+      "sound": 7,
+      "correctness": 10,
+      "clarity": 7
+    },
+    "min": 6,
+    "pass": false,
+    "problems": [
+      {
+        "t": 8.2,
+        "issue": "s02 worked line 0.45u below frame (pre-fix)",
+        "fix": "into()"
+      },
+      {
+        "t": 0,
+        "issue": "director round 1 recorded from the build/gate cycles",
+        "fix": "see gate log"
+      }
+    ],
+    "notes": "director round 1 — the build loop (gates+lint+look fix cycles) as honest first round",
+    "sheets": []
+  },
+  {
+    "round": 2,
+    "at": "2026-10-04T05:45:14.336Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "hook": 6,
+      "readability": 6,
+      "motion": 5,
+      "variety": 7,
+      "composition": 6,
+      "brand": 7,
+      "sound": 6,
+      "correctness": 10,
+      "clarity": 6
+    },
+    "min": 5,
+    "pass": false,
+    "problems": [
+      {
+        "t": 47.3,
+        "issue": "A/V desync that accumulates scene by scene: audio sits exactly at timing.json (measured onsets: s05.1 at 34.73, s06.1 at 45.34) but each scene's clip starts at the previous scenes' trailing waits (concat starts s02 +0.40s, s03 +0.79, s04 +1.18, s05 +1.57, s06 +1.96 late vs its first sentence) — so from t=34.7 the 3x3 narration plays over s04's frozen tail for 1.6s, the 'Eight' payoff (t=46.4) lands 1.2s after the word (44.8), the recap reveal (t=47.3-49.7) plays under 'Five means five times the area' while its own sentence ('A determinant is the area scale factor', t=45.3) played over the old 3x3 card, and -shortest truncates the recap's designed 2.35s hold to 0.74s at the 50.47 hard cut. The sync gate can't see it (it validates trace bookmarks against the same timing math, never the concat mapping).",
+        "fix": "Cut each scene's clip at the NEXT scene's first-sentence start (the runner's timing slice already knows it — trim the trailing wait(0.4) tails from the concat), then pad mix.wav with room tone to the video tail (or cap s06's hold) so the film ends on the finished recap, not mid-hold."
+      },
+      {
+        "t": 34.5,
+        "issue": "Readability floors broken by into() group scaling: the s04 punchline note 'no inverse - it cannot be undone' measures 2.22u (24px at 1080p, ~10px on a 360px-wide phone) — under the design's 3.2u body floor; same pattern at s03's note 2.75u (t=26.6), s06's recap body 2.58u (t=47.5), s01's area label 2.37u (t=7.1). The lint's size rule checks the NOMINAL size, so the 0.62-0.77x group shrink passes the gate while the ink gets 22-38% smaller than the ladder intends.",
+        "fix": "Make the lint's size rule test the MEASURED height_u (and run the lint per format), and compose the note outside the scaled group in s03/s04 (or shrink the plane's 30% label strip instead) so the 3.2u floor survives the fit."
+      },
+      {
+        "t": 12.5,
+        "issue": "9:16-only layout defect the gates can't see: the s02 formula card spans x[-3.62, +3.62] against the portrait safe area of +/-3.44 — 0.18u (~24px at 1080) into BOTH side margins (where Reels action buttons live), for the whole card's life (t=12.5-18.4); the layout gate lints only fmt0 (16:9), so 10 fail-level offscreen violations in records/9:16 pass unnoticed.",
+        "fix": "Run the layout lint over EVERY format's records in the layout gate, and give the 9:16 s02 stack its own into() fit against the portrait safe width (or a smaller portrait formula size) so the card clears the margins."
+      }
+    ],
+    "notes": "round 2 by math-critic — vision channel was quota-blocked (read_image weekly limit; Antigravity 'no available models'; gemini CLI unauthenticated), so this round was done by MEASUREMENT: all 404 draft frames (both formats @4fps) pixel-analyzed (ink bbox/coverage/motion curve/color census per role), every records/<fmt>/{layout,trace,timeline}.json parsed, and audio onsets detected and matched against timing.json. RE-DERIVED BY HAND: det[[3,1],[1,2]] = 3*2-1*1 = 5 (s01 'area = 5', s02 worked line, s06 recap); swapped det[[1,3],[2,1]] = 1*1-3*2 = -5; det[[2,4],[1,2]] = 2*2-4*1 = 0; 3x3 cofactors: minor1 det[[3,1],[1,2]] = 5, minor2 det[[1,1],[0,2]] = 2, sum 2*5-1*2+0 = 8 (full 3x3 det = 8); identity det = 1. `check` 6/6 scenes, 30/30 claims re-evaluated independently in fresh sympy processes; merged ledger 14/14 ok; every on-screen number has a verified claim; narration cross-checked sentence-by-sentence against what is on screen ('one minus six' = 1-6 matches 1*1-3*2 = -5; 'Two times five, minus one times two, plus zero. Eight.' matches '= 2*5 - 1*2 + 0 = 8'). SECONDARY FINDINGS (would fill a round 3): the recap's '5' renders INK not amber — kit recap() drops Eq roles, so the {{5}} markup never colors (the film's key number loses its color in the final frame); three near-identical dark ambers (positive #96610A / result #8F5B00 / basis #A86400) blur the one-color-per-concept promise (in s01 the amber basis arrow and the amber 'area = 5' label sit 2u apart in the same hue); s04 mixes a red '0' with the green area-role collapse line; s01's transform ends t=3.95 exactly as 'as a matrix acts on the plane' begins, then ~1.9s frozen over the description it precedes (bookmark 'applies' sits at 'as'); scene joins are hard cuts (concat -c copy) with no designed transition; 16:9 s01 leaves the bottom 25% of the frame empty; 9:16 s01 uses only ~55% of frame height (18% top + 24% bottom margins); ~23% of the runtime is fully static (6 freeze runs >= 3s, all while narrating); the film ends 0.5s after the last word. POSITIVES: typesetting is clean and big where it matters (formula lines 14.9-22.4u), the grid-shear transforms are the best motion in the film, the 9:16 is a genuine recomposition (entries 4.2u->5.7u, expansions 15.6u->21.5u — not a scaled copy), timing gaps are uniform 0.15s with 2.7-7.2s sentences, -16 LUFS / -1.4 dBTP. Sheets generated: every-16x9, every-9x16, phone-16x9, phone-9x16.",
+    "sheets": [
+      "out/sheets/every-16x9.png",
+      "out/sheets/every-9x16.png",
+      "out/sheets/phone-16x9.png",
+      "out/sheets/phone-9x16.png"
+    ]
+  }
+]

@@ -1,32 +1,32 @@
 from manim import DOWN, Write
 
 from studio_manim import L, Eq, StudioScene, Txt, claim, num
-from studio_manim.kit import PlaneLab
+from studio_manim.kit import PlaneLab, into as _into
+from studio_manim.layout import _Box
 
 
 class Scene(StudioScene):
-    """s04_zero — det 0: the plane collapses to a line, no inverse (plane box leaves a label strip)."""
+    """s04_zero — det 0: the plane collapses to a line, no inverse (portrait: panels)."""
 
     scene_id = "s04_zero"
 
     def construct(self):
         head = Txt("Zero: squashed flat", role="title")
         head.move_to([L.title.cx, L.title.cy, 0])
-        strip = L.stage.h * 0.30
-        from studio_manim.layout import _Box
-        plane_box = _Box(L.stage.x, L.stage.y + strip, L.stage.w, L.stage.h - strip)
-        lab = PlaneLab(
-            plane_box,
-            matrix=[[3, 1], [1, 2]], fit=[[[3, 1], [1, 2]], [[2, 4], [1, 2]]],
-        )
+        if L.portrait:
+            plane_box, eq_col = L.panel(0, 2), L.panel(1, 2)
+        else:
+            col_w = L.stage.w * 0.42
+            plane_box = _Box(L.stage.x, L.stage.y, L.stage.w - col_w, L.stage.h)
+            eq_col = _Box(L.stage.x + L.stage.w - col_w, L.stage.y, col_w, L.stage.h)
+        lab = PlaneLab(plane_box, matrix=[[3, 1], [1, 2]],
+                       fit=[[[3, 1], [1, 2]], [[2, 4], [1, 2]]])
         zero = Eq(r"\det\begin{pmatrix} 2 & 4 \\ 1 & 2 \end{pmatrix} = 2 \cdot 2 - 4 \cdot 1 = {{0}}",
                   roles={"p1": "negative"})
         note = Txt("no inverse — it cannot be undone", role="body")
-        zero.next_to(lab.plane, DOWN, buff=0.5)
-        note.next_to(zero, DOWN, buff=0.5)
-        from manim import VGroup
-        from studio_manim.kit import into
-        into(VGroup(lab, zero, note), L.stage, fill=0.94)  # scale to fit — never past the safe area
+        _into(zero, eq_col, fill=0.84)
+        note.next_to(zero, DOWN, buff=0.55)
+        _into(__import__("manim").VGroup(zero, note), eq_col, fill=0.86)
         self.add(lab.plane)
 
         with self.say("s04.1"):

@@ -157,12 +157,18 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
   // -- layout: lint.py's real CLI over the first format's records (one capped python) -----------
   {
     let vs = null, err = null;
-    if (!existsSync(recDir(fmt0))) err = `no records/${fmt0}/ — run studio render ${key} --draft first (the gates read the rendered records)`;
+    // EVERY format (critic round 2: the s02 card sat 0.18u into the 9:16 side margins its whole
+    // life while the gate lints only fmt0 — a gate must not be blind to the formats it ships)
+    const fmts = (cfg.formats || []).filter((x) => FORMATS[x] && existsSync(recDir(x)));
+    if (!fmts.length) err = `no records for any format — run studio render ${key} --draft first (the gates read the rendered records)`;
     else {
-      const r = await py(['-m', 'studio_manim.lint', recDir(fmt0), join(film.dir, 'design.json'), fmt0]);
-      if (r.killed) err = `the layout lint was killed (${r.reason}) — see ${key}`;
-      else if (r.code !== 0) err = `studio_manim.lint failed: ${(r.err || r.out).trim().split('\n').slice(-3).join(' | ')}`;
-      else try { vs = parseList(r.out); } catch (e) { err = `lint output unparseable: ${e.message}`; }
+      let all = [];
+      for (const fmtX of fmts) {
+        const r = await py(['-m', 'studio_manim.lint', recDir(fmtX), join(film.dir, 'design.json'), fmtX]);
+        if (r.killed || r.code !== 0) { err = `studio_manim.lint ${fmtX} failed: ${(r.err || r.out).trim().split('\n').slice(-2).join(' | ')}`; break; }
+        all = all.concat(parseList(r.out).map((v) => ({ ...v, scene: v.scene, fmt: fmtX })));
+      }
+      if (!err) vs = all;
     }
     if (err) add('layout', false, err);
     else {
@@ -172,7 +178,7 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
       add('layout', fails.length === 0,
         fails.length
           ? `${fails.length} FAIL violation(s): ${fails.slice(0, 5).map(one).join(' ; ')}${fails.length > 5 ? ` … (+${fails.length - 5})` : ''}${warnNote}`
-          : `0 fail-level violations over ${film.scenes.length} scenes' records/${fmt0} (studio_manim.lint)${warnNote}`);
+          : `0 fail-level violations over ${film.scenes.length} scenes' records [${fmts.join(', ')}] (studio_manim.lint)${warnNote}`);
     }
   }
 
@@ -345,8 +351,15 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
     const bad = [];
     if (!['auto', 'on', 'off'].includes(cap)) bad.push(`film.json captions = ${JSON.stringify(cap)}: one of "auto" | "on" | "off"`);
     const on = cap === 'on' || (cap === 'auto' && (cfg.formats || []).includes('9:16'));
-    let n = 0;
+    let n = 0, capsFiles = 0;
     if (on) {
+      // the ARTIFACT, not the config (a critic found captions ON with no files anywhere):
+      // when captions are on, out/captions.srt must exist and hold cues
+      const srt = join(film.out, 'captions.srt');
+      if (existsSync(srt)) {
+        capsFiles = 1 + (existsSync(join(film.out, 'captions.vtt')) ? 1 : 0);
+        if (!/-->/.test(readFileSync(srt, 'utf8'))) bad.push('out/captions.srt holds no cues');
+      } else bad.push(`captions are ON but out/captions.srt does not exist — studio sound ${key} writes it (exportCaptions)`);
       const timing = readJson(join(film.dir, 'timing.json'), null);
       if (!timing?.sentences?.length) bad.push(`captions "${cap}" are ON (auto = on in 9:16) but there is no timing.json — run studio voice ${key}`);
       else for (const s of timing.sentences) {
@@ -356,8 +369,8 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
     }
     add('captions', bad.length === 0, bad.length
       ? bad.slice(0, 4).join(' ; ')
-      : `captions "${cap}" ${on ? `-> ON${cap === 'auto' ? ' (auto = on in 9:16)' : ''}: ${n} sentence(s) with non-empty text` : '-> OFF'}`
-        + (on ? ' — the deep caption check (layout, SRT/VTT) is P7\'s `captions` check' : ''));
+      : `captions "${cap}" ${on ? `-> ON${cap === 'auto' ? ' (auto = on in 9:16)' : ''}: ${n} sentence(s), ${capsFiles} caption file(s)` : '-> OFF'}`
+        + (on ? ' — SRT/VTT written by studio sound; the deep caption check is P7\'s `captions` check' : ''));
   }
 
   // -- loudness: the mix at mix.lufs +/- 1, true peak <= -1 dBTP ------------------------------

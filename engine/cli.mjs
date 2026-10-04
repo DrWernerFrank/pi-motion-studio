@@ -211,6 +211,11 @@ async function main() {
         const N = await import('./narration.mjs');
         const v = await N.buildVoice(key); console.log(`voice: ${v.sentences.length} sentences, ${v.duration.toFixed(2)}s, timing ${v.timing}`);
         const m = await N.buildMix(key); console.log(`${rel(m.file)}  ${m.lufs} LUFS, true peak ${m.truePeak} dBTP${m.warning ? '  (warning: ' + m.warning + ')' : ''}`);
+        // captions ride the narration: the SRT/VTT are written with the mix (the critic found
+        // the config said ON while no artifact existed — the gate now checks the files)
+        const caps = cfgCaptions(key);
+        if (caps !== 'off') { const { exportCaptions } = await import('./math-captions.mjs');
+          const c = exportCaptions(key); console.log(`${c.cues} cues → ${rel(c.srt)}, ${rel(c.vtt)}`); }
         break;
       }
       await sound(key); break;

@@ -28,7 +28,7 @@ def corner(c, m, u):
 
 def ell(k, u):
     """The k-th L (gnomon), in its own color (design.json math.roles gnomon1..5)."""
-    return gnomon(k, u, role=f"gnomon{k}", opacity=0.55)
+    return gnomon(k, u, role=f"gnomon{k}", opacity=0.78)  # critic R1: 0.55 was 2.4:1 on cream; 0.78 clears 3:1
 
 
 def odd_eq(m):
@@ -67,8 +67,8 @@ def dimmed(g, on=True):
     """A copy of an L with its fill knocked back (the old square recedes; the 4th L leads)."""
     d = g.copy()
     if on:
-        d[0].set_fill(opacity=0.12).set_stroke(opacity=0.35)
-        d[1].set_stroke(opacity=0.2)
+        d[0].set_fill(opacity=0.22).set_stroke(opacity=0.55)  # critic R1: the dimmed floor was invisible (1.17:1)
+        d[1].set_stroke(opacity=0.45)
     return d
 
 

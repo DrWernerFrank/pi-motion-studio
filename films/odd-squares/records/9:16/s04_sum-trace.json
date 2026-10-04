@@ -234,24 +234,16 @@
  },
  {
   "kind": "animation",
-  "t": 9.6,
+  "t": 9.9,
   "i": 26,
   "scene": "s04_sum",
   "sentence": "s04.2",
-  "animation": "FadeOut; FadeOut; FadeOut; FadeOut"
- },
- {
-  "kind": "animation",
-  "t": 10.4,
-  "i": 27,
-  "scene": "s04_sum",
-  "sentence": "s04.2",
-  "animation": "FadeIn; Write"
+  "animation": "AnimationGroup"
  },
  {
   "kind": "animation",
   "t": 10.9,
-  "i": 28,
+  "i": 27,
   "scene": "s04_sum",
   "sentence": "s04.2",
   "animation": "Wait"
@@ -259,11 +251,11 @@
  {
   "kind": "animation",
   "t": 10.9,
-  "i": 29,
+  "i": 28,
   "scene": "s04_sum",
   "sentence": "s04.2",
   "animation": "wait",
-  "seconds": 0.501
+  "seconds": 1.001
  },
  {
   "t": 10.9,
@@ -274,7 +266,7 @@
  {
   "kind": "animation",
   "t": 11.033,
-  "i": 30,
+  "i": 29,
   "scene": "s04_sum",
   "sentence": null,
   "animation": "Wait"
@@ -282,7 +274,7 @@
  {
   "kind": "animation",
   "t": 11.033,
-  "i": 31,
+  "i": 30,
   "scene": "s04_sum",
   "sentence": null,
   "animation": "wait",
@@ -298,7 +290,7 @@
  {
   "kind": "animation",
   "t": 11.233,
-  "i": 32,
+  "i": 31,
   "scene": "s04_sum",
   "sentence": "s04.3",
   "animation": "Wait"
@@ -306,7 +298,7 @@
  {
   "kind": "animation",
   "t": 11.233,
-  "i": 33,
+  "i": 32,
   "scene": "s04_sum",
   "sentence": "s04.3",
   "animation": "wait",
@@ -315,7 +307,7 @@
  {
   "kind": "animation",
   "t": 12.033,
-  "i": 34,
+  "i": 33,
   "scene": "s04_sum",
   "sentence": "s04.3",
   "animation": "EqMorph"
@@ -323,7 +315,7 @@
  {
   "kind": "animation",
   "t": 15.667,
-  "i": 35,
+  "i": 34,
   "scene": "s04_sum",
   "sentence": "s04.3",
   "animation": "Wait"
@@ -331,7 +323,7 @@
  {
   "kind": "animation",
   "t": 15.667,
-  "i": 36,
+  "i": 35,
   "scene": "s04_sum",
   "sentence": "s04.3",
   "animation": "wait",
@@ -346,7 +338,7 @@
  {
   "kind": "animation",
   "t": 15.8,
-  "i": 37,
+  "i": 36,
   "scene": "s04_sum",
   "sentence": null,
   "animation": "Wait"
@@ -354,7 +346,7 @@
  {
   "kind": "animation",
   "t": 15.8,
-  "i": 38,
+  "i": 37,
   "scene": "s04_sum",
   "sentence": null,
   "animation": "wait",

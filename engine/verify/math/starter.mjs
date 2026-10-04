@@ -54,11 +54,14 @@ export default async () => {
       else facts.push('claims.md written');
     }
 
-    // 6. the deliverable probe: every final is a clean mp4
+    // 6. the deliverable probe: every final is a clean mp4 (rows, not a flat split — the CSV is
+    //    one line per stream + the format duration on its own line)
     for (const f of readdirSync(join(dir, 'out')).filter((x) => /\.mp4$/.test(x))) {
       const p = await run('ffprobe', ['-v', 'error', '-show_entries',
         'stream=width,height,pix_fmt,color_primaries:format=duration', '-of', 'csv=p=0', join(dir, 'out', f)], { allowFail: true });
-      const [w, h, pix, prim, dur] = p.out.trim().split(',');
+      const rows = p.out.trim().split('\n').map((l) => l.split(',')).filter((r) => r.length >= 4);
+      const [w, h, pix, prim] = rows[0] ?? [];
+      const dur = rows.map((r) => r.find((x) => /^\d+\.?\d*$/.test(x) && +x > 1)).find(Boolean) ?? '?';
       if (pix !== 'yuv420p') bad.push(`${f}: pix_fmt ${pix}`);
       if (prim && prim !== 'bt709') bad.push(`${f}: primaries ${prim}`);
       facts.push(`${f}: ${w}x${h} ${pix} ${dur}s`);

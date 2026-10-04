@@ -22,7 +22,7 @@ class Scene(StudioScene):
 
         from manim import VGroup
         from studio_manim.kit import into
-        into(VGroup(A, expansion, worked), L.stage, fill=0.92)  # 3 rows: scale to fit the stage
+        into(VGroup(A, expansion, worked), L.safe, fill=0.86)  # fit the SAFE box: portrait margins cleared (critic R2)
 
         with self.say("s05.1"):
             self.play(Write(head), run_time=0.9)

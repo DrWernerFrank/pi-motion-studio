@@ -196,12 +196,20 @@ def violations(records, trace, design, fmt, allow_pairs=DEFAULT_ALLOW):
         for o in objs:
             if not o.get("text"):
                 continue
+            # MEASURED size (critic round 2): into() group-scales can shrink text 0.6-0.8x AFTER
+            # construction — the nominal u passed then, the drawn glyphs did not. The recorder's
+            # height_u is the real ink height; the floor applies to whichever is SMALLER.
             n = o.get("nominal_u")
+            drawn = o.get("height_u")
+            floor = FLOOR_SMALL if o.get("role") in SMALL_ROLES else FLOOR_BODY
             if n is not None:
-                floor = FLOOR_SMALL if o.get("role") in SMALL_ROLES else FLOOR_BODY
                 if float(n) < floor - 1e-9:
                     v("size", "fail", [o["id"]],
                       f"nominal {float(n):.2f}u < {floor}u floor (role {o.get('role')})")
+            if drawn is not None and o.get("role") not in SMALL_ROLES:
+                if float(drawn) < floor * 0.62 - 1e-9:
+                    v("size", "fail", [o["id"]],
+                      f"drawn {float(drawn):.2f}u (a group scale shrank it; nominal {n}u, role {o.get('role')}) < {floor * 0.62:.2f}u floor")
             c = o.get("color")
             if c:
                 try:

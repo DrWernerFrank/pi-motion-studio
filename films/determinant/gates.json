@@ -1,12 +1,12 @@
 {
-  "at": "2026-10-04T05:22:59.042Z",
+  "at": "2026-10-04T14:58:27.259Z",
   "pass": true,
   "checks": [
     {
       "name": "layout",
       "pass": true,
       "level": "pass",
-      "detail": "0 fail-level violations over 6 scenes' records/16:9 (studio_manim.lint); 22 warn (density@s02_formula t=2.1s, density@s02_formula t=3.233s, density@s02_formula t=4.533s …)"
+      "detail": "0 fail-level violations over 6 scenes' records [16:9, 9:16] (studio_manim.lint); 44 warn (density@s02_formula t=2.1s, density@s02_formula t=3.233s, density@s02_formula t=4.533s …)"
     },
     {
       "name": "claims",
@@ -42,7 +42,7 @@
       "name": "captions",
       "pass": true,
       "level": "pass",
-      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 10 sentence(s) with non-empty text — the deep caption check (layout, SRT/VTT) is P7's `captions` check"
+      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 10 sentence(s), 2 caption file(s) — SRT/VTT written by studio sound; the deep caption check is P7's `captions` check"
     },
     {
       "name": "loudness",
@@ -60,19 +60,19 @@
       "name": "deterministic",
       "pass": false,
       "level": "warn",
-      "detail": "2 record file(s) changed since the last gates run (16:9/s05_3x3-layout.json, 9:16/s05_3x3-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "detail": "4 record file(s) changed since the last gates run (16:9/s03_sign-layout.json, 16:9/s04_zero-layout.json, 9:16/s03_sign-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
-        "16:9/s01_hook-layout.json": "07652f46d163",
-        "16:9/s02_formula-layout.json": "2dc0d8e338d6",
-        "16:9/s03_sign-layout.json": "0af4acf284c3",
-        "16:9/s04_zero-layout.json": "d0adbd32ef72",
-        "16:9/s05_3x3-layout.json": "7ef5f90faad3",
+        "16:9/s01_hook-layout.json": "d5f133eb3208",
+        "16:9/s02_formula-layout.json": "a47f73d35dc8",
+        "16:9/s03_sign-layout.json": "31bdbd68bce7",
+        "16:9/s04_zero-layout.json": "44f5724198f5",
+        "16:9/s05_3x3-layout.json": "82af54a8c630",
         "16:9/s06_recap-layout.json": "b04259861311",
-        "9:16/s01_hook-layout.json": "9ad5ea144c69",
-        "9:16/s02_formula-layout.json": "0934fb3b0388",
-        "9:16/s03_sign-layout.json": "9c14995daaf1",
-        "9:16/s04_zero-layout.json": "2ba266a47b1c",
-        "9:16/s05_3x3-layout.json": "c6f30ed1a0d0",
+        "9:16/s01_hook-layout.json": "6fb0cdfd8935",
+        "9:16/s02_formula-layout.json": "099510ecbc75",
+        "9:16/s03_sign-layout.json": "8f5fb37ff1b9",
+        "9:16/s04_zero-layout.json": "2f600fae00d1",
+        "9:16/s05_3x3-layout.json": "decf498027de",
         "9:16/s06_recap-layout.json": "b9c90e7fa259"
       }
     }

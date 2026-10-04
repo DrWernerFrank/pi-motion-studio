@@ -11,10 +11,11 @@ class Scene(StudioScene):
 
     def construct(self):
         with self.say("s06.1"):
+            from studio_manim import Eq
             group = recap([
                 "the area scale factor",
-                r"$\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$",
-                r"$[3, 1; 1, 2] \to {{5}}$",
+                Eq(r"\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc"),
+                Eq(r"[3, 1; 1, 2] \to {{5}}", roles={"p1": "result"}),  # the 5 wears result amber
             ])
             self.play(group.reveal())
             claim("Matrix([[3, 1], [1, 2]]).det() == 5", about="the recap repeats the verified number", says="s06.1")

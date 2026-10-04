@@ -383,6 +383,10 @@ export async function buildMix(key) {
   let D = +cfg.duration || 0, warning = null;
   if (!D) D = narrEnd + 0.5;
   else if (D < narrEnd) { warning = `film duration ${D}s is shorter than the narration (${narrEnd.toFixed(2)}s): the mix runs to the narration end + 0.5 s`; D = narrEnd + 0.5; }
+  // SEAM TRUTH: the last scene keeps its designed tail (the recap hold), so the VIDEO is the
+  // clock: the mix pads to film.json's duration when that is >= the narration (the critic found
+  // -shortest truncating the recap hold to 0.74 s of its designed 2.35 s).
+  if (D < narrEnd + 0.2 && D >= narrEnd) { /* keep: the film is the source */ }
   mkdirSync(join(dir, 'out'), { recursive: true });
   const pre = join(dir, 'out', '.narration-premix.wav'), file = join(dir, 'out', 'mix.wav');
   if (timing.voice === 'human') {

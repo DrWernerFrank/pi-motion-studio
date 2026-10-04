@@ -96,8 +96,14 @@ class Scene(StudioScene):
             claim("summation(k**2 - (k - 1)**2, (k, 1, n)) == n**2 - 0**2", about="the telescoping sum", says="s04.2")
             self.wait(0.4)
             here = VGroup(back, r0).get_center()
-            self.play(*[FadeOut(r, target_position=here, scale=0.3) for r in rows], run_time=0.6)
-            self.play(FadeIn(back, shift=DOWN * L.u * 6), Write(r0), run_time=0.8)
+            # critic R1 (t≈50.7): the rows fully exited before the answer entered — a ~0.3 s BLANK
+            # frame under the words. One AnimationGroup: the rows fade INTO the answer's position
+            # while it enters — the collapse and the return overlap, no empty beat.
+            from manim import AnimationGroup
+            self.play(AnimationGroup(
+                *[FadeOut(r, target_position=here, scale=0.3) for r in rows],
+                FadeIn(back, shift=DOWN * L.u * 6), Write(r0),
+            ), run_time=0.9)
         with self.say("s04.3"):
             self.wait(self.until("result"))
             self.play(EqMorph(r0, r1), run_time=0.8)

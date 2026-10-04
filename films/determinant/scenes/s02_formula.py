@@ -24,7 +24,8 @@ class Scene(StudioScene):
         formula.next_to(A, DOWN, buff=step)
         worked.next_to(formula, DOWN, buff=step * 0.8)
         from manim import VGroup
-        VGroup(A, formula, worked).move_to([L.stage.cx, L.stage.cy, 0])
+        from studio_manim.kit import into
+        into(VGroup(A, formula, worked), L.safe, fill=0.86)  # the SAFE box: portrait margins cleared (critic R2)
 
         with self.say("s02.1"):
             self.play(Write(head), run_time=0.9)

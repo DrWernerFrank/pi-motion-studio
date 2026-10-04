@@ -12,7 +12,7 @@ class Scene(StudioScene):
     def construct(self):
         q = Txt("What does a determinant do?", role="title")
         q.move_to([L.title.cx, L.title.cy, 0])
-        strip = L.stage.h * 0.22
+        strip = L.stage.h * 0.30
         from studio_manim.layout import _Box
         lab = PlaneLab(_Box(L.stage.x, L.stage.y + strip, L.stage.w, L.stage.h - strip),
                        matrix=[[3, 1], [1, 2]], fit=[[[3, 1], [1, 2]]])

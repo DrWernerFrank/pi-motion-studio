@@ -1,12 +1,12 @@
 {
-  "at": "2026-10-04T05:09:26.273Z",
+  "at": "2026-10-04T14:58:32.372Z",
   "pass": true,
   "checks": [
     {
       "name": "layout",
       "pass": true,
       "level": "pass",
-      "detail": "0 fail-level violations over 6 scenes' records/16:9 (studio_manim.lint); 7 warn (density@s04_slopes t=4.8s, density@s04_slopes t=5.5s, density@s04_slopes t=5.5s …)"
+      "detail": "0 fail-level violations over 6 scenes' records [16:9, 9:16] (studio_manim.lint); 14 warn (density@s04_slopes t=4.8s, density@s04_slopes t=5.5s, density@s04_slopes t=5.5s …)"
     },
     {
       "name": "claims",
@@ -36,13 +36,13 @@
       "name": "pace",
       "pass": true,
       "level": "pass",
-      "detail": "6 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
+      "detail": "5 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
     },
     {
       "name": "captions",
       "pass": true,
       "level": "pass",
-      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 12 sentence(s) with non-empty text — the deep caption check (layout, SRT/VTT) is P7's `captions` check"
+      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 12 sentence(s), 2 caption file(s) — SRT/VTT written by studio sound; the deep caption check is P7's `captions` check"
     },
     {
       "name": "loudness",
@@ -54,13 +54,13 @@
       "name": "deliverable",
       "pass": true,
       "level": "pass",
-      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 64.20s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 64.20s"
+      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 63.80s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 63.80s"
     },
     {
       "name": "deterministic",
       "pass": true,
       "level": "pass",
-      "detail": "first gates run: 12 layout record hash(es) stored (drift vs this baseline warns on the next run)",
+      "detail": "12 layout record hash(es) identical to the last gates.json run",
       "hashes": {
         "16:9/s01_hook-layout.json": "c7910395728b",
         "16:9/s02_secant-layout.json": "1463cbb1f9df",

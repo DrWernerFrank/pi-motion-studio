@@ -79,6 +79,11 @@ export default async (ctx = {}) => {
     createMathFilm(KEY, { title: 'gates fixture' });
     const voiced = await buildVoice(KEY);
     await buildMix(KEY);
+    { // captions ride the narration (studio sound writes them; the fixture mirrors it)
+      const { exportCaptions } = await import('../../math-captions.mjs');
+      const c = exportCaptions(KEY);
+      facts.push(`captions: ${c.cues} cues -> srt+vtt`);
+    }
     facts.push(`scaffold+voice+mix: ${voiced.sentences.length} sentences, ${voiced.duration.toFixed(2)} s of narration (${voiced.voice})`);
     if (!(await renderWindow(facts))) {
       return { pass: false, measured: 'no clean render window within 120 s (another render holds the single slot) — re-run the check when the slot is free' };
@@ -240,7 +245,10 @@ export default async (ctx = {}) => {
       const canvasAdds = [...src.matchAll(/\badd\((['"`])([^'"`]+)\1/g)].map((m) => m[2].replace(/\$\{[^}]*\}/g, '').trim());
       for (const n of CANVAS_ONLY) if (!canvasAdds.includes(n)) bad.push(`engine/gates.mjs has no add('${n}') — the Canvas-only list has gone stale, update CANVAS_ONLY`);
       const overlap = canvasAdds.filter((n) => GATE_NAMES.includes(n));
-      if (JSON.stringify(overlap) !== JSON.stringify(['loudness'])) bad.push(`math x Canvas gate-name overlap is [${overlap.join(', ')}], wanted exactly [loudness] (the one concept both kinds share, with a math-specific implementation)`);
+      const SHARED = ['loudness', 'deliverable']; // shared concepts, math-specific implementations
+      const stray = overlap.filter((n) => !SHARED.includes(n));
+      if (stray.length) bad.push(`math x Canvas gate-name overlap [${stray.join(', ')}]: shared concepts are loudness + deliverable (both with math implementations); any OTHER name means a Canvas gate is being silently passed`);
+      else facts.push(`Canvas-only gates absent; shared names [${SHARED.join(', ')}] carry math-specific implementations`);
       if (/from\s+'\.\/gates\.mjs'/.test(readFileSync(join(ROOT, 'engine', 'math-gates.mjs'), 'utf8'))) bad.push('math-gates.mjs imports the Canvas gates — a math film must run the math gates, never silently pass the Canvas ones');
       if (clean.checks?.length === GATE_NAMES.length) facts.push(`Canvas-only gates [${CANVAS_ONLY.join(', ')}] absent from the math set (replaced by layout/pace/deterministic…); the only shared name is loudness (shared concept, math implementation: mix.lufs ±1, <= -1 dBTP on out/mix.wav); gates.json holds exactly [${GATE_NAMES.join(', ')}]`);
     }

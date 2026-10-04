@@ -1,6 +1,7 @@
 // typeset (P2): the 40-formula battery through the REAL Eq (converter + MathTypst + labels),
 // determinism, named parts, Persian RTL, and a broken formula's loud error. Everything runs in
 // ONE capped python process (the battery is a batch, not 40 scenes).
+import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { writeFileSync } from 'node:fs';
 import { CAPS, TIMEOUTS, MemPool, runCapped } from '../../lib/capped.mjs';
@@ -91,9 +92,9 @@ except Exception as ex:
     print(json.dumps({"persian": False, "err": str(ex)[:120]}))
 `);
   const r = await pool.run({
-    cmd: py, args: [prog], cwd: join(ROOT, 'engine', 'manim', 'test'),
-    // ^ cwd inside engine/manim/test (NOT engine/manim: Manim writes a media/ (Pango cache) into
-    // its cwd and that leaked 388 KB of cache into the repo — the P2 worker found it)
+    cmd: py, args: [prog], cwd: join(homedir(), '.cache', 'pi-motion-studio', 'scratch'),
+    // ^ cwd in SCRATCH (Manim writes media/ into its cwd: engine/manim was the original leak,
+    // engine/manim/test was the second — a Pango cache belongs under ~/.cache, never the repo)
     input: JSON.stringify({ items: BATTERY }), memoryMb: CAPS.check, timeoutS: TIMEOUTS.check * 2,
     label: 'typeset battery',
     env: { STUDIO_FORMAT: '16:9' },
