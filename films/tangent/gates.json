@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-04T15:24:23.590Z",
+  "at": "2026-10-04T18:39:08.070Z",
   "pass": true,
   "checks": [
     {
@@ -54,26 +54,26 @@
       "name": "deliverable",
       "pass": true,
       "level": "pass",
-      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 63.80s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 63.80s"
+      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 63.40s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 63.40s"
     },
     {
       "name": "deterministic",
-      "pass": true,
-      "level": "pass",
-      "detail": "12 layout record hash(es) identical to the last gates.json run",
+      "pass": false,
+      "level": "warn",
+      "detail": "1 record file(s) changed since the last gates run (9:16/s02_secant-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
         "16:9/s01_hook-layout.json": "c7910395728b",
-        "16:9/s02_secant-layout.json": "1463cbb1f9df",
-        "16:9/s03_limit-layout.json": "8bf8c1819425",
-        "16:9/s04_slopes-layout.json": "d9989aaaafcf",
-        "16:9/s05_rule-layout.json": "11ad18545cb5",
-        "16:9/s06_recap-layout.json": "ec059016b5bd",
-        "9:16/s01_hook-layout.json": "252f63003b60",
-        "9:16/s02_secant-layout.json": "c273b5d24746",
-        "9:16/s03_limit-layout.json": "14d139b82cc2",
-        "9:16/s04_slopes-layout.json": "5f550ce0697e",
-        "9:16/s05_rule-layout.json": "5755f67157a8",
-        "9:16/s06_recap-layout.json": "eef072414e64"
+        "16:9/s02_secant-layout.json": "08e5d8f61ed7",
+        "16:9/s03_limit-layout.json": "458723e61ebb",
+        "16:9/s04_slopes-layout.json": "6d189ca0f21c",
+        "16:9/s05_rule-layout.json": "24e797861cbe",
+        "16:9/s06_recap-layout.json": "a3c126df690f",
+        "9:16/s01_hook-layout.json": "c42b23eb3ec4",
+        "9:16/s02_secant-layout.json": "a0b7a124c286",
+        "9:16/s03_limit-layout.json": "267d8a8bb2c0",
+        "9:16/s04_slopes-layout.json": "706feca35317",
+        "9:16/s05_rule-layout.json": "08282b6bb095",
+        "9:16/s06_recap-layout.json": "03df0e38d5fd"
       }
     }
   ]

@@ -116,5 +116,63 @@
       "out/sheets/strip-8.90-16x9.png",
       "out/sheets/strip-41.50-9x16.png"
     ]
+  },
+  {
+    "round": 4,
+    "at": "2026-10-04T15:46:13.096Z",
+    "reviewer": "critic",
+    "scores": {
+      "brand": 8,
+      "clarity": 9,
+      "composition": 7,
+      "correctness": 10,
+      "hook": 9,
+      "motion": 8,
+      "readability": 7,
+      "sound": 9,
+      "variety": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "fix": "Two-line the equation in 16:9 (det matrix line, then '= 1·1 − 3·2 = −5') or drop the det() prefix so into() stops compressing; target glyph em ≥ 7u. Also: lint should measure Eq sub-glyph ink, not the composite bbox (10.2u bbox is pmatrix-inflated and hides the shrink).",
+        "issue": "s03 16:9 equation into()-width-shrunk to 0.56× nominal — glyph em ≈ 5.0u, digit ink ≈ 2.9u, under the 3.2u floor at 360px; the −5 payoff is effectively unreadable on the phone sheet",
+        "t": 23.5
+      },
+      {
+        "fix": "Same two-line split or prefix-drop as s03; verify the 0 lands at ≥ 7u em and stays red-on-meaning.",
+        "issue": "s04 16:9 equation same into() shrink (em ≈ 5.4u) — the =0 payoff is squint-level at 360px while carrying the scene's whole point",
+        "t": 29.5
+      },
+      {
+        "fix": "Fit the group into the STAGE box (safe minus title band) or cap fill ~0.78 and even out the inter-line buffs so the stack breathes uniformly.",
+        "issue": "s05 16:9 3×3 stack crowds the title: 0.44u ink gap between 'Three by three…' and the matrix bracket tips (≈3px @540p, ~1px @360px — reads as touching on the phone sheet), 98px dead bottom, uneven vertical rhythm (85px matrix→expansion vs ~4px title→matrix)",
+        "t": 41.8
+      },
+      {
+        "fix": "Raise the portrait cap (grow ≈ 2.2× against the stage) or re-compose portrait as matrix-left / worked-right to shorten the group and let it scale wider.",
+        "issue": "s02 9:16 card fills only 58% of the tall stage (grow capped at 1.6×): ~160px hole under the title and ~30% dead bottom — the round-3 lift lands perfectly in 16:9 but the portrait floats mid-stage",
+        "t": 12
+      },
+      {
+        "fix": "Fit the recap into the stage at fill ~0.8, reuse s02's colored formula (amber ad, red bc) so color-is-meaning survives to the end, and keep the pmatrix notation for [3,1;1,2].",
+        "issue": "s06 recap (both formats) floats at 44–49% fill (47% dead above in 9:16) and drops s02's color coding: plain ad−bc, and [3,1;1,2] shorthand vs the pmatrix used everywhere else",
+        "t": 49.5
+      },
+      {
+        "fix": "Consider 4.2u for the two meaning-bearing notes (they carry the sign/zero concepts), or darken the note color one step for phone contrast.",
+        "issue": "Body notes ('negative means flipped', 'no inverse — it cannot be undone') at 3.6u nominal are borderline at 360px in both formats — the design floor itself is phone-tight",
+        "t": 25.5
+      }
+    ],
+    "notes": "round 4 by math-critic — re-derived by hand: det[3,1;1,2]=3·2−1·1=5; swap [1,3;2,1]=1·1−3·2=−5; [2,4;1,2]=4−4=0; minors det[3,1;1,2]=5, det[1,1;0,2]=2; cofactors 2·5−1·2+0=8 (Sarrus cross-check 12−4=8); identity=1 — plus 30/30 claims re-verified in fresh sympy processes. Round-3 fixes all VERIFIED: (1) s02 16:9 card records 90% stage fill, bottom-anchored (0.38u gap), 0.43u clear of the title band — full-res confirms 42px title gap / 67px bottom; (2) nominal audit over all 12 layout records: ZERO sub-floor nominals — s01 area label at full 9u math (4.3u ink = lowercase x-height, not a shrink), s04 note at 3.6u body; the 2.58u 'drawn' values are ascender-less ink at full nominal, above the 0.62× lint allowance; (3) trace: shear ends 3.967 ≈ bookmark 'applies' 3.947, area-label Write ends 7.1 ≈ 'five' 7.116 — lands on the word. New residuals: s03+s04 16:9 equations are into()-width-shrunk to 0.56–0.60× nominal (glyph em 5.0–5.4u, digit ink 2.9–3.1u — sub-3.2u at 360px, 'effectively unreadable' on the phone sheet; lint misses it because its drawn-ink check reads the whole Eq bbox, pmatrix-inflated to 10.2u); s05 16:9 stack crowds the title (0.44u ink gap ≈ 3px @540p, reads as touching at phone; 98px dead bottom; into() fits the SAFE box which includes the title band); 9:16 under-fills (s02 58% of stage at the 1.6× cap, s06 44%); s06 recap drops s02's ad/bc term colors and uses [3,1;1,2] shorthand. Hard cuts are clean (scenes trim tight to narration at 8.7/34.6/45.2 — earlier 'blank frame'/'ghost' reads were mid-Write states and cut moments, re-verified at full res). Sound gates on target (−16 LUFS, −1.4 dBTP, 20/20 bookmarks within a frame). Verdict vs bar: readability 7 and composition 7 are below 8 — the two real round-5 fixes are the s03/s04 equation scale and the s05 16:9 title clearance; 9:16 fill polish after those.",
+    "sheets": [
+      "films/determinant/out/sheets/every-16x9.png",
+      "films/determinant/out/sheets/sections-16x9.png",
+      "films/determinant/out/sheets/times-16x9.png",
+      "films/determinant/out/sheets/phone-16x9.png",
+      "films/determinant/out/sheets/phone-9x16.png"
+    ]
   }
 ]

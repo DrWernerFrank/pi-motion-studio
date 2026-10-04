@@ -67,5 +67,48 @@
       "out/sheets/phone-16x9.png",
       "out/sheets/phone-9x16.png"
     ]
+  },
+  {
+    "round": 3,
+    "at": "2026-10-04T15:37:49.028Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 8,
+      "variety": 7,
+      "composition": 5,
+      "brand": 7,
+      "sound": 8,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 5,
+    "pass": false,
+    "problems": [
+      {
+        "t": 23.5,
+        "issue": "The round-2 size fix only reached 9:16: the portrait slope/h readouts are now real digits (27px native = 18px at 360px, judged 9/10 at true phone size) but in 16:9 they still render ~6px at 360px (17px native at 960x540; judges 3-4/10, so 2.00 vs 2.02 stays indistinguishable at phone size). The kit instruments were bumped to FULL math size but tangent never calls them — every scene carries its own local live_readout at 0.8x math, and even full math would render only ~8px at 360px in 16:9. Ticks stay ~6px at 360px in both formats (3/10) and the landing h -> 0 is still grey, not the red h-color.",
+        "fix": "Make instrument size format-aware with a phone floor (>= 12px at 360px): in 16:9 scale the slope/h readouts and ticks to ~1.5-2x math (or route the scenes through the kit instruments); render h -> 0 in the red h-color at full weight; thicken the early secant."
+      },
+      {
+        "t": 45.5,
+        "issue": "The empty back half is untouched: s05 fades the graph out at 38.3s and runs 18.5s of stacked equations at ~85-90% empty canvas in both formats (measured 89-90% empty in 9:16 at 45.5s; near-blank moments at 38.5s and 56.5s mid-fade), and the s06 recap is ~65% empty with a top void of 43% of the portrait frame, misaligned left edges (formula x~70 vs text x~105) and a static hold for the last ~3s.",
+        "fix": "Keep a small live curve + tangent + slope-readout callback beside the s05 derivation and the s06 recap (the rule applied at x = 1/2/3); grow the EqSteps column to fill the stage; end on the pivot moment instead of a still; align the recap left edges."
+      },
+      {
+        "t": 15,
+        "issue": "The 9:16 plot proportion is unchanged: the lab is a wide 2:1 box at ~17-25% of frame height in every scene, with ~45% of the portrait height dead margins (a 300-415px empty top band frame after frame; 43% in s06) — the portrait frame is never re-proportioned, so the pivot, the spine of the film, plays small and low.",
+        "fix": "Give the 9:16 lab box ~40-50% of the portrait stage height (a taller plot, not just bigger type) and vertically center the title/plot/readout/work stack; keep the fixed readout HUD slot."
+      }
+    ],
+    "notes": "round 3 by math-critic — re-derived secant (4-1)/(2-1) = 3; slope = 2+h EXACT at every sampled readout (3.00 -> 2.78 -> 2.50 -> 2.10 -> 2.02 -> 2.00 against h 1.00 -> 0.78 -> 0.50 -> 0.10 -> 0.02 -> 0.00; the r2 denser series 2.98 -> 2.00 also all exact); tangent 2/4/6 at x = 1/2/3 with mid-sweep transients exact (2.86 = 2 x 1.43, 5.02 = 2 x 2.51); x^2 -> 2x, x^3 -> 3x^2, x^n -> n x^(n-1). check tangent: 6/6 scenes clean, independent fresh-sympy 54/54 claims true, gates ALL PASS — correctness 10. Fix audit vs r2: (1) readout size — FIXED in 9:16, the phone format (18px at 360px, real digits) but STILL a ~6px speck in 16:9: the kit full-math fix never reaches tangent because the scenes use their own 0.8x-math live_readout; (2) scene-seam reflows — the readout row is now a fixed HUD slot (verified: same pixel band at 23.5s and 33.5s) but work blocks still reflow at seams (20.5s stack swap, 46.5 -> 48.5s row shift, 56.5 -> 58.5s layout change); (3) empty canvas + 9:16 plot share — untouched (s05 89-90% empty in portrait, s06 65% with a 43% top void, plot 17-25% of portrait height, 16:9 55-70% empty with a dead bottom-right). Also persisting from r2: grey h -> 0, thin early secant, 3/10 ticks, the h=0.50 flash vs h=0.10 dwell asymmetry, the static recap tail. Verdict vs the 8+ bar: NOT passing — correctness 10, motion 8, but composition 5 and readability/brand at 7. The math spine (secant -> pivot -> live readout -> rule) is exemplary; the layout craft still lags it.",
+    "sheets": [
+      "out/sheets/every-16x9.png",
+      "out/sheets/times-16x9.png",
+      "out/sheets/phone-16x9.png",
+      "out/sheets/every-9x16.png",
+      "out/sheets/phone-9x16.png"
+    ]
   }
 ]

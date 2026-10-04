@@ -22,7 +22,13 @@ class Scene(StudioScene):
 
         from manim import VGroup
         from studio_manim.kit import into
-        into(VGroup(A, expansion, worked), L.safe, fill=0.86)  # fit the SAFE box: portrait margins cleared (critic R2)
+        # critic r4: fitting L.safe let the stack crowd the title (0.44u gap). The fit box is the
+        # STAGE minus the title band — the stack fills the stage BELOW the title with real margin.
+        from studio_manim.layout import _Box
+        # the fit box = the stage BELOW the title band: top = title band's bottom minus a margin
+        top = L.title.y - L.u * 1.5
+        into(VGroup(A, expansion, worked),
+             _Box(L.stage.x, L.stage.y, L.stage.w, top - L.stage.y), fill=0.9)
 
         with self.say("s05.1"):
             self.play(Write(head), run_time=0.9)

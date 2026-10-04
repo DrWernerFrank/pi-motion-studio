@@ -35,7 +35,12 @@ class Box:
 
 
 def graph_box():
-    """Panel 0 with its bottom 9% reserved for the tick labels (they sit below the axis, in safe)."""
+    """The graph's box. PORTRAIT (critic r3): the plot measured only 17-25% of the 9:16 frame —
+    a 2:1-wide box in a tall frame wastes ~45% vertical. Portrait gives the graph 62% of the
+    stage's height (a real re-proportion, not a scaled copy); landscape keeps panel 0. The bottom
+    9% stays reserved for the tick labels."""
+    if L.portrait:
+        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 
@@ -61,6 +66,10 @@ def title(text):
 
 
 def panel():
+    """The work column: panel 1 in landscape; the lower 38% of the stage in portrait (the graph
+    took 62% — critic r3's re-proportion)."""
+    if L.portrait:
+        return Box(L.stage.x, L.stage.y, L.stage.w, L.stage.h * 0.38)
     return L.panel(1, 2)
 
 
@@ -74,9 +83,10 @@ def name_eq(top=True):
 
 
 def readout_fs():
-    # 0.8 x math: the kit's slope_readout is 0.5 x math (4.5u in 16:9) — unreadable at phone size
-    # (round-1 look); same layout, same row, same tracker semantics, bigger type.
-    return _font_size("math") * 0.8
+    # critic r3: 0.8x read ~6px at 360px in 16:9 — the phone test judges the spine's instrument.
+    # Full math in 9:16 (18px@360 verified); 1.25x in 16:9 where the HUD row has the room.
+    from studio_manim.layout import L
+    return _font_size("math") * (1.25 if not L.portrait else 1.0)
 
 
 def live_readout(lab, value):
@@ -140,9 +150,14 @@ def slope_eqs(x1, x2):
     e2 = Eq(rf"= {num(s)}", role="result")
     e2.next_to(e1, RIGHT, buff=L.u * 2)
     g = VGroup(e1, e2)
-    p = panel()
-    g.scale(min(1.5, p.w * 0.9 / g.width, p.h * 0.8 / g.height))
-    g.move_to([p.cx, p.cy, 0])
+    # portrait: a dedicated 30% EQUATION zone UNDER the (62%) graph — its own band, clear of the
+    # curve (the graph-panel strip attempt overlapped the parabola itself). 16:9: the work panel.
+    if L.portrait:
+        strip = Box(L.stage.x, L.stage.y, L.stage.w, L.stage.h * 0.30)
+    else:
+        strip = panel()
+    g.scale(min(1.5, strip.w * 0.92 / g.width, strip.h * 0.8 / g.height))
+    g.move_to([strip.cx, strip.cy, 0])
     return e1, e2, s
 
 

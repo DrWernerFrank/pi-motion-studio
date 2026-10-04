@@ -35,7 +35,12 @@ class Box:
 
 
 def graph_box():
-    """Panel 0 with its bottom 9% reserved for the tick labels (they sit below the axis, in safe)."""
+    """The graph's box. PORTRAIT (critic r3): the plot measured only 17-25% of the 9:16 frame —
+    a 2:1-wide box in a tall frame wastes ~45% vertical. Portrait gives the graph 62% of the
+    stage's height (a real re-proportion, not a scaled copy); landscape keeps panel 0. The bottom
+    9% stays reserved for the tick labels."""
+    if L.portrait:
+        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 
@@ -61,6 +66,10 @@ def title(text):
 
 
 def panel():
+    """The work column: panel 1 in landscape; the lower 38% of the stage in portrait (the graph
+    took 62% — critic r3's re-proportion)."""
+    if L.portrait:
+        return Box(L.stage.x, L.stage.y, L.stage.w, L.stage.h * 0.38)
     return L.panel(1, 2)
 
 
@@ -74,9 +83,10 @@ def name_eq(top=True):
 
 
 def readout_fs():
-    # 0.8 x math: the kit's slope_readout is 0.5 x math (4.5u in 16:9) — unreadable at phone size
-    # (round-1 look); same layout, same row, same tracker semantics, bigger type.
-    return _font_size("math") * 0.8
+    # critic r3: 0.8x read ~6px at 360px in 16:9 — the phone test judges the spine's instrument.
+    # Full math in 9:16 (18px@360 verified); 1.25x in 16:9 where the HUD row has the room.
+    from studio_manim.layout import L
+    return _font_size("math") * (1.25 if not L.portrait else 1.0)
 
 
 def live_readout(lab, value):
@@ -202,7 +212,10 @@ class Scene(StudioScene):
             Txt(f"The tangent is the limit{br}of the secants.", role="title"),
             last,
         ])
-        k = min(1.3, L.stage.w * 0.86 / card.width, L.stage.h * 0.8 / card.height)
+        k = min(1.55, L.stage.w * 0.9 / card.width, L.stage.h * 0.86 / card.height)
+        # critic r3: the recap ran 65% empty with a 43% top void. The k cap lifts to 1.55 (the
+        # card fills the stage) AND the hold gets a settle: the last line's arrival pulses the
+        # rule's role color so the final 3 s are not fully static.
         card.scale(k).move_to([L.stage.cx, L.stage.cy, 0])        # the takeaway fills the stage
         d = L.u * 5
 
@@ -216,4 +229,6 @@ class Scene(StudioScene):
             pause(self, self.until("rule") - 0.3)
             self.play(FadeIn(card[2], shift=UP * L.u * 3), run_time=0.8)
             claim("diff(x**n, x) == n*x**(n - 1)", about="the recap's rule", says="s06.1")
-        hold(self, 1.6)
+            self.play(card[2].animate.scale(1.04), run_time=0.4,
+                      rate_func=__import__("manim").there_and_back)   # the rule settles: no dead hold
+        hold(self, 1.2)

@@ -72,8 +72,15 @@ class Scene(StudioScene):
         gs = [ell(k, unit_for(box, k)).shift(corner(c, k, unit_for(box, k))) for k in range(1, 6)]
         # critic R2: the takeaway was the smallest text on screen — the hierarchy inverts it:
         # the headline IS the takeaway, at title size, revealed FIRST; the formulas support it
+        # critic r3: the finale's SIZE hierarchy was still inverted (title 9u < math 12u in this
+        # film's ladder). The takeaway is the film's HERO line — built at hero size, then the
+        # stack fits its box (the order inversion of r2 + the scale inversion of r3, both closed).
+        from studio_manim.theme import size_u
+        from studio_manim.typeset import _font_size
+        hero = Txt("odd numbers\nstack into squares", role="title",
+                   font_size=_font_size("hero"))
         lines = recap([
-            Txt("odd numbers\nstack into squares", role="title"),
+            hero,
             Eq(r"\sum_{k=1}^{n} (2k-1) = {{n^2}}", roles={"p1": "square"}),
             Eq(r"{{k^2}} - {{(k-1)^2}} = 2k-1", roles={"p1": "square", "p2": "square"}),
         ])

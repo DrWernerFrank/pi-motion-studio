@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-04T15:24:18.736Z",
+  "at": "2026-10-04T18:38:39.438Z",
   "pass": true,
   "checks": [
     {
@@ -36,7 +36,7 @@
       "name": "pace",
       "pass": true,
       "level": "pass",
-      "detail": "6 freeze run(s) >= 3s, none while the narration is silent (10 sentences of timing crossed in)"
+      "detail": "5 freeze run(s) >= 3s, none while the narration is silent (10 sentences of timing crossed in)"
     },
     {
       "name": "captions",
@@ -64,15 +64,15 @@
       "hashes": {
         "16:9/s01_hook-layout.json": "ea454e5366af",
         "16:9/s02_formula-layout.json": "e0cc4290a408",
-        "16:9/s03_sign-layout.json": "31bdbd68bce7",
-        "16:9/s04_zero-layout.json": "8476be3472bd",
-        "16:9/s05_3x3-layout.json": "82af54a8c630",
+        "16:9/s03_sign-layout.json": "336aad5ebce1",
+        "16:9/s04_zero-layout.json": "08cd9afe0fb7",
+        "16:9/s05_3x3-layout.json": "8b92e7060b6d",
         "16:9/s06_recap-layout.json": "b04259861311",
         "9:16/s01_hook-layout.json": "5a26bc267172",
         "9:16/s02_formula-layout.json": "9aa288513231",
         "9:16/s03_sign-layout.json": "8f5fb37ff1b9",
         "9:16/s04_zero-layout.json": "07edd55098e0",
-        "9:16/s05_3x3-layout.json": "decf498027de",
+        "9:16/s05_3x3-layout.json": "802839bf05c2",
         "9:16/s06_recap-layout.json": "b9c90e7fa259"
       }
     }

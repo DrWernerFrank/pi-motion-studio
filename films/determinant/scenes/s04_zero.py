@@ -16,7 +16,10 @@ class Scene(StudioScene):
         if L.portrait:
             plane_box, eq_col = L.panel(0, 2), L.panel(1, 2)
         else:
-            col_w = L.stage.w * 0.42
+            # critic r4: the 42% column into()-shrunk the det line to 0.56x (unreadable at 360px).
+            # The 16:9 frame is WIDE: the plane keeps 55% and the equation column takes 45%, so the
+            # line runs at >= 0.8x; into() caps at exactly fit, never more.
+            col_w = L.stage.w * 0.45
             plane_box = _Box(L.stage.x, L.stage.y, L.stage.w - col_w, L.stage.h)
             eq_col = _Box(L.stage.x + L.stage.w - col_w, L.stage.y, col_w, L.stage.h)
         lab = PlaneLab(plane_box, matrix=[[3, 1], [1, 2]],
