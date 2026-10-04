@@ -269,7 +269,7 @@ class Scene(StudioScene):
             self.play(line.animate.set_stroke(width=TAN_W),
                       FadeOut(h_lock, shift=UP * L.u * 3, rate_func=first_half),
                       FadeIn(h_to0, shift=UP * L.u * 3, rate_func=second_half),
-                      Indicate(readout[1], scale_factor=1.35, color=math_role("result")), run_time=0.8)
+                      Indicate(readout[1], scale_factor=1.15, color=math_role("result")), run_time=0.8)  # r9: 1.35 overprinted the '='
             pause(self, self.until("two") - 1.5)
             self.play(FadeOut(quot, shift=UP * d, rate_func=first_half),
                       FadeOut(h_to0, shift=UP * d, rate_func=first_half), run_time=0.5)

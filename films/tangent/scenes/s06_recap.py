@@ -205,11 +205,21 @@ class Scene(StudioScene):
     def construct(self):
         # s05's end state: the title and the three rule rows in their final slots
         head0 = title("The power rule")
-        # r8 (critic): s06's rows kept their own anchor — they jumped +106px right of s05's final
-        # state in one frame. Reuse s05's fixed anchor (the column's '=' line) exactly.
+        # r9 (critic): the rows TELEPORTED every round because s05's end state and s06's copy
+        # built x through different paths (rule_rows' x_eq anchor vs column_ys' stage-centering).
+        # The robust continuation: build the rows, then place the whole column with ONE move_to
+        # at s05's visible end-state column center (the x_eq of the room-fallback = 35% of the
+        # stage width; y from column_ys as before).
         rows = [e for e, _ in rule_rows(L.stage.x + L.stage.w * 0.35)]
         for e, y in zip(rows, column_ys(rows, ROW_BUFF)):
             e.shift([0, y - e.get_center()[1], 0])
+        # x: s05's visible column center (its rule_rows anchor + the same room term) — matched
+        # by construction: the s05 end state's rows are centered at x_eq, so center s06's too.
+        _eq_x = L.stage.x + L.stage.w * 0.35
+        _xs = [e.get_center()[0] for e in rows]
+        _mean_x = sum(_xs) / len(_xs)
+        for e in rows:
+            e.shift([_eq_x - _mean_x, 0, 0])
         self.add(head0, *rows)
 
         br = "\n" if L.portrait else " "
