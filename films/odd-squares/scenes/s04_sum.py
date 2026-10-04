@@ -47,14 +47,14 @@ class Scene(StudioScene):
                 Eq(r"{{3}} {{=}} {{2^2}} {{- 1^2}}", roles={"p1": "gnomon2"}),
                 Eq(r"{{5}} {{=}} {{3^2}} {{- 2^2}}", roles={"p1": "gnomon3"}),
                 Eq(r"{{(2n-1)}} {{=}} {{n^2}} {{- (n-1)^2}}")]
-        pitch = max(r.height for r in rows) * 1.9
+        pitch = max(r.height for r in rows) * 1.45  # r11 (critic): 1.9 wasted height — the h-term bound and the 2s read 6.4px@360
         for i, r in enumerate(rows):
             r.shift([-r.part("p2").get_center()[0], -(i if i < 3 else 4) * pitch - r.get_center()[1], 0])
         x_sq = rows[2].part("p3").get_center()[0]
         dots = VGroup(*[Dot([x_sq, -3 * pitch + (j - 1) * pitch * 0.28, 0], radius=L.u * 0.7,
                             color=color_for("ink")) for j in range(3)])
         stack = VGroup(*rows, dots)
-        stack.scale(min(box.w * 0.9 / stack.width, box.h * 0.9 / stack.height)).move_to([box.cx, box.cy, 0])
+        stack.scale(min(box.w * 0.94 / stack.width, box.h * 0.94 / stack.height)).move_to([box.cx, box.cy, 0])
 
         def vanish(parts, to, run_time=0.5):
             """Equal squares of opposite sign meet and vanish. A part is a selection INSIDE its row:

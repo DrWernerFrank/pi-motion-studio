@@ -97,7 +97,7 @@ class Scene(StudioScene):
         _sum = Eq(r"\sum_{k=1}^{n} (2k-1) = {{n^2}}", roles={"p1": "square"})
         _kln = Eq(r"{{k^2}} - {{(k-1)^2}} = 2k-1", roles={"p1": "square", "p2": "square"})
         if L.portrait:
-            _sum.scale(0.72); _kln.scale(0.72)   # the hero keeps its size lead through the fit
+            _sum.scale(0.86); _kln.scale(0.86)  # r11 (critic): 0.72 blocked the panel growth (the k-line 2 read 6.4px@360); the hero's lead holds at 0.86
         lines = recap([
             hero,
             _sum,
