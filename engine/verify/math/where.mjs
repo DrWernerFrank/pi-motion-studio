@@ -205,8 +205,11 @@ export default async () => {
       maxDev = Math.max(maxDev, dev);
       maxInto = Math.max(maxInto, (t - sc.start) - (anims[sc.scene][ix - 1]?.t ?? 0));
       if (dev > 0.2 + 1e-9) bad.push(`t=${t}: nearest animation END is ${dev.toFixed(3)} s away (> 0.2)`);
-      // file: the scene's source file
+      // file: the scene's source file; `line` is the trace's source_line — the recorder does
+      // not stamp it yet (its docstring promises it, the animation frames lack it), so it must be
+      // null TODAY and an integer the day it lands (never a guess from the source)
       if (r.file !== `scenes/${sc.scene}.py`) bad.push(`t=${t}: file ${r.file}, wanted scenes/${sc.scene}.py`);
+      if (r.line !== null && !/^\d+$/.test(String(r.line))) bad.push(`t=${t}: line ${JSON.stringify(r.line)} is not an integer source_line`);
       if (r.fmt !== fmt || r.film !== KEY) bad.push(`t=${t}: fmt/film ${r.fmt}/${r.film}`);
       // a bookmark is reported only inside its +/-0.75 s window, and must match timing.json
       if (r.bookmark) {

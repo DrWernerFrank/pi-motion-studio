@@ -1,0 +1,50 @@
+[
+ {
+  "kind": "animation",
+  "t": 2.433,
+  "i": 1,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "Succession"
+ },
+ {
+  "kind": "animation",
+  "t": 4.6,
+  "i": 2,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.6,
+  "i": 3,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "wait",
+  "seconds": 2.199
+ },
+ {
+  "t": 2.4333333333333345,
+  "kind": "sentence_end",
+  "scene": "s06_recap",
+  "sentence": "s06.1"
+ },
+ {
+  "kind": "animation",
+  "t": 5.8,
+  "i": 4,
+  "scene": "s06_recap",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.8,
+  "i": 5,
+  "scene": "s06_recap",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 1.2
+ }
+]

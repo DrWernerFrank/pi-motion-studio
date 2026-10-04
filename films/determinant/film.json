@@ -1,0 +1,21 @@
+{
+  "kind": "math",
+  "title": "The determinant, explained",
+  "fps": 60,
+  "formats": [
+    "16:9",
+    "9:16"
+  ],
+  "duration": 50.473,
+  "lang": "en",
+  "voice": "piper:en_US-ljspeech-medium",
+  "captions": "auto",
+  "music": "none",
+  "mix": {
+    "lufs": -16
+  },
+  "gates": {
+    "maxStill": 3,
+    "maxSentenceGap": 6
+  }
+}

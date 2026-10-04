@@ -1,0 +1,1643 @@
+[
+ {
+  "t": 0.9,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "1:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 2.1,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "2:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "2:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "2:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 3.233,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "3:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "3:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "3:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "3:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.533,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "4:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "4:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "4:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "4:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.533,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "5:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "5:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "5:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "5:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.667,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "6:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "6:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "6:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "6:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.667,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "7:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "7:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "7:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "7:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 8.1,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "8:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "8:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "8:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "8:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:8",
+    "bbox": [
+     -2.794,
+     -4.319,
+     5.587,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 8.6,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "9:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "9:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "9:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "9:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:8",
+    "bbox": [
+     -2.794,
+     -4.319,
+     5.587,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 8.6,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "10:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "10:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "10:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "10:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:8",
+    "bbox": [
+     -2.794,
+     -4.319,
+     5.587,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 9.0,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "11:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "11:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "11:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "11:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:8",
+    "bbox": [
+     -2.794,
+     -4.319,
+     5.587,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 9.0,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "12:0",
+    "bbox": [
+     -3.371,
+     3.457,
+     6.741,
+     0.754
+    ],
+    "height_u": 9.43,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "12:1",
+    "bbox": [
+     -0.643,
+     0.86,
+     0.311,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "12:2",
+    "bbox": [
+     0.37,
+     0.869,
+     0.248,
+     0.5
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "12:3",
+    "bbox": [
+     -0.611,
+     -0.159,
+     0.248,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "12:4",
+    "bbox": [
+     0.343,
+     -0.159,
+     0.3,
+     0.499
+    ],
+    "height_u": 6.24,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VMobject",
+    "id": "12:5",
+    "bbox": [
+     -0.883,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobject",
+    "id": "12:6",
+    "bbox": [
+     0.703,
+     -0.339,
+     0.18,
+     1.895
+    ],
+    "height_u": 23.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "12:7",
+    "bbox": [
+     -3.618,
+     -3.033,
+     7.235,
+     1.794
+    ],
+    "height_u": 22.42,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "12:8",
+    "bbox": [
+     -2.794,
+     -4.319,
+     5.587,
+     0.516
+    ],
+    "height_u": 6.45,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

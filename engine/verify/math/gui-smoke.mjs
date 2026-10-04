@@ -28,27 +28,44 @@ export default async (ctx = {}) => {
   const cache = ctx.cache || '/tmp/vm-gui';
   const shots = join(cache, 'shots');
   rmSync(shots, { recursive: true, force: true }); mkdirSync(shots, { recursive: true });
-  const refs = { browser: null, srv: null, touchIv: null };
-  try {
-    await run({ bad, facts, need, shots, ctx, refs });
-  } catch (e) {
-    // a crash is a FAILED CHECK, never a dead verifier: the runner's .then has no .catch
-    bad.push(`unexpected: ${String(e?.message || e).split('\n')[0]}`);
-    const log = refs.srvLog || [];
-    if (log.length) bad.push(`server said: ${log.slice(-6).join('').split('\n').filter(Boolean).slice(-4).join(' | ').slice(0, 400)}`);
-  } finally {
-    // a job that was mid-run when the server died would keep rendering into the fixture: kill it
-    // by ITS OWN key (never a sibling's), then take the server group and the fixtures.
-    try { execSync(`pkill -f "cli.mjs render ${KEY}" 2>/dev/null; pkill -f "films/${KEY}/scenes" 2>/dev/null; true`); } catch {}
-    try { refs.browser?.close(); } catch {}
-    try { if (refs.srv) process.kill(-refs.srv.pid, 'SIGTERM'); } catch {}
-    try { clearInterval(refs.touchIv); } catch {}
-    for (const k of [KEY, EKEY]) rmSync(join(FILMS, k), { recursive: true, force: true });
+  // The gui server's SSE watcher (an EXISTING path, not mine to change) scans every films/<key>/*
+  // once a second with a bare readdirSync: a sibling verifier deleting ITS OWN films/verify-m-* at
+  // just the wrong microsecond scandir-throws and takes the server down (measured: three crashes
+  // during this wave). The check cannot fix that path, so it DETECTS a server death and retries the
+  // whole run on a fresh port — up to 3 attempts, every attempt noted in `measured`.
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const ports = [3210, 3212, 3213];   // 3211 is the security check's; never collide with it
+    const refs = { browser: null, srv: null, touchIv: null, srvLog: [], srvDead: false, port: ports[attempt - 1] };
+    bad.length = 0;
+    try {
+      await run({ bad, facts, need, shots, ctx, refs });
+    } catch (e) {
+      // a crash is a FAILED CHECK, never a dead verifier: the runner's .then has no .catch
+      bad.push(`unexpected: ${String(e?.message || e).split('\n')[0]}`);
+      const log = refs.srvLog.join('');
+      const why = /scandir[^}]*path: '([^']+)'/.exec(log)?.[1] || log.split('\n').filter(Boolean).slice(-2).join(' ').slice(0, 120);
+      if (why) bad.push(`server said: ${String(why).slice(0, 220)}`);
+    } finally {
+      // a job that was mid-run when the server died would keep rendering into the fixture: kill it
+      // by ITS OWN key (never a sibling's), then take the server group and the fixtures.
+      try { execSync(`pkill -f "cli.mjs render ${KEY}" 2>/dev/null; pkill -f "films/${KEY}/scenes" 2>/dev/null; true`); } catch {}
+      try { refs.browser?.close(); } catch {}
+      try { if (refs.srv) process.kill(-refs.srv.pid, 'SIGTERM'); } catch {}
+      try { clearInterval(refs.touchIv); } catch {}
+      for (const k of [KEY, EKEY]) rmSync(join(FILMS, k), { recursive: true, force: true });
+    }
+    if (bad.length === 0) break;
+    if (refs.srvDead && attempt < 3) {
+      facts.push(`attempt ${attempt}: the gui server died on concurrent film churn (a sibling's films/verify-m-* vanished mid-scan; ${bad.filter((x) => /server said/.test(x)).join(' ').slice(0, 160)}) — retrying on :${ports[attempt]}`);
+      continue;
+    }
+    break;
   }
   return { pass: bad.length === 0, measured: bad.length ? bad.join('; ') : facts.join('; ') };
 };
 
 async function run({ bad, facts, need, shots, refs }) {
+  const PORT = refs.port, BASE = `http://localhost:${PORT}`;
 
   // ── the fixture: mathdemo copied (title fixed), plus a twin with a SEEDED syntax error ──────
   for (const k of [KEY, EKEY]) rmSync(join(FILMS, k), { recursive: true, force: true });
@@ -87,12 +104,13 @@ async function run({ bad, facts, need, shots, refs }) {
   refs.srvLog = [];
   refs.srv.stdout?.on('data', (d) => refs.srvLog.push(String(d)));
   refs.srv.stderr?.on('data', (d) => refs.srvLog.push('ERR ' + String(d)));
+  refs.srv.on('exit', () => { refs.srvDead = true; });
   refs.srv.unref();
   // up BEFORE anything else (a cold import on /mnt/c can outlive the fixed wait; a dead spawn must
   // fail the check with a reason, not leave the browser legs guessing)
   let up = false;
   for (let i = 0; i < 30 && !up; i++) { await new Promise((r) => setTimeout(r, 500)); up = await fetch(`${BASE}/api/films`).then((r) => r.ok).catch(() => false); }
-  if (!up) { bad.push('the gui server never answered on :' + PORT); return; }
+  if (!up) { bad.push(`the gui server never answered on :${PORT}`); return; }
   let browser;
   try {
     // a node-side SSE tap: every event the GUI's own connection would see (the timing.json leg)

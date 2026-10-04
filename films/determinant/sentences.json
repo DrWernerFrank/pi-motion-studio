@@ -1,0 +1,169 @@
+{
+ "version": 1,
+ "scenes": [
+  {
+   "id": "s01_hook",
+   "title": "the question"
+  },
+  {
+   "id": "s02_formula",
+   "title": "the 2x2 formula"
+  },
+  {
+   "id": "s03_sign",
+   "title": "the sign"
+  },
+  {
+   "id": "s04_zero",
+   "title": "squashed flat"
+  },
+  {
+   "id": "s05_3x3",
+   "title": "the 3x3"
+  },
+  {
+   "id": "s06_recap",
+   "title": "the takeaway"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01.1",
+   "scene": "s01_hook",
+   "text": "What does a determinant actually do? {shows}Watch the unit square{applies} as a matrix acts on the plane.",
+   "spoken": "What does a determinant actually do? Watch the unit square as a matrix acts on the plane.",
+   "bookmarks": [
+    {
+     "id": "shows",
+     "at_word": 6
+    },
+    {
+     "id": "applies",
+     "at_word": 10
+    }
+   ],
+   "line": 4
+  },
+  {
+   "id": "s01.2",
+   "scene": "s01_hook",
+   "text": "The new area is {five}five times{fivex} the old one.",
+   "spoken": "The new area is five times the old one.",
+   "bookmarks": [
+    {
+     "id": "five",
+     "at_word": 4
+    },
+    {
+     "id": "fivex",
+     "at_word": 6
+    }
+   ],
+   "line": 5
+  },
+  {
+   "id": "s02.1",
+   "scene": "s02_formula",
+   "text": "For a two by two matrix, the determinant is {formula}ad minus bc.",
+   "spoken": "For a two by two matrix, the determinant is ad minus bc.",
+   "bookmarks": [
+    {
+     "id": "formula",
+     "at_word": 9
+    }
+   ],
+   "line": 8
+  },
+  {
+   "id": "s02.2",
+   "scene": "s02_formula",
+   "text": "Here: three times two, minus one times one. {lands}Five.",
+   "spoken": "Here: three times two, minus one times one. Five.",
+   "bookmarks": [
+    {
+     "id": "lands",
+     "at_word": 8
+    }
+   ],
+   "line": 9
+  },
+  {
+   "id": "s03.1",
+   "scene": "s03_sign",
+   "text": "Swap the two columns and the determinant becomes one minus six, which is {minus}minus five.",
+   "spoken": "Swap the two columns and the determinant becomes one minus six, which is minus five.",
+   "bookmarks": [
+    {
+     "id": "minus",
+     "at_word": 13
+    }
+   ],
+   "line": 12
+  },
+  {
+   "id": "s03.2",
+   "scene": "s03_sign",
+   "text": "A negative determinant means space has {flipped}flipped its orientation.",
+   "spoken": "A negative determinant means space has flipped its orientation.",
+   "bookmarks": [
+    {
+     "id": "flipped",
+     "at_word": 6
+    }
+   ],
+   "line": 13
+  },
+  {
+   "id": "s04.1",
+   "scene": "s04_zero",
+   "text": "When the determinant is zero, the whole plane collapses onto a single line, and the matrix {cannot}cannot be undone.",
+   "spoken": "When the determinant is zero, the whole plane collapses onto a single line, and the matrix cannot be undone.",
+   "bookmarks": [
+    {
+     "id": "cannot",
+     "at_word": 16
+    }
+   ],
+   "line": 16
+  },
+  {
+   "id": "s05.1",
+   "scene": "s05_3x3",
+   "text": "A three by three determinant breaks into little two by twos. {expand}Expand along the first row.",
+   "spoken": "A three by three determinant breaks into little two by twos. Expand along the first row.",
+   "bookmarks": [
+    {
+     "id": "expand",
+     "at_word": 11
+    }
+   ],
+   "line": 19
+  },
+  {
+   "id": "s05.2",
+   "scene": "s05_3x3",
+   "text": "Two times five, minus one times two, plus zero. {eight}Eight.",
+   "spoken": "Two times five, minus one times two, plus zero. Eight.",
+   "bookmarks": [
+    {
+     "id": "eight",
+     "at_word": 9
+    }
+   ],
+   "line": 20
+  },
+  {
+   "id": "s06.1",
+   "scene": "s06_recap",
+   "text": "A determinant is the area scale factor. {recap_end}Five means five times the area.",
+   "spoken": "A determinant is the area scale factor. Five means five times the area.",
+   "bookmarks": [
+    {
+     "id": "recap_end",
+     "at_word": 7
+    }
+   ],
+   "line": 23
+  }
+ ]
+}

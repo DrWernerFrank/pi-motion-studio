@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "Matrix([[3, 1], [1, 2]]).det() == 5",
+  "about": "the recap repeats the verified number",
+  "says": "s06.1",
+  "scene": "s06_recap",
+  "ok": true,
+  "value": "5 == 5"
+ },
+ {
+  "expr": "Matrix([[1, 0], [0, 1]]).det() == 1",
+  "about": "the identity keeps area",
+  "says": "s06.1",
+  "scene": "s06_recap",
+  "ok": true,
+  "value": "1 == 1"
+ }
+]

@@ -1,0 +1,887 @@
+{
+  "version": 1,
+  "voice": "piper:en_US-ljspeech-medium",
+  "length_scale": 1,
+  "sample_rate": 22050,
+  "gap": 0.15,
+  "gap_samples": 3308,
+  "duration": 49.972789,
+  "timing": "native",
+  "sentences": [
+    {
+      "id": "s01.1",
+      "scene": "s01_hook",
+      "text": "What does a determinant actually do? {shows}Watch the unit square{applies} as a matrix acts on the plane.",
+      "spoken": "What does a determinant actually do? Watch the unit square as a matrix acts on the plane.",
+      "start": 0,
+      "end": 5.874649,
+      "start_sample": 0,
+      "samples": 129536,
+      "words": [
+        {
+          "w": "What",
+          "start": 0.04644,
+          "end": 0.32508
+        },
+        {
+          "w": "does",
+          "start": 0.4644,
+          "end": 0.71982
+        },
+        {
+          "w": "a",
+          "start": 0.75465,
+          "end": 0.80109
+        },
+        {
+          "w": "determinant",
+          "start": 0.84753,
+          "end": 1.49769
+        },
+        {
+          "w": "actually",
+          "start": 1.54413,
+          "end": 2.04336
+        },
+        {
+          "w": "do?",
+          "start": 2.12463,
+          "end": 2.4381
+        },
+        {
+          "w": "Watch",
+          "start": 2.58902,
+          "end": 2.87927
+        },
+        {
+          "w": "the",
+          "start": 2.9141,
+          "end": 3.00698
+        },
+        {
+          "w": "unit",
+          "start": 3.05342,
+          "end": 3.39011
+        },
+        {
+          "w": "square",
+          "start": 3.50621,
+          "end": 3.86612
+        },
+        {
+          "w": "as",
+          "start": 3.94739,
+          "end": 4.04027
+        },
+        {
+          "w": "a",
+          "start": 4.08671,
+          "end": 4.13315
+        },
+        {
+          "w": "matrix",
+          "start": 4.17959,
+          "end": 4.70204
+        },
+        {
+          "w": "acts",
+          "start": 4.7717,
+          "end": 5.08517
+        },
+        {
+          "w": "on",
+          "start": 5.13161,
+          "end": 5.27093
+        },
+        {
+          "w": "the",
+          "start": 5.27093,
+          "end": 5.34059
+        },
+        {
+          "w": "plane.",
+          "start": 5.38703,
+          "end": 5.77016
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "shows",
+          "t": 2.58902,
+          "word": "Watch"
+        },
+        {
+          "id": "applies",
+          "t": 3.94739,
+          "word": "as"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/7be48cf8d828125f49ad31d7f26305d0078c269961ea2b8747f448cf28a9250b/audio.wav",
+      "hash": "7be48cf8d828125f49ad31d7f26305d0078c269961ea2b8747f448cf28a9250b"
+    },
+    {
+      "id": "s01.2",
+      "scene": "s01_hook",
+      "text": "The new area is {five}five times{fivex} the old one.",
+      "spoken": "The new area is five times the old one.",
+      "start": 6.024671,
+      "end": 8.683356,
+      "start_sample": 132844,
+      "samples": 58624,
+      "words": [
+        {
+          "w": "The",
+          "start": 6.04789,
+          "end": 6.10594
+        },
+        {
+          "w": "new",
+          "start": 6.14077,
+          "end": 6.33814
+        },
+        {
+          "w": "area",
+          "start": 6.38458,
+          "end": 6.77932
+        },
+        {
+          "w": "is",
+          "start": 6.91864,
+          "end": 7.05796
+        },
+        {
+          "w": "five",
+          "start": 7.11601,
+          "end": 7.38304
+        },
+        {
+          "w": "times",
+          "start": 7.42948,
+          "end": 7.78939
+        },
+        {
+          "w": "the",
+          "start": 7.83583,
+          "end": 7.95193
+        },
+        {
+          "w": "old",
+          "start": 7.99837,
+          "end": 8.20735
+        },
+        {
+          "w": "one.",
+          "start": 8.30023,
+          "end": 8.57887
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "five",
+          "t": 1.091339,
+          "word": "five"
+        },
+        {
+          "id": "fivex",
+          "t": 1.811159,
+          "word": "the"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/4c3b9afd21e553214d5d9393a9694e4cc2c487acad36d229df9b69df06bed519/audio.wav",
+      "hash": "4c3b9afd21e553214d5d9393a9694e4cc2c487acad36d229df9b69df06bed519"
+    },
+    {
+      "id": "s02.1",
+      "scene": "s02_formula",
+      "text": "For a two by two matrix, the determinant is {formula}ad minus bc.",
+      "spoken": "For a two by two matrix, the determinant is ad minus bc.",
+      "start": 8.833379,
+      "end": 13.37288,
+      "start_sample": 194776,
+      "samples": 100096,
+      "words": [
+        {
+          "w": "For",
+          "start": 8.89143,
+          "end": 8.99592
+        },
+        {
+          "w": "a",
+          "start": 8.99592,
+          "end": 9.11202
+        },
+        {
+          "w": "two",
+          "start": 9.18168,
+          "end": 9.54159
+        },
+        {
+          "w": "by",
+          "start": 9.61125,
+          "end": 9.76218
+        },
+        {
+          "w": "two",
+          "start": 9.84345,
+          "end": 9.99438
+        },
+        {
+          "w": "matrix,",
+          "start": 10.02921,
+          "end": 10.65615
+        },
+        {
+          "w": "the",
+          "start": 11.09733,
+          "end": 11.15538
+        },
+        {
+          "w": "determinant",
+          "start": 11.19021,
+          "end": 11.85197
+        },
+        {
+          "w": "is",
+          "start": 11.8868,
+          "end": 11.99129
+        },
+        {
+          "w": "ad",
+          "start": 12.06095,
+          "end": 12.26993
+        },
+        {
+          "w": "minus",
+          "start": 12.31637,
+          "end": 12.72272
+        },
+        {
+          "w": "bc.",
+          "start": 12.76916,
+          "end": 13.29161
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "formula",
+          "t": 3.227571,
+          "word": "ad"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/b2d0606f6828f07e92359837a6e2363fc32774f77de15f67980ab5a65346da24/audio.wav",
+      "hash": "b2d0606f6828f07e92359837a6e2363fc32774f77de15f67980ab5a65346da24"
+    },
+    {
+      "id": "s02.2",
+      "scene": "s02_formula",
+      "text": "Here: three times two, minus one times one. {lands}Five.",
+      "spoken": "Here: three times two, minus one times one. Five.",
+      "start": 13.522902,
+      "end": 17.458685,
+      "start_sample": 298180,
+      "samples": 86784,
+      "words": [
+        {
+          "w": "Here:",
+          "start": 13.54612,
+          "end": 13.95247
+        },
+        {
+          "w": "three",
+          "start": 14.32399,
+          "end": 14.60263
+        },
+        {
+          "w": "times",
+          "start": 14.64907,
+          "end": 15.0322
+        },
+        {
+          "w": "two,",
+          "start": 15.12508,
+          "end": 15.32245
+        },
+        {
+          "w": "minus",
+          "start": 15.41533,
+          "end": 15.79846
+        },
+        {
+          "w": "one",
+          "start": 15.85651,
+          "end": 16.06549
+        },
+        {
+          "w": "times",
+          "start": 16.11192,
+          "end": 16.47183
+        },
+        {
+          "w": "one.",
+          "start": 16.52988,
+          "end": 16.7853
+        },
+        {
+          "w": "Five.",
+          "start": 16.93623,
+          "end": 17.38902
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "lands",
+          "t": 3.413328,
+          "word": "Five."
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/861434e6c11678eb30d712faea25986c99cea57e04d5455de40d2a876b67deba/audio.wav",
+      "hash": "861434e6c11678eb30d712faea25986c99cea57e04d5455de40d2a876b67deba"
+    },
+    {
+      "id": "s03.1",
+      "scene": "s03_sign",
+      "text": "Swap the two columns and the determinant becomes one minus six, which is {minus}minus five.",
+      "spoken": "Swap the two columns and the determinant becomes one minus six, which is minus five.",
+      "start": 17.608707,
+      "end": 23.367256,
+      "start_sample": 388272,
+      "samples": 126976,
+      "words": [
+        {
+          "w": "Swap",
+          "start": 17.72481,
+          "end": 17.99184
+        },
+        {
+          "w": "the",
+          "start": 18.03828,
+          "end": 18.11955
+        },
+        {
+          "w": "two",
+          "start": 18.16599,
+          "end": 18.35175
+        },
+        {
+          "w": "columns",
+          "start": 18.4098,
+          "end": 18.94386
+        },
+        {
+          "w": "and",
+          "start": 19.01352,
+          "end": 19.19928
+        },
+        {
+          "w": "the",
+          "start": 19.28055,
+          "end": 19.3386
+        },
+        {
+          "w": "determinant",
+          "start": 19.37343,
+          "end": 20.00037
+        },
+        {
+          "w": "becomes",
+          "start": 20.04681,
+          "end": 20.47637
+        },
+        {
+          "w": "one",
+          "start": 20.52281,
+          "end": 20.72018
+        },
+        {
+          "w": "minus",
+          "start": 20.75501,
+          "end": 21.16136
+        },
+        {
+          "w": "six,",
+          "start": 21.25424,
+          "end": 21.64898
+        },
+        {
+          "w": "which",
+          "start": 22.00889,
+          "end": 22.17143
+        },
+        {
+          "w": "is",
+          "start": 22.19465,
+          "end": 22.29914
+        },
+        {
+          "w": "minus",
+          "start": 22.34558,
+          "end": 22.79837
+        },
+        {
+          "w": "five.",
+          "start": 22.86803,
+          "end": 23.2976
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "minus",
+          "t": 4.736873,
+          "word": "minus"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/4fbf2f31733b5ccac78661848dbbf334ddb33b4333e5205fb4beeecf6eb2598a/audio.wav",
+      "hash": "4fbf2f31733b5ccac78661848dbbf334ddb33b4333e5205fb4beeecf6eb2598a"
+    },
+    {
+      "id": "s03.2",
+      "scene": "s03_sign",
+      "text": "A negative determinant means space has {flipped}flipped its orientation.",
+      "spoken": "A negative determinant means space has flipped its orientation.",
+      "start": 23.517279,
+      "end": 27.197642,
+      "start_sample": 518556,
+      "samples": 81152,
+      "words": [
+        {
+          "w": "A",
+          "start": 23.55211,
+          "end": 23.63338
+        },
+        {
+          "w": "negative",
+          "start": 23.69143,
+          "end": 24.10939
+        },
+        {
+          "w": "determinant",
+          "start": 24.14422,
+          "end": 24.68989
+        },
+        {
+          "w": "means",
+          "start": 24.73633,
+          "end": 25.03819
+        },
+        {
+          "w": "space",
+          "start": 25.22395,
+          "end": 25.54903
+        },
+        {
+          "w": "has",
+          "start": 25.58386,
+          "end": 25.7464
+        },
+        {
+          "w": "flipped",
+          "start": 25.81606,
+          "end": 26.08308
+        },
+        {
+          "w": "its",
+          "start": 26.11791,
+          "end": 26.2224
+        },
+        {
+          "w": "orientation.",
+          "start": 26.30367,
+          "end": 27.09315
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "flipped",
+          "t": 2.298781,
+          "word": "flipped"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/f4f81449a7862c52f570dc954257a461d2a2b611f0122926bc2dec98de384d4a/audio.wav",
+      "hash": "f4f81449a7862c52f570dc954257a461d2a2b611f0122926bc2dec98de384d4a"
+    },
+    {
+      "id": "s04.1",
+      "scene": "s04_zero",
+      "text": "When the determinant is zero, the whole plane collapses onto a single line, and the matrix {cannot}cannot be undone.",
+      "spoken": "When the determinant is zero, the whole plane collapses onto a single line, and the matrix cannot be undone.",
+      "start": 27.347664,
+      "end": 34.58068,
+      "start_sample": 603016,
+      "samples": 159488,
+      "words": [
+        {
+          "w": "When",
+          "start": 27.37088,
+          "end": 27.46376
+        },
+        {
+          "w": "the",
+          "start": 27.48698,
+          "end": 27.55664
+        },
+        {
+          "w": "determinant",
+          "start": 27.59147,
+          "end": 28.2068
+        },
+        {
+          "w": "is",
+          "start": 28.24163,
+          "end": 28.36934
+        },
+        {
+          "w": "zero,",
+          "start": 28.41578,
+          "end": 28.85696
+        },
+        {
+          "w": "the",
+          "start": 29.24009,
+          "end": 29.30975
+        },
+        {
+          "w": "whole",
+          "start": 29.35619,
+          "end": 29.6
+        },
+        {
+          "w": "plane",
+          "start": 29.64644,
+          "end": 29.9599
+        },
+        {
+          "w": "collapses",
+          "start": 30.01795,
+          "end": 30.71455
+        },
+        {
+          "w": "onto",
+          "start": 30.79582,
+          "end": 31.10929
+        },
+        {
+          "w": "a",
+          "start": 31.15573,
+          "end": 31.20217
+        },
+        {
+          "w": "single",
+          "start": 31.29505,
+          "end": 31.65496
+        },
+        {
+          "w": "line,",
+          "start": 31.72462,
+          "end": 32.11936
+        },
+        {
+          "w": "and",
+          "start": 32.42122,
+          "end": 32.53732
+        },
+        {
+          "w": "the",
+          "start": 32.56054,
+          "end": 32.64181
+        },
+        {
+          "w": "matrix",
+          "start": 32.68825,
+          "end": 33.18748
+        },
+        {
+          "w": "cannot",
+          "start": 33.25714,
+          "end": 33.59383
+        },
+        {
+          "w": "be",
+          "start": 33.64027,
+          "end": 33.77959
+        },
+        {
+          "w": "undone.",
+          "start": 33.93052,
+          "end": 34.46458
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "cannot",
+          "t": 5.909476,
+          "word": "cannot"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/022130a272bd3c25546d9203136627e0909d1dd0d8d5f64de084514d79554d1d/audio.wav",
+      "hash": "022130a272bd3c25546d9203136627e0909d1dd0d8d5f64de084514d79554d1d"
+    },
+    {
+      "id": "s05.1",
+      "scene": "s05_3x3",
+      "text": "A three by three determinant breaks into little two by twos. {expand}Expand along the first row.",
+      "spoken": "A three by three determinant breaks into little two by twos. Expand along the first row.",
+      "start": 34.730703,
+      "end": 40.419592,
+      "start_sample": 765812,
+      "samples": 125440,
+      "words": [
+        {
+          "w": "A",
+          "start": 34.77714,
+          "end": 34.83519
+        },
+        {
+          "w": "three",
+          "start": 34.90485,
+          "end": 35.21832
+        },
+        {
+          "w": "by",
+          "start": 35.25315,
+          "end": 35.41569
+        },
+        {
+          "w": "three",
+          "start": 35.47374,
+          "end": 35.70594
+        },
+        {
+          "w": "determinant",
+          "start": 35.72916,
+          "end": 36.33288
+        },
+        {
+          "w": "breaks",
+          "start": 36.39093,
+          "end": 36.72762
+        },
+        {
+          "w": "into",
+          "start": 36.79728,
+          "end": 37.01787
+        },
+        {
+          "w": "little",
+          "start": 37.07592,
+          "end": 37.2849
+        },
+        {
+          "w": "two",
+          "start": 37.38938,
+          "end": 37.62158
+        },
+        {
+          "w": "by",
+          "start": 37.65641,
+          "end": 37.83056
+        },
+        {
+          "w": "twos.",
+          "start": 37.92344,
+          "end": 38.4575
+        },
+        {
+          "w": "Expand",
+          "start": 38.62004,
+          "end": 39.11927
+        },
+        {
+          "w": "along",
+          "start": 39.18893,
+          "end": 39.43274
+        },
+        {
+          "w": "the",
+          "start": 39.46757,
+          "end": 39.56045
+        },
+        {
+          "w": "first",
+          "start": 39.60689,
+          "end": 39.9668
+        },
+        {
+          "w": "row.",
+          "start": 40.03646,
+          "end": 40.34993
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "expand",
+          "t": 3.889337,
+          "word": "Expand"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/8dea78262416ff216dfdcd68703764faae477bbf50e64a0eeb08d2788ff8faa1/audio.wav",
+      "hash": "8dea78262416ff216dfdcd68703764faae477bbf50e64a0eeb08d2788ff8faa1"
+    },
+    {
+      "id": "s05.2",
+      "scene": "s05_3x3",
+      "text": "Two times five, minus one times two, plus zero. {eight}Eight.",
+      "spoken": "Two times five, minus one times two, plus zero. Eight.",
+      "start": 40.569615,
+      "end": 45.190385,
+      "start_sample": 894560,
+      "samples": 101888,
+      "words": [
+        {
+          "w": "Two",
+          "start": 40.61605,
+          "end": 40.80181
+        },
+        {
+          "w": "times",
+          "start": 40.84825,
+          "end": 41.23138
+        },
+        {
+          "w": "five,",
+          "start": 41.27782,
+          "end": 41.70739
+        },
+        {
+          "w": "minus",
+          "start": 42.10213,
+          "end": 42.52009
+        },
+        {
+          "w": "one",
+          "start": 42.57814,
+          "end": 42.7639
+        },
+        {
+          "w": "times",
+          "start": 42.79873,
+          "end": 43.15863
+        },
+        {
+          "w": "two,",
+          "start": 43.2399,
+          "end": 43.53015
+        },
+        {
+          "w": "plus",
+          "start": 43.87845,
+          "end": 44.18031
+        },
+        {
+          "w": "zero.",
+          "start": 44.23836,
+          "end": 44.65632
+        },
+        {
+          "w": "Eight.",
+          "start": 44.79564,
+          "end": 45.12072
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "eight",
+          "t": 4.226025,
+          "word": "Eight."
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/53f2b9424a77183321a0842fd7cd43fe13c550eb55f11d2b2ce55eed10b427ab/audio.wav",
+      "hash": "53f2b9424a77183321a0842fd7cd43fe13c550eb55f11d2b2ce55eed10b427ab"
+    },
+    {
+      "id": "s06.1",
+      "scene": "s06_recap",
+      "text": "A determinant is the area scale factor. {recap_end}Five means five times the area.",
+      "spoken": "A determinant is the area scale factor. Five means five times the area.",
+      "start": 45.340408,
+      "end": 49.972789,
+      "start_sample": 999756,
+      "samples": 102144,
+      "words": [
+        {
+          "w": "A",
+          "start": 45.37524,
+          "end": 45.41007
+        },
+        {
+          "w": "determinant",
+          "start": 45.45651,
+          "end": 46.06023
+        },
+        {
+          "w": "is",
+          "start": 46.10667,
+          "end": 46.18794
+        },
+        {
+          "w": "the",
+          "start": 46.22277,
+          "end": 46.33887
+        },
+        {
+          "w": "area",
+          "start": 46.38531,
+          "end": 46.73361
+        },
+        {
+          "w": "scale",
+          "start": 46.84971,
+          "end": 47.15157
+        },
+        {
+          "w": "factor.",
+          "start": 47.19801,
+          "end": 47.6508
+        },
+        {
+          "w": "Five",
+          "start": 47.79012,
+          "end": 48.1268
+        },
+        {
+          "w": "means",
+          "start": 48.17324,
+          "end": 48.48671
+        },
+        {
+          "w": "five",
+          "start": 48.54476,
+          "end": 48.84662
+        },
+        {
+          "w": "times",
+          "start": 48.89306,
+          "end": 49.21814
+        },
+        {
+          "w": "the",
+          "start": 49.26458,
+          "end": 49.4039
+        },
+        {
+          "w": "area.",
+          "start": 49.46195,
+          "end": 49.85669
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "recap_end",
+          "t": 2.449712,
+          "word": "Five"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3/audio.wav",
+      "hash": "52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3"
+    }
+  ]
+}
