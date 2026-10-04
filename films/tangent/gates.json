@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-04T19:34:21.012Z",
+  "at": "2026-10-04T20:01:14.087Z",
   "pass": true,
   "checks": [
     {
@@ -36,7 +36,7 @@
       "name": "pace",
       "pass": true,
       "level": "pass",
-      "detail": "5 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
+      "detail": "4 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
     },
     {
       "name": "captions",
@@ -58,22 +58,22 @@
     },
     {
       "name": "deterministic",
-      "pass": true,
-      "level": "pass",
-      "detail": "12 layout record hash(es) identical to the last gates.json run",
+      "pass": false,
+      "level": "warn",
+      "detail": "2 record file(s) changed since the last gates run (16:9/s06_recap-layout.json, 9:16/s06_recap-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
         "16:9/s01_hook-layout.json": "c7910395728b",
         "16:9/s02_secant-layout.json": "08e5d8f61ed7",
         "16:9/s03_limit-layout.json": "0d9a51704eff",
         "16:9/s04_slopes-layout.json": "6d189ca0f21c",
-        "16:9/s05_rule-layout.json": "24e797861cbe",
-        "16:9/s06_recap-layout.json": "204aea7aeade",
-        "9:16/s01_hook-layout.json": "c42b23eb3ec4",
-        "9:16/s02_secant-layout.json": "a0b7a124c286",
-        "9:16/s03_limit-layout.json": "f4cc4df10ec3",
-        "9:16/s04_slopes-layout.json": "706feca35317",
+        "16:9/s05_rule-layout.json": "fb28bd225c0c",
+        "16:9/s06_recap-layout.json": "2e1c4a5685c0",
+        "9:16/s01_hook-layout.json": "25bfd14b1493",
+        "9:16/s02_secant-layout.json": "89f239c8ecd0",
+        "9:16/s03_limit-layout.json": "248c8cdafb3c",
+        "9:16/s04_slopes-layout.json": "98fb9b64060e",
         "9:16/s05_rule-layout.json": "b00bed93c242",
-        "9:16/s06_recap-layout.json": "0a1e0c2035bc"
+        "9:16/s06_recap-layout.json": "dd35af0dc519"
       }
     }
   ]

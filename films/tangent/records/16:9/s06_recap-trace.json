@@ -81,24 +81,16 @@
  },
  {
   "kind": "animation",
-  "t": 5.1,
+  "t": 5.433,
   "i": 9,
   "scene": "s06_recap",
   "sentence": "s06.1",
-  "animation": "_AnimationBuilder"
- },
- {
-  "kind": "animation",
-  "t": 5.467,
-  "i": 10,
-  "scene": "s06_recap",
-  "sentence": "s06.1",
-  "animation": "_AnimationBuilder"
+  "animation": "Indicate"
  },
  {
   "kind": "animation",
   "t": 6.1,
-  "i": 11,
+  "i": 10,
   "scene": "s06_recap",
   "sentence": "s06.1",
   "animation": "Wait"
@@ -106,11 +98,11 @@
  {
   "kind": "animation",
   "t": 6.1,
-  "i": 12,
+  "i": 11,
   "scene": "s06_recap",
   "sentence": "s06.1",
   "animation": "wait",
-  "seconds": 0.651
+  "seconds": 0.684
  },
  {
   "t": 6.1,
@@ -121,7 +113,7 @@
  {
   "kind": "animation",
   "t": 7.3,
-  "i": 13,
+  "i": 12,
   "scene": "s06_recap",
   "sentence": null,
   "animation": "Wait"
@@ -129,7 +121,7 @@
  {
   "kind": "animation",
   "t": 7.3,
-  "i": 14,
+  "i": 13,
   "scene": "s06_recap",
   "sentence": null,
   "animation": "wait",

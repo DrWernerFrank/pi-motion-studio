@@ -40,7 +40,10 @@ def graph_box():
     stage's height (a real re-proportion, not a scaled copy); landscape keeps panel 0. The bottom
     9% stays reserved for the tick labels."""
     if L.portrait:
-        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
+        # critic r6: the full-width window drew a squat ~0.8:1 plot (29% of frame height). A
+        # square-ish window (88% w x 62% h) grows the plot and centers it.
+        w = L.stage.w * 0.88
+        return Box(L.stage.x + (L.stage.w - w) / 2, L.stage.y + L.stage.h * 0.38, w, L.stage.h * 0.62)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 

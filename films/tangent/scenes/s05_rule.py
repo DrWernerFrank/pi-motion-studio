@@ -41,7 +41,10 @@ def graph_box():
     stage's height (a real re-proportion, not a scaled copy); landscape keeps panel 0. The bottom
     9% stays reserved for the tick labels."""
     if L.portrait:
-        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
+        # critic r6: the full-width window drew a squat ~0.8:1 plot (29% of frame height). A
+        # square-ish window (88% w x 62% h) grows the plot and centers it.
+        w = L.stage.w * 0.88
+        return Box(L.stage.x + (L.stage.w - w) / 2, L.stage.y + L.stage.h * 0.38, w, L.stage.h * 0.62)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 
@@ -205,8 +208,11 @@ def rule_rows(x_eq):
     room = L.stage.w * 0.70 * 0.94
     if not (L.stage.x < x_eq < col_right):          # the '=' anchor fell outside: recentre
         x_eq = L.stage.x + L.stage.w * 0.35
-    hsum = sum(e.height for e, _ in out) + 2 * ROW_BUFF
-    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum)
+    # critic r6: the height term carried the EXITED derivation (steps+rows) so k stayed ~1.6 and
+    # the rows spanned 31% with the right 55% empty. The payoff budget is ROWS ONLY — the
+    # derivation is gone by then; the rows own the whole column height.
+    hsum_rows = sum(e.height for e, _ in out) + 2 * ROW_BUFF
+    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.62 / hsum_rows)
     for e, _ in out:
         e.scale(k)
         e.shift([x_eq - e.part("p1").get_center()[0], 0, 0])

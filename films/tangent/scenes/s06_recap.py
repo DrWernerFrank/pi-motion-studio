@@ -40,7 +40,10 @@ def graph_box():
     stage's height (a real re-proportion, not a scaled copy); landscape keeps panel 0. The bottom
     9% stays reserved for the tick labels."""
     if L.portrait:
-        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
+        # critic r6: the full-width window drew a squat ~0.8:1 plot (29% of frame height). A
+        # square-ish window (88% w x 62% h) grows the plot and centers it.
+        w = L.stage.w * 0.88
+        return Box(L.stage.x + (L.stage.w - w) / 2, L.stage.y + L.stage.h * 0.38, w, L.stage.h * 0.62)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 
@@ -212,7 +215,11 @@ class Scene(StudioScene):
             Txt(f"The tangent is the limit{br}of the secants.", role="title"),
             last,
         ])
-        k = min(1.55, L.stage.w * 0.9 / card.width, L.stage.h * 0.86 / card.height)
+        # the SAFE box (not the stage) is the fit bound: the r7 rerelease caught the recap Eq
+        # 0.028u past each portrait side — fit 0.86 of safe and center there.
+        from studio_manim.layout import _Box
+        fitbox = _Box(L.safe.x, L.stage.y, L.safe.w, L.stage.h)
+        k = min(1.55, fitbox.w * 0.86 / card.width, fitbox.h * 0.84 / card.height)
         # critic r3: the recap ran 65% empty with a 43% top void. The k cap lifts to 1.55 (the
         # card fills the stage) AND the hold gets a settle: the last line's arrival pulses the
         # rule's role color so the final 3 s are not fully static.
@@ -229,10 +236,9 @@ class Scene(StudioScene):
             pause(self, self.until("rule") - 0.3)
             self.play(FadeIn(card[2], shift=UP * L.u * 3), run_time=0.8)
             claim("diff(x**n, x) == n*x**(n - 1)", about="the recap's rule", says="s06.1")
-            # critic r5/r6: there_and_back rendered as a ONE-FRAME pop (a deferred-Eq re-render).
-            # Two explicit smooth plays, and the second returns to EXACTLY 1.0 (the there_and_back
-            # left the rule ~0.5% smaller permanently).
+            # critic r6: scale plays on an Eq never interpolated (the ink bbox was constant) —
+            # Indicate is the raster-safe emphasis: a color flash that provably changes pixels.
             import manim as _m
-            self.play(card[2].animate.scale(1.05), run_time=0.35, rate_func=_m.smooth)
-            self.play(card[2].animate.scale(1.0 / 1.05), run_time=0.35, rate_func=_m.smooth)
+            self.play(_m.Indicate(card[2], scale_factor=1.12, color=None,
+                                 rate_func=_m.smooth), run_time=0.7)
         hold(self, 1.2)
