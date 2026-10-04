@@ -76,15 +76,24 @@ class Scene(StudioScene):
         # film's ladder). The takeaway is the film's HERO line — built at hero size, then the
         # stack fits its box (the order inversion of r2 + the scale inversion of r3, both closed).
         from studio_manim.typeset import _font_size
+        # r5/r6 (self-review): the portrait finale stayed inverted (Σ 55-60px > headline 28-30px)
+        # because recap()'s group fit shrinks every line EQUALLY and the hero's two wrapped lines
+        # carry less height than the Σ's — after the fit the Σ wins again. The formulas enter the
+        # group PRE-SCALED DOWN (0.62x) so the fit preserves the hierarchy: hero > Σ > k-line.
+        from studio_manim.layout import L as _L
         hero = Txt("odd numbers\nstack into squares", role="title",
-                   font_size=_font_size("hero"))
+                   font_size=_font_size("hero") * (1.0 if not _L.portrait else 1.35))
         # critic r4: the portrait finale was still inverted — the hero's TWO LINES each fit the
         # safe width (no shrink needed; the earlier inversion came from the GROUP fit shrinking
         # everything equally). Build the hero at hero size and let recap()'s own fit do its work.
+        _sum = Eq(r"\sum_{k=1}^{n} (2k-1) = {{n^2}}", roles={"p1": "square"})
+        _kln = Eq(r"{{k^2}} - {{(k-1)^2}} = 2k-1", roles={"p1": "square", "p2": "square"})
+        if L.portrait:
+            _sum.scale(0.72); _kln.scale(0.72)   # the hero keeps its size lead through the fit
         lines = recap([
             hero,
-            Eq(r"\sum_{k=1}^{n} (2k-1) = {{n^2}}", roles={"p1": "square"}),
-            Eq(r"{{k^2}} - {{(k-1)^2}} = 2k-1", roles={"p1": "square", "p2": "square"}),
+            _sum,
+            _kln,
         ])
         into(lines, ebox, fill=0.9)
         l1, l2, l3 = lines.submobjects  # headline, the sum (the payoff), the k-th L

@@ -211,5 +211,95 @@
     ],
     "notes": "round 5 by math-critic — re-derived by hand: det[[3,1],[1,2]]=3·2−1·1=5; swapped [[1,3],[2,1]]=1·1−3·2=−5 (narration 'one minus six' = 1−6 ✓); [[2,4],[1,2]]=2·2−4·1=0; minors det[[3,1],[1,2]]=5, det[[1,1],[0,2]]=2, cofactors 2·5−1·2+0=8 (Sarrus cross-check 12−4=8 ✓); identity=1; unit-square area×5=5. check 6/6 scenes clean, 30/30 claims re-derived independently in fresh sympy processes, merged ledger 14/14; every on-screen number and spoken phrase cross-checked. R4 FIXES VERIFIED BY MEASUREMENT (git 986228d + records + 540p draft pixels): (1) s03/s04 columns 42→45% APPLIED — digit ink 2.9-3.1u → 3.15-3.21u, AT the 3.2u floor (+~8%), no wrap/clip/collision, plane clears the title by 18.7u; the claimed '≥0.8×' measures 0.62× vs s02's digits by ink (em ≈5.5u vs r4's 7u target — the lighter fix path), and the 9:16 det lines (≈4.9u digits) PASS the 360px phone test cleanly, every character; (2) s05 stage-below-title fit — 0.44u → 8.87u measured title-to-bracket clearance, even 8.9-12.3u inter-line rhythm, 12.3% bottom margin, stack spans 10-88% of frame height: exemplary; (3) s02 card 90% stage fill — TRUE in 16:9 (measured 87%, 3u title clearance, clean margins) but FALSE in 9:16: the portrait card measures 58% stage fill (content 42-76% H vs the 31-90% stage, ~106px hole under the title, ~131px dead bottom; the 1.6× grow cap is unchanged) — r4 #4 NOT fixed. PHONE TESTS: 9:16 passes everywhere (det lines, notes 5.4u, titles, formula, 3×3); 16:9 passes titles/s02/s05, det-line digits resolve at 360px but ·/− operators blur, the two 3.6u notes read as mush. Carried minors: red 0 in s04 (roles p1=negative on {{0}}) still stretches red=minus to a non-negative; three near-identical dark ambers (basis #A86400/positive #96610A/result #8F5B00); s03's red flip lands ~1.2s after the −5 is written (designed sequencing); s01's unit square dwells only ~0.5s as a true square before the shear sweeps it; s06's 3s hold is gate-legal. VERDICT vs the bar (every 8+, correctness 10): NOT YET — composition 7 because two r4-flagged defects persist by measurement (s02 9:16 at 58% fill, s06 recap at 44-48% float in both formats); one targeted pass (portrait s02 fill + recap stage fit, both the s05 pattern) clears it.",
     "sheets": []
+  },
+  {
+    "round": 6,
+    "at": "2026-10-04T19:14:24.737Z",
+    "reviewer": "math-critic (round 6, fix verification)",
+    "scores": {
+      "brand": 8,
+      "clarity": 9,
+      "composition": 7,
+      "correctness": 10,
+      "hook": 9,
+      "motion": 8,
+      "readability": 8,
+      "sound": 9,
+      "variety": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "fix": "Pre-scale the recap group against L.stage before into() — the s02 pattern: grow = (L.stage.h * 0.88) / group.height, scale about the group's bottom, then into(L.stage, fill=0.88) — or enlarge the Eq font; re-measure: target ≥85% of the stage's binding dimension in 16:9 (currently it binds on neither).",
+        "issue": "16:9 s06 recap floats: 38.5%W × 61.7%H of the stage (ink 33.9%W × 42.4%H of frame, rows 36–79%, ~15% frame area) — the r5-named float persists in the flagship format. The r6 fix is a NO-OP here: kit.into() scales DOWN, never up, so _into(group, L.stage, fill=0.88) left the natural-size group untouched; s06_recap.py has no pre-scale (unlike s02's explicit grow). Every other scene fills ~90%+ of its stage's binding dimension; the finale binds on neither and is the film's weakest frame.",
+        "t": 47.5
+      },
+      {
+        "fix": "Same pre-scale against L.stage (or a two-line re-layout: formula line above the example line at larger type) to fill the portrait stage; lift the kicker to ~title-band scale so the finale reads as a finale.",
+        "issue": "9:16 s06 recap is width-true at exactly 88.0%W but only 50.6% of stage height (4.25u of 8.4u, 2.08u voids top and bottom), and the kicker 'the area scale factor' (2.6u — the smallest text in the film) FAILS the 360px phone test in BOTH formats; the whole recap is the film's least comfortable beat at phone size.",
+        "t": 48
+      },
+      {
+        "fix": "Two-line the 16:9 det equation (matrix line, then '= 1·1 − 3·2 = −5') or drop the det() prefix so into() stops compressing; lift the two notes to ~4.2u (9:16 already sits at 5.4u); heavier · / − stroke weight so the signs survive 360px.",
+        "issue": "Carried from r5 (16:9 s03/s04): det-line digits sit AT the 3.2u floor (em ≈5.5u, ~0.62× s02's digits) and the two 3.6u notes ('negative means flipped', 'no inverse — it cannot be undone') read as mush at 360px; the · dots are specks and the − bars hairlines — at phone size the red −5's thin minus can drop, reading as plain 5 and losing s03's point.",
+        "t": 25.5
+      }
+    ],
+    "notes": "round 6 by math-critic — re-derived by hand: det[[3,1],[1,2]]=3·2−1·1=5; swapped [[1,3],[2,1]]=1·1−3·2=−5; [[2,4],[1,2]]=2·2−4·1=0; minors det[[3,1],[1,2]]=5, det[[1,1],[0,2]]=2, cofactors 2·5−1·2+0=8 (Sarrus cross-check 10−2=8 ✓); identity=1; unit-square 5. check 6/6 scenes clean, 30/30 claims re-derived independently in fresh sympy, merged ledger 14/14; captions clean (no template placeholders — the '{five}' thumbnail read was a misread; SRT says \"five times the old one\"). R5 FIXES VERIFIED BY MEASUREMENT (layout records + 540p draft pixels + full-size reads; drafts rendered 22:30 AFTER the 22:29 scene edits, gates re-run PASS): (1) s02 portrait fill FIXED — 9:16 group now 94% of fit-box width (84.3% of frame width, symmetric ~107/128px margins; r5's 58% card + 106px title hole + 131px dead bottom gone), 16:9 94% of fit-box height, 0.58u title clearance; the 1.6× cap is gone, the box binds. (2) s06 HALF-FIXED — the real pmatrix (tall parens on both lines, no [3,1;1,2] shorthand) and the ad-amber/bc-red term colors (the s02 thread) are TRUE and verified at full size (ad #9A6A12, bc #A33A2A, the 5 amber); but 'the recap fits the stage at 88%' is FALSE in 16:9: the group floats at 38.5%W × 61.7%H of the stage (ink 33.9%W × 42.4%H of frame, rows 36–79%, ~15% frame area — essentially the r5 float) because kit.into() scales DOWN never up, and s06_recap.py has no pre-scale (unlike s02's explicit grow). It is width-true only in 9:16 (exactly 88.0%W by the width-bound shrink; 50.6%H with 2.08u voids). Every other scene fills ~90%+ of its stage's binding dimension (s02 94%, s05 92.2%H in 16:9 / 90%W in 9:16) — the 16:9 finale binds on NEITHER dimension, breaks the film's vertical rhythm, and is its weakest frame; at 360px the s06 kicker heading (2.6u, the smallest text in the film) fails in both formats. Carried minors (unchanged, priced as r5): 16:9 s03/s04 det digits at the 3.2u floor with ·/− specks/hairlines and the two 3.6u notes as mush; three near-identical dark ambers and amber-vs-red proximity at phone size; red 0 stretching red=minus; s03's red flip ~1.2s after the −5; s01's unit square ~0.5s dwell; s06's 3s hold gate-legal. VERDICT vs the bar (every 8+, correctness 10): NOT YET — composition 7: one of the two r5 defects (s02) is fixed and verified, but the s06 stage-fit fix did not execute in 16:9 (no-op into()); one targeted pass — pre-scale the recap into the stage in BOTH formats, the same pattern s02 now uses — clears it.",
+    "sheets": [
+      "films/determinant/out/sheets/every-16x9.png",
+      "films/determinant/out/sheets/times-16x9.png",
+      "films/determinant/out/sheets/every-9x16.png",
+      "films/determinant/out/sheets/phone-16x9.png",
+      "films/determinant/out/sheets/phone-9x16.png",
+      "/tmp/r6/phone-tail-d169.png",
+      "/tmp/r6/phone-tail-d916.png",
+      "/tmp/r6/d169_50.2.png"
+    ]
+  },
+  {
+    "round": 7,
+    "at": "2026-10-04T19:33:04.780Z",
+    "reviewer": "math-critic (round 7, finale verification)",
+    "scores": {
+      "brand": 8,
+      "clarity": 8,
+      "composition": 8,
+      "correctness": 10,
+      "hook": 9,
+      "motion": 8,
+      "readability": 8,
+      "sound": 9,
+      "variety": 8
+    },
+    "min": 8,
+    "pass": true,
+    "problems": [
+      {
+        "fix": "Color the products without splitting the run through the converter: typeset the formula as one plain string (ad/bc as ordinary italic runs) and select glyphs post-typeset for coloring, or make _compose's label padding zero-width and single-letter the labels. Target: italic glyphs matching the matrix entries, a↔d gap ≤ the 0.15u plain-run spacing (currently 0.19u + upright).",
+        "issue": "The colored products render as upright, letter-gapped 'a d' / 'b c' (a↔d gap 0.192u ≈ 0.8 glyph widths; glyph paths differ from the italic matrix entries — objectively confirmed at the typesetter level). Root cause: tex2typst space-splits every letter run ('ad'→'a d', 'det'→'d e t') and _compose pads each {{label}} segment; 'det' escapes harm (upright operator names are convention) but the products should be italic-tight. Affects the film's core formula in s02 AND s06 (~30% of runtime); 4 independent native-res sightings.",
+        "t": 12.5
+      },
+      {
+        "fix": "Polish pass, portrait re-compose for the recap: move the kicker into the title band and grow the two Eqs against the remaining stage height (the s05 portrait pattern), targeting ≥65–70% stage H like s02/s05; keep the 88% width.",
+        "issue": "The 9:16 finale is the film's lightest card: 88% of stage width but only 51% of stage height, with the reserved title band empty above it (frame voids 45% above vs 24% below) — at phone scale it reads as a quiet cluster rather than a final beat (within the accepted s02 fill family: 94%W×58%H, so sub-severity).",
+        "t": 47.5
+      },
+      {
+        "fix": "Raise the recap kicker one ladder step (≈5.4u/8u) or set it in the mono label face at a heavier weight so it reads as the card's header rather than a footnote.",
+        "issue": "The recap kicker 'the area scale factor' is 3.6u/5.4u — borderline at feed scale (8–9px at 360px) and visually dwarfed by the 9u/13.5u formula beneath it; at phone scale it is skimmed past.",
+        "t": 46.9
+      }
+    ],
+    "notes": "round 7 by math-critic — re-derived 5, −5, 0, 8 (s05 expansion 2·5 − 1·2 + 0) and det(I)=1: 30/30 ledger claims re-derived in fresh sympy (independent), plus my own from-narration re-derivation; the r6 finale grow verified and CLOSED: 16:9 recap 38.5%W×61.7%H → 55.0%W×88.0%H of stage (the binding dimension — height — ≥85% target met; centered, side gaps 2.817/2.816, top/bottom 0.331/0.331), 9:16 holds 88%W (binding) × 50.6%H, both matching/exceeding the accepted s02 exemplar (47.2%W×90.2%H); the real pmatrix (proper extensible delimiters) and the term colors (amber ad/5, red bc) verified at native resolution in both formats; the hold is bit-stable (pixel-diff 47.5 vs 48.5 = 0.000) and the s05→s06 cut is a clean hard cut (no pop/ghost); phone-scale pass: s02 card, titles and the finale formula legible at 360px, finale glyphs 1.43× larger in 16:9 vs r6. NEW finding (native-res sweep, hidden at thumbnail scale, never flagged in rounds 1–6): the colored products render as upright, letter-gapped \"a d\" / \"b c\" — measured a↔d gap 0.192u (~0.8 glyph widths), glyph paths differ from the italic matrix entries; root cause: tex2typst space-splits every letter run (\"ad\"→\"a d\", \"det\"→\"d e t\") and _compose pads label segments — det escapes harm (operator names are upright by convention) but ad/bc should be italic-tight; meaning survives via color grouping + narration, so clarity 9→8, above the bar. Sub-severity residuals logged for a future polish pass: the portrait finale is the film's lightest card (51% stage H, empty title band above) and the 3.6u/5.4u kicker is borderline at feed scale. Gates PASS; the 16:9 s06 record-drift WARN is the fix's own layout record (re-rendered and re-gated after the change). MIN 8, correctness 10 — PASS: the film is done.",
+    "sheets": [
+      "films/determinant/out/sheets/every-16x9.png",
+      "films/determinant/out/sheets/times-16x9.png",
+      "films/determinant/out/sheets/every-9x16.png",
+      "films/determinant/out/sheets/times-9x16.png",
+      "films/determinant/out/sheets/phone-16x9.png",
+      "films/determinant/out/sheets/strip-44.40-16x9.png"
+    ]
   }
 ]

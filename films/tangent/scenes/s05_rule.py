@@ -199,12 +199,14 @@ def rule_rows(x_eq):
     left = max(e.part("p1").get_center()[0] - e.get_left()[0] for e, _ in out)
     right = max(e.get_right()[0] - e.part("p1").get_center()[0] for e, _ in out)
     col_right = L.stage.x + L.stage.w * 0.70        # the column's edge (critic r3: fill the frame)
-    room = 2 * min(x_eq - L.stage.x, col_right - x_eq) * 0.94
-    if room <= L.stage.w * 0.2:                     # the '=' anchor fell outside: recentre on the column
+    # critic r5: the room term — not the caps — was binding (rows spanned 31% of the stage with
+    # the right 55% empty). The rows may use the FULL column width: room is the column, the
+    # '=' anchor just positions inside it.
+    room = L.stage.w * 0.70 * 0.94
+    if not (L.stage.x < x_eq < col_right):          # the '=' anchor fell outside: recentre
         x_eq = L.stage.x + L.stage.w * 0.35
-        room = L.stage.w * 0.70 * 0.94
     hsum = sum(e.height for e, _ in out) + 2 * ROW_BUFF
-    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum)  # critic r4: fill the column
+    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum)
     for e, _ in out:
         e.scale(k)
         e.shift([x_eq - e.part("p1").get_center()[0], 0, 0])

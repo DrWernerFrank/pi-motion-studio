@@ -22,7 +22,13 @@ class Scene(StudioScene):
                 Eq(r"\begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix} \to {{5}}",
                    roles={"p1": "result"}),
             ])
+            # critic r6: into() only scales DOWN — the 16:9 finale floated at 38% because nothing
+            # grew it first. The s02 pattern: pre-scale against the stage (anchored at the bottom),
+            # THEN fit. (9:16 was already true at 88% width.)
+            from manim import VGroup as _VG
             from studio_manim.kit import into as _into
+            grow = (L.stage.h * 0.88) / max(group.height, 1e-6)
+            group.scale(max(1.0, grow), about_point=group.get_bottom())
             _into(group, L.stage, fill=0.88)
             self.play(group.reveal())
             claim("Matrix([[3, 1], [1, 2]]).det() == 5", about="the recap repeats the verified number", says="s06.1")

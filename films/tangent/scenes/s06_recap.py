@@ -229,6 +229,10 @@ class Scene(StudioScene):
             pause(self, self.until("rule") - 0.3)
             self.play(FadeIn(card[2], shift=UP * L.u * 3), run_time=0.8)
             claim("diff(x**n, x) == n*x**(n - 1)", about="the recap's rule", says="s06.1")
-            self.play(card[2].animate.scale(1.04), run_time=0.4,
-                      rate_func=__import__("manim").there_and_back)   # the rule settles: no dead hold
+            # critic r5/r6: there_and_back rendered as a ONE-FRAME pop (a deferred-Eq re-render).
+            # Two explicit smooth plays, and the second returns to EXACTLY 1.0 (the there_and_back
+            # left the rule ~0.5% smaller permanently).
+            import manim as _m
+            self.play(card[2].animate.scale(1.05), run_time=0.35, rate_func=_m.smooth)
+            self.play(card[2].animate.scale(1.0 / 1.05), run_time=0.35, rate_func=_m.smooth)
         hold(self, 1.2)

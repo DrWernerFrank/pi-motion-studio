@@ -95,10 +95,17 @@ class Scene(StudioScene):
                 # row whose INDEX matches the pair (pairs are (rows[0], rows[1]) then (rows[1], rows[2]))
                 for idx in pair_index:
                     rows[idx].set_opacity(0.45)
+            rows[2].set_opacity(0.45)   # r5: its 3^2 half just left — dim with its pair
             vanish([rows[2].part("p3")], dots.get_center(), run_time=0.7)   # +3^2 into the dots …
             vanish([dots, rows[3].part("p4")], mid(dots, rows[3].part("p4")), run_time=0.75)  # … which meet -(n-1)^2
             self.wait(self.until("survive"))
             lit0, lit3 = rows[0].copy(), rows[3].copy()     # the survivors take the square's color
+            # r5 (self-review): the copy was taken AFTER the vanish — the vanished 1^2 came back on
+            # screen through lit0. part() returns a fresh wrapper (opacity reads don't carry), so
+            # re-hide by the KNOWN indices: rows[0]'s p3 (the 1^2) vanished in pair 1; rows[3]'s
+            # p4 (the (n-1)^2) vanished at the end. The survivor rows show only what remains.
+            lit0.part("p3").set_opacity(0)
+            lit3.part("p4").set_opacity(0)
             lit0.part("p4").set_color(math_role("square"))
             lit3.part("p3").set_color(math_role("square"))
             self.play(Transform(rows[0], lit0), Transform(rows[3], lit3), run_time=0.6)
