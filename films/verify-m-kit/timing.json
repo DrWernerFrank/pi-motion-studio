@@ -88,7 +88,7 @@
     {
       "id": "s01.2",
       "scene": "s01_plane",
-      "text": "Its determinant is five, {lands}so the area scales by five.",
+      "text": "Its determinant is {swap}five, so the area scales by {five}five.",
       "spoken": "Its determinant is five, so the area scales by five.",
       "start": 4.770794,
       "end": 8.880726,
@@ -148,9 +148,14 @@
       ],
       "bookmarks": [
         {
-          "id": "lands",
-          "t": 2.078186,
-          "word": "so"
+          "id": "swap",
+          "t": 1.056506,
+          "word": "five,"
+        },
+        {
+          "id": "five",
+          "t": 3.599086,
+          "word": "five."
         }
       ],
       "timing": "native",

@@ -1,0 +1,42 @@
+[
+ {
+  "expr": "diff(x**2, x).subs(x, 1) == 2",
+  "about": "row x = 1: slope 2",
+  "says": "s04.1",
+  "scene": "s04_slopes",
+  "ok": true,
+  "value": "2 == 2"
+ },
+ {
+  "expr": "diff(x**2, x).subs(x, 2) == 4",
+  "about": "at x = 2 the slope is 4",
+  "says": "s04.1",
+  "scene": "s04_slopes",
+  "ok": true,
+  "value": "4 == 4"
+ },
+ {
+  "expr": "diff(x**2, x).subs(x, 3) == 6",
+  "about": "at x = 3 the slope is 6",
+  "says": "s04.1",
+  "scene": "s04_slopes",
+  "ok": true,
+  "value": "6 == 6"
+ },
+ {
+  "expr": "diff(x**2, x) == 2*x",
+  "about": "the slope is always twice x",
+  "says": "s04.2",
+  "scene": "s04_slopes",
+  "ok": true,
+  "value": "2*x == 2*x"
+ },
+ {
+  "expr": "diff(x**2, x) == 2*x",
+  "about": "the formula on screen",
+  "says": "s04.2",
+  "scene": "s04_slopes",
+  "ok": true,
+  "value": "2*x == 2*x"
+ }
+]

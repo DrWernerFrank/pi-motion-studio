@@ -1,0 +1,80 @@
+{
+  "at": "2026-10-04T05:00:06.508Z",
+  "pass": false,
+  "checks": [
+    {
+      "name": "layout",
+      "pass": false,
+      "level": "fail",
+      "detail": "25 FAIL violation(s): offscreen@s03_sign t=8.233s [4:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.567s [5:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.567s [6:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.967s [7:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) ; offscreen@s03_sign t=9.967s [8:7] Txt outside the SAFE area by bottom 0.285 (safe x -6.258..6.258, y -3.360..3.360) … (+20); 22 warn (density@s02_formula t=2.1s, density@s02_formula t=3.233s, density@s02_formula t=4.533s …)"
+    },
+    {
+      "name": "claims",
+      "pass": true,
+      "level": "pass",
+      "detail": "14 claims, all ok===true; coverage 100% (7/7 mathematical sentences linked; the 90% bar is the demos' P12 gate)"
+    },
+    {
+      "name": "typeset",
+      "pass": true,
+      "level": "pass",
+      "detail": "6 scenes x 2 format(s): every records layout.json non-empty; claims ledgers present — a typeset compile error itself surfaces at render time as a loud error (the formula + scene file:line)"
+    },
+    {
+      "name": "narration",
+      "pass": true,
+      "level": "pass",
+      "detail": "10 sentence(s): every script sentence in timing.json with start/end + audio, no overlaps, 6 scene timeline(s) cover their sentences' spans"
+    },
+    {
+      "name": "sync",
+      "pass": true,
+      "level": "pass",
+      "detail": "20 trace bookmark(s) over 12 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded — the sync check surfaces those"
+    },
+    {
+      "name": "pace",
+      "pass": true,
+      "level": "pass",
+      "detail": "6 freeze run(s) >= 3s, none while the narration is silent (10 sentences of timing crossed in)"
+    },
+    {
+      "name": "captions",
+      "pass": true,
+      "level": "pass",
+      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 10 sentence(s) with non-empty text — the deep caption check (layout, SRT/VTT) is P7's `captions` check"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-16 LUFS (want -16 +/- 1), true peak -1.4 dBTP (want <= -1)"
+    },
+    {
+      "name": "deliverable",
+      "pass": true,
+      "level": "pass",
+      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 50.47s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 50.47s"
+    },
+    {
+      "name": "deterministic",
+      "pass": false,
+      "level": "warn",
+      "detail": "4 record file(s) changed since the last gates run (16:9/s03_sign-layout.json, 16:9/s04_zero-layout.json, 9:16/s03_sign-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "hashes": {
+        "16:9/s01_hook-layout.json": "0fe788294b57",
+        "16:9/s02_formula-layout.json": "4ff58e8acbc5",
+        "16:9/s03_sign-layout.json": "c4cde4a1884f",
+        "16:9/s04_zero-layout.json": "a905b5c6c082",
+        "16:9/s05_3x3-layout.json": "9bf7322b2bb4",
+        "16:9/s06_recap-layout.json": "f4e714d4ecdd",
+        "9:16/s01_hook-layout.json": "78f38ebd68b0",
+        "9:16/s02_formula-layout.json": "6a91a04bb5be",
+        "9:16/s03_sign-layout.json": "50137e2bd7ae",
+        "9:16/s04_zero-layout.json": "c9719253328b",
+        "9:16/s05_3x3-layout.json": "670eb0adcbf2",
+        "9:16/s06_recap-layout.json": "1400873cdcab"
+      }
+    }
+  ]
+}

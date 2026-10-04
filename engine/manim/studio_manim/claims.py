@@ -18,7 +18,7 @@ binomial, det, transpose, inverse, diff, integrate, limit, summation, product, s
 Product, Integral, Derivative, Limit, simplify, expand, factor, trigsimp, radsimp, together, apart,
 cancel, latex, N, srepr, symbols, Symbol, Eq, Ne, Lt, Le, Gt, Ge, And, Or, Not, im, re, conjugate,
 gcd, lcm, prime, isprime, nextprime, div, Mod (and ``%``).
-Pre-defined symbols (no ``symbols()`` call needed): ``x y z n k t h a b c A v f``.
+Pre-defined symbols (no ``symbols()`` call needed): ``x y z n k t h a b c d A v f``.
 The expression is checked before it runs (``_validate``): unknown names, ``_private`` attributes,
 lambdas, comprehensions and assignments are rejected as not evaluable.
 
@@ -61,7 +61,7 @@ _NAMES = (
     "trigsimp radsimp together apart cancel latex N srepr symbols Symbol Eq Ne Lt Le Gt Ge And Or Not "
     "im re conjugate gcd lcm prime isprime nextprime div Mod"
 ).split()
-SYMBOLS = "x y z n k t h a b c A v f".split()
+SYMBOLS = "x y z n k t h a b c d A v f".split()  # a b c d: the 2x2 convention (det = ad - bc)
 
 _ALLOWED_NODES = (
     ast.Expression, ast.Compare, ast.BoolOp, ast.BinOp, ast.UnaryOp, ast.Call, ast.Attribute,

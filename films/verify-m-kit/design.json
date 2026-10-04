@@ -16,8 +16,8 @@
   },
   "math": {
     "roles": {
-      "positive": "#A86400",
-      "negative": "#C0452B",
+      "positive": "#96610A",
+      "negative": "#B03D24",
       "result": "#7A4E00",
       "vector": "#3E6F5C",
       "area": "#B9DE6E",

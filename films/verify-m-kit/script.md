@@ -2,7 +2,7 @@
 
 ## scene s01_plane: the plane lab
 [s01.1] Watch a matrix act: the unit square {applies}stretches into a parallelogram.
-[s01.2] Its determinant is five, {lands}so the area scales by five.
+[s01.2] Its determinant is {swap}five, so the area scales by {five}five.
 
 ## scene s02_steps: a derivation that morphs
 [s02.1] Squaring a sum begins as a product: {writes}a plus b, times itself.

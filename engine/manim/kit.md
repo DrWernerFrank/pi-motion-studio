@@ -7,7 +7,7 @@ from studio_manim.kit import *      # the components below
 
 **Public API (frozen):** `Matrix`, `PlaneLab`, `GraphLab`, `EqSteps`, `EqMorph`, `Callout`,
 `NumberLineLab`, `gnomon`, `stack_gnomons`, `unit_grid`, `chapter`, `recap`, `hold`, `caption`,
-`swap`, `collapse`, `into`.
+`swap`, `collapse`, `into`, `inset`.
 
 **House rules the components enforce.** Colors are `math_role(...)` (design.json `math.roles`; a
 missing role raises). Every on-screen number is computed (sympy `det`/`diff`/`integrate`, `num()`).
@@ -95,8 +95,9 @@ assert len(EqMorph(a, b).pairs) == 2
 ```
 
 ### Callout
-A brace (label at the brace tip) or a box (label solver-placed, obstacles = target + box + `avoid`)
-around a target; the label is never on the target. `create()` = shape, then label.
+A brace (label at the brace tip, body-role Txt — an annotation is meant to be read) or a box (label
+solver-placed, obstacles = target + box + `avoid`) around a target; the label is never on the target.
+`create()` = shape, then label.
 ```python
 from studio_manim import Eq
 from studio_manim.kit import Callout
@@ -166,12 +167,13 @@ for m in (en, fa):
 assert scene.kit_caption is en
 ```
 
-### swap / collapse / into
+### swap / collapse / into / inset
 `swap(scene, old, new, direction)` plays old OUT (shift + alpha 0) then new IN on its slot;
-`collapse(old, target)` shrinks old into the next object; `into(m, box)` scales down + centers.
+`collapse(old, target)` shrinks old into the next object; `into(m, box)` scales down + centers;
+`inset(box, by)` shrinks an L box by `by` units on every side (a margin for a lab inside a panel).
 ```python
 from studio_manim import L, Txt
-from studio_manim.kit import swap, collapse, into
+from studio_manim.kit import swap, collapse, into, inset
 a = Txt("first", role="title").move_to([L.title.cx, L.title.cy, 0])
 b = Txt("second", role="title").move_to(a)
 scene.add(a)
@@ -181,4 +183,6 @@ scene.play(collapse(b, [0, 0, 0]))
 assert b not in scene.mobjects
 big = into(Txt("x" * 200, role="body"), L.panel(0, 2))
 assert big.width <= L.panel(0, 2).w
+smaller = inset(L.panel(1, 2), L.u * 2)
+assert smaller.w == L.panel(1, 2).w - 4 * L.u and smaller.cx == L.panel(1, 2).cx
 ```

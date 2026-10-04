@@ -1,0 +1,206 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 1,
+  "scene": "s03_limit",
+  "sentence": "s03.1",
+  "animation": "FadeOut; FadeOut; FadeIn"
+ },
+ {
+  "kind": "animation",
+  "t": 1.7,
+  "i": 2,
+  "scene": "s03_limit",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.2,
+  "i": 3,
+  "scene": "s03_limit",
+  "sentence": "s03.1",
+  "animation": "FadeIn; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 23.75,
+  "id": "half",
+  "sentence": "s03.1",
+  "scene": "s03_limit"
+ },
+ {
+  "kind": "animation",
+  "t": 4.1,
+  "i": 4,
+  "scene": "s03_limit",
+  "sentence": "s03.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "bookmark",
+  "t": 24.447,
+  "id": "tenth",
+  "sentence": "s03.1",
+  "scene": "s03_limit"
+ },
+ {
+  "kind": "animation",
+  "t": 4.8,
+  "i": 5,
+  "scene": "s03_limit",
+  "sentence": "s03.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 5.267,
+  "i": 6,
+  "scene": "s03_limit",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.267,
+  "i": 7,
+  "scene": "s03_limit",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 0.494
+ },
+ {
+  "t": 0.8999999999999999,
+  "kind": "sentence_end",
+  "scene": "s03_limit",
+  "sentence": "s03.1"
+ },
+ {
+  "kind": "animation",
+  "t": 5.433,
+  "i": 8,
+  "scene": "s03_limit",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.433,
+  "i": 9,
+  "scene": "s03_limit",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.178
+ },
+ {
+  "kind": "bookmark",
+  "t": 26.13,
+  "id": "tangent",
+  "sentence": "s03.2",
+  "scene": "s03_limit"
+ },
+ {
+  "kind": "animation",
+  "t": 6.467,
+  "i": 10,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 7.267,
+  "i": 11,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "_AnimationBuilder; FadeOut; FadeIn; Indicate"
+ },
+ {
+  "kind": "bookmark",
+  "t": 29.253,
+  "id": "two",
+  "sentence": "s03.2",
+  "scene": "s03_limit"
+ },
+ {
+  "kind": "animation",
+  "t": 8.067,
+  "i": 12,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.067,
+  "i": 13,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 0.811
+ },
+ {
+  "kind": "animation",
+  "t": 8.567,
+  "i": 14,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "FadeOut; FadeOut"
+ },
+ {
+  "kind": "bookmark",
+  "t": 29.253,
+  "id": "two",
+  "sentence": "s03.2",
+  "scene": "s03_limit"
+ },
+ {
+  "kind": "animation",
+  "t": 9.6,
+  "i": 15,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 10.6,
+  "i": 16,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.6,
+  "i": 17,
+  "scene": "s03_limit",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 1.022
+ },
+ {
+  "t": 6.466666666666656,
+  "kind": "sentence_end",
+  "scene": "s03_limit",
+  "sentence": "s03.2"
+ },
+ {
+  "kind": "animation",
+  "t": 10.733,
+  "i": 18,
+  "scene": "s03_limit",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.733,
+  "i": 19,
+  "scene": "s03_limit",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.158
+ }
+]

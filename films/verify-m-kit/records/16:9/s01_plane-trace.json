@@ -87,40 +87,47 @@
   "seconds": 0.137
  },
  {
-  "kind": "animation",
-  "t": 5.667,
-  "i": 10,
-  "scene": "s01_plane",
-  "sentence": "s01.2",
-  "animation": "FadeOut; FadeIn"
- },
- {
   "kind": "bookmark",
-  "t": 6.849,
-  "id": "lands",
+  "t": 5.827,
+  "id": "swap",
   "sentence": "s01.2",
   "scene": "s01_plane"
  },
  {
   "kind": "animation",
-  "t": 6.833,
-  "i": 11,
+  "t": 5.8,
+  "i": 10,
   "scene": "s01_plane",
   "sentence": "s01.2",
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 6.833,
-  "i": 12,
+  "t": 5.8,
+  "i": 11,
   "scene": "s01_plane",
   "sentence": "s01.2",
   "animation": "wait",
-  "seconds": 1.182
+  "seconds": 1.057
  },
  {
   "kind": "animation",
-  "t": 8.867,
+  "t": 6.7,
+  "i": 12,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "FadeOut; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 8.37,
+  "id": "five",
+  "sentence": "s01.2",
+  "scene": "s01_plane"
+ },
+ {
+  "kind": "animation",
+  "t": 8.367,
   "i": 13,
   "scene": "s01_plane",
   "sentence": "s01.2",
@@ -128,34 +135,59 @@
  },
  {
   "kind": "animation",
-  "t": 8.867,
+  "t": 8.367,
   "i": 14,
   "scene": "s01_plane",
   "sentence": "s01.2",
   "animation": "wait",
-  "seconds": 2.047
+  "seconds": 1.67
  },
  {
-  "t": 5.666666666666657,
+  "kind": "animation",
+  "t": 8.867,
+  "i": 15,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "Indicate"
+ },
+ {
+  "kind": "animation",
+  "t": 8.9,
+  "i": 16,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.9,
+  "i": 17,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "wait",
+  "seconds": 0.014
+ },
+ {
+  "t": 5.799999999999994,
   "kind": "sentence_end",
   "scene": "s01_plane",
   "sentence": "s01.2"
  },
  {
   "kind": "animation",
-  "t": 10.067,
-  "i": 15,
+  "t": 8.933,
+  "i": 18,
   "scene": "s01_plane",
   "sentence": null,
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 10.067,
-  "i": 16,
+  "t": 8.933,
+  "i": 19,
   "scene": "s01_plane",
   "sentence": null,
   "animation": "wait",
-  "seconds": 1.2
+  "seconds": 0.05
  }
 ]

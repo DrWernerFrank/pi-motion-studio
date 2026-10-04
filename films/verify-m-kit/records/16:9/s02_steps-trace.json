@@ -95,7 +95,7 @@
  },
  {
   "kind": "animation",
-  "t": 8.233,
+  "t": 7.533,
   "i": 10,
   "scene": "s02_steps",
   "sentence": "s02.2",
@@ -103,12 +103,29 @@
  },
  {
   "kind": "animation",
-  "t": 8.233,
+  "t": 7.533,
   "i": 11,
   "scene": "s02_steps",
   "sentence": "s02.2",
   "animation": "wait",
-  "seconds": 1.132
+  "seconds": 0.4
+ },
+ {
+  "kind": "animation",
+  "t": 8.233,
+  "i": 12,
+  "scene": "s02_steps",
+  "sentence": "s02.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.233,
+  "i": 13,
+  "scene": "s02_steps",
+  "sentence": "s02.2",
+  "animation": "wait",
+  "seconds": 0.732
  },
  {
   "t": 5.399999999999999,
@@ -118,19 +135,19 @@
  },
  {
   "kind": "animation",
-  "t": 9.433,
-  "i": 12,
+  "t": 8.267,
+  "i": 14,
   "scene": "s02_steps",
   "sentence": null,
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 9.433,
-  "i": 13,
+  "t": 8.267,
+  "i": 15,
   "scene": "s02_steps",
   "sentence": null,
   "animation": "wait",
-  "seconds": 1.2
+  "seconds": 0.05
  }
 ]

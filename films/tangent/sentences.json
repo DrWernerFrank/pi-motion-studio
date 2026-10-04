@@ -1,0 +1,227 @@
+{
+ "version": 1,
+ "scenes": [
+  {
+   "id": "s01_hook",
+   "title": "how fast is it rising?"
+  },
+  {
+   "id": "s02_secant",
+   "title": "two points, one secant"
+  },
+  {
+   "id": "s03_limit",
+   "title": "the gap shrinks to zero"
+  },
+  {
+   "id": "s04_slopes",
+   "title": "the slope at every point"
+  },
+  {
+   "id": "s05_rule",
+   "title": "the power rule"
+  },
+  {
+   "id": "s06_recap",
+   "title": "the takeaway"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01.1",
+   "scene": "s01_hook",
+   "text": "How fast is this curve rising, {here}right here?",
+   "spoken": "How fast is this curve rising, right here?",
+   "bookmarks": [
+    {
+     "id": "here",
+     "at_word": 6
+    }
+   ],
+   "line": 4
+  },
+  {
+   "id": "s01.2",
+   "scene": "s01_hook",
+   "text": "The curve is {name}y equals x squared, and its steepness {changes}changes from point to point.",
+   "spoken": "The curve is y equals x squared, and its steepness changes from point to point.",
+   "bookmarks": [
+    {
+     "id": "name",
+     "at_word": 3
+    },
+    {
+     "id": "changes",
+     "at_word": 10
+    }
+   ],
+   "line": 5
+  },
+  {
+   "id": "s02.1",
+   "scene": "s02_secant",
+   "text": "Pick two points on the curve: {p1}x equals one, and {p2}x equals two.",
+   "spoken": "Pick two points on the curve: x equals one, and x equals two.",
+   "bookmarks": [
+    {
+     "id": "p1",
+     "at_word": 6
+    },
+    {
+     "id": "p2",
+     "at_word": 10
+    }
+   ],
+   "line": 8
+  },
+  {
+   "id": "s02.2",
+   "scene": "s02_secant",
+   "text": "The line through them is a secant. It rises {rise}three over a run of one, so its slope is {three}three.",
+   "spoken": "The line through them is a secant. It rises three over a run of one, so its slope is three.",
+   "bookmarks": [
+    {
+     "id": "rise",
+     "at_word": 9
+    },
+    {
+     "id": "three",
+     "at_word": 19
+    }
+   ],
+   "line": 9
+  },
+  {
+   "id": "s03.1",
+   "scene": "s03_limit",
+   "text": "Now slide the second point toward the first. The gap h shrinks: {half}a half, {tenth}a tenth.",
+   "spoken": "Now slide the second point toward the first. The gap h shrinks: a half, a tenth.",
+   "bookmarks": [
+    {
+     "id": "half",
+     "at_word": 12
+    },
+    {
+     "id": "tenth",
+     "at_word": 14
+    }
+   ],
+   "line": 12
+  },
+  {
+   "id": "s03.2",
+   "scene": "s03_limit",
+   "text": "The secant pivots {tangent}into the tangent line, and its slope settles on {two}exactly two.",
+   "spoken": "The secant pivots into the tangent line, and its slope settles on exactly two.",
+   "bookmarks": [
+    {
+     "id": "tangent",
+     "at_word": 3
+    },
+    {
+     "id": "two",
+     "at_word": 12
+    }
+   ],
+   "line": 13
+  },
+  {
+   "id": "s04.1",
+   "scene": "s04_slopes",
+   "text": "Do the same at every point. At {x2}two, the slope is four. At {x3}three, it is six.",
+   "spoken": "Do the same at every point. At two, the slope is four. At three, it is six.",
+   "bookmarks": [
+    {
+     "id": "x2",
+     "at_word": 7
+    },
+    {
+     "id": "x3",
+     "at_word": 13
+    }
+   ],
+   "line": 16
+  },
+  {
+   "id": "s04.2",
+   "scene": "s04_slopes",
+   "text": "The slope is always {double}twice x.",
+   "spoken": "The slope is always twice x.",
+   "bookmarks": [
+    {
+     "id": "double",
+     "at_word": 4
+    }
+   ],
+   "line": 17
+  },
+  {
+   "id": "s05.1",
+   "scene": "s05_rule",
+   "text": "The algebra agrees. {expand}Expand the quotient, {cancel}cancel the h, and let h go to {zero}zero: the derivative of x squared is {lands}two x.",
+   "spoken": "The algebra agrees. Expand the quotient, cancel the h, and let h go to zero: the derivative of x squared is two x.",
+   "bookmarks": [
+    {
+     "id": "expand",
+     "at_word": 3
+    },
+    {
+     "id": "cancel",
+     "at_word": 6
+    },
+    {
+     "id": "zero",
+     "at_word": 14
+    },
+    {
+     "id": "lands",
+     "at_word": 21
+    }
+   ],
+   "line": 20
+  },
+  {
+   "id": "s05.2",
+   "scene": "s05_rule",
+   "text": "For x cubed, the same steps give {cube}three x squared.",
+   "spoken": "For x cubed, the same steps give three x squared.",
+   "bookmarks": [
+    {
+     "id": "cube",
+     "at_word": 7
+    }
+   ],
+   "line": 21
+  },
+  {
+   "id": "s05.3",
+   "scene": "s05_rule",
+   "text": "So for any power: {rule}bring the power down, then lower it by one.",
+   "spoken": "So for any power: bring the power down, then lower it by one.",
+   "bookmarks": [
+    {
+     "id": "rule",
+     "at_word": 4
+    }
+   ],
+   "line": 22
+  },
+  {
+   "id": "s06.1",
+   "scene": "s06_recap",
+   "text": "The derivative is the slope of the tangent: {limit}the limit of secant slopes, {rule}with one rule for every power.",
+   "spoken": "The derivative is the slope of the tangent: the limit of secant slopes, with one rule for every power.",
+   "bookmarks": [
+    {
+     "id": "limit",
+     "at_word": 8
+    },
+    {
+     "id": "rule",
+     "at_word": 13
+    }
+   ],
+   "line": 25
+  }
+ ]
+}

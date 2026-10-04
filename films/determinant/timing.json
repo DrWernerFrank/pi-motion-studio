@@ -123,7 +123,7 @@
     {
       "id": "s01.2",
       "scene": "s01_hook",
-      "text": "The new area is {five}five times{fivex} the old one.",
+      "text": "The new area is {five}five times the old one.",
       "spoken": "The new area is five times the old one.",
       "start": 6.024671,
       "end": 8.683356,
@@ -181,11 +181,6 @@
           "id": "five",
           "t": 1.091339,
           "word": "five"
-        },
-        {
-          "id": "fivex",
-          "t": 1.811159,
-          "word": "the"
         }
       ],
       "timing": "native",
@@ -799,7 +794,7 @@
     {
       "id": "s06.1",
       "scene": "s06_recap",
-      "text": "A determinant is the area scale factor. {recap_end}Five means five times the area.",
+      "text": "A determinant is the area scale factor. Five means five times the area.",
       "spoken": "A determinant is the area scale factor. Five means five times the area.",
       "start": 45.340408,
       "end": 49.972789,
@@ -872,13 +867,7 @@
           "end": 49.85669
         }
       ],
-      "bookmarks": [
-        {
-          "id": "recap_end",
-          "t": 2.449712,
-          "word": "Five"
-        }
-      ],
+      "bookmarks": [],
       "timing": "native",
       "audio": "/home/werner/.cache/pi-motion-studio/voice/52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3/audio.wav",
       "hash": "52fbb6affcd4a686cbab28d13cefecf89e19198c32b59a625ba0ca691abb5ed3"

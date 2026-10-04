@@ -46,7 +46,7 @@ from .typeset import Eq, Txt, num, _font_size
 __all__ = [
     "Matrix", "PlaneLab", "GraphLab", "EqSteps", "EqMorph", "Callout", "NumberLineLab",
     "gnomon", "stack_gnomons", "unit_grid", "chapter", "recap", "hold", "caption",
-    "swap", "collapse", "into",
+    "swap", "collapse", "into", "inset",
 ]
 
 # -- shared helpers ---------------------------------------------------------------------------
@@ -108,6 +108,13 @@ def _record_by_parts(m, *parts):
     """
     m._studio_parts = list(parts)
     return m
+
+
+def inset(box, by: float):
+    """An L box shrunk by ``by`` units on every side — a margin for a lab inside a panel (the
+    plane then stops short of the panel's edge instead of bleeding to the safe area)."""
+    from .layout import _Box
+    return _Box(box.x + by, box.y + by, max(0.1, box.w - 2 * by), max(0.1, box.h - 2 * by))
 
 
 def _place(labels, anchors, avoid=(), prefer=None, buff=None, box=None) -> str:
@@ -374,9 +381,9 @@ class PlaneLab(VGroup):
         self.plane = NumberPlane(
             x_range=[mid[0] - hx, mid[0] + hx, 1], y_range=[mid[1] - hy, mid[1] + hy, 1],
             x_length=2 * hx * unit, y_length=2 * hy * unit,
-            background_line_style={"stroke_color": color_for("gridBase"), "stroke_width": 1,
+            background_line_style={"stroke_color": color_for("gridBase"), "stroke_width": 1.4,
                                    "stroke_opacity": 1.0},
-            axis_config={"stroke_color": color_for("grid"), "stroke_width": _stroke("thin")},
+            axis_config={"stroke_color": color_for("grid"), "stroke_width": _stroke("thin") * 1.3},
             faded_line_ratio=1,
         )
         self.plane.move_to(_c(self.box))
@@ -704,19 +711,23 @@ class Callout(VGroup):
     ``Callout(eq.part("p1"), "the ad term", kind="brace", direction=DOWN)``. Brace: the label sits at
     the brace tip (the brace defines the place). Box: the label is solver-placed with the target,
     the box and ``avoid`` as obstacles (``next_to(direction)`` fallback). ``label`` is a string
-    (label-role Txt) or any mobject (an ``Eq``). ``create()`` = shape first, then the label.
+    (a BODY-role Txt — an annotation is meant to be read, and the look rounds kept flagging the
+    label-role size at the readability floor) or any mobject (an ``Eq``). ``create()`` = shape
+    first, then the label.
     """
 
     def __init__(self, target, label, kind: str = "brace", direction=DOWN, role: str = "positive",
                  avoid=(), box=None):
         color = math_role(role)
-        lab = label if not isinstance(label, str) else Txt(label, role="label", color=color)
+        lab = label if not isinstance(label, str) else Txt(label, role="body", color=color)
         if kind == "brace":
-            shape = Brace(target, direction, buff=L.u * 1.2, color=color)
+            # the buff clears the line's DESCENDERS: a brace hung at a fixed 1.2u under a part
+            # whose siblings (parens, +) reach lower lands inside the equation's bbox — the lint
+            # reads that as text-over-figure (it bit at 1.25x scale in the showcase)
+            shape = Brace(target, direction, buff=L.u * 2.6, color=color)
             shape.set_stroke(width=0).set_fill(color, 1)
-            lab.next_to(shape, direction, buff=L.u * 1.5)
-            if box is not None:
-                _clamp(lab, box)
+            lab.next_to(shape, direction, buff=L.u * 2.2)
+            _clamp(lab, box or L.stage)   # a callout label never leaves the content area
             self.placed_by = "brace"
         elif kind == "box":
             shape = SurroundingRectangle(target, buff=L.u * 1.2, color=color,
@@ -813,7 +824,7 @@ def gnomon(k: int, unit: float = 1.0, cells: bool = True, role: str = "area", op
     else:
         pts = [(j, 0), (k, 0), (k, k), (0, k), (0, j), (j, j)]
     poly = Polygon(*[np.array([x * unit, y * unit, 0.0]) for x, y in pts])
-    poly.set_fill(math_role(role), opacity).set_stroke(color_for("ink"), _stroke("line") * 0.8)
+    poly.set_fill(math_role(role), opacity).set_stroke(color_for("ink"), _stroke("line"))
     divs = VGroup()
     if cells and k > 1:
         for y in range(1, k):  # the right arm (column x in [j, k]): k cells, k-1 dividers
@@ -842,10 +853,15 @@ def stack_gnomons(n: int, box=None, fill: float = 0.86):
 
 
 def unit_grid(n: int, unit: float = 1.0):
-    """A light n×n cell grid (theme grid color), bottom-left at ORIGIN — lay it under dissections."""
-    g = VGroup(*[Line([i * unit, 0, 0], [i * unit, n * unit, 0]) for i in range(n + 1)],
-               *[Line([0, i * unit, 0], [n * unit, i * unit, 0]) for i in range(n + 1)])
-    return g.set_stroke(color_for("grid"), _stroke("thin"), 0.9)
+    """A light n×n cell grid (theme grid color), bottom-left at ORIGIN — lay it under dissections.
+    Stroke and opacity sit just above the theme's hairline so the cells read at phone size (the
+    first look round read the grid as "only faint vertical lines"). The lines are INTERLEAVED
+    (vertical, horizontal, …) so a half-drawn ``Create`` reads as a grid forming, not as a set of
+    lone verticals (the phone round read that opening as a broken frame)."""
+    vs = [Line([i * unit, 0, 0], [i * unit, n * unit, 0]) for i in range(n + 1)]
+    hs = [Line([0, i * unit, 0], [n * unit, i * unit, 0]) for i in range(n + 1)]
+    g = VGroup(*[ln for pair in zip(vs, hs) for ln in pair])
+    return g.set_stroke(color_for("grid"), _stroke("thin") * 1.4, 0.95)
 
 
 # -- 8. Chapter and recap cards ---------------------------------------------------------------

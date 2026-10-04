@@ -1,0 +1,146 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.5,
+  "i": 1,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "FadeIn"
+ },
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 2,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "_AnimationBuilder; FadeIn"
+ },
+ {
+  "kind": "animation",
+  "t": 1.3,
+  "i": 3,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "_AnimationBuilder; _AnimationBuilder; FadeIn"
+ },
+ {
+  "kind": "animation",
+  "t": 1.7,
+  "i": 4,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "_AnimationBuilder; _AnimationBuilder; _AnimationBuilder; FadeIn"
+ },
+ {
+  "kind": "animation",
+  "t": 2.1,
+  "i": 5,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "_AnimationBuilder; _AnimationBuilder; _AnimationBuilder; _AnimationBuilder; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 58.783,
+  "id": "kth",
+  "sentence": "s05.1",
+  "scene": "s05_recap"
+ },
+ {
+  "kind": "animation",
+  "t": 2.3,
+  "i": 6,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 2.3,
+  "i": 7,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "wait",
+  "seconds": 0.2
+ },
+ {
+  "kind": "animation",
+  "t": 3.0,
+  "i": 8,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 61.976,
+  "id": "sum",
+  "sentence": "s05.1",
+  "scene": "s05_recap"
+ },
+ {
+  "kind": "animation",
+  "t": 5.467,
+  "i": 9,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.467,
+  "i": 10,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "wait",
+  "seconds": 2.492
+ },
+ {
+  "kind": "animation",
+  "t": 6.167,
+  "i": 11,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "FadeIn"
+ },
+ {
+  "kind": "animation",
+  "t": 7.967,
+  "i": 12,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.967,
+  "i": 13,
+  "scene": "s05_recap",
+  "sentence": "s05.1",
+  "animation": "wait",
+  "seconds": 1.833
+ },
+ {
+  "t": 0.49999999999999994,
+  "kind": "sentence_end",
+  "scene": "s05_recap",
+  "sentence": "s05.1"
+ },
+ {
+  "kind": "animation",
+  "t": 9.567,
+  "i": 14,
+  "scene": "s05_recap",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.567,
+  "i": 15,
+  "scene": "s05_recap",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 1.6
+ }
+]

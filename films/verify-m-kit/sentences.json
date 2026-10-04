@@ -31,12 +31,16 @@
   {
    "id": "s01.2",
    "scene": "s01_plane",
-   "text": "Its determinant is five, {lands}so the area scales by five.",
+   "text": "Its determinant is {swap}five, so the area scales by {five}five.",
    "spoken": "Its determinant is five, so the area scales by five.",
    "bookmarks": [
     {
-     "id": "lands",
-     "at_word": 4
+     "id": "swap",
+     "at_word": 3
+    },
+    {
+     "id": "five",
+     "at_word": 9
     }
    ],
    "line": 5

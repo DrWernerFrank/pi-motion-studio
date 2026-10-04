@@ -78,8 +78,15 @@
   "seconds": 0.158
  },
  {
+  "kind": "bookmark",
+  "t": 7.116,
+  "id": "five",
+  "sentence": "s01.2",
+  "scene": "s01_hook"
+ },
+ {
   "kind": "animation",
-  "t": 6.9,
+  "t": 7.1,
   "i": 8,
   "scene": "s01_hook",
   "sentence": "s01.2",
@@ -100,10 +107,10 @@
   "scene": "s01_hook",
   "sentence": "s01.2",
   "animation": "wait",
-  "seconds": 1.783
+  "seconds": 1.583
  },
  {
-  "t": 6.899999999999992,
+  "t": 7.099999999999992,
   "kind": "sentence_end",
   "scene": "s01_hook",
   "sentence": "s01.2"

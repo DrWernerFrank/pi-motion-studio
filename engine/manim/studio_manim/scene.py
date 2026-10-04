@@ -24,6 +24,9 @@ from .theme import background
 
 logger.disabled = True  # noqa: B010  (the runner owns output; errors travel as exceptions)
 
+SENTENCE_GAP_S = 0.15  # the narration bus's inter-sentence gap (narration.mjs) — a scene's last
+                        # sentence pads through it so picture and audio agree at every seam
+
 
 class StudioScene(Scene):
     """A math-film scene. ``self.L`` is the layout for the active format."""
@@ -62,7 +65,9 @@ class StudioScene(Scene):
         try:
             super().render(*args, **kw)
         finally:
-            self.rec.flush()
+            if getattr(self, "rec", None):
+                self.rec.scene_end()
+                self.rec.flush()
 
     # -- narration (the clock: scenes adapt to the voice, never the other way round) ----------
     def say(self, sentence_id: str | None = None):
@@ -194,6 +199,13 @@ class _Say:
                 now = None
             if now is not None and s._current_local_start is not None:
                 local_end = s._current_local_start + float(sent.get("end", sent.get("start", 0.0))) - float(sent.get("start", 0.0))
+                # SEAM GAP: if this is the SCENE'S LAST sentence, pad through the 0.15 s inter-
+                # sentence gap too (the narration bus inserts it between sentences — including
+                # across scene boundaries; without the pad the picture runs ~0.15 s ahead of the
+                # audio at every seam, accumulating; glm-kit measured 0.10–0.30 s).
+                own = s._scene_sentences()
+                if own and sent is own[-1]:
+                    local_end += SENTENCE_GAP_S
                 if now < local_end - 1e-3:
                     s.wait(local_end - now)          # pad: the sentence's words finish on screen
                 elif now > local_end + 0.05:

@@ -22,7 +22,7 @@ class Scene(StudioScene):
             self.play(lab.apply([[3, 1], [1, 2]], run_time=max(0.8, self.until("applies"))))
         with self.say("s01.2"):
             area = lab.show_area()          # the computed det — verified against area_value() inside
-            self.play(Write(area), run_time=0.9)
+            self.play(Write(area), run_time=self.until("five"))  # lands ON "five times"
             claim("Matrix([[3, 1], [1, 2]]).det() == 5", about="the area scale", says="s01.2")
             claim("Matrix([[3, 1], [1, 2]]).det() * 1 == 5", about="unit square area x det", says="s01.2")
         self.wait(0.4)

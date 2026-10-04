@@ -1,0 +1,176 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 1,
+  "scene": "s04_slopes",
+  "sentence": "s04.1",
+  "animation": "FadeOut; FadeIn; FadeOut; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.549,
+  "id": "x2",
+  "sentence": "s04.1",
+  "scene": "s04_slopes"
+ },
+ {
+  "kind": "animation",
+  "t": 2.133,
+  "i": 2,
+  "scene": "s04_slopes",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 2.733,
+  "i": 3,
+  "scene": "s04_slopes",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 34.639,
+  "id": "x3",
+  "sentence": "s04.1",
+  "scene": "s04_slopes"
+ },
+ {
+  "kind": "animation",
+  "t": 4.2,
+  "i": 4,
+  "scene": "s04_slopes",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 4.8,
+  "i": 5,
+  "scene": "s04_slopes",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 5.5,
+  "i": 6,
+  "scene": "s04_slopes",
+  "sentence": "s04.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.5,
+  "i": 7,
+  "scene": "s04_slopes",
+  "sentence": "s04.1",
+  "animation": "wait",
+  "seconds": 0.703
+ },
+ {
+  "t": 0.8999999999999999,
+  "kind": "sentence_end",
+  "scene": "s04_slopes",
+  "sentence": "s04.1"
+ },
+ {
+  "kind": "animation",
+  "t": 5.633,
+  "i": 8,
+  "scene": "s04_slopes",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.633,
+  "i": 9,
+  "scene": "s04_slopes",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.153
+ },
+ {
+  "kind": "bookmark",
+  "t": 37.227,
+  "id": "double",
+  "sentence": "s04.2",
+  "scene": "s04_slopes"
+ },
+ {
+  "kind": "animation",
+  "t": 6.233,
+  "i": 10,
+  "scene": "s04_slopes",
+  "sentence": "s04.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 6.233,
+  "i": 11,
+  "scene": "s04_slopes",
+  "sentence": "s04.2",
+  "animation": "wait",
+  "seconds": 0.626
+ },
+ {
+  "kind": "animation",
+  "t": 6.733,
+  "i": 12,
+  "scene": "s04_slopes",
+  "sentence": "s04.2",
+  "animation": "FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 7.533,
+  "i": 13,
+  "scene": "s04_slopes",
+  "sentence": "s04.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 7.7,
+  "i": 14,
+  "scene": "s04_slopes",
+  "sentence": "s04.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.7,
+  "i": 15,
+  "scene": "s04_slopes",
+  "sentence": "s04.2",
+  "animation": "wait",
+  "seconds": 0.198
+ },
+ {
+  "t": 6.233333333333326,
+  "kind": "sentence_end",
+  "scene": "s04_slopes",
+  "sentence": "s04.2"
+ },
+ {
+  "kind": "animation",
+  "t": 7.867,
+  "i": 16,
+  "scene": "s04_slopes",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.867,
+  "i": 17,
+  "scene": "s04_slopes",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.192
+ }
+]

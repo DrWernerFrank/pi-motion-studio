@@ -1,0 +1,3216 @@
+[
+ {
+  "t": 1.0,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "1:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 1.4,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "2:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:1",
+    "bbox": [
+     2.785,
+     -0.787,
+     1.069,
+     0.513
+    ],
+    "height_u": 6.41,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 2.533,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "3:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:1",
+    "bbox": [
+     2.785,
+     -0.787,
+     1.069,
+     0.513
+    ],
+    "height_u": 6.41,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 2.533,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "4:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:1",
+    "bbox": [
+     2.785,
+     -0.787,
+     1.069,
+     0.513
+    ],
+    "height_u": 6.41,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 2.933,
+  "objects": []
+ },
+ {
+  "t": 3.433,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "6:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 3.933,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "7:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.433,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "8:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.733,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "9:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "9:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 5.233,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "10:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "10:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "10:4",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.5,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "11:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "11:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "11:4",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.5,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "12:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "12:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "12:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "12:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "12:4",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.633,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "13:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "13:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "13:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "13:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "13:4",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.633,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "14:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "14:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "14:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "14:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "14:4",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.833,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "15:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "15:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "15:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "15:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "15:4",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.833,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "16:0",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "16:1",
+    "bbox": [
+     -1.274,
+     0.305,
+     2.615,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "16:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "16:3",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "16:4",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 6.333,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:0",
+    "bbox": [
+     -1.249,
+     1.426,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#9A5A00",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:1",
+    "bbox": [
+     -0.815,
+     1.498,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:2",
+    "bbox": [
+     0.485,
+     1.55,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:3",
+    "bbox": [
+     0.898,
+     1.414,
+     0.228,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:4",
+    "bbox": [
+     1.172,
+     1.623,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:5",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:6",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:7",
+    "bbox": [
+     -0.216,
+     0.316,
+     0.217,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "17:8",
+    "bbox": [
+     0.052,
+     0.513,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "17:9",
+    "bbox": [
+     -1.27,
+     -0.805,
+     2.61,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "17:10",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "17:11",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 6.833,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:0",
+    "bbox": [
+     -1.249,
+     1.426,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#9A5A00",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:1",
+    "bbox": [
+     -0.815,
+     1.498,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:2",
+    "bbox": [
+     0.485,
+     1.55,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:3",
+    "bbox": [
+     0.898,
+     1.414,
+     0.228,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:4",
+    "bbox": [
+     1.172,
+     1.623,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:5",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:6",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:7",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:8",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:9",
+    "bbox": [
+     -0.221,
+     -0.805,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 9,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "18:10",
+    "bbox": [
+     0.052,
+     -0.596,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VGroup",
+    "id": "18:11",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 11,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "18:12",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.3,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:0",
+    "bbox": [
+     -1.249,
+     1.426,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#9A5A00",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:1",
+    "bbox": [
+     -0.815,
+     1.498,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:2",
+    "bbox": [
+     0.485,
+     1.55,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:3",
+    "bbox": [
+     0.898,
+     1.414,
+     0.228,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:4",
+    "bbox": [
+     1.172,
+     1.623,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:5",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:6",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:7",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "19:8",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VGroup",
+    "id": "19:9",
+    "bbox": [
+     -0.046,
+     -2.04,
+     0.091,
+     0.712
+    ],
+    "height_u": 8.9,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 9,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "19:10",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.8,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:0",
+    "bbox": [
+     -1.249,
+     1.426,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#9A5A00",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:1",
+    "bbox": [
+     -0.815,
+     1.498,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:2",
+    "bbox": [
+     0.485,
+     1.55,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:3",
+    "bbox": [
+     0.898,
+     1.414,
+     0.228,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:4",
+    "bbox": [
+     1.172,
+     1.623,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:5",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:6",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:7",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:8",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:9",
+    "bbox": [
+     -2.806,
+     -2.95,
+     0.217,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 9,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:10",
+    "bbox": [
+     -2.364,
+     -2.95,
+     0.273,
+     0.24
+    ],
+    "height_u": 3.0,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:11",
+    "bbox": [
+     -1.869,
+     -2.825,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:12",
+    "bbox": [
+     -1.249,
+     -2.95,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:13",
+    "bbox": [
+     -0.815,
+     -2.878,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 13,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:14",
+    "bbox": [
+     -0.228,
+     -2.956,
+     0.294,
+     0.246
+    ],
+    "height_u": 3.07,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 14,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "20:15",
+    "bbox": [
+     0.106,
+     -2.753,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 15,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 8.0,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:0",
+    "bbox": [
+     -1.249,
+     1.426,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#9A5A00",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:1",
+    "bbox": [
+     -0.815,
+     1.498,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:2",
+    "bbox": [
+     0.485,
+     1.55,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:3",
+    "bbox": [
+     0.898,
+     1.414,
+     0.228,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:4",
+    "bbox": [
+     1.172,
+     1.623,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:5",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:6",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:7",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:8",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:9",
+    "bbox": [
+     -2.806,
+     -2.95,
+     0.217,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 9,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:10",
+    "bbox": [
+     -2.364,
+     -2.95,
+     0.273,
+     0.24
+    ],
+    "height_u": 3.0,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:11",
+    "bbox": [
+     -1.869,
+     -2.825,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:12",
+    "bbox": [
+     -1.249,
+     -2.95,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:13",
+    "bbox": [
+     -0.815,
+     -2.878,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 13,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:14",
+    "bbox": [
+     -0.228,
+     -2.956,
+     0.294,
+     0.246
+    ],
+    "height_u": 3.07,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 14,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "21:15",
+    "bbox": [
+     0.106,
+     -2.753,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 15,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 8.0,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:0",
+    "bbox": [
+     -1.249,
+     1.426,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#9A5A00",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:1",
+    "bbox": [
+     -0.815,
+     1.498,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:2",
+    "bbox": [
+     0.485,
+     1.55,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:3",
+    "bbox": [
+     0.898,
+     1.414,
+     0.228,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:4",
+    "bbox": [
+     1.172,
+     1.623,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:5",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:6",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:7",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:8",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:9",
+    "bbox": [
+     -2.806,
+     -2.95,
+     0.217,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 9,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:10",
+    "bbox": [
+     -2.364,
+     -2.95,
+     0.273,
+     0.24
+    ],
+    "height_u": 3.0,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:11",
+    "bbox": [
+     -1.869,
+     -2.825,
+     0.361,
+     0.022
+    ],
+    "height_u": 0.27,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:12",
+    "bbox": [
+     -1.249,
+     -2.95,
+     0.179,
+     0.361
+    ],
+    "height_u": 4.52,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:13",
+    "bbox": [
+     -0.815,
+     -2.878,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 13,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:14",
+    "bbox": [
+     -0.228,
+     -2.956,
+     0.294,
+     0.246
+    ],
+    "height_u": 3.07,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 14,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "22:15",
+    "bbox": [
+     0.106,
+     -2.753,
+     0.168,
+     0.252
+    ],
+    "height_u": 3.15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 15,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 8.6,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:0",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:1",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "23:3",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "23:4",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "23:5",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 9.0,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:0",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:1",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "24:3",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "24:4",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "24:5",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 9.0,
+  "objects": [
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "25:0",
+    "bbox": [
+     -1.274,
+     0.305,
+     0.225,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#2E6B5A",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "25:1",
+    "bbox": [
+     -0.815,
+     0.389,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "25:2",
+    "bbox": [
+     -1.27,
+     -0.805,
+     0.217,
+     0.373
+    ],
+    "height_u": 4.67,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A8324F",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VMobjectFromSVGPath",
+    "id": "25:3",
+    "bbox": [
+     -0.815,
+     -0.721,
+     0.361,
+     0.127
+    ],
+    "height_u": 1.59,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "25:4",
+    "bbox": [
+     -1.249,
+     1.414,
+     2.589,
+     0.461
+    ],
+    "height_u": 5.76,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "25:5",
+    "bbox": [
+     -2.806,
+     -3.084,
+     5.612,
+     0.584
+    ],
+    "height_u": 7.3,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 9.6,
+  "objects": []
+ },
+ {
+  "t": 10.4,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "27:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "27:1",
+    "bbox": [
+     2.785,
+     -0.803,
+     2.963,
+     0.618
+    ],
+    "height_u": 7.73,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 10.9,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "28:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "28:1",
+    "bbox": [
+     2.785,
+     -0.803,
+     2.963,
+     0.618
+    ],
+    "height_u": 7.73,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 10.9,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "29:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "29:1",
+    "bbox": [
+     2.785,
+     -0.803,
+     2.963,
+     0.618
+    ],
+    "height_u": 7.73,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 11.033,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "30:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "30:1",
+    "bbox": [
+     2.785,
+     -0.803,
+     2.963,
+     0.618
+    ],
+    "height_u": 7.73,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 11.033,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "31:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "31:1",
+    "bbox": [
+     2.785,
+     -0.803,
+     2.963,
+     0.618
+    ],
+    "height_u": 7.73,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 11.233,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "32:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "32:1",
+    "bbox": [
+     2.785,
+     -0.803,
+     2.963,
+     0.618
+    ],
+    "height_u": 7.73,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 11.233,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "33:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "33:1",
+    "bbox": [
+     2.785,
+     -0.803,
+     2.963,
+     0.618
+    ],
+    "height_u": 7.73,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 12.033,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "34:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "34:1",
+    "bbox": [
+     2.785,
+     -0.795,
+     1.461,
+     0.61
+    ],
+    "height_u": 7.63,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 15.5,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "35:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "35:1",
+    "bbox": [
+     2.785,
+     -0.795,
+     1.461,
+     0.61
+    ],
+    "height_u": 7.63,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 15.5,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "36:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "36:1",
+    "bbox": [
+     2.785,
+     -0.795,
+     1.461,
+     0.61
+    ],
+    "height_u": 7.63,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 15.633,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "37:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "37:1",
+    "bbox": [
+     2.785,
+     -0.795,
+     1.461,
+     0.61
+    ],
+    "height_u": 7.63,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 15.633,
+  "objects": [
+   {
+    "kind": "Eq",
+    "id": "38:0",
+    "bbox": [
+     -5.748,
+     -0.967,
+     8.333,
+     0.725
+    ],
+    "height_u": 9.06,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "38:1",
+    "bbox": [
+     2.785,
+     -0.795,
+     1.461,
+     0.61
+    ],
+    "height_u": 7.63,
+    "nominal_u": 12,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

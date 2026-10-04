@@ -1,0 +1,48 @@
+{
+  "theme": "paper",
+  "direction": "A math notebook that moves: warm paper, a fine grid, textbook serif math, mono labels. Color is meaning: each L-shaped gnomon owns one color for the whole film (1 amber, 3 teal, 5 raspberry, 7 slate, 9 olive) and its odd number on screen wears it; indigo = the square n^2; warm gray = a measurement (brace + count).",
+  "fonts": {
+    "display": "Instrument Serif",
+    "ui": "JetBrains Mono",
+    "body": "Inter"
+  },
+  "colors": {
+    "background": "#F2EEE4",
+    "ink": "#17150F",
+    "muted": "#8A8478",
+    "surface": "#FBF9F3",
+    "grid": "#CBC2AE",
+    "gridBase": "#E7E1D4"
+  },
+  "math": {
+    "roles": {
+      "positive": "#96610A",
+      "negative": "#B03D24",
+      "result": "#8F5B00",
+      "vector": "#3E6F5C",
+      "area": "#B9DE6E",
+      "basis": "#A86400",
+      "gnomon1": "#9A5A00",
+      "gnomon2": "#2E6B5A",
+      "gnomon3": "#A8324F",
+      "gnomon4": "#34588C",
+      "gnomon5": "#5E6118",
+      "square": "#5B3E8C",
+      "measure": "#4A453C"
+    }
+  },
+  "ladder": {
+    "hero": 16,
+    "title": 9,
+    "math": 12,
+    "body": 3.6,
+    "label": 3.2,
+    "caption": 3.4
+  },
+  "banned": [
+    "centered title on gradient",
+    "everything fading in",
+    "glow",
+    "particle bursts"
+  ]
+}

@@ -47,16 +47,12 @@
   {
    "id": "s01.2",
    "scene": "s01_hook",
-   "text": "The new area is {five}five times{fivex} the old one.",
+   "text": "The new area is {five}five times the old one.",
    "spoken": "The new area is five times the old one.",
    "bookmarks": [
     {
      "id": "five",
      "at_word": 4
-    },
-    {
-     "id": "fivex",
-     "at_word": 6
     }
    ],
    "line": 5
@@ -155,14 +151,9 @@
   {
    "id": "s06.1",
    "scene": "s06_recap",
-   "text": "A determinant is the area scale factor. {recap_end}Five means five times the area.",
+   "text": "A determinant is the area scale factor. Five means five times the area.",
    "spoken": "A determinant is the area scale factor. Five means five times the area.",
-   "bookmarks": [
-    {
-     "id": "recap_end",
-     "at_word": 7
-    }
-   ],
+   "bookmarks": [],
    "line": 23
   }
  ]

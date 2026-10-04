@@ -37,10 +37,16 @@ class Recorder:
         self._sentence = sentence
         self._sentence_start_t = None  # set on the first animation inside the sentence
 
+    def scene_end(self):
+        """The scene's real end (the clock now) — timeline.seconds reads this (glm-kit's D-022)."""
+        self.trace.append({"kind": "scene_end", "t": round(self._t_now(), 3), "scene": self.scene_id})
+
     def sentence_end(self, sentence: dict | None):
-        if self._sentence is not None and self._sentence_start_t is not None:
+        # the END time is the clock NOW (the first draft stamped the sentence's FIRST-animation t —
+        # a scene ending inside a say context under-reported 5.8 s for 8.93 s real; glm-kit found it)
+        if self._sentence is not None:
             self.trace.append({
-                "t": self._sentence_start_t, "kind": "sentence_end",
+                "t": round(self._t_now(), 3), "kind": "sentence_end",
                 "scene": self.scene_id, "sentence": (self._sentence or {}).get("id"),
             })
         self._sentence, self._sentence_start_t = None, None
@@ -147,9 +153,13 @@ class Recorder:
                 json.dump(data, f, indent=1)
         n = len(self.trace)
         secs = self.trace[-1]["t"] if self.trace else 0.0
+        # timeline seconds = the LAST trace entry's t (scene_end) — not trace[-1] of a possibly
+        # still-open sentence; scene_end is written by StudioScene.render's finally → flush
+        end = next((e["t"] for e in reversed(self.trace) if e.get("kind") in ("scene_end", "wait")),
+                   self.trace[-1]["t"] if self.trace else 0.0)
         with open(self.timeline_file, "w", encoding="utf-8") as f:
             json.dump({"scene_id": self.scene_id, "fmt": self.fmt, "animations": n,
-                       "seconds": round(float(secs), 3)}, f, indent=1)
+                       "seconds": round(float(end), 3)}, f, indent=1)
 
 
 def layout_path(scene_id: str) -> str:

@@ -1,0 +1,1196 @@
+{
+  "version": 1,
+  "voice": "piper:en_US-ljspeech-medium",
+  "length_scale": 1,
+  "sample_rate": 22050,
+  "gap": 0.15,
+  "gap_samples": 3308,
+  "duration": 62.77678,
+  "timing": "native",
+  "sentences": [
+    {
+      "id": "s01.1",
+      "scene": "s01_hook",
+      "text": "How fast is this curve rising, {here}right here?",
+      "spoken": "How fast is this curve rising, right here?",
+      "start": 0,
+      "end": 2.623855,
+      "start_sample": 0,
+      "samples": 57856,
+      "words": [
+        {
+          "w": "How",
+          "start": 0.04644,
+          "end": 0.25542
+        },
+        {
+          "w": "fast",
+          "start": 0.31347,
+          "end": 0.71982
+        },
+        {
+          "w": "is",
+          "start": 0.74304,
+          "end": 0.84753
+        },
+        {
+          "w": "this",
+          "start": 0.90558,
+          "end": 1.07973
+        },
+        {
+          "w": "curve",
+          "start": 1.161,
+          "end": 1.40481
+        },
+        {
+          "w": "rising,",
+          "start": 1.45125,
+          "end": 1.86921
+        },
+        {
+          "w": "right",
+          "start": 1.98531,
+          "end": 2.19429
+        },
+        {
+          "w": "here?",
+          "start": 2.25234,
+          "end": 2.50776
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "here",
+          "t": 1.98531,
+          "word": "right"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/b34c7e86f05ca8504a49ba7791d2345fbeece93c527fd018649c8f9e51970c38/audio.wav",
+      "hash": "b34c7e86f05ca8504a49ba7791d2345fbeece93c527fd018649c8f9e51970c38"
+    },
+    {
+      "id": "s01.2",
+      "scene": "s01_hook",
+      "text": "The curve is {name}y equals x squared, and its steepness {changes}changes from point to point.",
+      "spoken": "The curve is y equals x squared, and its steepness changes from point to point.",
+      "start": 2.773878,
+      "end": 7.998367,
+      "start_sample": 61164,
+      "samples": 115200,
+      "words": [
+        {
+          "w": "The",
+          "start": 2.7971,
+          "end": 2.85515
+        },
+        {
+          "w": "curve",
+          "start": 2.9132,
+          "end": 3.19184
+        },
+        {
+          "w": "is",
+          "start": 3.22667,
+          "end": 3.31955
+        },
+        {
+          "w": "y",
+          "start": 3.3776,
+          "end": 3.57497
+        },
+        {
+          "w": "equals",
+          "start": 3.64463,
+          "end": 4.06259
+        },
+        {
+          "w": "x",
+          "start": 4.14386,
+          "end": 4.37606
+        },
+        {
+          "w": "squared,",
+          "start": 4.48055,
+          "end": 4.99139
+        },
+        {
+          "w": "and",
+          "start": 5.27003,
+          "end": 5.45578
+        },
+        {
+          "w": "its",
+          "start": 5.51383,
+          "end": 5.62993
+        },
+        {
+          "w": "steepness",
+          "start": 5.67637,
+          "end": 6.12916
+        },
+        {
+          "w": "changes",
+          "start": 6.21043,
+          "end": 6.7561
+        },
+        {
+          "w": "from",
+          "start": 6.83737,
+          "end": 6.9883
+        },
+        {
+          "w": "point",
+          "start": 7.04635,
+          "end": 7.30177
+        },
+        {
+          "w": "to",
+          "start": 7.34821,
+          "end": 7.44109
+        },
+        {
+          "w": "point.",
+          "start": 7.48753,
+          "end": 7.92871
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "name",
+          "t": 0.603722,
+          "word": "y"
+        },
+        {
+          "id": "changes",
+          "t": 3.436552,
+          "word": "changes"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/5c68489bada4c1067e4e92ee5b26503e2391ef65275a950191fdfd93e54f0c86/audio.wav",
+      "hash": "5c68489bada4c1067e4e92ee5b26503e2391ef65275a950191fdfd93e54f0c86"
+    },
+    {
+      "id": "s02.1",
+      "scene": "s02_secant",
+      "text": "Pick two points on the curve: {p1}x equals one, and {p2}x equals two.",
+      "spoken": "Pick two points on the curve: x equals one, and x equals two.",
+      "start": 8.14839,
+      "end": 12.862041,
+      "start_sample": 179672,
+      "samples": 103936,
+      "words": [
+        {
+          "w": "Pick",
+          "start": 8.17161,
+          "end": 8.35737
+        },
+        {
+          "w": "two",
+          "start": 8.45025,
+          "end": 8.61279
+        },
+        {
+          "w": "points",
+          "start": 8.67084,
+          "end": 8.96109
+        },
+        {
+          "w": "on",
+          "start": 9.03075,
+          "end": 9.18168
+        },
+        {
+          "w": "the",
+          "start": 9.18168,
+          "end": 9.23973
+        },
+        {
+          "w": "curve:",
+          "start": 9.29778,
+          "end": 9.73896
+        },
+        {
+          "w": "x",
+          "start": 10.12209,
+          "end": 10.40073
+        },
+        {
+          "w": "equals",
+          "start": 10.49361,
+          "end": 10.89995
+        },
+        {
+          "w": "one,",
+          "start": 10.96961,
+          "end": 11.24825
+        },
+        {
+          "w": "and",
+          "start": 11.36435,
+          "end": 11.51528
+        },
+        {
+          "w": "x",
+          "start": 11.57333,
+          "end": 11.81714
+        },
+        {
+          "w": "equals",
+          "start": 11.91002,
+          "end": 12.33959
+        },
+        {
+          "w": "two.",
+          "start": 12.45569,
+          "end": 12.76916
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "p1",
+          "t": 1.9737,
+          "word": "x"
+        },
+        {
+          "id": "p2",
+          "t": 3.42494,
+          "word": "x"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/cd0a90f42c8a76d2eb13d8a3ab0ff3923cc98ad5658abb0d253e160859a3d491/audio.wav",
+      "hash": "cd0a90f42c8a76d2eb13d8a3ab0ff3923cc98ad5658abb0d253e160859a3d491"
+    },
+    {
+      "id": "s02.2",
+      "scene": "s02_secant",
+      "text": "The line through them is a secant. It rises {rise}three over a run of one, so its slope is {three}three.",
+      "spoken": "The line through them is a secant. It rises three over a run of one, so its slope is three.",
+      "start": 13.012063,
+      "end": 19.525261,
+      "start_sample": 286916,
+      "samples": 143616,
+      "words": [
+        {
+          "w": "The",
+          "start": 13.03528,
+          "end": 13.10494
+        },
+        {
+          "w": "line",
+          "start": 13.18621,
+          "end": 13.54612
+        },
+        {
+          "w": "through",
+          "start": 13.61578,
+          "end": 13.82476
+        },
+        {
+          "w": "them",
+          "start": 13.88281,
+          "end": 14.28916
+        },
+        {
+          "w": "is",
+          "start": 14.3356,
+          "end": 14.41687
+        },
+        {
+          "w": "a",
+          "start": 14.46331,
+          "end": 14.52136
+        },
+        {
+          "w": "secant.",
+          "start": 14.60263,
+          "end": 15.09025
+        },
+        {
+          "w": "It",
+          "start": 15.25279,
+          "end": 15.34567
+        },
+        {
+          "w": "rises",
+          "start": 15.41533,
+          "end": 15.92616
+        },
+        {
+          "w": "three",
+          "start": 16.00743,
+          "end": 16.27446
+        },
+        {
+          "w": "over",
+          "start": 16.39056,
+          "end": 16.6692
+        },
+        {
+          "w": "a",
+          "start": 16.6692,
+          "end": 16.76208
+        },
+        {
+          "w": "run",
+          "start": 16.80852,
+          "end": 16.94784
+        },
+        {
+          "w": "of",
+          "start": 16.99428,
+          "end": 17.08716
+        },
+        {
+          "w": "one,",
+          "start": 17.15682,
+          "end": 17.50512
+        },
+        {
+          "w": "so",
+          "start": 17.9463,
+          "end": 18.13206
+        },
+        {
+          "w": "its",
+          "start": 18.1785,
+          "end": 18.30621
+        },
+        {
+          "w": "slope",
+          "start": 18.38748,
+          "end": 18.84027
+        },
+        {
+          "w": "is",
+          "start": 18.88671,
+          "end": 19.04925
+        },
+        {
+          "w": "three.",
+          "start": 19.11891,
+          "end": 19.4556
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "rise",
+          "t": 2.995367,
+          "word": "three"
+        },
+        {
+          "id": "three",
+          "t": 6.106847,
+          "word": "three."
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/4da559519417e7fcabf01abe216d58d8ecfa91f4764b000a585f01facc47872c/audio.wav",
+      "hash": "4da559519417e7fcabf01abe216d58d8ecfa91f4764b000a585f01facc47872c"
+    },
+    {
+      "id": "s03.1",
+      "scene": "s03_limit",
+      "text": "Now slide the second point toward the first. The gap h shrinks: {half}a half, {tenth}a tenth.",
+      "spoken": "Now slide the second point toward the first. The gap h shrinks: a half, a tenth.",
+      "start": 19.675283,
+      "end": 24.969433,
+      "start_sample": 433840,
+      "samples": 116736,
+      "words": [
+        {
+          "w": "Now",
+          "start": 19.6985,
+          "end": 19.94231
+        },
+        {
+          "w": "slide",
+          "start": 20.02358,
+          "end": 20.29061
+        },
+        {
+          "w": "the",
+          "start": 20.32544,
+          "end": 20.3951
+        },
+        {
+          "w": "second",
+          "start": 20.45315,
+          "end": 20.72018
+        },
+        {
+          "w": "point",
+          "start": 20.77823,
+          "end": 21.08009
+        },
+        {
+          "w": "toward",
+          "start": 21.12653,
+          "end": 21.35873
+        },
+        {
+          "w": "the",
+          "start": 21.40517,
+          "end": 21.49805
+        },
+        {
+          "w": "first.",
+          "start": 21.54449,
+          "end": 22.03211
+        },
+        {
+          "w": "The",
+          "start": 22.12499,
+          "end": 22.19465
+        },
+        {
+          "w": "gap",
+          "start": 22.25269,
+          "end": 22.51972
+        },
+        {
+          "w": "h",
+          "start": 22.6126,
+          "end": 22.85641
+        },
+        {
+          "w": "shrinks:",
+          "start": 22.92607,
+          "end": 23.41369
+        },
+        {
+          "w": "a",
+          "start": 23.75038,
+          "end": 23.78521
+        },
+        {
+          "w": "half,",
+          "start": 23.85487,
+          "end": 24.24961
+        },
+        {
+          "w": "a",
+          "start": 24.44698,
+          "end": 24.50503
+        },
+        {
+          "w": "tenth.",
+          "start": 24.60952,
+          "end": 24.91138
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "half",
+          "t": 4.075097,
+          "word": "a"
+        },
+        {
+          "id": "tenth",
+          "t": 4.771697,
+          "word": "a"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/ac3891fc1730afdb2110ec3c933885a2759e7b178bbfb9e12df8f39c03263618/audio.wav",
+      "hash": "ac3891fc1730afdb2110ec3c933885a2759e7b178bbfb9e12df8f39c03263618"
+    },
+    {
+      "id": "s03.2",
+      "scene": "s03_limit",
+      "text": "The secant pivots {tangent}into the tangent line, and its slope settles on {two}exactly two.",
+      "spoken": "The secant pivots into the tangent line, and its slope settles on exactly two.",
+      "start": 25.119456,
+      "end": 30.297506,
+      "start_sample": 553884,
+      "samples": 114176,
+      "words": [
+        {
+          "w": "The",
+          "start": 25.14268,
+          "end": 25.25878
+        },
+        {
+          "w": "secant",
+          "start": 25.30522,
+          "end": 25.66513
+        },
+        {
+          "w": "pivots",
+          "start": 25.71157,
+          "end": 26.04826
+        },
+        {
+          "w": "into",
+          "start": 26.12953,
+          "end": 26.36173
+        },
+        {
+          "w": "the",
+          "start": 26.39656,
+          "end": 26.46622
+        },
+        {
+          "w": "tangent",
+          "start": 26.53588,
+          "end": 26.96545
+        },
+        {
+          "w": "line,",
+          "start": 27.04672,
+          "end": 27.41824
+        },
+        {
+          "w": "and",
+          "start": 27.7317,
+          "end": 27.90585
+        },
+        {
+          "w": "its",
+          "start": 27.9639,
+          "end": 28.10322
+        },
+        {
+          "w": "slope",
+          "start": 28.16127,
+          "end": 28.45152
+        },
+        {
+          "w": "settles",
+          "start": 28.53279,
+          "end": 28.96236
+        },
+        {
+          "w": "on",
+          "start": 29.04363,
+          "end": 29.19456
+        },
+        {
+          "w": "exactly",
+          "start": 29.25261,
+          "end": 29.79828
+        },
+        {
+          "w": "two.",
+          "start": 29.90277,
+          "end": 30.20463
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "tangent",
+          "t": 1.010074,
+          "word": "into"
+        },
+        {
+          "id": "two",
+          "t": 4.133154,
+          "word": "exactly"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/9f6b7b5d4df3212947c5ae629436dd3734afe5d09cc7cb7ffead8e5d5378183d/audio.wav",
+      "hash": "9f6b7b5d4df3212947c5ae629436dd3734afe5d09cc7cb7ffead8e5d5378183d"
+    },
+    {
+      "id": "s04.1",
+      "scene": "s04_slopes",
+      "text": "Do the same at every point. At {x2}two, the slope is four. At {x3}three, it is six.",
+      "spoken": "Do the same at every point. At two, the slope is four. At three, it is six.",
+      "start": 30.447528,
+      "end": 35.950658,
+      "start_sample": 671368,
+      "samples": 121344,
+      "words": [
+        {
+          "w": "Do",
+          "start": 30.51719,
+          "end": 30.67973
+        },
+        {
+          "w": "the",
+          "start": 30.71456,
+          "end": 30.79583
+        },
+        {
+          "w": "same",
+          "start": 30.8771,
+          "end": 31.15574
+        },
+        {
+          "w": "at",
+          "start": 31.20218,
+          "end": 31.32989
+        },
+        {
+          "w": "every",
+          "start": 31.37633,
+          "end": 31.64336
+        },
+        {
+          "w": "point.",
+          "start": 31.71302,
+          "end": 32.16581
+        },
+        {
+          "w": "At",
+          "start": 32.2703,
+          "end": 32.46767
+        },
+        {
+          "w": "two,",
+          "start": 32.54894,
+          "end": 32.87402
+        },
+        {
+          "w": "the",
+          "start": 33.15265,
+          "end": 33.23392
+        },
+        {
+          "w": "slope",
+          "start": 33.33841,
+          "end": 33.65188
+        },
+        {
+          "w": "is",
+          "start": 33.68671,
+          "end": 33.82603
+        },
+        {
+          "w": "four.",
+          "start": 33.9073,
+          "end": 34.22077
+        },
+        {
+          "w": "At",
+          "start": 34.39492,
+          "end": 34.55746
+        },
+        {
+          "w": "three,",
+          "start": 34.63873,
+          "end": 34.9522
+        },
+        {
+          "w": "it",
+          "start": 35.04508,
+          "end": 35.14957
+        },
+        {
+          "w": "is",
+          "start": 35.1844,
+          "end": 35.32372
+        },
+        {
+          "w": "six.",
+          "start": 35.39338,
+          "end": 35.84617
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "x2",
+          "t": 2.101412,
+          "word": "two,"
+        },
+        {
+          "id": "x3",
+          "t": 4.191202,
+          "word": "three,"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/039557e20cb16799379a225d8e1056274cf1c620db6b28999e262ee9b6a7e9c3/audio.wav",
+      "hash": "039557e20cb16799379a225d8e1056274cf1c620db6b28999e262ee9b6a7e9c3"
+    },
+    {
+      "id": "s04.2",
+      "scene": "s04_slopes",
+      "text": "The slope is always {double}twice x.",
+      "spoken": "The slope is always twice x.",
+      "start": 36.10068,
+      "end": 38.178866,
+      "start_sample": 796020,
+      "samples": 45824,
+      "words": [
+        {
+          "w": "The",
+          "start": 36.1239,
+          "end": 36.21678
+        },
+        {
+          "w": "slope",
+          "start": 36.29805,
+          "end": 36.59991
+        },
+        {
+          "w": "is",
+          "start": 36.64635,
+          "end": 36.73923
+        },
+        {
+          "w": "always",
+          "start": 36.80889,
+          "end": 37.1688
+        },
+        {
+          "w": "twice",
+          "start": 37.22685,
+          "end": 37.57515
+        },
+        {
+          "w": "x.",
+          "start": 37.65642,
+          "end": 38.07438
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "double",
+          "t": 1.12617,
+          "word": "twice"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/6fa046c3f2f34fdd2acd0b99dc08b3240c914a60bce443f6101d80603a191ce4/audio.wav",
+      "hash": "6fa046c3f2f34fdd2acd0b99dc08b3240c914a60bce443f6101d80603a191ce4"
+    },
+    {
+      "id": "s05.1",
+      "scene": "s05_rule",
+      "text": "The algebra agrees. {expand}Expand the quotient, {cancel}cancel the h, and let h go to {zero}zero: the derivative of x squared is {lands}two x.",
+      "spoken": "The algebra agrees. Expand the quotient, cancel the h, and let h go to zero: the derivative of x squared is two x.",
+      "start": 38.328889,
+      "end": 47.535601,
+      "start_sample": 845152,
+      "samples": 203008,
+      "words": [
+        {
+          "w": "The",
+          "start": 38.35211,
+          "end": 38.49143
+        },
+        {
+          "w": "algebra",
+          "start": 38.53787,
+          "end": 39.0371
+        },
+        {
+          "w": "agrees.",
+          "start": 39.12998,
+          "end": 39.74531
+        },
+        {
+          "w": "Expand",
+          "start": 39.91946,
+          "end": 40.37225
+        },
+        {
+          "w": "the",
+          "start": 40.41869,
+          "end": 40.47674
+        },
+        {
+          "w": "quotient,",
+          "start": 40.52318,
+          "end": 41.09206
+        },
+        {
+          "w": "cancel",
+          "start": 41.35909,
+          "end": 41.81188
+        },
+        {
+          "w": "the",
+          "start": 41.84671,
+          "end": 41.98603
+        },
+        {
+          "w": "h,",
+          "start": 42.05569,
+          "end": 42.46204
+        },
+        {
+          "w": "and",
+          "start": 42.69424,
+          "end": 42.84517
+        },
+        {
+          "w": "let",
+          "start": 42.90322,
+          "end": 43.10059
+        },
+        {
+          "w": "h",
+          "start": 43.14703,
+          "end": 43.40245
+        },
+        {
+          "w": "go",
+          "start": 43.4605,
+          "end": 43.64626
+        },
+        {
+          "w": "to",
+          "start": 43.70431,
+          "end": 43.78558
+        },
+        {
+          "w": "zero:",
+          "start": 43.85524,
+          "end": 44.29642
+        },
+        {
+          "w": "the",
+          "start": 44.64472,
+          "end": 44.72599
+        },
+        {
+          "w": "derivative",
+          "start": 44.78404,
+          "end": 45.39937
+        },
+        {
+          "w": "of",
+          "start": 45.44581,
+          "end": 45.50386
+        },
+        {
+          "w": "x",
+          "start": 45.57352,
+          "end": 45.81733
+        },
+        {
+          "w": "squared",
+          "start": 45.97987,
+          "end": 46.45587
+        },
+        {
+          "w": "is",
+          "start": 46.4907,
+          "end": 46.61841
+        },
+        {
+          "w": "two",
+          "start": 46.73451,
+          "end": 46.9551
+        },
+        {
+          "w": "x.",
+          "start": 47.03637,
+          "end": 47.43111
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "expand",
+          "t": 1.590571,
+          "word": "Expand"
+        },
+        {
+          "id": "cancel",
+          "t": 3.030201,
+          "word": "cancel"
+        },
+        {
+          "id": "zero",
+          "t": 5.526351,
+          "word": "zero:"
+        },
+        {
+          "id": "lands",
+          "t": 8.405621,
+          "word": "two"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/eb762d72b92884b04119e6f13aeeb60e1d44a333c3fdeda2bbf6eb1f30085c97/audio.wav",
+      "hash": "eb762d72b92884b04119e6f13aeeb60e1d44a333c3fdeda2bbf6eb1f30085c97"
+    },
+    {
+      "id": "s05.2",
+      "scene": "s05_rule",
+      "text": "For x cubed, the same steps give {cube}three x squared.",
+      "spoken": "For x cubed, the same steps give three x squared.",
+      "start": 47.685624,
+      "end": 51.493696,
+      "start_sample": 1051468,
+      "samples": 83968,
+      "words": [
+        {
+          "w": "For",
+          "start": 47.72045,
+          "end": 47.80172
+        },
+        {
+          "w": "x",
+          "start": 47.87138,
+          "end": 48.08036
+        },
+        {
+          "w": "cubed,",
+          "start": 48.16163,
+          "end": 48.61442
+        },
+        {
+          "w": "the",
+          "start": 48.97433,
+          "end": 49.04399
+        },
+        {
+          "w": "same",
+          "start": 49.11365,
+          "end": 49.39229
+        },
+        {
+          "w": "steps",
+          "start": 49.49678,
+          "end": 49.79864
+        },
+        {
+          "w": "give",
+          "start": 49.89152,
+          "end": 50.08889
+        },
+        {
+          "w": "three",
+          "start": 50.17016,
+          "end": 50.42557
+        },
+        {
+          "w": "x",
+          "start": 50.50684,
+          "end": 50.76226
+        },
+        {
+          "w": "squared.",
+          "start": 50.88997,
+          "end": 51.40081
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "cube",
+          "t": 2.484536,
+          "word": "three"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/bd80018393a2c2a5abfc88a2dbf21e483d1e000c6550a815c6673cf353f0a840/audio.wav",
+      "hash": "bd80018393a2c2a5abfc88a2dbf21e483d1e000c6550a815c6673cf353f0a840"
+    },
+    {
+      "id": "s05.3",
+      "scene": "s05_rule",
+      "text": "So for any power: {rule}bring the power down, then lower it by one.",
+      "spoken": "So for any power: bring the power down, then lower it by one.",
+      "start": 51.643719,
+      "end": 56.659229,
+      "start_sample": 1138744,
+      "samples": 110592,
+      "words": [
+        {
+          "w": "So",
+          "start": 51.77143,
+          "end": 51.98041
+        },
+        {
+          "w": "for",
+          "start": 52.02685,
+          "end": 52.22422
+        },
+        {
+          "w": "any",
+          "start": 52.29388,
+          "end": 52.49125
+        },
+        {
+          "w": "power:",
+          "start": 52.5493,
+          "end": 53.00209
+        },
+        {
+          "w": "bring",
+          "start": 53.54776,
+          "end": 53.76835
+        },
+        {
+          "w": "the",
+          "start": 53.79157,
+          "end": 53.87284
+        },
+        {
+          "w": "power",
+          "start": 53.91928,
+          "end": 54.3024
+        },
+        {
+          "w": "down,",
+          "start": 54.37206,
+          "end": 54.7668
+        },
+        {
+          "w": "then",
+          "start": 55.10349,
+          "end": 55.49823
+        },
+        {
+          "w": "lower",
+          "start": 55.5795,
+          "end": 55.83492
+        },
+        {
+          "w": "it",
+          "start": 55.90458,
+          "end": 55.98585
+        },
+        {
+          "w": "by",
+          "start": 56.03229,
+          "end": 56.20644
+        },
+        {
+          "w": "one.",
+          "start": 56.28771,
+          "end": 56.55474
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "rule",
+          "t": 1.904041,
+          "word": "bring"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/7bc45f4e596400f4541a94288ba61e47f213039fdacac5a2251e3b8b4c57b047/audio.wav",
+      "hash": "7bc45f4e596400f4541a94288ba61e47f213039fdacac5a2251e3b8b4c57b047"
+    },
+    {
+      "id": "s06.1",
+      "scene": "s06_recap",
+      "text": "The derivative is the slope of the tangent: {limit}the limit of secant slopes, {rule}with one rule for every power.",
+      "spoken": "The derivative is the slope of the tangent: the limit of secant slopes, with one rule for every power.",
+      "start": 56.809252,
+      "end": 62.77678,
+      "start_sample": 1252644,
+      "samples": 131584,
+      "words": [
+        {
+          "w": "The",
+          "start": 56.83247,
+          "end": 56.89052
+        },
+        {
+          "w": "derivative",
+          "start": 56.93696,
+          "end": 57.62195
+        },
+        {
+          "w": "is",
+          "start": 57.65678,
+          "end": 57.74966
+        },
+        {
+          "w": "the",
+          "start": 57.7961,
+          "end": 57.86576
+        },
+        {
+          "w": "slope",
+          "start": 57.95864,
+          "end": 58.2605
+        },
+        {
+          "w": "of",
+          "start": 58.30694,
+          "end": 58.39982
+        },
+        {
+          "w": "the",
+          "start": 58.39982,
+          "end": 58.48109
+        },
+        {
+          "w": "tangent:",
+          "start": 58.53914,
+          "end": 59.21252
+        },
+        {
+          "w": "the",
+          "start": 59.50276,
+          "end": 59.59564
+        },
+        {
+          "w": "limit",
+          "start": 59.6653,
+          "end": 59.97877
+        },
+        {
+          "w": "of",
+          "start": 60.0136,
+          "end": 60.10648
+        },
+        {
+          "w": "secant",
+          "start": 60.18775,
+          "end": 60.50122
+        },
+        {
+          "w": "slopes,",
+          "start": 60.5941,
+          "end": 60.98884
+        },
+        {
+          "w": "with",
+          "start": 61.0585,
+          "end": 61.1746
+        },
+        {
+          "w": "one",
+          "start": 61.24426,
+          "end": 61.45324
+        },
+        {
+          "w": "rule",
+          "start": 61.49968,
+          "end": 61.73188
+        },
+        {
+          "w": "for",
+          "start": 61.78993,
+          "end": 61.8712
+        },
+        {
+          "w": "every",
+          "start": 61.94086,
+          "end": 62.19628
+        },
+        {
+          "w": "power.",
+          "start": 62.25433,
+          "end": 62.67229
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "limit",
+          "t": 2.693508,
+          "word": "the"
+        },
+        {
+          "id": "rule",
+          "t": 4.249248,
+          "word": "with"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/5e8e7e5a82a8d2edf7b4a0fbe3bf6b41a0a0541072674a2745a49a071083f139/audio.wav",
+      "hash": "5e8e7e5a82a8d2edf7b4a0fbe3bf6b41a0a0541072674a2745a49a071083f139"
+    }
+  ]
+}

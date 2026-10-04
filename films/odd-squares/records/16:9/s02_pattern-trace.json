@@ -1,0 +1,247 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.633,
+  "i": 1,
+  "scene": "s02_pattern",
+  "sentence": "s02.1",
+  "animation": "Succession"
+ },
+ {
+  "kind": "bookmark",
+  "t": 8.485,
+  "id": "nine",
+  "sentence": "s02.1",
+  "scene": "s02_pattern"
+ },
+ {
+  "kind": "animation",
+  "t": 2.533,
+  "i": 2,
+  "scene": "s02_pattern",
+  "sentence": "s02.1",
+  "animation": "_AnimationBuilder; _AnimationBuilder; FadeIn; FadeOut; EqMorph"
+ },
+ {
+  "kind": "animation",
+  "t": 4.8,
+  "i": 3,
+  "scene": "s02_pattern",
+  "sentence": "s02.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.8,
+  "i": 4,
+  "scene": "s02_pattern",
+  "sentence": "s02.1",
+  "animation": "wait",
+  "seconds": 2.296
+ },
+ {
+  "t": 0.6333333333333333,
+  "kind": "sentence_end",
+  "scene": "s02_pattern",
+  "sentence": "s02.1"
+ },
+ {
+  "kind": "animation",
+  "t": 4.967,
+  "i": 5,
+  "scene": "s02_pattern",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.967,
+  "i": 6,
+  "scene": "s02_pattern",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.18
+ },
+ {
+  "kind": "bookmark",
+  "t": 12.223,
+  "id": "sixteen",
+  "sentence": "s02.2",
+  "scene": "s02_pattern"
+ },
+ {
+  "kind": "animation",
+  "t": 6.233,
+  "i": 7,
+  "scene": "s02_pattern",
+  "sentence": "s02.2",
+  "animation": "_AnimationBuilder; _AnimationBuilder; _AnimationBuilder; FadeIn; EqMorph"
+ },
+ {
+  "kind": "bookmark",
+  "t": 14.614,
+  "id": "twentyfive",
+  "sentence": "s02.2",
+  "scene": "s02_pattern"
+ },
+ {
+  "kind": "animation",
+  "t": 8.667,
+  "i": 8,
+  "scene": "s02_pattern",
+  "sentence": "s02.2",
+  "animation": "_AnimationBuilder; _AnimationBuilder; _AnimationBuilder; _AnimationBuilder; FadeIn; EqMorph"
+ },
+ {
+  "kind": "animation",
+  "t": 9.833,
+  "i": 9,
+  "scene": "s02_pattern",
+  "sentence": "s02.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.833,
+  "i": 10,
+  "scene": "s02_pattern",
+  "sentence": "s02.2",
+  "animation": "wait",
+  "seconds": 1.189
+ },
+ {
+  "t": 6.23333333333333,
+  "kind": "sentence_end",
+  "scene": "s02_pattern",
+  "sentence": "s02.2"
+ },
+ {
+  "kind": "animation",
+  "t": 10.0,
+  "i": 11,
+  "scene": "s02_pattern",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.0,
+  "i": 12,
+  "scene": "s02_pattern",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.173
+ },
+ {
+  "kind": "bookmark",
+  "t": 16.018,
+  "id": "each",
+  "sentence": "s02.3",
+  "scene": "s02_pattern"
+ },
+ {
+  "kind": "animation",
+  "t": 10.2,
+  "i": 13,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.2,
+  "i": 14,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "wait",
+  "seconds": 0.2
+ },
+ {
+  "kind": "animation",
+  "t": 10.767,
+  "i": 15,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "Indicate; Create"
+ },
+ {
+  "kind": "animation",
+  "t": 11.333,
+  "i": 16,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "Indicate; Transform"
+ },
+ {
+  "kind": "animation",
+  "t": 11.9,
+  "i": 17,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "Indicate; Transform"
+ },
+ {
+  "kind": "animation",
+  "t": 12.467,
+  "i": 18,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "Indicate; Transform"
+ },
+ {
+  "kind": "animation",
+  "t": 13.033,
+  "i": 19,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "Indicate; Transform"
+ },
+ {
+  "kind": "animation",
+  "t": 13.533,
+  "i": 20,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "FadeOut; FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 13.933,
+  "i": 21,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 13.933,
+  "i": 22,
+  "scene": "s02_pattern",
+  "sentence": "s02.3",
+  "animation": "wait",
+  "seconds": 0.42
+ },
+ {
+  "t": 10.199999999999987,
+  "kind": "sentence_end",
+  "scene": "s02_pattern",
+  "sentence": "s02.3"
+ },
+ {
+  "kind": "animation",
+  "t": 14.067,
+  "i": 23,
+  "scene": "s02_pattern",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 14.067,
+  "i": 24,
+  "scene": "s02_pattern",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.15
+ }
+]

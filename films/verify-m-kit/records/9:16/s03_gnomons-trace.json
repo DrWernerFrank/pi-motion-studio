@@ -5,19 +5,19 @@
   "i": 1,
   "scene": "s03_gnomons",
   "sentence": "s03.1",
-  "animation": "Succession"
+  "animation": "Create; Succession"
  },
  {
   "kind": "animation",
-  "t": 1.8,
+  "t": 2.4,
   "i": 2,
   "scene": "s03_gnomons",
   "sentence": "s03.1",
-  "animation": "Create"
+  "animation": "Write"
  },
  {
   "kind": "animation",
-  "t": 2.567,
+  "t": 3.167,
   "i": 3,
   "scene": "s03_gnomons",
   "sentence": "s03.1",
@@ -25,7 +25,7 @@
  },
  {
   "kind": "animation",
-  "t": 3.333,
+  "t": 3.933,
   "i": 4,
   "scene": "s03_gnomons",
   "sentence": "s03.1",
@@ -33,7 +33,7 @@
  },
  {
   "kind": "animation",
-  "t": 4.1,
+  "t": 4.7,
   "i": 5,
   "scene": "s03_gnomons",
   "sentence": "s03.1",
@@ -52,7 +52,7 @@
   "i": 6,
   "scene": "s03_gnomons",
   "sentence": "s03.1",
-  "animation": "Create"
+  "animation": "Create; Write"
  },
  {
   "kind": "animation",
@@ -95,14 +95,6 @@
   "seconds": 0.162
  },
  {
-  "kind": "animation",
-  "t": 6.667,
-  "i": 11,
-  "scene": "s03_gnomons",
-  "sentence": "s03.2",
-  "animation": "Write"
- },
- {
   "kind": "bookmark",
   "t": 25.27,
   "id": "lands",
@@ -111,20 +103,28 @@
  },
  {
   "kind": "animation",
-  "t": 7.8,
-  "i": 12,
+  "t": 7.767,
+  "i": 11,
   "scene": "s03_gnomons",
   "sentence": "s03.2",
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 7.8,
-  "i": 13,
+  "t": 7.767,
+  "i": 12,
   "scene": "s03_gnomons",
   "sentence": "s03.2",
   "animation": "wait",
-  "seconds": 1.158
+  "seconds": 2.229
+ },
+ {
+  "kind": "animation",
+  "t": 8.367,
+  "i": 13,
+  "scene": "s03_gnomons",
+  "sentence": "s03.2",
+  "animation": "Indicate"
  },
  {
   "kind": "animation",
@@ -141,17 +141,17 @@
   "scene": "s03_gnomons",
   "sentence": "s03.2",
   "animation": "wait",
-  "seconds": 1.534
+  "seconds": 0.967
  },
  {
-  "t": 6.666666666666655,
+  "t": 7.7666666666666595,
   "kind": "sentence_end",
   "scene": "s03_gnomons",
   "sentence": "s03.2"
  },
  {
   "kind": "animation",
-  "t": 10.733,
+  "t": 10.533,
   "i": 16,
   "scene": "s03_gnomons",
   "sentence": null,
@@ -159,11 +159,11 @@
  },
  {
   "kind": "animation",
-  "t": 10.733,
+  "t": 10.533,
   "i": 17,
   "scene": "s03_gnomons",
   "sentence": null,
   "animation": "wait",
-  "seconds": 1.4
+  "seconds": 1.2
  }
 ]

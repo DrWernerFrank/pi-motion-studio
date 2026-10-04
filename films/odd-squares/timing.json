@@ -1,0 +1,1215 @@
+{
+  "version": 1,
+  "voice": "piper:en_US-ljspeech-medium",
+  "length_scale": 1,
+  "sample_rate": 22050,
+  "gap": 0.15,
+  "gap_samples": 3308,
+  "duration": 64.483447,
+  "timing": "native",
+  "sentences": [
+    {
+      "id": "s01.1",
+      "scene": "s01_hook",
+      "text": "One square. {wrap}Wrap three more around it, {four}and you get a square of four.",
+      "spoken": "One square. Wrap three more around it, and you get a square of four.",
+      "start": 0,
+      "end": 4.191202,
+      "start_sample": 0,
+      "samples": 92416,
+      "words": [
+        {
+          "w": "One",
+          "start": 0.04644,
+          "end": 0.27864
+        },
+        {
+          "w": "square.",
+          "start": 0.37152,
+          "end": 0.75465
+        },
+        {
+          "w": "Wrap",
+          "start": 0.91719,
+          "end": 1.17261
+        },
+        {
+          "w": "three",
+          "start": 1.24227,
+          "end": 1.48608
+        },
+        {
+          "w": "more",
+          "start": 1.53252,
+          "end": 1.69506
+        },
+        {
+          "w": "around",
+          "start": 1.79955,
+          "end": 2.15946
+        },
+        {
+          "w": "it,",
+          "start": 2.27556,
+          "end": 2.47293
+        },
+        {
+          "w": "and",
+          "start": 2.63546,
+          "end": 2.77478
+        },
+        {
+          "w": "you",
+          "start": 2.798,
+          "end": 2.87927
+        },
+        {
+          "w": "get",
+          "start": 2.92571,
+          "end": 3.08825
+        },
+        {
+          "w": "a",
+          "start": 3.13469,
+          "end": 3.21596
+        },
+        {
+          "w": "square",
+          "start": 3.28562,
+          "end": 3.56426
+        },
+        {
+          "w": "of",
+          "start": 3.62231,
+          "end": 3.71519
+        },
+        {
+          "w": "four.",
+          "start": 3.78485,
+          "end": 4.08671
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "wrap",
+          "t": 0.91719,
+          "word": "Wrap"
+        },
+        {
+          "id": "four",
+          "t": 2.63546,
+          "word": "and"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/f68cdeab2898ef38a0a37a7b6f1f6b860ef60b576b4836ef235e79a0e12a9632/audio.wav",
+      "hash": "f68cdeab2898ef38a0a37a7b6f1f6b860ef60b576b4836ef235e79a0e12a9632"
+    },
+    {
+      "id": "s01.2",
+      "scene": "s01_hook",
+      "text": "Does it keep working?",
+      "spoken": "Does it keep working?",
+      "start": 4.341224,
+      "end": 5.827302,
+      "start_sample": 95724,
+      "samples": 32768,
+      "words": [
+        {
+          "w": "Does",
+          "start": 4.42249,
+          "end": 4.70113
+        },
+        {
+          "w": "it",
+          "start": 4.77079,
+          "end": 4.87528
+        },
+        {
+          "w": "keep",
+          "start": 4.93333,
+          "end": 5.16553
+        },
+        {
+          "w": "working?",
+          "start": 5.21197,
+          "end": 5.68798
+        }
+      ],
+      "bookmarks": [],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/949abfd34ff81aaffa516b33e05afde45f222d4aa3b117cb6a04ba06ad12c734/audio.wav",
+      "hash": "949abfd34ff81aaffa516b33e05afde45f222d4aa3b117cb6a04ba06ad12c734"
+    },
+    {
+      "id": "s02.1",
+      "scene": "s02_pattern",
+      "text": "Wrap the next odd number, five, {nine}and the square grows to three by three.",
+      "spoken": "Wrap the next odd number, five, and the square grows to three by three.",
+      "start": 5.977324,
+      "end": 10.807075,
+      "start_sample": 131800,
+      "samples": 106496,
+      "words": [
+        {
+          "w": "Wrap",
+          "start": 6.02376,
+          "end": 6.24435
+        },
+        {
+          "w": "the",
+          "start": 6.29079,
+          "end": 6.34884
+        },
+        {
+          "w": "next",
+          "start": 6.37206,
+          "end": 6.68553
+        },
+        {
+          "w": "odd",
+          "start": 6.72036,
+          "end": 6.85968
+        },
+        {
+          "w": "number,",
+          "start": 6.8829,
+          "end": 7.24281
+        },
+        {
+          "w": "five,",
+          "start": 7.61433,
+          "end": 8.12517
+        },
+        {
+          "w": "and",
+          "start": 8.48508,
+          "end": 8.60117
+        },
+        {
+          "w": "the",
+          "start": 8.62439,
+          "end": 8.70566
+        },
+        {
+          "w": "square",
+          "start": 8.79854,
+          "end": 9.17006
+        },
+        {
+          "w": "grows",
+          "start": 9.22811,
+          "end": 9.57641
+        },
+        {
+          "w": "to",
+          "start": 9.64607,
+          "end": 9.73895
+        },
+        {
+          "w": "three",
+          "start": 9.797,
+          "end": 10.08725
+        },
+        {
+          "w": "by",
+          "start": 10.13369,
+          "end": 10.34267
+        },
+        {
+          "w": "three.",
+          "start": 10.42394,
+          "end": 10.73741
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "nine",
+          "t": 2.507756,
+          "word": "and"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/796ffd19476336dd4b817b1177c3bd2cdac90439e6ddf793d2329b1bd5da4d11/audio.wav",
+      "hash": "796ffd19476336dd4b817b1177c3bd2cdac90439e6ddf793d2329b1bd5da4d11"
+    },
+    {
+      "id": "s02.2",
+      "scene": "s02_pattern",
+      "text": "Seven more: {sixteen}four by four. Nine more: {twentyfive}five by five.",
+      "spoken": "Seven more: four by four. Nine more: five by five.",
+      "start": 10.957098,
+      "end": 15.833288,
+      "start_sample": 241604,
+      "samples": 107520,
+      "words": [
+        {
+          "w": "Seven",
+          "start": 11.09642,
+          "end": 11.39828
+        },
+        {
+          "w": "more:",
+          "start": 11.44472,
+          "end": 11.85107
+        },
+        {
+          "w": "four",
+          "start": 12.22259,
+          "end": 12.50123
+        },
+        {
+          "w": "by",
+          "start": 12.54767,
+          "end": 12.74504
+        },
+        {
+          "w": "four.",
+          "start": 12.84953,
+          "end": 13.17461
+        },
+        {
+          "w": "Nine",
+          "start": 13.31393,
+          "end": 13.639
+        },
+        {
+          "w": "more:",
+          "start": 13.68544,
+          "end": 14.12662
+        },
+        {
+          "w": "five",
+          "start": 14.61424,
+          "end": 14.99737
+        },
+        {
+          "w": "by",
+          "start": 15.04381,
+          "end": 15.24118
+        },
+        {
+          "w": "five.",
+          "start": 15.29923,
+          "end": 15.76363
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "sixteen",
+          "t": 1.265492,
+          "word": "four"
+        },
+        {
+          "id": "twentyfive",
+          "t": 3.657142,
+          "word": "five"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/2a69a5479b67f0e90ef416fa53bf971a4a4e821ab1307ff792efba7740421604/audio.wav",
+      "hash": "2a69a5479b67f0e90ef416fa53bf971a4a4e821ab1307ff792efba7740421604"
+    },
+    {
+      "id": "s02.3",
+      "scene": "s02_pattern",
+      "text": "{each}Each odd number is exactly one more L around the square.",
+      "spoken": "Each odd number is exactly one more L around the square.",
+      "start": 15.983311,
+      "end": 19.930703,
+      "start_sample": 352432,
+      "samples": 87040,
+      "words": [
+        {
+          "w": "Each",
+          "start": 16.01814,
+          "end": 16.26195
+        },
+        {
+          "w": "odd",
+          "start": 16.32,
+          "end": 16.54059
+        },
+        {
+          "w": "number",
+          "start": 16.57542,
+          "end": 16.98177
+        },
+        {
+          "w": "is",
+          "start": 17.23719,
+          "end": 17.31846
+        },
+        {
+          "w": "exactly",
+          "start": 17.3649,
+          "end": 17.92218
+        },
+        {
+          "w": "one",
+          "start": 17.98023,
+          "end": 18.16599
+        },
+        {
+          "w": "more",
+          "start": 18.20082,
+          "end": 18.38658
+        },
+        {
+          "w": "L",
+          "start": 18.51429,
+          "end": 18.80453
+        },
+        {
+          "w": "around",
+          "start": 18.87419,
+          "end": 19.18766
+        },
+        {
+          "w": "the",
+          "start": 19.2341,
+          "end": 19.31537
+        },
+        {
+          "w": "square.",
+          "start": 19.40825,
+          "end": 19.8146
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "each",
+          "t": 0.034829,
+          "word": "Each"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/a33f319c62aa685050cfa4af899b258aaa355dee9e4421bd09d9be39a18abf0a/audio.wav",
+      "hash": "a33f319c62aa685050cfa4af899b258aaa355dee9e4421bd09d9be39a18abf0a"
+    },
+    {
+      "id": "s03.1",
+      "scene": "s03_why",
+      "text": "Look at the fourth L. {col}It is a column of four cells {row}and a row of three: {seven}seven, the fourth odd number.",
+      "spoken": "Look at the fourth L. It is a column of four cells and a row of three: seven, the fourth odd number.",
+      "start": 20.080726,
+      "end": 26.768073,
+      "start_sample": 442780,
+      "samples": 147456,
+      "words": [
+        {
+          "w": "Look",
+          "start": 20.13878,
+          "end": 20.2781
+        },
+        {
+          "w": "at",
+          "start": 20.31293,
+          "end": 20.40581
+        },
+        {
+          "w": "the",
+          "start": 20.45225,
+          "end": 20.54513
+        },
+        {
+          "w": "fourth",
+          "start": 20.60318,
+          "end": 20.87021
+        },
+        {
+          "w": "L.",
+          "start": 20.9747,
+          "end": 21.25334
+        },
+        {
+          "w": "It",
+          "start": 21.38105,
+          "end": 21.47393
+        },
+        {
+          "w": "is",
+          "start": 21.50876,
+          "end": 21.57842
+        },
+        {
+          "w": "a",
+          "start": 21.63647,
+          "end": 21.65969
+        },
+        {
+          "w": "column",
+          "start": 21.71774,
+          "end": 22.04282
+        },
+        {
+          "w": "of",
+          "start": 22.08926,
+          "end": 22.15892
+        },
+        {
+          "w": "four",
+          "start": 22.22858,
+          "end": 22.47239
+        },
+        {
+          "w": "cells",
+          "start": 22.56527,
+          "end": 22.91356
+        },
+        {
+          "w": "and",
+          "start": 22.94839,
+          "end": 23.04127
+        },
+        {
+          "w": "a",
+          "start": 23.08771,
+          "end": 23.13415
+        },
+        {
+          "w": "row",
+          "start": 23.18059,
+          "end": 23.37796
+        },
+        {
+          "w": "of",
+          "start": 23.41279,
+          "end": 23.50567
+        },
+        {
+          "w": "three:",
+          "start": 23.56372,
+          "end": 24.02812
+        },
+        {
+          "w": "seven,",
+          "start": 24.60862,
+          "end": 25.01497
+        },
+        {
+          "w": "the",
+          "start": 25.49098,
+          "end": 25.60708
+        },
+        {
+          "w": "fourth",
+          "start": 25.66513,
+          "end": 25.95538
+        },
+        {
+          "w": "odd",
+          "start": 26.07148,
+          "end": 26.28046
+        },
+        {
+          "w": "number.",
+          "start": 26.31529,
+          "end": 26.66359
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "col",
+          "t": 1.300324,
+          "word": "It"
+        },
+        {
+          "id": "row",
+          "t": 2.867664,
+          "word": "and"
+        },
+        {
+          "id": "seven",
+          "t": 4.527894,
+          "word": "seven,"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/16ed151d328bfdf603934f57f6f7f8509cd4d44122f59a9df1937afb4e63445f/audio.wav",
+      "hash": "16ed151d328bfdf603934f57f6f7f8509cd4d44122f59a9df1937afb4e63445f"
+    },
+    {
+      "id": "s03.2",
+      "scene": "s03_why",
+      "text": "In general, L number k is {colk}a column of k {rowk}and a row of k minus one: {total}two k minus one cells.",
+      "spoken": "In general, L number k is a column of k and a row of k minus one: two k minus one cells.",
+      "start": 26.918095,
+      "end": 33.884082,
+      "start_sample": 593544,
+      "samples": 153600,
+      "words": [
+        {
+          "w": "In",
+          "start": 26.95293,
+          "end": 27.05742
+        },
+        {
+          "w": "general,",
+          "start": 27.09225,
+          "end": 27.62631
+        },
+        {
+          "w": "L",
+          "start": 27.92817,
+          "end": 28.13715
+        },
+        {
+          "w": "number",
+          "start": 28.17198,
+          "end": 28.45062
+        },
+        {
+          "w": "k",
+          "start": 28.50867,
+          "end": 28.7757
+        },
+        {
+          "w": "is",
+          "start": 28.79892,
+          "end": 28.8918
+        },
+        {
+          "w": "a",
+          "start": 28.92663,
+          "end": 28.94985
+        },
+        {
+          "w": "column",
+          "start": 29.0079,
+          "end": 29.30976
+        },
+        {
+          "w": "of",
+          "start": 29.34459,
+          "end": 29.42586
+        },
+        {
+          "w": "k",
+          "start": 29.49551,
+          "end": 29.75093
+        },
+        {
+          "w": "and",
+          "start": 29.79737,
+          "end": 29.92508
+        },
+        {
+          "w": "a",
+          "start": 29.97152,
+          "end": 30.01796
+        },
+        {
+          "w": "row",
+          "start": 30.07601,
+          "end": 30.27338
+        },
+        {
+          "w": "of",
+          "start": 30.31982,
+          "end": 30.37787
+        },
+        {
+          "w": "k",
+          "start": 30.44753,
+          "end": 30.63329
+        },
+        {
+          "w": "minus",
+          "start": 30.67973,
+          "end": 31.08608
+        },
+        {
+          "w": "one:",
+          "start": 31.13252,
+          "end": 31.49243
+        },
+        {
+          "w": "two",
+          "start": 32.06132,
+          "end": 32.23547
+        },
+        {
+          "w": "k",
+          "start": 32.28191,
+          "end": 32.46767
+        },
+        {
+          "w": "minus",
+          "start": 32.51411,
+          "end": 32.90885
+        },
+        {
+          "w": "one",
+          "start": 32.9669,
+          "end": 33.16427
+        },
+        {
+          "w": "cells.",
+          "start": 33.25715,
+          "end": 33.76799
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "colk",
+          "t": 2.008535,
+          "word": "a"
+        },
+        {
+          "id": "rowk",
+          "t": 2.879275,
+          "word": "and"
+        },
+        {
+          "id": "total",
+          "t": 5.143225,
+          "word": "two"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/8db778ecb2962a74b1cb3ebf96316af78a9ec0a1f5d90f0b81e47a7acf9aec08/audio.wav",
+      "hash": "8db778ecb2962a74b1cb3ebf96316af78a9ec0a1f5d90f0b81e47a7acf9aec08"
+    },
+    {
+      "id": "s03.3",
+      "scene": "s03_why",
+      "text": "That is exactly the step from one square to the next: {diff}k squared minus k minus one squared.",
+      "spoken": "That is exactly the step from one square to the next: k squared minus k minus one squared.",
+      "start": 34.034104,
+      "end": 40.651791,
+      "start_sample": 750452,
+      "samples": 145920,
+      "words": [
+        {
+          "w": "That",
+          "start": 34.05732,
+          "end": 34.33596
+        },
+        {
+          "w": "is",
+          "start": 34.37079,
+          "end": 34.45206
+        },
+        {
+          "w": "exactly",
+          "start": 34.4985,
+          "end": 35.14866
+        },
+        {
+          "w": "the",
+          "start": 35.39247,
+          "end": 35.47374
+        },
+        {
+          "w": "step",
+          "start": 35.57823,
+          "end": 35.82204
+        },
+        {
+          "w": "from",
+          "start": 35.88009,
+          "end": 36.04263
+        },
+        {
+          "w": "one",
+          "start": 36.07746,
+          "end": 36.29805
+        },
+        {
+          "w": "square",
+          "start": 36.39093,
+          "end": 36.77405
+        },
+        {
+          "w": "to",
+          "start": 36.84371,
+          "end": 36.90176
+        },
+        {
+          "w": "the",
+          "start": 36.9482,
+          "end": 37.01786
+        },
+        {
+          "w": "next:",
+          "start": 37.0643,
+          "end": 37.6448
+        },
+        {
+          "w": "k",
+          "start": 37.92344,
+          "end": 38.15564
+        },
+        {
+          "w": "squared",
+          "start": 38.23691,
+          "end": 38.60843
+        },
+        {
+          "w": "minus",
+          "start": 38.65487,
+          "end": 39.02639
+        },
+        {
+          "w": "k",
+          "start": 39.10766,
+          "end": 39.28181
+        },
+        {
+          "w": "minus",
+          "start": 39.32825,
+          "end": 39.69977
+        },
+        {
+          "w": "one",
+          "start": 39.75782,
+          "end": 39.99002
+        },
+        {
+          "w": "squared.",
+          "start": 40.0829,
+          "end": 40.57052
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "diff",
+          "t": 3.889336,
+          "word": "k"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/411d90a4874962e3a91e033193f617c9889028543841233dd2ca085a62c276d8/audio.wav",
+      "hash": "411d90a4874962e3a91e033193f617c9889028543841233dd2ca085a62c276d8"
+    },
+    {
+      "id": "s04.1",
+      "scene": "s04_sum",
+      "text": "Now add up the first n odd numbers, {rewrite}writing each one as a difference of two squares.",
+      "spoken": "Now add up the first n odd numbers, writing each one as a difference of two squares.",
+      "start": 40.801814,
+      "end": 46.316553,
+      "start_sample": 899680,
+      "samples": 121600,
+      "words": [
+        {
+          "w": "Now",
+          "start": 40.83664,
+          "end": 41.15011
+        },
+        {
+          "w": "add",
+          "start": 41.19655,
+          "end": 41.31265
+        },
+        {
+          "w": "up",
+          "start": 41.33587,
+          "end": 41.42875
+        },
+        {
+          "w": "the",
+          "start": 41.47519,
+          "end": 41.56807
+        },
+        {
+          "w": "first",
+          "start": 41.62612,
+          "end": 41.93959
+        },
+        {
+          "w": "n",
+          "start": 41.98603,
+          "end": 42.14857
+        },
+        {
+          "w": "odd",
+          "start": 42.21823,
+          "end": 42.42721
+        },
+        {
+          "w": "numbers,",
+          "start": 42.47365,
+          "end": 42.98449
+        },
+        {
+          "w": "writing",
+          "start": 43.35601,
+          "end": 43.71591
+        },
+        {
+          "w": "each",
+          "start": 43.78557,
+          "end": 44.02938
+        },
+        {
+          "w": "one",
+          "start": 44.08743,
+          "end": 44.42412
+        },
+        {
+          "w": "as",
+          "start": 44.48217,
+          "end": 44.56344
+        },
+        {
+          "w": "a",
+          "start": 44.62149,
+          "end": 44.66793
+        },
+        {
+          "w": "difference",
+          "start": 44.72598,
+          "end": 45.06267
+        },
+        {
+          "w": "of",
+          "start": 45.12072,
+          "end": 45.2136
+        },
+        {
+          "w": "two",
+          "start": 45.28326,
+          "end": 45.51546
+        },
+        {
+          "w": "squares.",
+          "start": 45.58512,
+          "end": 46.21206
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "rewrite",
+          "t": 2.554196,
+          "word": "writing"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/f3efaacf6647c3664b35b45b5ac127b8b7135b2109717fd60c266c85456ae060/audio.wav",
+      "hash": "f3efaacf6647c3664b35b45b5ac127b8b7135b2109717fd60c266c85456ae060"
+    },
+    {
+      "id": "s04.2",
+      "scene": "s04_sum",
+      "text": "{cancel}Each square cancels its neighbour, {survive}and only n squared minus zero survives.",
+      "spoken": "Each square cancels its neighbour, and only n squared minus zero survives.",
+      "start": 46.466576,
+      "end": 51.702676,
+      "start_sample": 1024588,
+      "samples": 115456,
+      "words": [
+        {
+          "w": "Each",
+          "start": 46.50141,
+          "end": 46.78005
+        },
+        {
+          "w": "square",
+          "start": 46.8381,
+          "end": 47.17479
+        },
+        {
+          "w": "cancels",
+          "start": 47.23284,
+          "end": 47.80173
+        },
+        {
+          "w": "its",
+          "start": 47.883,
+          "end": 48.01071
+        },
+        {
+          "w": "neighbour,",
+          "start": 48.05715,
+          "end": 48.41706
+        },
+        {
+          "w": "and",
+          "start": 48.75375,
+          "end": 48.91629
+        },
+        {
+          "w": "only",
+          "start": 48.95112,
+          "end": 49.22975
+        },
+        {
+          "w": "n",
+          "start": 49.29941,
+          "end": 49.50839
+        },
+        {
+          "w": "squared",
+          "start": 49.60127,
+          "end": 49.97279
+        },
+        {
+          "w": "minus",
+          "start": 50.01923,
+          "end": 50.42558
+        },
+        {
+          "w": "zero",
+          "start": 50.47202,
+          "end": 50.82032
+        },
+        {
+          "w": "survives.",
+          "start": 50.88998,
+          "end": 51.59819
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "cancel",
+          "t": 0.034834,
+          "word": "Each"
+        },
+        {
+          "id": "survive",
+          "t": 2.287174,
+          "word": "and"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/eb1da9afc6e00c2a005c670dca969b5ac7714869d542a0130293a0103845091a/audio.wav",
+      "hash": "eb1da9afc6e00c2a005c670dca969b5ac7714869d542a0130293a0103845091a"
+    },
+    {
+      "id": "s04.3",
+      "scene": "s04_sum",
+      "text": "{result}So the sum of the first n odd numbers is n squared, for every n.",
+      "spoken": "So the sum of the first n odd numbers is n squared, for every n.",
+      "start": 51.852698,
+      "end": 56.33415,
+      "start_sample": 1143352,
+      "samples": 98816,
+      "words": [
+        {
+          "w": "So",
+          "start": 51.95719,
+          "end": 52.06168
+        },
+        {
+          "w": "the",
+          "start": 52.0849,
+          "end": 52.15456
+        },
+        {
+          "w": "sum",
+          "start": 52.24744,
+          "end": 52.52608
+        },
+        {
+          "w": "of",
+          "start": 52.56091,
+          "end": 52.64218
+        },
+        {
+          "w": "the",
+          "start": 52.64218,
+          "end": 52.73506
+        },
+        {
+          "w": "first",
+          "start": 52.7815,
+          "end": 53.08336
+        },
+        {
+          "w": "n",
+          "start": 53.11819,
+          "end": 53.28073
+        },
+        {
+          "w": "odd",
+          "start": 53.35039,
+          "end": 53.57098
+        },
+        {
+          "w": "numbers",
+          "start": 53.65225,
+          "end": 54.07021
+        },
+        {
+          "w": "is",
+          "start": 54.15148,
+          "end": 54.27919
+        },
+        {
+          "w": "n",
+          "start": 54.36046,
+          "end": 54.55782
+        },
+        {
+          "w": "squared,",
+          "start": 54.63909,
+          "end": 55.13832
+        },
+        {
+          "w": "for",
+          "start": 55.40535,
+          "end": 55.48662
+        },
+        {
+          "w": "every",
+          "start": 55.5795,
+          "end": 55.83492
+        },
+        {
+          "w": "n.",
+          "start": 55.93941,
+          "end": 56.22966
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "result",
+          "t": 0.104492,
+          "word": "So"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/0372b47adb3e8ee4707b2e0363c9ad5b8061ef876a53d231014f500f2ce37808/audio.wav",
+      "hash": "0372b47adb3e8ee4707b2e0363c9ad5b8061ef876a53d231014f500f2ce37808"
+    },
+    {
+      "id": "s05.1",
+      "scene": "s05_recap",
+      "text": "Odd numbers stack into squares. {kth}L number k adds two k minus one cells, {sum}and together the first n make n squared.",
+      "spoken": "Odd numbers stack into squares. L number k adds two k minus one cells, and together the first n make n squared.",
+      "start": 56.484172,
+      "end": 64.483447,
+      "start_sample": 1245476,
+      "samples": 176384,
+      "words": [
+        {
+          "w": "Odd",
+          "start": 56.50739,
+          "end": 56.69315
+        },
+        {
+          "w": "numbers",
+          "start": 56.72798,
+          "end": 57.06467
+        },
+        {
+          "w": "stack",
+          "start": 57.25043,
+          "end": 57.5639
+        },
+        {
+          "w": "into",
+          "start": 57.64517,
+          "end": 57.90059
+        },
+        {
+          "w": "squares.",
+          "start": 58.01669,
+          "end": 58.64363
+        },
+        {
+          "w": "L",
+          "start": 58.78295,
+          "end": 58.9571
+        },
+        {
+          "w": "number",
+          "start": 58.99193,
+          "end": 59.25895
+        },
+        {
+          "w": "k",
+          "start": 59.32861,
+          "end": 59.53759
+        },
+        {
+          "w": "adds",
+          "start": 59.58403,
+          "end": 59.90911
+        },
+        {
+          "w": "two",
+          "start": 60.00199,
+          "end": 60.1297
+        },
+        {
+          "w": "k",
+          "start": 60.17614,
+          "end": 60.37351
+        },
+        {
+          "w": "minus",
+          "start": 60.41995,
+          "end": 60.81469
+        },
+        {
+          "w": "one",
+          "start": 60.87274,
+          "end": 61.09333
+        },
+        {
+          "w": "cells,",
+          "start": 61.18621,
+          "end": 61.66222
+        },
+        {
+          "w": "and",
+          "start": 61.97569,
+          "end": 62.09179
+        },
+        {
+          "w": "together",
+          "start": 62.13823,
+          "end": 62.49814
+        },
+        {
+          "w": "the",
+          "start": 62.54458,
+          "end": 62.63746
+        },
+        {
+          "w": "first",
+          "start": 62.6839,
+          "end": 63.00898
+        },
+        {
+          "w": "n",
+          "start": 63.05542,
+          "end": 63.21796
+        },
+        {
+          "w": "make",
+          "start": 63.35728,
+          "end": 63.54304
+        },
+        {
+          "w": "n",
+          "start": 63.62431,
+          "end": 63.81007
+        },
+        {
+          "w": "squared.",
+          "start": 63.91456,
+          "end": 64.40217
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "kth",
+          "t": 2.298778,
+          "word": "L"
+        },
+        {
+          "id": "sum",
+          "t": 5.491518,
+          "word": "and"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/bab310dfbca03d260247dde3c2499e3ee837be5f16ac1a603bb0099f8cba488c/audio.wav",
+      "hash": "bab310dfbca03d260247dde3c2499e3ee837be5f16ac1a603bb0099f8cba488c"
+    }
+  ]
+}
