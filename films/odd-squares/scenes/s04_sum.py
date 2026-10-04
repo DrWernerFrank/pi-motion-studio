@@ -93,13 +93,22 @@ class Scene(StudioScene):
                 vanish([a, b], mid(a, b), run_time=0.75)
                 # critic r4: identity tests never fired (part() returns a fresh wrapper) — dim the
                 # row whose INDEX matches the pair (pairs are (rows[0], rows[1]) then (rows[1], rows[2]))
+                # r6b: row.set_opacity RE-ARMS part-hidden glyphs (the 50.4-50.7s flash) —
+                # dim the row then re-hide ITS vanished half (p3 on row0/1: the +k^2 that left)
                 for idx in pair_index:
                     rows[idx].set_opacity(0.45)
-            rows[2].set_opacity(0.45)   # r5: its 3^2 half just left — dim with its pair
+                    rows[idx].part("p3").set_opacity(0.0)
+            rows[2].set_opacity(0.45)   # its 3^2 half is about to leave
+            rows[2].part("p4").set_opacity(0.0) if hasattr(rows[2], "part") else None
             vanish([rows[2].part("p3")], dots.get_center(), run_time=0.7)   # +3^2 into the dots …
             vanish([dots, rows[3].part("p4")], mid(dots, rows[3].part("p4")), run_time=0.75)  # … which meet -(n-1)^2
+            rows[2].part("p3").set_opacity(0.0)   # re-hidden after its own vanish
             self.wait(self.until("survive"))
-            lit0, lit3 = rows[0].copy(), rows[3].copy()     # the survivors take the square's color
+            # r6 (critic): the copies inherited the 0.45 dim — the survivors must be FULL weight:
+            # "only n squared minus zero survives" shows minus-zero as strong as the n².
+            lit0, lit3 = rows[0].copy(), rows[3].copy()
+            lit0.set_opacity(1.0)
+            lit3.set_opacity(1.0)
             # r5 (self-review): the copy was taken AFTER the vanish — the vanished 1^2 came back on
             # screen through lit0. part() returns a fresh wrapper (opacity reads don't carry), so
             # re-hide by the KNOWN indices: rows[0]'s p3 (the 1^2) vanished in pair 1; rows[3]'s

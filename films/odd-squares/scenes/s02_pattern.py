@@ -42,7 +42,8 @@ def odd_eq(m):
 def odd_eqs(ebox, upto):
     """e_1..e_upto at ONE shared scale (fit for e_5), left-aligned: the line grows to the right."""
     widest = odd_eq(5)
-    s = min(1.0, ebox.w * 0.9 / widest.width)
+    # r6 (critic): grow into the panel's height as well — the ² was a 6.8px speck at 360px
+    s = min(1.6, ebox.w * 0.9 / widest.width, ebox.h * 0.38 / widest.height)
     x0 = ebox.cx - widest.width * s / 2
     out = []
     for m in range(1, upto + 1):

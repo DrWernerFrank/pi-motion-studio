@@ -110,11 +110,13 @@ class Scene(StudioScene):
         e4 = Eq(r"{{4}}", roles={"p1": "measure"})
         e43 = Eq(r"{{4}} {{+}} {{3}}", roles={"p1": "measure", "p3": "measure"})
         e47 = Eq(r"{{4}} {{+}} {{3}} {{=}} {{7}}", roles={"p1": "measure", "p3": "measure", "p5": "gnomon4"})
-        ek = Eq(r"{{k}} {{+}} {{(k-1)}} {{=}} {{(2k-1)}}", roles={"p1": "measure", "p3": "measure"})
+        ek = Eq(r"{{(k)}} {{+}} {{(k-1)}} {{=}} {{(2k-1)}}", roles={"p1": "measure", "p3": "measure"})
         ek2 = Eq(r"{{k^2}} - {{(k-1)^2}} {{=}} {{(2k-1)}}", roles={"p1": "square", "p2": "square"})
         slot = (e4, e43, e47, ek, ek2)
         wmax = max(e.width for e in slot)
-        s = min(1.0, ebox.w * 0.9 / wmax)
+        # r6 (critic): the 1.0 cap left the ² a 6.8px speck at 360px — grow into the
+        # panel's HEIGHT too (the equation owns its panel in 16:9)
+        s = min(1.6, ebox.w * 0.9 / wmax, ebox.h * 0.82 / max(e.height for e in slot))
         x0 = ebox.cx - wmax * s / 2
         for e in slot:
             e.scale(s)
@@ -133,12 +135,14 @@ class Scene(StudioScene):
             claim("4 + 3 == 7", about="column of 4 plus row of 3", says="s03.1")
             claim(f"{gs[3].cells} == 2*4 - 1", about="the 4th L has 7 cells (counted on the gnomon)", says="s03.1")
         with self.say("s03.2"):
+            # r6 (critic): the concrete 4+3=7 sat ~3 s under "in general" narration — the
+            # generalization now lands ON "a column of k" (colk), the first general word
+            self.play(EqMorph(e47, ek), run_time=0.9)
             self.wait(self.until("colk"))
             swap(self, cc.label, kc, direction=UP, run_time=0.6)
             self.wait(self.until("rowk"))
             swap(self, rc.label, kr, direction=UP, run_time=0.6)
-            self.wait(self.until("total"))
-            self.play(EqMorph(e47, ek), run_time=0.9)
+            self.wait(self.until("total"))   # {total} "two k minus one cells" — the count lands
             claim("k + (k - 1) == 2*k - 1", about="column of k plus row of k-1", says="s03.2")
             claim(f"{sum(gnomon(j).cells for j in range(1, 6))} == 5**2", about="the L's counted on the kit's gnomons fill 5x5", says="s03.2")
         with self.say("s03.3"):

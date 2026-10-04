@@ -135,6 +135,14 @@
   "seconds": 0.171
  },
  {
+  "kind": "animation",
+  "t": 7.733,
+  "i": 14,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "EqMorph"
+ },
+ {
   "kind": "bookmark",
   "t": 28.927,
   "id": "colk",
@@ -144,7 +152,7 @@
  {
   "kind": "animation",
   "t": 8.833,
-  "i": 14,
+  "i": 15,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "Wait"
@@ -152,16 +160,16 @@
  {
   "kind": "animation",
   "t": 8.833,
-  "i": 15,
+  "i": 16,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
-  "seconds": 2.009
+  "seconds": 1.113
  },
  {
   "kind": "animation",
   "t": 9.433,
-  "i": 16,
+  "i": 17,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "FadeOut; FadeIn"
@@ -176,7 +184,7 @@
  {
   "kind": "animation",
   "t": 9.7,
-  "i": 17,
+  "i": 18,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "Wait"
@@ -184,7 +192,7 @@
  {
   "kind": "animation",
   "t": 9.7,
-  "i": 18,
+  "i": 19,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
@@ -193,7 +201,7 @@
  {
   "kind": "animation",
   "t": 10.3,
-  "i": 19,
+  "i": 20,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "FadeOut; FadeIn"
@@ -208,7 +216,7 @@
  {
   "kind": "animation",
   "t": 11.967,
-  "i": 20,
+  "i": 21,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "Wait"
@@ -216,19 +224,11 @@
  {
   "kind": "animation",
   "t": 11.967,
-  "i": 21,
+  "i": 22,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
   "seconds": 1.681
- },
- {
-  "kind": "animation",
-  "t": 12.867,
-  "i": 22,
-  "scene": "s03_why",
-  "sentence": "s03.2",
-  "animation": "EqMorph"
  },
  {
   "kind": "animation",
@@ -245,7 +245,7 @@
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
-  "seconds": 0.937
+  "seconds": 1.837
  },
  {
   "t": 13.8,

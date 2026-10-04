@@ -183,16 +183,24 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
     // to its OWN last-sentence end (frame-quantized): scenes butt at exact sentence boundaries and
     // the video length matches the narration bus. The LAST scene keeps its full tail (its hold).
     const timingAll2 = timingAll;
-    const sceneSpan = (sid) => {
-      const own = (timingAll2?.sentences ?? []).filter((x) => x.scene === sid);
+    // A/V seam truth (critic r7, measured: video led the voice 0.15s->0.75s across the film):
+    // the narration bus keeps the 0.15s inter-sentence gaps BETWEEN scenes too, so each clip must
+    // run to the NEXT scene's first-sentence start (not its own last-sentence end — that drops the
+    // gaps from the picture only). The LAST scene keeps its full tail (its hold).
+    const sceneEndAt = (sid, isLast) => {
+      const sents = timingAll2?.sentences ?? [];
+      const own = sents.filter((x) => x.scene === sid);
       if (!own.length) return null;
-      return +(own.at(-1).end - own[0].start).toFixed(3);
+      if (isLast) return null;                       // keep the full tail
+      const i = sents.indexOf(own.at(-1));
+      const next = sents[i + 1];
+      return next ? +(next.start - own[0].start).toFixed(3) : null;  // through the gap, to the next start
     };
     const trimmed = [];
     for (const p of partials) {
-      const span = sceneSpan(p.scene.id);
+      const span = sceneEndAt(p.scene.id, p === partials.at(-1));
       const src = p.mp4;
-      if (span == null || p === partials.at(-1)) { trimmed.push(src); continue; }
+      if (span == null) { trimmed.push(src); continue; }
       const dst = join(SCRATCH, key, f, `trim-${p.scene.id}.mp4`);
       const { out: fpsOut } = await run('ffprobe', ['-v', 'error', '-select_streams', 'v:0',
         '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', src]);

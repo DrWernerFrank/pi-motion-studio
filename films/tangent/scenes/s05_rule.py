@@ -212,7 +212,7 @@ def rule_rows(x_eq):
     # the rows spanned 31% with the right 55% empty. The payoff budget is ROWS ONLY — the
     # derivation is gone by then; the rows own the whole column height.
     hsum_rows = sum(e.height for e, _ in out) + 2 * ROW_BUFF
-    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.62 / hsum_rows)
+    k = min(2.0, room / (2 * max(left, right)), L.stage.h * 0.88 / hsum_rows)  # r6 values restored (my r7 0.62 REGRESSED k)
     for e, _ in out:
         e.scale(k)
         e.shift([x_eq - e.part("p1").get_center()[0], 0, 0])
