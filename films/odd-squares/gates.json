@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-04T20:27:11.415Z",
+  "at": "2026-10-04T21:08:01.348Z",
   "pass": true,
   "checks": [
     {
@@ -63,15 +63,15 @@
       "detail": "10 layout record hash(es) identical to the last gates.json run",
       "hashes": {
         "16:9/s01_hook-layout.json": "e670ff5a83dc",
-        "16:9/s02_pattern-layout.json": "3982a9952c3b",
-        "16:9/s03_why-layout.json": "5ea2a3fffbb4",
+        "16:9/s02_pattern-layout.json": "65681e44c38e",
+        "16:9/s03_why-layout.json": "d2e4cbe3d655",
         "16:9/s04_sum-layout.json": "74e34ee5ad33",
-        "16:9/s05_recap-layout.json": "85df9879490e",
+        "16:9/s05_recap-layout.json": "b6dcb6c71e2f",
         "9:16/s01_hook-layout.json": "aa82ae245442",
-        "9:16/s02_pattern-layout.json": "f2c024d0ab62",
-        "9:16/s03_why-layout.json": "9ddf56f7e919",
+        "9:16/s02_pattern-layout.json": "594a92b3dc81",
+        "9:16/s03_why-layout.json": "67013fe99fb3",
         "9:16/s04_sum-layout.json": "002218108a34",
-        "9:16/s05_recap-layout.json": "2ba689b1555d"
+        "9:16/s05_recap-layout.json": "200d9e2714d2"
       }
     }
   ]

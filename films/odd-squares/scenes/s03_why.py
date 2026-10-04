@@ -116,7 +116,8 @@ class Scene(StudioScene):
         wmax = max(e.width for e in slot)
         # r6 (critic): the 1.0 cap left the ² a 6.8px speck at 360px — grow into the
         # panel's HEIGHT too (the equation owns its panel in 16:9)
-        s = min(1.6, ebox.w * 0.9 / wmax, ebox.h * 0.82 / max(e.height for e in slot))
+        # r7: the height term decides (the width term bound at 6.4px-2)
+        s = min(2.2, ebox.h * 0.86 / max(e.height for e in slot), ebox.w * 0.98 / wmax)
         x0 = ebox.cx - wmax * s / 2
         for e in slot:
             e.scale(s)

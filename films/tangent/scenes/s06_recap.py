@@ -42,8 +42,11 @@ def graph_box():
     if L.portrait:
         # critic r6: the full-width window drew a squat ~0.8:1 plot (29% of frame height). A
         # square-ish window (88% w x 62% h) grows the plot and centers it.
-        w = L.stage.w * 0.88
-        return Box(L.stage.x + (L.stage.w - w) / 2, L.stage.y + L.stage.h * 0.38, w, L.stage.h * 0.62)
+        # r8 (critic): the drawn plot is squat (the box reserves 62%, the axes draw 0.78 of it
+        # low in the frame) — but every window-widening variant collided the tick labels with the
+        # equation band (171 then 117 lint fails). The proven-clean geometry stands; the plot
+        # proportion is a documented residual (the r8 review's notes carry it).
+        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 
@@ -202,7 +205,9 @@ class Scene(StudioScene):
     def construct(self):
         # s05's end state: the title and the three rule rows in their final slots
         head0 = title("The power rule")
-        rows = [e for e, _ in rule_rows(derivation().eqs[-1].part("p2").get_center()[0])]
+        # r8 (critic): s06's rows kept their own anchor — they jumped +106px right of s05's final
+        # state in one frame. Reuse s05's fixed anchor (the column's '=' line) exactly.
+        rows = [e for e, _ in rule_rows(L.stage.x + L.stage.w * 0.35)]
         for e, y in zip(rows, column_ys(rows, ROW_BUFF)):
             e.shift([0, y - e.get_center()[1], 0])
         self.add(head0, *rows)

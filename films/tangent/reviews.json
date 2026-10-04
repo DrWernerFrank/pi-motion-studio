@@ -285,5 +285,51 @@
       "out/sheets/strip-60.83-16x9.png",
       "out/sheets/strip-60.83-9x16.png"
     ]
+  },
+  {
+    "round": 8,
+    "at": "2026-10-04T20:51:39.834Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "brand": 7,
+      "clarity": 8,
+      "composition": 6,
+      "correctness": 10,
+      "hook": 7,
+      "motion": 7,
+      "readability": 7,
+      "sound": 9,
+      "variety": 7
+    },
+    "min": 6,
+    "pass": false,
+    "problems": [
+      {
+        "fix": "Make s06 open from s05's ACTUAL end state: share ONE rule_rows (and the same x_eq/derivation anchor) between the scene files, or build s06's opening rows from the s05 layout records. Verify with a 2-frame native diff across the cut (56.733 vs 56.767): the row bboxes must be IDENTICAL before and after, in BOTH formats.",
+        "issue": "The s05→s06 seam still POPS, both formats — the r7 problem-3 fix is half-landed. At the cut (frame 1703) the three payoff rows jump in ONE frame: 16:9 +106px right (rows-band ink x 186→292; sizes now IDENTICAL — widths 257 vs 256px, y-centers 190/310/431, spacing — so the r7 1.42× scale jump IS gone); 9:16 +19% scale (278→335px) + 34px right + wider spacing — unchanged from r7's measured state. Then the rows fade out over 0.6s from the jumped position. Root cause: s06_recap.py still carries its own OLD rule_rows copy (symmetric room around its centered derivation's x_eq, k=min(1.6,…,0.88·h/hsum)) while s05_rule.py got the new column-room copy anchored at the LEFT-58% derivation's x_eq — the '=' anchors differ and in 9:16 the binding terms differ too.",
+        "t": 56.767
+      },
+      {
+        "fix": "Make the AXES fill the reserved box: widen the x-range or raise the y-range (or scale the axes' c2p) until the drawn plot is ~0.8:1 at 40–45% of the frame height; then re-verify from the Axes bbox in the layout records, NOT the reserved box — and add that distinction to the gates check so a box-only fix can never pass again.",
+        "issue": "RE-OPENED (r7's verification measured the reserved box, not the drawn plot): the 9:16 plot proportion is still unmet ON SCREEN. The layout records + phone-9:16 + every-9:16 sheets agree: the visible Axes are 380×278px = 29% of the 960px frame height, 1.37:1 wide (r6's state was 450×292px = 30%, 1.54:1). The r7 box change (0.95:1, 44.7% of the frame) never reached the drawn plot — the data window (x 0–3.2, y 0–11) leaves ~230px of cream INSIDE the plot box above the curve, plus empty bands above and below; the phone reader calls the chart 'small, 30–35% of the height, cream bands'. The r3/r6 ask (a portrait plot ~0.8:1 using 40–50% of the frame height) remains unmet through s01–s04.",
+        "t": 10.5
+      },
+      {
+        "fix": "The fix did not bind via the room term as intended (the height term binds at k=1.107; the new column room 8.23u computes to ≈3.5, far above): raise the rows-only height cap toward the true one ((0.9·stage.h − 2·ROW_BUFF)/Σheights ≈ 1.19+) or budget the title band into the rows-alone state, and/or restore the live curve+tangent callback in the reserved right 30% (the r3 ask, removed in 986228d and never replaced). Re-measure the records after: rows ≥45–55% of the 16:9 stage, centered, with s06 sized identically (problem 1).",
+        "issue": "The 16:9 payoff fill, 5th round of the same ask: the three rows hold the stage alone 48.4–56.8s (8.4s = 13% of the film) spanning x[−4.42,−0.57] = 30.7% of the 12.52u stage — RESTORED to the r4–r6 state (materially better than r7's 21.6%, verified pixel-identical) but the right ~55–65% is still empty cream and the column is off-center (its center at ~29% of the stage width; the title's left edge 58px vs the rows' 182px), vs the ≥55% ask.",
+        "t": 52.5
+      }
+    ],
+    "notes": "round 8 by math-critic — re-derived secant (4−1)/(2−1)=3 (17.6–19.4, both formats); the h-sweep EXACT at every sampled instant (3.00=2+1, 2.92=2+0.92, 2.63=2+0.63, 2.51, 2.10, 2.07, 2.04, 2.00 — a continuous 2+h at both phone-grid and curated-grid samples, both formats); the s04 readout 2x exact mid-sweep (3.27, 4.00, 4.11, 5.35, 5.98, 6.00); tangents 2/4/6 at x=1/2/3; x²→2x, x³→3x², xⁿ→nxⁿ⁻¹ both formats + the recap formula. check tangent: 6/6 scenes clean; independent fresh-sympy 54/54 claims TRUE; gates ALL PASS. THE A/V DESYNC IS FIXED — VERIFIED THREE WAYS (the round's big one): (1) the seam cuts sit at the next-scene first-sentence starts frame-exactly: draft frames 244/590/913/1149/1703 = t 8.133/19.667/30.433/38.300/56.767 vs voice 8.148/19.675/30.448/38.329/56.809 — video leads voice 0.008–0.042s (≤1.3 frames @30fps; r7 measured 0.15→0.75s; the residual is the s04 trim dropping one frame — round(7.881×30)=236 vs its 237-frame partial — quantize the trim to the sentence grid to zero it); (2) the draft audio sentence onsets are BIT-EQUAL to mix.wav's at 10ms bins across all 12 sentences in BOTH drafts (the mux kept the narration bus; the deltas vs timing.json are the uniform piper attack ramp +0.016→+0.141); (3) the five s06 play-bells now fit their words at ~0: rows fade 56.80–57.23 on the opening words, card[0] 57.6–58.17 on \"the slope of the tangent\", card[1] 59.37–59.93 exactly on \"the limit\" (59.50–59.98; r7 had it at 58.73 = −0.77), card[2] 60.93–61.47 on \"with one rule\" (61.06–61.45), the Indicate pulse 61.5–62.23 peaking on \"rule for every power\" (61.5–62.25) — the last 0.6s of s05.3 no longer plays over the recap opening. Sound 9: r7's 6 is dead. FIX AUDIT vs r7, measured (native frame diffs, layout records, ink-bbox clusters, strips — not eyeballs): (1) the s05 rows budget — RESTORED AND VERIFIED: row 3 x[−4.415,−0.573] = 3.842u = 30.7% of the 12.52u 16:9 stage, pixel-identical to r4–r6 (r7: 21.6%) — materially better; note it binds via the HEIGHT term at k=1.107 (r7's probe 0.780 × 0.88/0.62), not the room as intended — the new column room (8.23u → term ≈3.5) sits far above (problem 3). (2) the s05→s06 seam — HALF-FIXED: the 1.42× SCALE jump is gone in 16:9 (row widths 257 vs 256px, y-centers 190/310/431 identical, spacing identical) but the rows still JUMP +106px right in ONE frame at the cut (ink x 186→292; 9:16: +19% scale 278→335px + 34px right — UNCHANGED from r7) then fade over 0.6s — the two rule_rows copies still differ: s06 kept the old symmetric-room copy anchored at ITS centered derivation's x_eq while s05's new copy anchors at the left-58% derivation's x_eq (problem 1). (3) the concat — LANDED AND VERIFIED (above). ADJUDICATIONS of sheet suspects (native-verified): the 9:16 y=x²-label/fraction \"collision\" at 17.6–19.75 is FALSE at native (9–10px clear, same as r7); the \"staircase pop\" at 7.75 is a ~0.4s fade (the phone sheet catches 7.5 mid-fade; the 0.5s grid skips it); the t=26.5 \"readout pop\" is the h→0 lockup swap animating smoothly over 7+ frames in the work panel (y 135–455; the readout band itself unchanged, values legible); the 15.75 speck and the 17.75 gold dash are the triangle's and \"= 3\"'s first ink-reveal strokes; the t=29/40/50/52 mid-write garbles complete cleanly (the known class); \"h = 0.00\" displays ~3 frames at the sweep's end before the \"h → 0\" lockup takes over (value exact 2.00 = 2+h throughout). NEWLY RE-OPENED (problem 2): the 9:16 plot proportion — the VISIBLE Axes are 380×278px = 29% of the frame height, 1.37:1 (r6: 450×292 = 30%, 1.54:1): the r7 box change (0.95:1, 44.7% of frame) never reached the drawn plot — the data window (x 0–3.2, y 0–11) leaves ~230px of cream inside the box above the curve plus bands above and below; r7's verification measured the reserved box, not the axes (the r6 mistake repeated, mine); the phone-9:16 and every-9:16 sheets both read the chart at ~28–30% of the height. Persisting from r2–r7, unchanged: ticks ~5px mush at 360px (the phone-floor ask, 5th round), the pale-green y=x² label + its 0–1px superscript/tick-2 hair gap (9:16), the s05 stage-wipe blank at ~39, the s01/s02 empty right half in 16:9, the color-is-meaning cluster (h→0 three ways, lim amber vs ink), the upright-roman n/x + loose token gaps in the amber results, the hairline d/dx bars, the h=0.50 flash vs h=0.10 dwell. Judged good: the instruments (the readout + the red h lockup) remain the strongest elements and hold at 360px in both formats; the finale pulse now lands ON its words; the recap card is word-timed end to end. Verdict vs the 8+ bar: NOT passing — correctness 10 (earned), sound 9 (the structural desync verified fixed three ways), clarity 8, but composition 6 (the 16:9 payoff fill 5th round + the 9:16 plot re-opened + the seam position jump), motion 7 (the seam still pops in the hero rows, both formats), hook/readability/variety/brand 7. The timeline is finally truthful end-to-end; the layout craft and the seam continuity are what remain.",
+    "sheets": [
+      "films/tangent/out/sheets/every-16x9.png",
+      "films/tangent/out/sheets/every-9x16.png",
+      "films/tangent/out/sheets/phone-16x9.png",
+      "films/tangent/out/sheets/phone-9x16.png",
+      "films/tangent/out/sheets/times-16x9.png",
+      "films/tangent/out/sheets/times-9x16.png",
+      "films/tangent/out/sheets/strip-56.70-16x9.png",
+      "films/tangent/out/sheets/strip-56.70-9x16.png"
+    ]
   }
 ]

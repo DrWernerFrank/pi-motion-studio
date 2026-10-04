@@ -104,10 +104,12 @@ class Scene(StudioScene):
             for k in range(2, 6):
                 self.play(*wrap(gs[:k - 1], gs[k - 1], c, k, box), run_time=0.4)
             claim("summation(2*k - 1, (k, 1, 5)) == 5**2", about="the rebuilt square: five L's", says="s05.1")
+            # r7 (critic): the cues were CROSSED — the Σ line must land on "sum", the k-th-L line
+            # on "kth" (the narration says the k-th L first, the sum second — see script.md)
             self.wait(self.until("kth"))
-            self.play(FadeIn(l2, shift=UP * L.u * 3), run_time=0.7)   # the SUM lands on "kth"
-            claim("summation(2*k - 1, (k, 1, n)) == n**2", about="recap: the sum", says="s05.1")
-            self.wait(self.until("sum"))
-            self.play(FadeIn(l3, shift=UP * L.u * 3), run_time=0.7)  # the k-th L closes
+            self.play(FadeIn(l3, shift=UP * L.u * 3), run_time=0.7)   # the k-th L line on "kth"
             claim("k**2 - (k - 1)**2 == 2*k - 1", about="recap: the k-th L", says="s05.1")
+            self.wait(self.until("sum"))
+            self.play(FadeIn(l2, shift=UP * L.u * 3), run_time=0.7)   # the SUM on "sum"
+            claim("summation(2*k - 1, (k, 1, n)) == n**2", about="recap: the sum", says="s05.1")
         hold(self, 1.6)

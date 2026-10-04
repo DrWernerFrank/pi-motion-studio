@@ -95,9 +95,10 @@ class Scene(StudioScene):
                 # row whose INDEX matches the pair (pairs are (rows[0], rows[1]) then (rows[1], rows[2]))
                 # r6b: row.set_opacity RE-ARMS part-hidden glyphs (the 50.4-50.7s flash) —
                 # dim the row then re-hide ITS vanished half (p3 on row0/1: the +k^2 that left)
-                for idx in pair_index:
-                    rows[idx].set_opacity(0.45)
-                    rows[idx].part("p3").set_opacity(0.0)
+                # r7: each row re-hides ITS OWN vanished half — row0's p3 (its 1^2),
+                # row1's p4 (its -1^2, from pair 1's b-side). NEVER row1's p3 (its live 2^2).
+                rows[0].set_opacity(0.45); rows[0].part("p3").set_opacity(0.0)
+                rows[1].set_opacity(0.45); rows[1].part("p4").set_opacity(0.0)
             rows[2].set_opacity(0.45)   # its 3^2 half is about to leave
             rows[2].part("p4").set_opacity(0.0) if hasattr(rows[2], "part") else None
             vanish([rows[2].part("p3")], dots.get_center(), run_time=0.7)   # +3^2 into the dots …
