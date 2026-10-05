@@ -52,7 +52,11 @@ def odd_eq(m):
 def odd_eqs(ebox, upto):
     """e_1..e_upto at ONE shared scale (fit for e_5), left-aligned: the line grows to the right."""
     widest = odd_eq(5)
-    s = min(1.0, ebox.w * 0.9 / widest.width)
+    # r14 (critic, 5 cycles stale): unified with s02's height-scale (the seam resized ~9%
+    # because the scenes' scales diverged — s02's r8 height-scale vs this old width-cap)
+    s = ebox.h * 0.8 / widest.height
+    if widest.width * s > ebox.w * 0.98:
+        s = ebox.w * 0.98 / widest.width
     x0 = ebox.cx - widest.width * s / 2
     out = []
     for m in range(1, upto + 1):
