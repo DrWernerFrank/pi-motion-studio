@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T13:12:13.778Z",
+  "at": "2026-10-05T13:53:32.891Z",
   "pass": true,
   "checks": [
     {
@@ -58,22 +58,22 @@
     },
     {
       "name": "deterministic",
-      "pass": true,
-      "level": "pass",
-      "detail": "12 layout record hash(es) identical to the last gates.json run",
+      "pass": false,
+      "level": "warn",
+      "detail": "12 record file(s) changed since the last gates run (16:9/s01_hook-layout.json, 16:9/s02_formula-layout.json, 16:9/s03_sign-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
-        "16:9/s01_hook-layout.json": "80d7b35d24ba",
-        "16:9/s02_formula-layout.json": "0c2abe25ea0d",
-        "16:9/s03_sign-layout.json": "ab286df9ae4e",
-        "16:9/s04_zero-layout.json": "7840b6e6a364",
-        "16:9/s05_3x3-layout.json": "ddd8ef2977f7",
-        "16:9/s06_recap-layout.json": "bae55c538ce1",
-        "9:16/s01_hook-layout.json": "8c96d3cd1d4f",
-        "9:16/s02_formula-layout.json": "51a78fdb9b75",
-        "9:16/s03_sign-layout.json": "c8a411f0f92f",
-        "9:16/s04_zero-layout.json": "7144f967ce86",
-        "9:16/s05_3x3-layout.json": "7fa3a74f3836",
-        "9:16/s06_recap-layout.json": "06218807c847"
+        "16:9/s01_hook-layout.json": "ea454e5366af",
+        "16:9/s02_formula-layout.json": "86bd0aa83296",
+        "16:9/s03_sign-layout.json": "336aad5ebce1",
+        "16:9/s04_zero-layout.json": "08cd9afe0fb7",
+        "16:9/s05_3x3-layout.json": "8b92e7060b6d",
+        "16:9/s06_recap-layout.json": "575046fee1ec",
+        "9:16/s01_hook-layout.json": "5a26bc267172",
+        "9:16/s02_formula-layout.json": "c2d109bf261d",
+        "9:16/s03_sign-layout.json": "8f5fb37ff1b9",
+        "9:16/s04_zero-layout.json": "07edd55098e0",
+        "9:16/s05_3x3-layout.json": "802839bf05c2",
+        "9:16/s06_recap-layout.json": "cffc7b3e47a1"
       }
     }
   ]

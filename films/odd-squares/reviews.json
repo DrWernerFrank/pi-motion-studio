@@ -917,5 +917,42 @@
       "films/odd-squares/out/sheets/phone-16x9.png",
       "films/odd-squares/out/sheets/phone-9x16.png"
     ]
+  },
+  {
+    "round": 22,
+    "at": "2026-10-05T13:40:00.381Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "brand": 8,
+      "clarity": 9,
+      "composition": 8,
+      "correctness": 10,
+      "hook": 8,
+      "motion": 8,
+      "readability": 8,
+      "sound": 8,
+      "variety": 8
+    },
+    "min": 8,
+    "pass": true,
+    "problems": [
+      {
+        "fix": "Fold the measured arithmetic into brief.md's declared-permanents section (one line: the s04 block is width-bound at ~80% frame width; the leftover height is the cost) — the same documentation act that closed the Sigma-limit and seam holds, so the ledger stops carrying the s04 dead band as an undeclared face.",
+        "issue": "The s04 width-bind (composition's one undeclared inherent): the 9:16 algebraic close leaves a 44-55% top-empty dead band through 46-56s — MEASURED inherent this round (the block is frame-centered at y44.6-75.9%, not panel-confined, and its widest line — row n at 80.7% of frame width, the settled sum at 79.3% — caps the fit at the stage width; the growth route is dead by arithmetic), but brief.md's declarations name only the Sigma-limit and the seam trade, not this one.",
+        "t": 47
+      },
+      {
+        "fix": "A future portrait pass could raise the box another unit (the cap bought the current 3px) and/or add one unit of inter-line buff — polish, not a bar.",
+        "issue": "The stack geometry residuals, both unchanged and thin: the UI-band clearance is 3px@540 (2px@360 — delivered but with no margin; the cap's shorter line did most of the work, the raised box mostly the ~2% fit shrink), and the three-line gaps hold at 20px@540 = 13px@360 ('reads as touching' — the r16-r19 note stands).",
+        "t": 63.5
+      },
+      {
+        "fix": "Correct the two comments (or accept the edge state in the declarations with the true number) — the screen state is fine; the ledger's numbers should match the pixels.",
+        "issue": "Two code comments state optimistic numbers vs the delivered pixels: s05_recap's 'ascenders ~1.4x the parens' measures 1.32x, and '(n ~8.6px@360 after the fit)' measures 7-8px@360 true-render — the 9:16 Sigma n-limit sits at the floor's edge exactly as at r21 (accepted then, unchanged now), but the comment overstates it by ~15%.",
+        "t": 70
+      }
+    ],
+    "notes": "round 22 by math-critic — the DELTA round: the finale stack (composition's live routes, the film's one held key) re-verified on the fresh drafts with my own pixels. METHOD: git-diffed the round (b6e3438..HEAD touches odd-squares' s05_recap.py ONLY — every other scene, the bed and the mix are the r21-verified state, confirmed frame-level: extracted 30fps frames from both drafts, max|diff|=0.0 on the turn/payoff/label frames outside s05, the s05 frames differ as designed); math_check 5/5 scenes clean; INDEPENDENT re-evaluation 48/48 claims TRUE in fresh sympy from their text alone; hand re-derivation stands (r21's oracle: the ladder, 2k-1 both forms, the rows, the telescoping, Sum(2k-1)=n^2 for n=1..200, n=100->10000 — no mathematical error in twenty-two rounds). THE FINALE STACK, ALL FIVE NAMED ROUTES MEASURED LANDED (t=63.5, both formats, threshold-stable): (1) THE LEAD FINISHED — 9:16 hero ascenders 37px@540 vs the capped k-line's parens 28px = 1.32x per-glyph (the >=1.15x prescription MET with margin; x-height 26 vs digits 19 = 1.37x; the code comment's '~1.4x' is optimistic — 1.32x measured, still comfortably above). (2) THE K-LINE CAPPED — 0.82 nets 266px = 49.3% of frame width vs the hero L2's 294px = 54.5%: the k-line is NO LONGER the widest line (was 330px = 61% vs the hero's 52%), and its 2 holds the floor at 13px@540 = 9-10px@360 on a true-360 LANCZOS render (the 8px floor cleared; the r20 '0.88 dose' that never landed is now superseded by the cap that did — the same named goal achieved). (3) ONE SHARED LEFT EDGE — 9:16: hero L1/L2, Sigma, k-line ALL at x123 (spread 0px, was 129/147/105 staggered 42px); 16:9: ALL at x421 (spread 0px, was 431/474/421 spread 54px) — the r16 finding was BOTH formats and the fix delivers both: the stack reads as one unit, not three cards. (4) OFF THE UI BAND — the k-line's bottom ink at y843/960 = 87.8%, now OUTSIDE the bottom-12% band (starts 88.0%), clearing it by ~3px@540 = 2px@360 (was 88.5%, inside by 0.5%): the FIT route (the raised _Box) is the one taken as prescribed ('change the FIT, not the dose'), with the cap contributing most of the bottom's rise (the line itself 8px shorter) and the raised box showing as the ~2% fit shrink — delivered, honestly THIN. (5) THE SIGMA BOUND — held at 1.0 with its limits keeping theirs: k=1 at 17px@540 = 11-12px@360 (floor cleared); the Sigma-with-limits block 87px vs the hero two-line span 95px = the hero clears 1.09x (16:9: 113 vs 130 = 1.15x) — the block<=span prescription now holds with margin in both formats. THE FLOORS UNDER THE NEW FIT, all measured: the 9:16 k-line 2 9-10px@360, k=1 11-12, the 16:9 k-line 2 9px@360, the 16:9 Sigma n-limit EXACTLY 6px@360 = the declared desktop-first permanent to the pixel; the 9:16 Sigma n-limit holds its r21 edge state (7-8px@360 true-render — unchanged by construction, the Sigma held at 1.0; the code comment's '~8.6px@360' is ~15% optimistic, noted, not a regression). THE UNTOUCHED ROUTES, re-verified byte-identical: the bed (verified by construction at r21 — the mix/bed files are the same bytes), the payoff (the line settles 55.4 and holds, ink 5613-5670 through the hold), the turn (72,337/70,582 ink at 20.30/20.50 — identical to the pixel), the label sync (the s03.2 frames byte-identical). ADJUDICATION OF THE HELD KEY: composition was held at r21 by (i) the 9:16 under-fill — a DECLARED permanent (the seam-unification trade; the evidence stands: the s02/s03 helpers byte-matched, untouched this round) that does not bar; (ii) the finale stack's live routes — ALL NOW LANDED AND MEASURED, every one of the r16-r19 prescriptions verified on the delivered screen; (iii) the s04 mid-film dead band — NOW MEASURED BY ME as the width-bind's inherent cost: the s04 block is frame-CENTERED (y44.6-75.9%, not panel-confined) and its widest line (row n: 80.7% of frame width; the settled sum 79.3%) caps the fit at the stage width — the leftover height is arithmetic, the same measured-inherent family as the Sigma-limit bind, and the growth route is measured dead by these numbers; but brief.md does NOT yet name it (my r21 fix-list offered exactly that fold-in — the one open documentation item, carried as the CONDITION on this 8, not a bar: no live screen route remains). THE RESIDUALS, honestly: the stack gaps still 20px@540 = 13px@360 (touching-ish, unchanged); the Sigma glyph remains the tallest single mark (48px vs the hero ascender 37 = 1.30x, was 1.35x — inherent to display-Sigma, the block-level prescription met); the UI-band clearance is 3px, thin; the hero lowercase vs the sentence-case chapter titles (brand nit). VERDICT vs the 8+ bar: PASS — hook 8, readability 8, motion 8, variety 8, composition 8 (earned: every live route landed and pixel-verified, the permanents declared and accepted, one documentation condition carried), brand 8, sound 8, clarity 9, correctness 10 (48/48 independent across the round, hand+oracle re-verified, no error in twenty-two rounds). The film's first pass at the bar in twenty-two rounds, on the round its last live routes closed: the payoff frame now pays its headline as the biggest text mass in a left-aligned unit with a finished hierarchy, out of the phone UI band, in both cuts — the proof reads, the staging agrees with its narration word-for-word, the close pays its concrete number, and the math has been error-free every round. The conditions carried forward: fold the s04 width-bind arithmetic into brief.md's declared permanents, correct the two optimistic code comments (the ~1.4x lead is 1.32x; the n-limit ~8.6px@360 is 7-8px@360) — documentation acts, not screen acts.",
+    "sheets": []
   }
 ]

@@ -19,4 +19,7 @@ floor binds on the 9:16 cut, which holds it at 8.8-12 px). The 9:16 CENTERED SQU
 seam-unification trade: the gnomon grids share one byte-matched scale across scenes (the seam's
 hardest-won property — divergent scales teleport the handoff, measured twice); a full-frame variant
 needs a different square unit per scene, which is that exact break. The bottom-third breathing room
-around the centered square is the composition that trade buys.
+around the centered square is the composition that trade buys. The s04 PROOF-ROWS BAND is
+measured inherent (r22, the critic's own arithmetic: the block is frame-centered, not panel-
+confined, its widest line spends 80.7% of frame width and caps the fit — the growth route is dead
+by arithmetic; the s04 dead band is the 36/64 stage split's price, declared with it).

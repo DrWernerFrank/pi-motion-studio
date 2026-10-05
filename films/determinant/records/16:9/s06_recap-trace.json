@@ -1,7 +1,7 @@
 [
  {
   "kind": "animation",
-  "t": 2.417,
+  "t": 2.433,
   "i": 1,
   "scene": "s06_recap",
   "sentence": "s06.1",
@@ -22,7 +22,7 @@
   "scene": "s06_recap",
   "sentence": "s06.1",
   "animation": "wait",
-  "seconds": 2.366
+  "seconds": 2.349
  },
  {
   "t": 4.767,

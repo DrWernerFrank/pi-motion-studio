@@ -33,7 +33,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.033,
+  "t": 5.167,
   "i": 5,
   "scene": "s03_recap",
   "sentence": "s03.1",
@@ -41,22 +41,22 @@
  },
  {
   "kind": "animation",
-  "t": 5.033,
+  "t": 5.167,
   "i": 6,
   "scene": "s03_recap",
   "sentence": "s03.1",
   "animation": "wait",
-  "seconds": 1.939
+  "seconds": 2.089
  },
  {
-  "t": 0.7,
+  "t": 5.167,
   "kind": "sentence_end",
   "scene": "s03_recap",
   "sentence": "s03.1"
  },
  {
   "kind": "animation",
-  "t": 6.233,
+  "t": 6.367,
   "i": 7,
   "scene": "s03_recap",
   "sentence": null,
@@ -64,11 +64,16 @@
  },
  {
   "kind": "animation",
-  "t": 6.233,
+  "t": 6.367,
   "i": 8,
   "scene": "s03_recap",
   "sentence": null,
   "animation": "wait",
   "seconds": 1.2
+ },
+ {
+  "kind": "scene_end",
+  "t": 6.367,
+  "scene": "s03_recap"
  }
 ]

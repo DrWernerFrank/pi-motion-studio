@@ -106,10 +106,10 @@ class Scene(StudioScene):
         # what reads at phone width — the critic's own prescription).
         if L.portrait:
             # r21 (critic — the finale stack, composition's live routes): the LEAD finished — hero
-            # 1.30 puts its ascenders ~1.4x the k-line's parens (the >=1.15x prescription); the
+            # 1.30 puts its ascenders 1.32x the k-line's parens (the >=1.15x prescription, r22-measured); the
             # k-line CAPPED at 0.82 (r19's "cap the parens" route): its 2s hold ~8.9px@360 (above
             # the 8px floor) and it stops being the widest line; the Σ holds 1.0 so its limits
-            # keep theirs (n ~8.6px@360 after the fit) and its block stays under the hero span
+            # keep theirs (n 7-8px@360 after the fit) and its block stays under the hero span
             hero = hero.scale(1.30)
             _sum.scale(1.0); _kln.scale(0.82)
         else:

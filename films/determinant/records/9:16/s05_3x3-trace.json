@@ -32,7 +32,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.683,
+  "t": 5.667,
   "i": 4,
   "scene": "s05_3x3",
   "sentence": "s05.1",
@@ -40,7 +40,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.683,
+  "t": 5.667,
   "i": 5,
   "scene": "s05_3x3",
   "sentence": "s05.1",
@@ -48,7 +48,7 @@
   "seconds": 1.789
  },
  {
-  "t": 5.683,
+  "t": 5.667,
   "kind": "sentence_end",
   "scene": "s05_3x3",
   "sentence": "s05.1"
@@ -68,7 +68,7 @@
   "scene": "s05_3x3",
   "sentence": null,
   "animation": "wait",
-  "seconds": 0.156
+  "seconds": 0.172
  },
  {
   "kind": "bookmark",

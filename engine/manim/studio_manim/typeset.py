@@ -128,6 +128,16 @@ def _compose(tex: str) -> tuple[str, dict[str, str]]:
 
     Plain segments and label CONTENTS convert individually (cached); the label itself is emitted
     as ``{{ converted_content : name }}`` so Manim's ``.select(name)`` picks exactly that part.
+
+    The label content is wrapped in a ``[$…$]`` math content block: Manim's ``{{ }}`` shorthand
+    becomes ``manimgrp("name", body)`` and typst parses a function ARGUMENT in code context —
+    a leading bare letter there (the tangent hero's coefficient ``n`` in ``{{n x^{n-1}}}``, the
+    r22-r23 critics' ground-truthed upright-roman finding: stem-shear +0.04 = the digit class,
+    while the same string in raw math renders the italic n) falls back to upright text until the
+    first math-only token. Inside ``[$…$]`` the content is a math block: every glyph takes the
+    math italic/roman rules exactly as the unwrapped equation does (verified glyph-id-for-
+    glyph-id: the coefficient n, the x, the exponent all match the raw-math ids). Digits and
+    ``upright()``/string content are unchanged by the wrap (their ids already matched).
     """
     out: list[str] = []
     labels: dict[str, str] = {}
@@ -139,7 +149,7 @@ def _compose(tex: str) -> tuple[str, dict[str, str]]:
             out.append(f" {conv} " if conv.strip() else conv)
         else:
             labels[name] = content
-            out.append(f" {{{{ {_to_typst(content)} : {name} }}}} ")
+            out.append(f" {{{{ #[${_to_typst(content)}$] : {name} }}}} ")
     return "".join(out), labels
 
 

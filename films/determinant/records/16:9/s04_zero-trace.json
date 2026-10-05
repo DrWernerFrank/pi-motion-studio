@@ -32,7 +32,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.917,
+  "t": 5.933,
   "i": 4,
   "scene": "s04_zero",
   "sentence": "s04.1",
@@ -53,7 +53,7 @@
   "scene": "s04_zero",
   "sentence": "s04.1",
   "animation": "wait",
-  "seconds": 1.466
+  "seconds": 1.45
  },
  {
   "t": 7.367,

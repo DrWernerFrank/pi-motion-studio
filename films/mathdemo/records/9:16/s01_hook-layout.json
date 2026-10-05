@@ -87,7 +87,7 @@
     "height_u": 12.5,
     "nominal_u": null,
     "role": null,
-    "color": "#A86400",
+    "color": "#96610A",
     "z": 2,
     "alive": true,
     "text": false
@@ -168,7 +168,7 @@
   ]
  },
  {
-  "t": 6.2,
+  "t": 6.367,
   "objects": [
    {
     "kind": "NumberPlane",
@@ -241,7 +241,7 @@
   ]
  },
  {
-  "t": 6.2,
+  "t": 6.367,
   "objects": [
    {
     "kind": "NumberPlane",
@@ -314,7 +314,7 @@
   ]
  },
  {
-  "t": 6.7,
+  "t": 6.867,
   "objects": [
    {
     "kind": "NumberPlane",
@@ -387,7 +387,7 @@
   ]
  },
  {
-  "t": 6.7,
+  "t": 6.867,
   "objects": [
    {
     "kind": "NumberPlane",

@@ -1,12 +1,12 @@
 {
-  "at": "2026-10-05T11:46:33.593Z",
-  "pass": false,
+  "at": "2026-10-05T13:55:11.029Z",
+  "pass": true,
   "checks": [
     {
       "name": "layout",
-      "pass": false,
-      "level": "fail",
-      "detail": "9 FAIL violation(s): offscreen@s02_meaning t=3.4s [2:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.667s [3:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.667s [4:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.8s [5:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.8s [6:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) … (+4)"
+      "pass": true,
+      "level": "pass",
+      "detail": "0 fail-level violations over 3 scenes' records [16:9, 9:16] (studio_manim.lint)"
     },
     {
       "name": "claims",
@@ -36,13 +36,13 @@
       "name": "pace",
       "pass": true,
       "level": "pass",
-      "detail": "1 freeze run(s) >= 3s, none while the narration is silent (4 sentences of timing crossed in)"
+      "detail": "2 freeze run(s) >= 3s, none while the narration is silent (4 sentences of timing crossed in)"
     },
     {
       "name": "captions",
-      "pass": false,
-      "level": "fail",
-      "detail": "captions are ON but out/captions.srt does not exist — studio sound mathdemo writes it (exportCaptions)"
+      "pass": true,
+      "level": "pass",
+      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 4 sentence(s), 2 caption file(s) — SRT/VTT written by studio sound; the deep caption check is P7's `captions` check"
     },
     {
       "name": "loudness",
@@ -62,12 +62,12 @@
       "level": "pass",
       "detail": "6 layout record hash(es) identical to the last gates.json run",
       "hashes": {
-        "16:9/s01_hook-layout.json": "542a6e730aec",
-        "16:9/s02_meaning-layout.json": "de8c91e16cc5",
-        "16:9/s03_recap-layout.json": "14a59bf6f22a",
-        "9:16/s01_hook-layout.json": "95112a5688f9",
-        "9:16/s02_meaning-layout.json": "7e2262836da2",
-        "9:16/s03_recap-layout.json": "67587de7009f"
+        "16:9/s01_hook-layout.json": "f5714c511c08",
+        "16:9/s02_meaning-layout.json": "eac43b233897",
+        "16:9/s03_recap-layout.json": "7b5699ea355c",
+        "9:16/s01_hook-layout.json": "9d668e4d8581",
+        "9:16/s02_meaning-layout.json": "9c532f56dae6",
+        "9:16/s03_recap-layout.json": "e4ec87d9e016"
       }
     }
   ]
