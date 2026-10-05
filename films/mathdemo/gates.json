@@ -1,12 +1,12 @@
 {
-  "at": "2026-10-03T15:38:36.964Z",
-  "pass": true,
+  "at": "2026-10-05T11:46:33.593Z",
+  "pass": false,
   "checks": [
     {
       "name": "layout",
-      "pass": true,
-      "level": "pass",
-      "detail": "0 fail-level violations over 3 scenes' records/16:9 (studio_manim.lint)"
+      "pass": false,
+      "level": "fail",
+      "detail": "9 FAIL violation(s): offscreen@s02_meaning t=3.4s [2:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.667s [3:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.667s [4:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.8s [5:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) ; offscreen@s02_meaning t=4.8s [6:1] Eq outside the SAFE area by left 0.178, right 0.177 (safe x -3.440..3.440, y -5.689..4.551) … (+4)"
     },
     {
       "name": "claims",
@@ -30,7 +30,7 @@
       "name": "sync",
       "pass": true,
       "level": "pass",
-      "detail": "8 trace bookmark(s) over 6 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded — the sync check surfaces those"
+      "detail": "8 trace bookmark(s) over 6 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded ; seams continuous"
     },
     {
       "name": "pace",
@@ -40,9 +40,9 @@
     },
     {
       "name": "captions",
-      "pass": true,
-      "level": "pass",
-      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 4 sentence(s) with non-empty text — the deep caption check (layout, SRT/VTT) is P7's `captions` check"
+      "pass": false,
+      "level": "fail",
+      "detail": "captions are ON but out/captions.srt does not exist — studio sound mathdemo writes it (exportCaptions)"
     },
     {
       "name": "loudness",
