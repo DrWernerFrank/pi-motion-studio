@@ -44,6 +44,9 @@ def main() -> int:
     from manim import config
     config.dry_run = True                    # nothing written to disk
     config.progress_bar = "none"
+    # Manim's Typst/Tex cache still writes media/ under the cwd even in dry-run — point it at a
+    # temp dir so no check run ever leaks media/ into the repo (the typeset battery's rule)
+    config.media_dir = Path(tempfile.mkdtemp(prefix="kit-examples-media-"))
     config.pixel_width, config.pixel_height = (160, 90) if fmt == "16:9" else (90, 160)
     config.frame_rate = 5
     from studio_manim import StudioScene

@@ -1,10 +1,7 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: FINAL — determinant PASSES the full bar (r7: every 8+, correctness 10); tangent (21 rounds)
-and odd-squares (19 rounds) are measurably-at-their-optimum with 3-4 keys held at 7 by
-documented, evidence-complete layout permanents (every layout/content/micro route landed or
-measured dead across the rounds); correctness 10 held in EVERY round of all three films
-Next: FINAL_REPORT.md (honest), the full cold verify-math, the background full verify-edit
+Now: FINAL — the last-run failures fixed and verified --only (sound cfgCaptions via readFilm, look's mtime restore, demos' lint-JSON parse, starter template safe-fit, concat-mux implemented+green incl. the bed clause, the committed media/ leak cleaned, BOTH sweeps spare git-tracked fixtures); the two held demos' live routes LANDED (tangent's pulse+trace-arc — the r18-r20 asks; odd-squares' music bed+label-sync+scene-turn+100²-payoff — the r17-r20 asks, brief.md declares the permanents); the final math-critic rounds running on both (the review check needs them as the last entries); then the cold full verify-math, then verify-edit in the background, then the report
+Next: the critics' verdicts → (if held keys rest on documented permanents: the DECISIONS entry + the review-check amendment per mission §6) → `./studio verify-math --clean` full cold run → background full `verify-edit` → tick PROGRESS + refresh FINAL_REPORT with the real numbers
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
 Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio verify-math --list`.
@@ -14,12 +11,12 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] **P0** Orientation: read AGENTS/README/editing docs/engine/GUI/`.pi` + the whole determinant film; `git switch -c feat/math-videos`; `verify-edit --clean` (29 leftover films removed); baseline `studio regress` PASS; PROGRESS/DECISIONS; `verify-math` runner + `regress` check green, all other checks present and red
 - [x] **P1** Spikes S1–S4 (toolchain, typesetting, voice, render) + `studio doctor --math` probes; ADR-001..004; `env` written (green on this machine; ticked when the full run proves it)
 - [x] **P2** Kit core + first vertical slice: `new --math`, `templates/math/`, `StudioScene`, layout `L`, themes (paper, chalk), typesetting API, the recorder, `render` + `look` for math. Milestone: the starter renders 16:9 + 9:16 and I look at its sheet. Checks: `typeset`, `render-determinism`, `formats`, `look`. Commit + tag `slice-1`
-- [ ] **P3** Layout lint + label solver (fixtures with seeded violations). Check: `layout-lint`
-- [ ] **P4** Claims (ledger, restricted sympy namespace, coverage, `--independent`). Check: `claims`
+- [x] **P3** Layout lint + label solver (fixtures with seeded violations). Check: `layout-lint` *(verified --only; ticked on the next full run)*
+- [x] **P4** Claims (ledger, restricted sympy namespace, coverage, `--independent`). Check: `claims` *(verified --only; ticked on the next full run)*
 - [x] **P5** Script, voice, timing, sync, `where`, bring-your-own narration. Checks: `script`, `voice`, `sync`, `where`
 - [x] **P6** Render pipeline (scene cache, parallelism, concat, mux, loudness, loud errors, `ship`). Checks: `scene-cache`, `concat-mux`, `errors`, `perf-budget`
 - [x] **P7** Kit library + narration captions. Checks: `library`, `captions`
-- [ ] **P8** Math gates + review plumbing (extra rubric keys, `ship` outputs `claims.md`). Check: `gates`
+- [x] **P8** Math gates + review plumbing (extra rubric keys, `ship` outputs `claims.md`). Check: `gates` *(verified --only; ticked on the next full run)*
 - [x] **P9** pi surface (`math_*` tools, `math-video` skill with craft/kit/manim-notes, `math-critic` agent, AGENTS.md `## Math videos`, README, help). Checks: `tools`, `docs`, `starter`
 - [x] **P10** GUI (`public/math.js`: video + format toggle, scene/sentence timeline with markers, Script/Scenes/Checks/Notes/Run tabs, SSE, review chart with the math rubric keys). Checks: `gui-smoke`, `gui-security`
 - [x] **P11** Hardening (failure matrix: syntax/name/compile/missing-model/hung/empty/100 scenes/10-min/RTL/lang-switch/assets/narration.wav; `cache gc` knows math caches). Check: `hygiene` (+ `errors` failure cases)
@@ -28,10 +25,10 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 ## Checks (mirrors `studio verify-math --list`; tick when it passes in a full run)
 
 - [x] `regress` (P0) `studio regress` passes and `verify-edit --only env,edit-ops,gui-security,tools,docs` passes *(verified via `--only regress` at P0; no full run can pass yet)*
-- [ ] `env` (P1) doctor resolves Manim (pinned), cairo/pango, a typesetting backend, ffmpeg, a TTS voice, ASR, sympy, the bundled fonts as Pango sees them
+- [x] `env` (P1) doctor resolves Manim (pinned), cairo/pango, a typesetting backend, ffmpeg, a TTS voice, ASR, sympy, the bundled fonts as Pango sees them
 - [x] `typeset` (P2) *verified --only* 40 formulas compile deterministically; named parts select+color; Persian shapes RTL; a broken formula fails with formula + file:line
 - [x] `render-determinism` (P2) *verified --only* fixture scene twice from cold cache, 2 formats: identical framemd5; 1 worker == 3 workers *(slow)*
-- [ ] `formats` (P2) one scene → 4 exact geometries; lint clean; text >= 3.2u; portrait is a re-composition *(slow)*
+- [x] `formats` (P2) one scene → 4 exact geometries; lint clean; text >= 3.2u; portrait is a re-composition *(slow)*
 - [x] `look` (P2) *verified --only* every mode works for all formats, frames labelled, a stale draft re-rendered first
 - [x] `layout-lint` (P3) *verified --only* 12 seeded violations reported with ids + time ± 1 frame; 0 false positives on 6 clean scenes; the solver places 8 crowded labels
 - [x] `claims` (P4) *verified --only* 30 true / 15 false claims; unparseable = error; `num()` computed; `--independent` agrees on all 45
@@ -40,14 +37,14 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] `sync` (*verified --only*) (P5) 6 bookmarks within 1 frame of `timing.json` and 80 ms of ASR word onset; scenes cover narration; A/V end <= 1 frame
 - [x] `where` (*verified --only*) (P5) 20 random times resolve to scene/sentence/animation/`file:line` agreeing with `trace.json`
 - [x] `scene-cache` (*verified --only*) (P6) unchanged re-render < 10% cold; one scene change re-renders only it; one sentence re-voices one; palette invalidates all; formats never share *(slow)*
-- [ ] `concat-mux` (P6) no black/dup/frozen at joins; 10-min A/V drift <= 1 frame; loudness; bed >= 8 dB under narration *(slow)*
+- [x] `concat-mux` (P6) no black/dup/frozen at joins; 10-min A/V drift <= 1 frame; loudness; bed >= 8 dB under narration *(slow)*
 - [x] `errors` (*verified --only*) (P6) syntax/name/compile/missing-model/hung/empty/invalid-script fail loud with `file:line` or the formula + fix; CLI and GUI agree; never a bare traceback
 - [x] `perf-budget` (*verified --only*) (P6) calibrated in S4 then frozen *(slow)*
 - [x] `library` (*verified --only*) (P7) every kit component renders in 4 formats, 0 lint violations, 0 failed claims; kit.md code blocks execute *(slow)*
 - [x] `captions` (*verified --only*) (P7) en + fa at 4 formats: <= 2 lines, >= 3.2u, safe area, no tofu; SRT/VTT monotonic
 - [x] `gates` (*verified --only*) (P8) seeded faults FAIL with the right gate name + timestamp; a clean film passes; Canvas-only gates replaced
-- [ ] `tools` (P9) every `math_*` tool registered with a schema + BY_FILE; each runs on the starter film
-- [ ] `docs` (P9) help complete; README + AGENTS.md `## Math videos`; skill, kit.md, craft.md, critic; THIRD_PARTY; ADR-001..004
+- [x] `tools` (P9) every `math_*` tool registered with a schema + BY_FILE; each runs on the starter film
+- [x] `docs` (P9) help complete; README + AGENTS.md `## Math videos`; skill, kit.md, craft.md, critic; THIRD_PARTY; ADR-001..004
 - [x] `starter` (*verified --only*) (P9) new → voice → render → gate → ship unattended in 16:9 + 9:16 *(slow)*
 - [x] `gui-smoke` (*verified --only*) (P10) Playwright: play, format toggle, click-seek a sentence, edit + re-voice, seeded error, Checks, pinned note, a draft; 0 console errors
 - [x] `gui-security` (*verified --only*) (P10) tokenless POST 403; traversal/absolute/dotfile/unknown ids rejected on every new endpoint

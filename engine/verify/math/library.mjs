@@ -49,7 +49,7 @@ export default async () => {
       cwd: join(ROOT, 'engine', 'manim', 'test'), memoryMb: CAPS.check, timeoutS: 120,
       label: `lint ${fmt}`, env: { ...ENV, STUDIO_FORMAT: fmt },
     });
-    const violations = JSON.parse((lint.out || '[]').trim().split('\n').at(-1) || '[]');
+    const violations = JSON.parse((lint.out || '[]').slice(lint.out.indexOf('['), lint.out.lastIndexOf(']') + 1) || '[]');
     const fails = violations.filter((v) => v.level === 'fail');
     if (fails.length) bad.push(`${fmt}: ${fails.length} lint FAILs (${fails.slice(0, 2).map((v) => `${v.rule}@${v.t}s`).join(', ')})`);
     else facts.push(`${fmt}: ${seconds}s, lint 0 fail (${violations.length} warn)`);

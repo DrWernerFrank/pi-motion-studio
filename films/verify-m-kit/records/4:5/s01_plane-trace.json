@@ -1,0 +1,198 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.8,
+  "i": 1,
+  "scene": "s01_plane",
+  "sentence": "s01.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 1.1,
+  "i": 2,
+  "scene": "s01_plane",
+  "sentence": "s01.1",
+  "animation": "FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 1.9,
+  "i": 3,
+  "scene": "s01_plane",
+  "sentence": "s01.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 2.694,
+  "id": "applies",
+  "sentence": "s01.1",
+  "scene": "s01_plane"
+ },
+ {
+  "kind": "animation",
+  "t": 2.7,
+  "i": 4,
+  "scene": "s01_plane",
+  "sentence": "s01.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 4.6,
+  "i": 5,
+  "scene": "s01_plane",
+  "sentence": "s01.1",
+  "animation": "AnimationGroup"
+ },
+ {
+  "kind": "animation",
+  "t": 4.633,
+  "i": 6,
+  "scene": "s01_plane",
+  "sentence": "s01.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.633,
+  "i": 7,
+  "scene": "s01_plane",
+  "sentence": "s01.1",
+  "animation": "wait",
+  "seconds": 0.021
+ },
+ {
+  "t": 4.633,
+  "kind": "sentence_end",
+  "scene": "s01_plane",
+  "sentence": "s01.1"
+ },
+ {
+  "kind": "animation",
+  "t": 4.767,
+  "i": 8,
+  "scene": "s01_plane",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.767,
+  "i": 9,
+  "scene": "s01_plane",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.137
+ },
+ {
+  "kind": "bookmark",
+  "t": 5.827,
+  "id": "swap",
+  "sentence": "s01.2",
+  "scene": "s01_plane"
+ },
+ {
+  "kind": "animation",
+  "t": 5.8,
+  "i": 10,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.8,
+  "i": 11,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "wait",
+  "seconds": 1.057
+ },
+ {
+  "kind": "animation",
+  "t": 6.7,
+  "i": 12,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "FadeOut; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 8.37,
+  "id": "five",
+  "sentence": "s01.2",
+  "scene": "s01_plane"
+ },
+ {
+  "kind": "animation",
+  "t": 8.367,
+  "i": 13,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.367,
+  "i": 14,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "wait",
+  "seconds": 1.67
+ },
+ {
+  "kind": "animation",
+  "t": 8.867,
+  "i": 15,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "Indicate"
+ },
+ {
+  "kind": "animation",
+  "t": 9.0,
+  "i": 16,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.0,
+  "i": 17,
+  "scene": "s01_plane",
+  "sentence": "s01.2",
+  "animation": "wait",
+  "seconds": 0.164
+ },
+ {
+  "t": 9.0,
+  "kind": "sentence_end",
+  "scene": "s01_plane",
+  "sentence": "s01.2"
+ },
+ {
+  "kind": "animation",
+  "t": 9.033,
+  "i": 18,
+  "scene": "s01_plane",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.033,
+  "i": 19,
+  "scene": "s01_plane",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.05
+ },
+ {
+  "kind": "scene_end",
+  "t": 9.033,
+  "scene": "s01_plane"
+ }
+]
