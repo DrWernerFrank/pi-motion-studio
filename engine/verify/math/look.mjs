@@ -124,9 +124,9 @@ export default async () => {
     if (!re.rendered || !(after > before)) bad.push(`stale: draft not re-rendered (rendered=${re.rendered}, mtime ${before} -> ${after})`);
     else facts.push(`stale draft re-rendered first (mtime +${((after - before) / 1000).toFixed(1)} s)`);
     // the future-dated touch outlives any re-render (the render does not reset source mtimes) —
-    // restore the scene's mtime to NOW so the fresh draft is genuinely fresh
-    const now = new Date();
-    utimesSync(film.scenes[1].file, now, now);
+    // restore the scene's mtime to JUST BEFORE the new draft (older than it => not stale)
+    const justBefore = new Date(after - 1000);
+    utimesSync(film.scenes[1].file, justBefore, justBefore);
     if (draftStale(readMathFilm(KEY), draft)) bad.push('stale: draft still stale after the re-render');
     facts.push(`${((Date.now() - t0) / 1000).toFixed(0)} s total`);
     return { pass: bad.length === 0, measured: bad.length ? bad.join('; ').slice(0, 900) : facts.join('; ') };

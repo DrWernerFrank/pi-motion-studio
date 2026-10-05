@@ -213,7 +213,7 @@ async function main() {
         const m = await N.buildMix(key); console.log(`${rel(m.file)}  ${m.lufs} LUFS, true peak ${m.truePeak} dBTP${m.warning ? '  (warning: ' + m.warning + ')' : ''}`);
         // captions ride the narration: the SRT/VTT are written with the mix (the critic found
         // the config said ON while no artifact existed — the gate now checks the files)
-        const caps = film.cfg.captions ?? "auto";
+        const caps = readFilm(key).cfg.captions ?? "auto";
         if (caps !== 'off') { const { exportCaptions } = await import('./math-captions.mjs');
           const c = exportCaptions(key); console.log(`${c.cues} cues → ${rel(c.srt)}, ${rel(c.vtt)}`); }
         break;

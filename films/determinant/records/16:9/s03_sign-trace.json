@@ -16,7 +16,7 @@
  },
  {
   "kind": "animation",
-  "t": 4.767,
+  "t": 4.75,
   "i": 2,
   "scene": "s03_sign",
   "sentence": "s03.1",
@@ -24,7 +24,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.367,
+  "t": 6.35,
   "i": 3,
   "scene": "s03_sign",
   "sentence": "s03.1",
@@ -32,13 +32,13 @@
  },
  {
   "kind": "overrun",
-  "t": 6.367,
+  "t": 6.35,
   "sentence": "s03.1",
-  "seconds": 0.608,
+  "seconds": 0.591,
   "scene": "s03_sign"
  },
  {
-  "t": 6.367,
+  "t": 6.35,
   "kind": "sentence_end",
   "scene": "s03_sign",
   "sentence": "s03.1"
@@ -52,7 +52,7 @@
  },
  {
   "kind": "animation",
-  "t": 8.233,
+  "t": 8.217,
   "i": 4,
   "scene": "s03_sign",
   "sentence": "s03.2",
@@ -73,7 +73,7 @@
   "scene": "s03_sign",
   "sentence": "s03.2",
   "animation": "wait",
-  "seconds": 1.506
+  "seconds": 1.522
  },
  {
   "t": 9.733,

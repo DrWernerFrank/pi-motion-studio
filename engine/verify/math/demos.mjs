@@ -21,7 +21,10 @@ const lintOf = async (pool, key, fmt) => {
     label: `lint ${key} ${fmt}`, env: { STUDIO_FORMAT: fmt, PYTHONPATH: join(ROOT, 'engine', 'manim') },
   });
   if (r.killed || r.code !== 0) return { error: (r.err || r.out).split('\n').slice(-2).join(' | ') };
-  return { list: JSON.parse(r.out.trim().split('\n').at(-1) || '[]') };
+  // lint prints pretty (indent=1) JSON, so a violations list spans lines — parse the whole
+  // array (the same robust slice math-gates.mjs's parseList uses), never just the last line
+  const s = r.out.slice(r.out.indexOf('['), r.out.lastIndexOf(']') + 1);
+  return { list: JSON.parse(s || '[]') };
 };
 
 export default async () => {

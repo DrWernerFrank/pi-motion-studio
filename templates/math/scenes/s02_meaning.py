@@ -25,7 +25,11 @@ class Scene(StudioScene):
         buff = max(0.5, L.stage.h * 0.055)
         ex.next_to(A, DOWN, buff=buff)
         note.next_to(ex, DOWN, buff=buff * 0.8)
-        stack = VGroup(A, ex, note).move_to([L.stage.cx, L.stage.cy, 0])
+        # chained, then fitted to the SAFE box (portrait margins cleared — the template ships
+        # gates-clean in every format; the starter check enforces it)
+        from studio_manim.kit import into
+        stack = VGroup(A, ex, note)
+        into(stack, L.safe, fill=0.86)
 
         with self.say("s02.1"):
             self.play(Write(head), run_time=0.9)

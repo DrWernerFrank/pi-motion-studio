@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T08:50:57.384Z",
+  "at": "2026-10-05T11:52:38.660Z",
   "pass": true,
   "checks": [
     {
@@ -54,26 +54,26 @@
       "name": "deliverable",
       "pass": true,
       "level": "pass",
-      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 50.47s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 50.47s"
+      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 50.47s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 50.47s\nfinal-16:9.mp4: 1920x1080 yuv420p bt709 SAR 1:1 faststart 50.47s\nfinal-9:16.mp4: 1080x1920 yuv420p bt709 SAR 1:1 faststart 50.47s"
     },
     {
       "name": "deterministic",
-      "pass": true,
-      "level": "pass",
-      "detail": "12 layout record hash(es) identical to the last gates.json run",
+      "pass": false,
+      "level": "warn",
+      "detail": "12 record file(s) changed since the last gates run (16:9/s01_hook-layout.json, 16:9/s02_formula-layout.json, 16:9/s03_sign-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
-        "16:9/s01_hook-layout.json": "ea454e5366af",
-        "16:9/s02_formula-layout.json": "e0cc4290a408",
-        "16:9/s03_sign-layout.json": "336aad5ebce1",
-        "16:9/s04_zero-layout.json": "08cd9afe0fb7",
-        "16:9/s05_3x3-layout.json": "8b92e7060b6d",
-        "16:9/s06_recap-layout.json": "543503776a2b",
-        "9:16/s01_hook-layout.json": "5a26bc267172",
-        "9:16/s02_formula-layout.json": "9aa288513231",
-        "9:16/s03_sign-layout.json": "8f5fb37ff1b9",
-        "9:16/s04_zero-layout.json": "07edd55098e0",
-        "9:16/s05_3x3-layout.json": "802839bf05c2",
-        "9:16/s06_recap-layout.json": "622dd1978dab"
+        "16:9/s01_hook-layout.json": "80d7b35d24ba",
+        "16:9/s02_formula-layout.json": "0c2abe25ea0d",
+        "16:9/s03_sign-layout.json": "ab286df9ae4e",
+        "16:9/s04_zero-layout.json": "7840b6e6a364",
+        "16:9/s05_3x3-layout.json": "ddd8ef2977f7",
+        "16:9/s06_recap-layout.json": "bae55c538ce1",
+        "9:16/s01_hook-layout.json": "8c96d3cd1d4f",
+        "9:16/s02_formula-layout.json": "51a78fdb9b75",
+        "9:16/s03_sign-layout.json": "c8a411f0f92f",
+        "9:16/s04_zero-layout.json": "7144f967ce86",
+        "9:16/s05_3x3-layout.json": "7fa3a74f3836",
+        "9:16/s06_recap-layout.json": "06218807c847"
       }
     }
   ]
