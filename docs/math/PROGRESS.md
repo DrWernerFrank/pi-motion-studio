@@ -59,7 +59,7 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] every box above is ticked
 - [x] the three demos reviewed by `math-critic`: every score 8+, `correctness` 10
 - [x] `docs/math/FINAL_REPORT.md` exists
-- [ ] the full `./studio verify-edit` passes from the final tree (run once, in the background, after verify-math — see DECISIONS D-002)
+- [x] the full `./studio verify-edit` passes from the final tree (run once, in the background, after verify-math — see DECISIONS D-002)
 
 ## Known problems
 

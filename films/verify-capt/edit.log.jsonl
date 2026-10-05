@@ -1,5 +1,0 @@
-{"rev":1,"at":"2026-10-05T16:26:55.501Z","who":"cli","ops":[{"op":"add","src":"speech","in":0,"out":29.9}]}
-{"rev":2,"at":"2026-10-05T16:26:55.535Z","who":"cli","ops":[{"op":"caption-style","style":"pop","from":"speech","lang":"en"}]}
-{"rev":3,"at":"2026-10-05T16:27:12.494Z","who":"cli","ops":[{"op":"caption-style","style":"plain","from":"speech"}]}
-{"rev":4,"at":"2026-10-05T16:27:38.030Z","who":"cli","ops":[{"op":"caption-style","from":null}]}
-{"rev":5,"at":"2026-10-05T16:27:58.943Z","who":"cli","ops":[{"op":"caption-style","style":"plain","from":"speech","lang":"en"}]}

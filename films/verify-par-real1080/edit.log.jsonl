@@ -1,5 +1,0 @@
-{"rev":1,"at":"2026-10-05T16:21:12.437Z","who":"cli","ops":[{"op":"add","src":"cam","in":0,"out":1,"note":"cut 0"}]}
-{"rev":2,"at":"2026-10-05T16:21:12.471Z","who":"cli","ops":[{"op":"add","src":"cam","in":2,"out":3,"note":"cut 1"}]}
-{"rev":3,"at":"2026-10-05T16:21:12.504Z","who":"cli","ops":[{"op":"add","src":"cam","in":4,"out":5,"note":"cut 2"}]}
-{"rev":4,"at":"2026-10-05T16:21:12.538Z","who":"cli","ops":[{"op":"add","src":"cam","in":6,"out":7,"note":"cut 3"}]}
-{"rev":5,"at":"2026-10-05T16:21:12.570Z","who":"cli","ops":[{"op":"add","src":"cam","in":8,"out":9,"note":"cut 4"}]}
