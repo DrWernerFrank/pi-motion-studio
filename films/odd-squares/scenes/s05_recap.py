@@ -105,7 +105,7 @@ class Scene(StudioScene):
         # the verified sign fix); 9:16 keeps them at 1.0 and grows the HERO instead (its lead is
         # what reads at phone width — the critic's own prescription).
         if L.portrait:
-            hero = hero.scale(1.14)          # the hero grows; the formulas hold their 10.7px floor
+            hero = hero.scale(1.22)  # r17b: parity (1.00x) -> lead (the hero clears the Sigma block)          # the hero grows; the formulas hold their 10.7px floor
             _sum.scale(1.0); _kln.scale(1.0)
         else:
             _sum.scale(1.16); _kln.scale(1.16)

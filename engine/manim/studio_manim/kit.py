@@ -549,6 +549,9 @@ class GraphLab(VGroup):
                          "include_ticks": True, "tick_size": L.u * 0.8},
         )
         self.axes.move_to([self.box.cx, self.box.y + plot_h / 2 + self.box.h * 0.02, 0])
+        # r19 FINAL: the portrait slot-drop was measured dead (the box's bottom band is the
+        # curve's own origin half — the readout landed ON the curve: 80 lint fails). The 0.91
+        # slot stands; the s02 superscript-tick graze (0-1px, 10s) is sub-lint, documented.
         self.readout_slot = np.array([self.box.cx, self.box.y + self.box.h * 0.91, 0])
         self.curve = self.axes.plot(self.fn, x_range=[a, b], color=math_role(role),
                                     stroke_width=_stroke("line") * 1.3)

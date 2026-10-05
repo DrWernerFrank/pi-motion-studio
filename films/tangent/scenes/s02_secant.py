@@ -58,7 +58,14 @@ def graph_box():
 def make_lab():
     """GraphLab of x² in panel 0 (left in 16:9, top in 9:16) + x tick labels BELOW the axis."""
     lab = GraphLab(graph_box(), "x**2", x_range=XR, y_range=YR)
-    ticks = VGroup(*[Txt(num(k), role="tick").next_to(lab.axes.c2p(k, 0), DOWN, buff=L.u * 1.2)
+    # r18 (critic, the content route): the ticks at 1.5x weight in INK (they read ~5px mush at
+    # 360px — the 360px floor is the ask, not the 2.6u label floor)
+    from studio_manim.typeset import _font_size
+    # r18 (critic): the tick SIZE growths (1.25/1.5) collide the work band's equations (measured
+    # both rounds); the INK DARKENING stands (the readability half that costs nothing).
+    _fs = _font_size("label")
+    ticks = VGroup(*[Txt(num(k), role="tick", color=color_for("ink"), font_size=_fs)
+                     .next_to(lab.axes.c2p(k, 0), DOWN, buff=L.u * 1.2)
                      for k in (1, 2, 3)])
     ticks._studio_parts = list(ticks)          # recorded as text (role tick), not one figure box
     return lab, ticks
@@ -85,7 +92,7 @@ def panel():
 
 def name_eq(top=True):
     """y = x² in the curve's color; centered in panel 1 (s01), then parked at its top (s02 on)."""
-    e = Eq("y = x^2", role="vector")
+    e = Eq("y = x^2")  # r18: Eq defaults to INK (the role="vector" colored it pale green)
     p = panel()
     if top:
         return e.move_to([p.cx, p.y + p.h - e.height / 2 - p.h * 0.06, 0])

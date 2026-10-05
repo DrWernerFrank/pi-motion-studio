@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T01:35:24.338Z",
+  "at": "2026-10-05T08:24:02.091Z",
   "pass": true,
   "checks": [
     {
@@ -60,18 +60,18 @@
       "name": "deterministic",
       "pass": false,
       "level": "warn",
-      "detail": "2 record file(s) changed since the last gates run (16:9/s05_rule-layout.json, 9:16/s05_rule-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "detail": "2 record file(s) changed since the last gates run (9:16/s03_limit-layout.json, 9:16/s04_slopes-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
-        "16:9/s01_hook-layout.json": "c7910395728b",
-        "16:9/s02_secant-layout.json": "08e5d8f61ed7",
-        "16:9/s03_limit-layout.json": "0d9a51704eff",
-        "16:9/s04_slopes-layout.json": "6d189ca0f21c",
+        "16:9/s01_hook-layout.json": "bbd0f936ab71",
+        "16:9/s02_secant-layout.json": "073bc2a0ef93",
+        "16:9/s03_limit-layout.json": "aced7d1a7118",
+        "16:9/s04_slopes-layout.json": "e361ce2ccea7",
         "16:9/s05_rule-layout.json": "24e797861cbe",
         "16:9/s06_recap-layout.json": "887646eba588",
-        "9:16/s01_hook-layout.json": "c42b23eb3ec4",
-        "9:16/s02_secant-layout.json": "a0b7a124c286",
-        "9:16/s03_limit-layout.json": "f4cc4df10ec3",
-        "9:16/s04_slopes-layout.json": "706feca35317",
+        "9:16/s01_hook-layout.json": "df672ad50d16",
+        "9:16/s02_secant-layout.json": "a73a8448ecea",
+        "9:16/s03_limit-layout.json": "7d93627ae421",
+        "9:16/s04_slopes-layout.json": "62b479d9c8f3",
         "9:16/s05_rule-layout.json": "b00bed93c242",
         "9:16/s06_recap-layout.json": "3537cef85a99"
       }
