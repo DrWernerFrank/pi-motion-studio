@@ -1,0 +1,20 @@
+<!doctype html><meta charset=utf-8><body style="margin:0;background:#000">
+<video id=v muted playsinline preload=auto style="display:none"></video><canvas id=c></canvas>
+<script>
+// S1 probe: seek a <video> to the middle of frame n, draw it, read the frame-index barcode back out of the canvas.
+const q = new URLSearchParams(location.search), v = document.getElementById('v'), c = document.getElementById('c'), ctx = c.getContext('2d', { willReadFrequently: true });
+const BITS = 16, CELL = 40;
+const once = (el, ev, ms = 5000) => new Promise((ok, bad) => { const to = setTimeout(() => bad(new Error('timeout waiting for ' + ev)), ms); el.addEventListener(ev, (e) => { clearTimeout(to); ok(e); }, { once: true }); el.addEventListener('error', () => { clearTimeout(to); bad(new Error('video error ' + (v.error && v.error.message))); }, { once: true }); });
+window.__open = async (src) => { v.src = src; await once(v, 'loadeddata'); c.width = v.videoWidth; c.height = v.videoHeight; return { w: v.videoWidth, h: v.videoHeight, d: v.duration }; };
+const draw = () => ctx.drawImage(v, 0, 0);
+const barcode = () => { let n = 0; for (let i = 0; i < BITS; i++) { const d = ctx.getImageData(i * CELL + 10, CELL / 2 - 5, 20, 10).data; let s = 0; for (let k = 0; k < d.length; k += 4) s += d[k]; if (s / (d.length / 4) > 127) n |= 1 << i; } return n; };
+// mode 'seeked': draw right after the seeked event. mode 'rvfc': also wait for a presented-frame callback.
+window.__seek = async (n, fps, mode = 'seeked') => {
+  const t = (n + 0.5) / fps, p = once(v, 'seeked'); v.currentTime = t; await p;
+  if (mode === 'rvfc') await new Promise((ok) => { v.requestVideoFrameCallback(() => ok()); setTimeout(ok, 500); });
+  draw(); return barcode();
+};
+window.__png = () => c.toDataURL('image/png');
+window.__pixels = (x, y, w, h) => Array.from(ctx.getImageData(x, y, w, h).data);
+window.__ready = true;
+</script>

@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "3 * 2 - 1 * 1 == 5",
+  "about": "worked example",
+  "says": "s02.2",
+  "scene": "s02_meaning",
+  "ok": true,
+  "value": "5 == 5"
+ },
+ {
+  "expr": "Matrix([[3, 1], [1, 2]]).det() == 5",
+  "about": "the same number, computed",
+  "says": "s02.2",
+  "scene": "s02_meaning",
+  "ok": true,
+  "value": "5 == 5"
+ }
+]

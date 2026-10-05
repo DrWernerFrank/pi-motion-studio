@@ -1,0 +1,66 @@
+[
+ {
+  "expr": "expand((x + h)**2 - x**2) == 2*x*h + h**2",
+  "about": "expand the quotient",
+  "says": "s05.1",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "h**2 + 2*h*x == h**2 + 2*h*x"
+ },
+ {
+  "expr": "((x + h)**2 - x**2) / h == 2*x + h",
+  "about": "cancel the h",
+  "says": "s05.1",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "(-x**2 + (h + x)**2)/h == h + 2*x"
+ },
+ {
+  "expr": "limit(((x + h)**2 - x**2) / h, h, 0) == 2*x",
+  "about": "let h go to zero",
+  "says": "s05.1",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "2*x == 2*x"
+ },
+ {
+  "expr": "diff(x**2, x) == 2*x",
+  "about": "the derivative of x squared",
+  "says": "s05.1",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "2*x == 2*x"
+ },
+ {
+  "expr": "diff(x**3, x) == 3*x**2",
+  "about": "x cubed: three x squared",
+  "says": "s05.2",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "3*x**2 == 3*x**2"
+ },
+ {
+  "expr": "limit(((x + h)**3 - x**3) / h, h, 0) == 3*x**2",
+  "about": "the same steps for cubes",
+  "says": "s05.2",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "3*x**2 == 3*x**2"
+ },
+ {
+  "expr": "diff(x**n, x) == n*x**(n - 1)",
+  "about": "bring the power down, lower it by one",
+  "says": "s05.3",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "n*x**n/x == n*x**(n - 1)"
+ },
+ {
+  "expr": "(n*x**(n - 1)).subs(n, 3) == diff(x**3, x)",
+  "about": "the rule at n = 3",
+  "says": "s05.3",
+  "scene": "s05_rule",
+  "ok": true,
+  "value": "3*x**2 == 3*x**2"
+ }
+]

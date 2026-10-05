@@ -1,0 +1,10 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.2,
+  "i": 1,
+  "scene": "x",
+  "sentence": null,
+  "animation": "_AnimationBuilder"
+ }
+]

@@ -1,0 +1,106 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 1,
+  "scene": "s03_sign",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 22.346,
+  "id": "minus",
+  "sentence": "s03.1",
+  "scene": "s03_sign"
+ },
+ {
+  "kind": "animation",
+  "t": 4.75,
+  "i": 2,
+  "scene": "s03_sign",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 6.35,
+  "i": 3,
+  "scene": "s03_sign",
+  "sentence": "s03.1",
+  "animation": "AnimationGroup"
+ },
+ {
+  "kind": "overrun",
+  "t": 6.35,
+  "sentence": "s03.1",
+  "seconds": 0.591,
+  "scene": "s03_sign"
+ },
+ {
+  "t": 6.35,
+  "kind": "sentence_end",
+  "scene": "s03_sign",
+  "sentence": "s03.1"
+ },
+ {
+  "kind": "bookmark",
+  "t": 25.816,
+  "id": "flipped",
+  "sentence": "s03.2",
+  "scene": "s03_sign"
+ },
+ {
+  "kind": "animation",
+  "t": 8.217,
+  "i": 4,
+  "scene": "s03_sign",
+  "sentence": "s03.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 9.733,
+  "i": 5,
+  "scene": "s03_sign",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.733,
+  "i": 6,
+  "scene": "s03_sign",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 1.522
+ },
+ {
+  "t": 9.733,
+  "kind": "sentence_end",
+  "scene": "s03_sign",
+  "sentence": "s03.2"
+ },
+ {
+  "kind": "animation",
+  "t": 10.133,
+  "i": 7,
+  "scene": "s03_sign",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.133,
+  "i": 8,
+  "scene": "s03_sign",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.4
+ },
+ {
+  "kind": "scene_end",
+  "t": 10.133,
+  "scene": "s03_sign"
+ }
+]

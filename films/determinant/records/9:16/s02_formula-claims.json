@@ -1,0 +1,26 @@
+[
+ {
+  "expr": "Matrix([[a, b], [c, d]]).det() == a * d - b * c",
+  "about": "the general formula, symbolic",
+  "says": "s02.1",
+  "scene": "s02_formula",
+  "ok": true,
+  "value": "a*d - b*c == a*d - b*c"
+ },
+ {
+  "expr": "3 * 2 - 1 * 1 == 5",
+  "about": "the worked example",
+  "says": "s02.2",
+  "scene": "s02_formula",
+  "ok": true,
+  "value": "5 == 5"
+ },
+ {
+  "expr": "Matrix([[3, 1], [1, 2]]).det() == 5",
+  "about": "the same number, computed",
+  "says": "s02.2",
+  "scene": "s02_formula",
+  "ok": true,
+  "value": "5 == 5"
+ }
+]

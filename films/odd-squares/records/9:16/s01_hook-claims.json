@@ -1,0 +1,26 @@
+[
+ {
+  "expr": "1 == 1**2",
+  "about": "one cell is a 1 by 1 square",
+  "says": "s01.1",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "1 == 1"
+ },
+ {
+  "expr": "1 + 3 == 2**2",
+  "about": "one plus three is the 2 by 2 square",
+  "says": "s01.1",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "4 == 4"
+ },
+ {
+  "expr": "3 == 2*2 - 1",
+  "about": "the L around one cell has 3 cells (counted on the gnomon)",
+  "says": "s01.1",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "3 == 3"
+ }
+]

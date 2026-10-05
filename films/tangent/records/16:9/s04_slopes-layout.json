@@ -1,0 +1,3521 @@
+[
+ {
+  "t": 0.9,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "1:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "1:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "1:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "1:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "1:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "1:5",
+    "bbox": [
+     -5.076,
+     -2.732,
+     4.858,
+     1.92
+    ],
+    "height_u": 24.0,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "1:6",
+    "bbox": [
+     -4.248,
+     -2.448,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "1:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "1:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.023,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "1:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "1:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 2.117,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "2:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "2:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "2:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "2:5",
+    "bbox": [
+     -4.176,
+     -2.732,
+     3.958,
+     3.129
+    ],
+    "height_u": 39.11,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "2:6",
+    "bbox": [
+     -2.449,
+     -1.381,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "2:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "2:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.049,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "2:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 2.717,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "3:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "3:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "3:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "3:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "3:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "3:5",
+    "bbox": [
+     -4.176,
+     -2.732,
+     3.958,
+     3.129
+    ],
+    "height_u": 39.11,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "3:6",
+    "bbox": [
+     -2.449,
+     -1.381,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "3:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "3:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.049,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "3:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.2,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "4:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "4:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "4:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "4:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "4:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "4:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "4:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "4:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "4:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "4:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.8,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "5:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "5:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "5:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "5:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "5:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "5:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "5:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "5:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "5:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "5:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:12",
+    "bbox": [
+     0.313,
+     -2.009,
+     5.622,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.5,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "6:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "6:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "6:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "6:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "6:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "6:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "6:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "6:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "6:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "6:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:12",
+    "bbox": [
+     0.313,
+     -2.009,
+     5.622,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.5,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "7:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "7:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "7:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "7:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "7:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "7:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "7:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "7:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "7:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "7:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:12",
+    "bbox": [
+     0.313,
+     -2.009,
+     5.622,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.65,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "8:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "8:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "8:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "8:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "8:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "8:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "8:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "8:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "8:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "8:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:12",
+    "bbox": [
+     0.313,
+     -2.009,
+     5.622,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.65,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "9:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "9:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "9:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "9:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "9:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "9:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "9:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "9:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "9:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "9:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "9:12",
+    "bbox": [
+     0.313,
+     -2.009,
+     5.622,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 6.267,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "10:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "10:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "10:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "10:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "10:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "10:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "10:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "10:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "10:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "10:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "10:12",
+    "bbox": [
+     0.313,
+     -2.009,
+     5.622,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 6.267,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "11:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "11:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "11:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "11:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "11:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "11:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "11:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "11:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "11:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "11:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:10",
+    "bbox": [
+     0.313,
+     0.167,
+     5.617,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:11",
+    "bbox": [
+     0.313,
+     -0.921,
+     5.632,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 11,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "11:12",
+    "bbox": [
+     0.313,
+     -2.009,
+     5.622,
+     0.632
+    ],
+    "height_u": 7.9,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 12,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 6.767,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "12:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "12:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "12:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "12:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "12:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "12:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "12:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "12:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "12:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "12:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.567,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "13:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "13:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "13:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "13:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "13:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "13:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "13:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "13:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "13:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "13:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "13:10",
+    "bbox": [
+     1.442,
+     -0.938,
+     3.375,
+     0.666
+    ],
+    "height_u": 8.32,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.867,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "14:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "14:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "14:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "14:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "14:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "14:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "14:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "14:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "14:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "14:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "14:10",
+    "bbox": [
+     1.442,
+     -0.938,
+     3.375,
+     0.666
+    ],
+    "height_u": 8.32,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.867,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "15:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "15:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "15:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "15:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "15:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "15:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "15:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "15:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "15:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "15:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "15:10",
+    "bbox": [
+     1.442,
+     -0.938,
+     3.375,
+     0.666
+    ],
+    "height_u": 8.32,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.883,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "16:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "16:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "16:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "16:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "16:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "16:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "16:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "16:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "16:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "16:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "16:10",
+    "bbox": [
+     1.442,
+     -0.938,
+     3.375,
+     0.666
+    ],
+    "height_u": 8.32,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.883,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "17:0",
+    "bbox": [
+     -6.039,
+     -2.796,
+     5.821,
+     3.975
+    ],
+    "height_u": 49.69,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "17:1",
+    "bbox": [
+     -5.975,
+     -2.732,
+     5.757,
+     3.641
+    ],
+    "height_u": 45.51,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "17:2",
+    "bbox": [
+     -4.204,
+     -3.002,
+     0.055,
+     0.174
+    ],
+    "height_u": 2.18,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "17:3",
+    "bbox": [
+     -2.42,
+     -3.0,
+     0.085,
+     0.173
+    ],
+    "height_u": 2.16,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "17:4",
+    "bbox": [
+     -0.616,
+     -3.003,
+     0.076,
+     0.175
+    ],
+    "height_u": 2.19,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Line",
+    "id": "17:5",
+    "bbox": [
+     -3.277,
+     -2.732,
+     3.058,
+     3.627
+    ],
+    "height_u": 45.34,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Dot",
+    "id": "17:6",
+    "bbox": [
+     -0.65,
+     0.396,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "17:7",
+    "bbox": [
+     -4.681,
+     1.422,
+     1.962,
+     0.555
+    ],
+    "height_u": 6.94,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "17:8",
+    "bbox": [
+     -2.599,
+     1.484,
+     1.032,
+     0.43
+    ],
+    "height_u": 5.38,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "17:9",
+    "bbox": [
+     -6.257,
+     2.575,
+     5.294,
+     0.63
+    ],
+    "height_u": 7.87,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 9,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "17:10",
+    "bbox": [
+     1.442,
+     -0.938,
+     3.375,
+     0.666
+    ],
+    "height_u": 8.32,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 10,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "diff(x**2, x).subs(x, 1) == limit(((1 + h)**2 - 1) / h, h, 0)",
+  "about": "the derivative IS the limit of the secant slopes",
+  "says": "s06.1",
+  "scene": "s06_recap",
+  "ok": true,
+  "value": "2 == 2"
+ },
+ {
+  "expr": "diff(x**n, x) == n*x**(n - 1)",
+  "about": "the recap's rule",
+  "says": "s06.1",
+  "scene": "s06_recap",
+  "ok": true,
+  "value": "n*x**n/x == n*x**(n - 1)"
+ }
+]

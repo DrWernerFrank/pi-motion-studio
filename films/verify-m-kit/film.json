@@ -1,0 +1,34 @@
+{
+  "kind": "math",
+  "title": "kit showcase",
+  "fps": 60,
+  "formats": [
+    "16:9",
+    "9:16"
+  ],
+  "duration": 29.5,
+  "lang": "en",
+  "voice": "piper:en_US-ljspeech-medium",
+  "captions": "auto",
+  "music": {
+    "style": "minimal",
+    "bpm": 96,
+    "key": "A minor",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "gain": 0.09,
+    "duck": 12,
+    "seed": 5
+  },
+  "mix": {
+    "lufs": -16
+  },
+  "gates": {
+    "maxStill": 3,
+    "maxSentenceGap": 6
+  }
+}

@@ -1,0 +1,381 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.0,
+  "i": 1,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 1.4,
+  "i": 2,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 43.356,
+  "id": "rewrite",
+  "sentence": "s04.1",
+  "scene": "s04_sum"
+ },
+ {
+  "kind": "animation",
+  "t": 2.55,
+  "i": 3,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 2.55,
+  "i": 4,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "wait",
+  "seconds": 1.154
+ },
+ {
+  "kind": "animation",
+  "t": 2.95,
+  "i": 5,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "FadeOut; FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 3.45,
+  "i": 6,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 3.95,
+  "i": 7,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.45,
+  "i": 8,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.75,
+  "i": 9,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 5.25,
+  "i": 10,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 5.5,
+  "i": 11,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.5,
+  "i": 12,
+  "scene": "s04_sum",
+  "sentence": "s04.1",
+  "animation": "wait",
+  "seconds": 0.265
+ },
+ {
+  "t": 5.5,
+  "kind": "sentence_end",
+  "scene": "s04_sum",
+  "sentence": "s04.1"
+ },
+ {
+  "kind": "animation",
+  "t": 5.65,
+  "i": 13,
+  "scene": "s04_sum",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.65,
+  "i": 14,
+  "scene": "s04_sum",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.165
+ },
+ {
+  "kind": "bookmark",
+  "t": 46.501,
+  "id": "cancel",
+  "sentence": "s04.2",
+  "scene": "s04_sum"
+ },
+ {
+  "kind": "animation",
+  "t": 5.85,
+  "i": 15,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.85,
+  "i": 16,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "wait",
+  "seconds": 0.2
+ },
+ {
+  "kind": "animation",
+  "t": 6.3,
+  "i": 17,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "_AnimationBuilder; _AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 7.05,
+  "i": 18,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "FadeOut; FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 7.5,
+  "i": 19,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "_AnimationBuilder; _AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 8.25,
+  "i": 20,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "FadeOut; FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 8.95,
+  "i": 21,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 9.7,
+  "i": 22,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "FadeOut; FadeOut"
+ },
+ {
+  "kind": "bookmark",
+  "t": 48.754,
+  "id": "survive",
+  "sentence": "s04.2",
+  "scene": "s04_sum"
+ },
+ {
+  "kind": "animation",
+  "t": 9.9,
+  "i": 23,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.9,
+  "i": 24,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "wait",
+  "seconds": 0.2
+ },
+ {
+  "kind": "animation",
+  "t": 10.5,
+  "i": 25,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "Transform; Transform"
+ },
+ {
+  "kind": "animation",
+  "t": 10.9,
+  "i": 26,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.9,
+  "i": 27,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "wait",
+  "seconds": 0.4
+ },
+ {
+  "kind": "animation",
+  "t": 11.8,
+  "i": 28,
+  "scene": "s04_sum",
+  "sentence": "s04.2",
+  "animation": "AnimationGroup"
+ },
+ {
+  "kind": "overrun",
+  "t": 11.8,
+  "sentence": "s04.2",
+  "seconds": 0.899,
+  "scene": "s04_sum"
+ },
+ {
+  "t": 11.8,
+  "kind": "sentence_end",
+  "scene": "s04_sum",
+  "sentence": "s04.2"
+ },
+ {
+  "kind": "bookmark",
+  "t": 51.957,
+  "id": "result",
+  "sentence": "s04.3",
+  "scene": "s04_sum"
+ },
+ {
+  "kind": "animation",
+  "t": 12.0,
+  "i": 29,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 12.0,
+  "i": 30,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "wait",
+  "seconds": 0.2
+ },
+ {
+  "kind": "animation",
+  "t": 12.8,
+  "i": 31,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "bookmark",
+  "t": 55.405,
+  "id": "every",
+  "sentence": "s04.3",
+  "scene": "s04_sum"
+ },
+ {
+  "kind": "animation",
+  "t": 13.4,
+  "i": 32,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 13.4,
+  "i": 33,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "wait",
+  "seconds": 0.604
+ },
+ {
+  "kind": "animation",
+  "t": 14.6,
+  "i": 34,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 15.667,
+  "i": 35,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 15.667,
+  "i": 36,
+  "scene": "s04_sum",
+  "sentence": "s04.3",
+  "animation": "wait",
+  "seconds": 1.082
+ },
+ {
+  "t": 15.667,
+  "kind": "sentence_end",
+  "scene": "s04_sum",
+  "sentence": "s04.3"
+ },
+ {
+  "kind": "animation",
+  "t": 15.817,
+  "i": 37,
+  "scene": "s04_sum",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 15.817,
+  "i": 38,
+  "scene": "s04_sum",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.15
+ },
+ {
+  "kind": "scene_end",
+  "t": 15.817,
+  "scene": "s04_sum"
+ }
+]

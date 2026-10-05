@@ -1,0 +1,42 @@
+[
+ {
+  "expr": "(((1 + h)**2 - 1) / h).subs(h, Rational(1, 2)) == Rational(5, 2)",
+  "about": "h = 1/2: the secant slope 2.5",
+  "says": "s03.1",
+  "scene": "s03_limit",
+  "ok": true,
+  "value": "5/2 == 5/2"
+ },
+ {
+  "expr": "(((1 + h)**2 - 1) / h).subs(h, Rational(1, 10)) == Rational(21, 10)",
+  "about": "h = 1/10: the secant slope 2.1",
+  "says": "s03.1",
+  "scene": "s03_limit",
+  "ok": true,
+  "value": "21/10 == 21/10"
+ },
+ {
+  "expr": "limit(((1 + h)**2 - 1) / h, h, 0) == 2",
+  "about": "the secants' limit: slope 2",
+  "says": "s03.2",
+  "scene": "s03_limit",
+  "ok": true,
+  "value": "2 == 2"
+ },
+ {
+  "expr": "diff(x**2, x).subs(x, 1) == 2",
+  "about": "the tangent slope at x = 1 (sympy.diff)",
+  "says": "s03.2",
+  "scene": "s03_limit",
+  "ok": true,
+  "value": "2 == 2"
+ },
+ {
+  "expr": "limit(((1 + h)**2 - 1) / h, h, 0) == 2",
+  "about": "the number on screen",
+  "says": "s03.2",
+  "scene": "s03_limit",
+  "ok": true,
+  "value": "2 == 2"
+ }
+]

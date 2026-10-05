@@ -1,0 +1,214 @@
+{
+ "version": 1,
+ "scenes": [
+  {
+   "id": "s01_hook",
+   "title": "one plus three"
+  },
+  {
+   "id": "s02_pattern",
+   "title": "odd numbers make squares"
+  },
+  {
+   "id": "s03_why",
+   "title": "why the L fits"
+  },
+  {
+   "id": "s04_sum",
+   "title": "the algebraic close"
+  },
+  {
+   "id": "s05_recap",
+   "title": "the takeaway"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01.1",
+   "scene": "s01_hook",
+   "text": "One square. {wrap}Wrap three more around it, {four}and you get a square of four.",
+   "spoken": "One square. Wrap three more around it, and you get a square of four.",
+   "bookmarks": [
+    {
+     "id": "wrap",
+     "at_word": 2
+    },
+    {
+     "id": "four",
+     "at_word": 7
+    }
+   ],
+   "line": 4
+  },
+  {
+   "id": "s01.2",
+   "scene": "s01_hook",
+   "text": "Does it keep working?",
+   "spoken": "Does it keep working?",
+   "bookmarks": [],
+   "line": 5
+  },
+  {
+   "id": "s02.1",
+   "scene": "s02_pattern",
+   "text": "Wrap the next odd number, five, {nine}and the square grows to three by three.",
+   "spoken": "Wrap the next odd number, five, and the square grows to three by three.",
+   "bookmarks": [
+    {
+     "id": "nine",
+     "at_word": 6
+    }
+   ],
+   "line": 8
+  },
+  {
+   "id": "s02.2",
+   "scene": "s02_pattern",
+   "text": "Seven more: {sixteen}four by four. Nine more: {twentyfive}five by five.",
+   "spoken": "Seven more: four by four. Nine more: five by five.",
+   "bookmarks": [
+    {
+     "id": "sixteen",
+     "at_word": 2
+    },
+    {
+     "id": "twentyfive",
+     "at_word": 7
+    }
+   ],
+   "line": 9
+  },
+  {
+   "id": "s02.3",
+   "scene": "s02_pattern",
+   "text": "{each}Each odd number is exactly one more L around the square.",
+   "spoken": "Each odd number is exactly one more L around the square.",
+   "bookmarks": [
+    {
+     "id": "each",
+     "at_word": 0
+    }
+   ],
+   "line": 10
+  },
+  {
+   "id": "s03.1",
+   "scene": "s03_why",
+   "text": "Look at the fourth L. {col}It is a column of four cells {row}and a row of three: {seven}seven, the fourth odd number.",
+   "spoken": "Look at the fourth L. It is a column of four cells and a row of three: seven, the fourth odd number.",
+   "bookmarks": [
+    {
+     "id": "col",
+     "at_word": 5
+    },
+    {
+     "id": "row",
+     "at_word": 12
+    },
+    {
+     "id": "seven",
+     "at_word": 17
+    }
+   ],
+   "line": 13
+  },
+  {
+   "id": "s03.2",
+   "scene": "s03_why",
+   "text": "In general, L number k is {colk}a column of k {rowk}and a row of k minus one: {total}two k minus one cells.",
+   "spoken": "In general, L number k is a column of k and a row of k minus one: two k minus one cells.",
+   "bookmarks": [
+    {
+     "id": "colk",
+     "at_word": 6
+    },
+    {
+     "id": "rowk",
+     "at_word": 10
+    },
+    {
+     "id": "total",
+     "at_word": 17
+    }
+   ],
+   "line": 14
+  },
+  {
+   "id": "s03.3",
+   "scene": "s03_why",
+   "text": "That is exactly the step from one square to the next: {diff}k squared minus k minus one squared.",
+   "spoken": "That is exactly the step from one square to the next: k squared minus k minus one squared.",
+   "bookmarks": [
+    {
+     "id": "diff",
+     "at_word": 11
+    }
+   ],
+   "line": 15
+  },
+  {
+   "id": "s04.1",
+   "scene": "s04_sum",
+   "text": "Now add up the first n odd numbers, {rewrite}writing each one as a difference of two squares.",
+   "spoken": "Now add up the first n odd numbers, writing each one as a difference of two squares.",
+   "bookmarks": [
+    {
+     "id": "rewrite",
+     "at_word": 8
+    }
+   ],
+   "line": 18
+  },
+  {
+   "id": "s04.2",
+   "scene": "s04_sum",
+   "text": "{cancel}Each square cancels its neighbour, {survive}and only n squared minus zero survives.",
+   "spoken": "Each square cancels its neighbour, and only n squared minus zero survives.",
+   "bookmarks": [
+    {
+     "id": "cancel",
+     "at_word": 0
+    },
+    {
+     "id": "survive",
+     "at_word": 5
+    }
+   ],
+   "line": 19
+  },
+  {
+   "id": "s04.3",
+   "scene": "s04_sum",
+   "text": "{result}So the sum of the first n odd numbers is n squared, {every}for every n.",
+   "spoken": "So the sum of the first n odd numbers is n squared, for every n.",
+   "bookmarks": [
+    {
+     "id": "result",
+     "at_word": 0
+    },
+    {
+     "id": "every",
+     "at_word": 12
+    }
+   ],
+   "line": 20
+  },
+  {
+   "id": "s05.1",
+   "scene": "s05_recap",
+   "text": "Odd numbers stack into squares. {kth}L number k adds two k minus one cells, {sum}and together the first n make n squared.",
+   "spoken": "Odd numbers stack into squares. L number k adds two k minus one cells, and together the first n make n squared.",
+   "bookmarks": [
+    {
+     "id": "kth",
+     "at_word": 5
+    },
+    {
+     "id": "sum",
+     "at_word": 14
+    }
+   ],
+   "line": 23
+  }
+ ]
+}

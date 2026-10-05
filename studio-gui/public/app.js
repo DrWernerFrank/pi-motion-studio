@@ -1,11 +1,22 @@
 // Motion Studio GUI. Watches films/ over SSE; the live view calls the film's own window.seek(t).
+// The Edit tab (films with an edit.json) lives in edit.js and is mounted from here; the math view
+// (films with kind: math) lives in math.js and is mounted the same way.
+import * as EDIT from './edit.js';
+import * as MATH from './math.js';
+
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const api = (u) => fetch(u, { cache: 'no-store' }).then((r) => r.json());
-const post = (u, b) => fetch(u, { method: 'POST', headers: { 'content-type': 'application/json', 'x-studio-token': window.STUDIO_TOKEN }, body: JSON.stringify(b) }).then(async (r) => { const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j; });
+const post = (u, b) => fetch(u, { method: 'POST', headers: { 'content-type': 'application/json', 'x-studio-token': window.STUDIO_TOKEN }, body: JSON.stringify(b) }).then(async (r) => {
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(j.error || r.status); e.code = j.code; e.body = j; throw e; }  // edit.js reads .code (the 409 story)
+  return j;
+});
 const slug = (f) => f.replace(':', 'x');
 const RUBRIC = ['hook', 'readability', 'motion', 'variety', 'composition', 'brand', 'sound'];
-const COLORS = { hook: '#ff6a3d', readability: '#5ab0ff', motion: '#3ecf8e', variety: '#c77dff', composition: '#f5b841', brand: '#ff7eb6', sound: '#7ee0d0' };
+const MATH_KEYS = ['correctness', 'clarity'];   // math films carry two more (film_review takes extra keys, min()s over all)
+const rubric = (d) => (d?.math ? [...RUBRIC, ...MATH_KEYS] : RUBRIC);   // one chart, both worlds
+const COLORS = { hook: '#ff6a3d', readability: '#5ab0ff', motion: '#3ecf8e', variety: '#c77dff', composition: '#f5b841', brand: '#ff7eb6', sound: '#7ee0d0', correctness: '#f5e041', clarity: '#9ad6ff' };
 const CUE_COLORS = { impact: '#ff4d5e', thump: '#ff4d5e', drop: '#ff4d5e', whoosh: '#5ab0ff', swipe: '#5ab0ff', riser: '#c77dff', click: '#ececef', tick: '#ececef', pop: '#f5b841', type: '#8b8b94', chime: '#3ecf8e', glitch: '#ff7eb6', shutter: '#ececef' };
 
 const S = { films: [], key: null, d: null, fmt: null, view: 'live', tab: 'overview', t: 0, playing: false, jobs: {}, running: new Set(), frameReady: false };
@@ -34,10 +45,13 @@ async function selectFilm(key, { keepTime = false } = {}) {
   S.key = key;
   history.replaceState(null, '', `#film=${key}`);
   const d = await api(`/api/films/${key}`);
-  if (d.error) return;
+  if (d.error || key !== S.key) return;   // a newer selection (or film churn) superseded this response
   const codeChanged = !S.d || S.d.code !== d.code || changed;
   S.d = d;
   if (changed) { S.fmt = d.formats[0]; if (!keepTime) S.t = 0; pause(); }
+  if (changed && d.edit) S.tab = 'edit';              // an edit film opens on its editor
+  EDIT.setFilm(S, d);                                 // mounts the editor dock + Edit tab (no-op for motion films)
+  MATH.setFilm(S, d);                                 // mounts the math view (no-op for non-math films)
   if (!d.formats.includes(S.fmt)) S.fmt = d.formats[0];
   $('#empty').hidden = true; $('#film').hidden = false; $('#panel').hidden = false;
   $('#fTitle').textContent = d.title;
@@ -47,7 +61,7 @@ async function selectFilm(key, { keepTime = false } = {}) {
   $('#fmtSeg').querySelectorAll('button').forEach((b) => (b.onclick = () => { S.fmt = b.dataset.f; selectFilm(S.key, { keepTime: true }); reloadMedia(true); }));
   document.querySelectorAll('#films li').forEach((li) => li.classList.toggle('on', li.dataset.k === key));
   reloadMedia(codeChanged);
-  if (!(S.tab === 'notes' && document.activeElement?.id === 'noteText')) renderTab();
+  if (!(S.tab === 'notes' && document.activeElement?.id === 'noteText') && !(S.tab === 'edit' && EDIT.handles(S) && !changed)) renderTab();
   drawTimeline();
 }
 
@@ -73,13 +87,20 @@ function seek(t) {
   const D = S.d?.cfg.duration || 0;
   S.t = Math.max(0, Math.min(D, t));
   $('#tc').textContent = S.t.toFixed(2) + 's';
-  if (S.view === 'live' && S.frameReady) { try { iframe.contentWindow.seek(S.t); } catch {} }
+  if (S.view === 'live' && S.frameReady) {
+    try {
+      // edit films must go through postMessage: the film page awaits its footage prepare() before painting
+      if (EDIT.handles(S)) iframe.contentWindow.postMessage({ seek: S.t }, '*');
+      else iframe.contentWindow.seek(S.t);
+    } catch {}
+  }
   if (S.view === 'render' && !S.playing && Math.abs(video.currentTime - S.t) > 0.03) video.currentTime = S.t;
   drawTimeline();
 }
 let clock0 = 0, t0 = 0;
 function play() {
   if (!S.d) return;
+  if (S.view === 'live' && EDIT.handles(S)) return EDIT.play();  // the editor's transport (J/K/L shuttle)
   S.playing = true; $('#play').textContent = '❚❚';
   if (S.t >= S.d.cfg.duration - 0.01) S.t = 0;
   if (S.view === 'render') { video.currentTime = S.t; video.play(); return; }
@@ -87,7 +108,14 @@ function play() {
   if (audio.src) { audio.currentTime = S.t; audio.play().catch(() => {}); }
   requestAnimationFrame(tick);
 }
-function pause() { S.playing = false; $('#play').textContent = '▶'; audio.pause(); video.pause(); }
+function pause() {
+  if (EDIT.handles(S)) EDIT.pause();
+  S.playing = false; $('#play').textContent = '▶';
+  // pausing an element that is already paused would still CANCEL its in-flight preload request
+  // (an ERR_ABORTED in the request log), so only pause the ones that are actually playing.
+  if (!audio.paused) audio.pause();
+  if (!video.paused) video.pause();
+}
 function tick(now) {
   if (!S.playing || S.view !== 'live') return;
   const D = S.d.cfg.duration;
@@ -108,8 +136,10 @@ $('#viewSeg').querySelectorAll('button').forEach((b) => (b.onclick = () => {
   seek(S.t);
 }));
 addEventListener('keydown', (e) => {
-  if (!S.d || /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
-  const step = e.shiftKey ? 1 : 1 / (S.d.cfg.fps || 60);
+  if (!S.d || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+  if (EDIT.handles(S) && EDIT.keys(e)) return;   // J/K/L · I/O · S · Del · Ctrl+Z/Y · frame step
+  const fps = Number(S.d.cfg.fps);   // edit films carry a rational rate ("30000/1001"): never let step go NaN
+  const step = e.shiftKey ? 1 : 1 / (Number.isFinite(fps) && fps > 0 ? fps : 60);
   if (e.code === 'Space') { e.preventDefault(); S.playing ? pause() : play(); }
   if (e.code === 'ArrowRight') { pause(); seek(S.t + step); }
   if (e.code === 'ArrowLeft') { pause(); seek(S.t - step); }
@@ -119,6 +149,7 @@ addEventListener('keydown', (e) => {
 // ── timeline ────────────────────────────────────────────────────────────────
 function drawTimeline() {
   const d = S.d; if (!d) return;
+  if (EDIT.handles(S)) return EDIT.drawTimeline(S);   // the edit minimap: clips, playhead, viewport
   const dpr = devicePixelRatio || 1, W = tl.clientWidth, H = 64;
   if (tl.width !== W * dpr) { tl.width = W * dpr; tl.height = H * dpr; }
   const c = tl.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -148,7 +179,10 @@ function drawTimeline() {
 }
 let dragging = false;
 const scrubTo = (e) => { const r = tl.getBoundingClientRect(); pause(); seek(((e.clientX - r.left) / r.width) * S.d.cfg.duration); };
-tl.onpointerdown = (e) => { dragging = true; tl.setPointerCapture(e.pointerId); scrubTo(e); };
+tl.onpointerdown = (e) => {
+  if (EDIT.handles(S)) return EDIT.miniDown(e);   // the edit minimap: click = seek, drag inside the viewport = pan
+  dragging = true; tl.setPointerCapture(e.pointerId); scrubTo(e);
+};
 tl.onpointermove = (e) => dragging && scrubTo(e);
 tl.onpointerup = () => (dragging = false);
 addEventListener('resize', drawTimeline);
@@ -159,6 +193,7 @@ function renderTab() {
   $('#tabs').querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.tab === S.tab));
   const d = S.d, el = $('#tabBody');
   if (!d) return;
+  if (S.tab === 'edit') return EDIT.renderTab(S, el);   // media bin · inspector · cut proposals · transcript
   if (S.tab === 'overview') {
     const des = d.design || {};
     el.innerHTML = `
@@ -176,7 +211,7 @@ function renderTab() {
     const rs = d.reviews, last = rs.at(-1);
     el.innerHTML = !last ? '<p class="dim">No critique rounds yet. pi records them with the <code>film_review</code> tool (or <code>studio review</code>).</p>' : `
       <h3>Round ${last.round} · ${last.pass ? '<span style="color:var(--ok)">pass</span>' : 'not yet'} · ${esc(last.reviewer)}</h3>
-      <div class="scores">${RUBRIC.map((k) => `<div>${k}<div class="bar"><i style="width:${last.scores[k] * 10}%;background:${last.scores[k] >= 8 ? 'var(--ok)' : last.scores[k] >= 6 ? 'var(--warn)' : 'var(--bad)'}"></i></div></div><b>${last.scores[k]}</b>`).join('')}</div>
+      <div class="scores">${rubric(d).map((k) => `<div>${k}<div class="bar"><i style="width:${last.scores[k] * 10}%;background:${last.scores[k] >= 8 ? 'var(--ok)' : last.scores[k] >= 6 ? 'var(--warn)' : 'var(--bad)'}"></i></div></div><b>${last.scores[k]}</b>`).join('')}</div>
       <h3>Problems (click to jump)</h3>
       ${(last.problems || []).map((p) => `<div class="problem" data-t="${esc(p.t)}"><b>${esc(p.t)}s</b>${esc(p.issue)}${p.fix ? `<div class="fix">fix: ${esc(p.fix)}</div>` : ''}</div>`).join('') || '<p class="dim">none listed</p>'}
       ${last.notes ? `<p class="dim">${esc(last.notes)}</p>` : ''}
@@ -227,12 +262,13 @@ async function job(kind) {
 
 function chart(rs) {
   if (rs.length < 1) return '';
+  const R = rubric(S.d).filter((k) => rs.some((r) => r.scores[k] != null));   // rounds predate a rubric key: skip it
   const W = 340, H = 150, P = 18, n = Math.max(2, rs.length);
   const X = (i) => P + (i / (n - 1)) * (W - 2 * P), Y = (v) => H - P - ((v - 1) / 9) * (H - 2 * P);
-  const lines = RUBRIC.map((k) => `<polyline fill="none" stroke="${COLORS[k]}" stroke-width="1.6" opacity=".85" points="${rs.map((r, i) => `${X(i)},${Y(r.scores[k])}`).join(' ')}"><title>${k}</title></polyline>`).join('');
+  const lines = R.map((k) => `<polyline fill="none" stroke="${COLORS[k]}" stroke-width="1.6" opacity=".85" points="${rs.map((r, i) => r.scores[k] != null ? `${X(i)},${Y(r.scores[k])}` : '').join(' ')}"><title>${k}</title></polyline>`).join('');
   const pass = `<line x1="${P}" x2="${W - P}" y1="${Y(8)}" y2="${Y(8)}" stroke="#3ecf8e" stroke-dasharray="3 3" opacity=".6"/>`;
   const labels = rs.map((r, i) => `<text x="${X(i)}" y="${H - 3}" fill="#8b8b94" font-size="9" text-anchor="middle">r${r.round}</text>`).join('');
-  const legend = RUBRIC.map((k, i) => `<text x="${P + (i % 4) * 82}" y="${10 + Math.floor(i / 4) * 11}" fill="${COLORS[k]}" font-size="9">${k}</text>`).join('');
+  const legend = R.map((k, i) => `<text x="${P + (i % 4) * 82}" y="${10 + Math.floor(i / 4) * 11}" fill="${COLORS[k]}" font-size="9">${k}</text>`).join('');
   return `<svg class="chart" viewBox="0 0 ${W} ${H}">${pass}${lines}${labels}${legend}</svg>`;
 }
 
@@ -317,5 +353,10 @@ $('#newForm').onsubmit = async (e) => {
     $('#newDlg').close(); S.key = null; history.replaceState(null, '', `#film=${f.get('key')}`); await loadFilms(); selectFilm(f.get('key'));
   } catch (err) { alert(err.message); }
 };
+
+// ── the edit tab (films with an edit.json) gets the same helpers the motion tabs use ────
+EDIT.init({ S, esc, post, api, seek, pause, selectFilm, job, reloadPreview: () => reloadMedia(true), audio, iframe });
+// the math view (films with kind: math) gets the same helpers (its stage replaces the live view)
+MATH.init({ S, esc, post, api, seek, pause, selectFilm, job, renderTab });
 
 loadFilms(); connect();

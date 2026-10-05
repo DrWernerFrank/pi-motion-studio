@@ -97,3 +97,64 @@ dead time · novelty (a visual event every ≤ 4 s) · hook · blank frames · l
 - The two earlier attempts on the Desktop (`motion-studio`, `motion-studio-google`) were left untouched.
 - Inspired by the "Opus 5.5 motion design" course (movez) and veedstudio/open-edit (per-run folders,
   design system written first, mechanical gates, preview server).
+
+## Real footage
+
+The studio also edits real videos — phone clips, talking heads, interviews, podcasts, screen recordings —
+from raw file to platform-ready cut, with the same design system, gates and critique loop. In pi it is one
+sentence (the `video-edit` skill):
+
+```
+/skill:video-edit cut the dead air and the ums out of ~/Videos/interview.mp4, add captions, give me 9:16 and 16:9
+/skill:video-edit here is a 40-minute podcast (cam.mp4 + audio.m4a): three 45-second vertical highlights, hook and captions
+/skill:video-edit reframe this widescreen interview to vertical and keep the speaker framed
+/skill:video-edit make this screen recording snappy: cut the pauses, speed the boring part 1.5x, punch-ins, a music bed
+```
+
+The CLI underneath (`./studio help` lists everything):
+
+| Command | Example |
+|---|---|
+| `./studio new <key> --edit` | scaffold an edit film (`film.json` kind=edit + `edit.json`) |
+| `./studio ingest <key> file.mp4 --id cam` | conform (CFR, upright, SDR bt709) + proxy, waveform, filmstrip, silence map |
+| `./studio transcribe <key> cam` | local word-level transcript (cached); `./studio transcript <key> cam --grep "…" --format srt` reads it in chunks |
+| `./studio cut <key> silence \|fillers\|takes\|idle\|tighten` | measured cuts — dry run first, each proposal lists its removed text; `--apply` to accept |
+| `./studio edit <key> add --src cam --in 61.2 --out 64.9 --at 0` | the timeline as data (ops, undo/redo, frame-snapped) |
+| `./studio captions <key> --format srt\|vtt` | export the captions; `./studio look <key> --mode cuts\|phone` to look at the edit |
+| `./studio sound <key>` → `./studio gate <key>` → `./studio ship <key>` | dialog bus + ducked music at -14 LUFS → edit gates → final renders, all formats |
+
+Originals stay untouched (sha-pinned; `./studio relink` repairs a moved file). Pipeline and craft rules:
+`.pi/skills/video-edit/SKILL.md`; the fresh-eyes final review: `.pi/agents/edit-critic.md`.
+
+## Math videos
+
+The studio also makes **narrated math films** — explainers, worked examples, visual proofs,
+step-by-step derivations — animated with Manim, every number verified by sympy, narrated with
+deterministic local voices (Piper; bring your own narration.wav too), in every format. In pi it
+is one sentence (the `math-video` skill):
+
+```
+/skill:math-video explain Bayes' theorem with a medical-test example, narrated, 16:9 and 9:16
+/skill:math-video derive the quadratic formula step by step, vertical, with captions
+/skill:math-video here is my script.md: animate it
+/skill:math-video put a Persian title and Persian captions on it
+```
+
+The CLI underneath (the math rows that exist today):
+
+| Command | Example |
+|---|---|
+| `./studio new <key> --math [--formats 16:9,9:16] [--lang fa]` | scaffold a math film (script.md, three scenes, design.json, lexicon.json) |
+| `./studio look <key> --mode every\|sentences\|bookmarks\|sections\|phone\|strip\|times` | labelled contact sheets of the draft (a stale draft re-renders first) |
+| `./studio render <key> --draft` | half-res 30 fps, cached per scene; `--final` at film fps |
+| `./studio scene <key> <scene-id> [--draft] [--fmt 9:16]` | render ONE scene and look at its own sheet |
+| `./studio check <key> [--scene <id>]` | the dry run: typesetting + every claim true, no video |
+| `./studio where <key> --t 49.27` | the scene, sentence, animation and file:line that own a timecode |
+| `./studio sound <key>` | narration voice + mix at −16 LUFS → out/mix.wav (word timings are native) |
+
+Every mathematical statement on screen is a registered `claim` evaluated with sympy (`out/claims.md`
+when shipped); layout is measured (offscreen/overlap/size/contrast lint) not hoped for; the
+narration script is the timing source of truth (scenes wait for the voice). The pipeline, the
+kit API (`engine/manim/kit.md`) and the craft rules: `.pi/skills/math-video/SKILL.md`; the
+fresh-eyes final review (it re-derives every number by hand): `.pi/agents/math-critic.md`.
+Gates and `./studio ship <key>` are wired for math films (gates → finals → `out/claims.md`).

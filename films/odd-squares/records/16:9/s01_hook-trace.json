@@ -1,0 +1,142 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.7,
+  "i": 1,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 0.917,
+  "id": "wrap",
+  "sentence": "s01.1",
+  "scene": "s01_hook"
+ },
+ {
+  "kind": "animation",
+  "t": 0.917,
+  "i": 2,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 0.917,
+  "i": 3,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "wait",
+  "seconds": 0.217
+ },
+ {
+  "kind": "bookmark",
+  "t": 2.635,
+  "id": "four",
+  "sentence": "s01.1",
+  "scene": "s01_hook"
+ },
+ {
+  "kind": "animation",
+  "t": 2.65,
+  "i": 4,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "_AnimationBuilder; FadeIn; EqMorph"
+ },
+ {
+  "kind": "animation",
+  "t": 4.183,
+  "i": 5,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.183,
+  "i": 6,
+  "scene": "s01_hook",
+  "sentence": "s01.1",
+  "animation": "wait",
+  "seconds": 1.541
+ },
+ {
+  "t": 4.183,
+  "kind": "sentence_end",
+  "scene": "s01_hook",
+  "sentence": "s01.1"
+ },
+ {
+  "kind": "animation",
+  "t": 4.333,
+  "i": 7,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.333,
+  "i": 8,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.158
+ },
+ {
+  "kind": "animation",
+  "t": 5.333,
+  "i": 9,
+  "scene": "s01_hook",
+  "sentence": "s01.2",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 5.967,
+  "i": 10,
+  "scene": "s01_hook",
+  "sentence": "s01.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.967,
+  "i": 11,
+  "scene": "s01_hook",
+  "sentence": "s01.2",
+  "animation": "wait",
+  "seconds": 0.644
+ },
+ {
+  "t": 5.967,
+  "kind": "sentence_end",
+  "scene": "s01_hook",
+  "sentence": "s01.2"
+ },
+ {
+  "kind": "animation",
+  "t": 6.117,
+  "i": 12,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 6.117,
+  "i": 13,
+  "scene": "s01_hook",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.15
+ },
+ {
+  "kind": "scene_end",
+  "t": 6.117,
+  "scene": "s01_hook"
+ }
+]

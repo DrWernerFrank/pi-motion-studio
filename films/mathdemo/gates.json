@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-05T15:35:24.606Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "layout",
+      "pass": true,
+      "level": "pass",
+      "detail": "0 fail-level violations over 3 scenes' records [16:9, 9:16] (studio_manim.lint)"
+    },
+    {
+      "name": "claims",
+      "pass": true,
+      "level": "pass",
+      "detail": "5 claims, all ok===true; coverage 66.7% (2/3 mathematical sentences linked; the 90% bar is the demos' P12 gate)"
+    },
+    {
+      "name": "typeset",
+      "pass": true,
+      "level": "pass",
+      "detail": "3 scenes x 2 format(s): every records layout.json non-empty; claims ledgers present — a typeset compile error itself surfaces at render time as a loud error (the formula + scene file:line)"
+    },
+    {
+      "name": "narration",
+      "pass": true,
+      "level": "pass",
+      "detail": "4 sentence(s): every script sentence in timing.json with start/end + audio, no overlaps, 3 scene timeline(s) cover their sentences' spans"
+    },
+    {
+      "name": "sync",
+      "pass": true,
+      "level": "pass",
+      "detail": "8 trace bookmark(s) over 6 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 2 overrun(s) recorded ; seams continuous"
+    },
+    {
+      "name": "pace",
+      "pass": true,
+      "level": "pass",
+      "detail": "2 freeze run(s) >= 3s, none while the narration is silent (4 sentences of timing crossed in)"
+    },
+    {
+      "name": "captions",
+      "pass": true,
+      "level": "pass",
+      "detail": "captions \"auto\" -> ON (auto = on in 9:16): 4 sentence(s), 2 caption file(s) — SRT/VTT written by studio sound; the deep caption check is P7's `captions` check"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-16 LUFS (want -16 +/- 1), true peak -1.5 dBTP (want <= -1)"
+    },
+    {
+      "name": "deliverable",
+      "pass": true,
+      "level": "pass",
+      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 20.83s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 20.83s"
+    },
+    {
+      "name": "deterministic",
+      "pass": true,
+      "level": "pass",
+      "detail": "6 layout record hash(es) identical to the last gates.json run",
+      "hashes": {
+        "16:9/s01_hook-layout.json": "f5714c511c08",
+        "16:9/s02_meaning-layout.json": "eac43b233897",
+        "16:9/s03_recap-layout.json": "7b5699ea355c",
+        "9:16/s01_hook-layout.json": "9d668e4d8581",
+        "9:16/s02_meaning-layout.json": "9c532f56dae6",
+        "9:16/s03_recap-layout.json": "e4ec87d9e016"
+      }
+    }
+  ]
+}

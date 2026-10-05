@@ -1,0 +1,13 @@
+{
+ "name": "clean-small-legal-ticks",
+ "kind": "clean",
+ "allow_pairs": null,
+ "control": null,
+ "variants": [
+  {
+   "fmt": "16:9",
+   "fps": 30,
+   "expect": []
+  }
+ ]
+}

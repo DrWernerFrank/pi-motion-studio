@@ -1,0 +1,18 @@
+{
+ "name": "clean-brace-label",
+ "kind": "clean",
+ "allow_pairs": [
+  [
+   "Brace",
+   "label"
+  ]
+ ],
+ "control": "overlap",
+ "variants": [
+  {
+   "fmt": "16:9",
+   "fps": 30,
+   "expect": []
+  }
+ ]
+}

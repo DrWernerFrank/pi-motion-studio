@@ -1,0 +1,333 @@
+[
+ {
+  "kind": "bookmark",
+  "t": 21.381,
+  "id": "col",
+  "sentence": "s03.1",
+  "scene": "s03_why"
+ },
+ {
+  "kind": "animation",
+  "t": 1.317,
+  "i": 1,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "FadeOut; FadeOut; Transform; Transform; Transform; Transform; Succession"
+ },
+ {
+  "kind": "animation",
+  "t": 2.317,
+  "i": 2,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "Succession; Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 22.948,
+  "id": "row",
+  "sentence": "s03.1",
+  "scene": "s03_why"
+ },
+ {
+  "kind": "animation",
+  "t": 2.867,
+  "i": 3,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 2.867,
+  "i": 4,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 0.551
+ },
+ {
+  "kind": "animation",
+  "t": 3.867,
+  "i": 5,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "Succession; EqMorph"
+ },
+ {
+  "kind": "bookmark",
+  "t": 24.609,
+  "id": "seven",
+  "sentence": "s03.1",
+  "scene": "s03_why"
+ },
+ {
+  "kind": "animation",
+  "t": 4.517,
+  "i": 6,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.517,
+  "i": 7,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 0.661
+ },
+ {
+  "kind": "animation",
+  "t": 5.317,
+  "i": 8,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "animation",
+  "t": 6.683,
+  "i": 9,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 6.683,
+  "i": 10,
+  "scene": "s03_why",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 1.371
+ },
+ {
+  "t": 6.683,
+  "kind": "sentence_end",
+  "scene": "s03_why",
+  "sentence": "s03.1"
+ },
+ {
+  "kind": "animation",
+  "t": 6.833,
+  "i": 11,
+  "scene": "s03_why",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 6.833,
+  "i": 12,
+  "scene": "s03_why",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.154
+ },
+ {
+  "kind": "bookmark",
+  "t": 28.927,
+  "id": "colk",
+  "sentence": "s03.2",
+  "scene": "s03_why"
+ },
+ {
+  "kind": "animation",
+  "t": 8.833,
+  "i": 13,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.833,
+  "i": 14,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 2.009
+ },
+ {
+  "kind": "animation",
+  "t": 9.633,
+  "i": 15,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "EqMorph; FadeOut; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 29.797,
+  "id": "rowk",
+  "sentence": "s03.2",
+  "scene": "s03_why"
+ },
+ {
+  "kind": "animation",
+  "t": 9.833,
+  "i": 16,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.833,
+  "i": 17,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 0.2
+ },
+ {
+  "kind": "animation",
+  "t": 10.633,
+  "i": 18,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "FadeOut; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.061,
+  "id": "total",
+  "sentence": "s03.2",
+  "scene": "s03_why"
+ },
+ {
+  "kind": "animation",
+  "t": 11.967,
+  "i": 19,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 11.967,
+  "i": 20,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 1.347
+ },
+ {
+  "kind": "animation",
+  "t": 13.8,
+  "i": 21,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 13.8,
+  "i": 22,
+  "scene": "s03_why",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 1.837
+ },
+ {
+  "t": 13.8,
+  "kind": "sentence_end",
+  "scene": "s03_why",
+  "sentence": "s03.2"
+ },
+ {
+  "kind": "animation",
+  "t": 13.95,
+  "i": 23,
+  "scene": "s03_why",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 13.95,
+  "i": 24,
+  "scene": "s03_why",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.153
+ },
+ {
+  "kind": "animation",
+  "t": 14.85,
+  "i": 25,
+  "scene": "s03_why",
+  "sentence": "s03.3",
+  "animation": "Transform; Transform; Transform; Create"
+ },
+ {
+  "kind": "bookmark",
+  "t": 37.923,
+  "id": "diff",
+  "sentence": "s03.3",
+  "scene": "s03_why"
+ },
+ {
+  "kind": "animation",
+  "t": 17.85,
+  "i": 26,
+  "scene": "s03_why",
+  "sentence": "s03.3",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 18.75,
+  "i": 27,
+  "scene": "s03_why",
+  "sentence": "s03.3",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "animation",
+  "t": 20.717,
+  "i": 28,
+  "scene": "s03_why",
+  "sentence": "s03.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 20.717,
+  "i": 29,
+  "scene": "s03_why",
+  "sentence": "s03.3",
+  "animation": "wait",
+  "seconds": 1.971
+ },
+ {
+  "t": 20.717,
+  "kind": "sentence_end",
+  "scene": "s03_why",
+  "sentence": "s03.3"
+ },
+ {
+  "kind": "animation",
+  "t": 20.867,
+  "i": 30,
+  "scene": "s03_why",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 20.867,
+  "i": 31,
+  "scene": "s03_why",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.15
+ },
+ {
+  "kind": "scene_end",
+  "t": 20.867,
+  "scene": "s03_why"
+ }
+]

@@ -1,0 +1,18 @@
+{
+ "name": "clean-axis-ticks",
+ "kind": "clean",
+ "allow_pairs": [
+  [
+   "NumberPlane",
+   "tick"
+  ]
+ ],
+ "control": "overlap",
+ "variants": [
+  {
+   "fmt": "16:9",
+   "fps": 30,
+   "expect": []
+  }
+ ]
+}

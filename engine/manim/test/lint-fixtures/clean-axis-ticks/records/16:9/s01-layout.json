@@ -1,0 +1,165 @@
+[
+ {
+  "t": 0.5,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "1:0",
+    "bbox": [
+     -5,
+     -3,
+     10,
+     6
+    ],
+    "height_u": 75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 0,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 1.5,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "2:0",
+    "bbox": [
+     -5,
+     -3,
+     10,
+     6
+    ],
+    "height_u": 75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "2:1",
+    "bbox": [
+     -3.1,
+     -0.35,
+     0.2,
+     0.25
+    ],
+    "height_u": 3.125,
+    "nominal_u": 2.8,
+    "role": "tick",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:2",
+    "bbox": [
+     -2.1,
+     -0.35,
+     0.2,
+     0.25
+    ],
+    "height_u": 3.125,
+    "nominal_u": 2.8,
+    "role": "tick",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:3",
+    "bbox": [
+     -1.1,
+     -0.35,
+     0.2,
+     0.25
+    ],
+    "height_u": 3.125,
+    "nominal_u": 2.8,
+    "role": "tick",
+    "color": "#17150F",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:4",
+    "bbox": [
+     0.9,
+     -0.35,
+     0.2,
+     0.25
+    ],
+    "height_u": 3.125,
+    "nominal_u": 2.8,
+    "role": "tick",
+    "color": "#17150F",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:5",
+    "bbox": [
+     1.9,
+     -0.35,
+     0.2,
+     0.25
+    ],
+    "height_u": 3.125,
+    "nominal_u": 2.8,
+    "role": "tick",
+    "color": "#17150F",
+    "z": 5,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:6",
+    "bbox": [
+     2.9,
+     -0.35,
+     0.2,
+     0.25
+    ],
+    "height_u": 3.125,
+    "nominal_u": 2.8,
+    "role": "tick",
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:7",
+    "bbox": [
+     3.9,
+     -0.35,
+     0.2,
+     0.25
+    ],
+    "height_u": 3.125,
+    "nominal_u": 2.8,
+    "role": "tick",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

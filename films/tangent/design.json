@@ -1,0 +1,40 @@
+{
+  "theme": "paper",
+  "direction": "A math notebook that moves: warm paper, textbook serif math, mono labels. Color is meaning and never changes: green = the curve y = x², amber = the secant/tangent line, deep amber = the slope value (the readout and every computed slope), red = the gap h (the run).",
+  "fonts": {
+    "display": "Instrument Serif",
+    "ui": "JetBrains Mono",
+    "body": "Inter"
+  },
+  "colors": {
+    "background": "#F2EEE4",
+    "ink": "#17150F",
+    "muted": "#8A8478",
+    "surface": "#FBF9F3",
+    "grid": "#CBC2AE",
+    "gridBase": "#E7E1D4"
+  },
+  "math": {
+    "roles": {
+      "vector": "#3E6F5C",
+      "positive": "#96610A",
+      "result": "#8F5B00",
+      "negative": "#B03D24"
+    }
+  },
+  "ladder": {
+    "hero": 16,
+    "title": 9,
+    "math": 9,
+    "body": 3.6,
+    "label": 3.2,
+    "tick": 4.4,
+    "caption": 3.4
+  },
+  "banned": [
+    "centered title on gradient",
+    "everything fading in",
+    "glow",
+    "particle bursts"
+  ]
+}

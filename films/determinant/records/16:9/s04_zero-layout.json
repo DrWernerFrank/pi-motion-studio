@@ -1,0 +1,926 @@
+[
+ {
+  "t": 0.9,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "1:0",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "1:1",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 2.3,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "2:0",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "2:1",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:2",
+    "bbox": [
+     1.076,
+     -1.072,
+     4.731,
+     0.934
+    ],
+    "height_u": 11.67,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.1,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "3:0",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:1",
+    "bbox": [
+     1.076,
+     -1.072,
+     4.731,
+     0.934
+    ],
+    "height_u": 11.67,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "NumberPlane",
+    "id": "3:2",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Grid",
+    "id": "3:3",
+    "bbox": [
+     -6.051,
+     -2.222,
+     6.47,
+     3.235
+    ],
+    "height_u": 40.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "3:4",
+    "bbox": [
+     -5.512,
+     -1.953,
+     5.392,
+     2.696
+    ],
+    "height_u": 33.7,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "3:5",
+    "bbox": [
+     -5.512,
+     -1.953,
+     1.797,
+     0.899
+    ],
+    "height_u": 11.23,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "3:6",
+    "bbox": [
+     -5.512,
+     -1.953,
+     3.595,
+     1.797
+    ],
+    "height_u": 22.47,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 6,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 5.917,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "4:0",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:1",
+    "bbox": [
+     1.076,
+     -1.072,
+     4.731,
+     0.934
+    ],
+    "height_u": 11.67,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "NumberPlane",
+    "id": "4:2",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Grid",
+    "id": "4:3",
+    "bbox": [
+     -6.051,
+     -2.222,
+     6.47,
+     3.235
+    ],
+    "height_u": 40.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "4:4",
+    "bbox": [
+     -5.512,
+     -1.953,
+     5.392,
+     2.696
+    ],
+    "height_u": 33.7,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "4:5",
+    "bbox": [
+     -5.512,
+     -1.953,
+     1.797,
+     0.899
+    ],
+    "height_u": 11.23,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "4:6",
+    "bbox": [
+     -5.512,
+     -1.953,
+     3.595,
+     1.797
+    ],
+    "height_u": 22.47,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "4:7",
+    "bbox": [
+     1.203,
+     -1.878,
+     4.478,
+     0.206
+    ],
+    "height_u": 2.58,
+    "nominal_u": 3.6,
+    "role": "body",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.367,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "5:0",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:1",
+    "bbox": [
+     1.076,
+     -1.072,
+     4.731,
+     0.934
+    ],
+    "height_u": 11.67,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "NumberPlane",
+    "id": "5:2",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Grid",
+    "id": "5:3",
+    "bbox": [
+     -6.051,
+     -2.222,
+     6.47,
+     3.235
+    ],
+    "height_u": 40.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "5:4",
+    "bbox": [
+     -5.512,
+     -1.953,
+     5.392,
+     2.696
+    ],
+    "height_u": 33.7,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "5:5",
+    "bbox": [
+     -5.512,
+     -1.953,
+     1.797,
+     0.899
+    ],
+    "height_u": 11.23,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "5:6",
+    "bbox": [
+     -5.512,
+     -1.953,
+     3.595,
+     1.797
+    ],
+    "height_u": 22.47,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "5:7",
+    "bbox": [
+     1.203,
+     -1.878,
+     4.478,
+     0.206
+    ],
+    "height_u": 2.58,
+    "nominal_u": 3.6,
+    "role": "body",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.367,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "6:0",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "6:1",
+    "bbox": [
+     1.076,
+     -1.072,
+     4.731,
+     0.934
+    ],
+    "height_u": 11.67,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "NumberPlane",
+    "id": "6:2",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Grid",
+    "id": "6:3",
+    "bbox": [
+     -6.051,
+     -2.222,
+     6.47,
+     3.235
+    ],
+    "height_u": 40.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "6:4",
+    "bbox": [
+     -5.512,
+     -1.953,
+     5.392,
+     2.696
+    ],
+    "height_u": 33.7,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "6:5",
+    "bbox": [
+     -5.512,
+     -1.953,
+     1.797,
+     0.899
+    ],
+    "height_u": 11.23,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "6:6",
+    "bbox": [
+     -5.512,
+     -1.953,
+     3.595,
+     1.797
+    ],
+    "height_u": 22.47,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "6:7",
+    "bbox": [
+     1.203,
+     -1.878,
+     4.478,
+     0.206
+    ],
+    "height_u": 2.58,
+    "nominal_u": 3.6,
+    "role": "body",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.767,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "7:0",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "7:1",
+    "bbox": [
+     1.076,
+     -1.072,
+     4.731,
+     0.934
+    ],
+    "height_u": 11.67,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "NumberPlane",
+    "id": "7:2",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Grid",
+    "id": "7:3",
+    "bbox": [
+     -6.051,
+     -2.222,
+     6.47,
+     3.235
+    ],
+    "height_u": 40.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "7:4",
+    "bbox": [
+     -5.512,
+     -1.953,
+     5.392,
+     2.696
+    ],
+    "height_u": 33.7,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "7:5",
+    "bbox": [
+     -5.512,
+     -1.953,
+     1.797,
+     0.899
+    ],
+    "height_u": 11.23,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "7:6",
+    "bbox": [
+     -5.512,
+     -1.953,
+     3.595,
+     1.797
+    ],
+    "height_u": 22.47,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "7:7",
+    "bbox": [
+     1.203,
+     -1.878,
+     4.478,
+     0.206
+    ],
+    "height_u": 2.58,
+    "nominal_u": 3.6,
+    "role": "body",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.767,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "8:0",
+    "bbox": [
+     -2.118,
+     2.572,
+     4.235,
+     0.635
+    ],
+    "height_u": 7.94,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "8:1",
+    "bbox": [
+     1.076,
+     -1.072,
+     4.731,
+     0.934
+    ],
+    "height_u": 11.67,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "NumberPlane",
+    "id": "8:2",
+    "bbox": [
+     -6.051,
+     -3.195,
+     6.47,
+     5.18
+    ],
+    "height_u": 64.75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Grid",
+    "id": "8:3",
+    "bbox": [
+     -6.051,
+     -2.222,
+     6.47,
+     3.235
+    ],
+    "height_u": 40.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "8:4",
+    "bbox": [
+     -5.512,
+     -1.953,
+     5.392,
+     2.696
+    ],
+    "height_u": 33.7,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "8:5",
+    "bbox": [
+     -5.512,
+     -1.953,
+     1.797,
+     0.899
+    ],
+    "height_u": 11.23,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "8:6",
+    "bbox": [
+     -5.512,
+     -1.953,
+     3.595,
+     1.797
+    ],
+    "height_u": 22.47,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "8:7",
+    "bbox": [
+     1.203,
+     -1.878,
+     4.478,
+     0.206
+    ],
+    "height_u": 2.58,
+    "nominal_u": 3.6,
+    "role": "body",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

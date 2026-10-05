@@ -1,7 +1,7 @@
 /**
- * motion-tools entry: registers the film_* tools in this session, teaches the
- * interactive-subagents extension where they live (so motion-critic and
- * motion-animator can list them in `tools:`), and adds /studio.
+ * motion-tools entry: registers the film_* and edit_* tools in this session, teaches the
+ * interactive-subagents extension where they live (so motion-critic, motion-animator and
+ * edit-critic can list them in `tools:`), and adds /studio.
  *
  * Project extensions load before global ones, so the subagent registry does not
  * exist yet when this factory runs: register on session_start (idempotent).
@@ -11,12 +11,23 @@ import { spawn } from "node:child_process"
 import * as path from "node:path"
 import { fileURLToPath } from "node:url"
 import motionTools from "./tools.ts"
+import editTools from "./edit-tools.ts"
+import mathTools from "./math-tools.ts"
 
 const DIR = path.dirname(fileURLToPath(import.meta.url))
 const TOOLS = path.join(DIR, "tools.ts")
+const EDIT_TOOLS = path.join(DIR, "edit-tools.ts")
+const MATH_TOOLS = path.join(DIR, "math-tools.ts")
 const ROOT = path.resolve(DIR, "../../..")
 const PORT = Number(process.env.STUDIO_PORT || 3142)
-const NAMES = ["film_status", "film_look", "film_render", "film_sound", "film_gate", "film_review"]
+
+// tool name -> the module that registers it, so every name lands on its own file
+const BY_FILE: [string, string[]][] = [
+  [TOOLS, ["film_status", "film_look", "film_render", "film_sound", "film_gate", "film_review"]],
+  [EDIT_TOOLS, ["edit_status", "edit_ingest", "edit_transcribe", "edit_transcript", "edit_ops", "edit_cut", "edit_look", "edit_audio", "edit_render", "edit_gate"]],
+  [MATH_TOOLS, ["math_status", "math_script", "math_voice", "math_scene", "math_look", "math_check", "math_render", "math_gate", "math_where"]],
+]
+const NAMES = BY_FILE.flatMap(([, names]) => names)
 
 async function guiUp(): Promise<boolean> {
   try { return (await fetch(`http://127.0.0.1:${PORT}/api/films`, { signal: AbortSignal.timeout(800) })).ok } catch { return false }
@@ -24,11 +35,13 @@ async function guiUp(): Promise<boolean> {
 
 export default function (pi: ExtensionAPI) {
   motionTools(pi)
+  editTools(pi)
+  mathTools(pi)
 
   pi.on("session_start", async () => {
     const api = (globalThis as any).__pi_interactive_subagents
     if (!api?.registerToolExtension) return
-    for (const n of NAMES) { try { api.registerToolExtension(n, TOOLS) } catch { /* already registered */ } }
+    for (const [file, names] of BY_FILE) for (const n of names) { try { api.registerToolExtension(n, file) } catch { /* already registered */ } }
   })
 
   pi.registerCommand("studio", {

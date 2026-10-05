@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "Matrix([[2, 4], [1, 2]]).det() == 0",
+  "about": "the collapse",
+  "says": "s04.1",
+  "scene": "s04_zero",
+  "ok": true,
+  "value": "0 == 0"
+ },
+ {
+  "expr": "Matrix([[2, 4], [1, 2]]).det() == 0",
+  "about": "det 0 has no inverse",
+  "says": "s04.1",
+  "scene": "s04_zero",
+  "ok": true,
+  "value": "0 == 0"
+ }
+]

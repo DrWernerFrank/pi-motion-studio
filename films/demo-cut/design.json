@@ -1,0 +1,75 @@
+{
+  "direction": "Warm minimal: ink on plate, one accent, punch-ins on emphasized words, a slow push through the confession.",
+  "fonts": {
+    "display": "Bricolage Grotesque",
+    "ui": "Inter",
+    "mono": "JetBrains Mono"
+  },
+  "palette": {
+    "bg": "#0e0e10",
+    "ink": "#f2efe9",
+    "muted": "#7d7a74",
+    "surface": "#1a1a1d",
+    "accent": "#ff5b2e"
+  },
+  "ladder": [
+    {
+      "role": "hero",
+      "u": 17,
+      "weight": 800,
+      "trackingEm": -0.045
+    },
+    {
+      "role": "title",
+      "u": 9,
+      "weight": 700,
+      "trackingEm": -0.03
+    },
+    {
+      "role": "body",
+      "u": 4.2,
+      "weight": 500,
+      "trackingEm": -0.01
+    },
+    {
+      "role": "label",
+      "u": 2.6,
+      "weight": 600,
+      "trackingEm": 0.08,
+      "case": "upper"
+    },
+    {
+      "role": "caption",
+      "u": 4.6,
+      "weight": 600,
+      "tracking": 0,
+      "line": 1.28
+    }
+  ],
+  "motion": {
+    "ui": "SNAPPY",
+    "containers": "DEFAULT",
+    "type": "HEAVY",
+    "character": "PLAYFUL",
+    "stagger": 0.05
+  },
+  "devices": [
+    {
+      "name": "punch-in",
+      "purpose": "land emphasized words with a spring zoom, never across a cut"
+    },
+    {
+      "name": "slow push",
+      "purpose": "hold energy through the calm confession beat"
+    }
+  ],
+  "reference": "NASA PSA footage; the studio design system (Inter, ink/plate/accent).",
+  "banned": [
+    "centered title on gradient",
+    "everything fading in",
+    "corner labels",
+    "frame borders",
+    "glow on UI chrome",
+    "particle bursts"
+  ]
+}

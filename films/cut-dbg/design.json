@@ -1,0 +1,17 @@
+{
+  "direction": "ONE LINE: what the viewer should feel at the end. Every decision is checked against it.",
+  "fonts": { "display": "Bricolage Grotesque", "ui": "Inter", "mono": "JetBrains Mono" },
+  "palette": { "bg": "#0e0e10", "ink": "#f2efe9", "muted": "#7d7a74", "surface": "#1a1a1d", "accent": "#ff5b2e" },
+  "ladder": [
+    { "role": "hero", "u": 17, "weight": 800, "trackingEm": -0.045 },
+    { "role": "title", "u": 9, "weight": 700, "trackingEm": -0.03 },
+    { "role": "body", "u": 4.2, "weight": 500, "trackingEm": -0.01 },
+    { "role": "label", "u": 2.6, "weight": 600, "trackingEm": 0.08, "case": "upper" }
+  ],
+  "motion": { "ui": "SNAPPY", "containers": "DEFAULT", "type": "HEAVY", "character": "PLAYFUL", "stagger": 0.05 },
+  "devices": [
+    { "name": "example-device", "purpose": "what it does for the viewer, in one line" }
+  ],
+  "reference": "what was taken from the reference (grammar only, never content)",
+  "banned": ["centered title on gradient", "everything fading in", "corner labels", "frame borders", "glow on UI chrome", "particle bursts"]
+}

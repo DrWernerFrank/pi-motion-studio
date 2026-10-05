@@ -1,0 +1,152 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.017,
+  "i": 1,
+  "scene": "s06_recap",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 0.017,
+  "i": 2,
+  "scene": "s06_recap",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.01
+ },
+ {
+  "kind": "animation",
+  "t": 0.617,
+  "i": 3,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 1.417,
+  "i": 4,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 59.503,
+  "id": "limit",
+  "sentence": "s06.1",
+  "scene": "s06_recap"
+ },
+ {
+  "kind": "animation",
+  "t": 2.383,
+  "i": 5,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 2.383,
+  "i": 6,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "wait",
+  "seconds": 0.977
+ },
+ {
+  "kind": "animation",
+  "t": 3.183,
+  "i": 7,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 61.059,
+  "id": "rule",
+  "sentence": "s06.1",
+  "scene": "s06_recap"
+ },
+ {
+  "kind": "animation",
+  "t": 3.933,
+  "i": 8,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 3.933,
+  "i": 9,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "wait",
+  "seconds": 0.766
+ },
+ {
+  "kind": "animation",
+  "t": 4.733,
+  "i": 10,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "FadeIn"
+ },
+ {
+  "kind": "animation",
+  "t": 5.433,
+  "i": 11,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "Indicate"
+ },
+ {
+  "kind": "animation",
+  "t": 6.117,
+  "i": 12,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 6.117,
+  "i": 13,
+  "scene": "s06_recap",
+  "sentence": "s06.1",
+  "animation": "wait",
+  "seconds": 0.684
+ },
+ {
+  "t": 6.117,
+  "kind": "sentence_end",
+  "scene": "s06_recap",
+  "sentence": "s06.1"
+ },
+ {
+  "kind": "animation",
+  "t": 7.317,
+  "i": 14,
+  "scene": "s06_recap",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.317,
+  "i": 15,
+  "scene": "s06_recap",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 1.2
+ },
+ {
+  "kind": "scene_end",
+  "t": 7.317,
+  "scene": "s06_recap"
+ }
+]

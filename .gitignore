@@ -32,3 +32,18 @@ Thumbs.db:encryptable
 
 # Template (re-generated per film)
 templates/film/index.html
+
+# verifier run output (regenerated)
+docs/editing/verify-last*.json
+docs/math/verify-last*.json
+
+# derived media (conformed footage, proxies, audio): rebuilt by `studio ingest`
+films/*/assets/media/
+
+# Manim's derived media (Typst/SVG caches): the checks run from scratch (typeset.mjs),
+# these dirs only exist if something ran with the repo as cwd — never commit them
+engine/manim/media/
+engine/manim/test/media/
+
+# edit history snapshots
+films/*/.edit/

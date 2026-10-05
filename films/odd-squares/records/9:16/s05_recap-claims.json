@@ -1,0 +1,26 @@
+[
+ {
+  "expr": "summation(2*k - 1, (k, 1, 5)) == 5**2",
+  "about": "the rebuilt square: five L's",
+  "says": "s05.1",
+  "scene": "s05_recap",
+  "ok": true,
+  "value": "25 == 25"
+ },
+ {
+  "expr": "k**2 - (k - 1)**2 == 2*k - 1",
+  "about": "recap: the k-th L",
+  "says": "s05.1",
+  "scene": "s05_recap",
+  "ok": true,
+  "value": "k**2 - (k - 1)**2 == 2*k - 1"
+ },
+ {
+  "expr": "summation(2*k - 1, (k, 1, n)) == n**2",
+  "about": "recap: the sum",
+  "says": "s05.1",
+  "scene": "s05_recap",
+  "ok": true,
+  "value": "n**2 == n**2"
+ }
+]

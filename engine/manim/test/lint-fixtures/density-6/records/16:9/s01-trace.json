@@ -1,0 +1,22 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.5,
+  "i": 1,
+  "scene": "s01",
+  "sentence": null,
+  "animation": "Write",
+  "file": "scenes/s01.py",
+  "line": 10
+ },
+ {
+  "kind": "animation",
+  "t": 3,
+  "i": 2,
+  "scene": "s01",
+  "sentence": null,
+  "animation": "Write",
+  "file": "scenes/s01.py",
+  "line": 13
+ }
+]

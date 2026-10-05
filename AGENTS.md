@@ -67,3 +67,52 @@ sheets, scores, notes).
 ## Secrets
 API keys live in `.env` (never in a prompt, brief or screenshot). Refer to them by name:
 "the ElevenLabs key is `ELEVENLABS_API_KEY` in `.env`".
+
+## Real footage
+
+`studio new <key> --edit` starts an edit film: real footage (phone clips, talking heads, podcasts,
+screen recordings) cut in the same studio, same loop, same gates. Pipeline and craft rules:
+`.pi/skills/video-edit/SKILL.md`. The last review round is the `edit-critic` agent.
+
+- Originals are read-only (sha-pinned in the media bin; `studio relink` repairs a moved one by hash).
+  Ingest conforms (CFR, upright, SDR bt709, short GOP); `media.json` and the silence map are the truth
+  about a source, conformed media is a cache.
+- `films/<key>/edit.json` is the timeline as data: ops only (`studio edit <film> <op> --k v`, undo/redo,
+  stale `base-rev` conflicts), every op frame-snapped at the project's rational fps. Never hand-edit it.
+- Cut points are measured from the audio (noise floor, gaps), never from word boundaries. Every
+  automated cut (`studio cut <kind>`) runs dry first and lists its removed text so a human can veto.
+- Captions are design, not subtitles: 3 styles from `design.json`, the per-format safe area, the phone test.
+- Audio first: the dialog bus is built from the timeline, the music bed ducks 10-14 dB under speech, and
+  -14 LUFS / -1 dBTP is the mixer's job (`studio sound`), never a hand-tuned guess.
+
+## Math videos
+
+`studio new <key> --math` starts a math film: Manim scenes, a narration script, sympy-verified
+claims, per-scene cached renders, measured layout lint and the same loop and gates. Pipeline
+and craft rules: `.pi/skills/math-video/SKILL.md` (the kit API is `engine/manim/kit.md`; the
+pitfalls are in its `manim-notes.md`). In pi it is one sentence (the `math-video` skill):
+
+```
+/skill:math-video explain eigenvectors in 90 seconds, narrated, 16:9 and 9:16
+/skill:math-video a 60-second visual proof that 1 + 3 + … + (2n-1) = n²
+cut/skill:math-video here is my script.md and my own narration.wav: animate it
+```
+
+The CLI underneath (the math rows that exist today):
+
+| Command | Example |
+|---|---|
+| `./studio new <key> --math` | scaffold a math film (script.md, scenes/, design.json, lexicon.json) |
+| `./studio look <key> --mode every\|sentences\|bookmarks\|sections\|phone\|strip\|times` | labelled contact sheets from the draft (re-rendered when stale) |
+| `./studio render <key> --draft` | cached per scene, all formats; `--final` ships at film fps |
+| `./studio scene <key> <scene-id> [--draft\|--final] [--fmt 9:16]` | render ONE scene for fast iteration |
+| `./studio check <key> [--scene <id>]` | dry run: typesetting + claims, no video |
+| `./studio where <key> --t 49.27` | which scene, sentence, animation and file:line owns a timecode |
+| `./studio sound <key>` | narration voice + mix at `mix.lufs` (−16, narration-first) → out/mix.wav |
+
+Everything the mathematics says on screen is a registered `claim` evaluated with sympy — numbers
+come from computation, never typing; `--independent` re-derives each claim in a fresh process.
+The narration is data (`script.md` → timing.json): scenes wait for the voice (`say`/`at`/`until`),
+never the reverse. The review loop is AGENTS.md's with two extra rubric keys (correctness,
+clarity); **the last review round is the `math-critic` agent** (fresh eyes that re-derive every
+number by hand). Gates and `./studio ship <key>` are wired for math films (gates → finals → `out/claims.md`).

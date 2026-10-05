@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "Matrix([[3, 1], [1, 2]]).det() == 5",
+  "about": "the area scale",
+  "says": "s01.2",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "5 == 5"
+ },
+ {
+  "expr": "Matrix([[3, 1], [1, 2]]).det() * 1 == 5",
+  "about": "unit square area x det",
+  "says": "s01.2",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "5 == 5"
+ }
+]

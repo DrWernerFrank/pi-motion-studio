@@ -1,0 +1,26 @@
+[
+ {
+  "expr": "diff(x**2, x).subs(x, 1) > 0",
+  "about": "the curve is rising at x = 1",
+  "says": "s01.1",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "2 > 0"
+ },
+ {
+  "expr": "diff(x**2, x, 2) == 2",
+  "about": "the steepness itself changes (f'' = 2, not 0)",
+  "says": "s01.2",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "2 == 2"
+ },
+ {
+  "expr": "diff(x**2, x).subs(x, 2) != diff(x**2, x).subs(x, 1)",
+  "about": "different points, different steepness",
+  "says": "s01.2",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "4 != 2"
+ }
+]

@@ -1,0 +1,121 @@
+{
+  "note": "frame sha256 (png, first format, scale 0.5) at 8 fixed times + gate verdict levels. Rewrite only when a film is changed on purpose.",
+  "films": {
+    "studio-reel": {
+      "fmt": "9:16",
+      "scale": 0.5,
+      "fps": 60,
+      "duration": 12,
+      "times": [
+        0.75,
+        2.25,
+        3.75,
+        5.25,
+        6.75,
+        8.25,
+        9.75,
+        11.25
+      ],
+      "hashes": [
+        "9a1225f3ac2a498d",
+        "8dccd77f99a9abd5",
+        "26bae0e154fe02f0",
+        "5a5d6b5667f16a84",
+        "d6237cbad060eef6",
+        "04e2f97b7fff7f74",
+        "1d27d02ed8df3c23",
+        "4192d5bf15a45450"
+      ],
+      "gates": {
+        "lint": "pass",
+        "determinism": "pass",
+        "dead-time": "pass",
+        "novelty": "pass",
+        "hook": "pass",
+        "blank-frames": "pass",
+        "loudness": "pass",
+        "cue-sync": "pass",
+        "deliverable final-16x9.mp4": "pass",
+        "deliverable final-9x16.mp4": "pass"
+      }
+    },
+    "det-film": {
+      "fmt": "9:16",
+      "scale": 0.5,
+      "fps": 60,
+      "duration": 40,
+      "times": [
+        2.5,
+        7.5,
+        12.5,
+        17.5,
+        22.5,
+        27.5,
+        32.5,
+        37.5
+      ],
+      "hashes": [
+        "70afa0d85d748e36",
+        "c624effaba44f842",
+        "3e4f86cd08e2f5a6",
+        "6731aeff66e8b44b",
+        "7b3f86088c5260bd",
+        "dd389e751d3e9452",
+        "ea670aa50cc032a8",
+        "905f1347fef36581"
+      ],
+      "gates": {
+        "lint": "pass",
+        "determinism": "pass",
+        "dead-time": "pass",
+        "novelty": "warn",
+        "hook": "pass",
+        "blank-frames": "pass",
+        "loudness": "pass",
+        "cue-sync": "pass",
+        "deliverable final-9x16.mp4": "pass"
+      }
+    },
+    "determinant-explained": {
+      "fmt": "16:9",
+      "scale": 0.5,
+      "fps": 60,
+      "duration": 60,
+      "times": [
+        3.75,
+        11.25,
+        18.75,
+        26.25,
+        33.75,
+        41.25,
+        48.75,
+        56.25
+      ],
+      "hashes": [
+        "8ac17b162ca44563",
+        "d02916b6d8a70af6",
+        "0421daf24a3f47f8",
+        "9a0c8aac2f146ba2",
+        "3c93e1336475eee7",
+        "a1092e95771214d6",
+        "1891a3fe89009d32",
+        "a08bbe17c49ed37c"
+      ],
+      "gates": {
+        "lint": "pass",
+        "determinism": "pass",
+        "dead-time": "pass",
+        "novelty": "warn",
+        "hook": "pass",
+        "blank-frames": "pass",
+        "loudness": "pass",
+        "cue-sync": "pass",
+        "deliverable final-16x9.mp4": "pass",
+        "deliverable final-9x16.mp4": "pass"
+      }
+    },
+    "determinant-explainer": {
+      "broken": "film page never became ready (determinant-explainer 16:9)."
+    }
+  }
+}

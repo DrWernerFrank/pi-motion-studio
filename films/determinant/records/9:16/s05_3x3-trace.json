@@ -1,0 +1,133 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 1,
+  "scene": "s05_3x3",
+  "sentence": "s05.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.1,
+  "i": 2,
+  "scene": "s05_3x3",
+  "sentence": "s05.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "bookmark",
+  "t": 38.62,
+  "id": "expand",
+  "sentence": "s05.1",
+  "scene": "s05_3x3"
+ },
+ {
+  "kind": "animation",
+  "t": 3.9,
+  "i": 3,
+  "scene": "s05_3x3",
+  "sentence": "s05.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 5.683,
+  "i": 4,
+  "scene": "s05_3x3",
+  "sentence": "s05.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.683,
+  "i": 5,
+  "scene": "s05_3x3",
+  "sentence": "s05.1",
+  "animation": "wait",
+  "seconds": 1.789
+ },
+ {
+  "t": 5.683,
+  "kind": "sentence_end",
+  "scene": "s05_3x3",
+  "sentence": "s05.1"
+ },
+ {
+  "kind": "animation",
+  "t": 5.833,
+  "i": 6,
+  "scene": "s05_3x3",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.833,
+  "i": 7,
+  "scene": "s05_3x3",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.156
+ },
+ {
+  "kind": "bookmark",
+  "t": 44.796,
+  "id": "eight",
+  "sentence": "s05.2",
+  "scene": "s05_3x3"
+ },
+ {
+  "kind": "animation",
+  "t": 10.067,
+  "i": 8,
+  "scene": "s05_3x3",
+  "sentence": "s05.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 10.6,
+  "i": 9,
+  "scene": "s05_3x3",
+  "sentence": "s05.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.6,
+  "i": 10,
+  "scene": "s05_3x3",
+  "sentence": "s05.2",
+  "animation": "wait",
+  "seconds": 0.543
+ },
+ {
+  "t": 10.6,
+  "kind": "sentence_end",
+  "scene": "s05_3x3",
+  "sentence": "s05.2"
+ },
+ {
+  "kind": "animation",
+  "t": 11.0,
+  "i": 11,
+  "scene": "s05_3x3",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 11.0,
+  "i": 12,
+  "scene": "s05_3x3",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.4
+ },
+ {
+  "kind": "scene_end",
+  "t": 11.0,
+  "scene": "s05_3x3"
+ }
+]

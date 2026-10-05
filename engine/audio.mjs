@@ -279,11 +279,15 @@ export async function mix(key, { target } = {}) {
   await run('ffmpeg', ['-y', '-v', 'error', '-i', bed, '-i', sfx, '-filter_complex',
     `[0:a]aresample=${SR},volume=${bedGain}[a];[1:a]aresample=${SR},volume=${sfxGain}[b];[a][b]amix=inputs=2:normalize=0,atrim=0:${D},apad=whole_dur=${D}${fade}[m]`,
     '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
-  // Two-pass loudnorm to hit the target precisely.
+  return { file, ...(await normalize(pre, file, target)) };
+}
+
+// Two-pass loudnorm to hit the target precisely, then a true-peak limiter. pre -> file (16-bit PCM). Shared by synthesized and edit mixes.
+export async function normalize(pre, file, target) {
   const { err } = await run('ffmpeg', ['-hide_banner', '-i', pre, '-af', `loudnorm=I=${target}:TP=-1:LRA=11:print_format=json`, '-f', 'null', '-'], { allowFail: true });
   const m = JSON.parse(err.slice(err.lastIndexOf('{'), err.lastIndexOf('}') + 1));
   await run('ffmpeg', ['-y', '-v', 'error', '-i', pre, '-af',
     `loudnorm=I=${target}:TP=-1:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,aresample=${SR},alimiter=limit=0.84:level=false:attack=1:release=40`,
     '-c:a', 'pcm_s16le', file]);
-  return { file, ...(await loudness(file)) };
+  return loudness(file);
 }

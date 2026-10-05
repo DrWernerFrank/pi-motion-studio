@@ -1,0 +1,97 @@
+[
+ {
+  "t": 0.5,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "1:0",
+    "bbox": [
+     -5,
+     -3,
+     10,
+     6
+    ],
+    "height_u": 75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 0,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 1.5,
+  "objects": [
+   {
+    "kind": "NumberPlane",
+    "id": "2:0",
+    "bbox": [
+     -5,
+     -3,
+     10,
+     6
+    ],
+    "height_u": 75,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "2:1",
+    "bbox": [
+     -1,
+     -1,
+     3,
+     2
+    ],
+    "height_u": 25,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Square",
+    "id": "2:2",
+    "bbox": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "height_u": 12.5,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Arrow",
+    "id": "2:3",
+    "bbox": [
+     -0.5,
+     -0.5,
+     2.5,
+     1.2
+    ],
+    "height_u": 15,
+    "nominal_u": null,
+    "role": null,
+    "color": "#A86400",
+    "z": 3,
+    "alive": true,
+    "text": false
+   }
+  ]
+ }
+]

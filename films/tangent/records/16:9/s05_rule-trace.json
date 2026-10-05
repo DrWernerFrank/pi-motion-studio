@@ -1,0 +1,275 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.0,
+  "i": 1,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "FadeOut; FadeOut; FadeOut; FadeIn"
+ },
+ {
+  "kind": "bookmark",
+  "t": 39.919,
+  "id": "expand",
+  "sentence": "s05.1",
+  "scene": "s05_rule"
+ },
+ {
+  "kind": "animation",
+  "t": 2.0,
+  "i": 2,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.9,
+  "i": 3,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "bookmark",
+  "t": 41.359,
+  "id": "cancel",
+  "sentence": "s05.1",
+  "scene": "s05_rule"
+ },
+ {
+  "kind": "animation",
+  "t": 3.0,
+  "i": 4,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 3.0,
+  "i": 5,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "wait",
+  "seconds": 0.1
+ },
+ {
+  "kind": "animation",
+  "t": 3.9,
+  "i": 6,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "bookmark",
+  "t": 43.855,
+  "id": "zero",
+  "sentence": "s05.1",
+  "scene": "s05_rule"
+ },
+ {
+  "kind": "animation",
+  "t": 5.217,
+  "i": 7,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.217,
+  "i": 8,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "wait",
+  "seconds": 1.326
+ },
+ {
+  "kind": "animation",
+  "t": 6.117,
+  "i": 9,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "EqMorph"
+ },
+ {
+  "kind": "bookmark",
+  "t": 46.735,
+  "id": "lands",
+  "sentence": "s05.1",
+  "scene": "s05_rule"
+ },
+ {
+  "kind": "animation",
+  "t": 8.717,
+  "i": 10,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 9.2,
+  "i": 11,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.2,
+  "i": 12,
+  "scene": "s05_rule",
+  "sentence": "s05.1",
+  "animation": "wait",
+  "seconds": 0.49
+ },
+ {
+  "t": 9.2,
+  "kind": "sentence_end",
+  "scene": "s05_rule",
+  "sentence": "s05.1"
+ },
+ {
+  "kind": "animation",
+  "t": 9.35,
+  "i": 13,
+  "scene": "s05_rule",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.35,
+  "i": 14,
+  "scene": "s05_rule",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.157
+ },
+ {
+  "kind": "animation",
+  "t": 10.15,
+  "i": 15,
+  "scene": "s05_rule",
+  "sentence": "s05.2",
+  "animation": "FadeOut; _AnimationBuilder"
+ },
+ {
+  "kind": "bookmark",
+  "t": 50.17,
+  "id": "cube",
+  "sentence": "s05.2",
+  "scene": "s05_rule"
+ },
+ {
+  "kind": "animation",
+  "t": 12.35,
+  "i": 16,
+  "scene": "s05_rule",
+  "sentence": "s05.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 13.15,
+  "i": 17,
+  "scene": "s05_rule",
+  "sentence": "s05.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 13.15,
+  "i": 18,
+  "scene": "s05_rule",
+  "sentence": "s05.2",
+  "animation": "wait",
+  "seconds": 0.815
+ },
+ {
+  "t": 13.15,
+  "kind": "sentence_end",
+  "scene": "s05_rule",
+  "sentence": "s05.2"
+ },
+ {
+  "kind": "animation",
+  "t": 13.3,
+  "i": 19,
+  "scene": "s05_rule",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 13.3,
+  "i": 20,
+  "scene": "s05_rule",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.165
+ },
+ {
+  "kind": "bookmark",
+  "t": 53.548,
+  "id": "rule",
+  "sentence": "s05.3",
+  "scene": "s05_rule"
+ },
+ {
+  "kind": "animation",
+  "t": 15.817,
+  "i": 21,
+  "scene": "s05_rule",
+  "sentence": "s05.3",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 18.467,
+  "i": 22,
+  "scene": "s05_rule",
+  "sentence": "s05.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 18.467,
+  "i": 23,
+  "scene": "s05_rule",
+  "sentence": "s05.3",
+  "animation": "wait",
+  "seconds": 2.664
+ },
+ {
+  "t": 18.467,
+  "kind": "sentence_end",
+  "scene": "s05_rule",
+  "sentence": "s05.3"
+ },
+ {
+  "kind": "animation",
+  "t": 18.483,
+  "i": 24,
+  "scene": "s05_rule",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 18.483,
+  "i": 25,
+  "scene": "s05_rule",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.012
+ },
+ {
+  "kind": "scene_end",
+  "t": 18.483,
+  "scene": "s05_rule"
+ }
+]

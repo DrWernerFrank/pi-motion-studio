@@ -1,0 +1,17 @@
+{
+  "kind": "edit",
+  "title": "demo-edit",
+  "duration": 15.5155,
+  "fps": "30000/1001",
+  "formats": [
+    "16:9",
+    "9:16"
+  ],
+  "loop": false,
+  "background": "#000000",
+  "motionBlur": 1,
+  "gates": {
+    "maxStill": 4,
+    "maxNoNovelty": 8
+  }
+}

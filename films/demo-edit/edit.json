@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "rev": 6,
+  "fps": "30000/1001",
+  "counter": 3,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/real/talking-head-original.webm",
+      "sha256": "f3dd2f87b8dedbc6ea9864af594e2de4fc8a2b5d425f85f834ba7f36c1d04472",
+      "kind": "video",
+      "duration": 53.820433,
+      "frames": 1613,
+      "fps": "30000/1001",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c3",
+          "src": "cam",
+          "in": 35.001633,
+          "out": 41.007633,
+          "at": 0
+        },
+        {
+          "id": "c1",
+          "src": "cam",
+          "in": 6.5065,
+          "out": 12.012,
+          "at": 6.006
+        },
+        {
+          "id": "c2",
+          "src": "cam",
+          "in": 19.986633,
+          "out": 25.992633,
+          "at": 11.5115,
+          "speed": 1.5,
+          "dur": 4.004
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}

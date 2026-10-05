@@ -1,0 +1,86 @@
+[
+ {
+  "kind": "animation",
+  "t": 0.9,
+  "i": 1,
+  "scene": "s04_zero",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.3,
+  "i": 2,
+  "scene": "s04_zero",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 4.1,
+  "i": 3,
+  "scene": "s04_zero",
+  "sentence": "s04.1",
+  "animation": "AnimationGroup"
+ },
+ {
+  "kind": "bookmark",
+  "t": 33.257,
+  "id": "cannot",
+  "sentence": "s04.1",
+  "scene": "s04_zero"
+ },
+ {
+  "kind": "animation",
+  "t": 5.917,
+  "i": 4,
+  "scene": "s04_zero",
+  "sentence": "s04.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 7.367,
+  "i": 5,
+  "scene": "s04_zero",
+  "sentence": "s04.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.367,
+  "i": 6,
+  "scene": "s04_zero",
+  "sentence": "s04.1",
+  "animation": "wait",
+  "seconds": 1.466
+ },
+ {
+  "t": 7.367,
+  "kind": "sentence_end",
+  "scene": "s04_zero",
+  "sentence": "s04.1"
+ },
+ {
+  "kind": "animation",
+  "t": 7.767,
+  "i": 7,
+  "scene": "s04_zero",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.767,
+  "i": 8,
+  "scene": "s04_zero",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.4
+ },
+ {
+  "kind": "scene_end",
+  "t": 7.767,
+  "scene": "s04_zero"
+ }
+]

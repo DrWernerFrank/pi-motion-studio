@@ -1,0 +1,282 @@
+[
+ {
+  "t": 2.417,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "1:0",
+    "bbox": [
+     -1.753,
+     0.529,
+     3.506,
+     0.281
+    ],
+    "height_u": 3.52,
+    "nominal_u": 5.4,
+    "role": "body",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "1:1",
+    "bbox": [
+     -3.027,
+     -1.631,
+     6.054,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "1:2",
+    "bbox": [
+     -1.615,
+     -3.791,
+     3.231,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.767,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "2:0",
+    "bbox": [
+     -1.753,
+     0.529,
+     3.506,
+     0.281
+    ],
+    "height_u": 3.52,
+    "nominal_u": 5.4,
+    "role": "body",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:1",
+    "bbox": [
+     -3.027,
+     -1.631,
+     6.054,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "2:2",
+    "bbox": [
+     -1.615,
+     -3.791,
+     3.231,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 4.767,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "3:0",
+    "bbox": [
+     -1.753,
+     0.529,
+     3.506,
+     0.281
+    ],
+    "height_u": 3.52,
+    "nominal_u": 5.4,
+    "role": "body",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:1",
+    "bbox": [
+     -3.027,
+     -1.631,
+     6.054,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "3:2",
+    "bbox": [
+     -1.615,
+     -3.791,
+     3.231,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.967,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "4:0",
+    "bbox": [
+     -1.753,
+     0.529,
+     3.506,
+     0.281
+    ],
+    "height_u": 3.52,
+    "nominal_u": 5.4,
+    "role": "body",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:1",
+    "bbox": [
+     -3.027,
+     -1.631,
+     6.054,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "4:2",
+    "bbox": [
+     -1.615,
+     -3.791,
+     3.231,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 5.967,
+  "objects": [
+   {
+    "kind": "Txt",
+    "id": "5:0",
+    "bbox": [
+     -1.753,
+     0.529,
+     3.506,
+     0.281
+    ],
+    "height_u": 3.52,
+    "nominal_u": 5.4,
+    "role": "body",
+    "color": "#000000",
+    "z": 0,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:1",
+    "bbox": [
+     -3.027,
+     -1.631,
+     6.054,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Eq",
+    "id": "5:2",
+    "bbox": [
+     -1.615,
+     -3.791,
+     3.231,
+     1.627
+    ],
+    "height_u": 20.34,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 2,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

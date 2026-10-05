@@ -1,0 +1,372 @@
+{
+  "version": 1,
+  "rev": 42,
+  "fps": "30",
+  "counter": 28,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/real/talking-head-original.webm",
+      "sha256": "f3dd2f87b8dedbc6ea9864af594e2de4fc8a2b5d425f85f834ba7f36c1d04472",
+      "kind": "video",
+      "duration": 53.833333,
+      "frames": 1615,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c10",
+          "src": "cam",
+          "in": 36.933333,
+          "out": 42.3,
+          "at": 0,
+          "note": "HOOK: Pulling someone down... (word-fenced)",
+          "crop": {
+            "9:16": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "1:1": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "4:5": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ]
+          }
+        },
+        {
+          "id": "c11",
+          "src": "cam",
+          "in": 9.366667,
+          "out": 13.466667,
+          "at": 5.366667,
+          "note": "saw a lot of kids get bullied (word-fenced)",
+          "crop": {
+            "9:16": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "1:1": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "4:5": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ]
+          }
+        },
+        {
+          "id": "c18",
+          "src": "cam",
+          "in": 13.866667,
+          "out": 24.233333,
+          "at": 9.466667,
+          "note": "saw a lot of kids get bullied (word-fenced)",
+          "crop": {
+            "9:16": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              },
+              {
+                "t": 2,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              },
+              {
+                "t": 9.5,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.3
+              }
+            ],
+            "1:1": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              },
+              {
+                "t": 2,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              },
+              {
+                "t": 9.5,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.3
+              }
+            ],
+            "4:5": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              },
+              {
+                "t": 2,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              },
+              {
+                "t": 9.5,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.3
+              }
+            ],
+            "16:9": [
+              {
+                "t": 2,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1
+              },
+              {
+                "t": 9.5,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.1
+              }
+            ]
+          }
+        },
+        {
+          "id": "c13",
+          "src": "cam",
+          "in": 24.266667,
+          "out": 29.766667,
+          "at": 19.833333,
+          "note": "good news; take action (word-fenced)",
+          "crop": {
+            "9:16": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "1:1": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "4:5": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ]
+          }
+        },
+        {
+          "id": "c14",
+          "src": "cam",
+          "in": 38.533333,
+          "out": 46.266667,
+          "at": 25.333333,
+          "note": "the hook line, resolved (word-fenced)",
+          "crop": {
+            "9:16": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "1:1": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "4:5": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ]
+          }
+        },
+        {
+          "id": "c28",
+          "src": "cam",
+          "freeze": true,
+          "in": 46.266667,
+          "out": 46.3,
+          "at": 33.066667,
+          "dur": 1.566667,
+          "crop": {
+            "9:16": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "1:1": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ],
+            "4:5": [
+              {
+                "t": 0,
+                "cx": 0.5,
+                "cy": 0.44,
+                "zoom": 1.2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [
+    {
+      "id": "oP0",
+      "type": "punch-in",
+      "at": 0.6,
+      "dur": 1.8,
+      "props": {
+        "zoom": 1.12,
+        "cx": 0.5,
+        "cy": 0.42,
+        "showDot": false
+      }
+    },
+    {
+      "id": "oL",
+      "type": "lower-third",
+      "at": 1.2,
+      "dur": 4,
+      "props": {
+        "name": "Scott Kelly",
+        "role": "NASA astronaut"
+      }
+    },
+    {
+      "id": "oP1",
+      "type": "punch-in",
+      "at": 6.3,
+      "dur": 1.8,
+      "props": {
+        "zoom": 1.12,
+        "cx": 0.48,
+        "cy": 0.38,
+        "showDot": false
+      }
+    },
+    {
+      "id": "oP2",
+      "type": "punch-in",
+      "at": 13.8,
+      "dur": 1.8,
+      "props": {
+        "zoom": 1.15,
+        "cx": 0.52,
+        "cy": 0.45,
+        "showDot": false
+      }
+    },
+    {
+      "id": "oP4",
+      "type": "punch-in",
+      "at": 22.3,
+      "dur": 1.8,
+      "props": {
+        "zoom": 1.12,
+        "cx": 0.52,
+        "cy": 0.38,
+        "showDot": false
+      }
+    },
+    {
+      "id": "oP3",
+      "type": "punch-in",
+      "at": 26.4,
+      "dur": 2.2,
+      "props": {
+        "zoom": 1.14,
+        "cx": 0.48,
+        "cy": 0.45,
+        "showDot": false
+      }
+    },
+    {
+      "id": "oEnd",
+      "type": "title",
+      "at": 33,
+      "dur": 1.6,
+      "props": {
+        "text": "stopbullying.gov"
+      }
+    }
+  ],
+  "captions": {
+    "style": "pop",
+    "from": "cam",
+    "lang": "en"
+  },
+  "markers": []
+}

@@ -1,0 +1,6 @@
+{"rev":1,"at":"2026-10-01T15:39:26.145Z","who":"cli","ops":[{"op":"add","src":"cam","in":6,"out":12}]}
+{"rev":2,"at":"2026-10-01T15:39:26.432Z","who":"cli","ops":[{"op":"add","src":"cam","in":20,"out":26}]}
+{"rev":3,"at":"2026-10-01T15:39:26.723Z","who":"cli","ops":[{"op":"add","src":"cam","in":35,"out":41}]}
+{"rev":4,"at":"2026-10-01T15:39:27.019Z","who":"cli","ops":[{"op":"trim","id":"c1","in":6.5}]}
+{"rev":5,"at":"2026-10-01T15:39:27.348Z","who":"cli","ops":[{"op":"reorder","track":"V1","order":["c3","c1","c2"]}]}
+{"rev":6,"at":"2026-10-01T15:39:27.630Z","who":"cli","ops":[{"op":"speed","id":"c2","speed":1.5}]}
