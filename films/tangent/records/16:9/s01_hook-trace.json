@@ -94,7 +94,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.6,
+  "t": 4.7,
   "i": 9,
   "scene": "s01_hook",
   "sentence": "s01.2",
@@ -102,24 +102,31 @@
  },
  {
   "kind": "animation",
-  "t": 5.6,
+  "t": 4.7,
   "i": 10,
   "scene": "s01_hook",
   "sentence": "s01.2",
   "animation": "wait",
-  "seconds": 1.41
+  "seconds": 0.51
  },
  {
   "kind": "animation",
-  "t": 6.8,
+  "t": 5.3,
   "i": 11,
   "scene": "s01_hook",
   "sentence": "s01.2",
-  "animation": "Create"
+  "animation": "Indicate"
+ },
+ {
+  "kind": "bookmark",
+  "t": 6.21,
+  "id": "changes",
+  "sentence": "s01.2",
+  "scene": "s01_hook"
  },
  {
   "kind": "animation",
-  "t": 7.2,
+  "t": 5.6,
   "i": 12,
   "scene": "s01_hook",
   "sentence": "s01.2",
@@ -127,8 +134,33 @@
  },
  {
   "kind": "animation",
-  "t": 7.2,
+  "t": 5.6,
   "i": 13,
+  "scene": "s01_hook",
+  "sentence": "s01.2",
+  "animation": "wait",
+  "seconds": 0.31
+ },
+ {
+  "kind": "animation",
+  "t": 6.8,
+  "i": 14,
+  "scene": "s01_hook",
+  "sentence": "s01.2",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 7.2,
+  "i": 15,
+  "scene": "s01_hook",
+  "sentence": "s01.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.2,
+  "i": 16,
   "scene": "s01_hook",
   "sentence": "s01.2",
   "animation": "wait",
@@ -137,7 +169,7 @@
  {
   "kind": "animation",
   "t": 7.6,
-  "i": 14,
+  "i": 17,
   "scene": "s01_hook",
   "sentence": "s01.2",
   "animation": "FadeOut"
@@ -145,7 +177,7 @@
  {
   "kind": "animation",
   "t": 8.133,
-  "i": 15,
+  "i": 18,
   "scene": "s01_hook",
   "sentence": "s01.2",
   "animation": "Wait"
@@ -153,7 +185,7 @@
  {
   "kind": "animation",
   "t": 8.133,
-  "i": 16,
+  "i": 19,
   "scene": "s01_hook",
   "sentence": "s01.2",
   "animation": "wait",

@@ -1,7 +1,7 @@
 import numpy as np
 from manim import DOWN, RIGHT, UP, Create, Dot, FadeIn, FadeOut, Transform, VGroup, Write
 
-from studio_manim import L, Eq, StudioScene, claim, color_for, math_role
+from studio_manim import L, Eq, StudioScene, claim, color_for, math_role, num
 from studio_manim.kit import EqMorph
 
 
@@ -135,4 +135,16 @@ class Scene(StudioScene):
             self.play(EqMorph(r0, r1), run_time=0.8)
             claim("summation(2*k - 1, (k, 1, n)) == n**2", about="the sum of the first n odd numbers", says="s04.3")
             claim("summation(2*k - 1, (k, 1, 100)) == 100**2", about="for every n: n = 100", says="s04.3")
+            # r17/r19 (critic, the unspent impact beat): "for every n" earns its number — the
+            # n = 100 instantiation lands under the result as the words arrive (every digit from
+            # computation, the claim above its proof) and holds through the scene end: the static
+            # hold becomes the payoff, and in 9:16 the line lands in the under-filled band
+            pay = Eq(r"{{\text{n = 100:}}} " + num(100) + "^2 = {{" + num(100 ** 2) + "}}",
+                     roles={"p2": "result"})
+            pay.scale(back.height * 0.8 / pay.height)
+            pay.next_to(VGroup(back, r1), DOWN, buff=L.u * 3)
+            budget = self.until("every") - 1.2
+            if budget > 0.05:
+                self.wait(budget)
+            self.play(Write(pay), run_time=1.2)
         self.wait(0.15)

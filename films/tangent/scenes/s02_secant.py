@@ -204,12 +204,20 @@ class Scene(StudioScene):
             self.play(name0.animate.move_to(name), run_time=0.7)
             pause(self, self.until("p1") - 0.1)
             self.play(Indicate(P, scale_factor=1.6, color=math_role("positive")), run_time=0.8)
+            # r18/r19/r20's lull ask (the ~11.5s dot-wait): as the voice says "and x equals
+            # two", the curve's own arc from the first point to the second traces itself — the
+            # path the secant is about to span, completing exactly ON "two" where Q grows
+            # (word-synced, zero geometry moved; it folds away with the secant's entrance)
+            arc = lab.axes.plot(f, x_range=[1, 2], color=math_role("result"),
+                                stroke_width=5, stroke_opacity=0.65)
+            if self.until("p2") > 0.25:
+                self.play(Create(arc), run_time=self.until("p2"))
             pause(self, self.until("p2") - 0.1)
             self.play(GrowFromCenter(Q), run_time=0.6)
             claim("(x**2).subs(x, 1) == 1", about="the first point (1, 1)", says="s02.1")
             claim("(x**2).subs(x, 2) == 4", about="the second point (2, 4)", says="s02.1")
         with self.say("s02.2"):
-            self.play(Create(secant), run_time=1.2)
+            self.play(Create(secant), FadeOut(arc), run_time=1.2)
             pause(self, self.until("rise") - 0.4)
             self.play(Create(run), Create(rise), run_time=0.8)
             self.play(Write(e1), run_time=1.2)

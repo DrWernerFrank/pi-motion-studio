@@ -3,6 +3,7 @@
 // required check passed. A check lives in engine/verify/<id>.mjs (default export: async (ctx) => { pass,
 // measured, skip? }); a check without a file is "pending" and counts as red.
 //   studio verify-edit [--quick] [--list] [--only a,b] [--clean]
+import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -66,7 +67,13 @@ export const RUN_STARTED = Date.now();
 export function cleanTemp() {
   const gone = [];
   if (existsSync(FILMS)) for (const f of readdirSync(FILMS)) {
-    if (/^verify-[a-z0-9-]+$/.test(f) && statSync(join(FILMS, f)).mtimeMs < RUN_STARTED - 2000) { rmSync(join(FILMS, f), { recursive: true, force: true }); gone.push(`films/${f}`); }
+    if (/^verify-[a-z0-9-]+$/.test(f) && statSync(join(FILMS, f)).mtimeMs < RUN_STARTED - 2000) {
+      // git-tracked fixtures are never leftovers (the math mission commits films/verify-m-kit as its
+      // library/joins fixture; an unguarded sweep here deleted it mid-run through the spawned regress
+      // check — same guard as verify-math's)
+      try { if (execSync('git ls-files -- films/' + f, { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim().length > 0) continue; } catch {}
+      rmSync(join(FILMS, f), { recursive: true, force: true }); gone.push(`films/${f}`);
+    }
   }
   if (existsSync(VERIFY_CACHE)) { rmSync(VERIFY_CACHE, { recursive: true, force: true }); gone.push(VERIFY_CACHE.replace(homedir(), '~')); }
   return gone;

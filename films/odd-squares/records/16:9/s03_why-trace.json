@@ -1,13 +1,5 @@
 [
  {
-  "kind": "animation",
-  "t": 0.5,
-  "i": 1,
-  "scene": "s03_why",
-  "sentence": "s03.1",
-  "animation": "FadeOut; FadeOut"
- },
- {
   "kind": "bookmark",
   "t": 21.381,
   "id": "col",
@@ -17,15 +9,15 @@
  {
   "kind": "animation",
   "t": 1.333,
-  "i": 2,
+  "i": 1,
   "scene": "s03_why",
   "sentence": "s03.1",
-  "animation": "Transform; Transform; Transform; Transform; Succession"
+  "animation": "FadeOut; FadeOut; Transform; Transform; Transform; Transform; Succession"
  },
  {
   "kind": "animation",
   "t": 2.333,
-  "i": 3,
+  "i": 2,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "Succession; Write"
@@ -40,7 +32,7 @@
  {
   "kind": "animation",
   "t": 2.867,
-  "i": 4,
+  "i": 3,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "Wait"
@@ -48,7 +40,7 @@
  {
   "kind": "animation",
   "t": 2.867,
-  "i": 5,
+  "i": 4,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "wait",
@@ -57,7 +49,7 @@
  {
   "kind": "animation",
   "t": 3.867,
-  "i": 6,
+  "i": 5,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "Succession; EqMorph"
@@ -72,7 +64,7 @@
  {
   "kind": "animation",
   "t": 4.5,
-  "i": 7,
+  "i": 6,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "Wait"
@@ -80,7 +72,7 @@
  {
   "kind": "animation",
   "t": 4.5,
-  "i": 8,
+  "i": 7,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "wait",
@@ -89,7 +81,7 @@
  {
   "kind": "animation",
   "t": 5.3,
-  "i": 9,
+  "i": 8,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "EqMorph"
@@ -97,7 +89,7 @@
  {
   "kind": "animation",
   "t": 6.667,
-  "i": 10,
+  "i": 9,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "Wait"
@@ -105,7 +97,7 @@
  {
   "kind": "animation",
   "t": 6.667,
-  "i": 11,
+  "i": 10,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "wait",
@@ -120,7 +112,7 @@
  {
   "kind": "animation",
   "t": 6.833,
-  "i": 12,
+  "i": 11,
   "scene": "s03_why",
   "sentence": null,
   "animation": "Wait"
@@ -128,7 +120,7 @@
  {
   "kind": "animation",
   "t": 6.833,
-  "i": 13,
+  "i": 12,
   "scene": "s03_why",
   "sentence": null,
   "animation": "wait",
@@ -144,7 +136,7 @@
  {
   "kind": "animation",
   "t": 8.833,
-  "i": 14,
+  "i": 13,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "Wait"
@@ -152,7 +144,7 @@
  {
   "kind": "animation",
   "t": 8.833,
-  "i": 15,
+  "i": 14,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
@@ -160,19 +152,11 @@
  },
  {
   "kind": "animation",
-  "t": 9.533,
-  "i": 16,
+  "t": 9.633,
+  "i": 15,
   "scene": "s03_why",
   "sentence": "s03.2",
-  "animation": "EqMorph"
- },
- {
-  "kind": "animation",
-  "t": 10.133,
-  "i": 17,
-  "scene": "s03_why",
-  "sentence": "s03.2",
-  "animation": "FadeOut; FadeIn"
+  "animation": "EqMorph; FadeOut; FadeIn"
  },
  {
   "kind": "bookmark",
@@ -183,16 +167,16 @@
  },
  {
   "kind": "animation",
-  "t": 10.333,
-  "i": 18,
+  "t": 9.833,
+  "i": 16,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 10.333,
-  "i": 19,
+  "t": 9.833,
+  "i": 17,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
@@ -200,8 +184,8 @@
  },
  {
   "kind": "animation",
-  "t": 10.933,
-  "i": 20,
+  "t": 10.633,
+  "i": 18,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "FadeOut; FadeIn"
@@ -216,7 +200,7 @@
  {
   "kind": "animation",
   "t": 11.967,
-  "i": 21,
+  "i": 19,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "Wait"
@@ -224,16 +208,16 @@
  {
   "kind": "animation",
   "t": 11.967,
-  "i": 22,
+  "i": 20,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
-  "seconds": 1.047
+  "seconds": 1.347
  },
  {
   "kind": "animation",
   "t": 13.8,
-  "i": 23,
+  "i": 21,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "Wait"
@@ -241,7 +225,7 @@
  {
   "kind": "animation",
   "t": 13.8,
-  "i": 24,
+  "i": 22,
   "scene": "s03_why",
   "sentence": "s03.2",
   "animation": "wait",
@@ -256,7 +240,7 @@
  {
   "kind": "animation",
   "t": 13.933,
-  "i": 25,
+  "i": 23,
   "scene": "s03_why",
   "sentence": null,
   "animation": "Wait"
@@ -264,7 +248,7 @@
  {
   "kind": "animation",
   "t": 13.933,
-  "i": 26,
+  "i": 24,
   "scene": "s03_why",
   "sentence": null,
   "animation": "wait",
@@ -273,7 +257,7 @@
  {
   "kind": "animation",
   "t": 14.833,
-  "i": 27,
+  "i": 25,
   "scene": "s03_why",
   "sentence": "s03.3",
   "animation": "Transform; Transform; Transform; Create"
@@ -288,7 +272,7 @@
  {
   "kind": "animation",
   "t": 17.867,
-  "i": 28,
+  "i": 26,
   "scene": "s03_why",
   "sentence": "s03.3",
   "animation": "Create"
@@ -296,7 +280,7 @@
  {
   "kind": "animation",
   "t": 18.767,
-  "i": 29,
+  "i": 27,
   "scene": "s03_why",
   "sentence": "s03.3",
   "animation": "EqMorph"
@@ -304,7 +288,7 @@
  {
   "kind": "animation",
   "t": 20.7,
-  "i": 30,
+  "i": 28,
   "scene": "s03_why",
   "sentence": "s03.3",
   "animation": "Wait"
@@ -312,7 +296,7 @@
  {
   "kind": "animation",
   "t": 20.7,
-  "i": 31,
+  "i": 29,
   "scene": "s03_why",
   "sentence": "s03.3",
   "animation": "wait",
@@ -327,7 +311,7 @@
  {
   "kind": "animation",
   "t": 20.833,
-  "i": 32,
+  "i": 30,
   "scene": "s03_why",
   "sentence": null,
   "animation": "Wait"
@@ -335,7 +319,7 @@
  {
   "kind": "animation",
   "t": 20.833,
-  "i": 33,
+  "i": 31,
   "scene": "s03_why",
   "sentence": null,
   "animation": "wait",

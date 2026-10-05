@@ -1,0 +1,174 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.0,
+  "i": 1,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "Create; Succession"
+ },
+ {
+  "kind": "animation",
+  "t": 2.4,
+  "i": 2,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 3.167,
+  "i": 3,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 3.933,
+  "i": 4,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 4.7,
+  "i": 5,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "bookmark",
+  "t": 22.427,
+  "id": "gnomons",
+  "sentence": "s03.1",
+  "scene": "s03_gnomons"
+ },
+ {
+  "kind": "animation",
+  "t": 5.0,
+  "i": 6,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "Create; Write"
+ },
+ {
+  "kind": "animation",
+  "t": 5.433,
+  "i": 7,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.433,
+  "i": 8,
+  "scene": "s03_gnomons",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 0.445
+ },
+ {
+  "t": 5.433,
+  "kind": "sentence_end",
+  "scene": "s03_gnomons",
+  "sentence": "s03.1"
+ },
+ {
+  "kind": "animation",
+  "t": 5.567,
+  "i": 9,
+  "scene": "s03_gnomons",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 5.567,
+  "i": 10,
+  "scene": "s03_gnomons",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.162
+ },
+ {
+  "kind": "bookmark",
+  "t": 25.27,
+  "id": "lands",
+  "sentence": "s03.2",
+  "scene": "s03_gnomons"
+ },
+ {
+  "kind": "animation",
+  "t": 7.767,
+  "i": 11,
+  "scene": "s03_gnomons",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.767,
+  "i": 12,
+  "scene": "s03_gnomons",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 2.229
+ },
+ {
+  "kind": "animation",
+  "t": 8.367,
+  "i": 13,
+  "scene": "s03_gnomons",
+  "sentence": "s03.2",
+  "animation": "Indicate"
+ },
+ {
+  "kind": "animation",
+  "t": 9.467,
+  "i": 14,
+  "scene": "s03_gnomons",
+  "sentence": "s03.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 9.467,
+  "i": 15,
+  "scene": "s03_gnomons",
+  "sentence": "s03.2",
+  "animation": "wait",
+  "seconds": 1.117
+ },
+ {
+  "t": 9.467,
+  "kind": "sentence_end",
+  "scene": "s03_gnomons",
+  "sentence": "s03.2"
+ },
+ {
+  "kind": "animation",
+  "t": 12.067,
+  "i": 16,
+  "scene": "s03_gnomons",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 12.067,
+  "i": 17,
+  "scene": "s03_gnomons",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 2.6
+ },
+ {
+  "kind": "scene_end",
+  "t": 12.067,
+  "scene": "s03_gnomons"
+ }
+]

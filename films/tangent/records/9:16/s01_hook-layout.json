@@ -924,7 +924,7 @@
   ]
  },
  {
-  "t": 5.6,
+  "t": 4.7,
   "objects": [
    {
     "kind": "Axes",
@@ -1065,7 +1065,7 @@
   ]
  },
  {
-  "t": 5.6,
+  "t": 4.7,
   "objects": [
    {
     "kind": "Axes",
@@ -1206,7 +1206,7 @@
   ]
  },
  {
-  "t": 6.8,
+  "t": 5.3,
   "objects": [
    {
     "kind": "Axes",
@@ -1343,28 +1343,11 @@
     "z": 7,
     "alive": true,
     "text": true
-   },
-   {
-    "kind": "VGroup",
-    "id": "11:8",
-    "bbox": [
-     -2.638,
-     -2.339,
-     4.945,
-     2.769
-    ],
-    "height_u": 34.61,
-    "nominal_u": null,
-    "role": null,
-    "color": "#FFFFFF",
-    "z": 8,
-    "alive": true,
-    "text": false
    }
   ]
  },
  {
-  "t": 7.2,
+  "t": 5.6,
   "objects": [
    {
     "kind": "Axes",
@@ -1501,28 +1484,11 @@
     "z": 7,
     "alive": true,
     "text": true
-   },
-   {
-    "kind": "VGroup",
-    "id": "12:8",
-    "bbox": [
-     -2.638,
-     -2.339,
-     4.945,
-     2.769
-    ],
-    "height_u": 34.61,
-    "nominal_u": null,
-    "role": null,
-    "color": "#FFFFFF",
-    "z": 8,
-    "alive": true,
-    "text": false
    }
   ]
  },
  {
-  "t": 7.2,
+  "t": 5.6,
   "objects": [
    {
     "kind": "Axes",
@@ -1659,28 +1625,11 @@
     "z": 7,
     "alive": true,
     "text": true
-   },
-   {
-    "kind": "VGroup",
-    "id": "13:8",
-    "bbox": [
-     -2.638,
-     -2.339,
-     4.945,
-     2.769
-    ],
-    "height_u": 34.61,
-    "nominal_u": null,
-    "role": null,
-    "color": "#FFFFFF",
-    "z": 8,
-    "alive": true,
-    "text": false
    }
   ]
  },
  {
-  "t": 7.6,
+  "t": 6.8,
   "objects": [
    {
     "kind": "Axes",
@@ -1817,11 +1766,28 @@
     "z": 7,
     "alive": true,
     "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "14:8",
+    "bbox": [
+     -2.638,
+     -2.339,
+     4.945,
+     2.769
+    ],
+    "height_u": 34.61,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
    }
   ]
  },
  {
-  "t": 8.133,
+  "t": 7.2,
   "objects": [
    {
     "kind": "Axes",
@@ -1958,11 +1924,28 @@
     "z": 7,
     "alive": true,
     "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "15:8",
+    "bbox": [
+     -2.638,
+     -2.339,
+     4.945,
+     2.769
+    ],
+    "height_u": 34.61,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
    }
   ]
  },
  {
-  "t": 8.133,
+  "t": 7.2,
   "objects": [
    {
     "kind": "Axes",
@@ -2086,6 +2069,446 @@
    {
     "kind": "Eq",
     "id": "16:7",
+    "bbox": [
+     -1.031,
+     -4.481,
+     2.062,
+     0.775
+    ],
+    "height_u": 9.68,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "VGroup",
+    "id": "16:8",
+    "bbox": [
+     -2.638,
+     -2.339,
+     4.945,
+     2.769
+    ],
+    "height_u": 34.61,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 7.6,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "17:0",
+    "bbox": [
+     -3.197,
+     -2.426,
+     6.394,
+     4.125
+    ],
+    "height_u": 51.56,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "17:1",
+    "bbox": [
+     -3.44,
+     3.416,
+     5.772,
+     0.836
+    ],
+    "height_u": 10.45,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "17:2",
+    "bbox": [
+     -3.133,
+     -2.362,
+     6.33,
+     3.78
+    ],
+    "height_u": 47.25,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "17:3",
+    "bbox": [
+     -1.197,
+     -2.719,
+     0.084,
+     0.261
+    ],
+    "height_u": 3.26,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "17:4",
+    "bbox": [
+     0.76,
+     -2.717,
+     0.127,
+     0.259
+    ],
+    "height_u": 3.24,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "17:5",
+    "bbox": [
+     2.744,
+     -2.72,
+     0.114,
+     0.263
+    ],
+    "height_u": 3.28,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 5,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Dot",
+    "id": "17:6",
+    "bbox": [
+     -1.227,
+     -2.065,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "17:7",
+    "bbox": [
+     -1.031,
+     -4.481,
+     2.062,
+     0.775
+    ],
+    "height_u": 9.68,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 8.133,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "18:0",
+    "bbox": [
+     -3.197,
+     -2.426,
+     6.394,
+     4.125
+    ],
+    "height_u": 51.56,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "18:1",
+    "bbox": [
+     -3.44,
+     3.416,
+     5.772,
+     0.836
+    ],
+    "height_u": 10.45,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "18:2",
+    "bbox": [
+     -3.133,
+     -2.362,
+     6.33,
+     3.78
+    ],
+    "height_u": 47.25,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "18:3",
+    "bbox": [
+     -1.197,
+     -2.719,
+     0.084,
+     0.261
+    ],
+    "height_u": 3.26,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "18:4",
+    "bbox": [
+     0.76,
+     -2.717,
+     0.127,
+     0.259
+    ],
+    "height_u": 3.24,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "18:5",
+    "bbox": [
+     2.744,
+     -2.72,
+     0.114,
+     0.263
+    ],
+    "height_u": 3.28,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 5,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Dot",
+    "id": "18:6",
+    "bbox": [
+     -1.227,
+     -2.065,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "18:7",
+    "bbox": [
+     -1.031,
+     -4.481,
+     2.062,
+     0.775
+    ],
+    "height_u": 9.68,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 7,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 8.133,
+  "objects": [
+   {
+    "kind": "Axes",
+    "id": "19:0",
+    "bbox": [
+     -3.197,
+     -2.426,
+     6.394,
+     4.125
+    ],
+    "height_u": 51.56,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "19:1",
+    "bbox": [
+     -3.44,
+     3.416,
+     5.772,
+     0.836
+    ],
+    "height_u": 10.45,
+    "nominal_u": 11.700000000000001,
+    "role": "title",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "ParametricFunction",
+    "id": "19:2",
+    "bbox": [
+     -3.133,
+     -2.362,
+     6.33,
+     3.78
+    ],
+    "height_u": 47.25,
+    "nominal_u": null,
+    "role": null,
+    "color": "#3E6F5C",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "19:3",
+    "bbox": [
+     -1.197,
+     -2.719,
+     0.084,
+     0.261
+    ],
+    "height_u": 3.26,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "19:4",
+    "bbox": [
+     0.76,
+     -2.717,
+     0.127,
+     0.259
+    ],
+    "height_u": 3.24,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "19:5",
+    "bbox": [
+     2.744,
+     -2.72,
+     0.114,
+     0.263
+    ],
+    "height_u": 3.28,
+    "nominal_u": 4.4,
+    "role": "tick",
+    "color": "#000000",
+    "z": 5,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Dot",
+    "id": "19:6",
+    "bbox": [
+     -1.227,
+     -2.065,
+     0.144,
+     0.144
+    ],
+    "height_u": 1.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "19:7",
     "bbox": [
      -1.031,
      -4.481,

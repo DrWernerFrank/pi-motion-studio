@@ -5,7 +5,11 @@
 //   buildVoice(key, {only})     piper per sentence (engine/manim/voice.py, ML venv), cached by content in
 //                               ~/.cache/pi-motion-studio/voice/<sha256>/{audio.wav, words.json}, then timing.json
 //   alignNarration(key, wav)    the human's own narration: engine/asr.py words matched to the sentences
-//   buildMix(key)               the narration bus, sample-exact, two-pass loudnorm to mix.lufs (-16)
+//   buildMix(key)               the narration bus, sample-exact, two-pass loudnorm to mix.lufs (-16);
+//                               film.json music: {…} adds a synthesized bed (audio.mjs synthMusic,
+//                               deterministic, seeded) ducked under the narration — the isolated ducked
+//                               bed is written to out/bed.wav (the concat-mux check measures the duck);
+//                               films without a music object take the exact former path (byte-identical mix)
 //
 // timing.json (derived, never hand-edited):
 //   { version, voice: "piper:<name>" | "human", length_scale, sample_rate, gap, gap_samples, duration, timing,
@@ -401,10 +405,42 @@ export async function buildMix(key) {
     }
     writeWavF32(pre, [bus, bus], sr);
   }
+  // the optional bed (film.json music: {…} — "none"/absent stays the narration-only path): a
+  // deterministic synth score ducked under every narration window. The DUCKED bed is the artifact:
+  // out/bed.wav is what concat-mux measures (speech windows vs gaps >= 8 dB apart).
+  const mus = cfg.music && (typeof cfg.music === 'object' || cfg.music === 'synth')
+    ? (typeof cfg.music === 'object' ? cfg.music : {}) : null;
+  let bedFile = null;
   try {
-    const r = await normalize(pre, file, target);
-    return { file, lufs: r.lufs, truePeak: r.truePeak, duration: +D.toFixed(3), ...(warning ? { warning } : {}) };
-  } finally { rmSync(pre, { force: true }); }
+    let sum = pre;
+    if (mus) {
+      const { synthMusic, writeWav } = await import('./audio.mjs');
+      const bed = synthMusic({ style: 'minimal', ...mus }, D, true);
+      const gain = mus.gain ?? 0.09, duckDb = mus.duck ?? 12;
+      const duckG = Math.pow(10, -duckDb / 20);
+      const SR48 = 48000, n = bed.L.length, env = new Float32Array(n).fill(1);
+      const AT = 0.12, REL = 0.4, LEAD = 0.03, TAIL = 0.22; // s: attack/release ramps, lead-in, hold
+      for (const s of timing.sentences) {
+        const a0 = Math.max(0, Math.round((s.start - LEAD - AT) * SR48)), a1 = Math.max(0, Math.round((s.start - LEAD) * SR48));
+        const h0 = a1, h1 = Math.min(n, Math.round((s.end + TAIL) * SR48));
+        const r0 = h1, r1 = Math.min(n, Math.round((s.end + TAIL + REL) * SR48));
+        for (let i = a0; i < a1; i++) { const v = duckG + (1 - duckG) * (a1 - i) / Math.max(1, a1 - a0); if (v < env[i]) env[i] = v; }
+        for (let i = h0; i < h1; i++) if (duckG < env[i]) env[i] = duckG;
+        for (let i = r0; i < r1; i++) { const v = duckG + (1 - duckG) * (i - r0) / Math.max(1, r1 - r0); if (v < env[i]) env[i] = v; }
+      }
+      const f0 = Math.max(0, n - Math.round(0.5 * SR48)); // end fade: the bed resolves under the recap hold
+      for (let i = f0; i < n; i++) env[i] *= (n - i) / (n - f0);
+      for (let i = 0; i < n; i++) { bed.L[i] *= env[i] * gain; bed.R[i] *= env[i] * gain; }
+      bedFile = join(dir, 'out', 'bed.wav');
+      writeWav(bedFile, bed.L, bed.R);
+      sum = join(dir, 'out', '.premix.wav');
+      await run('ffmpeg', ['-y', '-v', 'error', '-i', pre, '-i', bedFile, '-filter_complex',
+        `[0:a]aresample=48000[a];[a][1:a]amix=inputs=2:normalize=0,atrim=0:${D},apad=whole_dur=${D}[m]`,
+        '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', sum]);
+    }
+    const r = await normalize(sum, file, target);
+    return { file, lufs: r.lufs, truePeak: r.truePeak, duration: +D.toFixed(3), ...(bedFile ? { bed: bedFile } : {}), ...(warning ? { warning } : {}) };
+  } finally { rmSync(pre, { force: true }); rmSync(join(dir, 'out', '.premix.wav'), { force: true }); }
 }
 
 // voice cache entries (for the "one sentence re-voices alone" contract and `studio cache`)

@@ -4,6 +4,7 @@
 // { pass, measured, skip? }); a check without a file is "pending" and counts as red (mirrors the
 // editing mission's D-003/D-004, never silently weakened).
 //   studio verify-math [--quick] [--list] [--only <id>,…] [--clean]
+import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -59,12 +60,22 @@ const gitHead = async () => {
 // films that existed before this process started (mtime guard), so a concurrent verifier never deletes
 // another run's films mid-check. The sweep also takes stale leftovers of the editing verifier
 // (films/verify-*, the 5 GB the first mission left behind); films created after this process started are
-// never touched — each check cleans up its own.
+// never touched — each check cleans up its own. COMMITTED fixtures (films/verify-m-kit, restored in
+// d99a378 and then eaten twice more by this very sweep — the library check's "missing" failure, and
+// 3e3c3a1 accidentally staging the deletion) are git-tracked and NEVER swept: a temp film is untracked
+// by definition.
 export const RUN_STARTED = Date.now();
+const trackedByGit = (f) => {
+  try { return execSync('git ls-files -- films/' + f, { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim().length > 0; }
+  catch { return false; }
+};
 export function cleanTemp() {
   const gone = [];
   if (existsSync(FILMS)) for (const f of readdirSync(FILMS)) {
-    if (/^verify-(m-)?[a-z0-9-]+$/.test(f) && statSync(join(FILMS, f)).mtimeMs < RUN_STARTED - 2000) { rmSync(join(FILMS, f), { recursive: true, force: true }); gone.push(`films/${f}`); }
+    if (/^verify-(m-)?[a-z0-9-]+$/.test(f) && statSync(join(FILMS, f)).mtimeMs < RUN_STARTED - 2000) {
+      if (trackedByGit(f)) continue; // a committed fixture (verify-m-kit): never a leftover
+      rmSync(join(FILMS, f), { recursive: true, force: true }); gone.push(`films/${f}`);
+    }
   }
   if (existsSync(VERIFY_CACHE)) { rmSync(VERIFY_CACHE, { recursive: true, force: true }); gone.push(VERIFY_CACHE.replace(homedir(), '~')); }
   return gone;

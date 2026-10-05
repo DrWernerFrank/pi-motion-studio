@@ -189,6 +189,11 @@ class Scene(StudioScene):
             claim("diff(x**2, x, 2) == 2", about="the steepness itself changes (f'' = 2, not 0)", says="s01.2")
             claim("diff(x**2, x).subs(x, 2) != diff(x**2, x).subs(x, 1)",
                   about="different points, different steepness", says="s01.2")
+            # r18/r19/r20's lull ask (the 3.5-5.5 static hold): while the voice says "and its
+            # steepness…", P pulses — the point whose steepness the staircase is about to show
+            # (sub-second, word-synced, zero geometry moved); the stairs still land on "changes"
+            pause(self, self.until("changes") - 1.5)
+            self.play(Indicate(P, scale_factor=1.5, color=math_role("positive")), run_time=0.6)
             pause(self, self.until("changes") - 0.6)
             self.play(Create(stairs, lag_ratio=0.5), run_time=1.2)
             self.wait(0.4)

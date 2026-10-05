@@ -179,12 +179,16 @@
   {
    "id": "s04.3",
    "scene": "s04_sum",
-   "text": "{result}So the sum of the first n odd numbers is n squared, for every n.",
+   "text": "{result}So the sum of the first n odd numbers is n squared, {every}for every n.",
    "spoken": "So the sum of the first n odd numbers is n squared, for every n.",
    "bookmarks": [
     {
      "id": "result",
      "at_word": 0
+    },
+    {
+     "id": "every",
+     "at_word": 12
     }
    ],
    "line": 20

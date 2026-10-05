@@ -10,7 +10,16 @@
   "lang": "en",
   "voice": "piper:en_US-ljspeech-medium",
   "captions": "auto",
-  "music": "none",
+  "music": {
+    "style": "minimal",
+    "bpm": 84,
+    "key": "C major",
+    "progression": ["I", "V", "vi", "IV"],
+    "sections": [{ "bars": 1, "layers": ["arp"] }, { "bars": 30, "layers": ["arp", "bass"] }],
+    "gain": 0.09,
+    "duck": 12,
+    "seed": 21
+  },
   "mix": {
     "lufs": -16
   },

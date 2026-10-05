@@ -55,26 +55,48 @@
   "scene": "s02_secant"
  },
  {
+  "kind": "bookmark",
+  "t": 11.573,
+  "id": "p2",
+  "sentence": "s02.1",
+  "scene": "s02_secant"
+ },
+ {
   "kind": "animation",
-  "t": 3.3,
+  "t": 3.433,
   "i": 6,
+  "scene": "s02_secant",
+  "sentence": "s02.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "bookmark",
+  "t": 11.573,
+  "id": "p2",
+  "sentence": "s02.1",
+  "scene": "s02_secant"
+ },
+ {
+  "kind": "animation",
+  "t": 3.533,
+  "i": 7,
   "scene": "s02_secant",
   "sentence": "s02.1",
   "animation": "Wait"
  },
  {
   "kind": "animation",
-  "t": 3.3,
-  "i": 7,
+  "t": 3.533,
+  "i": 8,
   "scene": "s02_secant",
   "sentence": "s02.1",
   "animation": "wait",
-  "seconds": 0.658
+  "seconds": 0.1
  },
  {
   "kind": "animation",
-  "t": 3.9,
-  "i": 8,
+  "t": 4.133,
+  "i": 9,
   "scene": "s02_secant",
   "sentence": "s02.1",
   "animation": "GrowFromCenter"
@@ -82,7 +104,7 @@
  {
   "kind": "animation",
   "t": 4.7,
-  "i": 9,
+  "i": 10,
   "scene": "s02_secant",
   "sentence": "s02.1",
   "animation": "Wait"
@@ -90,11 +112,11 @@
  {
   "kind": "animation",
   "t": 4.7,
-  "i": 10,
+  "i": 11,
   "scene": "s02_secant",
   "sentence": "s02.1",
   "animation": "wait",
-  "seconds": 0.814
+  "seconds": 0.58
  },
  {
   "t": 4.7,
@@ -105,7 +127,7 @@
  {
   "kind": "animation",
   "t": 4.833,
-  "i": 11,
+  "i": 12,
   "scene": "s02_secant",
   "sentence": null,
   "animation": "Wait"
@@ -113,7 +135,7 @@
  {
   "kind": "animation",
   "t": 4.833,
-  "i": 12,
+  "i": 13,
   "scene": "s02_secant",
   "sentence": null,
   "animation": "wait",
@@ -122,10 +144,10 @@
  {
   "kind": "animation",
   "t": 6.033,
-  "i": 13,
+  "i": 14,
   "scene": "s02_secant",
   "sentence": "s02.2",
-  "animation": "Create"
+  "animation": "Create; FadeOut"
  },
  {
   "kind": "bookmark",
@@ -137,7 +159,7 @@
  {
   "kind": "animation",
   "t": 7.433,
-  "i": 14,
+  "i": 15,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "Wait"
@@ -145,7 +167,7 @@
  {
   "kind": "animation",
   "t": 7.433,
-  "i": 15,
+  "i": 16,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "wait",
@@ -154,7 +176,7 @@
  {
   "kind": "animation",
   "t": 8.233,
-  "i": 16,
+  "i": 17,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "Create; Create"
@@ -162,7 +184,7 @@
  {
   "kind": "animation",
   "t": 9.433,
-  "i": 17,
+  "i": 18,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "Write"
@@ -177,7 +199,7 @@
  {
   "kind": "animation",
   "t": 11.0,
-  "i": 18,
+  "i": 19,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "Write"
@@ -185,7 +207,7 @@
  {
   "kind": "animation",
   "t": 11.5,
-  "i": 19,
+  "i": 20,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "Wait"
@@ -193,7 +215,7 @@
  {
   "kind": "animation",
   "t": 11.5,
-  "i": 20,
+  "i": 21,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "wait",
@@ -208,7 +230,7 @@
  {
   "kind": "animation",
   "t": 11.533,
-  "i": 21,
+  "i": 22,
   "scene": "s02_secant",
   "sentence": null,
   "animation": "Wait"
@@ -216,7 +238,7 @@
  {
   "kind": "animation",
   "t": 11.533,
-  "i": 22,
+  "i": 23,
   "scene": "s02_secant",
   "sentence": null,
   "animation": "wait",

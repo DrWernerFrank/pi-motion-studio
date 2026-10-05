@@ -43,6 +43,19 @@ export default async () => {
   }
   const { readMathFilm } = await import('../../math.mjs');
   const film = readMathFilm(SHOW);
+  // the drafts are the probe surface: render any that are missing or stale (a source change on
+  // the fixture would otherwise silently skip a format — a skip that hides a real drift), then
+  // build the mix FROM THE RENDERED TRUTH (film.json duration is DERIVED by the render) and
+  // re-mux so the drafts carry the current mix (scene renders stay cached; this is mux-only)
+  const { draftStale } = await import('../../math-cli.mjs');
+  let rendered = 0;
+  for (const fmt of film.cfg.formats) {
+    const file = join(film.out, `draft-${fmt}.mp4`);
+    if (!existsSync(file) || draftStale(film, file)) { rendered++; await renderMathFilm(SHOW, { quality: 'draft', fmt }); }
+  }
+  await buildMix(SHOW);
+  for (const fmt of film.cfg.formats) await renderMathFilm(SHOW, { quality: 'draft', fmt });
+  if (rendered) facts.push(`${rendered} draft format(s) rendered fresh; the mix rebuilt from the derived duration`);
   // scene spans from timing.json (audio truth) — the joins are the sentence boundaries
   const timing = JSON.parse(readFileSync(join(film.dir, 'timing.json'), 'utf8'));
   const scenes = [];
@@ -52,7 +65,7 @@ export default async () => {
   }
   for (const fmt of film.cfg.formats) {
     const file = join(film.out, `draft-${fmt}.mp4`);
-    if (!existsSync(file)) continue;
+    if (!existsSync(file)) continue; // rendered above
     const { bad: jbad, joins } = await probeJoins(file, scenes);
     if (jbad.length) bad.push(`${fmt}: ${jbad.slice(0, 3).join(', ')}`);
     else facts.push(`${fmt}: ${joins} joins clean (no black/frozen)`);
@@ -69,19 +82,47 @@ export default async () => {
     else bad.push(`loudness ${l.lufs} LUFS / TP ${l.truePeak} (want ${want} ±1 / ≤ −1)`);
   } else bad.push('no out/mix.wav on the showcase (run studio sound)');
 
+  // 2b. the music bed is >= 8 dB lower under narration than in the gaps, measured on the ISOLATED
+  // ducked bed (out/bed.wav — narration.mjs writes it with the mix). The showcase carries a bed by
+  // design (film.json music) and a 2.5 s tail after the narration so the release is measurable.
+  const bed = join(film.out, 'bed.wav');
+  if (film.cfg.music && typeof film.cfg.music === 'object') {
+    if (!existsSync(bed)) await buildMix(SHOW); // deterministic; builds bed.wav + mix.wav
+    if (existsSync(bed)) {
+      const rms = async (from, to) => {
+        const { err } = await run('ffmpeg', ['-v', 'info', '-ss', String(from), '-to', String(to), '-i', bed,
+          '-af', 'astats=measure_perchannel=none:measure_overall=RMS_level', '-f', 'null', '-'], { allowFail: true });
+        const m = /RMS level dB:\s*(-?[\d.]+|-inf)/.exec(err);
+        return m ? +m[1] : null;
+      };
+      // fully-ducked window: 1 s inside the LONGEST sentence (past the 0.12 s attack)
+      const longest = timing.sentences.reduce((a, s) => (s.end - s.start > a.end - a.start ? s : a));
+      const sFrom = longest.start + 0.3, sTo = Math.min(longest.end, sFrom + 1);
+      // released window: past the 0.62 s release, before the 0.5 s end fade
+      const narrEnd = timing.sentences.reduce((a, s) => Math.max(a, s.end), 0);
+      const gFrom = narrEnd + 1.0, gTo = narrEnd + 2.0;
+      const sL = await rms(sFrom, sTo), gL = await rms(gFrom, gTo);
+      if (sL === null || gL === null) bad.push('the isolated bed did not measure (astats)');
+      else {
+        const duck = gL - sL;
+        if (duck >= 8) facts.push(`bed ducked ${duck.toFixed(1)} dB under narration (speech ${sL.toFixed(1)} vs gap ${gL.toFixed(1)} dB RMS on the isolated bed, >= 8)`);
+        else bad.push(`bed duck only ${duck.toFixed(1)} dB (speech ${sL.toFixed(1)} vs gap ${gL.toFixed(1)} dB RMS) — want >= 8 dB under narration`);
+      }
+    } else bad.push('no out/bed.wav on the showcase (film.json has music; run studio sound)');
+  } else bad.push('the showcase carries no music bed — the duck clause needs one (film.json music)');
+
   // 3. A/V drift at the end: the drafts' video vs audio durations <= 1 frame (30fps draft = 33ms)
   for (const fmt of film.cfg.formats) {
     const file = join(film.out, `draft-${fmt}.mp4`);
-    if (!existsSync(file)) continue;
+    if (!existsSync(file)) continue; // rendered above
     const { out } = await run('ffprobe', ['-v', 'error', '-show_entries',
       'stream=codec_type:format=duration', '-of', 'json', file]);
     const p = JSON.parse(out);
     const vd = +p.format.duration;
-    const ad = p.streams.find((s) => s.codec_type === 'audio') ? vd : null; // a single muxed stream: equal by mux
     if (existsSync(mix)) {
       const { out: md } = await run('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', mix]);
       const mdur = +md;
-      const drift = Math.abs(vdur - mdur);
+      const drift = Math.abs(vd - mdur);
       if (drift <= 0.034) facts.push(`${fmt}: A/V end offset ${drift.toFixed(3)}s <= 1 frame`);
       else bad.push(`${fmt}: A/V end offset ${drift.toFixed(3)}s > 1 frame`);
     }

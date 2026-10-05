@@ -1,7 +1,8 @@
 from types import SimpleNamespace
 
 import numpy as np
-from manim import DL, ORIGIN, RIGHT, UP, UR, Create, FadeIn, FadeOut, Rectangle, Square, Transform, VGroup, Write
+from manim import (DL, ORIGIN, RIGHT, UP, UR, Create, FadeIn, FadeOut, Rectangle, Square, Transform,
+                   VGroup, Write, smooth)
 
 from studio_manim import L, Eq, StudioScene, claim, color_for, math_role
 from studio_manim.kit import Callout, EqMorph, chapter, gnomon, into, swap
@@ -84,6 +85,23 @@ def dimmed(g, on=True):
     return d
 
 
+def _first_half(t):
+    return smooth(min(1.0, 2 * t))
+
+
+def _second_half(t):
+    return smooth(max(0.0, 2 * t - 1))
+
+
+def swap_with(scene, old, new, direction, run_time):
+    """swap()'s exit-then-enter semantics as ANIMATIONS (not a play), so a label swap can share
+    one play with the equation it belongs to — r16-r19 (critic, thrice on the phone sheets): the
+    brace labels lagged the generalizing equation ~0.6-0.9s; they now move as one beat."""
+    d = L.u * 6
+    return [FadeOut(old, shift=direction * d, rate_func=_first_half),
+            FadeIn(new, shift=direction * d, rate_func=_second_half)]
+
+
 class Scene(StudioScene):
     """s03_why — the 4th L is a column of 4 and a row of 3; in general k and k-1: 2k-1 = k^2-(k-1)^2."""
 
@@ -139,8 +157,13 @@ class Scene(StudioScene):
         ch = chapter("Why the L fits")
 
         with self.say("s03.1"):
-            self.play(FadeOut(e5, shift=UP * L.u * 6), FadeOut(gs[4], shift=UR * u), run_time=0.5)
-            self.play(*[Transform(g, d) for g, d in zip(gs[:4], dim)], ch.enter(run_time=0.8),
+            # r16-r19 (critic, the ~0.35s figure-alone beat at the turn): the old equation's exit
+            # and the chapter's entrance now share ONE play — the page never goes quiet between them.
+            # The two exits are SEQUENCED inside the beat (e5 leaves in its first half, the 5th L
+            # lifts off in its second) so the L never crosses the fading equation's glyphs
+            self.play(FadeOut(e5, shift=UP * L.u * 6, rate_func=lambda t: smooth(min(1.0, 2 * t))),
+                      FadeOut(gs[4], shift=UR * u, rate_func=lambda t: smooth(max(0.0, 2 * t - 1))),
+                      *[Transform(g, d) for g, d in zip(gs[:4], dim)], ch.enter(run_time=0.8),
                       run_time=max(0.8, self.until("col")))
             self.play(cc.create(run_time=1.0), Write(e4, run_time=1.0))
             self.wait(self.until("row"))
@@ -153,10 +176,10 @@ class Scene(StudioScene):
             # r13 (critic): the equation generalized ~2s before the labels under "a column of k"
             # — the equation now lands WITH the first label (colk), and the k-th label at rowk
             self.wait(self.until("colk"))
-            self.play(EqMorph(e47, ek), run_time=0.7)
-            swap(self, cc.label, kc, direction=UP, run_time=0.6)
+            self.play(EqMorph(e47, ek, run_time=0.8), *swap_with(self, cc.label, kc, UP, 0.8),
+                      run_time=0.8)
             self.wait(self.until("rowk"))
-            swap(self, rc.label, kr, direction=UP, run_time=0.6)
+            self.play(*swap_with(self, rc.label, kr, UP, 0.8), run_time=0.8)
             self.wait(self.until("total"))   # {total} "two k minus one cells" — the count lands
             claim("k + (k - 1) == 2*k - 1", about="column of k plus row of k-1", says="s03.2")
             claim(f"{sum(gnomon(j).cells for j in range(1, 6))} == 5**2", about="the L's counted on the kit's gnomons fill 5x5", says="s03.2")

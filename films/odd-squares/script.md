@@ -17,7 +17,7 @@
 ## scene s04_sum: the algebraic close
 [s04.1] Now add up the first n odd numbers, {rewrite}writing each one as a difference of two squares.
 [s04.2] {cancel}Each square cancels its neighbour, {survive}and only n squared minus zero survives.
-[s04.3] {result}So the sum of the first n odd numbers is n squared, for every n.
+[s04.3] {result}So the sum of the first n odd numbers is n squared, {every}for every n.
 
 ## scene s05_recap: the takeaway
 [s05.1] Odd numbers stack into squares. {kth}L number k adds two k minus one cells, {sum}and together the first n make n squared.
