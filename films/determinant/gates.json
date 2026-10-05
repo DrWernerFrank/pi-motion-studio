@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T14:09:41.310Z",
+  "at": "2026-10-05T14:38:01.643Z",
   "pass": true,
   "checks": [
     {
@@ -58,9 +58,9 @@
     },
     {
       "name": "deterministic",
-      "pass": false,
-      "level": "warn",
-      "detail": "12 record file(s) changed since the last gates run (16:9/s01_hook-layout.json, 16:9/s02_formula-layout.json, 16:9/s03_sign-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "pass": true,
+      "level": "pass",
+      "detail": "12 layout record hash(es) identical to the last gates.json run",
       "hashes": {
         "16:9/s01_hook-layout.json": "80d7b35d24ba",
         "16:9/s02_formula-layout.json": "9507bb45cfdf",

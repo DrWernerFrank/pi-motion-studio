@@ -179,7 +179,12 @@ export async function buildVoice(key, { only, cacheDir = VOICE_CACHE } = {}) {
     } finally { rmSync(jobs, { force: true }); }
   }
   const timing = assembleTiming(sentences, keys, v);
-  writeJson(timingPath(key), timing);
+  // D-014 (the mtime rule, the tools check's arm): a deterministic re-voice of cached sentences
+  // produces BYTE-IDENTICAL timing — write only when the content changes, or every re-voice
+  // stales every draft for nothing (writeJson bumps mtime unconditionally)
+  const tp = timingPath(key);
+  const next = JSON.stringify(timing, null, 2) + '\n';
+  if (!existsSync(tp) || readFileSync(tp, 'utf8') !== next) writeFileSync(tp, next);
   return { ...timing, voiced: todo.map((k) => k.id) };
 }
 

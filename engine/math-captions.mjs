@@ -52,9 +52,14 @@ export function vazirCovers(text) {
 // The layout probe: the longest cue, at caption size, wraps to <= 2 lines that fit L.caption's band
 // in EVERY format, and the nominal size is >= 3.2u (role=caption stamps it; we assert the ladder).
 // One capped python process for all formats (the probe is cheap: it constructs Txt, no render).
-export const PROBE_PY = `import json, sys, warnings
+export const PROBE_PY = `import json, os, sys, tempfile, warnings
 warnings.filterwarnings("ignore")
 sys.path.insert(0, ${JSON.stringify(join(ROOT, 'engine', 'manim'))})
+# Manim's Typst/Text cache writes media/ under the cwd even for a measurement-only probe —
+# point it at a temp dir or every run leaks engine/manim/test/media (the hygiene check)
+os.environ.setdefault("STUDIO_RECORDS_DIR", tempfile.mkdtemp(prefix="cap-probe-"))
+from manim import config
+config.media_dir = tempfile.mkdtemp(prefix="cap-media-")
 from studio_manim import Txt
 from studio_manim.layout import layout_for
 from studio_manim.theme import size_u

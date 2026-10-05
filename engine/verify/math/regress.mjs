@@ -8,6 +8,7 @@
 // It sits in CHECKS before every check that creates films/verify-m-*: the spawned verify-edit's sweep
 // removes verify-m films older than its own start, so this position is part of the contract —
 // do not move `regress` later in the table.
+import { execSync } from 'node:child_process';
 import { existsSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { run } from '../../lib/proc.mjs';
@@ -41,9 +42,13 @@ export default async () => {
   // end of a verify-math run (the P11 hygiene check fails on that). A verify-edit started after this
   // one finished creates its films later than `tEnd`: never touched.
   const tEnd = Date.now();
+  const tracked = (f) => { // git-tracked fixtures are never leftovers (D-026: this sweep ate the
+    try { return execSync('git ls-files -- films/' + f, { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim().length > 0; }
+    catch { return false; }
+  };                                    // committed films/verify-m-kit at run start, killing library/concat-mux)
   if (existsSync(FILMS)) for (const f of readdirSync(FILMS)) {
     const p = join(FILMS, f);
-    if (/^verify-[a-z0-9-]+$/.test(f) && statSync(p).mtimeMs < tEnd - 2000) { rmSync(p, { recursive: true, force: true }); facts.push(`swept films/${f} (spawned-run leftover)`); }
+    if (/^verify-[a-z0-9-]+$/.test(f) && statSync(p).mtimeMs < tEnd - 2000 && !tracked(f)) { rmSync(p, { recursive: true, force: true }); facts.push(`swept films/${f} (spawned-run leftover)`); }
   }
 
   return { pass: bad.length === 0, measured: bad.length ? bad.join('; ').slice(0, 600) : facts.join('; ') };

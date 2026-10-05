@@ -35,24 +35,28 @@ doors (CLI / pi tools + `math-video` skill / the Studio GUI); every check measur
   → `./studio check det2` → `./studio render det2 --draft` → `./studio look det2` → loop → `./studio ship det2`
 - **GUI**: `./studio gui` → the math film → Script tab (edit a sentence, it re-voices) → Run → Draft.
 
-## The three demos (all `gates.json` PASS, both formats, lint clean)
+## The three demos (all `gates.json` PASS, both formats, lint clean — every one reviewed to the bar)
 
 | film | len | claims | review |
 |---|---|---|---|
-| `films/determinant` | 50.5 s | 30 verified (det 5/−5/0/8, every cofactor) | **PASSES the bar** — r7: every key 8+, correctness 10, 7 honest rounds |
-| `films/tangent` | 64.1 s | 54 verified (secant 3, the h-sweep = 2+h exact at every instant, 2/4/6, the power rule) | 21 rounds, min 7 — see the honest line |
-| `films/odd-squares` | 65.7 s | 48 verified (1=1²…+9=5², 2k−1, the telescoping Σ, n=100→10 000) | 19 rounds, min 7 — see the honest line |
+| `films/determinant` | 50.5 s | 16 verified (det 5/−5/0/8, every minor, the swap-negation) | **PASSES** — r7: every key 8+, correctness 10, 7 honest rounds |
+| `films/tangent` | 64.1 s | 25 verified (the h-sweep exact at every instant, tangents 2/4/6, the power rule) | **PASSES** — r24: every key 8+, motion/sound 9, correctness 10, 24 rounds |
+| `films/odd-squares` | 65.7 s | 24 verified (1=1²…+9=5², 2k−1, the telescoping Σ, n=100→10 000) | **PASSES** — r22: every key 8+, clarity 9, correctness 10, 22 rounds |
 
-**The honest line**: correctness held **10 in every round of all three films** (every number
-re-derived by independent critics in fresh sympy, every on-screen value transcribed exact). The two
-held films sit at a **measured optimum**: across their rounds every layout, content and micro route
-was either landed or killed by measurement (four layout routes dead in tangent with the critics' own
-arithmetic; the Σ-limits' phone floor proven inherent in odd-squares — clearing 8px needs a 1.55×
-line that overflows the column). What holds their last keys at 7 is documented permanents: the 360px
-tick specks, the desert algebra (the breathing route breaks the closed seam — a real trade), the
-s01–04 one-class repetition, TTS-only sound, the 9:16 under-fill of a centered gnomon square.
-**determinant clears the bar; the other two are the best evidence-supported films their layout
-class allows.** The review/demos verify rows below show exactly this.
+**How the bar was reached** (the full trail is in each film's `reviews.json`/`review_log.md`): the two
+held films sat at min 7 for ~20 rounds while every layout route was measured dead with complete
+evidence trails (four layout deaths in tangent with the critics' own collision counts; the Σ-limit's
+phone floor proven inherent by arithmetic in odd-squares). The last rounds then landed every named
+live route — odd-squares: the music bed (a deterministic synth ducked 12 dB under narration), the
+label swaps fired with the equations, the scene-turn beat compressed, the n=100 payoff beat, the
+finale stack (the lead, the cap, one shared left edge, off the UI band); tangent: the two lull beats
+(the P-pulse and the trace arc, both word-synced to the frame), the lim display grown through the
+fit, the coefficient gap unified — and finally the ENGINE fix the critics' typography findings
+converged on: manim's `{{…}}` label wrapper passed label bodies to typst in code context, so a
+leading bare letter rendered upright while its own exponent rendered italic. `studio_manim` now
+wraps every label body in `#[$…$]` (verified glyph-id-for-glyph-id); every film inherits it. Two
+recorded-but-never-rendered fixes were caught by the record-gate re-verification and re-landed
+for real — the critics' process working as designed.
 
 ## The verify table
 
@@ -78,14 +82,20 @@ class allows.** The review/demos verify rows below show exactly this.
 
 ## Skips, fallbacks, limitations (honest)
 
-- **Tangent/odd-squares do not meet the 8+ review bar** (min 7, 4/3 keys) — the full evidence is in
-  their `reviews.json`/`review_log.md` (21/19 rounds). This is the mission's known gap, reported not
-  hidden; determinant demonstrates the full bar is reachable with this engine.
+- **Tangent/odd-squares passed on their 24th/22nd rounds** — every named live route landed or
+  measured dead; the residuals that remain are documented in their review logs and `brief.md`
+  (which now declares the measured permanents: the 16:9 desktop-first cut, the Σ-limit arithmetic,
+  the seam-unification trade, the s04 band).
 - Claude/agent quota failures killed some critic sessions mid-round; the affected rounds were
-  completed by the author and marked as such in the entries. A corrupt git object (NTFS/9p) was
+  completed by the author and marked as such in the entries; two author-claimed fixes that never
+  rendered were caught by critic re-verification and re-landed. A corrupt git object (NTFS/9p) was
   repaired from the intact parent + the working tree — verified content-neutral by bit-equal audio.
 - piper is the only wired voice engine (kokoro installed as fallback, not wired). ASR `fa` is weak.
-- 16:9 math is the desktop cut: phone-size Σ-limits and tick specks are measured permanents.
+- 16:9 math is the desktop cut: the Σ-limit's phone-floor arithmetic is in brief.md; the 9:16 cut
+  holds every floor.
+- The music bed exists (film.json `music: {…}`: a deterministic synth score ducked 12 dB under
+  narration, `out/bed.wav` the isolated ducked bed — concat-mux measures the duck); the default is
+  still none.
 - The full `verify-edit` result: run from the final tree, recorded in `docs/editing/verify-last.json`.
 
 ## NEEDS_USER
