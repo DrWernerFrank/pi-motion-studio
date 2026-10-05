@@ -45,4 +45,7 @@ class Scene(StudioScene):
         with self.say("s03.2"):
             self.play(Write(note), run_time=self.until("flipped"))
             claim("Matrix([[1, 3], [2, 1]]).det() < 0", about="a negative determinant flips space", says="s03.2")
+            # the swap story in one line: exchanging the columns negates the determinant
+            claim("Matrix([[1, 3], [2, 1]]).det() == -(Matrix([[3, 1], [1, 2]]).det())",
+                  about="the swap negates: -5 = -(5)", says="s03.2")
         self.wait(0.4)

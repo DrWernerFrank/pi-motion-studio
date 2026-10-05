@@ -80,7 +80,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.467,
+  "t": 5.483,
   "i": 9,
   "scene": "s05_recap",
   "sentence": "s05.1",
@@ -88,7 +88,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.467,
+  "t": 5.483,
   "i": 10,
   "scene": "s05_recap",
   "sentence": "s05.1",
@@ -97,7 +97,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.167,
+  "t": 6.183,
   "i": 11,
   "scene": "s05_recap",
   "sentence": "s05.1",
@@ -118,7 +118,7 @@
   "scene": "s05_recap",
   "sentence": "s05.1",
   "animation": "wait",
-  "seconds": 1.983
+  "seconds": 1.966
  },
  {
   "t": 8.133,

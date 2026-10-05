@@ -1,7 +1,7 @@
 [
  {
   "kind": "animation",
-  "t": 0.033,
+  "t": 0.017,
   "i": 1,
   "scene": "s06_recap",
   "sentence": null,
@@ -9,7 +9,7 @@
  },
  {
   "kind": "animation",
-  "t": 0.033,
+  "t": 0.017,
   "i": 2,
   "scene": "s06_recap",
   "sentence": null,
@@ -18,7 +18,7 @@
  },
  {
   "kind": "animation",
-  "t": 0.633,
+  "t": 0.617,
   "i": 3,
   "scene": "s06_recap",
   "sentence": "s06.1",
@@ -26,7 +26,7 @@
  },
  {
   "kind": "animation",
-  "t": 1.433,
+  "t": 1.417,
   "i": 4,
   "scene": "s06_recap",
   "sentence": "s06.1",
@@ -41,7 +41,7 @@
  },
  {
   "kind": "animation",
-  "t": 2.367,
+  "t": 2.383,
   "i": 5,
   "scene": "s06_recap",
   "sentence": "s06.1",
@@ -49,16 +49,16 @@
  },
  {
   "kind": "animation",
-  "t": 2.367,
+  "t": 2.383,
   "i": 6,
   "scene": "s06_recap",
   "sentence": "s06.1",
   "animation": "wait",
-  "seconds": 0.96
+  "seconds": 0.977
  },
  {
   "kind": "animation",
-  "t": 3.167,
+  "t": 3.183,
   "i": 7,
   "scene": "s06_recap",
   "sentence": "s06.1",
@@ -86,7 +86,7 @@
   "scene": "s06_recap",
   "sentence": "s06.1",
   "animation": "wait",
-  "seconds": 0.783
+  "seconds": 0.766
  },
  {
   "kind": "animation",
@@ -106,7 +106,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.1,
+  "t": 6.117,
   "i": 12,
   "scene": "s06_recap",
   "sentence": "s06.1",
@@ -114,7 +114,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.1,
+  "t": 6.117,
   "i": 13,
   "scene": "s06_recap",
   "sentence": "s06.1",
@@ -122,14 +122,14 @@
   "seconds": 0.684
  },
  {
-  "t": 6.1,
+  "t": 6.117,
   "kind": "sentence_end",
   "scene": "s06_recap",
   "sentence": "s06.1"
  },
  {
   "kind": "animation",
-  "t": 7.3,
+  "t": 7.317,
   "i": 14,
   "scene": "s06_recap",
   "sentence": null,
@@ -137,7 +137,7 @@
  },
  {
   "kind": "animation",
-  "t": 7.3,
+  "t": 7.317,
   "i": 15,
   "scene": "s06_recap",
   "sentence": null,
@@ -146,7 +146,7 @@
  },
  {
   "kind": "scene_end",
-  "t": 7.3,
+  "t": 7.317,
   "scene": "s06_recap"
  }
 ]

@@ -126,7 +126,7 @@
  },
  {
   "kind": "animation",
-  "t": 4.833,
+  "t": 4.85,
   "i": 12,
   "scene": "s02_secant",
   "sentence": null,
@@ -134,7 +134,7 @@
  },
  {
   "kind": "animation",
-  "t": 4.833,
+  "t": 4.85,
   "i": 13,
   "scene": "s02_secant",
   "sentence": null,
@@ -143,7 +143,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.033,
+  "t": 6.05,
   "i": 14,
   "scene": "s02_secant",
   "sentence": "s02.2",
@@ -158,7 +158,7 @@
  },
  {
   "kind": "animation",
-  "t": 7.433,
+  "t": 7.45,
   "i": 15,
   "scene": "s02_secant",
   "sentence": "s02.2",
@@ -166,16 +166,16 @@
  },
  {
   "kind": "animation",
-  "t": 7.433,
+  "t": 7.45,
   "i": 16,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "wait",
-  "seconds": 1.426
+  "seconds": 1.409
  },
  {
   "kind": "animation",
-  "t": 8.233,
+  "t": 8.25,
   "i": 17,
   "scene": "s02_secant",
   "sentence": "s02.2",
@@ -183,7 +183,7 @@
  },
  {
   "kind": "animation",
-  "t": 9.433,
+  "t": 9.45,
   "i": 18,
   "scene": "s02_secant",
   "sentence": "s02.2",
@@ -198,7 +198,7 @@
  },
  {
   "kind": "animation",
-  "t": 11.0,
+  "t": 10.983,
   "i": 19,
   "scene": "s02_secant",
   "sentence": "s02.2",
@@ -206,7 +206,7 @@
  },
  {
   "kind": "animation",
-  "t": 11.5,
+  "t": 11.517,
   "i": 20,
   "scene": "s02_secant",
   "sentence": "s02.2",
@@ -214,15 +214,15 @@
  },
  {
   "kind": "animation",
-  "t": 11.5,
+  "t": 11.517,
   "i": 21,
   "scene": "s02_secant",
   "sentence": "s02.2",
   "animation": "wait",
-  "seconds": 0.527
+  "seconds": 0.544
  },
  {
-  "t": 11.5,
+  "t": 11.517,
   "kind": "sentence_end",
   "scene": "s02_secant",
   "sentence": "s02.2"
@@ -242,7 +242,7 @@
   "scene": "s02_secant",
   "sentence": null,
   "animation": "wait",
-  "seconds": 0.025
+  "seconds": 0.012
  },
  {
   "kind": "scene_end",

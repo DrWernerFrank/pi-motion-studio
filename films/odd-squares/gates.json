@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T13:53:46.274Z",
+  "at": "2026-10-05T14:17:51.248Z",
   "pass": true,
   "checks": [
     {
@@ -62,16 +62,16 @@
       "level": "warn",
       "detail": "10 record file(s) changed since the last gates run (16:9/s01_hook-layout.json, 16:9/s02_pattern-layout.json, 16:9/s03_why-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
-        "16:9/s01_hook-layout.json": "cc8a655f11c9",
-        "16:9/s02_pattern-layout.json": "ac24e9239752",
-        "16:9/s03_why-layout.json": "04718274c248",
-        "16:9/s04_sum-layout.json": "a74f941a8df1",
-        "16:9/s05_recap-layout.json": "1eaa8defbe38",
-        "9:16/s01_hook-layout.json": "a603d2e33bbe",
-        "9:16/s02_pattern-layout.json": "9ea7aa999c53",
-        "9:16/s03_why-layout.json": "b0445cfa3f65",
-        "9:16/s04_sum-layout.json": "316ee8ea71e8",
-        "9:16/s05_recap-layout.json": "541104654019"
+        "16:9/s01_hook-layout.json": "3bd1c5017e24",
+        "16:9/s02_pattern-layout.json": "9bb9f278e57c",
+        "16:9/s03_why-layout.json": "871e08f6706a",
+        "16:9/s04_sum-layout.json": "83f10d72e8df",
+        "16:9/s05_recap-layout.json": "ee04fcef3279",
+        "9:16/s01_hook-layout.json": "72cbb43e651b",
+        "9:16/s02_pattern-layout.json": "d460105bd2a4",
+        "9:16/s03_why-layout.json": "4182eba4d304",
+        "9:16/s04_sum-layout.json": "936cba805b40",
+        "9:16/s05_recap-layout.json": "6ce17688dc6b"
       }
     }
   ]

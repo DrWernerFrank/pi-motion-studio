@@ -8,7 +8,7 @@
  },
  {
   "kind": "animation",
-  "t": 1.333,
+  "t": 1.317,
   "i": 1,
   "scene": "s03_why",
   "sentence": "s03.1",
@@ -16,7 +16,7 @@
  },
  {
   "kind": "animation",
-  "t": 2.333,
+  "t": 2.317,
   "i": 2,
   "scene": "s03_why",
   "sentence": "s03.1",
@@ -44,7 +44,7 @@
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "wait",
-  "seconds": 0.534
+  "seconds": 0.551
  },
  {
   "kind": "animation",
@@ -63,7 +63,7 @@
  },
  {
   "kind": "animation",
-  "t": 4.5,
+  "t": 4.517,
   "i": 6,
   "scene": "s03_why",
   "sentence": "s03.1",
@@ -71,7 +71,7 @@
  },
  {
   "kind": "animation",
-  "t": 4.5,
+  "t": 4.517,
   "i": 7,
   "scene": "s03_why",
   "sentence": "s03.1",
@@ -80,7 +80,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.3,
+  "t": 5.317,
   "i": 8,
   "scene": "s03_why",
   "sentence": "s03.1",
@@ -88,7 +88,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.667,
+  "t": 6.683,
   "i": 9,
   "scene": "s03_why",
   "sentence": "s03.1",
@@ -96,15 +96,15 @@
  },
  {
   "kind": "animation",
-  "t": 6.667,
+  "t": 6.683,
   "i": 10,
   "scene": "s03_why",
   "sentence": "s03.1",
   "animation": "wait",
-  "seconds": 1.387
+  "seconds": 1.371
  },
  {
-  "t": 6.667,
+  "t": 6.683,
   "kind": "sentence_end",
   "scene": "s03_why",
   "sentence": "s03.1"
@@ -124,7 +124,7 @@
   "scene": "s03_why",
   "sentence": null,
   "animation": "wait",
-  "seconds": 0.171
+  "seconds": 0.154
  },
  {
   "kind": "bookmark",
@@ -239,7 +239,7 @@
  },
  {
   "kind": "animation",
-  "t": 13.933,
+  "t": 13.95,
   "i": 23,
   "scene": "s03_why",
   "sentence": null,
@@ -247,7 +247,7 @@
  },
  {
   "kind": "animation",
-  "t": 13.933,
+  "t": 13.95,
   "i": 24,
   "scene": "s03_why",
   "sentence": null,
@@ -256,7 +256,7 @@
  },
  {
   "kind": "animation",
-  "t": 14.833,
+  "t": 14.85,
   "i": 25,
   "scene": "s03_why",
   "sentence": "s03.3",
@@ -271,7 +271,7 @@
  },
  {
   "kind": "animation",
-  "t": 17.867,
+  "t": 17.85,
   "i": 26,
   "scene": "s03_why",
   "sentence": "s03.3",
@@ -279,7 +279,7 @@
  },
  {
   "kind": "animation",
-  "t": 18.767,
+  "t": 18.75,
   "i": 27,
   "scene": "s03_why",
   "sentence": "s03.3",
@@ -287,7 +287,7 @@
  },
  {
   "kind": "animation",
-  "t": 20.7,
+  "t": 20.717,
   "i": 28,
   "scene": "s03_why",
   "sentence": "s03.3",
@@ -295,22 +295,22 @@
  },
  {
   "kind": "animation",
-  "t": 20.7,
+  "t": 20.717,
   "i": 29,
   "scene": "s03_why",
   "sentence": "s03.3",
   "animation": "wait",
-  "seconds": 1.954
+  "seconds": 1.971
  },
  {
-  "t": 20.7,
+  "t": 20.717,
   "kind": "sentence_end",
   "scene": "s03_why",
   "sentence": "s03.3"
  },
  {
   "kind": "animation",
-  "t": 20.833,
+  "t": 20.867,
   "i": 30,
   "scene": "s03_why",
   "sentence": null,
@@ -318,7 +318,7 @@
  },
  {
   "kind": "animation",
-  "t": 20.833,
+  "t": 20.867,
   "i": 31,
   "scene": "s03_why",
   "sentence": null,
@@ -327,7 +327,7 @@
  },
  {
   "kind": "scene_end",
-  "t": 20.833,
+  "t": 20.867,
   "scene": "s03_why"
  }
 ]

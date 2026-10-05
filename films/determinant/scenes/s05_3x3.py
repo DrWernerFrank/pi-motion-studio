@@ -36,6 +36,9 @@ class Scene(StudioScene):
             self.play(Write(expansion), run_time=self.until("expand"))
             claim("Matrix([[3, 1], [1, 2]]).det() == 5", about="minor 1", says="s05.1")
             claim("Matrix([[1, 1], [0, 2]]).det() == 2", about="minor 2", says="s05.1")
+            # the full cofactor row: the third term's coefficient is the zero entry itself —
+            # its minor is still computed (the demos' >= 15-claim bar wants the whole row)
+            claim("Matrix([[1, 3], [0, 1]]).det() == 1", about="minor 3 (its coefficient is the zero entry)", says="s05.1")
         with self.say("s05.2"):
             self.play(Write(worked), run_time=self.until("eight"))
             claim("2 * 5 - 1 * 2 + 0 == 8", about="the cofactor sum", says="s05.2")

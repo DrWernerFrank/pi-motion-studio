@@ -16,7 +16,7 @@
  },
  {
   "kind": "animation",
-  "t": 2.133,
+  "t": 2.117,
   "i": 2,
   "scene": "s04_slopes",
   "sentence": "s04.1",
@@ -24,7 +24,7 @@
  },
  {
   "kind": "animation",
-  "t": 2.733,
+  "t": 2.717,
   "i": 3,
   "scene": "s04_slopes",
   "sentence": "s04.1",
@@ -78,7 +78,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.633,
+  "t": 5.65,
   "i": 8,
   "scene": "s04_slopes",
   "sentence": null,
@@ -86,7 +86,7 @@
  },
  {
   "kind": "animation",
-  "t": 5.633,
+  "t": 5.65,
   "i": 9,
   "scene": "s04_slopes",
   "sentence": null,
@@ -102,7 +102,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.233,
+  "t": 6.267,
   "i": 10,
   "scene": "s04_slopes",
   "sentence": "s04.2",
@@ -110,7 +110,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.233,
+  "t": 6.267,
   "i": 11,
   "scene": "s04_slopes",
   "sentence": "s04.2",
@@ -119,7 +119,7 @@
  },
  {
   "kind": "animation",
-  "t": 6.733,
+  "t": 6.767,
   "i": 12,
   "scene": "s04_slopes",
   "sentence": "s04.2",
@@ -127,7 +127,7 @@
  },
  {
   "kind": "animation",
-  "t": 7.533,
+  "t": 7.567,
   "i": 13,
   "scene": "s04_slopes",
   "sentence": "s04.2",
@@ -148,7 +148,7 @@
   "scene": "s04_slopes",
   "sentence": "s04.2",
   "animation": "wait",
-  "seconds": 0.348
+  "seconds": 0.315
  },
  {
   "t": 7.867,
@@ -158,7 +158,7 @@
  },
  {
   "kind": "animation",
-  "t": 7.9,
+  "t": 7.883,
   "i": 16,
   "scene": "s04_slopes",
   "sentence": null,
@@ -166,16 +166,16 @@
  },
  {
   "kind": "animation",
-  "t": 7.9,
+  "t": 7.883,
   "i": 17,
   "scene": "s04_slopes",
   "sentence": null,
   "animation": "wait",
-  "seconds": 0.025
+  "seconds": 0.013
  },
  {
   "kind": "scene_end",
-  "t": 7.9,
+  "t": 7.883,
   "scene": "s04_slopes"
  }
 ]
