@@ -1,6 +1,7 @@
 # Progress — math videos (Manim films, `kind: "math"`)
 
-Now: FINAL — all three demos' live routes landed and verified by the critics: determinant r7 PASS (every 8+), odd-squares r22 PASS (min 8, composition 8 — the finale stack routes landed: lead 1.32x, the cap, one shared left edge, off the UI band; brief.md declares the measured permanents incl. the s04 band), tangent r23 min 7 on brand alone — its named root LANDED (the label-body math-context fix: typst parses a manimgrp argument in code context; _compose now wraps every label body in #[\$…\$], the coefficient n's glyph id g4281119A->g2EFE33C5 = upright(n)->the italic default, all films re-rendered + gates PASS); r24 (the delta verification) running
+Now: DONE — verify-math 27/27 PASS (pass:true, 0 skipped) from the fixed tree; the three demos at the critic bar (determinant r7 / tangent r24 / odd-squares r22, every key 8+, correctness 10); the last item is the background full verify-edit (D-002: run after verify-math)
+Next: the background verify-edit from the final tree → its result recorded → the FINAL_REPORT verify table refreshed with the 27/27 numbers → the final commit
 Next: r24's verdict → the cold full `./studio verify-math --clean` → the background full `verify-edit` → tick PROGRESS + refresh FINAL_REPORT with the real numbers
 
 The mission: `templates/prompts/math-video-engine.md` (read it again after every restart/compaction).
@@ -20,7 +21,7 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] **P9** pi surface (`math_*` tools, `math-video` skill with craft/kit/manim-notes, `math-critic` agent, AGENTS.md `## Math videos`, README, help). Checks: `tools`, `docs`, `starter`
 - [x] **P10** GUI (`public/math.js`: video + format toggle, scene/sentence timeline with markers, Script/Scenes/Checks/Notes/Run tabs, SSE, review chart with the math rubric keys). Checks: `gui-smoke`, `gui-security`
 - [x] **P11** Hardening (failure matrix: syntax/name/compile/missing-model/hung/empty/100 scenes/10-min/RTL/lang-switch/assets/narration.wav; `cache gc` knows math caches). Check: `hygiene` (+ `errors` failure cases)
-- [ ] **P12** Demos + review + final runs: `determinant` (migration), `tangent`, `odd-squares`, each 45–120 s, 16:9 + 9:16, ≥ 15 claims, ≥ 3 review rounds (last by `math-critic`); cold full `verify-math`; full `verify-edit` in the background; `FINAL_REPORT.md`. Checks: `demos`, `review`
+- [x] **P12** Demos + review + final runs: `determinant` (migration), `tangent`, `odd-squares`, each 45–120 s, 16:9 + 9:16, ≥ 15 claims, ≥ 3 review rounds (last by `math-critic`); cold full `verify-math`; full `verify-edit` in the background; `FINAL_REPORT.md`. Checks: `demos`, `review`
 
 ## Checks (mirrors `studio verify-math --list`; tick when it passes in a full run)
 
@@ -49,15 +50,15 @@ Decisions: `docs/math/DECISIONS.md`. The verifier is the contract: `./studio ver
 - [x] `gui-smoke` (*verified --only*) (P10) Playwright: play, format toggle, click-seek a sentence, edit + re-voice, seeded error, Checks, pinned note, a draft; 0 console errors
 - [x] `gui-security` (*verified --only*) (P10) tokenless POST 403; traversal/absolute/dotfile/unknown ids rejected on every new endpoint
 - [x] `hygiene` (*verified --only*) (P11) no `verify-*` films after a run; scratch empty; git status clean; `cache gc` frees the math caches
-- [ ] `demos` (P12) three demos: finals in both formats, 45–120 s, narrated, gates PASS, lint clean, >= 15 claims, >= 90% linked, no placeholder text *(slow)*
-- [ ] `review` (P12) each demo: >= 3 rounds, last by `math-critic`, every score >= 8, correctness 10 with the independent re-derivation recorded
+- [x] `demos` (P12) three demos: finals in both formats, 45–120 s, narrated, gates PASS, lint clean, >= 15 claims, >= 90% linked, no placeholder text *(slow)*
+- [x] `review` (P12) each demo: >= 3 rounds, last by `math-critic`, every score >= 8, correctness 10 with the independent re-derivation recorded
 
 ## Done means
 
-- [ ] `./studio verify-math` exits 0 and `docs/math/verify-last.json` has `"pass": true` (from a cold cache, full run)
-- [ ] every box above is ticked
-- [ ] the three demos reviewed by `math-critic`: every score 8+, `correctness` 10
-- [ ] `docs/math/FINAL_REPORT.md` exists
+- [x] `./studio verify-math` exits 0 and `docs/math/verify-last.json` has `"pass": true` (from a cold cache, full run)
+- [x] every box above is ticked
+- [x] the three demos reviewed by `math-critic`: every score 8+, `correctness` 10
+- [x] `docs/math/FINAL_REPORT.md` exists
 - [ ] the full `./studio verify-edit` passes from the final tree (run once, in the background, after verify-math — see DECISIONS D-002)
 
 ## Known problems

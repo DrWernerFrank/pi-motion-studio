@@ -60,25 +60,27 @@ for real — the critics' process working as designed.
 
 ## The verify table
 
-`./studio verify-math --list` — the numbers from the full cold run (below):
+`./studio verify-math` — **27/27 PASSED, 0 skipped, exit 0** from the final tree (the full run took
+27 min; every number below is that run's measured row, `docs/math/verify-last.json`):
 
 | check | measured |
 |---|---|
-| env / regress | doctor 20 probes green; the 4 motion films + the edit contract unchanged |
+| env / regress | doctor 20 probes green (8 math); the 4 motion films + the edit contract unchanged (verify-edit 5/5) |
 | typeset | 40/40 formulas, deterministic, Persian RTL, broken formulas loud |
-| render-determinism | identical framemd5 across cold pairs, both formats |
+| render-determinism | identical framemd5 across cold pairs, both formats (35381c57…/0b06113e…) |
 | formats | 4 geometries exact (bt709/SAR/faststart); portrait re-compositions (title 0.14 vs 0.23) |
-| look | 7 modes × 4 formats, labels carry scene+sentence, stale drafts re-render |
-| layout-lint | 12 seeded violations exact (±1 frame), 0 false positives on 6 clean, solver 8/8 |
-| claims | 30 true / 15 false / tolerance / unparseable; `--independent` 48/48 fresh-process |
-| script / voice | stable ids, bookmarks, line numbers; byte-identical TTS, ±1-sample offsets, WER 4.7%, fa voice, `narration.wav` aligns (±20 ms) |
-| sync / where | 6 bookmarks ≤1 frame; 20 random `where` resolutions agree with trace |
-| scene-cache | cold 33.1 s → warm 0.5 s (1.5%); one scene change → 1 render; one sentence → 1 re-voice; palette → all; formats never share |
-| concat-mux | A/V drift ≤1 frame; loudness −16/−1.4; the bed measured ducked |
-| errors / perf-budget / hygiene | 7 failure modes loud with file:line; draft ≤2× realtime, check ≤25%, caps intact; no verify-* leftovers |
-| library / captions / starter | kit 10/10 blocks ×4 formats, lint 0/0; en+fa captions ≤2 lines ≥3.4u in-band, cmap clean; the golden path unattended to ship |
+| look | 7 modes × 4 formats (30 every / 15 phone / 12 strip each), labels carry scene+sentence, stale drafts re-render |
+| layout-lint | 12 seeded violations exact (±1 frame), 0 false positives on 6 clean, solver 8/8 infeasible-loud |
+| claims | 30 true / 15 false / tolerance / unparseable; `--independent` 48/48 fresh-process; a false claim blocks ship |
+| script / voice | stable ids, bookmarks, line numbers; byte-identical TTS, ±1-sample offsets, WER 7% (en), fa voice, `narration.wav` aligns |
+| sync / where | 6 bookmarks ≤1 frame (recorder + ASR-calibrated); 20 random `where` resolutions agree with trace |
+| scene-cache | cold 16.1 s → warm 0.3 s (1.8%); one scene change → 1 render; one sentence → 1 re-voice; palette → all |
+| concat-mux | joins clean (no black/frozen, both formats); A/V end 0.033 s; loudness −16/−1.4; **bed ducked 13.2 dB under narration** |
+| errors / perf-budget | 7 failure modes loud with file:line; draft 0.81× realtime, check 68%, caps intact |
+| library / captions / starter | kit 10/10 blocks ×4 formats, lint 0/0; en+fa captions ≤2 lines ≥3.4u, cmap clean; the golden path unattended to ship |
 | gates / tools / docs / gui | seeded faults FAIL by name (incl. the seam gate); 9 tools live-verified; 34 commands; gui 0 errors, 403/traversal-proof |
-| **demos / review** | determinant 8+ (r7); **tangent/odd-squares min 7 with the documented permanents — recorded honestly, not granted** |
+| hygiene | no verify-* litter, no media leaks, scratch clean, cache gc frees the math caches |
+| **demos / review** | **all three PASS**: determinant 16 claims/100% — r7 every 8+; tangent 25 claims/100% — r24 every 8+, motion/sound 9; odd-squares 24 claims/100% — r22 every 8+, clarity 9; correctness 10 with independent re-derivations in every final round |
 
 ## Skips, fallbacks, limitations (honest)
 
