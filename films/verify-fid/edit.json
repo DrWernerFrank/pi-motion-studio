@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "rev": 1,
+  "fps": "30000/1001",
+  "counter": 1,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/real/real1080.mp4",
+      "sha256": "7b6e56d5aa2af5d091d37fa372e7e05655d2675f3d6e735b96579cb247c5adcb",
+      "kind": "video",
+      "duration": 12.012,
+      "frames": 360,
+      "fps": "30000/1001",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "cam",
+          "in": 0,
+          "out": 12.012,
+          "at": 0,
+          "note": "cut 0"
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}

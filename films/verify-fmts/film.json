@@ -1,0 +1,35 @@
+{
+  "kind": "edit",
+  "title": "verify-fmts",
+  "duration": 15.015,
+  "fps": "30000/1001",
+  "formats": [
+    "9:16",
+    "1:1",
+    "16:9",
+    "4:5"
+  ],
+  "loop": false,
+  "background": "#000000",
+  "motionBlur": 1,
+  "music": {
+    "bpm": 120,
+    "key": "A minor",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "style": "drive",
+    "seed": 7
+  },
+  "mix": {
+    "music": 0.35,
+    "duck_db": -12
+  },
+  "gates": {
+    "maxStill": 4,
+    "maxNoNovelty": 8
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "rev": 13,
+  "fps": "30",
+  "counter": 1,
+  "sources": {
+    "cam": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/real/talking-head-original.webm",
+      "sha256": "f3dd2f87b8dedbc6ea9864af594e2de4fc8a2b5d425f85f834ba7f36c1d04472",
+      "kind": "video",
+      "duration": 53.833333,
+      "frames": 1615,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "cam",
+          "in": 5,
+          "out": 17,
+          "at": 0
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [
+    {
+      "id": "oT",
+      "type": "title",
+      "at": 0.4,
+      "dur": 2.4,
+      "props": {
+        "text": "How we edit video"
+      }
+    },
+    {
+      "id": "oL",
+      "type": "lower-third",
+      "at": 3.2,
+      "dur": 2.6,
+      "props": {
+        "name": "Scott Kelly",
+        "role": "NASA astronaut"
+      }
+    },
+    {
+      "id": "oC",
+      "type": "callout",
+      "at": 6.2,
+      "dur": 2.6,
+      "props": {
+        "text": "listen first",
+        "x": 0.74,
+        "y": 0.36
+      }
+    },
+    {
+      "id": "oP",
+      "type": "punch-in",
+      "at": 9.2,
+      "dur": 3,
+      "props": {
+        "zoom": 1.22,
+        "cx": 0.5,
+        "cy": 0.42
+      }
+    }
+  ],
+  "captions": null,
+  "markers": []
+}

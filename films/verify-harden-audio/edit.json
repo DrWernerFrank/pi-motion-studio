@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "rev": 2,
+  "fps": "30",
+  "counter": 5,
+  "sources": {
+    "edge-mono": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/edge/edge-mono.mp4",
+      "sha256": "8cf6ff8dbcf1222db306db491d903358e434462c9f5f88fcd831565cc6134b9b",
+      "kind": "video",
+      "duration": 6,
+      "frames": 180,
+      "fps": "30",
+      "has_audio": true
+    },
+    "edge-51": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/edge/edge-51.mp4",
+      "sha256": "8728a0003238e2e9e7414e5636625ab00316d2fa38d4afd685f9d8f899d53d79",
+      "kind": "video",
+      "duration": 6,
+      "frames": 180,
+      "fps": "30",
+      "has_audio": true
+    },
+    "edge-2audio-loud": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/edge/edge-2audio.mp4",
+      "sha256": "6916bb734ffb040915e36e895e236783173d8a915c260f1f6a9aea6ab510fc16",
+      "kind": "video",
+      "duration": 6,
+      "frames": 180,
+      "fps": "30",
+      "has_audio": true
+    },
+    "edge-sub1s": {
+      "path": "/home/werner/.cache/pi-motion-studio/fixtures/edge/edge-sub1s.mp4",
+      "sha256": "578cadb2fb2a557c90d10aa0262471a7f54ac731f77341eafd88476208296413",
+      "kind": "video",
+      "duration": 0.6,
+      "frames": 18,
+      "fps": "30",
+      "has_audio": true
+    }
+  },
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": [
+        {
+          "id": "c1",
+          "src": "edge-mono",
+          "in": 0,
+          "out": 6,
+          "at": 0
+        },
+        {
+          "id": "c2",
+          "src": "edge-51",
+          "in": 0,
+          "out": 6,
+          "at": 6
+        },
+        {
+          "id": "c3",
+          "src": "edge-2audio-loud",
+          "in": 0,
+          "out": 6,
+          "at": 12
+        },
+        {
+          "id": "c4",
+          "src": "edge-sub1s",
+          "in": 0,
+          "out": 0.3,
+          "at": 18
+        },
+        {
+          "id": "c5",
+          "src": "edge-sub1s",
+          "in": 0.3,
+          "out": 0.6,
+          "at": 18.3
+        }
+      ]
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}

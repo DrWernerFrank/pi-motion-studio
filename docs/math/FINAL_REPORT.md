@@ -98,7 +98,9 @@ for real — the critics' process working as designed.
 - The music bed exists (film.json `music: {…}`: a deterministic synth score ducked 12 dB under
   narration, `out/bed.wav` the isolated ducked bed — concat-mux measures the duck); the default is
   still none.
-- The full `verify-edit` result: run from the final tree, recorded in `docs/editing/verify-last.json`.
+- The full `verify-edit` result: **34/34 PASSED, 0 skipped** from the final tree (65 min,
+  `docs/editing/verify-last.json` — the edit mission's contract holds untouched through the math
+  build; the only edit-side code changed was the sweep's git-tracked guard, D-026).
 
 ## NEEDS_USER
 
