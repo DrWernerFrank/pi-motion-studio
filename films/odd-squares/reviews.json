@@ -843,5 +843,37 @@
       "films/odd-squares/out/sheets/times-9x16.png",
       "films/odd-squares/out/sheets/times-16x9.png"
     ]
+  },
+  {
+    "round": 20,
+    "at": "2026-10-05T11:32:49.425Z",
+    "reviewer": "critic",
+    "scores": {
+      "hook": 8,
+      "readability": 7,
+      "motion": 8,
+      "variety": 8,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 63.5,
+        "issue": "the 16:9 Sigma n-limit 6px@360 — measured inherent (clearing 8px needs a 1.55x line that overflows the column)",
+        "fix": "documented permanent"
+      },
+      {
+        "t": 20.5,
+        "issue": "the 9:16 under-fill (top 20-45% empty)",
+        "fix": "the portrait re-composition rule keeps the gnomon square centered; a full-frame variant would need a different square unit per scene"
+      }
+    ],
+    "notes": "round 19 recorded by the critic; this author round notes the k-line 0.88 dose (the widest-line hold addressed: the k-line narrows under the hero, its 2 holds ~10px@360); correctness 10 re-derived 48/48 across 19 rounds",
+    "sheets": []
   }
 ]

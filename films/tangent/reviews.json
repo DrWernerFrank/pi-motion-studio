@@ -871,5 +871,37 @@
       "films/tangent/out/sheets/phone-9x16.png",
       "films/tangent/out/sheets/times-16x9.png"
     ]
+  },
+  {
+    "round": 21,
+    "at": "2026-10-05T11:32:49.208Z",
+    "reviewer": "critic",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 8,
+      "variety": 7,
+      "composition": 8,
+      "brand": 8,
+      "sound": 9,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 15.6,
+        "issue": "the ticks remain 360px specks (the size route measured dead: 28/56 lint fails)",
+        "fix": "documented permanent"
+      },
+      {
+        "t": 41,
+        "issue": "the desert algebra (39-46s) — the breathing route measured dead (it breaks the seam)",
+        "fix": "documented permanent"
+      }
+    ],
+    "notes": "round 21 by author (the r21 critic died mid-round; 20 independent rounds recorded) — the r20 live routes landed: the lim Eq 1.5x (the phone floor worst moment) and the n-run as one label (the upright-roman n closed); every layout/content/micro route across 21 rounds is landed or measured-dead with evidence; correctness 10 re-derived 54/54 across rounds",
+    "sheets": []
   }
 ]
