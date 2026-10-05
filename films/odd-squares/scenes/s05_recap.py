@@ -100,8 +100,15 @@ class Scene(StudioScene):
         # must GROW the formulas: 1.16 in 16:9 (the hero's 1.33x lead survives: 1.33/1.16 = 1.15x
         # — the headline stays clearly bigger) and 1.16 in 9:16 (was 0.86; the hero lead was 1.00x
         # — this restores it while growing the k-line past the 9px floor).
-        _dose = 1.16
-        _sum.scale(_dose); _kln.scale(_dose)
+        # r15 (critic): the 1.16 overshot 9:16 (the formulas were past the floor; the fit crushed
+        # the hero and INVERTED the lead 1.00x->0.78x). Per-format: 16:9 grows the formulas (1.16,
+        # the verified sign fix); 9:16 keeps them at 1.0 and grows the HERO instead (its lead is
+        # what reads at phone width — the critic's own prescription).
+        if L.portrait:
+            hero = hero.scale(1.14)          # the hero grows; the formulas hold their 10.7px floor
+            _sum.scale(1.0); _kln.scale(1.0)
+        else:
+            _sum.scale(1.16); _kln.scale(1.16)
         lines = recap([
             hero,
             _sum,

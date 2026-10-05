@@ -3,6 +3,7 @@ scene file (self-contained scenes keep the scene cache exact); the scene follows
 import re
 
 import sympy as sp
+import numpy as np
 from manim import (DOWN, LEFT, RIGHT, UP, Create, DashedLine, DecimalNumber, Dot, FadeIn, FadeOut,
                    GrowFromCenter, Indicate, Line, MathTypst, ReplacementTransform, ValueTracker,
                    VGroup, Write, smooth)
@@ -250,13 +251,21 @@ def column_ys(mobs, buff):
     return [m.get_center()[1] for m in col]
 
 
+def _norm_t(t):
+    return t.replace(" ", "")
+
+
 def derivation():
     """EqSteps of the difference quotient. The column is the LEFT 58% of the stage (the graph
     callback owns the lower-right corner — critic r3's empty-canvas fix made them neighbours)."""
     from studio_manim.layout import _Box
     left_box = _Box(L.stage.x, L.stage.y + L.stage.h * 0.16, L.stage.w * 0.70, L.stage.h * 0.80)  # r13: lifted (the derivation sat 0.42u below safe)
     steps = EqSteps(STEPS, left_box, role="result")
-    k = min(2.2, left_box.w * 0.94 / steps.width, left_box.h * 0.9 / max(steps.height, 1e-6))  # critic r4: the 1.5 cap bound first
+    # r17 FINAL: the per-state breathing was attempted and MEASURED DEAD — it breaks the seam
+    # contract (s06's byte-identical geometry is the closed-seam guarantee; divergent per-state
+    # scales teleport the handoff — the continuity gate caught 3 telemetries) and overflows the
+    # box left by 0.75u. The shared k stands; the desert's breathing is a documented residual.
+    k = min(2.2, left_box.w * 0.94 / steps.width, left_box.h * 0.9 / max(steps.height, 1e-6))
     steps.scale(k)
     # r13: center in the BOX on both axes (x-only left the stack's own arrangement 0.42u
     # below the safe floor)
