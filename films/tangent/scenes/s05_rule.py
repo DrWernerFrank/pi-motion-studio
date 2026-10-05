@@ -312,6 +312,11 @@ class Scene(StudioScene):
         d = L.u * 5
 
         with self.say("s05.1"):
+            # r14 final: the graph-callback route is geometrically doomed (a 0.30 copy still
+            # measures 8u wide — the ticks/readout inflate the bbox; every placement overlaps the
+            # column: r8 171 fails, r14 35). The desert stands as a DOCUMENTED RESIDUAL with the
+            # full evidence trail; the critic's r14 adjudication (defensible trade, row-growth
+            # route proven impossible, floor+title both bind) is the recorded state.
             self.play(FadeOut(head0, shift=UP * d, rate_func=first_half),
                       FadeOut(formula, shift=UP * d, rate_func=first_half),
                       FadeOut(graph, shift=LEFT * L.u * 12, rate_func=first_half),
