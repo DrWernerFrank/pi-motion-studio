@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T00:03:04.573Z",
+  "at": "2026-10-05T00:23:55.286Z",
   "pass": true,
   "checks": [
     {
@@ -36,7 +36,7 @@
       "name": "pace",
       "pass": true,
       "level": "pass",
-      "detail": "8 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
+      "detail": "9 freeze run(s) >= 3s, none while the narration is silent (12 sentences of timing crossed in)"
     },
     {
       "name": "captions",
@@ -58,18 +58,18 @@
     },
     {
       "name": "deterministic",
-      "pass": true,
-      "level": "pass",
-      "detail": "10 layout record hash(es) identical to the last gates.json run",
+      "pass": false,
+      "level": "warn",
+      "detail": "3 record file(s) changed since the last gates run (16:9/s03_why-layout.json, 16:9/s05_recap-layout.json, 9:16/s03_why-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
         "16:9/s01_hook-layout.json": "8ffc38f7a931",
         "16:9/s02_pattern-layout.json": "cf087aed43a5",
-        "16:9/s03_why-layout.json": "02545094a620",
+        "16:9/s03_why-layout.json": "f0ec83ea3bc0",
         "16:9/s04_sum-layout.json": "667ef3e163b7",
-        "16:9/s05_recap-layout.json": "0e0e661381c0",
+        "16:9/s05_recap-layout.json": "464a312a0092",
         "9:16/s01_hook-layout.json": "5fdb70a3a346",
         "9:16/s02_pattern-layout.json": "6f8284661e7b",
-        "9:16/s03_why-layout.json": "67013fe99fb3",
+        "9:16/s03_why-layout.json": "b0a321007f20",
         "9:16/s04_sum-layout.json": "43b7248d6b0f",
         "9:16/s05_recap-layout.json": "ffbba477b3b9"
       }

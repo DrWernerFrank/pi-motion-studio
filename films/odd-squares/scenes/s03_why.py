@@ -146,10 +146,10 @@ class Scene(StudioScene):
             claim("4 + 3 == 7", about="column of 4 plus row of 3", says="s03.1")
             claim(f"{gs[3].cells} == 2*4 - 1", about="the 4th L has 7 cells (counted on the gnomon)", says="s03.1")
         with self.say("s03.2"):
-            # r6 (critic): the concrete 4+3=7 sat ~3 s under "in general" narration — the
-            # generalization now lands ON "a column of k" (colk), the first general word
-            self.play(EqMorph(e47, ek), run_time=0.9)
+            # r13 (critic): the equation generalized ~2s before the labels under "a column of k"
+            # — the equation now lands WITH the first label (colk), and the k-th label at rowk
             self.wait(self.until("colk"))
+            self.play(EqMorph(e47, ek), run_time=0.7)
             swap(self, cc.label, kc, direction=UP, run_time=0.6)
             self.wait(self.until("rowk"))
             swap(self, rc.label, kr, direction=UP, run_time=0.6)

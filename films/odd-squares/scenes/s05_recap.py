@@ -96,8 +96,10 @@ class Scene(StudioScene):
         # everything equally). Build the hero at hero size and let recap()'s own fit do its work.
         _sum = Eq(r"\sum_{k=1}^{n} (2k-1) = {{n^2}}", roles={"p1": "square"})
         _kln = Eq(r"{{k^2}} - {{(k-1)^2}} = 2k-1", roles={"p1": "square", "p2": "square"})
-        if L.portrait:
-            _sum.scale(0.86); _kln.scale(0.86)  # r11 (critic): 0.72 blocked the panel growth (the k-line 2 read 6.4px@360); the hero's lead holds at 0.86
+        # r13 (critic): the 0.86 dose was portrait-only — the 16:9 finale k-line read 7.5px@360.
+        # Both formats now dose (16:9 to 0.90: the hero's 1.33x lead holds; 9:16 0.86 as measured).
+        _dose = 0.86 if L.portrait else 0.90
+        _sum.scale(_dose); _kln.scale(_dose)
         lines = recap([
             hero,
             _sum,

@@ -40,13 +40,12 @@ def graph_box():
     stage's height (a real re-proportion, not a scaled copy); landscape keeps panel 0. The bottom
     9% stays reserved for the tick labels."""
     if L.portrait:
-        # critic r6: the full-width window drew a squat ~0.8:1 plot (29% of frame height). A
-        # square-ish window (88% w x 62% h) grows the plot and centers it.
-        # r8 (critic): the drawn plot is squat (the box reserves 62%, the axes draw 0.78 of it
-        # low in the frame) — but every window-widening variant collided the tick labels with the
-        # equation band (171 then 117 lint fails). The proven-clean geometry stands; the plot
-        # proportion is a documented residual (the r8 review's notes carry it).
-        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
+        # r15 (critic, 13th round): the 133px dead gap ABOVE the plot — the axes draw at 0.78 of
+        # a tall box, low. The box now MATCHES the drawn plot: 88% w, ~54% h, tight under the
+        # title band, so the axes fill it and the gap dies.
+        w = L.stage.w * 0.88
+        h = L.stage.h * 0.54
+        return Box(L.stage.x + (L.stage.w - w) / 2, L.stage.y + L.stage.h - h - L.u * 0.5, w, h)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 

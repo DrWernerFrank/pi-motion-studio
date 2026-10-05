@@ -6,12 +6,12 @@
     "kind": "Axes",
     "id": "1:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -23,12 +23,12 @@
     "kind": "ParametricFunction",
     "id": "1:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -40,8 +40,8 @@
     "kind": "Txt",
     "id": "1:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -57,8 +57,8 @@
     "kind": "Txt",
     "id": "1:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -74,8 +74,8 @@
     "kind": "Txt",
     "id": "1:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -91,39 +91,56 @@
     "kind": "Line",
     "id": "1:5",
     "bbox": [
-     -1.814,
-     -2.362,
-     5.011,
-     2.806
+     -1.012,
+     -1.422,
+     1.741,
+     0.0
     ],
-    "height_u": 35.07,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "1:6",
     "bbox": [
-     -1.227,
-     -2.065,
-     2.106,
-     1.235
+     -1.593,
+     -1.744,
+     4.41,
+     2.444
     ],
-    "height_u": 15.44,
+    "height_u": 30.54,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "1:7",
+    "bbox": [
+     -1.084,
+     -1.494,
+     1.869,
+     1.093
+    ],
+    "height_u": 13.66,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "1:8",
     "bbox": [
      -3.44,
      3.421,
@@ -134,7 +151,7 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 7,
+    "z": 8,
     "alive": true,
     "text": true
    }
@@ -147,12 +164,12 @@
     "kind": "Axes",
     "id": "2:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -164,12 +181,12 @@
     "kind": "ParametricFunction",
     "id": "2:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -181,8 +198,8 @@
     "kind": "Txt",
     "id": "2:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -198,8 +215,8 @@
     "kind": "Txt",
     "id": "2:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -215,8 +232,8 @@
     "kind": "Txt",
     "id": "2:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -232,39 +249,56 @@
     "kind": "Line",
     "id": "2:5",
     "bbox": [
-     -1.814,
-     -2.362,
-     5.011,
-     2.806
+     -1.012,
+     -1.422,
+     1.741,
+     0.0
     ],
-    "height_u": 35.07,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "2:6",
     "bbox": [
-     -1.227,
-     -2.065,
-     2.106,
-     1.235
+     -1.593,
+     -1.744,
+     4.41,
+     2.444
     ],
-    "height_u": 15.44,
+    "height_u": 30.54,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "2:7",
+    "bbox": [
+     -1.084,
+     -1.494,
+     1.869,
+     1.093
+    ],
+    "height_u": 13.66,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "2:8",
     "bbox": [
      -3.44,
      3.421,
@@ -275,13 +309,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 7,
+    "z": 8,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "2:8",
+    "id": "2:9",
     "bbox": [
      -3.096,
      -4.379,
@@ -292,7 +326,7 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 8,
+    "z": 9,
     "alive": true,
     "text": true
    }
@@ -305,12 +339,12 @@
     "kind": "Axes",
     "id": "3:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -322,12 +356,12 @@
     "kind": "ParametricFunction",
     "id": "3:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -339,8 +373,8 @@
     "kind": "Txt",
     "id": "3:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -356,8 +390,8 @@
     "kind": "Txt",
     "id": "3:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -373,8 +407,8 @@
     "kind": "Txt",
     "id": "3:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -390,39 +424,56 @@
     "kind": "Line",
     "id": "3:5",
     "bbox": [
-     -1.814,
-     -2.362,
-     5.011,
-     2.806
+     -1.012,
+     -1.422,
+     1.741,
+     0.0
     ],
-    "height_u": 35.07,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "3:6",
     "bbox": [
-     -1.227,
-     -2.065,
-     2.106,
-     1.235
+     -1.593,
+     -1.744,
+     4.41,
+     2.444
     ],
-    "height_u": 15.44,
+    "height_u": 30.54,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "3:7",
+    "bbox": [
+     -1.084,
+     -1.494,
+     1.869,
+     1.093
+    ],
+    "height_u": 13.66,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "3:8",
     "bbox": [
      -3.44,
      3.421,
@@ -433,13 +484,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 7,
+    "z": 8,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "3:8",
+    "id": "3:9",
     "bbox": [
      -3.096,
      -4.379,
@@ -450,13 +501,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 8,
+    "z": 9,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "3:9",
+    "id": "3:10",
     "bbox": [
      -1.083,
      -5.277,
@@ -467,13 +518,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 9,
+    "z": 10,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "3:10",
+    "id": "3:11",
     "bbox": [
      0.052,
      -5.271,
@@ -484,16 +535,16 @@
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
-    "z": 10,
+    "z": 11,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "3:11",
+    "id": "3:12",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -501,16 +552,16 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 11,
+    "z": 12,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "3:12",
+    "id": "3:13",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.238,
      0.516
     ],
@@ -518,7 +569,7 @@
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
-    "z": 12,
+    "z": 13,
     "alive": true,
     "text": false
    }
@@ -531,12 +582,12 @@
     "kind": "Axes",
     "id": "4:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -548,12 +599,12 @@
     "kind": "ParametricFunction",
     "id": "4:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -565,8 +616,8 @@
     "kind": "Txt",
     "id": "4:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -582,8 +633,8 @@
     "kind": "Txt",
     "id": "4:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -599,8 +650,8 @@
     "kind": "Txt",
     "id": "4:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -616,12 +667,12 @@
     "kind": "Line",
     "id": "4:5",
     "bbox": [
-     -1.946,
-     -2.362,
-     5.143,
-     2.399
+     -1.709,
+     -1.744,
+     4.526,
+     2.09
     ],
-    "height_u": 29.99,
+    "height_u": 26.12,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -633,12 +684,12 @@
     "kind": "VGroup",
     "id": "4:6",
     "bbox": [
-     -1.227,
-     -2.065,
-     1.117,
-     0.589
+     -1.084,
+     -1.494,
+     0.998,
+     0.53
     ],
-    "height_u": 7.37,
+    "height_u": 6.62,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -719,7 +770,7 @@
     "id": "4:11",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -736,7 +787,7 @@
     "id": "4:12",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.211,
      0.516
     ],
@@ -757,12 +808,12 @@
     "kind": "Axes",
     "id": "5:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -774,12 +825,12 @@
     "kind": "ParametricFunction",
     "id": "5:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -791,8 +842,8 @@
     "kind": "Txt",
     "id": "5:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -808,8 +859,8 @@
     "kind": "Txt",
     "id": "5:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -825,8 +876,8 @@
     "kind": "Txt",
     "id": "5:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -842,15 +893,15 @@
     "kind": "Line",
     "id": "5:5",
     "bbox": [
-     -0.957,
-     -1.993,
-     0.0,
-     0.078
+     -1.012,
+     -1.422,
+     0.174,
+     0.0
     ],
-    "height_u": 0.97,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#17150F",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
@@ -859,39 +910,56 @@
     "kind": "Line",
     "id": "5:6",
     "bbox": [
-     -2.097,
-     -2.362,
-     5.294,
-     2.075
+     -0.838,
+     -1.422,
+     0.0,
+     0.068
     ],
-    "height_u": 25.93,
+    "height_u": 0.84,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "5:7",
     "bbox": [
-     -1.227,
-     -2.065,
-     0.326,
-     0.206
+     -1.841,
+     -1.744,
+     4.658,
+     1.807
     ],
-    "height_u": 2.57,
+    "height_u": 22.59,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 7,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "5:8",
+    "bbox": [
+     -1.084,
+     -1.494,
+     0.302,
+     0.196
+    ],
+    "height_u": 2.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "5:9",
     "bbox": [
      -3.44,
      3.421,
@@ -902,13 +970,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 8,
+    "z": 9,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "5:9",
+    "id": "5:10",
     "bbox": [
      -3.096,
      -4.379,
@@ -919,13 +987,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 9,
+    "z": 10,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "5:10",
+    "id": "5:11",
     "bbox": [
      -1.083,
      -5.277,
@@ -936,13 +1004,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 10,
+    "z": 11,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "5:11",
+    "id": "5:12",
     "bbox": [
      0.052,
      -5.271,
@@ -953,16 +1021,16 @@
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
-    "z": 11,
+    "z": 12,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "5:12",
+    "id": "5:13",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -970,16 +1038,16 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 12,
+    "z": 13,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "5:13",
+    "id": "5:14",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.159,
      0.516
     ],
@@ -987,7 +1055,7 @@
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
-    "z": 13,
+    "z": 14,
     "alive": true,
     "text": false
    }
@@ -1000,12 +1068,12 @@
     "kind": "Axes",
     "id": "6:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1017,12 +1085,12 @@
     "kind": "ParametricFunction",
     "id": "6:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -1034,8 +1102,8 @@
     "kind": "Txt",
     "id": "6:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -1051,8 +1119,8 @@
     "kind": "Txt",
     "id": "6:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -1068,8 +1136,8 @@
     "kind": "Txt",
     "id": "6:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -1085,15 +1153,15 @@
     "kind": "Line",
     "id": "6:5",
     "bbox": [
-     -0.957,
-     -1.993,
-     0.0,
-     0.078
+     -1.012,
+     -1.422,
+     0.174,
+     0.0
     ],
-    "height_u": 0.97,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#17150F",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
@@ -1102,39 +1170,56 @@
     "kind": "Line",
     "id": "6:6",
     "bbox": [
-     -2.097,
-     -2.362,
-     5.294,
-     2.075
+     -0.838,
+     -1.422,
+     0.0,
+     0.068
     ],
-    "height_u": 25.93,
+    "height_u": 0.84,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "6:7",
     "bbox": [
-     -1.227,
-     -2.065,
-     0.326,
-     0.206
+     -1.841,
+     -1.744,
+     4.658,
+     1.807
     ],
-    "height_u": 2.57,
+    "height_u": 22.59,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 7,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "6:8",
+    "bbox": [
+     -1.084,
+     -1.494,
+     0.302,
+     0.196
+    ],
+    "height_u": 2.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "6:9",
     "bbox": [
      -3.44,
      3.421,
@@ -1145,13 +1230,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 8,
+    "z": 9,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "6:9",
+    "id": "6:10",
     "bbox": [
      -3.096,
      -4.379,
@@ -1162,13 +1247,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 9,
+    "z": 10,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "6:10",
+    "id": "6:11",
     "bbox": [
      -1.083,
      -5.277,
@@ -1179,13 +1264,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 10,
+    "z": 11,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "6:11",
+    "id": "6:12",
     "bbox": [
      0.052,
      -5.271,
@@ -1196,16 +1281,16 @@
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
-    "z": 11,
+    "z": 12,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "6:12",
+    "id": "6:13",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -1213,16 +1298,16 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 12,
+    "z": 13,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "6:13",
+    "id": "6:14",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.159,
      0.516
     ],
@@ -1230,7 +1315,7 @@
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
-    "z": 13,
+    "z": 14,
     "alive": true,
     "text": false
    }
@@ -1243,12 +1328,12 @@
     "kind": "Axes",
     "id": "7:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1260,12 +1345,12 @@
     "kind": "ParametricFunction",
     "id": "7:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -1277,8 +1362,8 @@
     "kind": "Txt",
     "id": "7:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -1294,8 +1379,8 @@
     "kind": "Txt",
     "id": "7:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -1311,8 +1396,8 @@
     "kind": "Txt",
     "id": "7:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -1328,15 +1413,15 @@
     "kind": "Line",
     "id": "7:5",
     "bbox": [
-     -0.957,
-     -1.993,
-     0.0,
-     0.078
+     -1.012,
+     -1.422,
+     0.174,
+     0.0
     ],
-    "height_u": 0.97,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#17150F",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
@@ -1345,39 +1430,56 @@
     "kind": "Line",
     "id": "7:6",
     "bbox": [
-     -2.097,
-     -2.362,
-     5.294,
-     2.075
+     -0.838,
+     -1.422,
+     0.0,
+     0.068
     ],
-    "height_u": 25.93,
+    "height_u": 0.84,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "7:7",
     "bbox": [
-     -1.227,
-     -2.065,
-     0.326,
-     0.206
+     -1.841,
+     -1.744,
+     4.658,
+     1.807
     ],
-    "height_u": 2.57,
+    "height_u": 22.59,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 7,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "7:8",
+    "bbox": [
+     -1.084,
+     -1.494,
+     0.302,
+     0.196
+    ],
+    "height_u": 2.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "7:9",
     "bbox": [
      -3.44,
      3.421,
@@ -1388,13 +1490,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 8,
+    "z": 9,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "7:9",
+    "id": "7:10",
     "bbox": [
      -3.096,
      -4.379,
@@ -1405,13 +1507,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 9,
+    "z": 10,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "7:10",
+    "id": "7:11",
     "bbox": [
      -1.083,
      -5.277,
@@ -1422,13 +1524,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 10,
+    "z": 11,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "7:11",
+    "id": "7:12",
     "bbox": [
      0.052,
      -5.271,
@@ -1439,16 +1541,16 @@
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
-    "z": 11,
+    "z": 12,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "7:12",
+    "id": "7:13",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -1456,16 +1558,16 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 12,
+    "z": 13,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "7:13",
+    "id": "7:14",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.159,
      0.516
     ],
@@ -1473,7 +1575,7 @@
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
-    "z": 13,
+    "z": 14,
     "alive": true,
     "text": false
    }
@@ -1486,12 +1588,12 @@
     "kind": "Axes",
     "id": "8:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1503,12 +1605,12 @@
     "kind": "ParametricFunction",
     "id": "8:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -1520,8 +1622,8 @@
     "kind": "Txt",
     "id": "8:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -1537,8 +1639,8 @@
     "kind": "Txt",
     "id": "8:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -1554,8 +1656,8 @@
     "kind": "Txt",
     "id": "8:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -1571,15 +1673,15 @@
     "kind": "Line",
     "id": "8:5",
     "bbox": [
-     -0.957,
-     -1.993,
-     0.0,
-     0.078
+     -1.012,
+     -1.422,
+     0.174,
+     0.0
     ],
-    "height_u": 0.97,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#17150F",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
@@ -1588,39 +1690,56 @@
     "kind": "Line",
     "id": "8:6",
     "bbox": [
-     -2.097,
-     -2.362,
-     5.294,
-     2.075
+     -0.838,
+     -1.422,
+     0.0,
+     0.068
     ],
-    "height_u": 25.93,
+    "height_u": 0.84,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "8:7",
     "bbox": [
-     -1.227,
-     -2.065,
-     0.326,
-     0.206
+     -1.841,
+     -1.744,
+     4.658,
+     1.807
     ],
-    "height_u": 2.57,
+    "height_u": 22.59,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 7,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "8:8",
+    "bbox": [
+     -1.084,
+     -1.494,
+     0.302,
+     0.196
+    ],
+    "height_u": 2.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "8:9",
     "bbox": [
      -3.44,
      3.421,
@@ -1631,13 +1750,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 8,
+    "z": 9,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "8:9",
+    "id": "8:10",
     "bbox": [
      -3.096,
      -4.379,
@@ -1648,13 +1767,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 9,
+    "z": 10,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "8:10",
+    "id": "8:11",
     "bbox": [
      -1.083,
      -5.277,
@@ -1665,13 +1784,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 10,
+    "z": 11,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "8:11",
+    "id": "8:12",
     "bbox": [
      0.052,
      -5.271,
@@ -1682,16 +1801,16 @@
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
-    "z": 11,
+    "z": 12,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "8:12",
+    "id": "8:13",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -1699,16 +1818,16 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 12,
+    "z": 13,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "8:13",
+    "id": "8:14",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.159,
      0.516
     ],
@@ -1716,7 +1835,7 @@
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
-    "z": 13,
+    "z": 14,
     "alive": true,
     "text": false
    }
@@ -1729,12 +1848,12 @@
     "kind": "Axes",
     "id": "9:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1746,12 +1865,12 @@
     "kind": "ParametricFunction",
     "id": "9:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -1763,8 +1882,8 @@
     "kind": "Txt",
     "id": "9:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -1780,8 +1899,8 @@
     "kind": "Txt",
     "id": "9:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -1797,8 +1916,8 @@
     "kind": "Txt",
     "id": "9:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -1814,15 +1933,15 @@
     "kind": "Line",
     "id": "9:5",
     "bbox": [
-     -0.957,
-     -1.993,
-     0.0,
-     0.078
+     -1.012,
+     -1.422,
+     0.174,
+     0.0
     ],
-    "height_u": 0.97,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#17150F",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
@@ -1831,39 +1950,56 @@
     "kind": "Line",
     "id": "9:6",
     "bbox": [
-     -2.097,
-     -2.362,
-     5.294,
-     2.075
+     -0.838,
+     -1.422,
+     0.0,
+     0.068
     ],
-    "height_u": 25.93,
+    "height_u": 0.84,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#17150F",
     "z": 6,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "9:7",
     "bbox": [
-     -1.227,
-     -2.065,
-     0.326,
-     0.206
+     -1.841,
+     -1.744,
+     4.658,
+     1.807
     ],
-    "height_u": 2.57,
+    "height_u": 22.59,
     "nominal_u": null,
     "role": null,
-    "color": "#FFFFFF",
+    "color": "#96610A",
     "z": 7,
     "alive": true,
     "text": false
    },
    {
-    "kind": "Txt",
+    "kind": "VGroup",
     "id": "9:8",
+    "bbox": [
+     -1.084,
+     -1.494,
+     0.302,
+     0.196
+    ],
+    "height_u": 2.44,
+    "nominal_u": null,
+    "role": null,
+    "color": "#FFFFFF",
+    "z": 8,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "9:9",
     "bbox": [
      -3.44,
      3.421,
@@ -1874,13 +2010,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 8,
+    "z": 9,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "9:9",
+    "id": "9:10",
     "bbox": [
      -3.096,
      -4.379,
@@ -1891,13 +2027,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 9,
+    "z": 10,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "9:10",
+    "id": "9:11",
     "bbox": [
      -1.083,
      -5.277,
@@ -1908,13 +2044,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 10,
+    "z": 11,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "9:11",
+    "id": "9:12",
     "bbox": [
      0.052,
      -5.271,
@@ -1925,16 +2061,16 @@
     "nominal_u": null,
     "role": null,
     "color": "#B03D24",
-    "z": 11,
+    "z": 12,
     "alive": true,
     "text": false
    },
    {
     "kind": "Eq",
-    "id": "9:12",
+    "id": "9:13",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -1942,16 +2078,16 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 12,
+    "z": 13,
     "alive": true,
     "text": true
    },
    {
     "kind": "DecimalNumber",
-    "id": "9:13",
+    "id": "9:14",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.159,
      0.516
     ],
@@ -1959,7 +2095,7 @@
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
-    "z": 13,
+    "z": 14,
     "alive": true,
     "text": false
    }
@@ -1972,12 +2108,12 @@
     "kind": "Axes",
     "id": "10:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -1989,12 +2125,12 @@
     "kind": "ParametricFunction",
     "id": "10:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -2006,8 +2142,8 @@
     "kind": "Txt",
     "id": "10:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -2023,8 +2159,8 @@
     "kind": "Txt",
     "id": "10:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -2040,8 +2176,8 @@
     "kind": "Txt",
     "id": "10:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -2057,25 +2193,59 @@
     "kind": "Line",
     "id": "10:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.012,
+     -1.422,
+     0.002,
+     0.0
     ],
-    "height_u": 24.92,
+    "height_u": 0.0,
     "nominal_u": null,
     "role": null,
-    "color": "#96610A",
+    "color": "#B03D24",
     "z": 5,
     "alive": true,
     "text": false
    },
    {
-    "kind": "VGroup",
+    "kind": "Line",
     "id": "10:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.011,
+     -1.422,
+     0.0,
+     0.001
+    ],
+    "height_u": 0.01,
+    "nominal_u": null,
+    "role": null,
+    "color": "#17150F",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Line",
+    "id": "10:7",
+    "bbox": [
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
+    ],
+    "height_u": 21.7,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 7,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "VGroup",
+    "id": "10:8",
+    "bbox": [
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -2083,13 +2253,13 @@
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
-    "z": 6,
+    "z": 8,
     "alive": true,
     "text": false
    },
    {
     "kind": "Txt",
-    "id": "10:7",
+    "id": "10:9",
     "bbox": [
      -3.44,
      3.421,
@@ -2100,13 +2270,13 @@
     "nominal_u": 11.700000000000001,
     "role": "title",
     "color": "#000000",
-    "z": 7,
+    "z": 9,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "10:8",
+    "id": "10:10",
     "bbox": [
      -3.096,
      -4.379,
@@ -2117,13 +2287,13 @@
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
-    "z": 8,
+    "z": 10,
     "alive": true,
     "text": true
    },
    {
     "kind": "Eq",
-    "id": "10:9",
+    "id": "10:11",
     "bbox": [
      -1.083,
      -5.277,
@@ -2131,40 +2301,6 @@
      0.47
     ],
     "height_u": 5.88,
-    "nominal_u": 13.5,
-    "role": "math",
-    "color": "#17150F",
-    "z": 9,
-    "alive": true,
-    "text": true
-   },
-   {
-    "kind": "DecimalNumber",
-    "id": "10:10",
-    "bbox": [
-     0.052,
-     -5.271,
-     1.106,
-     0.459
-    ],
-    "height_u": 5.74,
-    "nominal_u": null,
-    "role": null,
-    "color": "#B03D24",
-    "z": 10,
-    "alive": true,
-    "text": false
-   },
-   {
-    "kind": "Eq",
-    "id": "10:11",
-    "bbox": [
-     -1.856,
-     1.906,
-     2.354,
-     0.666
-    ],
-    "height_u": 8.33,
     "nominal_u": 13.5,
     "role": "math",
     "color": "#17150F",
@@ -2176,8 +2312,42 @@
     "kind": "DecimalNumber",
     "id": "10:12",
     "bbox": [
+     0.052,
+     -5.271,
+     1.106,
+     0.459
+    ],
+    "height_u": 5.74,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B03D24",
+    "z": 12,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Eq",
+    "id": "10:13",
+    "bbox": [
+     -1.856,
+     1.927,
+     2.354,
+     0.666
+    ],
+    "height_u": 8.33,
+    "nominal_u": 13.5,
+    "role": "math",
+    "color": "#17150F",
+    "z": 13,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "DecimalNumber",
+    "id": "10:14",
+    "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],
@@ -2185,7 +2355,7 @@
     "nominal_u": null,
     "role": null,
     "color": "#8F5B00",
-    "z": 12,
+    "z": 14,
     "alive": true,
     "text": false
    }
@@ -2198,12 +2368,12 @@
     "kind": "Axes",
     "id": "11:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -2215,12 +2385,12 @@
     "kind": "ParametricFunction",
     "id": "11:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -2232,8 +2402,8 @@
     "kind": "Txt",
     "id": "11:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -2249,8 +2419,8 @@
     "kind": "Txt",
     "id": "11:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -2266,8 +2436,8 @@
     "kind": "Txt",
     "id": "11:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -2283,12 +2453,12 @@
     "kind": "Line",
     "id": "11:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
     ],
-    "height_u": 24.92,
+    "height_u": 21.7,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -2300,8 +2470,8 @@
     "kind": "Dot",
     "id": "11:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -2352,7 +2522,7 @@
     "id": "11:9",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -2369,7 +2539,7 @@
     "id": "11:10",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],
@@ -2407,12 +2577,12 @@
     "kind": "Axes",
     "id": "12:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -2424,12 +2594,12 @@
     "kind": "ParametricFunction",
     "id": "12:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -2441,8 +2611,8 @@
     "kind": "Txt",
     "id": "12:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -2458,8 +2628,8 @@
     "kind": "Txt",
     "id": "12:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -2475,8 +2645,8 @@
     "kind": "Txt",
     "id": "12:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -2492,12 +2662,12 @@
     "kind": "Line",
     "id": "12:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
     ],
-    "height_u": 24.92,
+    "height_u": 21.7,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -2509,8 +2679,8 @@
     "kind": "Dot",
     "id": "12:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -2561,7 +2731,7 @@
     "id": "12:9",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -2578,7 +2748,7 @@
     "id": "12:10",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],
@@ -2616,12 +2786,12 @@
     "kind": "Axes",
     "id": "13:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -2633,12 +2803,12 @@
     "kind": "ParametricFunction",
     "id": "13:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -2650,8 +2820,8 @@
     "kind": "Txt",
     "id": "13:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -2667,8 +2837,8 @@
     "kind": "Txt",
     "id": "13:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -2684,8 +2854,8 @@
     "kind": "Txt",
     "id": "13:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -2701,12 +2871,12 @@
     "kind": "Line",
     "id": "13:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
     ],
-    "height_u": 24.92,
+    "height_u": 21.7,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -2718,8 +2888,8 @@
     "kind": "Dot",
     "id": "13:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -2770,7 +2940,7 @@
     "id": "13:9",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -2787,7 +2957,7 @@
     "id": "13:10",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],
@@ -2825,12 +2995,12 @@
     "kind": "Axes",
     "id": "14:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -2842,12 +3012,12 @@
     "kind": "ParametricFunction",
     "id": "14:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -2859,8 +3029,8 @@
     "kind": "Txt",
     "id": "14:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -2876,8 +3046,8 @@
     "kind": "Txt",
     "id": "14:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -2893,8 +3063,8 @@
     "kind": "Txt",
     "id": "14:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -2910,12 +3080,12 @@
     "kind": "Line",
     "id": "14:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
     ],
-    "height_u": 24.92,
+    "height_u": 21.7,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -2927,8 +3097,8 @@
     "kind": "Dot",
     "id": "14:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -2962,7 +3132,7 @@
     "id": "14:8",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -2979,7 +3149,7 @@
     "id": "14:9",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],
@@ -3000,12 +3170,12 @@
     "kind": "Axes",
     "id": "15:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -3017,12 +3187,12 @@
     "kind": "ParametricFunction",
     "id": "15:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -3034,8 +3204,8 @@
     "kind": "Txt",
     "id": "15:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -3051,8 +3221,8 @@
     "kind": "Txt",
     "id": "15:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -3068,8 +3238,8 @@
     "kind": "Txt",
     "id": "15:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -3085,12 +3255,12 @@
     "kind": "Line",
     "id": "15:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
     ],
-    "height_u": 24.92,
+    "height_u": 21.7,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -3102,8 +3272,8 @@
     "kind": "Dot",
     "id": "15:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -3137,7 +3307,7 @@
     "id": "15:8",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -3154,7 +3324,7 @@
     "id": "15:9",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],
@@ -3192,12 +3362,12 @@
     "kind": "Axes",
     "id": "16:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -3209,12 +3379,12 @@
     "kind": "ParametricFunction",
     "id": "16:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -3226,8 +3396,8 @@
     "kind": "Txt",
     "id": "16:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -3243,8 +3413,8 @@
     "kind": "Txt",
     "id": "16:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -3260,8 +3430,8 @@
     "kind": "Txt",
     "id": "16:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -3277,12 +3447,12 @@
     "kind": "Line",
     "id": "16:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
     ],
-    "height_u": 24.92,
+    "height_u": 21.7,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -3294,8 +3464,8 @@
     "kind": "Dot",
     "id": "16:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -3329,7 +3499,7 @@
     "id": "16:8",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -3346,7 +3516,7 @@
     "id": "16:9",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],
@@ -3384,12 +3554,12 @@
     "kind": "Axes",
     "id": "17:0",
     "bbox": [
-     -3.197,
-     -2.426,
-     6.394,
-     4.125
+     -2.817,
+     -1.808,
+     5.634,
+     3.601
     ],
-    "height_u": 51.56,
+    "height_u": 45.01,
     "nominal_u": null,
     "role": null,
     "color": "#FFFFFF",
@@ -3401,12 +3571,12 @@
     "kind": "ParametricFunction",
     "id": "17:1",
     "bbox": [
-     -3.133,
-     -2.362,
-     6.33,
-     3.78
+     -2.753,
+     -1.744,
+     5.57,
+     3.292
     ],
-    "height_u": 47.25,
+    "height_u": 41.15,
     "nominal_u": null,
     "role": null,
     "color": "#3E6F5C",
@@ -3418,8 +3588,8 @@
     "kind": "Txt",
     "id": "17:2",
     "bbox": [
-     -1.193,
-     -2.698,
+     -1.051,
+     -2.079,
      0.077,
      0.24
     ],
@@ -3435,8 +3605,8 @@
     "kind": "Txt",
     "id": "17:3",
     "bbox": [
-     0.765,
-     -2.695,
+     0.67,
+     -2.077,
      0.117,
      0.237
     ],
@@ -3452,8 +3622,8 @@
     "kind": "Txt",
     "id": "17:4",
     "bbox": [
-     2.749,
-     -2.699,
+     2.417,
+     -2.08,
      0.105,
      0.241
     ],
@@ -3469,12 +3639,12 @@
     "kind": "Line",
     "id": "17:5",
     "bbox": [
-     -2.144,
-     -2.362,
-     5.341,
-     1.993
+     -1.883,
+     -1.744,
+     4.7,
+     1.736
     ],
-    "height_u": 24.92,
+    "height_u": 21.7,
     "nominal_u": null,
     "role": null,
     "color": "#96610A",
@@ -3486,8 +3656,8 @@
     "kind": "Dot",
     "id": "17:6",
     "bbox": [
-     -1.227,
-     -2.065,
+     -1.084,
+     -1.494,
      0.144,
      0.144
     ],
@@ -3521,7 +3691,7 @@
     "id": "17:8",
     "bbox": [
      -1.856,
-     1.906,
+     1.927,
      2.354,
      0.666
     ],
@@ -3538,7 +3708,7 @@
     "id": "17:9",
     "bbox": [
      0.618,
-     1.981,
+     2.002,
      1.227,
      0.516
     ],

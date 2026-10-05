@@ -568,5 +568,58 @@
       "films/odd-squares/out/sheets/times-16x9.png",
       "films/odd-squares/out/sheets/times-9x16.png"
     ]
+  },
+  {
+    "round": 14,
+    "at": "2026-10-05T00:20:44.739Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "hook": 8,
+      "readability": 7,
+      "motion": 8,
+      "variety": 8,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 63.5,
+        "issue": "The s05 dose re-judged on the unchanged drafts: KEEP 0.86 — but the hero regression is byte-confirmed and the 16:9 half still never existed. Measured at t=63.5/64.9 in both formats: the portrait 0.86 holds the k-line 2 at 16px@540 = 10.7px@360 and the Sigma-line's n2 at 11.3 (both clear the floor — the dose's win is real; I would not revert it), but the recap group fit still takes the dose out of the hero: hero two-line span 84-85px with x-height ~24px = the k-line's digits 23-24px@540 (per-glyph lead 1.00x), the k-line's parens (34px) overhang the hero's ascenders (33px), and the Sigma-with-limits block (87-88px) is taller than the hero's whole span — the r5/r6 'hero > Sigma > k-line' mechanism stays broken. The stack crowds (hero to n-limit 24px, k=1 to k-line 23px @540 = 15-16px@360) and the k-line's bottom sits at 88% frame height (the bottom UI band). The 16:9 recap is portrait-guarded, untouched by de0a4e4/fe71599: its k-line 2 measures 20px@960 = 7.5px@360, the Sigma-line's n2 2 19px = 7.1, the Sigma limits n 13px = 4.9 / k=1 21px = 7.9 — sub-floor on the film's last equations in the co-equal cut.",
+        "fix": "Keep 0.86 but decouple the hierarchy from the group fit: scale the Sigma/k-line pair to a px budget per format (k-line 2 >=10px@360, Sigma limits >=8px@360, in BOTH formats — replace the portrait guard with per-format floors), and re-lead the hero against the k-line's PARENS (the tallest formula glyph) rather than its x-height — hero ascenders >=1.15x the paren height; cap the Sigma's display size so its block <= the hero's two-line span; move the k-line up out of the bottom 15%."
+      },
+      {
+        "t": 20.07,
+        "issue": "The s02->s03 seam: the odd_eqs unification skipped a FOURTH cycle (fe71599 's04 proof rows FIXED' touches no odd_eqs; the five copied helpers still diverge — s02 sizes at ebox.w*0.98/widest_e5, s01/s03/s05 at *0.9), so the carried e5 still resizes ~10% mid-crossfade (r12's 28-frame timeline: digits h34-36 -> h30-33 at t~20.08, +29px left-edge; my 20.05-20.15 frames show the equation's ink x397-868 thinning through the dissolve). The seam's other machinery verified GOOD this round at 1/30s: the title fades out 19.30-19.47, the olive L + e5 dissolve across the cut 20.25-20.5, the 4x4 core holds position and size into s03 (no block pop — the 2s-sheet's '20% shrink' is just the olive L leaving, 72/90 = exactly 4/5), and 'Why the L fits' letter-fades in from 20.59. Residuals: the resize itself, a 0.2-0.3s near-blank beat at 20.5-20.6 (block alone on paper), and faint trailing glyphs in the title's letter-fade.",
+        "fix": "Hoist odd_eqs into the kit (one coefficient set, one widest reference — the r10 prescription, four cycles old now), or export s02's e5 end-state geometry and continue from it in s03; add a crossfade term to the seam-continuity gate (frame-paired bbox deltas on persisted glyphs through fades, not only cuts); re-run the 19.8-20.4 strip in both formats."
+      },
+      {
+        "t": 39,
+        "issue": "The 16:9 2 population still squints at phone width — unchanged, now precisely bounded: the s03 k-line's 2 measures 23px@960 = 8.6px@360 (the floor band's bottom edge, on the proof's pivot glyph), the finale k-line's 2 20px = 7.5px@360 and the Sigma-line's n2 19px = 7.1 (sub-floor, on the film's last equations), the Sigma limits n 4.9 / k=1 7.9px@360. The 9:16 counterparts all clear (s02 2s 11-12, s04 rows 13.3, the finale 2s 10.7-11.3px@360) — the asymmetry is the un-unified sizing, not the geometry (s04's rows prove the panels admit >=8.6px@360).",
+        "fix": "One unified odd_eqs floor (hoist to the kit) or per-line px floors in each format; target 2 >=10px@360 for every equation population and Sigma limits >=8px@360; re-measure the phone-16:9 sheets at 39s and 57-65.7s."
+      },
+      {
+        "t": 29,
+        "issue": "NEW this round — a cue desync in s03's generalization: the k-line reads (k)+(k-1)=(2k-1) from ~28.5s while the brace labels still measure the concrete fourth L ('4' at the right brace, '3' at the top) until ~30.5-31s — roughly 2s of mixed notation against the narration's 'a column of k and a row of k minus one', where the script's cue order ({colk}, {rowk} BEFORE {total}) asks the labels to lead. Not a math error (the braces truly measure 4 and 3 cells) — a staging wobble that reads as the equation anticipating its own labels.",
+        "fix": "Fire the label swap with or just before the {total} cue (4->k and 3->k-1 on 'L number k is a column of k'), or hold the equation concrete until the labels land; re-check the 27.5-31.5s window on the phone sheets."
+      }
+    ],
+    "notes": "round 13 by math-critic (READ-ONLY; the film is byte-identical to the r12 review — drafts 23:32/23:33Z, commit fe71599 'odd-squares s04 proof rows FIXED (8.6-9.0px@360)' on top of de0a4e4's 0.86 dose, odd_eqs untouched a fourth cycle; gates ALL PASS re-stamped 00:03:04Z; math_check 5/5 scenes clean; INDEPENDENT re-evaluation 48/48 claims TRUE in fresh sympy processes from their text alone). RE-DERIVED, all correct: 1=1^2; 1+3=4=2^2; 1+3+5=9=3^2; +7=16=4^2; +9=25=5^2; 3=2*2-1; 4+3=7=2*4-1 (column 4 + row 3); 7=4^2-3^2; 9=5^2-4^2; k+(k-1)=2k-1; k^2-(k-1)^2=2k-1; rows 1=1^2-0^2, 3=2^2-1^2, 5=3^2-2^2, (2n-1)=n^2-(n-1)^2; telescoping Sum(k^2-(k-1)^2,1..n)=n^2-0^2; Sum(2k-1,1..n)=n^2; n=100 -> 100^2=10000; Sum(2k-1,1..5)=25 — every on-screen equation transcribes true, the payoff row simplifies 1+3+5+...+(2n-1)=n^2-0^2 -> =n^2 by t=55.6. METHOD: LOOKED at 10 sheets (every-16:9 at a 0.5s sweep of 0-18s plus a 2s full-film sweep, every-9:16 full, phone-16:9 and phone-9:16, times-9:16 finale at 360px, and five 1/30s strips: 0.05, 6.95, 19.30, 20.15, 20.52) with vision reads, then MEASURED at full res on 14 extracted frames — numpy ink-band and glyph-run analysis of the s05 finale hierarchy in both formats (9:16: hero ascender 33px@540 / Sigma block 87 / k-line glyphs 23-24 with parens 34 and 2 at 16 = 10.7px@360; 16:9: hero 55@960 / Sigma body 57 / k-line glyphs 29 with 2 at 20 = 7.5px@360 and Sigma limits n 13 = 4.9px@360), the s04 rows in both formats, the s03 k-line 2s, the seam at 1/30s across three strips, the hook reveal (clean staggered per-glyph fade, no clip — the 0.25s 'clip' was the 2 mid-fade), the wrap crossing (the entering L passes over the equation at 30-40% opacity but the text z-orders above — legible throughout, x3), and the audio (-16.0 LUFS, -1.1 dBTP, LRA 2.4, captions full-length). THE FOUR NAMED ITEMS: (1) s04's fix re-verified in BOTH formats — 16:9 pitch 76-78px, clear gaps 25-30px, 2 23-24px@960 = 8.6-9.0px@360, digits 12.4-12.8px@360; 9:16 pitch 65px, gaps 23px, 2 13.3px@360 (black) / 16.7 (emphasis-colored); evenly pitched, no overlap — the fix holds and matches the commit's claim exactly. (2) the s05 dose: judged KEEP 0.86 — the 2 floor at 10.7-11.3px@360 is the non-negotiable win — but the hero regression is byte-confirmed (lead 1.00x on x-height, parens 34px over the ascenders 33px, Sigma block 87px > the hero's 84px span, 15px@360 stack gaps, the k-line at 88% frame height) and the 16:9 half is still missing (problem 1). (3) the seam: the e5 resize confirmed (problem 2), though my strips show the seam is otherwise well-made — the 4x4 core holds position across the cut, the olive L and title dissolve cleanly. (4) the 16:9 k-line 2 sub-floor confirmed and bounded (problem 3). NEW FINDINGS: the s03 notation desync (problem 4); the s01 hook verified clean at entrance but reads ~10% of frame at phone-16:9 (equation 12px@360, group center-of-mass at 38% across, dashed outlines ~1px at 4.5-5.5s); the s02 9:16 equation left-aligned at x~25 under the centered square (off-balance); the s04->s05 seam is a good crossfade (the s05 hero pre-rolls over s04's tail); the last 2s a static hold; the finale left edges still ragged (16:9 square 77 / hero 417 / k-line 437 / Sigma 486; 9:16 106/137/148) and the 9:16 under-fill stands (top 20-45% empty through the film). VERDICT vs the 8+ bar: FAILS on readability 7, composition 7, sound 7 (TTS-only, flat LRA, no bed). PASSES hook 8, motion 8, variety 8, brand 8, clarity 8, correctness 10 — earned: 48/48 independent, hand re-derived, every on-screen equation transcribes true, no mathematical error in thirteen rounds. The proof rows read, the portrait k-line clears its floor, and the seam is better-made than the 2s sampling suggests; what keeps it off my feed: the co-equal 16:9 cut's last equations still squint at phone width, the 0.86 dose re-inverted the portrait finale's hierarchy it was meant to preserve, the odd_eqs unification is four cycles stale, and the finale-edge / under-fill / sound holds stand untouched.",
+    "sheets": [
+      "films/odd-squares/out/sheets/every-16x9.png",
+      "films/odd-squares/out/sheets/every-9x16.png",
+      "films/odd-squares/out/sheets/phone-16x9.png",
+      "films/odd-squares/out/sheets/phone-9x16.png",
+      "films/odd-squares/out/sheets/times-9x16.png",
+      "films/odd-squares/out/sheets/strip-0.05-16x9.png",
+      "films/odd-squares/out/sheets/strip-6.95-16x9.png",
+      "films/odd-squares/out/sheets/strip-19.30-16x9.png",
+      "films/odd-squares/out/sheets/strip-20.15-16x9.png",
+      "films/odd-squares/out/sheets/strip-20.52-16x9.png"
+    ]
   }
 ]
