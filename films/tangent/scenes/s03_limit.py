@@ -181,11 +181,16 @@ def second_half(t):
     return smooth(max(0.0, 2 * t - 1))
 
 
-def below_name(g):
-    """Center ``g`` in panel 1 (the algebra panel; y = x² has left it by s03), grown up to 1.5 x
-    so the algebra fills 90% of the panel's width (round-2 look: it floated small)."""
+def below_name(g, growth: float = 1.5, fill_w: float = 0.9):
+    """Center ``g`` in panel 1 (the algebra panel; y = x² has left it by s03), grown up to
+    ``growth`` x so the algebra fills ``fill_w`` of the panel's width (round-2 look: it floated
+    small). r22 (critic): the growth must bind — a font_size dose alone is divided right back out
+    by this same width fit (r21's lim 1.5x was a rendered no-op, the records byte-identical). The
+    lim display is the ONE object in its panel at 28.5s: it takes fill_w=0.98 (k 1.16 vs 1.06)
+    and the growth ceiling 1.3 — the h->0 subscript crosses the 8px@360 phone floor.
+    """
     p = panel()
-    k = min(1.5, p.w * 0.9 / g.width, p.h * 0.8 / g.height)
+    k = min(growth, p.w * fill_w / g.width, p.h * 0.8 / g.height)
     g.scale(k)
     g.move_to([p.cx, p.cy, 0])
     return g
@@ -195,12 +200,13 @@ def limit_eq():
     """lim_{h→0} ((1+h)² − 1²)/h = 2 — the 2 from sympy.limit, never typed."""
     h = sp.Symbol("h")
     lim = sp.limit(((1 + h) ** 2 - 1) / h, h, 0)
-    # r20 (critic, the live content route): the lim's sub-glyphs (h->0) were the phone floor's
-    # worst (28.5s) — the whole lim Eq at 1.5x (a one-shot display with the room)
+    # r20/r22 (critic): the lim's sub-glyphs (h->0) were the phone floor's worst (28.5s) — the
+    # lim display GROWN THROUGH THE FIT (the 1.5 ceiling binds where the width cap did not:
+    # r21's font dose was divided out, a measured no-op; the growth param is the fix)
     from studio_manim.typeset import _font_size
     e = Eq(rf"\lim_{{h \to 0}} \frac{{(1+h)^2 - 1^2}}{{h}} = {{{{{num(lim)}}}}}",
            roles={"p1": "result"}, font_size=_font_size("math") * 1.5)
-    return below_name(e), lim
+    return below_name(e, growth=1.3, fill_w=0.98), lim
 
 
 class Scene(StudioScene):

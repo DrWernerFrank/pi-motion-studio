@@ -211,7 +211,11 @@ def rule_rows(x_eq):
     out = []
     for p in (2, 3, n):
         d = sp.powsimp(sp.simplify(sp.diff(X ** p, X)))
-        rhs = tex(d) if p != n else r"{{n\, x^{n - 1}}}"  # r20: one label -> one shaped run (the upright-roman n)
+        rhs = tex(d) if p != n else r"{{n x^{n - 1}}}"
+        # r22 (critic): the \, thin-space read as a stray gap beside the converter's tight
+        # juxtaposition in rows 1-2 — plain juxtaposition (typst ignores inter-atom spaces),
+        # one coefficient class across all three rows. (The bar weight and the letterforms
+        # are the font's own — NCMM Math's frac rule/italic; judged residual, no override.)
         out.append((Eq(rf"\frac{{d}}{{dx}}\, x^{{{sp.latex(p)}}} {{{{=}}}} {{{{{rhs}}}}}",
                        roles={"p2": "result"}), d))
     left = max(e.part("p1").get_center()[0] - e.get_left()[0] for e, _ in out)
@@ -234,6 +238,12 @@ def rule_rows(x_eq):
     for e, _ in out:
         e.scale(k)
         e.shift([x_eq - e.part("p1").get_center()[0], 0, 0])
+    # r22 (critic): the rhs tightening freed width, k grew, and the rows' LEFT edge crossed the
+    # safe area by 0.062u — clamp the group inside L.safe (x only; the y-clamp stays in construct)
+    _ovl = L.safe.x - min(e.get_left()[0] for e, _ in out)
+    if _ovl > 0:
+        for e, _ in out:
+            e.shift([_ovl + L.u * 0.05, 0, 0])
     return out
 
 

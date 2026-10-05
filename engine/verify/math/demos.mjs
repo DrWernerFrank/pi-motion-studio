@@ -81,8 +81,10 @@ export default async () => {
     facts.push(`${key}: ${claims.length} claims all ok, coverage ${pct}% (${linkedMath.length}/${mathIds.length})`);
 
     // 5. no placeholder text: sweep the scene sources and script for stub markers
+    //    (skip __pycache__ — a directory, and readFileSync would throw EISDIR)
     const PLACEHOLDER = /TODO|FIXME|placeholder|PLACEHOLDER|lorem|\bXX\b|\bTBD\b/i;
-    const srcs = readdirSync(join(dir, 'scenes')).map((f) => readFileSync(join(dir, 'scenes', f), 'utf8')).join('\n')
+    const srcs = readdirSync(join(dir, 'scenes')).filter((f) => f.endsWith('.py'))
+      .map((f) => readFileSync(join(dir, 'scenes', f), 'utf8')).join('\n')
       + readFileSync(join(dir, 'script.md'), 'utf8');
     if (PLACEHOLDER.test(srcs)) bad.push(`${key}: placeholder text present`);
   }

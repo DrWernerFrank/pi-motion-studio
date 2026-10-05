@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T12:53:45.807Z",
+  "at": "2026-10-05T13:20:36.307Z",
   "pass": true,
   "checks": [
     {
@@ -60,18 +60,18 @@
       "name": "deterministic",
       "pass": false,
       "level": "warn",
-      "detail": "2 record file(s) changed since the last gates run (16:9/s04_sum-layout.json, 9:16/s04_sum-layout.json) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "detail": "4 record file(s) changed since the last gates run (16:9/s04_sum-layout.json, 16:9/s05_recap-layout.json, 9:16/s04_sum-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
         "16:9/s01_hook-layout.json": "8ffc38f7a931",
         "16:9/s02_pattern-layout.json": "cf087aed43a5",
         "16:9/s03_why-layout.json": "04718274c248",
-        "16:9/s04_sum-layout.json": "5ad9a88c8451",
-        "16:9/s05_recap-layout.json": "be5550c9fa7a",
+        "16:9/s04_sum-layout.json": "8daae11778ee",
+        "16:9/s05_recap-layout.json": "1eaa8defbe38",
         "9:16/s01_hook-layout.json": "5fdb70a3a346",
         "9:16/s02_pattern-layout.json": "6f8284661e7b",
         "9:16/s03_why-layout.json": "b0445cfa3f65",
-        "9:16/s04_sum-layout.json": "0fc99bebac3e",
-        "9:16/s05_recap-layout.json": "3d9a5e3a3334"
+        "9:16/s04_sum-layout.json": "7e598259d020",
+        "9:16/s05_recap-layout.json": "541104654019"
       }
     }
   ]

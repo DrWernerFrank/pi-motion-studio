@@ -105,8 +105,13 @@ class Scene(StudioScene):
         # the verified sign fix); 9:16 keeps them at 1.0 and grows the HERO instead (its lead is
         # what reads at phone width — the critic's own prescription).
         if L.portrait:
-            hero = hero.scale(1.22)  # r17b: parity (1.00x) -> lead (the hero clears the Sigma block)          # the hero grows; the formulas hold their 10.7px floor
-            _sum.scale(1.0); _kln.scale(1.0)
+            # r21 (critic — the finale stack, composition's live routes): the LEAD finished — hero
+            # 1.30 puts its ascenders ~1.4x the k-line's parens (the >=1.15x prescription); the
+            # k-line CAPPED at 0.82 (r19's "cap the parens" route): its 2s hold ~8.9px@360 (above
+            # the 8px floor) and it stops being the widest line; the Σ holds 1.0 so its limits
+            # keep theirs (n ~8.6px@360 after the fit) and its block stays under the hero span
+            hero = hero.scale(1.30)
+            _sum.scale(1.0); _kln.scale(0.82)
         else:
             _sum.scale(1.16); _kln.scale(1.16)
         lines = recap([
@@ -114,7 +119,20 @@ class Scene(StudioScene):
             _sum,
             _kln,
         ])
-        into(lines, ebox, fill=0.9)
+        # r21 (critic): ONE shared left edge — the three center-aligned edges staggered ~42px
+        # and read as three cards (r16-r19, both formats); a left-aligned block is one unit
+        x0 = min(m.get_left()[0] for m in lines.submobjects)
+        for m in lines.submobjects:
+            m.shift([x0 - m.get_left()[0], 0, 0])
+        # r21 (critic): the k-line PINNED at 88.5% of the frame — inside the bottom-12% phone UI
+        # band. r19's own FIT route (not a dose): the portrait stack fits a box raised off the
+        # bottom edge, so the block (the k-line last) clears the band; the ~2% fit shrink is
+        # inside every floor (the 2s ~8.9px, the Σ limits ~8.6px@360)
+        if L.portrait:
+            from studio_manim.layout import _Box
+            into(lines, _Box(ebox.x, ebox.y + L.u * 1.2, ebox.w, ebox.h - L.u * 1.2), fill=0.9)
+        else:
+            into(lines, ebox, fill=0.9)
         l1, l2, l3 = lines.submobjects  # headline, the sum (the payoff), the k-th L
 
         with self.say("s05.1"):
