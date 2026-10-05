@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T00:23:05.822Z",
+  "at": "2026-10-05T00:55:38.889Z",
   "pass": true,
   "checks": [
     {
@@ -58,9 +58,9 @@
     },
     {
       "name": "deterministic",
-      "pass": true,
-      "level": "pass",
-      "detail": "12 layout record hash(es) identical to the last gates.json run",
+      "pass": false,
+      "level": "warn",
+      "detail": "5 record file(s) changed since the last gates run (16:9/s02_secant-layout.json, 9:16/s01_hook-layout.json, 9:16/s02_secant-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
       "hashes": {
         "16:9/s01_hook-layout.json": "c7910395728b",
         "16:9/s02_secant-layout.json": "08e5d8f61ed7",
@@ -68,10 +68,10 @@
         "16:9/s04_slopes-layout.json": "6d189ca0f21c",
         "16:9/s05_rule-layout.json": "24e797861cbe",
         "16:9/s06_recap-layout.json": "887646eba588",
-        "9:16/s01_hook-layout.json": "c57bff6b7dff",
-        "9:16/s02_secant-layout.json": "90a1c873e235",
-        "9:16/s03_limit-layout.json": "560bbcf996b1",
-        "9:16/s04_slopes-layout.json": "9efce1f53997",
+        "9:16/s01_hook-layout.json": "c42b23eb3ec4",
+        "9:16/s02_secant-layout.json": "a0b7a124c286",
+        "9:16/s03_limit-layout.json": "f4cc4df10ec3",
+        "9:16/s04_slopes-layout.json": "706feca35317",
         "9:16/s05_rule-layout.json": "b00bed93c242",
         "9:16/s06_recap-layout.json": "3537cef85a99"
       }

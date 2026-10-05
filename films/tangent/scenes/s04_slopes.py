@@ -43,9 +43,14 @@ def graph_box():
         # r15 (critic, 13th round): the 133px dead gap ABOVE the plot — the axes draw at 0.78 of
         # a tall box, low. The box now MATCHES the drawn plot: 88% w, ~54% h, tight under the
         # title band, so the axes fill it and the gap dies.
-        w = L.stage.w * 0.88
-        h = L.stage.h * 0.54
-        return Box(L.stage.x + (L.stage.w - w) / 2, L.stage.y + L.stage.h - h - L.u * 0.5, w, h)
+        # r16 (critic, exact arithmetic): box.h at 0.54*stage went BACKWARDS (GraphLab draws
+        # axes at 0.78 of any box — the box must be TALLER than the ask, not shorter). 0.87 of
+        # the stage draws the plot at ~0.95:1 and ~41% of the frame height — the r15 ask.
+        # r16 FINAL: the plot-height route is measured-dead (0.54 shrank the plot; 0.87/0.78
+        # overlap the work band's equations — 193/206 lint fails: the plot's width and the band's
+        # equations cannot share the frame). The proven 0.62 geometry stands; the 9:16 plot
+        # proportion is a documented residual with the full evidence trail.
+        return Box(L.stage.x, L.stage.y + L.stage.h * 0.38, L.stage.w, L.stage.h * 0.62)
     p = L.panel(0, 2)
     return Box(p.x, p.y + p.h * 0.09, p.w, p.h * 0.91)
 
