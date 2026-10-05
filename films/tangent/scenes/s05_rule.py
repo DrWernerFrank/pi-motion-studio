@@ -211,7 +211,7 @@ def rule_rows(x_eq):
     out = []
     for p in (2, 3, n):
         d = sp.powsimp(sp.simplify(sp.diff(X ** p, X)))
-        rhs = tex(d) if p != n else r"n\, x^{n - 1}"
+        rhs = tex(d) if p != n else r"{{n\, x^{n - 1}}}"  # r20: one label -> one shaped run (the upright-roman n)
         out.append((Eq(rf"\frac{{d}}{{dx}}\, x^{{{sp.latex(p)}}} {{{{=}}}} {{{{{rhs}}}}}",
                        roles={"p2": "result"}), d))
     left = max(e.part("p1").get_center()[0] - e.get_left()[0] for e, _ in out)

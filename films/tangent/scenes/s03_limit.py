@@ -195,7 +195,11 @@ def limit_eq():
     """lim_{h→0} ((1+h)² − 1²)/h = 2 — the 2 from sympy.limit, never typed."""
     h = sp.Symbol("h")
     lim = sp.limit(((1 + h) ** 2 - 1) / h, h, 0)
-    e = Eq(rf"\lim_{{h \to 0}} \frac{{(1+h)^2 - 1^2}}{{h}} = {{{{{num(lim)}}}}}", roles={"p1": "result"})
+    # r20 (critic, the live content route): the lim's sub-glyphs (h->0) were the phone floor's
+    # worst (28.5s) — the whole lim Eq at 1.5x (a one-shot display with the room)
+    from studio_manim.typeset import _font_size
+    e = Eq(rf"\lim_{{h \to 0}} \frac{{(1+h)^2 - 1^2}}{{h}} = {{{{{num(lim)}}}}}",
+           roles={"p1": "result"}, font_size=_font_size("math") * 1.5)
     return below_name(e), lim
 
 

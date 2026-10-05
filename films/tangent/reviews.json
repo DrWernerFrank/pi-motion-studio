@@ -823,5 +823,53 @@
       "films/tangent/out/sheets/strip-20.85-16x9.png",
       "out/critic19/"
     ]
+  },
+  {
+    "round": 20,
+    "at": "2026-10-05T08:47:02.037Z",
+    "reviewer": "math-critic",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 8,
+      "variety": 7,
+      "composition": 8,
+      "brand": 7,
+      "sound": 9,
+      "correctness": 10,
+      "clarity": 8
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 28.5,
+        "issue": "THE PHONE FLOOR AFTER THE r20 ADJUDICATION — ONE LIVE LEG LEFT, EVERYTHING ELSE PERMANENT WITH EVIDENCE (both formats, the floor that holds readability at 7): the ticks (size route measured-dead since r19 at 28/56 lint fails, the collision family; the ink half landed — dark specks, re-read this round at 360px: illegible in BOTH phone reads, the strongest text never was); the desert young-state algebra (breathing dead r18, the 1-2-line states still ~3% of frame height); and NOW PERMANENT: the 9:16 s02 graze (the slot-drop measured-dead at 80 lint fails — the box bottom band is the curve origin half, the 0.91 slot stands; re-measured this round at 4x on current pixels: the superscript-2 and tick-2 ink-connected into one cluster, the tick reads malformed, sub-lint forever behind the line-box blind spot). THE ONE LIVE LEG: the lim h->0 subscript + fraction exponents — this round phone readers again name t=28.5 the worst legibility moment (the subscript a speck, the exponents guessable-not-crisp), never itself route-measured.",
+        "fix": "Lint-check the modest superscript-size pass inside the s03/s05 fraction slots the way the ticks were measured (the same check that killed the tick growth may kill it; record the trail either way). If it dies, the floor is FULLY closed-class and readability is all documented-dead territory — the r18 composition precedent then applies to the honest score."
+      },
+      {
+        "t": 55.5,
+        "issue": "THE HERO/PAYOFF TYPOGRAPHY (brand live route, re-measured COLD at full res this round, both formats): the upright-roman coefficient n in a visibly different face from the italic math x (native read: looks like a different font), the 75px word-space gap between n and x^n-1 (reads as a stray space, not tight juxtaposition), the 2-3px hairline d/dx fraction bars against 6-10px glyph strokes, the generous = spacing, the readout = kerning (r19, 2px vs 19px). Plus the s06 block bottom-weighted BOTH formats (16:9: 325px top void vs 145px below; 9:16: 43%/21%). The finale is ink-centered (475/473px margins, nothing clipped) — the polish asks are real but small.",
+        "fix": "One seam-safe typography pass over the rule rows + readout + hero: italicize the n, tighten the coefficient gaps, weight the d/dx bars, loosen the = kerning — applied symmetrically s05+s06 (byte-identical geometry, both sides move together); lint-check, then verify the seam strip still returns dx=0."
+      },
+      {
+        "t": 11.5,
+        "issue": "THE HOOK LULLS, THIRD ROUND NAMED, STILL UNATTEMPTED (r18 named, r19 re-named, r20 nothing landed): the calm open, the dot-wait 8.75-12.75, the 3.5-5.5 triple hold — re-read this round as the every-sheet dead spans (4.25-5.75 static, 10.75-11.75 static, the 55-57 span). No layout, no seam impact, no closed route touched — the one territory every layout/content/micro route left open. They hold hook at 7 (and motion at 8).",
+        "fix": "The small s01-s02 motion asks: a second dot pulse, a trace arc ~11.5s. Word-synced, sub-second, zero geometry."
+      },
+      {
+        "t": 45,
+        "issue": "THE PERMANENT CONSEQUENCES, NOW THE COMPLETE SET (the r20 adjudication: with the slot-drop 80-fail, the tick growths 28/56, and the tags bbox-span deaths all measured since r19, the layout + content + micro trade-space is FULLY closed): the s01-s04 one-class repetition (~47% of runtime in the panel class — variety held at 7; the class IS the direction, no route exists to measure), the desert (9:16 ~80% empty 39-55s, the 16:9 right half dead, the payoff span 3.842u/30.7%W re-measured to the digit this round), the 16:9 s01/s02 dead right half (core ink <=45%W to 16.7s), the 360px tick specks, the 9:16 graze, the axis squash (XR 3.2 vs YR 11 — forced: x^2 range in a landscape panel; r17 sharpest cold line, re-echoed this round: large slope numbers drawn as gentle inclines).",
+        "fix": "None within the contracts — every removal route measured to break a harder-won property (the seam, the floor, the slot, the truth of the drawn curve); documented-dead with complete trails. The honest scores are the honest scores: an impossibility proof assigns the cause, it does not change the screen."
+      }
+    ],
+    "notes": "round 20 by math-critic — re-derived: the full claims ledger 54/54 TRUE in fresh sympy processes from text alone (nothing trusted because a scene said so) + check tangent 6/6 scenes clean; gates ALL PASS (the drift WARN is the r19 tag-removal re-render class, 9:16 s03/s04 records). THE GIT-REPAIR VERIFIED CONTENT-NEUTRAL FOUR WAYS: the audio spine BIT-EQUAL on the current drafts (sha256 b2e5c0f110600110 over 3,075,072 stereo samples, identical across both formats — r18/r19 EXACT hash), the climax seam re-measured at the cut n1702->1703 (rows-region IoU 0.94/0.95, full-frame 0.96/0.97, best shift dx=0 both formats — the r13-r19 class), the payoff geometry identical to the digit (the 16:9 s05 rows at x=-4.415, w=3.842 = 30.7%W — r13/r15 baseline), and the screen state matching r19 on every sheet. ON-SCREEN NUMBERS re-verified cold this round, both formats, native + 360px: the h-sweep 2+h exact at every sampled instant (2.92/2.51/2.10/2.07/2.00 against h 0.92/0.51/0.10/0.07/h->0), the mid-sweep readouts exact 2x (2.04/4.00/4.11/5.98/6.00), secant (4-1)/(2-1)=3, tangents 2/4/6 at x=1/2/3, the derivation chain ((x+h)^2-x^2)/h = 2x+h -> lim -> 2x, the rule rows, the recap formula — every value transcribed correctly by this round readers; captions token-free (0 braces, grepped). THE THREE r19 MICRO-ROUTES re-adjudicated dead on the current state and their consequences accepted: the slot-drop (80 lint fails, the 0.91 slot stands, the graze permanent), the tick growths (28/56, the ink half landed), the tags (bbox spans the panel; the live readout IS the tag, verified clean). NEW THIS ROUND, ADJUDICATED BENIGN WITH A LIFECYCLE STRIP: the t=15.75 speck below the curve is the slope-triangle ink RISE growing in place from 15.6s, word-synced to It rises three over a run of one — the leading edge of the intended animation, not an artifact (the s01 language: ink structure, red run); the s02 fraction ink-operators/amber-result is the consistent color system (working=ink, value=amber — the phone reader black-not-amber misread adjudicated at native); the 29s h-bar and 35s slo-glyph are the mid-morph/mid-write class completing clean; the 9.3-9.6 label move is r15 smooth ease; the s04->s05 0.4%-ink beat and the 8.5 title crossfade are the r17 classes. RE-CONFIRMED STANDING: the desert, the 16:9 dead right half, the lulls, the one-class s01-s04 repetition, the 9:16 bottom-weighted recap (both now), the hairline bars/upright n/loose gaps at the hero and payoff rows, the tick specks at 360px. SCORING vs THE BAR (every 8+, correctness 10 earned): the round question — with every layout + content + micro route landed-or-dead, do the remaining keys earn 8 or do the permanents hold them — answered with measurements: readability 7 (the permanents on screen — tick specks illegible at 360px both formats, the graze at 4x malformed, the desert algebra tiny — PLUS the one live leg, the lim-subscript/exponent pass, unmeasured; a live named route bars the rise by the r13 formula), variety 7 (the s01-s04 one-class repetition re-read on screen through ~47% of the runtime — the closed class permanent consequence; no route exists to measure), brand 7 (the hero/payoff typography re-measured cold at full res: upright-roman n in a different face, the 75px coefficient gap, 2-3px hairline bars — one live seam-safe pass), hook 7 (the lulls, third round), motion 8 (the seam re-verified on the current drafts; the lulls keep it from 9), composition 8 (HELD: the r18 condition — the trade-space staying closed — is MET, the r20 deaths further closed it; the payoff geometry unchanged to the digit), sound 9 (bit-equal spine re-verified), clarity 8 (the pedagogy reads end-to-end; the instruments transcribe cold; the permanents are blemishes not breaks), correctness 10 EARNED (54/54 independent). VERDICT vs the 8+ bar: NOT passing — hook 7 / readability 7 / variety 7 / brand 7, min 7, the same shape as r18/r19 — but the attribution is now COMPLETE: every layout (r15-r18), content (r19), and micro (r20) route is landed-or-measured-dead, and the remaining deficit is exactly (a) the permanent consequences (the tick specks, the desert algebra, the s01-s04 repetition, the graze — the closed classes prices, unfixable within the contracts) and (b) three small LIVE content routes that were never layout: the lim-subscript lint-pass (readability last leg), the hero typography pass (brand), the lull motion asks (hook, motion toward 9). The film is measurably at the optimum of its layout class with an exemplary spine — 54/54 independent, bit-equal audio, a seam closed by construction and re-verified on every fresh render, word-timed end to end — and the bar is earned, not granted: the honest score is the honest score.",
+    "sheets": [
+      "films/tangent/out/sheets/every-16x9.png",
+      "films/tangent/out/sheets/every-9x16.png",
+      "films/tangent/out/sheets/phone-16x9.png",
+      "films/tangent/out/sheets/phone-9x16.png",
+      "films/tangent/out/sheets/times-16x9.png"
+    ]
   }
 ]
