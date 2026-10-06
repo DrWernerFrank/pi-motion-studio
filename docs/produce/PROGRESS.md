@@ -24,8 +24,8 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W2-skill | produce skill + AGENTS/README sections (lead integrates) + producer-critic + checks | .pi/skills/produce/**, .pi/agents/producer-critic.md, engine/verify/produce/{skill,critic}.mjs | — | `--only skill,critic` | glm-worker | **DONE b2eec31** |
 | W2-make | spike S4 + runner + studio make + fake-pi + make check + ADR-004 | engine/produce/runner.mjs, engine/verify/produce/make.mjs, docs/produce/ADR-004-*.md (cli wiring = lead) | SCHEMAS runner | `--only make` | glm-worker | **DONE cf42856** (died post-completion; verified) |
 | W2-tools | project_* tools + tools check | .pi/extensions/motion-tools/project-tools.ts (BY_FILE = lead) | W2-proj | `--only tools` | glm-worker | **DONE a271650** |
-| W3-gui | Make dialog + public/project.js + server endpoints + gui-smoke/gui-security | studio-gui/**, engine/verify/produce/{gui-smoke,gui-security}.mjs | W2-make (API frozen) | `--only gui-smoke,gui-security` | glm-worker | todo |
-| W3-grow | capability new/check scaffold + growth check | engine/produce/growth.mjs, templates/capability/**, engine/verify/produce/growth.mjs | K1/K2 | `--only growth` | glm-worker | todo |
+| W3-gui | Make dialog + public/project.js + server endpoints + gui-smoke/gui-security | studio-gui/**, engine/verify/produce/{gui-smoke,gui-security}.mjs | W2-make (API frozen) | `--only gui-smoke,gui-security` | glm-worker + lead | **DONE 7e5dda0** (worker died at 7m; the lead finished: 2 real bugs found+fixed) |
+| W3-grow | capability new/check scaffold + growth check | engine/produce/growth.mjs, templates/capability/**, engine/verify/produce/growth.mjs | K1/K2 | `--only growth` | glm-worker | **DONE 9843c1d** (w3-grow2, verified) |
 | W3-bat | the 12-brief battery: fresh critics write references, then plans + check | engine/produce/battery/**, engine/verify/produce/battery.mjs | W2-skill | `--only battery` | critics(fresh)+glm | todo |
 | W4-err | the failure matrix + errors check | engine/verify/produce/errors.mjs (+ small loud-failure fixes via lead) | all | `--only errors` | glm-worker | todo |
 | W4-docs | docs check (help completeness, Producer sections) | engine/verify/produce/docs.mjs (README/AGENTS = lead) | W2 | `--only docs` | glm-worker | todo |
@@ -82,8 +82,11 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `make` — `studio make` (fake pi): project created, request verbatim by file, loop relaunches until verify passes, stops on budget/STOP/cap, refuses concurrent run, survives quotes/backticks/`$(...)`; `--plan-only`; `--stop`
 - [x] `tools` — W2-tools + the lead's BY_FILE wiring: 7 tools, live flow green — DONE
 - [ ] `tools` — every `project_*` tool registered with a `Type.Object` schema in `BY_FILE`; each runs against a fixture project
+- [x] `gui-smoke` — the lead: tabs/nesting/note/job/Make-with-real-build, 0 errors, screenshots looked at — DONE
 - [ ] `gui-smoke` — Make dialog creates a project (fake pi); Plan/Requirements/Assets/Facts/Log tabs render; segments show status; children group; a note pins; a rebuild runs; 0 console errors, screenshots looked at
+- [x] `gui-security` — the lead: 403s/4xx/caps/409 + structural (no shell, request-by-file) — DONE
 - [ ] `gui-security` — POST w/o token 403; oversized request, traversal/absolute attachment, concurrent run, unknown id refused; request never through a shell; nothing runs outside the job runner
+- [x] `growth` — W3-grow2: scaffold refuses naming every stub; verify-chart honest (data+axis gates); the menu grows; removal consistent — DONE
 - [ ] `growth` — `capability new` scaffolds; `capability check` refuses until parts exist, accepts when they do; appears in `capabilities` + plan menu; demo D's capability passes; removing a capability keeps the registry consistent
 - [ ] `battery` — the 12 stored plans validate; >= 90% of each independent reference's requirements covered; capability sets in the reference's acceptable sets; missing inputs flagged; alternatives stated; no invented inputs
 - [ ] `errors` — the P8 matrix fails loud with next steps; prompt injection changes nothing + noted in log.md; killed run + two simultaneous runs handled; partial output never promoted
@@ -100,7 +103,10 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Next: W3-gui died at 7m with the view + endpoints on disk (no checks) — the LEAD takes the GUI (its
-files are the lead's integration surface): review project.js + the server diff, finish + write
-gui-smoke/gui-security. W3-grow died at 7m with only templates/ — respawn it once (retry rule),
-else the lead takes it. Then W3-bat, W4-err/docs/hyg, the demos.
+Now: 23 of 28 checks green (all waves 1-3 + the P1 five). Two real bugs found and fixed by the lead's
+GUI finish: detail() spread a Promise since the registry migration (every film's detail lost its
+summary fields), and outFiles crashed the SSE watcher on transient files. Remaining: assemble (the
+composite fixture), battery (12 briefs + fresh critics), errors/docs/hygiene, the 4 demos + review,
+then the full cold verify + FINAL_REPORT.
+Next: dispatch W2-asm (assemble) + W4-err (the failure matrix) now; W3-bat's references need FRESH
+critic agents (a different model than the builders) — spawn when assemble's slot frees.
