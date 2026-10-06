@@ -67,3 +67,31 @@ now slug the dir (the lint CLI's fmt ARG stays raw — it computes safe boxes); 
 gui-security.mjs's raw film-kind reads became kindOf (same semantics, the sanctioned helper); the
 grep gate targets the film-kind concept (`cfg.kind` reads + film-kind literals) so the dozens of
 legitimate track/clip/source/trace `.kind === 'video'` reads do not trip it.
+
+**D-006 2026-10-06 P2 — Working mode: the lead builds nothing big; subagents build.**
+Per the human's change of mode (2026-10-06): the lead keeps decisions/ADRs, interface freezing
+(SCHEMAS.md), shared-file integration (cli.mjs, verify-produce.mjs, index.ts BY_FILE, the registry,
+README/AGENTS.md), all git commits, PROGRESS/DECISIONS, verifier runs, and <15-min fixes; everything
+else goes to subagents. Constraints: max 3 concurrent, spawn only with >= 2 GB free, one
+`verify-produce --only` at a time (retry after 60 s), nobody runs --clean/full verifies while
+subagents are active, subagents never commit or run git state commands, never print the origin URL,
+and never edit shared files (they report exact lines instead). Default worker glm-worker
+(moreweb/glm-5.3-max — claude-bridge is rate-limited on this account; on a Claude rate-limit failure
+respawn on GLM and note it). Reviews/critics run on a different agent+model than the builder; GLM
+cannot see images (its read_image proxy uses the Claude quota — batch the looking). Every report is
+verified by the lead (run the acceptance commands, read the diff, `studio regress` if engine files
+changed) before any commit. The dispatch table lives in PROGRESS.md; interfaces in SCHEMAS.md.
+
+**D-007 2026-10-06 P2 — the golden baseline caught a real engine bug: the edit mix was nondeterministic.**
+Symptom: the registry check's transcript comparison drifted on edit.txt (-13.9 vs -14.1 LUFS across
+two gold-film captures). Isolation (measured, scratch/w1 diagnostics): dialog.wav + music.wav were
+byte-identical across two fresh films with the same source; the PREMIX (the
+sidechaincompress+amix+afade chain over those exact files) gave 3 different md5s in 3 runs; the
+same chain with `-filter_threads 1` gave 3 identical md5s, byte-equal to the last multithreaded run
+— ffmpeg 8.0.1's sidechaincompress is run-to-run frame-scheduling-nondeterministic with multiple
+filter threads (same audio result class, different bytes). Fix: `mixEdit` (and the audio-chain
+check's two sidechain legs) pin `-filter_threads 1` (cost: nothing — one pass over seconds of
+audio). Consequence: mix.wav is now a deterministic function of (dialog, music) — the golden
+baseline's edit.txt is stable across captures, and the earlier missions' measured-loudness checks
+are unaffected (they never compared mix bytes). This is the pattern the baseline exists for: an
+intentional-drift re-capture surfaced an unintentional one.
