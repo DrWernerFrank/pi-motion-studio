@@ -144,7 +144,11 @@ export async function mixEdit(filmKey, { target } = {}) {
   const finalMix = inputs.length === 1
     ? `${chain};[a0]${fade}[m]`
     : `${chain};${mix.replace(/\[m\]$/, `,${fade}[m]`)}${extraCh}`;
-  await run('ffmpeg', ['-y', '-v', 'error', ...inputs.flatMap((f) => ['-i', f]), '-filter_complex', finalMix, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
+  // -filter_threads 1: sidechaincompress is run-to-run nondeterministic with multiple filter
+  // threads (measured: 3 runs, 3 md5s on identical dialog+music; with 1 thread, 3 identical —
+  // and byte-equal to the last multithreaded run, so the audio is the same, only the frame
+  // scheduling varied). One thread costs nothing here (the mix is one pass over ~seconds).
+  await run('ffmpeg', ['-y', '-v', 'error', '-filter_threads', '1', ...inputs.flatMap((f) => ['-i', f]), '-filter_complex', finalMix, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre]);
   const l = await normalize(pre, file, lufs);
   rmSync(pre, { force: true });
   return { file, ...l, duration: D };

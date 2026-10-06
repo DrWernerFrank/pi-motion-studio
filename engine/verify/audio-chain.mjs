@@ -63,7 +63,7 @@ export default async () => {
       ? `[0:a]asplit=2[key][dial];[1:a][key]sidechaincompress=threshold=0.02:ratio=${r.toFixed(2)}:attack=150:release=400:makeup=1:link=average[bed];[dial][bed]amix=inputs=2:normalize=0[m]`
       : '[0:a][1:a]amix=inputs=2:normalize=0[m]';
     const suffix = duck ? '.d.wav' : '.n.wav';
-    await run('ffmpeg', ['-y', '-v', 'error', '-i', dialog, '-i', music, '-filter_complex', af, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre + suffix]);
+    await run('ffmpeg', ['-y', '-v', 'error', '-filter_threads', '1', '-i', dialog, '-i', music, '-filter_complex', af, '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', pre + suffix]);
     return pre + suffix;
   };
   const D = await mk(true), N = await mk(false);
@@ -77,7 +77,7 @@ export default async () => {
       ? `[1:a][0:a]sidechaincompress=threshold=0.02:ratio=${r.toFixed(2)}:attack=150:release=400:makeup=1:link=average[b]`
       : '[1:a]anull[b]';
     const out2 = join(film.out, `.bed-${duck ? 'ducked' : 'plain'}.wav`);
-    await run('ffmpeg', ['-y', '-v', 'error', '-i', dialog, '-i', music, '-filter_complex', fc, '-map', '[b]', '-ac', '2', '-c:a', 'pcm_f32le', out2]);
+    await run('ffmpeg', ['-y', '-v', 'error', '-filter_threads', '1', '-i', dialog, '-i', music, '-filter_complex', fc, '-map', '[b]', '-ac', '2', '-c:a', 'pcm_f32le', out2]);
     return out2;
   };
   const bedD = await rmsDb(await bedOnly(true), speechWin[0], speechWin[1]);
