@@ -21,7 +21,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W1-svc | narration service check (motion+script.md) | engine/verify/produce/services.mjs (reports engine needs to lead) | — | `--only services` | glm-worker | **DONE 1fc1249** |
 | W2-proj | project lifecycle: resume, where-chain, revision, child-parent; single-technique wrappers | engine/kinds/project/index.mjs, engine/produce/ship.mjs, engine/verify/produce/{project,single}.mjs | W1 | `--only project,single` | glm-worker | todo |
 | W2-asm | spike S2 + assembly (edit-film assembler, design inheritance, PSNR/geometry) + ADR-003 | engine/produce/assemble.mjs, engine/verify/produce/assemble.mjs, docs/produce/ADR-003-*.md | W2-proj | `--only assemble` | glm-worker | todo |
-| W2-skill | produce skill + AGENTS/README sections (lead integrates) + producer-critic + checks | .pi/skills/produce/**, .pi/agents/producer-critic.md, engine/verify/produce/{skill,critic}.mjs | — | `--only skill,critic` | glm-worker | todo |
+| W2-skill | produce skill + AGENTS/README sections (lead integrates) + producer-critic + checks | .pi/skills/produce/**, .pi/agents/producer-critic.md, engine/verify/produce/{skill,critic}.mjs | — | `--only skill,critic` | glm-worker | **DONE b2eec31** |
 | W2-make | spike S4 + runner + studio make + fake-pi + make check + ADR-004 | engine/produce/runner.mjs, engine/verify/produce/make.mjs, docs/produce/ADR-004-*.md (cli wiring = lead) | SCHEMAS runner | `--only make` | glm-worker | todo |
 | W2-tools | project_* tools + tools check | .pi/extensions/motion-tools/project-tools.ts (BY_FILE = lead) | W2-proj | `--only tools` | glm-worker | todo |
 | W3-gui | Make dialog + public/project.js + server endpoints + gui-smoke/gui-security | studio-gui/**, engine/verify/produce/{gui-smoke,gui-security}.mjs | W2-make (API frozen) | `--only gui-smoke,gui-security` | glm-worker | todo |
@@ -72,7 +72,9 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `project` — `studio project new/status/list/plan/verify/rebuild/ship/where`; killed run resumes from state.json; note chains through segment to child `where`; revision appends requirements + rebuilds only touched parts; a child lists its parent
 - [ ] `single` — projects wrapping one math / one motion / one edit film ship with the child's final unchanged; `project verify` passes
 - [ ] `assemble` — composite fixture (math+motion+edit) 16:9 + 9:16: geometry, bt709, duration, A/V, loudness, no black/frozen join, PSNR per segment, design inheritance
+- [x] `skill` — W2-skill: the produce skill + Start here + the 4 defer clauses + the any-video lint + all 11 body things — DONE
 - [ ] `skill` — `produce` skill + AGENTS.md "Start here" parse; 4 older skills defer; no duplicate "any video" trigger; the order/framework/one-question/revision/loop named
+- [x] `critic` — W2-skill: producer-critic parses/read-only/9 keys/fidelity-10; addReview accepts — DONE
 - [ ] `critic` — `producer-critic` parses, read-only, tools listed, 7 keys + fidelity + coherence, fidelity-10 rule present; `film_review` accepts the round
 - [ ] `make` — `studio make` (fake pi): project created, request verbatim by file, loop relaunches until verify passes, stops on budget/STOP/cap, refuses concurrent run, survives quotes/backticks/`$(...)`; `--plan-only`; `--stop`
 - [ ] `tools` — every `project_*` tool registered with a `Type.Object` schema in `BY_FILE`; each runs against a fixture project
