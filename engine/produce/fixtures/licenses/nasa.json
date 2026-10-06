@@ -1,0 +1,11 @@
+{
+  "source": "nasa",
+  "recorded_by": "engine/produce/fetch.mjs nasaImage — the images-api item data + the usage meta, recorded as a fixture (never a live call)",
+  "title": "Earth disc from the studio fixture camera",
+  "center": "Goddard Space Flight Center",
+  "description": "A deterministic fixture description: the Earth as a generated disc, used to parse the NASA media usage guidelines.",
+  "date_created": "2026-01-01T00:00:00Z",
+  "preview": "https://images-assets.nasa.gov/studio-license-fixture/earth-disc~orig.jpg",
+  "license": "NASA media usage guidelines (public domain)",
+  "usage": "NASA guidelines"
+}

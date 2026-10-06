@@ -1,0 +1,10 @@
+{
+  "source": "internet archive",
+  "recorded_by": "engine/produce/fetch.mjs archiveMeta — the archive.org metadata, recorded as a fixture (never a live call)",
+  "identifier": "studio-license-fixture-1929",
+  "title": "Studio License Fixture Film (1929)",
+  "licenseurl": "https://creativecommons.org/licenses/by/4.0/",
+  "rights": "Creative Commons Attribution 4.0 International",
+  "creator": "Prelinger Mills Film Company",
+  "description": "A deterministic fixture: a 1929-style film used to parse Internet Archive license metadata."
+}

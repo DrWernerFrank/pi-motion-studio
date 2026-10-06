@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { FILMS, readJson, writeJson } from '../lib/film.mjs';
+import { htmlToText } from './fetch.mjs';   // the one HTML stripper (never executes anything)
 
 export const assetsPath = (key) => join(FILMS, key, 'assets.json');
 
@@ -24,20 +25,47 @@ export const LICENSES = {
   studio: { name: 'made by the studio', attribution: false },
 };
 
-/** Parse a license from an API metadata blob (the recorded fixtures' shape). Recognizes the
- *  Wikimedia license template names, NASA's usage lines, and the plain license strings. */
+/** Parse a license from an API metadata blob into a LICENSES id (null = unknown/absent).
+ *  Understands the RECORDED fixture shapes (engine/produce/fixtures/licenses/) and the flattened
+ *  meta the fetch helpers hand over (commonsCandidates / nasaImage / archiveMeta): the Commons
+ *  imageinfo extmetadata (LicenseShortName/UsageTerms nested under {value}), NASA's images-api
+ *  meta (license/usage), the Internet Archive metadata (licenseurl/rights), and plain strings.
+ *  Only the license's OWN terms fields are read — a description that mentions "public domain" in
+ *  passing never decides the license. NASA is matched first: its usage line says "public domain"
+ *  but the license is the NASA guidelines. */
 export function parseLicense(meta) {
   if (!meta || typeof meta !== 'object') return null;
-  const text = [meta.license, meta.licensetext, meta.usage, meta.rights, meta.credit, meta.description]
-    .filter(Boolean).join(' ').toLowerCase();
-  if (/public domain/.test(text)) return 'public domain';
-  if (/cc0/.test(text)) return 'cc0';
-  const by = /cc[ -]?by[ -]?sa[ -]?([34])\.0/.exec(text) || /creative commons attribution-sharealike ([34])\.0/.exec(text);
-  if (by) return `cc-by-sa-${by[1]}.0`;
-  const plain = /cc[ -]?by[ -]?([34])\.0/.exec(text) || /creative commons attribution ([34])\.0/.exec(text);
-  if (plain) return `cc-by-${plain[1]}.0`;
-  if (/nasa/.test(text) && (meta.usage || /nasa/.test(String(meta.source ?? '')))) return 'nasa';
+  const val = (v) => (v && typeof v === 'object' && 'value' in v ? String(v.value ?? '') : v);   // the extmetadata {value} nesting
+  const ex = meta.extmetadata;
+  const m = ex ? { license: val(ex.LicenseShortName) || val(ex.UsageTerms), usage: val(ex.UsageTerms),
+      licenseurl: meta.licenseurl, source: meta.source } : meta;
+  const terms = [m.license, m.licensetext, m.usage, m.rights, m.licenseurl].filter(Boolean).join(' ').toLowerCase();
+  if (!terms.trim()) return null;
+  if (/nasa/.test(terms) && (/usage|guidelines/.test(terms) || /nasa/.test(String(m.source ?? '').toLowerCase()))) return 'nasa';
+  if (/cc0|publicdomain\/zero/.test(terms)) return 'cc0';
+  if (/public[ -]?domain/.test(terms)) return 'public domain';
+  const sa = /cc[ -]?by[ -]?sa[ -]?([34])(?:\.0)?/.exec(terms) || /creative commons attribution[- ]sharealike ([34])\.0/.exec(terms)
+    || /licenses\/by-sa\/([34])\.0/.exec(terms);
+  if (sa) return `cc-by-sa-${sa[1]}.0`;
+  const by = /cc[ -]?by[ -]?([34])(?:\.0)?/.exec(terms) || /creative commons attribution ([34])\.0/.exec(terms)
+    || /licenses\/by\/([34])\.0/.exec(terms);
+  if (by) return `cc-by-${by[1]}.0`;
   return null;
+}
+
+/** The attribution an attribution license REQUIRES, read from the same metadata blob: the maker
+ *  + the credit. Wikimedia's Artist/Credit arrive as HTML (stripped to text — links kept);
+ *  the Internet Archive names a creator; NASA's images API carries the maker as center + title,
+ *  exactly the line nasaImage builds. Returns null when the blob names no maker. */
+export function attributionOf(meta) {
+  if (!meta || typeof meta !== 'object') return null;
+  const val = (v) => (v && typeof v === 'object' && 'value' in v ? String(v.value ?? '') : v);
+  const ex = meta.extmetadata;
+  const parts = ex ? [val(ex.Artist), val(ex.Credit)] : [meta.attribution, meta.artist, meta.creator, meta.credit];
+  let text = parts.filter(Boolean).map((s) => htmlToText(String(s))).filter(Boolean).join(' — ');
+  if (!text && /nasa/i.test(String(meta.source ?? '')) && (meta.center || meta.title))
+    text = `NASA${meta.center ? ` ${meta.center}` : ''}${meta.title ? ` — ${meta.title}` : ''}`;
+  return text && text.trim() ? text.trim() : null;
 }
 
 const shaOf = (p) => { try { return createHash('sha256').update(readFileSync(p)).digest('hex'); } catch { return null; } };
@@ -62,7 +90,7 @@ export function verifyAssets(key) {
   const rows = readJson(assetsPath(key), []);
   const out = [];
   for (const a of rows) {
-    if (!LICENSES[a.license]) { out.push({ id: a.id, status: 'red', why: `no license recorded (${a.license ?? 'none'}) — public domain / CC0 / CC-BY (with attribution) / human / studio` }); continue; }
+    if (!LICENSES[a.license]) { out.push({ id: a.id, status: 'red', why: `no license recorded (${a.license || 'none'}) — public domain / CC0 / CC-BY (with attribution) / human / studio` }); continue; }
     if (LICENSES[a.license].attribution && !a.attribution) { out.push({ id: a.id, status: 'red', why: `${LICENSES[a.license].name} needs attribution captured` }); continue; }
     if (a.sha256 && a.path && existsSync(a.path)) {
       const now = shaOf(a.path);

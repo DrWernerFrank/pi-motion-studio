@@ -1,0 +1,14 @@
+{
+  "source": "wikimedia commons",
+  "recorded_by": "engine/produce/fetch.mjs commonsCandidates — the imageinfo extmetadata, recorded as a fixture (never a live call)",
+  "title": "File:Orbit diagram (studio license fixture, CC0).svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/orbit-diagram-license-fixture.svg",
+  "descriptionurl": "https://commons.wikimedia.org/wiki/File:Orbit_diagram_(studio_license_fixture,_CC0).svg",
+  "extmetadata": {
+    "LicenseShortName": { "value": "CC0" },
+    "UsageTerms": { "value": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication" },
+    "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:OrbitRender\">OrbitRender</a>" },
+    "Credit": { "value": "Own work — dedicated to the public domain via CC0 (deterministic studio fixture)" },
+    "ImageDescription": { "value": "A deterministic CC0 fixture orbit diagram." }
+  }
+}

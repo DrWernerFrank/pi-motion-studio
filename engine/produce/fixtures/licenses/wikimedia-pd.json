@@ -1,0 +1,14 @@
+{
+  "source": "wikimedia commons",
+  "recorded_by": "engine/produce/fetch.mjs commonsCandidates — the imageinfo extmetadata, recorded as a fixture (never a live call)",
+  "title": "File:Earth disc (studio license fixture, public domain).png",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/earth-disc-license-fixture.png",
+  "descriptionurl": "https://commons.wikimedia.org/wiki/File:Earth_disc_(studio_license_fixture,_public_domain).png",
+  "extmetadata": {
+    "LicenseShortName": { "value": "Public domain" },
+    "UsageTerms": { "value": "Public domain" },
+    "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:OrbitRender\">OrbitRender</a>" },
+    "Credit": { "value": "Own work — the author released this deterministic fixture to the public domain" },
+    "ImageDescription": { "value": "A deterministic public-domain fixture disc." }
+  }
+}

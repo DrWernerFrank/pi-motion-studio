@@ -30,22 +30,23 @@ export function providerStatus(name, { env = readEnv() } = {}) {
   if (!p) return { enabled: false, why: `unknown provider "${name}" (known: ${Object.keys(PROVIDERS).join(', ')})` };
   const hasKey = !!env[p.keyName] && !env[p.keyName].startsWith('#');
   const budget = Number(env.STUDIO_BUDGET_USD || 0);
-  if (!hasKey && !(budget > 0)) return { enabled: false, why: `disabled: no ${p.keyName} in .env and STUDIO_BUDGET_USD is not > 0 (spend nothing without permission — this is the default)` };
+  if (!hasKey && !(budget > 0)) return { enabled: false, why: `disabled: no ${p.keyName} in .env and STUDIO_BUDGET_USD is not > 0 — fix: add the key by name to .env AND set STUDIO_BUDGET_USD above 0, or spend nothing (this is the default)` };
   if (!hasKey) return { enabled: false, why: `disabled: ${p.keyName} is not in .env (add it by name, never paste the value anywhere)` };
   if (!(budget > 0)) return { enabled: false, why: `disabled: STUDIO_BUDGET_USD is not > 0 (a budget must be allowed before any call)` };
   return { enabled: true, why: `enabled: ${p.keyName} present and STUDIO_BUDGET_USD=${budget}` };
 }
 
 /** Call a provider (the one place anything billable can happen). Checks status first, logs every
- *  call to budget.json, enforces the usd hard stop and the minutes soft/hard stops. */
-export async function call(key, name, { costUsd = 0, minutes = 0, label = '' } = {}) {
+ *  call to budget.json, enforces the usd hard stop and the minutes soft/hard stops. `{env}`
+ *  overrides the .env read (tests pass their own env; production leaves it unset). */
+export async function call(key, name, { costUsd = 0, minutes = 0, label = '', env } = {}) {
   const bud = readJson(budgetPath(key), { minutes: 180, usd: 0, spent_usd: 0, calls: [] });
   // minutes: soft stop at 80% (wrap up with what exists), hard stop at 100%
   const minsSoft = bud.minutes * 0.8, minsHard = bud.minutes;
   const spentMin = (bud.calls || []).reduce((n, c) => n + (c.minutes || 0), 0);
   if (spentMin + minutes > minsHard) throw new Error(`budget (minutes) hard stop: ${spentMin.toFixed(0)}/${minsHard.toFixed(0)} min used — finish with what exists and report honestly`);
   if (spentMin + minutes > minsSoft) return { ok: false, softStop: true, why: `budget (minutes) soft stop at 80%: wrap up with what exists (${(minsHard - spentMin).toFixed(0)} min left)` };
-  const st = providerStatus(name);
+  const st = providerStatus(name, env ? { env } : {});
   if (!st.enabled) return { ok: false, disabled: true, why: st.why };
   // the usd hard stop: no call may push the spend past the allowed budget
   if (bud.spent_usd + costUsd > bud.usd) throw new Error(`budget (usd) hard stop: $${bud.spent_usd.toFixed(3)} + $${costUsd.toFixed(3)} > the allowed $${bud.usd} — stop and report`);
