@@ -29,12 +29,12 @@ export function readLedger(key) {
     seen.add(r.id);
     if (!TYPES.includes(r.type)) bad.push(`${r.id}: type "${r.type}" (${TYPES.join('|')})`);
     if (!STATUSES.includes(r.status)) bad.push(`${r.id}: status "${r.status}"`);
-    if (r.type === 'measurable' && !VERIFIERS.includes(r.verifier)) bad.push(`${r.id}: verifier "${r.verifier}" (${VERIFIERS.join('|')})`);
+    if (r.type === 'measurable' && !VERIFIERS.includes(r.verifier)) bad.push(`${r.id} "${r.text}": a measurable requirement must name a verifier the library knows — "${r.verifier ?? 'none'}" is not one of ${VERIFIERS.join(', ')}`);
     if (r.type === 'measurable' && r.arg === undefined) bad.push(`${r.id}: arg (what the verifier compares against)`);
     if (r.type !== 'measurable' && r.verifier) bad.push(`${r.id}: only measurable requirements carry a verifier`);
     if (!r.text) bad.push(`${r.id}: text — the ask in plain words`);
     if (!r.source) bad.push(`${r.id}: source ("request" | "revision N" | "implied")`);
-    if (r.status === 'waived' && r.waived_by !== 'human') bad.push(`${r.id}: a waiver is the human's alone (waived_by must be "human")`);
+    if (r.status === 'waived' && r.waived_by !== 'human') bad.push(`${r.id}: a waiver is the human's alone (waived_by must be "human", got ${JSON.stringify(r.waived_by)})`);
   }
   if (bad.length) throw new Error(`requirements.json is malformed:\n  ${bad.join('\n  ')}`);
   return rows;
@@ -69,14 +69,45 @@ export function waive(key, id) {
 }
 
 // ── the verifier dispatch: one requirement -> measured evidence ──────────────────────────────
-/** Run every pending measurable requirement against the project's finals. Returns { green, red, rows }. */
+/** A subjective requirement passes ONLY with critic evidence: a reviews.json round whose scores
+ *  carry every rubric key of this film's kind (the studio's 7 + the kind's own — a project adds
+ *  fidelity + coherence) at 8+ AND whose sheets are non-empty (the critic must have looked). The
+ *  LAST round is the operative verdict (fresh eyes; the P9 review check reads it the same way).
+ *  Without it the requirement CANNOT pass — no evidence, no green, and nothing a build can invent. */
+export async function verifySubjective(key, req) {
+  const { RUBRIC } = await import('../review.mjs');
+  const keys = [...Object.keys(RUBRIC)];
+  try {
+    const { hooksFor } = await import('../kinds/registry.mjs');
+    const K = await hooksFor(key);                     // the film's kind, motion-fallback
+    if (Array.isArray(K.rubric)) keys.push(...K.rubric);
+  } catch { /* no film.json / no registry yet: the base 7 keys decide */ }
+  const id = req?.id ?? 'subjective';
+  const cannot = (why) => ({ status: 'red', pass: false, evidence: `cannot pass: ${why}`, measured: 'cannot-pass' });
+  const rounds = readJson(join(FILMS, key, 'reviews.json'), []);
+  const last = Array.isArray(rounds) && rounds.length ? rounds[rounds.length - 1] : null;
+  if (!last) return cannot(`requirement ${id} ("${req?.text ?? 'subjective'}") has no critic evidence — films/${key}/reviews.json holds no review round (a subjective ask passes only with a round scoring every rubric key 8+ with saved sheets)`);
+  const low = keys.filter((k) => !((last.scores ?? {})[k] >= 8));
+  if (low.length) return cannot(`requirement ${id}: the last review round (${last.reviewer ?? 'critic'}) scores ${low.map((k) => `${k} ${last.scores?.[k] ?? '—'}`).join(', ')} below 8 (round ${last.round ?? '?'} of ${rounds.length})`);
+  if (!Array.isArray(last.sheets) || !last.sheets.length) return cannot(`requirement ${id}: the last review round (${last.reviewer ?? 'critic'}) saved no sheets — the critic must have looked (sheets: ["sheets/every-16x9.png", …])`);
+  const min = Math.min(...keys.map((k) => last.scores[k]));
+  return { status: 'green', pass: true, evidence: `critic round ${last.round ?? rounds.length} by ${last.reviewer ?? 'critic'}: every rubric key 8+ (min ${min}) over ${keys.length} keys, ${last.sheets.length} sheet(s)`, measured: `round ${last.round ?? rounds.length} min ${min}` };
+}
+
+/** Run every pending measurable + subjective requirement against the project's finals.
+ *  Returns { green, red, rows } — fact/proof rows pass through to their own gates. */
 export async function runLedger(key, { finals } = {}) {
   const { verifyRequirement } = await import('./verify-lib.mjs');
   const ledger = readLedger(key);
   const out = [];
   for (const r of ledger) {
     if (r.status === 'waived') { out.push({ ...r, measured: 'waived' }); continue; }
-    if (r.type !== 'measurable') { out.push(r); continue; }   // fact/proof/subjective are checked by their own gates
+    if (r.type === 'subjective') {
+      try { const s = await verifySubjective(key, r); out.push({ ...r, status: s.status, evidence: s.evidence, measured: s.measured }); }
+      catch (e) { out.push({ ...r, status: 'red', evidence: String(e.message || e), measured: 'cannot-pass' }); }
+      continue;
+    }
+    if (r.type !== 'measurable') { out.push(r); continue; }   // fact/proof are checked by their own gates
     try { out.push({ ...r, ...(await verifyRequirement(r, { key, finals })).row }); }
     catch (e) { out.push({ ...r, status: 'red', evidence: String(e.message || e) }); }
   }
