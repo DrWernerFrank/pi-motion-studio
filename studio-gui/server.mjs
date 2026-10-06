@@ -89,11 +89,11 @@ async function summary(key) {
   };
 }
 
-function detail(key) {
+async function detail(key) {
   const dir = join(FILMS, key);
   if (!existsSync(join(dir, 'film.json'))) return null;
   return {
-    ...summary(key),
+    ...(await summary(key)),   // summary is async since the kind registry (ADR-001): AWAIT it — spreading a Promise silently drops every summary field
     cfg: readJson(join(dir, 'film.json')),
     design: readJson(join(dir, 'design.json')),
     beats: readJson(join(dir, 'beats.json')),
@@ -280,7 +280,7 @@ const server = createServer(async (req, res) => {
     const m = /^\/api\/films\/([a-z0-9-]+)(?:\/(job|notes))?$/.exec(p);
     if (m) {
       const [, key, sub] = m;
-      if (!sub) { const d = detail(key); return d ? json(res, 200, d) : json(res, 404, { error: 'no such film' }); }
+      if (!sub) { const d = await detail(key); return d ? json(res, 200, d) : json(res, 404, { error: 'no such film' }); }
       if (sub === 'job' && req.method === 'POST') {
         const b = await body(req);
         if (!JOBS[b.kind]) return json(res, 400, { error: `kind: ${Object.keys(JOBS).join(', ')}` });

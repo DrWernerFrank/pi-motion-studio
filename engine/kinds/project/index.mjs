@@ -111,6 +111,7 @@ export async function segment(key, seg, { design = true, build = true } = {}) {
   const st = readJson(join(FILMS, key, 'state.json'), { phase: 'planning', segments: {} });
   st.segments ??= {};
   st.segments[seg.id] = { ...st.segments[seg.id], status: st.segments[seg.id]?.status ?? 'created', film: childKey, capability: seg.capability, at: new Date().toISOString() };
+  syncDuration(key);
   writeJson(join(FILMS, key, 'state.json'), st);
   appendLog(key, `segment ${seg.id} (${seg.capability}) -> films/${childKey}${existed ? ' (existing film linked)' : ''}`);
   const r = { key: childKey, existed };
@@ -156,6 +157,15 @@ async function buildSegment(key, seg, childKey, formats) {
     console.log(`  !! segment ${seg.id} build FAILED — it stays 'building': ${msg}`);
     return { status: 'building', gates: false, error: msg };
   }
+}
+
+/** Keep film.json.duration in sync with the plan (a project IS a film; the GUI's transport, the
+ *  meta line and the timeline read duration/fps like every other kind — the plan's segments total). */
+export function syncDuration(key) {
+  const plan = readJson(join(FILMS, key, 'plan.json'), null);
+  const cfg = readJson(join(FILMS, key, 'film.json'), {});
+  const total = plan?.segments?.length ? plan.segments.reduce((n, sg) => n + (sg.duration || 0), 0) : null;
+  if (total && Math.abs((cfg.duration || 0) - total) > 0.001) { cfg.duration = total; writeJson(join(FILMS, key, 'film.json'), cfg); }
 }
 
 function copyDesign(key, childKey) {
