@@ -17,6 +17,14 @@ import { claudeRead, claudeVisionAvailable } from '../engine/lib/claude-vision.m
 import { ROOT, safePath, sendFile } from '../engine/lib/serve.mjs';
 // math films (kind: math): the math view's endpoints + jobs. All additive; the edit/motion paths are untouched.
 import { writeFileSync } from 'node:fs';
+// project films (kind: project — the producer view, K10's GUI half) + the make runner's endpoints.
+// All additive too: the project data is read straight from the machine files (ADR-002), the Run
+// tab's verbs go through the SAME job runner every other button uses, and the make runner is a
+// child of that job runner — never of a request handler. Same rules as every endpoint: loopback
+// + token, ids validated (ID_RE), everything resolved under films/<key>/ by the server itself.
+import { mkdirSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { pathToFileURL } from 'node:url';
 import { runCapped } from '../engine/lib/capped.mjs';
 import { pythonFor } from '../engine/doctor.mjs';
 import { readMathFilm } from '../engine/math.mjs';
@@ -50,7 +58,11 @@ function outFiles(dir) {
     if (!existsSync(d)) continue;
     for (const f of readdirSync(d)) {
       if (f.startsWith('.')) continue;
-      const p = join(d, f), st = statSync(p);
+      const p = join(d, f);
+      let st = null;
+      // a file that vanishes between readdir and stat is transient churn (a re-render rewriting an
+      // output), never a watcher crash: ENOENT skips it — the next signature pass picks up the new file
+      try { st = statSync(p); } catch (e) { if (e.code === 'ENOENT') continue; throw e; }
       if (st.isFile()) list.push({ name: sub ? `${sub}/${f}` : f, size: st.size, mtime: st.mtimeMs });
     }
   }
@@ -69,6 +81,7 @@ async function summary(key) {
   return {
     key, title: cfg.title || key, duration: cfg.duration, formats: cfg.formats || ['9:16'],
     edit: false, math: false, ...flags,
+    parent: cfg.parent ?? null,   // a child names its project (film.json "parent") — the list groups on it
     review: reviews.length ? { round: reviews.length, min: reviews.at(-1).min, pass: reviews.at(-1).pass } : null,
     gates: gates ? { pass: gates.pass, warns: gates.checks.filter((c) => c.level === 'warn').length, at: gates.at } : null,
     finals: files.filter((f) => /^final-[^.]*\.mp4$/.test(f.name)).map((f) => f.name),
@@ -128,6 +141,12 @@ const JOBS = {
   check: (k) => ['check', k],   // math films: studio check (typeset + claims, dry-run; errors loudly on non-math)
   gate: (k) => ['gate', k],
   ship: (k) => ['ship', k],
+  // project films (the producer view's Run tab): the project CLI verbs — `studio project <sub>
+  // <key>`. Named project-* so they can never collide with the film verbs above (ship already
+  // means a film ship); the /api/project/:key/job endpoint maps rebuild|verify|ship onto these.
+  'project-rebuild': (k) => ['project', 'rebuild', k],
+  'project-verify': (k) => ['project', 'verify', k],
+  'project-ship': (k) => ['project', 'ship', k],
 };
 const jobs = [];
 const revoicing = new Set();   // films with a sentence re-voice in flight (one at a time, like the job guard)
@@ -141,6 +160,40 @@ function startJob(key, kind, extra = []) {
   p.stdout.on('data', line); p.stderr.on('data', line);
   p.on('close', (code) => { job.code = code; job.ended = Date.now(); send({ type: 'job-end', id: job.id, key, kind, code }); });
   send({ type: 'job-start', id: job.id, key, kind, args });
+  return job;
+}
+
+// ── make (K10): one plain-words request -> the runner builds a verified project ────────────────
+// The runner is a CHILD OF THE JOB RUNNER, never of a request handler: POST /api/make registers a
+// job with startJob's exact record shape and spawns `node -e <fixed code> <request-file>`. The
+// request NEVER travels through a shell string or even argv — it is written to a FILE the child
+// reads (and deletes) before calling makeRun(request, { key, formats, minutes }); the argv carries
+// only that file's path. STUDIO_PI_CMD (the runner's own env, untouched here) substitutes pi in
+// tests. makeRun itself creates the project first (the request lands verbatim in brief.md), so a
+// job that dies later still leaves the project behind. This is the spawn shape w2-make2's runner
+// exports (engine/produce/runner.mjs: makeRun/stopRun/slugKey) — see the w3-gui report.
+const RUNNER_URL = pathToFileURL(join(ROOT, 'engine', 'produce', 'runner.mjs')).href;
+const MAKE_CHILD = `import(${JSON.stringify(RUNNER_URL)}).then(async (m) => {
+  const fs = await import('node:fs');
+  const spec = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
+  try { fs.rmSync(process.argv[1], { force: true }); } catch {}
+  const r = await m.makeRun(spec.request, spec.opts);
+  console.log('make ' + spec.opts.key + ': ' + r.outcome + (r.reason ? ' — ' + r.reason : ''));
+  process.exitCode = r.outcome === 'verified' || r.outcome === 'plan-only' ? 0 : 1;
+}).catch((e) => { console.error(String((e && e.message) || e)); process.exitCode = 1; })`;
+const REQS = join(homedir(), '.cache', 'pi-motion-studio', 'make-req');   // request files: the cache, outside the repo
+let RUNNER;   // undefined = not tried yet, null = absent (re-tried per POST: a runner that lands mid-session works without a restart), module = loaded
+const runnerMod = async () => (RUNNER ??= await import('../engine/produce/runner.mjs').then((m) => m, () => null));
+let MAKING = null;   // { key, job } while a GUI-started make runs (the runner holds its own lock too)
+const pidAlive = (pid) => { try { process.kill(pid, 0); return true; } catch (e) { return e.code === 'EPERM'; } };
+function startMakeJob(key, reqFile) {
+  const job = { id: jobs.length + 1, key, kind: 'make', args: ['-e', MAKE_CHILD, reqFile], log: [], started: Date.now() };
+  jobs.push(job); if (jobs.length > 50) jobs.shift();
+  const p = spawn(process.execPath, ['-e', MAKE_CHILD, reqFile], { cwd: ROOT });
+  const line = (d) => String(d).split('\n').filter(Boolean).forEach((l) => { job.log.push(l); send({ type: 'job', id: job.id, key, line: l }); });
+  p.stdout.on('data', line); p.stderr.on('data', line);
+  p.on('close', (code) => { job.code = code; job.ended = Date.now(); if (MAKING?.job === job) MAKING = null; send({ type: 'job-end', id: job.id, key, kind: 'make', code }); });
+  send({ type: 'job-start', id: job.id, key, kind: 'make', args: job.args });
   return job;
 }
 
@@ -159,7 +212,7 @@ const server = createServer(async (req, res) => {
       const html = readFileSync(join(PUB, 'index.html'), 'utf8').replace('__TOKEN__', TOKEN);
       res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' }); return res.end(html);
     }
-    if (p === '/app.js' || p === '/edit.js' || p === '/math.js' || p === '/style.css') return sendFile(req, res, join(PUB, p.slice(1)));
+    if (p === '/app.js' || p === '/edit.js' || p === '/math.js' || p === '/project.js' || p === '/style.css') return sendFile(req, res, join(PUB, p.slice(1)));
     // Project files at their real paths: films import /engine/lib/*.js absolutely.
     if (/^\/(films|engine|refs|templates)\//.test(p)) { const full = safePath(p); if (!full) { res.writeHead(403); return res.end(); } return sendFile(req, res, full); }
 
@@ -493,6 +546,111 @@ const server = createServer(async (req, res) => {
         const r = resolveWhere(k, t, fmt || undefined);
         return r && r.error ? json(res, 404, { error: r.error }) : json(res, 200, r);
       }
+    }
+
+    // ── the project endpoints (kind: project — the producer view, w3-gui) ────────────────────
+    // Ids only, validated: the route regex AND projId re-check ID_RE, then the film must exist
+    // AND be kind project (kindOf). No client string ever reaches a path join as a free value.
+    const projId = (v) => {
+      const k = String(v ?? '');
+      if (!ID_RE.test(k)) return null;
+      const d = join(FILMS, k);
+      return existsSync(join(d, 'film.json')) && kindOf(readJson(join(d, 'film.json'), {})) === 'project' ? k : null;
+    };
+    const mPj = /^\/api\/project\/([a-z0-9-]+)(?:\/(job|where))?$/.exec(p);
+    if (mPj) {
+      const k = projId(mPj[1]);
+      if (!k) return json(res, 404, { error: 'no such project film (films/<key> with kind: project)' });
+      const dir = join(FILMS, k);
+
+      // GET — the project view's one document: the machine files (ADR-002) + the log tail
+      if (!mPj[2] && req.method === 'GET') {
+        const { budgetOf } = await import('../engine/produce/budget.mjs');
+        return json(res, 200, {
+          key: k,
+          cfg: readJson(join(dir, 'film.json'), {}),
+          brief: read(join(dir, 'brief.md')),
+          plan: readJson(join(dir, 'plan.json'), null),
+          requirements: readJson(join(dir, 'requirements.json'), []),
+          assets: readJson(join(dir, 'assets.json'), []),
+          facts: readJson(join(dir, 'facts.json'), []),
+          budget: { ...readJson(join(dir, 'budget.json'), {}), ...budgetOf(k) },
+          state: readJson(join(dir, 'state.json'), { phase: 'planning', segments: {} }),
+          logTail: (read(join(dir, 'log.md')) ?? '').split('\n').filter(Boolean).slice(-80),
+          notes: readJson(join(dir, 'notes.json'), []),
+        });
+      }
+
+      // POST job { kind: rebuild|verify|ship } — the Run tab's verbs, through the SAME job runner
+      // every other button uses (one job per film, 409 while one runs, logs over SSE)
+      if (mPj[2] === 'job' && req.method === 'POST') {
+        const b = await body(req);
+        const kind = { rebuild: 'project-rebuild', verify: 'project-verify', ship: 'project-ship' }[b.kind];
+        if (!kind) return json(res, 400, { error: 'kind: rebuild, verify or ship' });
+        try { return json(res, 200, { id: startJob(k, kind).id }); }
+        catch (e) { return json(res, e.status || 500, { error: e.message }); }
+      }
+
+      // GET where?t= — a timecode -> the plan's segment -> the child's own where (the CLI's
+      // chained resolve, in-process: reads only, no spawn, fast). The child's kind may not have a
+      // where hook at all (motion refuses loudly) — that answer is passed through, never a 500.
+      if (mPj[2] === 'where' && req.method === 'GET') {
+        const rawT = url.searchParams.get('t');
+        const t = Number(rawT);
+        if (rawT == null || rawT.trim() === '' || !Number.isFinite(t) || t < 0 || t > 1e6)
+          return json(res, 400, { error: 't: seconds since 0 — a finite number >= 0 (e.g. ?t=12.34)' });
+        const plan = readJson(join(dir, 'plan.json'), {}) ?? {};
+        const st = readJson(join(dir, 'state.json'), { segments: {} });
+        let acc = 0, hit = null;
+        for (const seg of plan.segments || []) { if (t < acc + (seg.duration ?? 0) + 0.25) { hit = { seg, local: t - acc }; break; } acc += seg.duration ?? 0; }
+        if (!hit) hit = { seg: (plan.segments || []).at(-1) ?? null, local: 0 };
+        if (!hit.seg) return json(res, 404, { error: `films/${k}/plan.json has no segments yet` });
+        const child = st.segments?.[hit.seg.id]?.film;
+        let own = null;
+        if (child) {
+          try { own = await (await hooksFor(child)).where(child, hit.local, undefined); }
+          catch (e) { own = { error: String(e.message || e).split('\n')[0] }; }
+        }
+        return json(res, 200, { key: k, t, segment: { id: hit.seg.id, capability: hit.seg.capability, role: hit.seg.role,
+          duration: hit.seg.duration ?? null, local: hit.local, status: st.segments?.[hit.seg.id]?.status ?? null },
+          child: child ? { key: child, where: own } : null });
+      }
+      return json(res, 404, { error: 'not found' });
+    }
+
+    // ── make: one plain-words request -> the runner (a child of the job runner) ─────────────
+    if (p === '/api/make' && req.method === 'POST') {
+      const b = await body(req);
+      if (typeof b.request !== 'string' || !b.request.trim()) return json(res, 400, { error: 'request: the plain-words ask, 1-4000 characters' });
+      if (b.request.length > 4000) return json(res, 400, { error: `request: ${b.request.length} characters — the cap is 4000 (long context belongs in attached files, not the request)` });
+      const formats = b.formats ?? undefined;
+      if (formats != null && (!Array.isArray(formats) || !formats.length || formats.some((f) => !/^(9:16|16:9|1:1|4:5)$/.test(String(f)))))
+        return json(res, 400, { error: 'formats: an array like ["16:9","9:16"]' });
+      const minutes = b.minutes == null || b.minutes === '' ? undefined : Number(b.minutes);
+      if (minutes !== undefined && (!Number.isFinite(minutes) || minutes < 1 || minutes > 43200))
+        return json(res, 400, { error: 'minutes: the run budget, 1-43200 minutes' });
+      // one make at a time: this server's run first, then the runner's own lock (a CLI-started run
+      // must 409 here too, not die inside the job)
+      if (MAKING && MAKING.job.code === undefined)
+        return json(res, 409, { error: `a make run is already active — key "${MAKING.key}". Stop it first: POST /api/make/stop, or wait for it to finish` });
+      const lock = readJson(join(homedir(), '.cache', 'pi-motion-studio', 'make.lock'));
+      if (lock?.pid && lock.pid !== process.pid && pidAlive(lock.pid))
+        return json(res, 409, { error: `another make run is active — key "${lock.key ?? '(unknown)'}" (pid ${lock.pid}, started ${lock.startedAt ?? '?'}). Stop it first: POST /api/make/stop, or wait for it to finish` });
+      const R = await runnerMod();
+      if (!R) return json(res, 503, { error: 'the make runner is not built yet (engine/produce/runner.mjs is absent — w2-make2 in flight); nothing was created' });
+      const key = R.slugKey(b.request);   // 'make-' + the request's first significant words, -N on clash
+      // the request rides a FILE to the runner child — never a shell string, never argv
+      mkdirSync(REQS, { recursive: true });
+      const reqFile = join(REQS, `${key}-${Date.now()}.json`);
+      writeFileSync(reqFile, JSON.stringify({ request: b.request, opts: { key, ...(formats ?? {}), ...(minutes !== undefined ? { minutes } : {}) } }));
+      MAKING = { key, job: startMakeJob(key, reqFile) };
+      return json(res, 200, { ok: true, key, job: MAKING.job.id, note: 'the runner creates the project as its first step; its logs stream into the Run tab' });
+    }
+    if (p === '/api/make/stop' && req.method === 'POST') {
+      const R = await runnerMod();
+      if (!R) return json(res, 503, { error: 'the make runner is not built yet — nothing to stop' });
+      try { return json(res, 200, await R.stopRun()); }
+      catch (e) { return json(res, 400, { error: String(e.message || e) }); }
     }
 
     json(res, 404, { error: 'not found' });

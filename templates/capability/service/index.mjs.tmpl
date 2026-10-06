@@ -1,0 +1,19 @@
+// __ID__ (K12, a grown service): __DESCRIPTION__
+//
+// A service is a reusable capability any TECHNIQUE calls (voice, asr, captions, mix, capture,
+// ingest, assemble — engine/produce/catalog.mjs SERVICES). A grown service lives here as a
+// module with a FROZEN interface; the catalog entry is REPORTED to the lead (the growth is
+// two-step by design: this module, then the entry the lead adds to catalog.mjs SERVICES —
+// `studio capabilities` lists the service only after that).
+//
+// THE INTERFACE (frozen — techniques import these; fill the stubs, never change the shape):
+//   run(key, opts)   the service's work on a film (returns whatever the technique needs)
+//   status()         a cheap probe: {ok, detail} — readiness without doing the work
+// `studio capability check __ID__` asserts the interface exists + the entry is reported.
+export async function run(key, opts = {}) {
+  throw new Error(`not implemented yet: run — what this service does to films/${key} (opts: ${JSON.stringify(Object.keys(opts))})`);
+}
+
+export function status() {
+  return { ok: true, detail: 'scaffolded (K12): the interface exists, run() is a stub — engine/produce/services/__ID__/index.mjs' };
+}

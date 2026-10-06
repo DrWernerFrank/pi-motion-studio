@@ -3,6 +3,7 @@
 // (films with kind: math) lives in math.js and is mounted the same way.
 import * as EDIT from './edit.js';
 import * as MATH from './math.js';
+import * as PROJECT from './project.js';   // the project view (films with kind: project)
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -27,14 +28,25 @@ const iframe = $('#live'), video = $('#video'), tl = $('#timeline');
 async function loadFilms() {
   S.films = await api('/api/films');
   const ul = $('#films');
-  ul.innerHTML = S.films.map((f) => {
+  // children group under their project (film.json's parent field — the producer's world): a
+  // child renders as a nested row inside its project's, never a loose sibling
+  const has = new Set(S.films.map((f) => f.key));
+  const kids = new Map();
+  for (const f of S.films) if (f.parent && has.has(f.parent)) (kids.get(f.parent) ?? kids.set(f.parent, []).get(f.parent)).push(f);
+  const li = (f, kid = false) => {
     const g = f.gates ? (f.gates.pass ? (f.gates.warns ? 'warn' : 'ok') : 'bad') : '';
     const r = f.review ? (f.review.pass ? 'ok' : 'warn') : '';
-    return `<li data-k="${f.key}" class="${f.key === S.key ? 'on' : ''}">
+    const dur = f.project ? `${(f.children || []).length} part${(f.children || []).length === 1 ? '' : 's'}` : `${f.duration}s`;
+    return `<li data-k="${f.key}" class="${f.key === S.key ? 'on' : ''}${kid ? ' kid' : ''}">
       <div class="k"><span class="dot ${S.running.has(f.key) ? 'run' : r}"></span>${esc(f.title)}</div>
-      <div class="s"><span>${f.duration}s · ${f.formats.join(' ')}</span>
+      <div class="s"><span>${dur} · ${f.formats.join(' ')}</span>
       <span>${f.review ? `r${f.review.round} min ${f.review.min}` : 'no review'}</span>
       <span><span class="dot ${g}"></span> gates</span>${f.finals.length ? '<span>● rendered</span>' : ''}</div></li>`;
+  };
+  ul.innerHTML = S.films.map((f) => {
+    if (f.parent && kids.has(f.parent)) return '';   // it renders inside its project's row
+    const kk = kids.get(f.key), row = li(f);
+    return kk ? row.replace(/<\/li>$/, `<ul class="kids">${kk.map((c) => li(c, true)).join('')}</ul></li>`) : row;
   }).join('') || '<li class="dim">no films yet</li>';
   ul.querySelectorAll('li[data-k]').forEach((li) => (li.onclick = () => selectFilm(li.dataset.k)));
   if (!S.key && S.films.length) selectFilm(new URLSearchParams(location.hash.slice(1)).get('film') || S.films[0].key);
@@ -52,11 +64,12 @@ async function selectFilm(key, { keepTime = false } = {}) {
   if (changed && d.edit) S.tab = 'edit';              // an edit film opens on its editor
   EDIT.setFilm(S, d);                                 // mounts the editor dock + Edit tab (no-op for motion films)
   MATH.setFilm(S, d);                                 // mounts the math view (no-op for non-math films)
+  PROJECT.setFilm(S, d);                              // mounts the project view (no-op for non-project films)
   if (!d.formats.includes(S.fmt)) S.fmt = d.formats[0];
   $('#empty').hidden = true; $('#film').hidden = false; $('#panel').hidden = false;
   $('#fTitle').textContent = d.title;
   const bpm = d.beats?.bpm ? `${Math.round(d.beats.bpm)} bpm` : '';
-  $('#fMeta').textContent = [`films/${key}`, `${d.cfg.duration}s @ ${d.cfg.fps}fps`, bpm, d.cfg.loop ? 'loop' : ''].filter(Boolean).join(' · ');
+  $('#fMeta').textContent = d.project ? PROJECT.meta(S, d) : [`films/${key}`, `${d.cfg.duration}s @ ${d.cfg.fps}fps`, bpm, d.cfg.loop ? 'loop' : ''].filter(Boolean).join(' · ');
   $('#fmtSeg').innerHTML = d.formats.map((f) => `<button data-f="${f}" class="${f === S.fmt ? 'on' : ''}">${f}</button>`).join('');
   $('#fmtSeg').querySelectorAll('button').forEach((b) => (b.onclick = () => { S.fmt = b.dataset.f; selectFilm(S.key, { keepTime: true }); reloadMedia(true); }));
   document.querySelectorAll('#films li').forEach((li) => li.classList.toggle('on', li.dataset.k === key));
@@ -354,9 +367,36 @@ $('#newForm').onsubmit = async (e) => {
   } catch (err) { alert(err.message); }
 };
 
+// ── make: one plain-words request -> the runner builds a verified project ──────────────────
+$('#makeBtn').onclick = () => $('#makeDlg').showModal();
+$('#makeForm').onsubmit = async (e) => {
+  if (e.submitter?.value !== 'ok') return;
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const request = String(f.get('request') || '').trim();
+  if (!request) return;
+  const formats = [...f.getAll('fmt')].filter(Boolean);
+  const minutes = +f.get('minutes');
+  let r;
+  try { r = await post('/api/make', { request, ...(formats.length ? { formats } : {}), ...(minutes > 0 ? { minutes } : {}) }); }
+  catch (err) { alert(String(err.message).split('\n')[0]); return; }
+  $('#makeDlg').close();
+  // the runner creates the project as its first step (its logs stream into the Run tab): wait
+  // for the film to appear, then open it. One make at a time — the server guards it (409).
+  const wait = $('#makeBtn');
+  wait.disabled = true;
+  try {
+    for (let i = 0; i < 240 && !S.films.some((x) => x.key === r.key); i++) { await new Promise((ok) => setTimeout(ok, 500)); await loadFilms(); }
+    if (S.films.some((x) => x.key === r.key)) selectFilm(r.key);
+    else alert(`the runner is still working on ${r.key} — it will appear in the list (watch the Run tab once it does)`);
+  } finally { wait.disabled = false; }
+};
+
 // ── the edit tab (films with an edit.json) gets the same helpers the motion tabs use ────
 EDIT.init({ S, esc, post, api, seek, pause, selectFilm, job, reloadPreview: () => reloadMedia(true), audio, iframe });
 // the math view (films with kind: math) gets the same helpers (its stage replaces the live view)
 MATH.init({ S, esc, post, api, seek, pause, selectFilm, job, renderTab });
+// the project view (films with kind: project) gets them too (its stage replaces the live view)
+PROJECT.init({ S, esc, post, api, seek, pause, selectFilm, job, renderTab });
 
 loadFilms(); connect();

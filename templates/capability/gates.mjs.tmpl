@@ -1,0 +1,38 @@
+// gates.mjs — __ID__'s gates (K12). A gate takes the film record ({key, dir, cfg, out} — what
+// readFilm returns) and returns {name, pass, detail}; a FAIL blocks ship, a gate must never
+// throw (runGates catches a throw and reports it as a FAIL — a crash is not a verdict).
+// runGates(key) runs them all and writes films/<key>/gates.json {at, pass, checks} (the same
+// shape math's runMathGates and motion's gates return).
+//
+// The two stubs below THROW until implemented — the growth contract (studio capability check
+// __ID__) requires >= 2 gates that RUN without throwing on a seeded film. Make each gate check
+// one thing this technique can actually be wrong about (math's layout/claims gates and the
+// chart technique's data/axis gates in engine/verify/produce/growth.mjs are the pattern).
+import { join } from 'node:path';
+import { readFilm, writeJson } from '../../lib/film.mjs';
+
+export async function firstGate(film) {
+  void film;
+  throw new Error('not implemented yet: firstGate — what it checks, of what (return {name, pass, detail}; FAIL names the thing)');
+}
+
+export async function secondGate(film) {
+  void film;
+  throw new Error('not implemented yet: secondGate — the second thing that must hold (a second real check, not a copy)');
+}
+
+export const GATES = [firstGate, secondGate];
+
+export async function runGates(key, { write = true, log = console.log } = {}) {
+  const film = readFilm(key);
+  const checks = [];
+  for (const g of GATES) {
+    let r;
+    try { r = await g(film); } catch (e) { r = { name: g.name, pass: false, detail: `threw: ${e.message}` }; }
+    checks.push(r);
+    log(`${r.pass ? 'ok  ' : 'FAIL'} ${r.name}: ${r.detail}`);
+  }
+  const result = { at: new Date().toISOString(), pass: checks.every((c) => c.pass), checks };
+  if (write) writeJson(join(film.dir, 'gates.json'), result);
+  return result;
+}

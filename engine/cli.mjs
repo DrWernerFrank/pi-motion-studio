@@ -102,6 +102,14 @@ const HELP = `studio <command> <film> [options]
   project ship <key>     verify -> refuse if red -> credits.md + report.md + out/ finals
   project where <key> --t 12.3
                          a timecode -> the segment -> the child's own where (scene, sentence, file:line)
+  capability new <id> --type technique|service [--description "…"]
+                         scaffold a grown capability (K12): a technique kind module
+                         (engine/kinds/<id>/ from templates/capability/) or a service module
+                         (engine/produce/services/<id>/) — the contract parts are its README
+  capability check <id> the growth contract: refuses until every part is real (hooks, gates,
+                         catalog entry, doctor probe, the check file, SKILL/TOOLS)
+  capability remove <id> remove a grown capability (its kind/service module + the grown row);
+                         a capability committed to git is the lead's to remove
   make "<request>" [--file <input>…] [--formats 16:9,9:16] [--minutes 180] [--plan-only]
                          create the project (the request verbatim) and RELAUNCH pi — one session,
                          argv-only — until 'studio project verify' is green; stops on STOP/budget/cap
@@ -406,6 +414,34 @@ async function main() {
         break;
       }
       throw new Error(`studio project: unknown subcommand "${sub ?? ''}" (new|list|status|plan|requirement|verify|rebuild|ship|where)`);
+    }
+    case 'capability': {
+      // K12: grow a capability (the producer's escape hatch when nothing in the catalog fits)
+      const G = await import('./produce/growth.mjs');
+      const sub = argv[1];
+      const cid = argv[2] && !argv[2].startsWith('--') ? argv[2] : undefined;
+      if (sub === 'new') {
+        if (!cid) throw new Error('studio capability new <id> --type technique|service [--description "…"]');
+        const type = opt('type', 'technique') === true ? 'technique' : String(opt('type', 'technique'));
+        const r = await G.scaffold(cid, { type, description: opt('description') === true || opt('description') === undefined ? undefined : String(opt('description')) });
+        console.log(r.message);
+        break;
+      }
+      if (sub === 'check') {
+        if (!cid) throw new Error('studio capability check <id>');
+        const r = await G.checkCapability(cid);
+        for (const p of r.present) console.log(`  ok    ${p}`);
+        for (const m of r.missing) console.log(`  MISS  ${m}`);
+        console.log(r.ok ? `capability ${cid}: READY (${r.present.length} contract parts present)` : `capability ${cid}: ${r.missing.length} part(s) missing`);
+        process.exitCode = r.ok ? 0 : 1;
+        break;
+      }
+      if (sub === 'remove') {
+        if (!cid) throw new Error('studio capability remove <id>');
+        console.log(G.removeCapability(cid).message);
+        break;
+      }
+      throw new Error(`studio capability: unknown subcommand "${sub ?? ''}" (new|check|remove)`);
     }
     case 'make': {
       const M = await import('./produce/runner.mjs');
