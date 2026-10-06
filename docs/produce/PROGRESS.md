@@ -22,7 +22,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W2-proj | project lifecycle: resume, where-chain, revision, child-parent; single-technique wrappers | engine/kinds/project/index.mjs, engine/produce/ship.mjs, engine/verify/produce/{project,single}.mjs | W1 | `--only project,single` | glm-worker | **DONE c6494d0** |
 | W2-asm | spike S2 + assembly (edit-film assembler, design inheritance, PSNR/geometry) + ADR-003 | engine/produce/assemble.mjs, engine/verify/produce/assemble.mjs, docs/produce/ADR-003-*.md | W2-proj | `--only assemble` | glm-worker | todo |
 | W2-skill | produce skill + AGENTS/README sections (lead integrates) + producer-critic + checks | .pi/skills/produce/**, .pi/agents/producer-critic.md, engine/verify/produce/{skill,critic}.mjs | — | `--only skill,critic` | glm-worker | **DONE b2eec31** |
-| W2-make | spike S4 + runner + studio make + fake-pi + make check + ADR-004 | engine/produce/runner.mjs, engine/verify/produce/make.mjs, docs/produce/ADR-004-*.md (cli wiring = lead) | SCHEMAS runner | `--only make` | glm-worker | respawned as w2-make2 (died mid-spike; findings reused) |
+| W2-make | spike S4 + runner + studio make + fake-pi + make check + ADR-004 | engine/produce/runner.mjs, engine/verify/produce/make.mjs, docs/produce/ADR-004-*.md (cli wiring = lead) | SCHEMAS runner | `--only make` | glm-worker | **DONE cf42856** (died post-completion; verified) |
 | W2-tools | project_* tools + tools check | .pi/extensions/motion-tools/project-tools.ts (BY_FILE = lead) | W2-proj | `--only tools` | glm-worker | **DONE a271650** |
 | W3-gui | Make dialog + public/project.js + server endpoints + gui-smoke/gui-security | studio-gui/**, engine/verify/produce/{gui-smoke,gui-security}.mjs | W2-make (API frozen) | `--only gui-smoke,gui-security` | glm-worker | todo |
 | W3-grow | capability new/check scaffold + growth check | engine/produce/growth.mjs, templates/capability/**, engine/verify/produce/growth.mjs | K1/K2 | `--only growth` | glm-worker | todo |
@@ -78,6 +78,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `skill` — `produce` skill + AGENTS.md "Start here" parse; 4 older skills defer; no duplicate "any video" trigger; the order/framework/one-question/revision/loop named
 - [x] `critic` — W2-skill: producer-critic parses/read-only/9 keys/fidelity-10; addReview accepts — DONE
 - [ ] `critic` — `producer-critic` parses, read-only, tools listed, 7 keys + fidelity + coherence, fidelity-10 rule present; `film_review` accepts the round
+- [x] `make` — W2-make: all 11 legs (build/verbatim/argv/clash/hostile/STOP/cap/budget/concurrency/plan-only/recovery) — DONE
 - [ ] `make` — `studio make` (fake pi): project created, request verbatim by file, loop relaunches until verify passes, stops on budget/STOP/cap, refuses concurrent run, survives quotes/backticks/`$(...)`; `--plan-only`; `--stop`
 - [x] `tools` — W2-tools + the lead's BY_FILE wiring: 7 tools, live flow green — DONE
 - [ ] `tools` — every `project_*` tool registered with a `Type.Object` schema in `BY_FILE`; each runs against a fixture project
@@ -99,4 +100,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Next: wire `studio make` when w2-make2 signals CLI-READY (poll scratch/w2-make2/); spawn W3-gui (GUI Make dialog + project view) and W3-grow (capability scaffold) in the freed slots; then W3-bat (the battery, fresh critics) and W4 (errors, docs, hygiene, demos).
+Next: W3-gui died at 7m with the view + endpoints on disk (no checks) — the LEAD takes the GUI (its
+files are the lead's integration surface): review project.js + the server diff, finish + write
+gui-smoke/gui-security. W3-grow died at 7m with only templates/ — respawn it once (retry rule),
+else the lead takes it. Then W3-bat, W4-err/docs/hyg, the demos.
