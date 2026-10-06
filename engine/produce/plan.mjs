@@ -3,8 +3,6 @@
 // simplest thing that could work), a budget, deliverables, no over-scoping, and a risky choice
 // carries saved probe sheets. Pure: (plan, catalog) -> { ok, errors[], warnings[] }.
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { ROOT } from '../lib/serve.mjs';
 
 export const PLAN_VERSION = 1;
 
@@ -13,10 +11,12 @@ export function checkPlan(plan, catalogById) {
   const errors = [], warnings = [];
   const err = (m) => errors.push(m);
   const warn = (m) => warnings.push(m);
+  const byId = catalogById ?? {};   // a missing catalog still reports "not in the catalog", never throws
+  const idsOfCatalog = () => Object.keys(byId).join(', ');
 
   if (!plan || typeof plan !== 'object') return { ok: false, errors: ['plan.json: not an object'], warnings };
   if (plan.version !== PLAN_VERSION) err(`version: ${PLAN_VERSION} (got ${JSON.stringify(plan.version)})`);
-  if (!plan.goal || typeof plan.goal !== 'string' || plan.goal.length < 8) err(`goal: one line, the film in one sentence (missing/too short: ${JSON.stringify(plan.goal?.slice?.(0, 40))})`);
+  if (!plan.goal || typeof plan.goal !== 'string' || plan.goal.length < 8) err(`goal: one line, the film in one sentence (missing/too short: ${JSON.stringify(String(plan.goal ?? '').slice(0, 40))})`);
   if (!Array.isArray(plan.assumptions) || !plan.assumptions.length) err('assumptions: a non-empty array — what you assumed when the request was ambiguous (write them down and move on)');
   if (!Array.isArray(plan.deliverables) || !plan.deliverables.length) err('deliverables: a non-empty array ({ type: "video", formats: [...], duration: n })');
   else for (const d of plan.deliverables) {
@@ -34,11 +34,11 @@ export function checkPlan(plan, catalogById) {
     if (!dec.why || typeof dec.why !== 'string' || dec.why.length < 10) err('decision.why: why that choice (a sentence, not a word)');
     const alts = dec.alternatives;
     if (!Array.isArray(alts) || alts.length < 2) err('decision.alternatives: at least two considered, including the simplest thing that could work');
-    else for (const a of alts) if (!a.id || !a.rejected_because) err(`decision.alternatives: { id, rejected_because } — every alternative carries its reason (${JSON.stringify(a.id).slice(0, 30)} has none)`);
+    else for (const a of alts) if (!a.id || !a.rejected_because) err(`decision.alternatives: { id, rejected_because } — every alternative carries its reason (${String(a.id ?? '(no id)').slice(0, 30)} has none)`);
     // a single-technique choice must name a real technique; "composite" plans assemble (P3)
-    if (dec.chosen !== 'composite') {
-      const cap = catalogById[dec.chosen];
-      if (!cap) err(`decision.chosen "${dec.chosen}" is not in the capability catalog (${[...Object.keys(catalogById)].join(', ')})`);
+    if (dec.chosen && dec.chosen !== 'composite') {
+      const cap = byId[dec.chosen];
+      if (!cap) err(`decision.chosen "${dec.chosen}" is not in the capability catalog (${idsOfCatalog()})`);
       else if (cap.type !== 'technique') err(`decision.chosen "${dec.chosen}" is a ${cap.type}, not a technique`);
     }
     // a risky choice requires probe sheets (a 5-minute prototype of the hardest moment, looked at)
@@ -51,24 +51,25 @@ export function checkPlan(plan, catalogById) {
   else {
     const ids = new Set();
     for (const s of segs) {
-      if (!s.id || /^s\d{2}$/.test(s.id) === false && !/^[a-z0-9][a-z0-9-]*$/.test(s.id)) err(`segment id "${s.id}" (s01, s02, … or a slug)`);
+      const sid = typeof s.id === 'string' && s.id ? s.id : '(no id)';
+      if (typeof s.id !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(s.id)) err(`segment id "${s.id}" (s01, s02, … or a slug)`);
       if (ids.has(s.id)) err(`segment id "${s.id}" twice`);
       ids.add(s.id);
-      if (!s.capability) err(`segment ${s.id}: capability — which technique makes this part`);
+      if (!s.capability) err(`segment ${sid}: capability — which technique makes this part`);
       else {
-        const cap = catalogById[s.capability];
-        if (!cap) err(`segment ${s.id}: capability "${s.capability}" is not in the catalog (${[...Object.keys(catalogById)].join(', ')})`);
-        else if (cap.type !== 'technique') err(`segment ${s.id}: capability "${s.capability}" is a ${cap.type}, not a technique`);
+        const cap = byId[s.capability];
+        if (!cap) err(`segment ${sid}: capability "${s.capability}" is not in the catalog (${idsOfCatalog()})`);
+        else if (cap.type !== 'technique') err(`segment ${sid}: capability "${s.capability}" is a ${cap.type}, not a technique`);
         else if (cap.typical?.duration && typeof s.duration === 'number') {
           const [lo, hi] = cap.typical.duration;
-          if (s.duration < lo * 0.5 || s.duration > hi * 2) warn(`segment ${s.id}: ${s.duration}s is outside ${cap.capability ?? s.capability}'s typical ${lo}-${hi}s — possible over-scoping`);
+          if (s.duration < lo * 0.5 || s.duration > hi * 2) warn(`segment ${sid}: ${s.duration}s is outside ${cap.id}'s typical ${lo}-${hi}s — possible over-scoping`);
         }
       }
-      if (!s.role) err(`segment ${s.id}: role (cold open, proof, payoff, end card …)`);
-      if (!s.brief || s.brief.length < 12) err(`segment ${s.id}: brief — what this part shows (a sentence)`);
-      if (typeof s.duration !== 'number' || s.duration <= 0) err(`segment ${s.id}: duration in seconds`);
-      if (!Array.isArray(s.acceptance) || !s.acceptance.length) err(`segment ${s.id}: acceptance — what must hold when this part is done`);
-      if (s.film && !/^[a-z0-9][a-z0-9-]*$/.test(s.film)) err(`segment ${s.id}: film key "${s.film}" (lowercase letters, digits, dashes)`);
+      if (!s.role) err(`segment ${sid}: role (cold open, proof, payoff, end card …)`);
+      if (!s.brief || s.brief.length < 12) err(`segment ${sid}: brief — what this part shows (a sentence)`);
+      if (typeof s.duration !== 'number' || s.duration <= 0) err(`segment ${sid}: duration in seconds`);
+      if (!Array.isArray(s.acceptance) || !s.acceptance.length) err(`segment ${sid}: acceptance — what must hold when this part is done`);
+      if (s.film && !/^[a-z0-9][a-z0-9-]*$/.test(s.film)) err(`segment ${sid}: film key "${s.film}" (lowercase letters, digits, dashes)`);
     }
     // over-scoping: the segments' total vs the video deliverables' target (±20%)
     const target = (plan.deliverables || []).filter((d) => d.type === 'video').reduce((n, d) => n + (d.duration || 0), 0);
@@ -81,8 +82,10 @@ export function checkPlan(plan, catalogById) {
   const asm = plan.assembly;
   if (!asm || !asm.mode) err('assembly.mode: edit-film (default), direct, or single (one technique — no assembly)');
   else if (!['edit-film', 'direct', 'single'].includes(asm.mode)) err(`assembly.mode "${asm.mode}" (edit-film|direct|single)`);
-  if (!plan.feasibility || !Array.isArray(plan.feasibility.blocked_inputs)) err('feasibility.blocked_inputs: the missing inputs, flagged — never invented');
-  if (dec?.chosen !== 'composite' && !Array.isArray(plan.feasibility?.needs_capability ?? [])) err('feasibility.needs_capability: an array (what must be built if nothing fits)');
+  // both feasibility keys are required for every plan (SCHEMAS §plan.json): missing inputs are
+  // flagged, never invented; needs_capability says what must be built if nothing fits
+  if (!plan.feasibility || typeof plan.feasibility !== 'object' || !Array.isArray(plan.feasibility.blocked_inputs)) err('feasibility.blocked_inputs: the missing inputs, flagged — never invented');
+  if (!plan.feasibility || typeof plan.feasibility !== 'object' || !Array.isArray(plan.feasibility.needs_capability)) err('feasibility.needs_capability: an array (what must be built if nothing fits)');
   const bud = plan.budget;
   if (!bud || typeof bud.minutes !== 'number' || bud.minutes <= 0) err('budget.minutes: the time budget (soft stop at 80%, hard at 100%)');
   if (!bud || typeof bud.usd !== 'number' || bud.usd < 0) err('budget.usd: the money budget (0 by default — spend nothing without permission)');
@@ -95,7 +98,7 @@ export function checkPlan(plan, catalogById) {
   return { ok: errors.length === 0, errors, warnings };
 }
 
-/** Load + validate a plan against the catalog. Returns { ok, errors, warnings, plan }. */
+/** Load + validate a plan against the catalog. Returns { ok, errors, warnings, plan, catalogById }. */
 export async function validatePlanFile(file) {
   const { validatedCatalog } = await import('./catalog.mjs');
   const entries = await validatedCatalog();
@@ -106,5 +109,3 @@ export async function validatePlanFile(file) {
   const r = checkPlan(plan, byId);
   return { ...r, plan, catalogById: byId };
 }
-
-void join; void ROOT;
