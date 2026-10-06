@@ -350,9 +350,11 @@ async function main() {
         if (wv !== undefined && wv !== true) { const r = L.waive(pkey, String(wv)); console.log(`waived: ${r.id} by ${r.waived_by}`); break; }
         const text = opt('text');
         if (!text || text === true) throw new Error('studio project requirement <key> add --text "…" --type measurable --verifier duration --arg 60');
+        // --arg may be a number (60) or a JSON value (["16:9"] for the formats verifier): parse
+        // what parses, keep the raw string otherwise (the verifiers validate their own arg)
+        const argOf = (k) => { const v = opt(k); if (v === true || v === undefined) return undefined; try { return JSON.parse(v); } catch { return String(v); } };
         const rows = [{ text: String(text), type: opt('type', 'measurable'), verifier: opt('verifier') === true ? undefined : opt('verifier'),
-          arg: opt('arg') === true || opt('arg') === undefined ? undefined : Number(opt('arg')),
-          tolerance: opt('tolerance') === true || opt('tolerance') === undefined ? undefined : Number(opt('tolerance')) }];
+          arg: argOf('arg'), tolerance: argOf('tolerance') === undefined ? undefined : Number.isFinite(+argOf('tolerance')) ? +argOf('tolerance') : argOf('tolerance') }];
         const add = L.addRequirements(pkey, rows, { source: opt('source', 'request') });
         console.log(`added ${add.map((r) => r.id).join(', ')} -> films/${pkey}/requirements.json`);
         break;

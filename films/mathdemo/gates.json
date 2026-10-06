@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T15:35:24.606Z",
+  "at": "2026-10-06T09:31:57.884Z",
   "pass": true,
   "checks": [
     {
@@ -54,7 +54,7 @@
       "name": "deliverable",
       "pass": true,
       "level": "pass",
-      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 20.83s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 20.83s"
+      "detail": "draft-16x9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 20.83s\ndraft-9x16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 20.83s"
     },
     {
       "name": "deterministic",
