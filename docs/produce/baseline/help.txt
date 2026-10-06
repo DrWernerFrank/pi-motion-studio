@@ -71,5 +71,26 @@ studio <command> <film> [options]
   verify-produce [--quick] [--list] [--only <id>,…] [--clean]
                          the producer contract: every check of the mission (registry, capabilities,
                          plan, ledger, project, assemble, make, demos …) → docs/produce/verify-last.json
+  migrate-names [<film>|--all]
+                         math films: derived paths to the Windows-safe form (draft-16x9.mp4,
+                         records/16x9/), the tracked ones via git mv; idempotent
+  capabilities [<id>] [--json] [--doc]
+                         the technique/service catalog with readiness from real probes (a missing
+                         dependency reports not-ready and the fix); --doc writes the generated
+                         docs/produce/CAPABILITIES.md
+  project new <key> "<request>" [--formats 16:9,9:16] [--file <input>…]
+                         create a project film: the request verbatim in brief.md + the ledgers
+  project list           every project: phase, parts, finals
+  project status <key>  the project's state: segments, budget, parts
+  project plan <key> --check
+                         validate plan.json (goal, >= 2 alternatives, capabilities, budget…)
+  project requirement <key> add --text "…" --type measurable --verifier duration --arg 60
+                         [--waive r02]   the ledger: append an ask, or waive one (the human only)
+  project verify <key>   the whole contract: plan validates, requirements green, gates, facts, assets, budget
+  project rebuild <key> [--only s01]
+                         build the parts that are not done (resume), or exactly the named one
+  project ship <key>     verify -> refuse if red -> credits.md + report.md + out/ finals
+  project where <key> --t 12.3
+                         a timecode -> the segment -> the child's own where (scene, sentence, file:line)
   help                   this text
 [exit 0]

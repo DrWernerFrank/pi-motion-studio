@@ -45,7 +45,7 @@ export default async () => {
     const seconds = rows[0]?.seconds ?? 0;
     // lint the real records of this format
     const lint = await pool.run({
-      cmd: PY, args: ['-m', 'studio_manim.lint', join(dir, 'records', fmt), join(dir, 'design.json'), fmt],
+      cmd: PY, args: ['-m', 'studio_manim.lint', join(dir, 'records', fmt.replace(':', 'x')), join(dir, 'design.json'), fmt],
       cwd: join(ROOT, 'engine', 'manim', 'test'), memoryMb: CAPS.check, timeoutS: 120,
       label: `lint ${fmt}`, env: { ...ENV, STUDIO_FORMAT: fmt },
     });
@@ -55,9 +55,9 @@ export default async () => {
     else facts.push(`${fmt}: ${seconds}s, lint 0 fail (${violations.length} warn)`);
     // claims: every ledger entry ok:true in every format
     const led = [];
-    for (const f of readdirSync(join(dir, 'records', fmt))) {
+    for (const f of readdirSync(join(dir, 'records', fmt.replace(':', 'x')))) {
       if (!f.endsWith('-claims.json')) continue;
-      for (const c of JSON.parse(readFileSync(join(dir, 'records', fmt, f), 'utf8')) || []) led.push(c);
+      for (const c of JSON.parse(readFileSync(join(dir, 'records', fmt.replace(':', 'x'), f), 'utf8')) || []) led.push(c);
     }
     const notOk = led.filter((c) => c.ok !== true);
     if (notOk.length) bad.push(`${fmt}: ${notOk.length} failed claims`);

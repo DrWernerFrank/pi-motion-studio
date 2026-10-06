@@ -16,7 +16,7 @@
   "math": {
     "film": "mathdemo",
     "fmt": "16:9",
-    "file": "films/mathdemo/out/draft-16:9.mp4",
+    "file": "films/mathdemo/out/draft-16x9.mp4",
     "bytes": 687878,
     "md5": "38596ccc4fb37605a2699d19b08ff0a5"
   }

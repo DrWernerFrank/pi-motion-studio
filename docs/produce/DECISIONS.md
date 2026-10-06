@@ -51,3 +51,19 @@ film delete each other's scratch work dir mid-manim (FileNotFoundError from path
 at a time is a machine rule, not a suggestion (glm-worker's brief already says so).
 Golden proof: `engine/produce/baseline.mjs --compare` → "baseline: identical" (transcripts + drafts +
 regress; only wall-clock `<n>s` tokens normalized).
+
+**D-005 2026-10-06 P1 — the baseline is re-captured at each phase's commit; the fmtDirs bug it caught.**
+The P0 baseline (registry-migration proof: "baseline: identical" at 11:30, before any P1 feature)
+stays recorded in git history; P1's own additions — `migrate-names`/`capabilities` in help, the
+slugged math draft names — are INTENTIONAL drift, so the committed baseline is re-captured at P1's
+commit and the registry check thereafter guards against unintended drift between commits. The
+re-capture immediately caught a real bug the naming migration had introduced: `math-gates`'s
+`fmtDirs()` returned raw DIRECTORY names (now `16x9`) while every gate compares against the RAW
+format id (`16:9`), so `fmts.includes(fmt0)` was silently false and the typeset gate failed loudly
+with "no records/16x9/ at all" on a film whose records existed. Fix: `fmtDirs` resolves the KNOWN
+formats' slugged dirs and returns raw ids (the gates' messages already print `records/<slug>/`).
+Swept the same class repo-wide: the records joins in verify/math/{demos,library,gui-smoke,where}
+now slug the dir (the lint CLI's fmt ARG stays raw — it computes safe boxes); demos.mjs and
+gui-security.mjs's raw film-kind reads became kindOf (same semantics, the sanctioned helper); the
+grep gate targets the film-kind concept (`cfg.kind` reads + film-kind literals) so the dozens of
+legitimate track/clip/source/trace `.kind === 'video'` reads do not trip it.

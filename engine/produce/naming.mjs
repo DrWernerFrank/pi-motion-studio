@@ -6,7 +6,7 @@
 import { execSync } from 'node:child_process';
 import { existsSync, readdirSync, renameSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { fmtSlug, readFilm, readJson, writeJson } from '../lib/film.mjs';
+import { fmtSlug, kindOf, readFilm, readJson, writeJson } from '../lib/film.mjs';
 import { ROOT } from '../lib/serve.mjs';
 
 const tracked = (rel) => {
@@ -72,7 +72,7 @@ export function migrateAll() {
   const out = {};
   for (const k of readdirSync(join(ROOT, 'films'))) {
     const cfg = readJson(join(ROOT, 'films', k, 'film.json'), null);
-    if (cfg?.kind !== 'math') continue;
+    if (kindOf(cfg) !== 'math') continue;   // kindOf: the sanctioned kind read (ADR-001)
     out[k] = migrateNames(k);
   }
   return out;

@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-06T09:04:36.293Z",
+  "pass": false,
+  "checks": [
+    {
+      "name": "lint",
+      "pass": true,
+      "level": "pass",
+      "detail": "no timers, randomness, wall clock or CSS animation"
+    },
+    {
+      "name": "determinism",
+      "pass": true,
+      "level": "pass",
+      "detail": "4 frames identical across seek orders"
+    },
+    {
+      "name": "dead-time",
+      "pass": false,
+      "level": "fail",
+      "detail": "nothing moves during 4.0-6.0s"
+    },
+    {
+      "name": "novelty",
+      "pass": true,
+      "level": "pass",
+      "detail": "a new visual event at least every 4s"
+    },
+    {
+      "name": "hook",
+      "pass": false,
+      "level": "warn",
+      "detail": "first frame contrast 0.0 (want >3), max change in first 2s 8.0 (want >8)"
+    },
+    {
+      "name": "blank-frames",
+      "pass": false,
+      "level": "warn",
+      "detail": "flat frames at 0, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6s …"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-13.8 LUFS (want -14 ±1), true peak -1.2 dBFS"
+    }
+  ]
+}

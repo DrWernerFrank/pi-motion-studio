@@ -88,6 +88,20 @@ const HELP = `studio <command> <film> [options]
                          the technique/service catalog with readiness from real probes (a missing
                          dependency reports not-ready and the fix); --doc writes the generated
                          docs/produce/CAPABILITIES.md
+  project new <key> "<request>" [--formats 16:9,9:16] [--file <input>…]
+                         create a project film: the request verbatim in brief.md + the ledgers
+  project list           every project: phase, parts, finals
+  project status <key>  the project's state: segments, budget, parts
+  project plan <key> --check
+                         validate plan.json (goal, >= 2 alternatives, capabilities, budget…)
+  project requirement <key> add --text "…" --type measurable --verifier duration --arg 60
+                         [--waive r02]   the ledger: append an ask, or waive one (the human only)
+  project verify <key>   the whole contract: plan validates, requirements green, gates, facts, assets, budget
+  project rebuild <key> [--only s01]
+                         build the parts that are not done (resume), or exactly the named one
+  project ship <key>     verify -> refuse if red -> credits.md + report.md + out/ finals
+  project where <key> --t 12.3
+                         a timecode -> the segment -> the child's own where (scene, sentence, file:line)
   help                   this text`;
 
 const argv = process.argv.slice(2);
@@ -282,6 +296,110 @@ async function main() {
       const { verifyMath } = await import('./verify-math.mjs');
       const r = await verifyMath({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
       process.exitCode = r.pass ? 0 : 1; break;
+    }
+    case 'project': {
+      const P = await import('./kinds/project/index.mjs');
+      const sub = argv[1];
+      const pkey = argv[2] && !argv[2].startsWith('--') ? argv[2] : undefined;
+      if (sub === 'new') {
+        if (!pkey || !/^[a-z0-9][a-z0-9-]*$/.test(pkey)) throw new Error('studio project new <key> "<request>" [--formats 16:9,9:16]');
+        // the request = the positional words after the key, up to the first --flag (a quoted
+        // request is one argv element; an unquoted multi-word one works the same way)
+        const words = [];
+        for (const a of argv.slice(3)) { if (a.startsWith('--')) break; words.push(a); }
+        const request = words.join(' ');
+        if (!request) throw new Error('studio project new <key> "<request>" — the request in plain words');
+        const files = []; argv.forEach((a, i) => { if (a === '--file' && argv[i + 1]) files.push(argv[i + 1]); });
+        const r = P.create(pkey, { title: opt('title', pkey) === true ? undefined : opt('title'), request,
+          formats: opt('formats') && opt('formats') !== true ? String(opt('formats')).split(',') : ['16:9'], inputs: files });
+        console.log(r.message);
+        break;
+      }
+      if (sub === 'list') {
+        const rows = existsSync(FILMS) ? readdirSync(FILMS).filter((k) => { const c = readJson(join(FILMS, k, 'film.json'), null); return c && c.kind === 'project'; }) : [];
+        if (!rows.length) console.log('no projects yet: studio project new <key> "<request>"');
+        for (const k of rows) {
+          const c = readJson(join(FILMS, k, 'film.json'), {}), st = P.stateOf(k);
+          const finals = existsSync(join(FILMS, k, 'out')) ? readdirSync(join(FILMS, k, 'out')).filter((f) => /^final-.*\.mp4$/.test(f)).length : 0;
+          console.log(`${k.padEnd(20)} ${(st.phase ?? '?').padEnd(11)} parts ${(c.parts || []).length}  finals ${finals}  ${(c.formats || []).join(',')}`);
+        }
+        break;
+      }
+      if (!pkey) throw new Error('studio project <new|list|status|plan|requirement|verify|rebuild|ship|where> <key> …');
+      if (sub === 'status') {
+        const st = P.stateOf(pkey), c = readJson(join(FILMS, pkey, 'film.json'), {});
+        console.log(`${pkey}: ${st.phase} · ${(c.parts || []).length} part(s) · formats ${(c.formats || []).join(', ')}`);
+        for (const [id, sg] of Object.entries(st.segments ?? {})) console.log(`  ${id.padEnd(6)} ${(sg.status ?? '?').padEnd(10)} ${sg.film} (${sg.capability})`);
+        const B = await import('./produce/budget.mjs');
+        const b = B.budgetOf(pkey);
+        console.log(`  budget: ${b.spentMinutes.toFixed(0)}/${b.minutes} min (${b.phase}), $${b.spentUsd.toFixed(3)}/${b.usd}`);
+        break;
+      }
+      if (sub === 'plan') {
+        if (opt('check') === undefined) throw new Error('studio project plan <key> --check (plan.json is written by the producer)');
+        const r = await P.planCheck(pkey);
+        for (const e of r.errors) console.log(`  ✗ ${e}`);
+        for (const w of r.warnings) console.log(`  ⚠ ${w}`);
+        console.log(r.ok ? `plan: VALID (${(r.plan?.segments || []).length} segments, chosen ${r.plan?.decision?.chosen}${r.warnings.length ? `, ${r.warnings.length} warning(s)` : ''})` : `plan: ${r.errors.length} error(s)`);
+        process.exitCode = r.ok ? 0 : 1;
+        break;
+      }
+      if (sub === 'requirement') {
+        const L = await import('./produce/ledger.mjs');
+        const wv = opt('waive');
+        if (wv !== undefined && wv !== true) { const r = L.waive(pkey, String(wv)); console.log(`waived: ${r.id} by ${r.waived_by}`); break; }
+        const text = opt('text');
+        if (!text || text === true) throw new Error('studio project requirement <key> add --text "…" --type measurable --verifier duration --arg 60');
+        const rows = [{ text: String(text), type: opt('type', 'measurable'), verifier: opt('verifier') === true ? undefined : opt('verifier'),
+          arg: opt('arg') === true || opt('arg') === undefined ? undefined : Number(opt('arg')),
+          tolerance: opt('tolerance') === true || opt('tolerance') === undefined ? undefined : Number(opt('tolerance')) }];
+        const add = L.addRequirements(pkey, rows, { source: opt('source', 'request') });
+        console.log(`added ${add.map((r) => r.id).join(', ')} -> films/${pkey}/requirements.json`);
+        break;
+      }
+      if (sub === 'verify') {
+        const { verifyProject } = await import('./produce/ship.mjs');
+        const r = await verifyProject(pkey);
+        for (const w of r.why) console.log(`  ✗ ${w}`);
+        console.log(r.pass ? `project ${pkey}: VERIFY GREEN (requirements green, gates PASS, facts/assets/budget clean)` : `project ${pkey}: ${r.why.length} problem(s)`);
+        process.exitCode = r.pass ? 0 : 1;
+        break;
+      }
+      if (sub === 'rebuild') {
+        const plan = readJson(join(FILMS, pkey, 'plan.json'), null);
+        if (!plan) throw new Error(`films/${pkey}/plan.json is empty — write the plan first`);
+        const only = opt('only') === true ? undefined : opt('only');
+        const st = P.stateOf(pkey);
+        let built = 0, skipped = 0;
+        for (const seg of plan.segments || []) {
+          if (only && seg.id !== only) continue;
+          const cur = st.segments?.[seg.id];
+          if (cur?.status === 'done' && !only) { skipped++; continue; }   // resume: finished parts stay
+          const r = await P.segment(pkey, seg);
+          console.log(`  ${seg.id} (${seg.capability}) -> films/${r.key}${r.existed ? ' (existing)' : ''}`);
+          built++;
+        }
+        console.log(`rebuild: ${built} part(s) built, ${skipped} already done${only ? ` (only ${only})` : ''}`);
+        break;
+      }
+      if (sub === 'ship') { await P.ship(pkey); break; }
+      if (sub === 'where') {
+        const t = num('t', 0);
+        const plan = readJson(join(FILMS, pkey, 'plan.json'), {});
+        const st = P.stateOf(pkey);
+        let acc = 0, hit = null;
+        for (const seg of plan.segments || []) { if (t < acc + (seg.duration ?? 0) + 0.25) { hit = { seg, local: t - acc }; break; } acc += seg.duration ?? 0; }
+        if (!hit) hit = { seg: (plan.segments || []).at(-1), local: 0 };
+        console.log(`${t}s -> segment ${hit.seg.id} (${hit.seg.capability}, ${hit.seg.role}) @ +${hit.local.toFixed(2)}s`);
+        const child = st.segments?.[hit.seg.id]?.film;
+        if (child) {
+          console.log(`  child films/${child}:`);
+          const K = await import('./kinds/registry.mjs');
+          try { (await K.hooksFor(child)).where(child, hit.local, undefined); } catch (e) { console.log(`    (its own where: ${String(e.message || e).split('\n')[0]})`); }
+        }
+        break;
+      }
+      throw new Error(`studio project: unknown subcommand "${sub ?? ''}" (new|list|status|plan|requirement|verify|rebuild|ship|where)`);
     }
     case 'capabilities': {
       const C = await import('./produce/capabilities.mjs');

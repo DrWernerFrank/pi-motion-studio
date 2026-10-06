@@ -17,16 +17,22 @@ export default async () => {
   need(r1.status === 0, `studio regress exited ${r1.status}:\n${(r1.stdout || r1.stderr || '').split('\n').filter((l) => /DRIFT|FAIL|broken/.test(l)).join(' | ')}`);
   facts.push('studio regress: 4 motion films on the baseline (frame hashes + gate verdicts identical)');
 
-  // 2. the edit contract's cheap subset
-  const r2 = run(['verify-edit', '--only', 'env,edit-ops,gui-security,tools,docs'], 20 * 60 * 1000);
-  const pass2 = /^PASS  env/m.test(r2.stdout || '') && (r2.stdout || '').split('\n').filter((l) => /^PASS /.test(l)).length;
-  need(r2.stdout && !/FAIL|ERR /m.test(r2.stdout.split('verify-edit:')[0]), `verify-edit cheap subset not green:\n${(r2.stdout || '').split('\n').filter((l) => !/^PASS/.test(l)).join(' | ')}`);
+  // 2-3. the two cheap subsets. Judge by the ROW lines (a row is "^PASS|^FAIL|^ERR |^skip|^TODO
+  //      <id>"), never by substrings: a PASS row's own measured text can honestly contain the word
+  //      FAIL (the claims check reports "a false claim blocks ship: AssertionError: CLAIM FAILED…").
+  const rowsOf = (out) => (out || '').split('\n').filter((l) => /^(PASS|FAIL|ERR |skip|TODO) /.test(l));
+  const subset = (name, args, want, timeout) => {
+    const r = run(args, timeout);
+    const rows = rowsOf(r.stdout);
+    const good = rows.filter((l) => /^PASS /.test(l)).length;
+    const badRows = rows.filter((l) => !/^PASS /.test(l));
+    need(rows.length >= want && badRows.length === 0,
+      `${name}: ${good}/${want} PASS${badRows.length ? `\n  ${badRows.join('\n  ')}` : rows.length < want ? `\n  (only ${rows.length} row lines — output truncated?)\n  ${(r.stdout || r.stderr || '').split('\n').slice(-6).join('\n  ')}` : ''}`);
+    return good;
+  };
+  const pass2 = subset('verify-edit cheap subset', ['verify-edit', '--only', 'env,edit-ops,gui-security,tools,docs'], 5, 20 * 60 * 1000);
   facts.push(`verify-edit cheap subset: ${pass2}/5 PASS`);
-
-  // 3. the math contract's cheap subset
-  const r3 = run(['verify-math', '--only', 'env,regress,typeset,claims,docs'], 25 * 60 * 1000);
-  const pass3 = (r3.stdout || '').split('\n').filter((l) => /^PASS /.test(l)).length;
-  need(r3.stdout && !/FAIL|ERR /m.test(r3.stdout.split('verify-math:')[0]), `verify-math cheap subset not green:\n${(r3.stdout || '').split('\n').filter((l) => !/^PASS/.test(l)).join(' | ')}`);
+  const pass3 = subset('verify-math cheap subset', ['verify-math', '--only', 'env,regress,typeset,claims,docs'], 5, 25 * 60 * 1000);
   facts.push(`verify-math cheap subset: ${pass3}/5 PASS`);
 
   function need(ok, what) { if (!ok) bad.push(what); }

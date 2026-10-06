@@ -37,7 +37,7 @@ const md5 = (f) => createHash('md5').update(readFileSync(f)).digest('hex');
 const DRAFTS = [
   { kind: 'motion', film: 'studio-reel', fmt: '9:16' },
   { kind: 'edit', film: 'demo-cut', fmt: '16:9' },
-  { kind: 'math', film: 'mathdemo', fmt: '16:9' },
+  { kind: 'math', film: 'mathdemo', fmt: '16:9', allFmts: true },   // math drafts render every format
 ];
 function draftFile(kind, film, fmt) {
   const out = join(ROOT, 'films', film, 'out');
@@ -99,7 +99,7 @@ function drafts(dir) {
   for (const d of DRAFTS) {
     // render fresh (the SAME command the user runs — no cache bypass; both runs of this script
     // go through identical code paths, which is exactly the claim under test)
-    sh(['render', d.film, '--draft', ...(d.kind === 'math' ? [] : ['--fmt', d.fmt])]);
+    sh(['render', d.film, '--draft', ...(d.allFmts ? [] : ['--fmt', d.fmt])]);
     const f = draftFile(d.kind, d.film, d.fmt);
     if (!f) throw new Error(`no draft for ${d.kind} (${d.film} ${d.fmt}) — render failed?`);
     out[d.kind] = { film: d.film, fmt: d.fmt, file: f.replace(ROOT + '/', ''),

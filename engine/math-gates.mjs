@@ -59,8 +59,11 @@ const parseJsonFrom = (s, tag = 'RESULT ') => {
   return line ? JSON.parse(line.slice(tag.length)) : null;
 };
 const parseList = (s) => JSON.parse(s.slice(s.indexOf('['), s.lastIndexOf(']') + 1));
-const fmtDirs = (root) => (existsSync(root) ? readdirSync(root, { withFileTypes: true })
-  .filter((e) => e.isDirectory() && !e.name.startsWith('.')).map((e) => e.name).sort() : []);
+// the formats that HAVE a records dir, as RAW format ids ('16:9'): the records dirs are named by
+// the slug (16x9, Windows-safe) but every gate compares against and prints the raw id — so resolve
+// the known formats' slugs instead of listing raw dir names (the naming migration made the two
+// differ, and fmts.includes(fmt0) silently broke: '16x9' vs '16:9').
+const fmtDirs = (root) => Object.keys(FORMATS).filter((f) => existsSync(join(root, fmtSlug(f)))).sort();
 // The narration's silent intervals (film seconds): the complement of the sentence spans, with the
 // head before the first sentence and an endless tail after the last. timing === null -> all silent.
 function silentIntervals(timing) {

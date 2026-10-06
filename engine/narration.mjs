@@ -27,7 +27,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync
 import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { runCapped } from './lib/capped.mjs';
-import { FILMS, readJson, writeJson } from './lib/film.mjs';
+import { FILMS, kindOf, readJson, writeJson } from './lib/film.mjs'
 import { pythonFor } from './doctor.mjs';
 import { normalize } from './audio.mjs';
 import { run, runBuf } from './lib/proc.mjs';
@@ -383,11 +383,13 @@ async function envelope(file) {
 }
 
 // -- the mix ------------------------------------------------------------------------------------
-export async function buildMix(key) {
+export async function buildMix(key, { sfx } = {}) {
   const dir = filmDir(key), cfg = readJson(join(dir, 'film.json'));
   const timing = readJson(timingPath(key), null);
   if (!timing) throw new Error(`films/${key}/timing.json is missing: run studio voice ${key} first`);
-  const target = cfg.mix?.lufs ?? -16;
+  // S3 (narration as a service): math films keep the narration-first -16 default (their existing
+  // mixes are byte-identical); every other kind takes the studio's standard -14.
+  const target = cfg.mix?.lufs ?? (kindOf(cfg) === 'math' ? -16 : -14);
   const narrEnd = timing.sentences.reduce((a, s) => Math.max(a, s.end), 0);
   let D = +cfg.duration || 0, warning = null;
   if (!D) D = narrEnd + 0.5;
@@ -443,9 +445,20 @@ export async function buildMix(key) {
         `[0:a]aresample=48000[a];[a][1:a]amix=inputs=2:normalize=0,atrim=0:${D},apad=whole_dur=${D}[m]`,
         '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', sum]);
     }
+    // the SFX stem (motion films' cues.json, synthesized by the caller): mixed at cfg.mix.sfx gain
+    // over whatever exists (narration + bed, or narration alone). Math films pass nothing (their
+    // path is byte-identical to before this parameter existed).
+    if (sfx && existsSync(sfx)) {
+      const g = cfg.mix?.sfx ?? 0.9;
+      const withSfx = join(dir, 'out', '.premix-sfx.wav');
+      await run('ffmpeg', ['-y', '-v', 'error', '-i', sum, '-i', sfx, '-filter_complex',
+        `[1:a]volume=${g}[s];[0:a][s]amix=inputs=2:normalize=0,atrim=0:${D},apad=whole_dur=${D}[m]`,
+        '-map', '[m]', '-ac', '2', '-c:a', 'pcm_f32le', withSfx]);
+      sum = withSfx;
+    }
     const r = await normalize(sum, file, target);
     return { file, lufs: r.lufs, truePeak: r.truePeak, duration: +D.toFixed(3), ...(bedFile ? { bed: bedFile } : {}), ...(warning ? { warning } : {}) };
-  } finally { rmSync(pre, { force: true }); rmSync(join(dir, 'out', '.premix.wav'), { force: true }); }
+  } finally { rmSync(pre, { force: true }); rmSync(join(dir, 'out', '.premix.wav'), { force: true }); rmSync(join(dir, 'out', '.premix-sfx.wav'), { force: true }); }
 }
 
 // voice cache entries (for the "one sentence re-voices alone" contract and `studio cache`)

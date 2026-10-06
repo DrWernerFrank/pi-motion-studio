@@ -37,6 +37,16 @@ export async function gate(key, opts = {}) { return gates(key, opts); }
 
 export async function sound(key) {
   const film = readFilm(key);
+  // S3 — narration as a service: a film with a script.md gets the narration pipeline (voice ->
+  // timing.json -> the narration bus + the synth bed ducked under it + SFX, at the film's mix.lufs;
+  // default -14, the studio standard). A film without a script keeps the classic synth path.
+  if (existsSync(join(film.dir, 'script.md'))) {
+    const N = await import('../../narration.mjs');
+    const v = await N.buildVoice(key); console.log(`voice: ${v.sentences.length} sentences, ${v.duration.toFixed(2)}s, timing ${v.timing}`);
+    const s = buildSfx(key); console.log(`${rel(s.file)} (${s.cues} cues)`);
+    const x = await N.buildMix(key, { sfx: s.file }); console.log(`${rel(x.file)}  ${x.lufs} LUFS, true peak ${x.truePeak} dBFS`);
+    return x;
+  }
   if (!existsSync(join(film.dir, 'beats.json'))) film.cfg.track ? await measureBeats(key) : gridBeats(key);
   const m = buildMusic(key); if (m.file) console.log(rel(m.file));
   const s = buildSfx(key); console.log(`${rel(s.file)} (${s.cues} cues)`);

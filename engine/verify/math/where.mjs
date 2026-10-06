@@ -156,7 +156,7 @@ export default async () => {
     // scene order + lengths straight from records/<fmt>/ (the render order: sorted scene files)
     const timing = readJson(join(dir, 'timing.json'));
     const sents = timing.sentences;
-    const ids = readdirSync(join(dir, 'records', fmt)).filter((f) => f.endsWith('-timeline.json'))
+    const ids = readdirSync(join(dir, 'records', fmt.replace(':', 'x'))).filter((f) => f.endsWith('-timeline.json'))
       .map((f) => f.replace(/-timeline\.json$/, '')).sort();
     let acc = 0;
     const scenes = ids.map((sid) => {

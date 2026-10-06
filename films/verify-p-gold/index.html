@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>film</title>
+<link rel="stylesheet" href="/engine/lib/fonts.css">
+</head>
+<body>
+<script type="module">
+// Skeleton only: replace the scenes with the shot list. Rules: AGENTS.md.
+// Every value (fonts, sizes, colors, feels) comes from design.json via D.
+import { film } from '/engine/lib/runtime.js';
+import { loadDesign } from '/engine/lib/design.js';
+import { spring, track, clamp, rrect, kineticLine, playScenes, pulse } from '/engine/lib/motion.js';
+
+let D, cfg;
+
+const scenes = [
+  { from: 0, to: 2.2, draw(ctx, lt, L) {
+      // A bar sweeps in on a snappy spring; the words rise on their own springs behind it.
+      const w = L.W * 0.62 * spring(lt, ...D.feel('ui'));
+      ctx.fillStyle = D.c.accent;
+      rrect(ctx, L.safe.x, L.cy - D.px('hero', L) * 0.95, w, D.px('hero', L) * 0.08, 4); ctx.fill();
+      D.type(ctx, 'hero', L);
+      kineticLine(ctx, 'Replace me.', L.safe.x, L.cy, lt - 0.15, { color: D.c.ink, feel: D.feel('type'), stagger: D.stagger });
+  } },
+  { from: 2.0, to: 4, draw(ctx, lt, L, p, t) {
+      const x = track(t, [[2, L.safe.x], [2.5, L.cx - L.u * 20], [3.0, L.safe.x + L.u * 30]], ...D.feel('containers'));
+      const s = 1 + 0.06 * pulse(t, cfg.beats || []);
+      ctx.save(); ctx.translate(x, L.cy + L.u * 20); ctx.scale(s, s);
+      ctx.fillStyle = D.c.surface; rrect(ctx, 0, 0, L.u * 40, L.u * 24, L.u * 3); ctx.fill();
+      ctx.restore();
+  } },
+];
+
+film({
+  async setup(L, c) { cfg = c; D = await loadDesign(); },
+  draw(ctx, t, L) {
+    ctx.fillStyle = D.c.bg; ctx.fillRect(0, 0, L.W, L.H);
+    playScenes(scenes, ctx, t, L);
+  },
+});
+</script>
+</body>
+</html>

@@ -30,15 +30,18 @@ export default async (ctx) => {
   }
   facts.push(`kinds behind the registry: ${found.join(', ')} (required: ${REQUIRED.join(', ')})`);
 
-  // 2. the grep gate: no raw kind check outside engine/kinds/ (+ lib/film.mjs, kindOf/requireKind's home)
-  const grep = (dir, args) => { const r = spawnSync('grep', args, { cwd: ROOT, encoding: 'utf8' }); return (r.stdout || '').split('\n').filter(Boolean); };
-  const mjs = grep('', ['-rl', '--include=*.mjs', '-e', String.raw`\.kind[ !=]*===`, '-e', String.raw`\.kind !==`, 'engine', 'studio-gui']);
-  const offenders = mjs.filter((f) => !f.startsWith('engine/kinds/') && f !== 'engine/lib/film.mjs' && !f.startsWith('engine/verify/'));
-  need(!offenders.length, `raw cfg.kind checks outside the registry: ${offenders.join(', ')}`);
-  const ts = grep('', ['-rl', '--include=*.ts', '-e', String.raw`\.kind[ !=]*===`, '-e', String.raw`\.kind !==`, join(ROOT, '.pi', 'extensions')]);
-  need(!ts.length, `raw cfg.kind checks in the tools: ${ts.join(', ')}`);
-  const allowed = mjs.filter((f) => f.startsWith('engine/kinds/') || f === 'engine/lib/film.mjs');
-  facts.push(`grep gate: 0 raw kind checks outside the allowed homes (${allowed.length} allowed: ${allowed.map((f) => f.replace('engine/', '')).join(', ')})`);
+  // 2. the grep gate: no raw FILM-KIND check outside engine/kinds/ (+ lib/film.mjs, kindOf/requireKind's
+  //    home). The pattern targets the film-kind concept only — `cfg.kind ===` reads of the film
+  //    config, and comparisons against the film-kind literals (math|edit|motion|project) — so the
+  //    dozens of legitimate track/clip/source/trace `.kind === 'video'` reads do not trip it.
+  const grep = (args) => { const r = spawnSync('grep', args, { cwd: ROOT, encoding: 'utf8' }); return (r.stdout || '').split('\n').filter(Boolean); };
+  const FILM_KIND = ['-e', String.raw`cfg\s*\??\.\s*kind\s*[!=]==`, '-e', String.raw`\.kind\s*[!=]==\s*['"](?:math|edit|motion|project)['"]`];
+  const mjs = grep(['-rl', '--include=*.mjs', ...FILM_KIND, 'engine', 'studio-gui']);
+  const offenders = mjs.filter((f) => !f.startsWith('engine/kinds/') && f !== 'engine/lib/film.mjs');
+  need(!offenders.length, `raw film-kind checks outside the registry: ${offenders.join(', ')}`);
+  const ts = grep(['-rl', '--include=*.ts', ...FILM_KIND, join(ROOT, '.pi', 'extensions')]);
+  need(!ts.length, `raw film-kind checks in the tools: ${ts.join(', ')}`);
+  facts.push('grep gate: 0 raw film-kind checks outside engine/kinds/ + lib/film.mjs (track/clip/source kinds are a different concept and stay free)');
 
   // 3. a kind module missing a required hook fails loudly, naming kind and hook (seeded fault,
   //    in a temp dir inside kinds/ so the registry's scan finds it; always removed)
@@ -48,7 +51,7 @@ export default async (ctx) => {
   try {
     writeFileSync(join(brokenDir, 'index.mjs'), '// a seeded fault: no hooks at all\nexport const DOC = "broken on purpose";\n');
     let loud = null;
-    try { (await import('../../kinds/registry.mjs?seed' + Date.now())).allKinds(); }
+    try { await (await import('../../kinds/registry.mjs?seed' + Date.now())).allKinds(); }
     catch (e) { loud = String(e.message || e); }
     need(/missing required hook\(s\): create/.test(loud ?? ''), `a hookless kind module did not fail loudly (got: ${loud})`);
     need(/verify-broken/.test(loud ?? ''), 'the loud failure does not name the kind');

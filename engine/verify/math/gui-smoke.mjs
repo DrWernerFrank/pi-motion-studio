@@ -93,7 +93,7 @@ async function run({ bad, facts, need, shots, refs }) {
     }
   }
   const lints = await Promise.all(['16:9', '9:16'].map((f) => runCapped(pythonFor('manim'),
-    ['-m', 'studio_manim.lint', join(FILMS, KEY, 'records', f), join(FILMS, KEY, 'design.json'), f],
+    ['-m', 'studio_manim.lint', join(FILMS, KEY, 'records', f.replace(':', 'x')), join(FILMS, KEY, 'design.json'), f],
     { cwd: ROOT, memoryMb: 512, timeoutS: 30, env: { PYTHONPATH: MANIM }, label: `smoke lint ${f}` })));
   const lintTruth = {};
   ['16:9', '9:16'].forEach((f, i) => { lintTruth[f] = JSON.parse((lints[i].out || '').trim()).length; });

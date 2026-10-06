@@ -23,7 +23,7 @@ export const VERIFY_CACHE = join(CACHE, 'verify-produce');
 export const CHECKS = [
   ['env', 'P0', 'doctor reports pi on PATH (version), the capability readiness table, the runner prerequisites; each missing item names its fix'],
   ['regress', 'P0', 'studio regress passes and both cheap subsets (verify-edit env,edit-ops,gui-security,tools,docs / verify-math env,regress,typeset,claims,docs) pass'],
-  ['registry', 'P1', 'motion, edit, math and project are registry modules; no raw cfg.kind=== outside engine/kinds/; golden CLI transcripts + draft frame md5 equal the P0 baselines; a missing required hook fails loudly naming it; verify-edit docs seeded-fault still fails'],
+  ['registry', 'P1', 'motion, edit, math and project are registry modules; no raw FILM-KIND check outside engine/kinds/ (kindOf/requireKind are the sanctioned helpers); golden CLI transcripts + draft md5 equal the committed baseline; a missing required hook fails loudly naming it; verify-edit docs seeded-fault still fails'],
   ['naming', 'P1', 'no tracked path and no films/ path with Windows-reserved chars; math outputs final-16x9 style; the three math demos migrated, re-render identical md5; media/ + x-*.json untracked and ignored'],
   ['capabilities', 'P1', 'studio capabilities --json validates against the schema; readiness from real probes; every invoke command exists in studio help; the three techniques + voice/asr/captions/mix/capture/ingest/assemble present; a malformed entry rejected with its path'],
   ['services', 'P2', 'a motion film with a script.md gets timing.json and a narration bus at mix.lufs; the math path byte-identical to before; captions/mix/capture callable from any kind hooks'],
