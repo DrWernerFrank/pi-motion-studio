@@ -88,6 +88,9 @@ const HELP = `studio <command> <film> [options]
                          the technique/service catalog with readiness from real probes (a missing
                          dependency reports not-ready and the fix); --doc writes the generated
                          docs/produce/CAPABILITIES.md
+  brief-lint "<request>" [--file <path>] [--film <key>]
+                         extract the request's numbers, formats, languages and named assets (the
+                         requirement seeds); --film lints them against that project's ledger
   project new <key> "<request>" [--formats 16:9,9:16] [--file <input>…]
                          create a project film: the request verbatim in brief.md + the ledgers
   project list           every project: phase, parts, finals
@@ -482,6 +485,24 @@ async function main() {
       const missing = await C.invokeCoverage();
       if (missing.length) { console.log(`
 !! invoke commands missing from studio help:`); for (const m of missing) console.log(`   ${m}`); process.exitCode = 1; }
+      break;
+    }
+    case 'brief-lint': {
+      const B = await import('./produce/brief-lint.mjs');
+      const fileArg = opt('file');
+      const request = fileArg && fileArg !== true ? B.requestOf(String(fileArg))
+        : argv.slice(1).filter((a) => !a.startsWith('--') && a !== fileArg).join(' ');
+      if (!request) throw new Error('studio brief-lint "<request>" | --file <path> [--film <key>]');
+      const ex = B.extract(request);
+      console.log(`durations: ${ex.durations.join(', ') || '-'}\nformats: ${ex.formats.join(', ') || '-'}\nlanguages: ${ex.languages.join(', ') || '-'}\nassets: ${ex.assets.join(', ') || '-'}\ncounts: ${ex.counts.join(', ') || '-'}`);
+      const film = opt('film');
+      if (film && film !== true) {
+        const ledger = readJson(join(FILMS, String(film), 'requirements.json'), []);
+        const r = B.lint(request, ledger);
+        if (!r.unmapped.length) console.log(`lint: every ask is mapped by films/${film}/requirements.json`);
+        for (const u of r.unmapped) console.log(`  ✗ ${u.kind} "${u.value}" — ${u.fix}`);
+        process.exitCode = r.unmapped.length ? 1 : 0;
+      }
       break;
     }
     case 'migrate-names': {

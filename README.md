@@ -120,9 +120,10 @@ Or unattended: `./studio make "<request>"` creates the project and runs the prod
 (plan → build → assemble → verify → ship → report) until every requirement is green. Or the
 "Make" box in the Studio GUI. The request becomes a **project film** (`studio project new <key>
 "<request>"`): `brief.md` (the request verbatim + the interpretation), `plan.json` (a technique
-per part, with alternatives and reasons), `requirements.json` (every explicit ask — a duration, a
+per part, with alternatives and reasons), the **requirements ledger** `requirements.json` (every explicit ask — a duration, a
 format, a language, a named file — verified by a measured verifier: ffprobe'd duration, ASR'd
-language, the license of every asset), `facts.json` (a source snapshot + a quote for every
+language, the license of every asset; `studio brief-lint` extracts the asks from the request so
+none is missed), `facts.json` (a source snapshot + a quote for every
 number), `assets.json`, `budget.json` (zero spend by default), one `design.json` for the whole
 piece, and children — real films of any kind whose `film.json` carries `"parent"`. Revisions work
 the same way ("shorter intro, calmer music" appends requirements and rebuilds only the parts they

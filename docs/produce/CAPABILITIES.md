@@ -89,6 +89,16 @@ page is generated from the same source as `studio capabilities` — edit the cat
 **Gates:** lint, determinism, dead-time, novelty, hook, blank-frames, loop-seam, loudness, cue-sync, deliverable.
 **Skill:** `.pi/skills/motion-reel/SKILL.md` · **Critic:** `.pi/agents/motion-critic.md`
 
+## project — technique
+
+**Makes:** one piece from a plain-words request: any technique, any mix, assembled and verified against the ask.
+**Strengths:** requirements ledger with measured verifiers; facts + assets + budget ledgers; resume from state.json; revisions rebuild only what they touch.
+**Weak:** an extra layer over the techniques (worth it only when the ask is more than one technique can carry).
+**Typical:** 5-300 s, 16:9 + 9:16 + 1:1 + 4:5
+**Invoke:** `studio project new <key> "<request>"` · `studio project plan <key> --check` · `studio project rebuild <key>` · `studio project verify <key>` · `studio project ship <key>`
+**Gates:** project verify: the plan validates, every requirement green, child gates PASS, assets/facts/credits clean, budget held.
+**Skill:** `.pi/skills/produce/SKILL.md` · **Critic:** `.pi/agents/producer-critic.md`
+
 ## voice — service
 
 **Makes:** narration from a script (deterministic local TTS, native word timings).
