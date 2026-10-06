@@ -18,7 +18,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W1-plan | plan validator + brief-lint checks | engine/produce/{plan,brief-lint}.mjs, engine/verify/produce/plan.mjs | — | `verify-produce --only plan` | glm-worker | **DONE 1057360** |
 | W1-ledger | ledger + verifier library check | engine/produce/{ledger,verify-lib,asr-probe}.mjs, engine/verify/produce/ledger.mjs | — | `--only ledger` | glm-worker | **DONE 0d94d18** (died post-completion; work was on disk, lead verified) |
 | W1-fab | facts + assets + budget checks (+ license fixtures) | engine/produce/{facts,assets,budget,fetch}.mjs, engine/produce/fixtures/**, engine/verify/produce/{facts,assets,budget}.mjs | — | `--only facts,assets,budget` | glm-worker | **DONE 951445e** |
-| W1-svc | narration service check (motion+script.md) | engine/verify/produce/services.mjs (reports engine needs to lead) | — | `--only services` | glm-worker | spawned |
+| W1-svc | narration service check (motion+script.md) | engine/verify/produce/services.mjs (reports engine needs to lead) | — | `--only services` | glm-worker | **DONE 1fc1249** |
 | W2-proj | project lifecycle: resume, where-chain, revision, child-parent; single-technique wrappers | engine/kinds/project/index.mjs, engine/produce/ship.mjs, engine/verify/produce/{project,single}.mjs | W1 | `--only project,single` | glm-worker | todo |
 | W2-asm | spike S2 + assembly (edit-film assembler, design inheritance, PSNR/geometry) + ADR-003 | engine/produce/assemble.mjs, engine/verify/produce/assemble.mjs, docs/produce/ADR-003-*.md | W2-proj | `--only assemble` | glm-worker | todo |
 | W2-skill | produce skill + AGENTS/README sections (lead integrates) + producer-critic + checks | .pi/skills/produce/**, .pi/agents/producer-critic.md, engine/verify/produce/{skill,critic}.mjs | — | `--only skill,critic` | glm-worker | todo |
@@ -57,6 +57,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `registry` — kinds are modules behind one registry; no raw `cfg.kind ===` outside `engine/kinds/`; golden transcripts + frame md5 == P0 baselines; missing hook fails loudly; seeded-fault docs check (check file written, re-run pending)
 - [x] `naming` — 0 Windows-reserved chars in 684 tracked paths + under films/; math outputs `16x9`; 6/6 demo finals re-render byte-identical to the frozen ledger + audio-pair consistency; `media/` + `x-*.json` untracked — P1 PASS
 - [x] `capabilities` — `studio capabilities --json` validates (10 entries); readiness from real probes; all 28 invoke commands in help; malformed entries rejected with their path — P1 PASS
+- [x] `services` — W1-svc: motion+script.md -> timing.json + narration bus at -14 (math byte-identical, captions kind-agnostic) — DONE
 - [ ] `services` — motion film + `script.md` → `timing.json` + narration bus at `mix.lufs`; math path byte-identical; captions/mix/capture callable from any kind's hooks
 - [x] `plan` — W1-plan: 24 seeded rejects + valid accepted + over-scope-as-error + probes demanded + brief-lint 10/10 — DONE
 - [ ] `plan` — the validator rejects bad plans (goal, assumptions, capability, acceptance, reasons, <2 alternatives, budget, deliverables); accepts a valid one; flags over-scoping + unknown capabilities; risky choice needs saved probe sheets
@@ -92,5 +93,5 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] Full `./studio verify-math` in the background from the final tree (27 checks)
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
-Now: wave 1 integrated — plan/ledger/facts/assets/budget all green and committed (1057360, 0d94d18, 951445e). W1-svc (services) spawned. The old in-flight registry run is stale (baseline re-captured at P2 commit 938f8de); re-run `--only registry` after W1-svc finishes to confirm.
-Next: spawn W2-proj, W2-skill, W2-make as verify slots free; W1-svc's services check on the lead's motion narration path.
+Now: wave 1 COMPLETE (plan 1057360, ledger 0d94d18, facts+assets+budget 951445e, services 1fc1249 — all lead-verified). In flight: W2-proj (project+single checks), W2-skill (skill+critic). The lead found + fixed a real engine bug meanwhile: the edit mix was nondeterministic (sidechaincompress + multi filter threads -> 3 runs 3 md5s; -filter_threads 1 -> identical; D-007, b275f14). AGENTS.md Start here + README Producer written (1cc3184).
+Next: when W2-proj/W2-skill land, verify + commit them; spawn W2-make (runner+make check) and W2-tools in the freed slots; then the stale `--only registry` re-run against the post-D-007 baseline.
