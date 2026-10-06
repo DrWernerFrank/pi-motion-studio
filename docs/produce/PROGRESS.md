@@ -28,8 +28,8 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W3-grow | capability new/check scaffold + growth check | engine/produce/growth.mjs, templates/capability/**, engine/verify/produce/growth.mjs | K1/K2 | `--only growth` | glm-worker | **DONE 9843c1d** (w3-grow2, verified) |
 | W3-bat | the 12-brief battery: fresh critics write references, then plans + check | engine/produce/battery/**, engine/verify/produce/battery.mjs | W2-skill | `--only battery` | critics(fresh)+glm | todo |
 | W4-err | the failure matrix + errors check | engine/verify/produce/errors.mjs (+ small loud-failure fixes via lead) | all | `--only errors` | glm-worker | todo |
-| W4-docs | docs check (help completeness, Producer sections) | engine/verify/produce/docs.mjs (README/AGENTS = lead) | W2 | `--only docs` | glm-worker | todo |
-| W4-hyg | hygiene check + cache gc for the new dirs | engine/verify/produce/hygiene.mjs (cache.mjs = lead) | W1+ | `--only hygiene` | glm-worker | todo |
+| W4-docs | docs check (help completeness, Producer sections) | engine/verify/produce/docs.mjs (README/AGENTS = lead) | W2 | `--only docs` | lead | **DONE except ADR-003** (00dd1c8; closes when w2-asm lands) |
+| W4-hyg | hygiene check + cache gc for the new dirs | engine/verify/produce/hygiene.mjs (cache.mjs = lead) | W1+ | `--only hygiene` | lead | **DONE 00dd1c8** (found + fixed the gc fixture-deletion bug, the D-026 class's 4th path) |
 | W5-demoA | demo A `composite`: clip + Pythagoras + end card, 50-70s, 16:9+9:16 | films/composite*/** | W2-asm, W2-skill | demos+review rows green | producer-role | todo |
 | W5-demoB | demo B `launch-teaser`: 25s vertical from GUI captures | films/launch-teaser*/** | W2 | same | producer-role | todo |
 | W5-demoC | demo C `gps`: 60s narrated GPS explainer, sourced | films/gps*/** | W2 | same | producer-role | todo |
@@ -90,7 +90,9 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `growth` — `capability new` scaffolds; `capability check` refuses until parts exist, accepts when they do; appears in `capabilities` + plan menu; demo D's capability passes; removing a capability keeps the registry consistent
 - [ ] `battery` — the 12 stored plans validate; >= 90% of each independent reference's requirements covered; capability sets in the reference's acceptable sets; missing inputs flagged; alternatives stated; no invented inputs
 - [ ] `errors` — the P8 matrix fails loud with next steps; prompt injection changes nothing + noted in log.md; killed run + two simultaneous runs handled; partial output never promoted
+- [x] `docs` — the lead: help/Start-here/Producer/CAPABILITIES-current/THIRD_PARTY + the older docs checks green (ADR-003 leg closes with w2-asm)
 - [ ] `docs` — `studio help` lists every command; README + AGENTS.md "Start here" + "## Producer"; skill, critic, CAPABILITIES.md, ADR-001..004, THIRD_PARTY.md exist; older doc checks still pass
+- [x] `hygiene` — the lead: no litter/strays/protected-edits, scratch swept, gc lists the new caches + spares the fixture, 0 credential leaks in 76 files — DONE
 - [ ] `hygiene` — after a full run no `verify-*` films, no stray root files, git status only intended, scratch empty, cache gc frees the new caches, no credential ever printed
 - [ ] `demos` — 4 demo projects: finals in the asked formats, ledgers green, gates PASS, credits + report, facts sourced, assets licensed, spend zero
 - [ ] `review` — each demo: >= 3 rounds, last by producer-critic, every score >= 8, fidelity = 10, sheets exist
@@ -103,10 +105,10 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: 23 of 28 checks green (all waves 1-3 + the P1 five). Two real bugs found and fixed by the lead's
-GUI finish: detail() spread a Promise since the registry migration (every film's detail lost its
-summary fields), and outFiles crashed the SSE watcher on transient files. Remaining: assemble (the
-composite fixture), battery (12 briefs + fresh critics), errors/docs/hygiene, the 4 demos + review,
-then the full cold verify + FINAL_REPORT.
-Next: dispatch W2-asm (assemble) + W4-err (the failure matrix) now; W3-bat's references need FRESH
-critic agents (a different model than the builders) — spawn when assemble's slot frees.
+Now: 24 of 28 green (docs' last leg waits on ADR-003). In flight: w2-asm (assemble+S2+ADR-003),
+w4-err (the 13-case failure matrix), w3-bat-ref1+ref2 (the 12 independent battery references).
+The lead's own fixes this round: brief-lint finally implemented (help-sketch since P0), cache gc's
+fixture-deletion bug (D-026's 4th path), the produce caches in gc, docs+hygiene checks.
+Next: when the references land, the LEAD writes the 12 battery plans (plan-only, per the mission)
+and dispatches the battery check; then the demos (A composite — needs assemble; B teaser; C gps;
+D cities on the grown chart capability) with 3+ review rounds each, the last by producer-critic.
