@@ -1,8 +1,41 @@
 # Producer mission progress
 
+**Working mode: LEAD + SUBAGENTS (D-006).** The lead (this agent) decides, freezes interfaces,
+integrates shared files (cli.mjs, verify-produce.mjs, index.ts BY_FILE, the registry, README/
+AGENTS.md), runs verifiers, commits everything, keeps PROGRESS/DECISIONS; subagents build modules,
+checks, GUI, skill, docs, fixtures and demos against `docs/produce/SCHEMAS.md`. Max 3 subagents at
+once; spawn only with >= 2 GB free (free -m); one `verify-produce --only <id>` at a time (retry 60s);
+nobody runs --clean/full verifies while subagents are active; subagents never commit or touch git.
+
 The mission: `templates/prompts/producer.md` (§7 = the checks, §5 = the build order). Working rules:
 DECISIONS.md logs every judgment; after any restart read this file first and continue from the
 first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
+
+## Work plan (the lead's dispatch table)
+
+| id | what | files owned (disjoint) | depends | acceptance | agent/model | status |
+|---|---|---|---|---|---|---|
+| W1-plan | plan validator + brief-lint checks | engine/produce/{plan,brief-lint}.mjs, engine/verify/produce/plan.mjs | — | `verify-produce --only plan` | glm-worker | **DONE 1057360** |
+| W1-ledger | ledger + verifier library check | engine/produce/{ledger,verify-lib,asr-probe}.mjs, engine/verify/produce/ledger.mjs | — | `--only ledger` | glm-worker | **DONE 0d94d18** (died post-completion; work was on disk, lead verified) |
+| W1-fab | facts + assets + budget checks (+ license fixtures) | engine/produce/{facts,assets,budget,fetch}.mjs, engine/produce/fixtures/**, engine/verify/produce/{facts,assets,budget}.mjs | — | `--only facts,assets,budget` | glm-worker | **DONE 951445e** |
+| W1-svc | narration service check (motion+script.md) | engine/verify/produce/services.mjs (reports engine needs to lead) | — | `--only services` | glm-worker | spawned |
+| W2-proj | project lifecycle: resume, where-chain, revision, child-parent; single-technique wrappers | engine/kinds/project/index.mjs, engine/produce/ship.mjs, engine/verify/produce/{project,single}.mjs | W1 | `--only project,single` | glm-worker | todo |
+| W2-asm | spike S2 + assembly (edit-film assembler, design inheritance, PSNR/geometry) + ADR-003 | engine/produce/assemble.mjs, engine/verify/produce/assemble.mjs, docs/produce/ADR-003-*.md | W2-proj | `--only assemble` | glm-worker | todo |
+| W2-skill | produce skill + AGENTS/README sections (lead integrates) + producer-critic + checks | .pi/skills/produce/**, .pi/agents/producer-critic.md, engine/verify/produce/{skill,critic}.mjs | — | `--only skill,critic` | glm-worker | todo |
+| W2-make | spike S4 + runner + studio make + fake-pi + make check + ADR-004 | engine/produce/runner.mjs, engine/verify/produce/make.mjs, docs/produce/ADR-004-*.md (cli wiring = lead) | SCHEMAS runner | `--only make` | glm-worker | todo |
+| W2-tools | project_* tools + tools check | .pi/extensions/motion-tools/project-tools.ts (BY_FILE = lead) | W2-proj | `--only tools` | glm-worker | todo |
+| W3-gui | Make dialog + public/project.js + server endpoints + gui-smoke/gui-security | studio-gui/**, engine/verify/produce/{gui-smoke,gui-security}.mjs | W2-make (API frozen) | `--only gui-smoke,gui-security` | glm-worker | todo |
+| W3-grow | capability new/check scaffold + growth check | engine/produce/growth.mjs, templates/capability/**, engine/verify/produce/growth.mjs | K1/K2 | `--only growth` | glm-worker | todo |
+| W3-bat | the 12-brief battery: fresh critics write references, then plans + check | engine/produce/battery/**, engine/verify/produce/battery.mjs | W2-skill | `--only battery` | critics(fresh)+glm | todo |
+| W4-err | the failure matrix + errors check | engine/verify/produce/errors.mjs (+ small loud-failure fixes via lead) | all | `--only errors` | glm-worker | todo |
+| W4-docs | docs check (help completeness, Producer sections) | engine/verify/produce/docs.mjs (README/AGENTS = lead) | W2 | `--only docs` | glm-worker | todo |
+| W4-hyg | hygiene check + cache gc for the new dirs | engine/verify/produce/hygiene.mjs (cache.mjs = lead) | W1+ | `--only hygiene` | glm-worker | todo |
+| W5-demoA | demo A `composite`: clip + Pythagoras + end card, 50-70s, 16:9+9:16 | films/composite*/** | W2-asm, W2-skill | demos+review rows green | producer-role | todo |
+| W5-demoB | demo B `launch-teaser`: 25s vertical from GUI captures | films/launch-teaser*/** | W2 | same | producer-role | todo |
+| W5-demoC | demo C `gps`: 60s narrated GPS explainer, sourced | films/gps*/** | W2 | same | producer-role | todo |
+| W5-demoD | demo D `cities`: 30s animated top-10 cities chart (+ the grown capability) | films/cities*/**, engine/kinds/<chart-kind>/ (with lead) | W3-grow | same | producer-role | todo |
+| W5-rev | review check over the demos (3+ rounds, critic last, 8+, fidelity 10) | engine/verify/produce/review.mjs | W5 demos | `--only review` | glm-worker | todo |
+| lead | full verify-produce from cold cache; full verify-edit + verify-math (background); FINAL_REPORT | docs/produce/FINAL_REPORT.md | all | `pass: true` x3 | lead | todo |
 
 ## Phases
 
@@ -25,10 +58,15 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [x] `naming` — 0 Windows-reserved chars in 684 tracked paths + under films/; math outputs `16x9`; 6/6 demo finals re-render byte-identical to the frozen ledger + audio-pair consistency; `media/` + `x-*.json` untracked — P1 PASS
 - [x] `capabilities` — `studio capabilities --json` validates (10 entries); readiness from real probes; all 28 invoke commands in help; malformed entries rejected with their path — P1 PASS
 - [ ] `services` — motion film + `script.md` → `timing.json` + narration bus at `mix.lufs`; math path byte-identical; captions/mix/capture callable from any kind's hooks
+- [x] `plan` — W1-plan: 24 seeded rejects + valid accepted + over-scope-as-error + probes demanded + brief-lint 10/10 — DONE
 - [ ] `plan` — the validator rejects bad plans (goal, assumptions, capability, acceptance, reasons, <2 alternatives, budget, deliverables); accepts a valid one; flags over-scoping + unknown capabilities; risky choice needs saved probe sheets
+- [x] `ledger` — W1-ledger: 10/10 verifiers good+bad, subjective cannot-pass/can-pass, waiver rules, brief-lint 25 asks — DONE
 - [ ] `ledger` — every verifier passes good media / fails bad media with a message; measurable w/o verifier fails loudly; subjective w/o critic evidence cannot pass; brief-lint flags all numbers/formats/languages/named assets of 10 seeded requests; a non-human waiver refused
+- [x] `facts` — W1-fab: offline rules all five legs — DONE
 - [ ] `facts` — quote-in-snapshot passes; missing quote/snapshot, hedged, unsourced handled by rule; verification offline
+- [x] `assets` — W1-fab: 5 license fixtures parsed, pins hold, credits, unlicensed blocks ship — DONE
 - [ ] `assets` — unlicensed asset blocks ship; license parsing (PD/CC0/CC-BY) from recorded fixtures; credits list every attributed asset; sha256 pins hold
+- [x] `budget` — W1-fab: disabled-by-default, usd+minutes stops, nothing real called — DONE
 - [ ] `budget` — no key / no STUDIO_BUDGET_USD → provider disabled and never called; both → called + logged; usd hard stop + minutes soft/hard stops fire; nothing real ever called
 - [ ] `project` — `studio project new/status/list/plan/verify/rebuild/ship/where`; killed run resumes from state.json; note chains through segment to child `where`; revision appends requirements + rebuilds only touched parts; a child lists its parent
 - [ ] `single` — projects wrapping one math / one motion / one edit film ship with the child's final unchanged; `project verify` passes
@@ -54,5 +92,5 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] Full `./studio verify-math` in the background from the final tree (27 checks)
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
-Now: P1 — registry + catalog + naming done and green (env/naming/capabilities PASS); the registry check re-runs after the compare() fix; then commit P1 and tag slice-0.
-Next: P2 (the project kind, plan, ledger, facts, assets, budget, narration service).
+Now: wave 1 integrated — plan/ledger/facts/assets/budget all green and committed (1057360, 0d94d18, 951445e). W1-svc (services) spawned. The old in-flight registry run is stale (baseline re-captured at P2 commit 938f8de); re-run `--only registry` after W1-svc finishes to confirm.
+Next: spawn W2-proj, W2-skill, W2-make as verify slots free; W1-svc's services check on the lead's motion narration path.
