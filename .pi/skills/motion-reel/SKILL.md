@@ -1,10 +1,9 @@
 ---
-description: 'Make a motion graphics video rendered from code: showreel, product/launch
-  reel, motion ad, animated explainer, UI-morph loop, kinetic type piece (roughly
-  5-60 s). Use whenever the user asks for a video, reel, launch film, promo, ad, animation
-  or "motion design" in this studio. Runs intake, brand/reference capture, design
-  system, beat-grid shot list, seek(t) animation, synthesized sound, a critique loop
-  on its own frames, and multi-format delivery.'
+description: 'Defer to the produce skill for any new piece; use this when the human names /skill:motion-reel
+  or the ask is a code-drawn motion graphics video: showreel, product/launch reel, motion ad,
+  animated explainer, UI-morph loop, kinetic type piece (roughly 5-60 s), rendered from code.
+  Runs intake, brand/reference capture, design system, beat-grid shot list, seek(t) animation,
+  synthesized sound, a critique loop on its own frames, and multi-format delivery.'
 name: motion-reel
 ---
 
