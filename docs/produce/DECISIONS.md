@@ -18,3 +18,36 @@ the only thing that writes `"pass": true`, one lock (`produce-verify.lock`), tem
 swept at end-of-run with the mtime + git-tracked guards (the third-sweep rule, math D-029/D-026).
 `regress` runs before every check that creates films (the spawned sweeps). Slow set is a first guess
 (marked per check), frozen with measured runtimes later.
+
+**D-003 2026-10-06 P1 — the naming migration is render-identical; one pre-migration file was stale.**
+`studio migrate-names --all` renamed 29 derived paths (math films' `draft-16:9.mp4` → `draft-16x9.mp4`,
+`records/16:9/` → `records/16x9/`, handoffs, the sheet paths inside reviews.json; tracked ones via
+`git mv`, so history follows) plus the 262 tracked lint-fixture paths; `media/` and `x-*.json` untracked
++ ignored (173 + 3 files kept on disk). Zero raw-format path constructors remain (every site goes
+through `fmtSlug`; the format IDS stay `16:9`). Proof: pre-migration final md5s were recorded
+(`baseline/math-names-pre.md5`) before any rename; fresh re-renders reproduce 5/6 byte-identical.
+The 6th — odd-squares `final-9:16` — was STALE ON DISK, not changed by the migration: its last review
+(Round 22) was 13:40 but its mix/bed/timing were rebuilt at 16:14 by the math mission's final verify
+run, and the file was never re-rendered after that, so it muxed an earlier audio state. Evidence the
+fresh render is the correct one: the current pair is internally consistent (both formats mux the same
+mix — byte-identical audio streams, `ffmpeg -map 0:a -f md5`), and a second re-render reproduces
+`a06b4b79` exactly. Consequence: the naming check compares against a FROZEN post-migration ledger
+(`baseline/math-names.md5`) and asserts re-render stability + audio-pair consistency — the durable
+contract — rather than the one-off pre-migration comparison.
+
+**D-004 2026-10-06 P1 — the registry's shape (ADR-001) and the two migration surprises.**
+`engine/kinds/{motion,edit,math}/index.mjs` behind `engine/kinds/registry.mjs`: REQUIRED hooks are
+own exports (a kind that inherits motion's render/look/gate/ship RE-EXPORTS them — the inheritance is
+declared, not silent; the first load of the edit kind failed the validator exactly as designed and the
+re-export is the fix), optional hooks fall back to motion's (the default kind: a film.json without
+"kind" IS a motion film). `kindOf`/`requireKind` in lib/film.mjs are the only sanctioned raw readers
+(the grep gate allows engine/kinds/** + that one file); every dispatch site (cli 8, render, stills,
+ingest, server 2, math.mjs's guard, math-tools.ts's guard) now goes through the registry or those
+helpers. `pickTimes`/`projectFps` became async (their kind hooks load modules) — no caller needed
+them synchronously. Surprises: (1) `execFileSync().status` does not exist — execFileSync returns
+stdout, so "is this path tracked/ignored" must use spawnSync or a try/catch (bit twice: naming.mjs's
+tracked() and the naming check's gitIgnored); (2) the concurrent-render race: two renders of the same
+film delete each other's scratch work dir mid-manim (FileNotFoundError from pathlib.cwd) — one render
+at a time is a machine rule, not a suggestion (glm-worker's brief already says so).
+Golden proof: `engine/produce/baseline.mjs --compare` → "baseline: identical" (transcripts + drafts +
+regress; only wall-clock `<n>s` tokens normalized).

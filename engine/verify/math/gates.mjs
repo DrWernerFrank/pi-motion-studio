@@ -126,7 +126,7 @@ export default async (ctx = {}) => {
 
     // ---- 2a. overlap: a text bbox moved onto another text -> the LAYOUT gate --------------------
     {
-      const layout = join(dir, 'records', '16:9', 's01_hook-layout.json');
+      const layout = join(dir, 'records', '16x9', 's01_hook-layout.json');
       const pristine = readFileSync(layout, 'utf8');
       const frames = JSON.parse(pristine);
       const fi = frames.findIndex((f) => (f.objects || []).filter((o) => o.text && o.bbox && o.alive !== false).length >= 2);
@@ -152,7 +152,7 @@ export default async (ctx = {}) => {
 
     // ---- 2b. a false claim: ok:true -> ok:false -> the CLAIMS gate ------------------------------
     {
-      const claims = join(dir, 'records', '16:9', 's01_hook-claims.json');
+      const claims = join(dir, 'records', '16x9', 's01_hook-claims.json');
       const pristine = readFileSync(claims, 'utf8');
       const led = JSON.parse(pristine);
       if (led[0]?.ok !== true) bad.push(`false-claim seed: the pristine first entry is ok=${led[0]?.ok}, nothing to flip`);

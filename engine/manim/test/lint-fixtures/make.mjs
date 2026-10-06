@@ -115,7 +115,7 @@ for (const c of cases) {
   const variants = c.variants.map((v) => {
     fid = 0;
     const frames = v.frames.map(([t, objs]) => frame(t, objs));
-    const dir = join(HERE, c.name, 'records', v.fmt);
+    const dir = join(HERE, c.name, 'records', v.fmt.replace(':', 'x'));   // Windows-safe dir names (16x9)
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 's01-layout.json'), JSON.stringify(frames, null, 1) + '\n');
     const trace = frames.map((f, i) => ({ kind: 'animation', t: f.t, i: i + 1, scene: 's01', sentence: null,

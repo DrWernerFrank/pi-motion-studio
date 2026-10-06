@@ -24,6 +24,19 @@ export function readFilm(key) {
 }
 
 export const readJson = (p, d = null) => { try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return d; } };
+
+// The ONE place outside engine/kinds/ that reads a film's kind (the registry and its grep gate
+// allow exactly these two paths). A film.json without a "kind" field is a motion film — the
+// default kind every other kind falls back to (ADR-001).
+export const kindOf = (cfg) => cfg?.kind ?? 'motion';
+
+/** The loud precondition of a kind-specific engine (math.mjs's readMathFilm and the kinds' own
+ *  guards): throws the exact "films/<key> is kind=<raw cfg.kind>, not <want>" the engines threw
+ *  before the registry (a plain motion film has no kind field — the message says kind=undefined). */
+export function requireKind(key, cfg, want) {
+  if (cfg.kind !== want) throw new Error(`films/${key} is kind=${cfg.kind}, not ${want}`);
+  return cfg;
+}
 export const writeJson = (p, v) => writeFileSync(p, JSON.stringify(v, null, 2) + '\n');
 
 // Flags chosen for pixel-identical output run to run.

@@ -1,15 +1,13 @@
 #!/usr/bin/env node
 // studio: the command surface of the motion studio. `studio help` lists everything.
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { buildMusic, buildSfx, gridBeats, measureBeats, mix } from './audio.mjs';
-import { gates } from './gates.mjs';
-import { FILMS, readFilm, readJson, writeJson } from './lib/film.mjs';
+import { gridBeats, measureBeats } from './audio.mjs';
+import { FILMS, readFilm, readJson } from './lib/film.mjs';
 import { run } from './lib/proc.mjs';
 import { ROOT } from './lib/serve.mjs';
-import { renderFilm } from './render.mjs';
 import { addReview } from './review.mjs';
-import { contactSheet, poster } from './stills.mjs';
+import { poster } from './stills.mjs';
 
 const HELP = `studio <command> <film> [options]
 
@@ -83,6 +81,13 @@ const HELP = `studio <command> <film> [options]
   verify-produce [--quick] [--list] [--only <id>,…] [--clean]
                          the producer contract: every check of the mission (registry, capabilities,
                          plan, ledger, project, assemble, make, demos …) → docs/produce/verify-last.json
+  migrate-names [<film>|--all]
+                         math films: derived paths to the Windows-safe form (draft-16x9.mp4,
+                         records/16x9/), the tracked ones via git mv; idempotent
+  capabilities [<id>] [--json] [--doc]
+                         the technique/service catalog with readiness from real probes (a missing
+                         dependency reports not-ready and the fix); --doc writes the generated
+                         docs/produce/CAPABILITIES.md
   help                   this text`;
 
 const argv = process.argv.slice(2);
@@ -92,36 +97,29 @@ const num = (k, d) => (opt(k) === undefined ? d : Number(opt(k)));
 const rel = (f) => f.startsWith(ROOT) ? f.slice(ROOT.length + 1) : f;
 
 async function main() {
+  const { hooksFor, kindModule } = await import('./kinds/registry.mjs');
   switch (cmd) {
     case 'new': {
       if (argv.includes('--math')) {
-        const M = await import('./math-cli.mjs');
-        const dir = M.createMathFilm(key, { title: opt('title', key),
+        const dir = (await kindModule('math')).create(key, { title: opt('title', key),
           formats: opt('formats') && opt('formats') !== true ? String(opt('formats')).split(',') : undefined,
           lang: opt('lang') === true ? 'en' : String(opt('lang') ?? 'en'),
           voice: opt('voice') === true ? undefined : opt('voice') });
-        console.log(`created ${rel(dir)} (math film)\n  next: studio render ${key} --draft   then   studio look ${key}\n  scenes live in films/${key}/scenes/ — from studio_manim import *; craft: docs/math + the skill`);
+        console.log(dir.message);
         break;
       }
       if (argv.includes('--edit')) {
-        const E = await import('./edit-cli.mjs');
-        const dir = E.createEditFilm(key, { title: opt('title', key), fps: opt('fps') && opt('fps') !== true ? String(opt('fps')) : 30, formats: opt('formats') && opt('formats') !== true ? String(opt('formats')).split(',') : ['16:9'] });
-        console.log(`created ${rel(dir)} (edit film)\n  next: studio ingest ${key} <your footage> --id cam   then   studio edit ${key} add --src cam --in 0 --out 10   then   studio look ${key}\n  preview: studio gui`);
+        const dir = (await kindModule('edit')).create(key, { title: opt('title', key),
+          fps: opt('fps') && opt('fps') !== true ? String(opt('fps')) : 30,
+          formats: opt('formats') && opt('formats') !== true ? String(opt('formats')).split(',') : ['16:9'] });
+        console.log(dir.message);
         break;
       }
-      if (!key || !/^[a-z0-9][a-z0-9-]*$/.test(key)) throw new Error('studio new <key>: lowercase letters, digits, dashes');
-      const dir = join(FILMS, key);
-      if (existsSync(dir)) throw new Error(`films/${key} already exists`);
-      cpSync(join(ROOT, 'templates', 'film'), dir, { recursive: true });
-      const cfg = readJson(join(dir, 'film.json'));
-      Object.assign(cfg, {
-        title: opt('title', key), duration: num('duration', cfg.duration),
-        formats: opt('formats') ? String(opt('formats')).split(',') : cfg.formats, loop: !!opt('loop', cfg.loop),
-      });
-      cfg.music.bpm = num('bpm', cfg.music.bpm);
-      writeJson(join(dir, 'film.json'), cfg);
-      gridBeats(key);
-      console.log(`created films/${key}\n  next: write brief.md, design.json, shotlist.md, then index.html\n  preview: studio gui  (or open http://localhost:3142/films/${key}/)`);
+      const dir = (await kindModule('motion')).create(key, {
+        title: opt('title', key), duration: num('duration'),
+        formats: opt('formats') && opt('formats') !== true ? String(opt('formats')).split(',') : undefined,
+        loop: opt('loop'), bpm: num('bpm') });
+      console.log(dir.message);
       break;
     }
     case 'list': {
@@ -141,13 +139,7 @@ async function main() {
       const o = { mode, every: num('every', 0.5), at: num('at', 0), fmt: opt('fmt'), width: opt('width') ? num('width') : undefined,
         times: opt('times') ? String(opt('times')).split(',').map(Number) : undefined, n: num('n', 12) };
       if (mode === 'phone') Object.assign(o, { mode: 'every', every: 1, width: 360, name: `phone-${(o.fmt || readFilm(key).cfg.formats[0]).replace(':', 'x')}`, title: 'phone test 360px' });
-      if (readFilm(key).cfg.kind === 'math') { // math films: frames from the draft (no seek(t) page)
-        const M = await import('./math-cli.mjs');
-        const r = await M.lookMath(key, o);
-        console.log(`${rel(r.file)}  (${r.count} frames: ${r.times.join(', ')})`);
-        break;
-      }
-      const r = await contactSheet(key, o);
+      const r = await (await hooksFor(key)).look(key, o);
       console.log(`${rel(r.file)}  (${r.count} frames: ${r.times.join(', ')})`);
       break;
     }
@@ -170,65 +162,39 @@ async function main() {
     }
     case 'poster': console.log(rel((await poster(key, { at: num('at', 0), fmt: opt('fmt') })).file)); break;
     case 'render': {
-      if (readFilm(key).cfg.kind === 'math') {
-        const M = await import('./math.mjs');
-        const r = await renderMathSlice(M, key, opt, num, argv);
-        for (const x of r) console.log(rel(x.file));
-        break;
-      }
-      const r = await renderFilm(key, { quality: opt('draft') ? 'draft' : 'final', fmt: opt('fmt'), from: opt('from') !== undefined ? num('from') : undefined,
-        to: opt('to') !== undefined ? num('to') : undefined, sub: opt('sub') !== undefined ? num('sub') : undefined, workers: opt('workers') ? num('workers') : undefined,
+      const quality = argv.includes('--draft') ? 'draft' : argv.includes('--final') ? 'final' : 'final';
+      const r = await (await hooksFor(key)).render(key, { quality, fmt: opt('fmt'),
+        from: opt('from') !== undefined ? num('from') : undefined, to: opt('to') !== undefined ? num('to') : undefined,
+        sub: opt('sub') !== undefined ? num('sub') : undefined, workers: opt('workers') ? num('workers') : undefined,
         bypassCache: argv.includes('--no-cache') });
       for (const x of r) console.log(rel(x.file));
       break;
     }
     case 'scene': {
       if (!argv[2] || argv[2].startsWith('--')) throw new Error('studio scene <film> <scene-id> [--draft|--final] [--fmt 9:16]');
-      const M = await import('./math.mjs');
-      const r = await renderMathSlice(M, key, opt, num, argv, argv[2]);
+      const quality = argv.includes('--draft') ? 'draft' : argv.includes('--final') ? 'final' : 'draft';   // one-scene default: draft (fast iteration)
+      const r = await (await hooksFor(key)).scene(key, argv[2], { quality, fmt: opt('fmt') === true ? undefined : opt('fmt') });
       for (const x of r) console.log(`${rel(x.file)}  (${x.scenes} scene, ${x.seconds}s)`);
       break;
     }
     case 'check': {
-      if (readFilm(key).cfg.kind !== 'math') throw new Error('studio check is for math films (kind: math)');
-      const M = await import('./math.mjs');
-      const rows = await M.checkMathFilm(key, { scene: opt('scene') === true ? undefined : opt('scene') });
-      let bad = 0;
-      for (const r of rows) { if (r.ok) console.log(`ok    ${r.scene}: typeset + ${r.claims} claim(s)`); else { bad++; console.log(`FAIL  ${r.scene}:\n${r.error}`); } }
-      console.log(`check: ${rows.length - bad}/${rows.length} scenes clean`);
-      process.exitCode = bad ? 1 : 0;
+      const r = await (await hooksFor(key)).check(key, { scene: opt('scene') === true ? undefined : opt('scene') });
+      process.exitCode = r.pass ? 0 : 1;
       break;
     }
     case 'grid': { const r = gridBeats(key); console.log(`${rel(r.file)}: ${r.beats} beats at ${r.bpm} bpm`); break; }
     case 'beats': { const r = await measureBeats(key); console.log(`${rel(r.file)}: ${r.beats} beats, ${r.hits} hits, ${r.bpm.toFixed(1)} bpm`); break; }
     case 'where': {
-      if (readFilm(key).cfg.kind !== 'math') throw new Error('studio where is for math films (kind: math) — edit films have edit_status');
-      const W = await import('./where.mjs');
-      const t = num('t', 0);
-      const r = W.resolveWhere(key, t, opt('fmt') === true ? undefined : opt('fmt'));
-      console.log(`${r.t}s → scene ${r.scene} (scene_t ${r.scene_t}s) · ${r.sentence ? `${r.sentence.id} “${r.sentence.text.slice(0, 48)}”` : 'no sentence'}${r.bookmark ? ` · near {${r.bookmark.id}}@${r.bookmark.t}s` : ''}${r.overrun ? ' · OVERRUN nearby' : ''}\n  animation: ${r.animation ? `#${r.animation.i} ${r.animation.name} @${r.animation.t}s` : 'none'}\n  code: ${r.file}${r.line ? ':' + r.line : ''}`);
+      (await hooksFor(key)).where(key, num('t', 0), opt('fmt') === true ? undefined : opt('fmt'));
       break;
     }
     case 'sound': {
-      if (readFilm(key).cfg.kind === 'math') { // the math narration bus: voice → timing → mix at mix.lufs
-        const N = await import('./narration.mjs');
-        const v = await N.buildVoice(key); console.log(`voice: ${v.sentences.length} sentences, ${v.duration.toFixed(2)}s, timing ${v.timing}`);
-        const m = await N.buildMix(key); console.log(`${rel(m.file)}  ${m.lufs} LUFS, true peak ${m.truePeak} dBTP${m.warning ? '  (warning: ' + m.warning + ')' : ''}`);
-        // captions ride the narration: the SRT/VTT are written with the mix (the critic found
-        // the config said ON while no artifact existed — the gate now checks the files)
-        const caps = readFilm(key).cfg.captions ?? "auto";
-        if (caps !== 'off') { const { exportCaptions } = await import('./math-captions.mjs');
-          const c = exportCaptions(key); console.log(`${c.cues} cues → ${rel(c.srt)}, ${rel(c.vtt)}`); }
-        break;
-      }
-      await sound(key); break;
+      await (await hooksFor(key)).sound(key);
+      break;
     }
     case 'gate': {
-      if (readFilm(key).cfg.kind === 'math') {
-        const { runMathGates } = await import('./math-gates.mjs');
-        const g = await runMathGates(key); console.log(g.pass ? '\ngates: PASS' : '\ngates: FAIL'); process.exitCode = g.pass ? 0 : 1; break;
-      }
-      const r = await gates(key); console.log(r.pass ? '\ngates: PASS' : '\ngates: FAIL'); process.exitCode = r.pass ? 0 : 1; break;
+      const r = await (await hooksFor(key)).gate(key);
+      console.log(r.pass ? '\ngates: PASS' : '\ngates: FAIL'); process.exitCode = r.pass ? 0 : 1; break;
     }
     case 'review': {
       const e = addReview(key, JSON.parse(opt('json', '{}')));
@@ -236,48 +202,7 @@ async function main() {
       break;
     }
     case 'ship': {
-      if (readFilm(key).cfg.kind === 'math') {
-        // gates first (FAIL blocks), then finals in every format, then claims.md (every verified claim)
-        console.log('── gates'); const { runMathGates } = await import('./math-gates.mjs');
-        const g = await runMathGates(key);
-        if (!g.pass) throw new Error('math gates failed: fix the FAIL lines above before shipping');
-        console.log('── render'); const M = await import('./math.mjs');
-        const r = await M.renderMathFilm(key, { quality: 'final' });
-        console.log('── claims');
-        // the film-level ledger: every records/<fmt>/*-claims.json, deduped by (expr, says) — D-011
-        const { writeFileSync, readdirSync: rd, existsSync: ex, readFileSync: rf } = await import('node:fs');
-        const recDir = join(readFilm(key).dir, 'records');
-        const led = [];
-        if (ex(recDir)) for (const fmtDir of rd(recDir).filter((f) => ex(join(recDir, f)))) {
-          for (const x of rd(join(recDir, fmtDir))) {
-            if (!x.endsWith('-claims.json')) continue;
-            for (const c of (JSON.parse(rf(join(recDir, fmtDir, x), 'utf8')) || []))
-              if (!led.some((y) => y.expr === c.expr && y.says === c.says)) led.push(c);
-          }
-        }
-        writeFileSync(join(readFilm(key).dir, 'out', 'claims.md'),
-          `# Verified claims — ${key}\n\nEvery mathematical statement in this film, evaluated exactly (sympy) at render time.\n\n${led.map((c) => `- ${c.ok ? '✓' : '✗'} \`${c.expr}\`${c.about ? ` — ${c.about}` : ''}${c.says ? ` (${c.says})` : ''}`).join('\n')}\n`);
-        console.log(`${led.length} claims → ${rel(join(readFilm(key).dir, 'out', 'claims.md'))}`);
-        console.log('── shipped'); for (const x of r) console.log(`${rel(x.file)}  (${x.seconds}s)`);
-        break;
-      }
-      const film = readFilm(key);
-      console.log('── sound'); await sound(key);
-      console.log('── gates'); const g = await gates(key);
-      if (!g.pass) throw new Error('gates failed: fix the FAIL lines above before shipping');
-      const reviews = readJson(join(film.dir, 'reviews.json'), []);
-      if (!reviews.length || !reviews.at(-1).pass) console.log(`!! last review ${reviews.length ? `min ${reviews.at(-1).min}` : 'missing'}: shipping anyway, but the loop says 8+ first`);
-      console.log('── render'); const r = await renderFilm(key, { quality: 'final', fmt: 'all' });
-      const at = film.cfg.poster ?? Math.min(film.cfg.duration * 0.35, 3);
-      for (const f of film.cfg.formats) console.log(rel((await poster(key, { at, fmt: f })).file));
-      console.log(rel((await contactSheet(key, { mode: 'every', every: 0.5, name: 'contact' })).file));
-      if (film.cfg.loop) {
-        const src = r[0].file, dst = join(film.out, 'loop_check.mp4');
-        await run('ffmpeg', ['-y', '-v', 'error', '-stream_loop', '1', '-i', src, '-c', 'copy', dst]);
-        console.log(rel(dst));
-      }
-      await gates(key, { log: () => {} });
-      console.log('── shipped'); for (const x of r) console.log(`${rel(x.file)}  (${x.seconds}s to render)`);
+      await (await hooksFor(key)).ship(key);
       break;
     }
     case 'read': {
@@ -357,6 +282,44 @@ async function main() {
       const { verifyMath } = await import('./verify-math.mjs');
       const r = await verifyMath({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
       process.exitCode = r.pass ? 0 : 1; break;
+    }
+    case 'capabilities': {
+      const C = await import('./produce/capabilities.mjs');
+      const rows = await C.capabilitiesWithReadiness();
+      if (opt('doc')) {
+        const { writeFileSync } = await import('node:fs');
+        const { join: j } = await import('node:path');
+        const file = j(ROOT, 'docs', 'produce', 'CAPABILITIES.md');
+        writeFileSync(file, C.markdownDoc(rows));
+        console.log(`${rows.length} capabilities -> ${file.replace(ROOT + '/', '')}`);
+        break;
+      }
+      if (opt('json')) { console.log(JSON.stringify(rows, null, 2)); break; }
+      const id = argv[1] && !argv[1].startsWith('--') ? argv[1] : undefined;
+      if (id) {
+        const r = rows.find((x) => x.id === id);
+        if (!r) throw new Error(`no capability "${id}": ${rows.map((x) => x.id).join(', ')}`);
+        console.log(JSON.stringify(r, null, 2));
+        break;
+      }
+      console.log(C.table(rows));
+      const missing = await C.invokeCoverage();
+      if (missing.length) { console.log(`
+!! invoke commands missing from studio help:`); for (const m of missing) console.log(`   ${m}`); process.exitCode = 1; }
+      break;
+    }
+    case 'migrate-names': {
+      const N = await import('./produce/naming.mjs');
+      const rows = argv.includes('--all') ? N.migrateAll()
+        : key ? { [key]: N.migrateNames(key) } : (() => { throw new Error('studio migrate-names <film> | --all'); })();
+      let n = 0;
+      for (const [k, r] of Object.entries(rows)) {
+        for (const m of r.moved) console.log(`  ${k}: ${m}`);
+        for (const f of r.fixed) console.log(`  ${k}: ${f} paths fixed`);
+        n += r.moved.length + r.fixed.length;
+      }
+      console.log(`migrate-names: ${n} change(s) across ${Object.keys(rows).length} math film(s)`);
+      break;
     }
     case 'verify-produce': {
       const { verifyProduce } = await import('./verify-produce.mjs');
@@ -454,25 +417,5 @@ async function main() {
   }
 }
 
-async function sound(key) {
-  const film = readFilm(key);
-  if (film.cfg.kind === 'edit') { // an edit film's sound is its dialog bus over the ducked music bed
-    const A = await import('./edit-audio.mjs');
-    if (film.cfg.music && !film.cfg.track) { const m = buildMusic(key); if (m.file) console.log(rel(m.file)); }
-    const d = await A.buildDialog(key, { log: (m) => console.log(m) }), x = await A.mixEdit(key);
-    console.log(`${rel(x.file)}  ${x.lufs} LUFS, true peak ${x.truePeak} dBFS`); void d; return;
-  }
-  if (!existsSync(join(film.dir, 'beats.json'))) film.cfg.track ? await measureBeats(key) : gridBeats(key);
-  const m = buildMusic(key); if (m.file) console.log(rel(m.file));
-  const s = buildSfx(key); console.log(`${rel(s.file)} (${s.cues} cues)`);
-  const x = await mix(key); console.log(`${rel(x.file)}  ${x.lufs} LUFS, true peak ${x.truePeak} dBFS`);
-}
-
 main().catch((e) => { console.error('studio: ' + (e.message || e)); process.exit(1); });
 
-// Math render from the CLI: `render` defaults to final (like the Canvas films), `--draft` halves
-// it; `scene <id>` defaults to DRAFT (fast iteration on one scene) unless `--final`.
-async function renderMathSlice(M, key, opt, _num, argv, sceneId) {
-  const quality = argv.includes('--draft') ? 'draft' : argv.includes('--final') ? 'final' : sceneId ? 'draft' : 'final';
-  return M.renderMathFilm(key, { quality, fmt: opt('fmt') === true ? undefined : opt('fmt'), scene: sceneId });
-}

@@ -118,14 +118,17 @@ export function capture({ out }) {
   } finally { sweep(); }
 }
 
-// compare: run the capture into a scratch dir, then diff every file (transcripts normalized at
-// capture time, so a byte compare is the contract). Returns the list of differences.
+// compare: run the capture into a scratch dir, then diff every CAPTURED file (transcripts are
+// normalized at capture time, so a byte compare is the contract). Only the files capture() itself
+// produces are compared — the baseline dir may hold siblings (the naming ledgers) that are other
+// checks' truth. Returns the list of differences.
+// regress.txt is documentation (the P0 verdict); the live `regress` check runs studio regress itself
+const CAPTURED = ['help.txt', 'new-motion.txt', 'motion.txt', 'new-edit.txt', 'edit.txt', 'new-math.txt', 'math.txt', 'drafts.json'];
 export function compare(baselineDir, scratchDir) {
   const diffs = [];
-  const names = readdirSync(baselineDir);
+  const names = readdirSync(baselineDir).filter((n) => CAPTURED.includes(n));
   capture({ out: scratchDir });                       // fresh capture, same code path as the baseline
   for (const n of names) {
-    if (n === 'regress.txt') continue;                // recorded separately (the regress baseline)
     const a = readFileSync(join(baselineDir, n), 'utf8'), b = readFileSync(join(scratchDir, n), 'utf8');
     if (a !== b) diffs.push({ file: n, a, b });
   }

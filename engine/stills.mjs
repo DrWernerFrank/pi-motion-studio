@@ -5,11 +5,12 @@ import { join } from 'node:path';
 import { activeClip, clipFrames, grid, mapFrame } from './lib/edit-ops.mjs';
 import { fmtSlug, openStudio, readFilm, readJson, stillPng } from './lib/film.mjs';
 
-// Pick the moments to look at. Returns [{ t, label }].
-export function pickTimes(film, { mode = 'every', every = 0.5, times, at = 0, n = 12, max = 36 } = {}) {
+// Pick the moments to look at. Returns [{ t, label }]. Async: the timeline (edit films' edit.json —
+// the kind's `timeline` hook, ADR-001) is loaded through the kind registry.
+export async function pickTimes(film, { mode = 'every', every = 0.5, times, at = 0, n = 12, max = 36 } = {}) {
   const { cfg, dir } = film, D = cfg.duration, fps = film.fps.value;
   const clampT = (t) => Math.min(Math.max(0, t), D - 1 / fps);
-  const edit = cfg.kind === 'edit' ? readJson(join(dir, 'edit.json')) : null;
+  const edit = (await (await import('./kinds/registry.mjs')).hooksFor(film)).timeline?.(film) ?? null;
   let out;
   if (mode === 'cuts') {
     // both sides of every cut on the video tracks: the last frame of the clip that ends and the first of the one that starts
@@ -55,7 +56,7 @@ export function pickTimes(film, { mode = 'every', every = 0.5, times, at = 0, n 
 export async function contactSheet(key, opts = {}) {
   const film = readFilm(key);
   const fmt = opts.fmt || film.cfg.formats[0];
-  const moments = pickTimes(film, opts);
+  const moments = await pickTimes(film, opts);
   const [W] = { '9:16': [1080], '1:1': [1080], '16:9': [1920], '4:5': [1080] }[fmt];
   const width = opts.width || (moments.length > 12 ? 270 : 360);
   const studio = await openStudio();

@@ -6,7 +6,8 @@ import { randomBytes } from 'node:crypto';
 import { appendFileSync, existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { join } from 'node:path';
-import { FILMS, readJson } from '../engine/lib/film.mjs';
+import { FILMS, fmtSlug, kindOf, readJson } from '../engine/lib/film.mjs';
+import { hooksFor } from '../engine/kinds/registry.mjs';
 import { OP_NAMES, OpError } from '../engine/lib/edit-ops.mjs';
 import { applyOps, historyDepth, loadEdit, redo, syncFilm, undo } from '../engine/lib/edit-store.mjs';
 import { binDir, readBin } from '../engine/ingest.mjs';
@@ -32,10 +33,14 @@ const OP_SNAP = [...OP_NAMES, 'snap'];  // 'snap' rides along in a batch as a qu
 const read = (p) => { try { return readFileSync(p, 'utf8'); } catch { return null; } };
 const mtime = (p) => { try { return statSync(p).mtimeMs; } catch { return 0; } };
 
-function films() {
+async function films() {
   if (!existsSync(FILMS)) return [];
-  return readdirSync(FILMS).filter((k) => existsSync(join(FILMS, k, 'film.json'))).map(summary)
-    .sort((a, b) => b.updated - a.updated);
+  const rows = [];
+  for (const k of readdirSync(FILMS)) {
+    if (!existsSync(join(FILMS, k, 'film.json'))) continue;
+    rows.push(await summary(k));
+  }
+  return rows.sort((a, b) => b.updated - a.updated);
 }
 
 function outFiles(dir) {
@@ -52,16 +57,18 @@ function outFiles(dir) {
   return list.sort((a, b) => b.mtime - a.mtime);
 }
 
-function summary(key) {
+async function summary(key) {
   const dir = join(FILMS, key);
   const cfg = readJson(join(dir, 'film.json'), {});
   const reviews = readJson(join(dir, 'reviews.json'), []);
   const gates = readJson(join(dir, 'gates.json'));
   const files = outFiles(dir);
+  // the per-kind view flags come from the kind module (the math view mounts on "math" like
+  // edit.json mounts the editor — ADR-001); edit/math default false exactly as before
+  const flags = (await hooksFor(key)).summary?.(cfg, dir) ?? {};
   return {
     key, title: cfg.title || key, duration: cfg.duration, formats: cfg.formats || ['9:16'],
-    edit: existsSync(join(dir, 'edit.json')),
-    math: cfg.kind === 'math',   // the math view mounts on this (M7), like edit.json mounts the editor
+    edit: false, math: false, ...flags,
     review: reviews.length ? { round: reviews.length, min: reviews.at(-1).min, pass: reviews.at(-1).pass } : null,
     gates: gates ? { pass: gates.pass, warns: gates.checks.filter((c) => c.level === 'warn').length, at: gates.at } : null,
     finals: files.filter((f) => /^final-[^.]*\.mp4$/.test(f.name)).map((f) => f.name),
@@ -163,7 +170,7 @@ const server = createServer(async (req, res) => {
       req.on('close', () => { clients.delete(res); clearInterval(ping); });
       return;
     }
-    if (p === '/api/films' && req.method === 'GET') return json(res, 200, films());
+    if (p === '/api/films' && req.method === 'GET') return json(res, 200, await films());
     if (p === '/api/jobs') return json(res, 200, jobs.slice(-20).map(({ log, ...j }) => ({ ...j, tail: log.slice(-200) })));
     // An AI reads a sheet/poster: { key, file, prompt, model?, engine? }
     // Antigravity agents (Google AI Pro subscription, no key) preferred; API-key vision as fallback.
@@ -365,7 +372,7 @@ const server = createServer(async (req, res) => {
       const k = String(v ?? '');
       if (!ID_RE.test(k)) return null;
       const d = join(FILMS, k);
-      return existsSync(join(d, 'film.json')) && readJson(join(d, 'film.json'), {}).kind === 'math' ? k : null;
+      return existsSync(join(d, 'film.json')) && kindOf(readJson(join(d, 'film.json'), {})) === 'math' ? k : null;
     };
     const mM = /^\/api\/film\/([a-z0-9-]+)\/(script|sentence|records|where)$/.exec(p);
     if (mM) {
@@ -432,7 +439,7 @@ const server = createServer(async (req, res) => {
         const syntaxP = runCapped(pythonFor('manim'), ['-c', SYNTAX_PY, ...rels],
           { cwd: dir, memoryMb: 512, timeoutS: 20, label: `gui syntax ${k}` }).catch(() => null);
         const lintPs = (film.cfg.formats || []).map((f) => {
-          const rd = join(dir, 'records', f);
+          const rd = join(dir, 'records', fmtSlug(f));
           if (!existsSync(rd)) return Promise.resolve(null);   // never rendered in this format
           return runCapped(pythonFor('manim'), ['-m', 'studio_manim.lint', rd, join(dir, 'design.json'), f],
             { cwd: ROOT, memoryMb: 512, timeoutS: 30, label: `gui lint ${k} ${f}`, env: { PYTHONPATH: join(ROOT, 'engine', 'manim') } }).catch(() => null);
@@ -451,7 +458,7 @@ const server = createServer(async (req, res) => {
         });
         const claims = [];
         for (const f of film.cfg.formats || []) {
-          const rd = join(dir, 'records', f);
+          const rd = join(dir, 'records', fmtSlug(f));
           if (!existsSync(rd)) continue;
           for (const file of readdirSync(rd)) {
             if (!file.endsWith('-claims.json')) continue;
@@ -463,7 +470,7 @@ const server = createServer(async (req, res) => {
           const row = { id: s.id, file: `scenes/${s.id}.py`, seconds: {}, lastRender: {}, claims: claims.filter((c) => c.scene === s.id).length,
             error: probe && !probe.ok ? { file: `scenes/${s.id}.py`, line: probe.line, message: probe.message } : null };
           for (const f of film.cfg.formats || []) {
-            const tl = join(dir, 'records', f, `${s.id}-timeline.json`);
+            const tl = join(dir, 'records', fmtSlug(f), `${s.id}-timeline.json`);
             if (existsSync(tl)) { row.seconds[f] = readJson(tl, {}).seconds ?? null; row.lastRender[f] = mtime(tl); }
           }
           return row;

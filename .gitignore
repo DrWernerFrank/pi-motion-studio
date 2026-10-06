@@ -50,3 +50,9 @@ films/*/.edit/
 
 # verifier run output (regenerated)
 docs/produce/verify-last*.json
+
+# Manim's repo-root media dir (typst/svg caches — derived; engine/manim/media is already excluded)
+/media/
+/x-layout.json
+/x-timeline.json
+/x-trace.json

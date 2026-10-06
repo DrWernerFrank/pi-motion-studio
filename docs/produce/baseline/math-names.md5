@@ -1,0 +1,9 @@
+# Post-migration final md5s (frozen 2026-10-06, after the naming migration + fresh renders).
+# The naming check re-renders and compares against THIS ledger; the pre-migration story is
+# in docs/produce/DECISIONS.md D-003 (5/6 byte-identical; odd-squares 9:16 was stale on disk).
+8ab26879f815349d021ff6773c137e37  films/determinant/out/final-16x9.mp4
+b8e677548250502a4ce3618f410f6e81  films/determinant/out/final-9x16.mp4
+cb3ad8088cd2f87b95083931d9a7cfdf  films/tangent/out/final-16x9.mp4
+73c2e04b69b8aecfdc2d79d44da63786  films/tangent/out/final-9x16.mp4
+a606194632d08edd9ea039b307178c9e  films/odd-squares/out/final-16x9.mp4
+a06b4b79fecf788c185a0978e22dd7eb  films/odd-squares/out/final-9x16.mp4

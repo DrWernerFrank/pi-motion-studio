@@ -92,7 +92,7 @@ function mergedClaims(dir: string, formats: string[]): { total: number; ok: numb
   const seen = new Map<string, any>()
   const scenes = new Set<string>()
   for (const f of formats) {
-    const d = path.join(dir, "records", f)
+    const d = path.join(dir, "records", f.replace(":", "x"))   // Windows-safe records dir (16x9)
     if (!existsSync(d)) continue
     for (const file of readdirSync(d).filter((x) => x.endsWith("-claims.json"))) {
       for (const c of readJson(path.join(d, file), []) as any[]) {
@@ -119,7 +119,8 @@ export default function mathTools(pi: ExtensionAPI) {
       const dir = path.join(ROOT, "films", p.film)
       if (!existsSync(path.join(dir, "film.json"))) throw new Error(`no film "${p.film}" (films/${p.film}/film.json missing)`)
       const cfg = readJson(path.join(dir, "film.json"), {})
-      if (cfg.kind !== "math") throw new Error(`films/${p.film} is kind=${cfg.kind}, not math (film_status/edit_status for the other kinds)`)
+      const { kindOf } = await engine("lib/film.mjs")
+      if (kindOf(cfg) !== "math") throw new Error(`films/${p.film} is kind=${kindOf(cfg)}, not math (film_status/edit_status for the other kinds)`)
       const design = readJson(path.join(dir, "design.json"), {})
       const timing = readJson(path.join(dir, "timing.json"), {})
       const sentences: any[] = timing?.sentences ?? []
@@ -127,7 +128,7 @@ export default function mathTools(pi: ExtensionAPI) {
       const gates = readJson(path.join(dir, "gates.json"))
       const sceneIds = existsSync(path.join(dir, "scenes")) ? readdirSync(path.join(dir, "scenes")).filter((f) => f.endsWith(".py")).sort().map((f) => f.replace(/\.py$/, "")) : []
       const secs = (id: string) => (cfg.formats as string[]).map((f) => {
-        const s = readJson(path.join(dir, "records", f, `${id}-timeline.json`), {})?.seconds
+        const s = readJson(path.join(dir, "records", f.replace(":", "x"), `${id}-timeline.json`), {})?.seconds
         return s ? `${f} ${(+s).toFixed(1)}s` : null
       }).filter(Boolean).join(", ")
       const voiced = sentences.filter((s) => s.audio && existsSync(s.audio)).length
@@ -289,7 +290,7 @@ export default function mathTools(pi: ExtensionAPI) {
       const MC = await engine("math-cli.mjs")
       const film = M.readMathFilm(p.film)
       const fmt = p.fmt || film.cfg.formats?.[0] || "16:9"
-      if (MC.draftStale(film, path.join(film.out, `draft-${fmt}.mp4`)))
+      if (MC.draftStale(film, path.join(film.out, `draft-${fmt.replace(":", "x")}.mp4`)))
         await renderWindow(`math_look ${p.film} (stale draft re-render)`)
       const args = ["look", p.film, "--mode", p.mode ?? "every"]
       if (p.every) args.push("--every", String(p.every))
@@ -347,7 +348,7 @@ export default function mathTools(pi: ExtensionAPI) {
           const file = path.join(scratch, `${p.film}-independent.json`)
           const ledger = []
           for (const f of cfg.formats ?? []) {
-            const d = path.join(dir, "records", f)
+            const d = path.join(dir, "records", f.replace(":", "x"))
             if (!existsSync(d)) continue
             for (const x of readdirSync(d).filter((y) => y.endsWith("-claims.json")))
               for (const c of readJson(path.join(d, x), []) as any[])

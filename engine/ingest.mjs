@@ -26,10 +26,12 @@ const writeBin = (film, bin) => { mkdirSync(binDir(film), { recursive: true }); 
 // slug for an id; names with no latin letters (Persian, CJK…) fall back to src-<hash>
 export const slugId = (name, sha) => (basename(name, extname(name)).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || `src-${sha.slice(0, 6)}`);
 
-// Project rate: --fps, else the film's own fps when it is an edit film, else the nearest standard rate to the source's base rate.
-export function projectFps(film, m, opt) {
+// Project rate: --fps, else the film's own rate when its kind declares one (edit films carry one in
+// film.json — the kind's `ownFps` hook, ADR-001), else the nearest standard rate to the source's base.
+export async function projectFps(film, m, opt) {
   if (opt.fps) return parseFps(opt.fps);
-  if (film.cfg.kind === 'edit' && film.cfg.fps) return parseFps(film.cfg.fps);
+  const own = (await (await import('./kinds/registry.mjs')).hooksFor(film)).ownFps?.(film.cfg);
+  if (own) return own;
   const v = m.video;
   const base = v.vfr ? Number(v.r_frame_rate.split('/')[0]) / Number(v.r_frame_rate.split('/')[1] || 1) : v.fps_value;
   return nearestStandardFps(base || 30);
@@ -89,7 +91,7 @@ export async function ingestSource(filmKey, srcArg, opt = {}) {
   const audioIdx = opt.audioStream !== undefined ? Number(opt.audioStream) : m.audio_used;
   if (audioIdx !== null && audioIdx !== undefined && !m.audio.some((a) => a.index === audioIdx)) throw new Error(`${basename(src)} has no audio stream ${audioIdx} (streams: ${m.audio.map((a) => a.index).join(', ') || 'none'})`);
   m.audio_used = audioIdx ?? null;
-  const fps = m.video ? projectFps(film, m, opt) : null, max = opt.max ? Number(opt.max) : MAX_LONG_SIDE, still = Number(opt.stillSeconds || 5);
+  const fps = m.video ? await projectFps(film, m, opt) : null, max = opt.max ? Number(opt.max) : MAX_LONG_SIDE, still = Number(opt.stillSeconds || 5);
   const params = { fps: fps?.str, max, audio: m.audio_used, still: m.kind === 'image' ? still : undefined, proxy: opt.proxy !== false };
   const key = createHash('sha256').update(JSON.stringify({ RECIPE, sha: m.source.sha256, params })).digest('hex').slice(0, 16);
 

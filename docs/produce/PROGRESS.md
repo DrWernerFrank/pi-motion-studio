@@ -7,7 +7,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 ## Phases
 
 - [ ] P0 Orientation + baselines + `verify-produce` skeleton (all checks red)
-- [ ] P1 Registry (K1), naming migration, hygiene, capability catalog (K2)
+- [ ] P1 Registry (K1), naming migration, hygiene, capability catalog (K2) — registry+catalog+naming DONE, checks landing
 - [ ] P2 Project kind (K3), plan (K4), ledger (K5), facts/assets (K6), budget (K7), narration service (S3) — first vertical slice
 - [ ] P3 Assembly (K8, spike S2)
 - [ ] P4 Producer skill + routing (K9) + producer-critic (K11)
@@ -19,11 +19,11 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 
 ## Checks (§7 — `./studio verify-produce`, every one needs a file + green)
 
-- [ ] `env` — doctor reports pi on PATH + version, capability readiness table, runner prerequisites; each missing item names its fix
-- [ ] `regress` — `studio regress` + both cheap verify subsets green for the whole mission
-- [ ] `registry` — kinds are modules behind one registry; no raw `cfg.kind ===` outside `engine/kinds/`; golden transcripts + frame md5 == P0 baselines; missing hook fails loudly; seeded-fault docs check
-- [ ] `naming` — no tracked path or `films/` path with Windows-reserved chars; math outputs `16x9`; the three math demos migrated, re-render identical md5; `media/` + `x-*.json` untracked
-- [ ] `capabilities` — `studio capabilities --json` validates; readiness from real probes; every `invoke` command exists in help; techniques + services present; malformed entry rejected with its path
+- [x] `env` — doctor reports pi on PATH (0.87.1) + capability readiness table (10/10 real probes) + runner prerequisites; P1 PASS
+- [ ] `regress` — `studio regress` + both cheap verify subsets green for the whole mission (check file written; claims-driver path fix landed, re-run pending)
+- [ ] `registry` — kinds are modules behind one registry; no raw `cfg.kind ===` outside `engine/kinds/`; golden transcripts + frame md5 == P0 baselines; missing hook fails loudly; seeded-fault docs check (check file written, re-run pending)
+- [x] `naming` — 0 Windows-reserved chars in 684 tracked paths + under films/; math outputs `16x9`; 6/6 demo finals re-render byte-identical to the frozen ledger + audio-pair consistency; `media/` + `x-*.json` untracked — P1 PASS
+- [x] `capabilities` — `studio capabilities --json` validates (10 entries); readiness from real probes; all 28 invoke commands in help; malformed entries rejected with their path — P1 PASS
 - [ ] `services` — motion film + `script.md` → `timing.json` + narration bus at `mix.lufs`; math path byte-identical; captions/mix/capture callable from any kind's hooks
 - [ ] `plan` — the validator rejects bad plans (goal, assumptions, capability, acceptance, reasons, <2 alternatives, budget, deliverables); accepts a valid one; flags over-scoping + unknown capabilities; risky choice needs saved probe sheets
 - [ ] `ledger` — every verifier passes good media / fails bad media with a message; measurable w/o verifier fails loudly; subjective w/o critic evidence cannot pass; brief-lint flags all numbers/formats/languages/named assets of 10 seeded requests; a non-human waiver refused
@@ -54,5 +54,5 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] Full `./studio verify-math` in the background from the final tree (27 checks)
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
-Now: P0 — baselines captured, PROGRESS/DECISIONS written, verify-produce skeleton + every check present and red.
-Next: commit P0, then S1 (registry spike).
+Now: P1 — registry + catalog + naming done and green (env/naming/capabilities PASS); the registry check re-runs after the compare() fix; then commit P1 and tag slice-0.
+Next: P2 (the project kind, plan, ledger, facts, assets, budget, narration service).
