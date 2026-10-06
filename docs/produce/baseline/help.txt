@@ -1,0 +1,75 @@
+$ studio help
+studio <command> <film> [options]
+
+  new <key> [--title T] [--duration 15] [--formats 9:16,1:1,16:9] [--bpm 120] [--loop]
+                         scaffold films/<key> from templates/film
+  new <key> --edit [--fps 30000/1001] [--formats 16:9,9:16]
+                         scaffold an edit film (real footage): film.json kind=edit, edit.json, index.html
+  new <key> --math [--formats 16:9,9:16] [--lang en] [--voice piper:en_US-ljspeech-medium]
+                         scaffold a math film (Manim): script.md, design.json, lexicon.json, scenes/*.py
+  scene <film> <scene-id> [--draft|--final] [--fmt 9:16]
+                         render ONE scene of a math film (default draft) through the memory guard
+  check <film> [--scene <id>]
+                         math films: run scenes with --dry_run (typesetting + claims, no video)
+  where <film> --t <seconds> [--fmt 9:16]
+                         math films: which scene, sentence, animation and file owns a timecode
+  sound <film>           math films: voice → timing → the narration mix at mix.lufs (a quiet bed if
+                         music is set); edit films: the dialog bus + ducked bed at -14 LUFS
+  gate <film>            math films: the math gates (layout, claims, typeset, narration, sync, pace,
+                         captions, loudness, deliverable, deterministic) → gates.json
+  where <film> <t>       math films: which scene, sentence and file owns a timecode
+  list                   films with their status
+  look <film> [--mode every|beats|shots|strip|times|phone] [--every 0.5] [--at 4.2] [--times 1,2.5]
+               [--fmt 9:16] [--width 270]
+                         contact sheet straight from seek(t) → out/sheets/*.png (seconds, no encode)
+  capture <film> <url>   real screenshots, logos, colors, fonts → films/<film>/assets/ (+ site.json)
+  refs <film> <video>    extract reference frames every Ns → films/<film>/refs/frames/ + a contact sheet
+  poster <film> --at 3.2 full-res still → out/poster-<fmt>.png
+  render <film> [--draft] [--fmt 9:16|all] [--from 2 --to 5] [--sub 4] [--workers 4]
+                         frames → H.264 (draft: half-res 30fps; final: film fps + motion blur)
+  grid <film>            beats.json from film.json music.bpm (synthesized score)
+  beats <film>           beats.json measured from film.json "track" (librosa)
+  sound <film>           beats (if missing) → music → sfx → mix at -14 LUFS → out/mix.wav
+  gate <film>            mechanical gates → gates.json (lint, determinism, dead time, loop, loudness …)
+  review <film> --json '{"scores":{…},"problems":[…]}'   record a critique round
+  read <film> [--sheet sheets/times-9x16.png] [--prompt "…"] [--model flash|pro|flash_lite|gemini-2.5-pro] [--engine agy|api|gemini]
+                         An AI reads a sheet/poster (default: newest). Engine agy = Antigravity agents
+                         on your Google AI Pro subscription (no key — default when installed).
+                         api = GEMINI_API_KEY vision. gemini = the Gemini CLI agent.
+  login-gemini          browser login with your Google account (Pro/Code Assist quota, no API key)
+  ship <film>            sound → gate → final render (all formats) → poster → sheets → loop check
+  gui                    start the Studio GUI (http://localhost:3142)
+  regress [--write]      the four motion films still render identically (frame hashes + gate verdicts
+                         vs docs/editing/baseline.json); --write records the baseline
+  fixtures [--list] [--only a,b] [--force] [--verify]
+                         deterministic test media (barcode clips, VFR/rotated, HLG, long, subject …) → ~/.cache/pi-motion-studio/fixtures
+  ingest <film> <file...> [--id cam] [--fps 30000/1001] [--max 1920] [--audio-stream N] [--no-proxy] [--force]
+                         conform footage (CFR, upright, SDR bt709, short GOP) + proxy, audio, peaks, filmstrip, scenes, silence map
+  transcribe <film> <src-id> [--model small] [--language auto] [--force]
+                         word-level transcript of an ingested source (local faster-whisper, cached, refined)
+  transcript <film> <src-id> [--from 10 --to 40] [--grep um] [--format compact|words|srt]
+                         read the transcript back in ranges/greps an agent can use
+  cut <film> <silence|fillers|takes|idle|tighten> [--src cam] [--max-gap 0.5] [--apply] [--target 45]
+                         measured cut proposals with the removed text (dry run; --apply goes through edit-ops)
+  captions <film> [--format srt|vtt]
+                         caption export (.srt/.vtt) from the same chunks the screen shows
+  edit <film> [show | ops '<json array>' | undo | redo | sync | export-edl [f] | import-edl <f> | <op> --k v …] [--base-rev N]
+                         the timeline as data: add trim split delete ripple-delete move reorder speed freeze volume fade xfade crop-keyframe overlay caption-style marker snap
+  autoedit <film> --preset talking-head|screen|audiogram|montage [--src <file>…] [--id cam] [--target 60] [--final]
+                         the deterministic pipeline, no LLM: ingest → transcribe → measured cuts → captions →
+                         reframe → sound → gates → draft renders of every format (--final ships finals)
+  media <film>           the media bin: sources, kinds, durations, whether the originals are still where they were
+  relink <film> [--search dir ...]   find moved originals by size + sha256 and repair the bin (and edit.json)
+  cache [gc [--dry] [--fixtures]]   disk use of media/outputs/caches; gc removes temp films, orphan media, interrupted-ingest leftovers
+  doctor [--fix] [--math]  probe the toolchain: editing by default; --math adds Manim, typesetting,
+                         voice, sympy and font probes (docs/math/ADR-001..004)
+  verify-edit [--quick] [--list] [--only <id>] [--clean]
+                         the real-video-editing contract: every check of the mission, measured → docs/editing/verify-last.json
+  verify-math [--quick] [--list] [--only <id>,…] [--clean]
+                         the math-video contract: every check of the mission (env, typeset, claims, gates,
+                         demos …) → docs/math/verify-last.json
+  verify-produce [--quick] [--list] [--only <id>,…] [--clean]
+                         the producer contract: every check of the mission (registry, capabilities,
+                         plan, ledger, project, assemble, make, demos …) → docs/produce/verify-last.json
+  help                   this text
+[exit 0]

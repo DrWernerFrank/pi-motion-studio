@@ -1,0 +1,5 @@
+$ studio new verify-p-gold-math --math
+created films/verify-p-gold-math (math film)
+  next: studio render verify-p-gold-math --draft   then   studio look verify-p-gold-math
+  scenes live in films/verify-p-gold-math/scenes/ — from studio_manim import *; craft: docs/math + the skill
+[exit 0]

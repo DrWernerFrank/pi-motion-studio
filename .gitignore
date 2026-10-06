@@ -47,3 +47,6 @@ engine/manim/test/media/
 
 # edit history snapshots
 films/*/.edit/
+
+# verifier run output (regenerated)
+docs/produce/verify-last*.json

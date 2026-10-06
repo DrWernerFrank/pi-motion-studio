@@ -80,6 +80,9 @@ const HELP = `studio <command> <film> [options]
   verify-math [--quick] [--list] [--only <id>,…] [--clean]
                          the math-video contract: every check of the mission (env, typeset, claims, gates,
                          demos …) → docs/math/verify-last.json
+  verify-produce [--quick] [--list] [--only <id>,…] [--clean]
+                         the producer contract: every check of the mission (registry, capabilities,
+                         plan, ledger, project, assemble, make, demos …) → docs/produce/verify-last.json
   help                   this text`;
 
 const argv = process.argv.slice(2);
@@ -353,6 +356,11 @@ async function main() {
     case 'verify-math': {
       const { verifyMath } = await import('./verify-math.mjs');
       const r = await verifyMath({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
+      process.exitCode = r.pass ? 0 : 1; break;
+    }
+    case 'verify-produce': {
+      const { verifyProduce } = await import('./verify-produce.mjs');
+      const r = await verifyProduce({ quick: !!opt('quick'), list: !!opt('list'), only: opt('only') === true ? undefined : opt('only'), clean: !!opt('clean') });
       process.exitCode = r.pass ? 0 : 1; break;
     }
     case 'fixtures': {

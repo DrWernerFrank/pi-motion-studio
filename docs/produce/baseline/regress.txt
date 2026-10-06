@@ -1,0 +1,6 @@
+studio-reel              8/8 frames identical, 10/10 gate verdicts unchanged
+det-film                 8/8 frames identical, 9/9 gate verdicts unchanged
+determinant-explained    8/8 frames identical, 10/10 gate verdicts unchanged
+determinant-explainer    still broken as recorded (film page never became ready (determinant-explainer 16:9).)
+regress: PASS
+[exit 0]
