@@ -102,6 +102,10 @@ const HELP = `studio <command> <film> [options]
   project ship <key>     verify -> refuse if red -> credits.md + report.md + out/ finals
   project where <key> --t 12.3
                          a timecode -> the segment -> the child's own where (scene, sentence, file:line)
+  make "<request>" [--file <input>…] [--formats 16:9,9:16] [--minutes 180] [--plan-only]
+                         create the project (the request verbatim) and RELAUNCH pi — one session,
+                         argv-only — until 'studio project verify' is green; stops on STOP/budget/cap
+  make --stop           stop the active run (SIGTERM; the lock and pid file go with it)
   help                   this text`;
 
 const argv = process.argv.slice(2);
@@ -402,6 +406,22 @@ async function main() {
         break;
       }
       throw new Error(`studio project: unknown subcommand "${sub ?? ''}" (new|list|status|plan|requirement|verify|rebuild|ship|where)`);
+    }
+    case 'make': {
+      const M = await import('./produce/runner.mjs');
+      if (opt('stop')) { const s = await M.stopRun(); console.log(`stopped: ${s.stopped.map((x) => `films/${x.key} (pid ${x.pid})`).join(', ')}`); break; }
+      const words = [];
+      for (const a of argv.slice(1)) { if (a.startsWith('--')) break; words.push(a); }
+      const request = words.join(' ');
+      if (!request) throw new Error('studio make "<request>" [--file <input>…] [--formats 16:9,9:16] [--minutes 180] [--plan-only] [--stop]');
+      const files = []; argv.forEach((a, i) => { if (a === '--file' && argv[i + 1]) files.push(argv[i + 1]); });
+      const r = await M.makeRun(request, {
+        formats: opt('formats') && opt('formats') !== true ? String(opt('formats')).split(',') : undefined,
+        minutes: opt('minutes') !== undefined && opt('minutes') !== true ? Number(opt('minutes')) : undefined,
+        planOnly: !!opt('plan-only'), file: files });
+      console.log(`make ${r.key}: ${r.outcome}${r.reason ? ` — ${r.reason}` : ''}  (${r.iterations} pi run(s))  log: ${rel(r.logFile)}`);
+      process.exitCode = r.outcome === 'verified' || r.outcome === 'plan-only' ? 0 : 1;
+      break;
     }
     case 'capabilities': {
       const C = await import('./produce/capabilities.mjs');
