@@ -56,3 +56,7 @@ docs/produce/verify-last*.json
 /x-layout.json
 /x-timeline.json
 /x-trace.json
+
+# the baseline capture's gold films (engine/produce/baseline.mjs): created + swept on every
+# registry comparison — local scratch, never tracked (the 14 tracked files came from one `git add -A`)
+films/verify-p-gold*
