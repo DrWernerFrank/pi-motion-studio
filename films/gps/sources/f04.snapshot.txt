@@ -1,0 +1,504 @@
+What is GPS? 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ An official website of the United States government.
+ 
+ Here's how you know we're official.
+ [#collapse-usa] 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ dot gov icon Official websites use .gov 
+
+ A .gov website belongs to an official government organization in the United States. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ https icon Secure websites use HTTPS 
+
+ 
+ A small lock or https:// means you’ve safely connected to a .gov website. Share sensitive information only on official, secure websites. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ Toggle navigation 
+ Toggle search 
+ 
+ [/welcome.html] National Ocean Service [/welcome.html] National Oceanic and Atmospheric Administration [/welcome.html] 
+
+ 
+
+ 
+ 
+ 
+ Search 
+ 
+ Search National Ocean Service 
+ 
+ 
+
+ 
+ 
+ 
+
+ [/welcome.html] 
+ 
+ 
+ 
+ Home [/] 
+
+ Ocean Facts [/facts/] 
+
+
+ Topics [#] 
+ 
+ Explore All Topics [/topics/] 
+ Arctic [/arctic/] 
+ Careers [/profiles/] 
+ Deep Seabed Mineral Resources [/deep-seabed-mineral-resources/] 
+ Economy [/economy/] 
+ Ecosystems [/ecosystems/] 
+ Geodesy [/geodesy/] 
+ Hazards [/hazards/] 
+ International [/international/] 
+ Navigation [/navigation/] 
+ Observations [/observations/] 
+ Ocean [/ocean/] 
+ Recreation [/recreation/] 
+ Sea Level Rise [/hazards/sealevelrise/] 
+ Tools [/tools/] 
+ 
+
+ 
+
+ 
+ Education [/education/] 
+
+
+ 
+ News [/news/] 
+
+ Podcasts [/podcast/] 
+
+ Video [/video/] 
+
+ Images [/gallery/] 
+
+ About Us [/about/] 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ Home [/] 
+
+ Facts [/facts/] 
+
+ What is GPS?
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ What is GPS? 
+ 
+
+ The Global Positioning System lets us know where we are (and where we are going) anywhere on Earth.
+
+ 
+ 
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ The GPS Block IIR(M) Satellite shown here is one of the various generations of GPS satellites orbiting the Earth. GPS satellites fly in medium Earth orbit at an altitude of approximately 20,200 Kilometers [#] . Each satellite circles the Earth twice a day. The satellites in the GPS constellation [http://www.gps.gov/systems/gps/space/] are arranged so that users can view at least four satellites from virtually any point on the planet.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Did you know? 
+
+ The movements of Earth's surface in the U.S. are monitored by NOAA's National Geodetic Survey [http://geodesy.noaa.gov/] through its nationwide network of permanent GPS stations called Continuously Operating Reference Stations. These stations makes it possible for NOAA to provide positioning products for use in surveying, construction, navigation, mapping, and other industries.
+
+ 
+
+ 
+
+ 
+
+ 
+ For thousands of years, humans found their way by looking to the sky. Sailors used the constellations, sun, and moon to navigate to distant shores. Today, all that's needed is a device called a GPS receiver. GPS stands for Global Positioning System, and it lets us know where we are and where we are going anywhere on Earth.
+
+ We still need objects in the sky to know where we are and how we get to other places, but now we use satellites instead of stars. Over 30 GPS navigation satellites are whizzing around the world, orbiting at an altitude of 20,200 Kilometers [#] , to help us find our way. 
+
+ GPS is a three-part system: satellites, ground stations, and receivers. Satellites act like the stars in constellations&mdash;we know where they are supposed to be at any given time. The ground stations monitor and control the satellites, and they help determine their locations&mdash;both where they were and where they are forecast to be. A receiver, like you might find in your phone or in your car, is constantly listening for signals from these satellites, which can be used like a giant tape measure between the receiver and satellites. 
+
+ Once your receiver calculates its distance from four or more satellites, it knows exactly where you are. Within seconds, from thousands of miles up in space, your location on the ground can be determined with incredible precision, often within a few yards of your actual location. Many high-tech receivers can figure out where you are to within a fraction of an inch.
+
+ 
+ 
+
+ 
+ 
+
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ More Information 
+
+
+ 
+ 
+ National Geodetic Survey 
+ [http://www.ngs.noaa.gov/] 
+
+ 
+ 
+ What is the geoid? 
+ [/facts/geoid.html] 
+
+ 
+ 
+ 
+ What is geodesy? 
+ [/facts/geodesy.html] 
+
+ 
+ Is the Earth round? 
+ [/facts/earth-round.html] 
+ 
+ 
+ 
+ Geodesy: The Inivisble Backbone of Navigation (audio podcast) 
+ [/podcast/jan18/nop12-geodesy.html] 
+
+ 
+ 
+ GPS on Bench Marks (audio podcast) 
+ [/podcast/mar17/nop03-gps-benchmarks.html] 
+
+ 
+ 
+ GPS.gov 
+ [http://www.gps.gov/] 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ Get Social [/socialmedia.html] 
+
+ 
+ 
+ 
+ Social 
+ 
+
+ 
+
+ 
+ [https://twitter.com/noaaocean] 
+
+ [https://www.facebook.com/usoceangov/] 
+
+ [https://www.instagram.com/noaaocean/] 
+
+ [https://www.youtube.com/user/usoceangov] 
+
+ 
+ 
+ [https://www.linkedin.com/company/noaa-national-ocean-service] 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ Last updated: 
+
+ 
+ 09/23/26 
+ 
+
+ Author: NOAA
+
+ How to cite this article [/about/faq.html] 
+
+ Contact Us [/contact.html] 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ [#] 
+ 
+ 
+ 
+ 
+ Provide Feedback [https://touchpoints.app.cloud.gov/touchpoints/3966cfca/submit] 
+
+ Contact Us [/contact.html] 
+
+ Report an error [/contact.html#feedback] 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Social
+
+ 
+ 
+ [https://twitter.com/noaaocean] 
+
+ [https://www.facebook.com/usoceangov/] 
+
+ 
+
+ [https://www.instagram.com/noaaocean/] 
+
+ [https://www.linkedin.com/company/noaa-national-ocean-service] 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ [https://www.noaa.gov/] 
+ 
+ Science. Service.
+Stewardship. 
+ 
+
+ 
+
+ 
+ 
+ About NOS
+ 
+
+ 
+ About Us [/about/welcome.html] 
+
+ NOS Program Offices [/programs/welcome.html] 
+
+ Media Inquiries [/contact.html] 
+
+ Site Index [/sitemap.html] 
+
+ Disclaimer [/disclaimer.html] 
+
+ 
+ 
+
+ 
+ 
+ More Resources
+ 
+
+ 
+ Freedom of Information Act [https://www.noaa.gov/information-technology/foia] 
+
+ Accessibility [https://www.noaa.gov/accessibility] 
+
+ Information Quality [https://www.noaa.gov/office-of-chief-information-officer/it-policy-oversight/information-quality] 
+
+ Privacy Policy [/privacy.html] 
+ 
+ USA.gov [https://www.usa.gov/] 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Department of Commerce [https://www.commerce.gov] 
+
+ National Oceanic and Atmospheric Administration (NOAA) [https://www.noaa.gov/] 
+
+ National Ocean Service [/]

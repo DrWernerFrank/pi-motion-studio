@@ -103,7 +103,7 @@ export async function segment(key, seg, { design = true, build = true } = {}) {
   if (cfg.parent !== key) writeJson(join(FILMS, childKey, 'film.json'), { ...cfg, parent: key });
   // one design system: the project's design.json flows into every child (children may override
   // ONLY what the plan says — for now: inherit wholesale; per-key overrides come with the plan)
-  if (!existed && design) copyDesign(key, childKey);
+  if (!existed && design) copyDesign(key, childKey, kindOf(readJson(join(FILMS, childKey, 'film.json'), {})));
   // the project's parts + state
   const film = readJson(join(FILMS, key, 'film.json'), {});
   film.parts = [...new Set([...(film.parts || []), childKey])];
@@ -168,19 +168,26 @@ export function syncDuration(key) {
   if (total && Math.abs((cfg.duration || 0) - total) > 0.001) { cfg.duration = total; writeJson(join(FILMS, key, 'film.json'), cfg); }
 }
 
-function copyDesign(key, childKey) {
+function copyDesign(key, childKey, childKind) {
   const d = readJson(join(FILMS, key, 'design.json'), null);
   if (!d) return;
-  // children keep their own design fields the engine requires, but inherit the system's direction:
-  // palette, fonts, ladder, feel — one piece, not stitched parts (K8)
+  // ONE design system for the whole piece (K8) — but each KIND reads its own SHAPE: the motion
+  // ladder is a LIST of {role, u, weight}, the math ladder is a DICT of role -> u. Inheriting a
+  // motion-shaped field into a math child crashes its kit ('ladder.get' on a list, theme.py).
+  // So the palette/colors/fonts/direction flow; the per-kind shapes stay the CHILD's own.
   const child = readJson(join(FILMS, childKey, 'design.json'), null) || {};
+  const isMath = childKind === 'math';
+  const flow = Object.fromEntries(Object.entries(d).filter(([k]) =>
+    ['colors', 'fonts', 'direction', 'motion', 'feel'].includes(k)
+    || (k === 'palette' && !isMath)
+    || (k === 'ladder' && (isMath ? (d.ladder && !Array.isArray(d.ladder)) : Array.isArray(d.ladder)))
+    || (k === 'devices' && !isMath)));
   writeJson(join(FILMS, childKey, 'design.json'), {
-    ...child, ...pickDesign(d),
+    ...child, ...flow,
     direction: d.direction ?? child.direction,
     inheritedFrom: `films/${key}/design.json`,
   });
 }
-const pickDesign = (d) => Object.fromEntries(Object.entries(d).filter(([k]) => ['palette', 'colors', 'c', 'fonts', 'type', 'ladder', 'feel', 'motion', 'devices'].includes(k)));
 
 // ── state / resume ─────────────────────────────────────────────────────────────────────────
 export const stateOf = (key) => readJson(join(FILMS, key, 'state.json'), { phase: 'planning', segments: {} });

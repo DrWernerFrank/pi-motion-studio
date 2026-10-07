@@ -1,0 +1,73 @@
+[
+  {
+    "id": "r01",
+    "text": "60 seconds",
+    "type": "measurable",
+    "verifier": "duration",
+    "arg": 60,
+    "tolerance": 3,
+    "source": "request",
+    "status": "pending",
+    "evidence": null,
+    "waived_by": null
+  },
+  {
+    "id": "r02",
+    "text": "16:9 format",
+    "type": "measurable",
+    "verifier": "formats",
+    "arg": [
+      "16:9"
+    ],
+    "source": "request",
+    "status": "pending",
+    "evidence": null,
+    "waived_by": null
+  },
+  {
+    "id": "r03",
+    "text": "narrated (has audio)",
+    "type": "measurable",
+    "verifier": "has-audio",
+    "source": "request",
+    "status": "pending",
+    "evidence": null,
+    "waived_by": null
+  },
+  {
+    "id": "r04",
+    "text": "captions accompany the narration",
+    "type": "measurable",
+    "verifier": "captions",
+    "arg": "srt",
+    "tolerance": null,
+    "source": "request",
+    "status": "pending",
+    "evidence": null,
+    "waived_by": null
+  },
+  {
+    "id": "r05",
+    "text": "loudness at the narration-first target",
+    "type": "measurable",
+    "verifier": "loudness",
+    "arg": -16,
+    "tolerance": null,
+    "source": "request",
+    "status": "pending",
+    "evidence": null,
+    "waived_by": null
+  },
+  {
+    "id": "r06",
+    "text": "60-second duration within 3s",
+    "type": "measurable",
+    "verifier": "duration",
+    "arg": 60,
+    "tolerance": 3,
+    "source": "request",
+    "status": "pending",
+    "evidence": null,
+    "waived_by": null
+  }
+]

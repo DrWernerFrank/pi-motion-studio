@@ -1,0 +1,49 @@
+{
+  "id": "chart",
+  "type": "technique",
+  "makes": [
+    "animated data charts: bars racing ranks over time, drawn from a data file (chart.json) the film reads in setup \u2014 the GDP/population style pieces"
+  ],
+  "strengths": [
+    "the data + axis gates make the chart honest (rows + source + numeric pairs checked mechanically)",
+    "motion-based: one timeline reframes to every format",
+    "the drawn chart is a pure function of (chart.json, t)"
+  ],
+  "weak": [
+    "no real footage",
+    "no narration of its own (the voice service adds one)",
+    "a chart film needs its data sourced (facts) \u2014 the gates check the file, not the truth of the figures"
+  ],
+  "typical": {
+    "duration": [
+      10,
+      60
+    ],
+    "formats": [
+      "16:9",
+      "9:16"
+    ]
+  },
+  "needs": [],
+  "ready": "yes",
+  "invoke": {
+    "create": "studio new <key> --chart",
+    "look": "studio look <key>",
+    "render": "studio render <key> --draft",
+    "sound": "studio sound <key>",
+    "gate": "studio gate <key>",
+    "ship": "studio ship <key>"
+  },
+  "gates": [
+    "chart-data (rows + the source every figure cites)",
+    "chart-axis (every row a numeric pair)"
+  ],
+  "tools": [
+    "film_status",
+    "film_look",
+    "film_render",
+    "film_gate"
+  ],
+  "skill": "produce",
+  "critic": "producer-critic"
+}

@@ -1,0 +1,882 @@
+{
+  "version": 1,
+  "voice": "piper:en_US-ljspeech-medium",
+  "length_scale": 1,
+  "sample_rate": 22050,
+  "gap": 0.15,
+  "gap_samples": 3308,
+  "duration": 52.215329,
+  "timing": "native",
+  "sentences": [
+    {
+      "id": "s01.1",
+      "scene": "s01_hook",
+      "text": "Your phone knows where it is, to within a few meters, using satellites twelve thousand miles overhead.",
+      "spoken": "Your phone knows where it is, to within a few meters, using satellites twelve thousand miles overhead.",
+      "start": 0,
+      "end": 6.164898,
+      "start_sample": 0,
+      "samples": 135936,
+      "words": [
+        {
+          "w": "Your",
+          "start": 0.04644,
+          "end": 0.19737
+        },
+        {
+          "w": "phone",
+          "start": 0.24381,
+          "end": 0.44118
+        },
+        {
+          "w": "knows",
+          "start": 0.4644,
+          "end": 0.74304
+        },
+        {
+          "w": "where",
+          "start": 0.78948,
+          "end": 0.94041
+        },
+        {
+          "w": "it",
+          "start": 0.99846,
+          "end": 1.05651
+        },
+        {
+          "w": "is,",
+          "start": 1.10295,
+          "end": 1.33515
+        },
+        {
+          "w": "to",
+          "start": 1.56735,
+          "end": 1.64862
+        },
+        {
+          "w": "within",
+          "start": 1.69506,
+          "end": 1.92726
+        },
+        {
+          "w": "a",
+          "start": 1.96209,
+          "end": 1.99692
+        },
+        {
+          "w": "few",
+          "start": 2.02014,
+          "end": 2.21751
+        },
+        {
+          "w": "meters,",
+          "start": 2.26395,
+          "end": 2.78639
+        },
+        {
+          "w": "using",
+          "start": 3.19274,
+          "end": 3.54104
+        },
+        {
+          "w": "satellites",
+          "start": 3.63392,
+          "end": 4.17959
+        },
+        {
+          "w": "twelve",
+          "start": 4.23764,
+          "end": 4.50467
+        },
+        {
+          "w": "thousand",
+          "start": 4.55111,
+          "end": 4.94585
+        },
+        {
+          "w": "miles",
+          "start": 4.99229,
+          "end": 5.44508
+        },
+        {
+          "w": "overhead.",
+          "start": 5.51474,
+          "end": 6.06041
+        }
+      ],
+      "bookmarks": [],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/7e008807e0b16779cda17dbf4db41420364ae64fe16b9c83344d727340863fa9/audio.wav",
+      "hash": "7e008807e0b16779cda17dbf4db41420364ae64fe16b9c83344d727340863fa9"
+    },
+    {
+      "id": "s01.2",
+      "scene": "s01_hook",
+      "text": "The trick is a clock. {shows}Every GPS satellite carries an atomic clock, and broadcasts exactly what time it is.",
+      "spoken": "The trick is a clock. Every GPS satellite carries an atomic clock, and broadcasts exactly what time it is.",
+      "start": 6.314921,
+      "end": 13.954286,
+      "start_sample": 139244,
+      "samples": 168448,
+      "words": [
+        {
+          "w": "The",
+          "start": 6.33814,
+          "end": 6.4078
+        },
+        {
+          "w": "trick",
+          "start": 6.45424,
+          "end": 6.72127
+        },
+        {
+          "w": "is",
+          "start": 6.77932,
+          "end": 6.86059
+        },
+        {
+          "w": "a",
+          "start": 6.91864,
+          "end": 6.96508
+        },
+        {
+          "w": "clock.",
+          "start": 6.99991,
+          "end": 7.4527
+        },
+        {
+          "w": "Every",
+          "start": 7.5688,
+          "end": 7.81261
+        },
+        {
+          "w": "GPS",
+          "start": 7.84744,
+          "end": 8.52082
+        },
+        {
+          "w": "satellite",
+          "start": 8.57887,
+          "end": 9.06648
+        },
+        {
+          "w": "carries",
+          "start": 9.12453,
+          "end": 9.5541
+        },
+        {
+          "w": "an",
+          "start": 9.60054,
+          "end": 9.70503
+        },
+        {
+          "w": "atomic",
+          "start": 9.75147,
+          "end": 10.12299
+        },
+        {
+          "w": "clock,",
+          "start": 10.22748,
+          "end": 10.63383
+        },
+        {
+          "w": "and",
+          "start": 10.93569,
+          "end": 11.10984
+        },
+        {
+          "w": "broadcasts",
+          "start": 11.16789,
+          "end": 11.86449
+        },
+        {
+          "w": "exactly",
+          "start": 11.89932,
+          "end": 12.53787
+        },
+        {
+          "w": "what",
+          "start": 12.77007,
+          "end": 12.94422
+        },
+        {
+          "w": "time",
+          "start": 13.00227,
+          "end": 13.25769
+        },
+        {
+          "w": "it",
+          "start": 13.29252,
+          "end": 13.37379
+        },
+        {
+          "w": "is.",
+          "start": 13.48989,
+          "end": 13.8498
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "shows",
+          "t": 1.253879,
+          "word": "Every"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/690bef7df38e5eee4be7a23f197e6bb866009976f8256d35008707a6c4f3f263/audio.wav",
+      "hash": "690bef7df38e5eee4be7a23f197e6bb866009976f8256d35008707a6c4f3f263"
+    },
+    {
+      "id": "s02.1",
+      "scene": "s02_meaning",
+      "text": "Your phone receives the signal a moment later, and measures the delay. {delay_marks}",
+      "spoken": "Your phone receives the signal a moment later, and measures the delay.",
+      "start": 14.104308,
+      "end": 18.016871,
+      "start_sample": 311000,
+      "samples": 86272,
+      "words": [
+        {
+          "w": "Your",
+          "start": 14.15075,
+          "end": 14.30168
+        },
+        {
+          "w": "phone",
+          "start": 14.35973,
+          "end": 14.58032
+        },
+        {
+          "w": "receives",
+          "start": 14.60354,
+          "end": 15.04472
+        },
+        {
+          "w": "the",
+          "start": 15.09116,
+          "end": 15.16082
+        },
+        {
+          "w": "signal",
+          "start": 15.24209,
+          "end": 15.63683
+        },
+        {
+          "w": "a",
+          "start": 15.68327,
+          "end": 15.72971
+        },
+        {
+          "w": "moment",
+          "start": 15.76454,
+          "end": 16.04318
+        },
+        {
+          "w": "later,",
+          "start": 16.08962,
+          "end": 16.4147
+        },
+        {
+          "w": "and",
+          "start": 16.76299,
+          "end": 16.91392
+        },
+        {
+          "w": "measures",
+          "start": 16.93714,
+          "end": 17.33188
+        },
+        {
+          "w": "the",
+          "start": 17.37832,
+          "end": 17.43637
+        },
+        {
+          "w": "delay.",
+          "start": 17.49442,
+          "end": 17.92399
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "delay_marks",
+          "t": 3.912562,
+          "word": null
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/e4e9d7d43214c60625cd4cd2cd01c708ddc3e1e0e71d7ce21a1def1d064cddfe/audio.wav",
+      "hash": "e4e9d7d43214c60625cd4cd2cd01c708ddc3e1e0e71d7ce21a1def1d064cddfe"
+    },
+    {
+      "id": "s02.2",
+      "scene": "s02_meaning",
+      "text": "The signal travels at the speed of light — a defined constant, two hundred ninety nine million seven hundred ninety two thousand four hundred fifty eight meters every second. {formula_lands}",
+      "spoken": "The signal travels at the speed of light — a defined constant, two hundred ninety nine million seven hundred ninety two thousand four hundred fifty eight meters every second.",
+      "start": 18.166893,
+      "end": 28.255964,
+      "start_sample": 400580,
+      "samples": 222464,
+      "words": [
+        {
+          "w": "The",
+          "start": 18.19011,
+          "end": 18.27138
+        },
+        {
+          "w": "signal",
+          "start": 18.31782,
+          "end": 18.61968
+        },
+        {
+          "w": "travels",
+          "start": 18.67773,
+          "end": 19.20018
+        },
+        {
+          "w": "at",
+          "start": 19.26984,
+          "end": 19.35111
+        },
+        {
+          "w": "the",
+          "start": 19.39755,
+          "end": 19.46721
+        },
+        {
+          "w": "speed",
+          "start": 19.56009,
+          "end": 19.8039
+        },
+        {
+          "w": "of",
+          "start": 19.83873,
+          "end": 19.93161
+        },
+        {
+          "w": "light",
+          "start": 19.97805,
+          "end": 20.55855
+        },
+        {
+          "w": "—",
+          "start": 20.55855,
+          "end": 20.55855
+        },
+        {
+          "w": "a",
+          "start": 20.81396,
+          "end": 20.8604
+        },
+        {
+          "w": "defined",
+          "start": 20.90684,
+          "end": 21.33641
+        },
+        {
+          "w": "constant,",
+          "start": 21.41768,
+          "end": 22.05623
+        },
+        {
+          "w": "two",
+          "start": 22.27682,
+          "end": 22.38131
+        },
+        {
+          "w": "hundred",
+          "start": 22.40453,
+          "end": 22.67156
+        },
+        {
+          "w": "ninety",
+          "start": 22.69478,
+          "end": 23.00825
+        },
+        {
+          "w": "nine",
+          "start": 23.0663,
+          "end": 23.33333
+        },
+        {
+          "w": "million",
+          "start": 23.37977,
+          "end": 23.80934
+        },
+        {
+          "w": "seven",
+          "start": 23.89061,
+          "end": 24.15764
+        },
+        {
+          "w": "hundred",
+          "start": 24.18086,
+          "end": 24.43628
+        },
+        {
+          "w": "ninety",
+          "start": 24.4595,
+          "end": 24.77297
+        },
+        {
+          "w": "two",
+          "start": 24.86585,
+          "end": 25.04
+        },
+        {
+          "w": "thousand",
+          "start": 25.07483,
+          "end": 25.52762
+        },
+        {
+          "w": "four",
+          "start": 25.59728,
+          "end": 25.78304
+        },
+        {
+          "w": "hundred",
+          "start": 25.80626,
+          "end": 26.07328
+        },
+        {
+          "w": "fifty",
+          "start": 26.11972,
+          "end": 26.46802
+        },
+        {
+          "w": "eight",
+          "start": 26.59573,
+          "end": 26.81632
+        },
+        {
+          "w": "meters",
+          "start": 26.86276,
+          "end": 27.26911
+        },
+        {
+          "w": "every",
+          "start": 27.32716,
+          "end": 27.6058
+        },
+        {
+          "w": "second.",
+          "start": 27.68707,
+          "end": 28.15147
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "formula_lands",
+          "t": 10.08907,
+          "word": null
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/f63b02f488cb080d1a94c422e7276f32d6dfe460fd3a782ecf0f50aebd04fa8a/audio.wav",
+      "hash": "f63b02f488cb080d1a94c422e7276f32d6dfe460fd3a782ecf0f50aebd04fa8a"
+    },
+    {
+      "id": "s02.3",
+      "scene": "s02_meaning",
+      "text": "Distance equals that speed times the delay. {equation_lands}So one satellite gives one distance — a sphere around it.",
+      "spoken": "Distance equals that speed times the delay. So one satellite gives one distance — a sphere around it.",
+      "start": 28.405986,
+      "end": 35.174603,
+      "start_sample": 626352,
+      "samples": 149248,
+      "words": [
+        {
+          "w": "Distance",
+          "start": 28.49887,
+          "end": 28.98649
+        },
+        {
+          "w": "equals",
+          "start": 29.07937,
+          "end": 29.50894
+        },
+        {
+          "w": "that",
+          "start": 29.55538,
+          "end": 29.68309
+        },
+        {
+          "w": "speed",
+          "start": 29.75275,
+          "end": 29.99656
+        },
+        {
+          "w": "times",
+          "start": 30.043,
+          "end": 30.42613
+        },
+        {
+          "w": "the",
+          "start": 30.48418,
+          "end": 30.54223
+        },
+        {
+          "w": "delay.",
+          "start": 30.58867,
+          "end": 30.99501
+        },
+        {
+          "w": "So",
+          "start": 31.22721,
+          "end": 31.38975
+        },
+        {
+          "w": "one",
+          "start": 31.43619,
+          "end": 31.64517
+        },
+        {
+          "w": "satellite",
+          "start": 31.73805,
+          "end": 32.27211
+        },
+        {
+          "w": "gives",
+          "start": 32.31855,
+          "end": 32.52753
+        },
+        {
+          "w": "one",
+          "start": 32.59719,
+          "end": 32.79456
+        },
+        {
+          "w": "distance",
+          "start": 32.841,
+          "end": 33.40989
+        },
+        {
+          "w": "—",
+          "start": 33.40989,
+          "end": 33.40989
+        },
+        {
+          "w": "a",
+          "start": 33.81624,
+          "end": 33.89751
+        },
+        {
+          "w": "sphere",
+          "start": 34.03683,
+          "end": 34.3503
+        },
+        {
+          "w": "around",
+          "start": 34.4664,
+          "end": 34.82631
+        },
+        {
+          "w": "it.",
+          "start": 34.90758,
+          "end": 35.10495
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "equation_lands",
+          "t": 2.821224,
+          "word": "So"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/e475fb9c576d30b828905cee3dc608509182955dfcb8a674524535ffed6d2113/audio.wav",
+      "hash": "e475fb9c576d30b828905cee3dc608509182955dfcb8a674524535ffed6d2113"
+    },
+    {
+      "id": "s02.4",
+      "scene": "s02_meaning",
+      "text": "Three spheres intersect in one point. {spheres_close}That is where you are.",
+      "spoken": "Three spheres intersect in one point. That is where you are.",
+      "start": 35.324626,
+      "end": 39.063039,
+      "start_sample": 778908,
+      "samples": 82432,
+      "words": [
+        {
+          "w": "Three",
+          "start": 35.38268,
+          "end": 35.68454
+        },
+        {
+          "w": "spheres",
+          "start": 35.74259,
+          "end": 36.14894
+        },
+        {
+          "w": "intersect",
+          "start": 36.20699,
+          "end": 36.84554
+        },
+        {
+          "w": "in",
+          "start": 36.88037,
+          "end": 36.97325
+        },
+        {
+          "w": "one",
+          "start": 37.01969,
+          "end": 37.22867
+        },
+        {
+          "w": "point.",
+          "start": 37.29833,
+          "end": 37.73951
+        },
+        {
+          "w": "That",
+          "start": 37.83239,
+          "end": 38.01814
+        },
+        {
+          "w": "is",
+          "start": 38.09941,
+          "end": 38.19229
+        },
+        {
+          "w": "where",
+          "start": 38.26195,
+          "end": 38.52898
+        },
+        {
+          "w": "you",
+          "start": 38.59864,
+          "end": 38.73796
+        },
+        {
+          "w": "are.",
+          "start": 38.81923,
+          "end": 38.95855
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "spheres_close",
+          "t": 2.507764,
+          "word": "That"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/841edbbd9a6ceebcf6195e6c26a43c90ed8557aaf304b702a14226a6889d483f/audio.wav",
+      "hash": "841edbbd9a6ceebcf6195e6c26a43c90ed8557aaf304b702a14226a6889d483f"
+    },
+    {
+      "id": "s02.5",
+      "scene": "s02_meaning",
+      "text": "But your phone's clock is not atomic. {clock_gap}So a fourth satellite corrects it — solving position and time together.",
+      "spoken": "But your phone's clock is not atomic. So a fourth satellite corrects it — solving position and time together.",
+      "start": 39.213061,
+      "end": 46.074558,
+      "start_sample": 864648,
+      "samples": 151296,
+      "words": [
+        {
+          "w": "But",
+          "start": 39.23628,
+          "end": 39.38721
+        },
+        {
+          "w": "your",
+          "start": 39.41043,
+          "end": 39.53814
+        },
+        {
+          "w": "phone's",
+          "start": 39.58458,
+          "end": 39.90966
+        },
+        {
+          "w": "clock",
+          "start": 40.01415,
+          "end": 40.47855
+        },
+        {
+          "w": "is",
+          "start": 40.52499,
+          "end": 40.61787
+        },
+        {
+          "w": "not",
+          "start": 40.66431,
+          "end": 40.87329
+        },
+        {
+          "w": "atomic.",
+          "start": 40.90812,
+          "end": 41.40735
+        },
+        {
+          "w": "So",
+          "start": 41.63955,
+          "end": 41.81369
+        },
+        {
+          "w": "a",
+          "start": 41.86013,
+          "end": 41.92979
+        },
+        {
+          "w": "fourth",
+          "start": 41.99945,
+          "end": 42.26648
+        },
+        {
+          "w": "satellite",
+          "start": 42.37097,
+          "end": 42.85859
+        },
+        {
+          "w": "corrects",
+          "start": 42.90503,
+          "end": 43.3346
+        },
+        {
+          "w": "it",
+          "start": 43.43909,
+          "end": 43.74095
+        },
+        {
+          "w": "—",
+          "start": 43.74095,
+          "end": 43.74095
+        },
+        {
+          "w": "solving",
+          "start": 43.96154,
+          "end": 44.33306
+        },
+        {
+          "w": "position",
+          "start": 44.3795,
+          "end": 44.91356
+        },
+        {
+          "w": "and",
+          "start": 45.0761,
+          "end": 45.21542
+        },
+        {
+          "w": "time",
+          "start": 45.27347,
+          "end": 45.52889
+        },
+        {
+          "w": "together.",
+          "start": 45.57533,
+          "end": 45.97007
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "clock_gap",
+          "t": 2.426489,
+          "word": "So"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/b2df0c3803bfc27455be6e1a2babc30310458dc8c9e331f5a289402c6f9deb30/audio.wav",
+      "hash": "b2df0c3803bfc27455be6e1a2babc30310458dc8c9e331f5a289402c6f9deb30"
+    },
+    {
+      "id": "s03.1",
+      "scene": "s03_recap",
+      "text": "Four satellites, one clock trick, and geometry: {recap_stack}that is how GPS knows where you are.",
+      "spoken": "Four satellites, one clock trick, and geometry: that is how GPS knows where you are.",
+      "start": 46.22458,
+      "end": 52.215329,
+      "start_sample": 1019252,
+      "samples": 132096,
+      "words": [
+        {
+          "w": "Four",
+          "start": 46.27102,
+          "end": 46.52644
+        },
+        {
+          "w": "satellites,",
+          "start": 46.61932,
+          "end": 47.37397
+        },
+        {
+          "w": "one",
+          "start": 47.61778,
+          "end": 47.82676
+        },
+        {
+          "w": "clock",
+          "start": 47.89642,
+          "end": 48.17506
+        },
+        {
+          "w": "trick,",
+          "start": 48.23311,
+          "end": 48.51175
+        },
+        {
+          "w": "and",
+          "start": 48.62785,
+          "end": 48.72073
+        },
+        {
+          "w": "geometry:",
+          "start": 48.74395,
+          "end": 49.42893
+        },
+        {
+          "w": "that",
+          "start": 49.88172,
+          "end": 50.0907
+        },
+        {
+          "w": "is",
+          "start": 50.13714,
+          "end": 50.21841
+        },
+        {
+          "w": "how",
+          "start": 50.27646,
+          "end": 50.42739
+        },
+        {
+          "w": "GPS",
+          "start": 50.45061,
+          "end": 51.10077
+        },
+        {
+          "w": "knows",
+          "start": 51.15882,
+          "end": 51.42585
+        },
+        {
+          "w": "where",
+          "start": 51.4839,
+          "end": 51.70449
+        },
+        {
+          "w": "you",
+          "start": 51.77415,
+          "end": 51.91347
+        },
+        {
+          "w": "are.",
+          "start": 51.98313,
+          "end": 52.12245
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "recap_stack",
+          "t": 3.65714,
+          "word": "that"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/3f49212faadde1f514d3ef47ce478701fdd4da1b333e08506a8e20dfbd55c0d9/audio.wav",
+      "hash": "3f49212faadde1f514d3ef47ce478701fdd4da1b333e08506a8e20dfbd55c0d9"
+    }
+  ]
+}

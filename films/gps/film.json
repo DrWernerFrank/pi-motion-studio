@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "title": "gps",
+  "formats": [
+    "16:9"
+  ],
+  "request": "A 60-second narrated explainer on how GPS knows where you are, with sources for every number.",
+  "parts": [
+    "gps-s01"
+  ],
+  "duration": 60
+}

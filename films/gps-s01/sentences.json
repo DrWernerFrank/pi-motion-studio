@@ -1,0 +1,134 @@
+{
+ "version": 1,
+ "scenes": [
+  {
+   "id": "s01_hook",
+   "title": "the question"
+  },
+  {
+   "id": "s02_meaning",
+   "title": "the clock trick"
+  },
+  {
+   "id": "s03_recap",
+   "title": "the payoff"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01.1",
+   "scene": "s01_hook",
+   "text": "Your phone knows where it is, to within a few meters, using satellites twelve thousand miles overhead.",
+   "spoken": "Your phone knows where it is, to within a few meters, using satellites twelve thousand miles overhead.",
+   "bookmarks": [],
+   "line": 5
+  },
+  {
+   "id": "s01.2",
+   "scene": "s01_hook",
+   "text": "The trick is a clock. {shows}Every GPS satellite carries an atomic clock, and broadcasts exactly what time it is.",
+   "spoken": "The trick is a clock. Every GPS satellite carries an atomic clock, and broadcasts exactly what time it is.",
+   "bookmarks": [
+    {
+     "id": "shows",
+     "at_word": 5
+    }
+   ],
+   "line": 6
+  },
+  {
+   "id": "s02.1",
+   "scene": "s02_meaning",
+   "text": "Your phone receives the signal a moment later, and measures the delay. {delay_marks}",
+   "spoken": "Your phone receives the signal a moment later, and measures the delay.",
+   "bookmarks": [
+    {
+     "id": "delay_marks",
+     "at_word": 12
+    }
+   ],
+   "line": 10
+  },
+  {
+   "id": "s02.2",
+   "scene": "s02_meaning",
+   "text": "The signal travels at the speed of light — a defined constant, two hundred ninety nine million seven hundred ninety two thousand four hundred fifty eight meters every second. {formula_lands}{eq_shown}",
+   "spoken": "The signal travels at the speed of light — a defined constant, two hundred ninety nine million seven hundred ninety two thousand four hundred fifty eight meters every second.",
+   "bookmarks": [
+    {
+     "id": "formula_lands",
+     "at_word": 29
+    },
+    {
+     "id": "eq_shown",
+     "at_word": 29
+    }
+   ],
+   "line": 11
+  },
+  {
+   "id": "s02.3",
+   "scene": "s02_meaning",
+   "text": "Distance equals that speed times the delay. {equation_lands}So one satellite gives one distance — a sphere around it. {sphere_grows}",
+   "spoken": "Distance equals that speed times the delay. So one satellite gives one distance — a sphere around it.",
+   "bookmarks": [
+    {
+     "id": "equation_lands",
+     "at_word": 7
+    },
+    {
+     "id": "sphere_grows",
+     "at_word": 18
+    }
+   ],
+   "line": 12
+  },
+  {
+   "id": "s02.4",
+   "scene": "s02_meaning",
+   "text": "Three spheres intersect in one point. {spheres_close}That is where you are. {spot_pins}",
+   "spoken": "Three spheres intersect in one point. That is where you are.",
+   "bookmarks": [
+    {
+     "id": "spheres_close",
+     "at_word": 6
+    },
+    {
+     "id": "spot_pins",
+     "at_word": 11
+    }
+   ],
+   "line": 13
+  },
+  {
+   "id": "s02.5",
+   "scene": "s02_meaning",
+   "text": "But your phone's clock is not atomic. {clock_gap}So a fourth satellite corrects it — solving position and time together. {fourth_draws}",
+   "spoken": "But your phone's clock is not atomic. So a fourth satellite corrects it — solving position and time together.",
+   "bookmarks": [
+    {
+     "id": "clock_gap",
+     "at_word": 7
+    },
+    {
+     "id": "fourth_draws",
+     "at_word": 19
+    }
+   ],
+   "line": 14
+  },
+  {
+   "id": "s03.1",
+   "scene": "s03_recap",
+   "text": "Four satellites, one clock trick, and geometry: {recap_stack}that is how GPS knows where you are.",
+   "spoken": "Four satellites, one clock trick, and geometry: that is how GPS knows where you are.",
+   "bookmarks": [
+    {
+     "id": "recap_stack",
+     "at_word": 7
+    }
+   ],
+   "line": 18
+  }
+ ]
+}

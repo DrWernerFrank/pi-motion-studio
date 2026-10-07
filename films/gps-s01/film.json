@@ -1,0 +1,21 @@
+{
+  "kind": "math",
+  "title": "the whole explainer — gps",
+  "fps": 60,
+  "formats": [
+    "16:9"
+  ],
+  "duration": 52.715,
+  "lang": "en",
+  "voice": "piper:en_US-ljspeech-medium",
+  "captions": "auto",
+  "music": "none",
+  "mix": {
+    "lufs": -16
+  },
+  "gates": {
+    "maxStill": 3,
+    "maxSentenceGap": 6
+  },
+  "parent": "gps"
+}

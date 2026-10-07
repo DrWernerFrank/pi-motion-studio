@@ -1,0 +1,12 @@
+{
+  "phase": "building",
+  "segments": {
+    "s01": {
+      "status": "building",
+      "film": "gps-s01",
+      "capability": "math",
+      "at": "2026-10-07T08:03:57.749Z"
+    }
+  },
+  "started": "2026-10-07T07:55:09.025Z"
+}

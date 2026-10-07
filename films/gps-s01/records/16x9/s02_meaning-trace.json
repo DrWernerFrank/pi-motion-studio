@@ -1,0 +1,287 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.3,
+  "i": 1,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "Create; Write"
+ },
+ {
+  "kind": "animation",
+  "t": 3.9,
+  "i": 2,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 3.9,
+  "i": 3,
+  "scene": "s02_meaning",
+  "sentence": "s02.1",
+  "animation": "wait",
+  "seconds": 2.613
+ },
+ {
+  "t": 3.9,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.1"
+ },
+ {
+  "kind": "animation",
+  "t": 4.033,
+  "i": 4,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 4.033,
+  "i": 5,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.163
+ },
+ {
+  "kind": "animation",
+  "t": 5.133,
+  "i": 6,
+  "scene": "s02_meaning",
+  "sentence": "s02.2",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 14.133,
+  "i": 7,
+  "scene": "s02_meaning",
+  "sentence": "s02.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 14.133,
+  "i": 8,
+  "scene": "s02_meaning",
+  "sentence": "s02.2",
+  "animation": "wait",
+  "seconds": 9.018
+ },
+ {
+  "t": 14.133,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.2"
+ },
+ {
+  "kind": "animation",
+  "t": 14.3,
+  "i": 9,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 14.3,
+  "i": 10,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.168
+ },
+ {
+  "kind": "animation",
+  "t": 14.7,
+  "i": 11,
+  "scene": "s02_meaning",
+  "sentence": "s02.3",
+  "animation": "FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 15.7,
+  "i": 12,
+  "scene": "s02_meaning",
+  "sentence": "s02.3",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 16.1,
+  "i": 13,
+  "scene": "s02_meaning",
+  "sentence": "s02.3",
+  "animation": "FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 21.067,
+  "i": 14,
+  "scene": "s02_meaning",
+  "sentence": "s02.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 21.067,
+  "i": 15,
+  "scene": "s02_meaning",
+  "sentence": "s02.3",
+  "animation": "wait",
+  "seconds": 4.97
+ },
+ {
+  "t": 21.067,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.3"
+ },
+ {
+  "kind": "animation",
+  "t": 21.2,
+  "i": 16,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 21.2,
+  "i": 17,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.154
+ },
+ {
+  "kind": "animation",
+  "t": 21.767,
+  "i": 18,
+  "scene": "s02_meaning",
+  "sentence": "s02.4",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 22.333,
+  "i": 19,
+  "scene": "s02_meaning",
+  "sentence": "s02.4",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 22.9,
+  "i": 20,
+  "scene": "s02_meaning",
+  "sentence": "s02.4",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 23.4,
+  "i": 21,
+  "scene": "s02_meaning",
+  "sentence": "s02.4",
+  "animation": "GrowFromCenter"
+ },
+ {
+  "kind": "animation",
+  "t": 24.933,
+  "i": 22,
+  "scene": "s02_meaning",
+  "sentence": "s02.4",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 24.933,
+  "i": 23,
+  "scene": "s02_meaning",
+  "sentence": "s02.4",
+  "animation": "wait",
+  "seconds": 1.559
+ },
+ {
+  "t": 24.933,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.4"
+ },
+ {
+  "kind": "animation",
+  "t": 25.1,
+  "i": 24,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 25.1,
+  "i": 25,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.175
+ },
+ {
+  "kind": "animation",
+  "t": 26.0,
+  "i": 26,
+  "scene": "s02_meaning",
+  "sentence": "s02.5",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 32.1,
+  "i": 27,
+  "scene": "s02_meaning",
+  "sentence": "s02.5",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 32.1,
+  "i": 28,
+  "scene": "s02_meaning",
+  "sentence": "s02.5",
+  "animation": "wait",
+  "seconds": 6.12
+ },
+ {
+  "t": 32.1,
+  "kind": "sentence_end",
+  "scene": "s02_meaning",
+  "sentence": "s02.5"
+ },
+ {
+  "kind": "animation",
+  "t": 32.4,
+  "i": 29,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 32.4,
+  "i": 30,
+  "scene": "s02_meaning",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.3
+ },
+ {
+  "kind": "scene_end",
+  "t": 32.4,
+  "scene": "s02_meaning"
+ }
+]
