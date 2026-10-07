@@ -26,7 +26,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W2-tools | project_* tools + tools check | .pi/extensions/motion-tools/project-tools.ts (BY_FILE = lead) | W2-proj | `--only tools` | glm-worker | **DONE a271650** |
 | W3-gui | Make dialog + public/project.js + server endpoints + gui-smoke/gui-security | studio-gui/**, engine/verify/produce/{gui-smoke,gui-security}.mjs | W2-make (API frozen) | `--only gui-smoke,gui-security` | glm-worker + lead | **DONE 7e5dda0** (worker died at 7m; the lead finished: 2 real bugs found+fixed) |
 | W3-grow | capability new/check scaffold + growth check | engine/produce/growth.mjs, templates/capability/**, engine/verify/produce/growth.mjs | K1/K2 | `--only growth` | glm-worker | **DONE 9843c1d** (w3-grow2, verified) |
-| W3-bat | the 12-brief battery: fresh critics write references, then plans + check | engine/produce/battery/**, engine/verify/produce/battery.mjs | W2-skill | `--only battery` | critics(fresh)+glm | todo |
+| W3-bat | the 12-brief battery: fresh critics write references, then plans + check | engine/produce/battery/**, engine/verify/produce/battery.mjs | W2-skill | `--only battery` | fresh GLM critics + lead | **DONE 7a7527a** |
 | W4-err | the failure matrix + errors check | engine/verify/produce/errors.mjs (+ small loud-failure fixes via lead) | all | `--only errors` | glm-worker | todo |
 | W4-docs | docs check (help completeness, Producer sections) | engine/verify/produce/docs.mjs (README/AGENTS = lead) | W2 | `--only docs` | lead | **DONE except ADR-003** (00dd1c8; closes when w2-asm lands) |
 | W4-hyg | hygiene check + cache gc for the new dirs | engine/verify/produce/hygiene.mjs (cache.mjs = lead) | W1+ | `--only hygiene` | lead | **DONE 00dd1c8** (found + fixed the gc fixture-deletion bug, the D-026 class's 4th path) |
@@ -88,6 +88,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `gui-security` — POST w/o token 403; oversized request, traversal/absolute attachment, concurrent run, unknown id refused; request never through a shell; nothing runs outside the job runner
 - [x] `growth` — W3-grow2: scaffold refuses naming every stub; verify-chart honest (data+axis gates); the menu grows; removal consistent — DONE
 - [ ] `growth` — `capability new` scaffolds; `capability check` refuses until parts exist, accepts when they do; appears in `capabilities` + plan menu; demo D's capability passes; removing a capability keeps the registry consistent
+- [x] `battery` — 12 plans vs 12 fresh-eye references: 100% coverage, sets honest, flags exact, nothing invented — DONE
 - [ ] `battery` — the 12 stored plans validate; >= 90% of each independent reference's requirements covered; capability sets in the reference's acceptable sets; missing inputs flagged; alternatives stated; no invented inputs
 - [ ] `errors` — the P8 matrix fails loud with next steps; prompt injection changes nothing + noted in log.md; killed run + two simultaneous runs handled; partial output never promoted
 - [x] `docs` — the lead: help/Start-here/Producer/CAPABILITIES-current/THIRD_PARTY + the older docs checks green (ADR-003 leg closes with w2-asm)
@@ -105,8 +106,10 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: 24 of 28 green (docs' last leg waits on ADR-003). In flight: w2-asm (assemble+S2+ADR-003),
-w4-err (the 13-case failure matrix), w3-bat-ref1+ref2 (the 12 independent battery references).
+Now: 25 of 28 green. battery DONE (100% x 12 — the references were written first by fresh critics,
+the plans after, two plans honestly restructured when the references proved my first choices wrong).
+In flight: w2-asm (assemble + S2 + ADR-003 — the last check of the table's build phases), w4-err
+(the 13-case failure matrix, its check is written and verifying).
 The lead's own fixes this round: brief-lint finally implemented (help-sketch since P0), cache gc's
 fixture-deletion bug (D-026's 4th path), the produce caches in gc, docs+hygiene checks.
 Next: when the references land, the LEAD writes the 12 battery plans (plan-only, per the mission)
