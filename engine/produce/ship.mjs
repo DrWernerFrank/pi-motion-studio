@@ -52,9 +52,18 @@ export async function verifyProject(key) {
     if (!row) return { status: 'red', evidence: `no fact "${r.fact}" in films/${key}/facts.json` };
     return { status: row.status, evidence: `${r.fact}: ${row.why}` };
   };
-  const rows = (meas.rows.length ? meas.rows : ledger).map((r) =>
+  // NEVER replace the on-disk ledger with a partial picture: if readLedger threw, `ledger`
+  // is [] and meas.rows is [] — writing either DESTROYS the file (found live: one verify run
+  // wiped 6 seeded rows to []). Merge measured statuses into what is on disk, by id; write
+  // nothing when there is nothing measured.
+  const measured = meas.rows.filter((r) => r.status && r.status !== 'pending');
+  const merged = ledger.map((r) => {
+    const m = measured.find((x) => x.id === r.id);
+    return m ? { ...r, status: m.status, evidence: m.evidence ?? r.evidence } : r;
+  });
+  const rows = merged.map((r) =>
     r.type === 'fact' && r.status !== 'waived' ? { ...r, ...factOf(r) } : { ...r });
-  writeStatuses(key, rows);
+  if (measured.length || ledger.some((r) => r.type === 'fact')) writeStatuses(key, rows);
   const reds = rows.filter((r) => r.status === 'red');
   if (reds.length) why.push(`requirements red: ${reds.map((r) => `${r.id} (${r.text}): ${r.evidence}`).join('; ')}`);
   const pending = reds.length ? [] : rows.filter((r) => r.status === 'pending');
