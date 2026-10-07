@@ -27,7 +27,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W3-gui | Make dialog + public/project.js + server endpoints + gui-smoke/gui-security | studio-gui/**, engine/verify/produce/{gui-smoke,gui-security}.mjs | W2-make (API frozen) | `--only gui-smoke,gui-security` | glm-worker + lead | **DONE 7e5dda0** (worker died at 7m; the lead finished: 2 real bugs found+fixed) |
 | W3-grow | capability new/check scaffold + growth check | engine/produce/growth.mjs, templates/capability/**, engine/verify/produce/growth.mjs | K1/K2 | `--only growth` | glm-worker | **DONE 9843c1d** (w3-grow2, verified) |
 | W3-bat | the 12-brief battery: fresh critics write references, then plans + check | engine/produce/battery/**, engine/verify/produce/battery.mjs | W2-skill | `--only battery` | fresh GLM critics + lead | **DONE 7a7527a** |
-| W4-err | the failure matrix + errors check | engine/verify/produce/errors.mjs (+ small loud-failure fixes via lead) | all | `--only errors` | glm-worker | todo |
+| W4-err | the failure matrix + errors check | engine/verify/produce/errors.mjs (+ small loud-failure fixes via lead) | all | `--only errors` | glm-worker | **DONE f79ae92** (2 timeouts; the file was complete — the lead verified) |
 | W4-docs | docs check (help completeness, Producer sections) | engine/verify/produce/docs.mjs (README/AGENTS = lead) | W2 | `--only docs` | lead | **DONE except ADR-003** (00dd1c8; closes when w2-asm lands) |
 | W4-hyg | hygiene check + cache gc for the new dirs | engine/verify/produce/hygiene.mjs (cache.mjs = lead) | W1+ | `--only hygiene` | lead | **DONE 00dd1c8** (found + fixed the gc fixture-deletion bug, the D-026 class's 4th path) |
 | W5-demoA | demo A `composite`: clip + Pythagoras + end card, 50-70s, 16:9+9:16 | films/composite*/** | W2-asm, W2-skill | demos+review rows green | producer-role | todo |
@@ -90,6 +90,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `growth` — `capability new` scaffolds; `capability check` refuses until parts exist, accepts when they do; appears in `capabilities` + plan menu; demo D's capability passes; removing a capability keeps the registry consistent
 - [x] `battery` — 12 plans vs 12 fresh-eye references: 100% coverage, sets honest, flags exact, nothing invented — DONE
 - [ ] `battery` — the 12 stored plans validate; >= 90% of each independent reference's requirements covered; capability sets in the reference's acceptable sets; missing inputs flagged; alternatives stated; no invented inputs
+- [x] `errors` — W4-err: all 13 matrix cases loud with next steps; the injection changed nothing — DONE
 - [ ] `errors` — the P8 matrix fails loud with next steps; prompt injection changes nothing + noted in log.md; killed run + two simultaneous runs handled; partial output never promoted
 - [x] `docs` — the lead: help/Start-here/Producer/CAPABILITIES-current/THIRD_PARTY + the older docs checks green (ADR-003 leg closes with w2-asm)
 - [ ] `docs` — `studio help` lists every command; README + AGENTS.md "Start here" + "## Producer"; skill, critic, CAPABILITIES.md, ADR-001..004, THIRD_PARTY.md exist; older doc checks still pass
