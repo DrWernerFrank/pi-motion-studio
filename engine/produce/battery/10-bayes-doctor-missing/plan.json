@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "goal": "Open on the real doctor explaining the test, then earn the viewer's trust with Bayes' theorem worked on that very test \u2014 90 seconds, narrated.",
+  "audience": "a patient who just got a positive result and does not know what it means",
+  "assumptions": [
+    "90 seconds total: the clip is the cold open (~10s), the Bayes example the body (~80s)",
+    "the Bayes numbers are computed claims (sympy), the clip's words are real footage",
+    "the example uses the test's own numbers if the clip states them, else a clearly-labeled typical example",
+    "the language follows the request: English",
+    "no format was named: the plan states its assumption (16:9)",
+    "narrated: a spoken voice carries the explanation",
+    "the doctor clip is missing: flagged in feasibility; the plan keeps both the open (edit) and the body (math)"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 90
+    },
+    {
+      "type": "captions",
+      "name": "captions"
+    }
+  ],
+  "decision": {
+    "chosen": "composite",
+    "why": "The piece needs what no single technique has: real footage for the doctor (edit) and a narrated, verified derivation for Bayes (math \u2014 the numbers must be computed claims, the narration must drive the scenes). The edit-film assembler joins them with a designed transition.",
+    "alternatives": [
+      {
+        "id": "math only",
+        "rejected_because": "a Bayes explainer without the real doctor loses the reason to care \u2014 the clip IS the hook"
+      },
+      {
+        "id": "edit only",
+        "rejected_because": "the derivation cannot be cut from footage we do not have; a captioned formula over the doctor would be neither verified nor narrated"
+      },
+      {
+        "id": "simplest: the clip plus on-screen text of the result",
+        "rejected_because": "the simplest thing that could work \u2014 but 'explain Bayes' theorem' asks for the worked example, and worked means computed"
+      }
+    ],
+    "probes": [
+      "probes/p1-seam.png"
+    ]
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "edit",
+      "role": "the cold open: the real doctor",
+      "brief": "The clip of the doctor explaining the test: cut to its strongest 10 seconds, captioned in the studio's design, ending on the question the example will answer.",
+      "duration": 10,
+      "inputs": [
+        "input:i1"
+      ],
+      "acceptance": [
+        "the real clip (never a re-enactment)",
+        "ends on the question",
+        "captioned",
+        "the piece opens on the real doctor clip (a cold open, the actual footage)",
+        "Bayes' theorem is explained with a worked example (real numbers computed on screen)",
+        "the math is verified: the theorem statement and the example are sympy claims",
+        "the example's numbers are honest: hypothetical inputs are labeled as such",
+        "narrated: a spoken voice carries the explanation"
+      ]
+    },
+    {
+      "id": "s02",
+      "capability": "math",
+      "role": "the Bayes example, worked",
+      "brief": "Bayes on the test: the prior, the test's sensitivity and specificity (computed claims), the posterior \u2014 the number the patient actually wants, narrated.",
+      "duration": 80,
+      "inputs": [],
+      "acceptance": [
+        "every number is a sympy-verified claim",
+        "the narration clock drives the scenes",
+        "the posterior lands as the payoff",
+        "the piece opens on the real doctor clip (a cold open, the actual footage)",
+        "Bayes' theorem is explained with a worked example (real numbers computed on screen)",
+        "the math is verified: the theorem statement and the example are sympy claims",
+        "the example's numbers are honest: hypothetical inputs are labeled as such",
+        "narrated: a spoken voice carries the explanation"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "edit-film",
+    "transitions": "a designed hand-off (the doctor's last frame becomes the math's first ground), never a black cut",
+    "audio": "one mix: the clip's dialog, then the narration, at one loudness"
+  },
+  "feasibility": {
+    "blocked_inputs": [
+      "input:i1 \u2014 the doctor clip does not exist (the human must supply it; the plan holds without it)"
+    ],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 150,
+    "usd": 0
+  },
+  "risks": [
+    "the clip's exact numbers may differ from the example's \u2014 the piece says which it uses",
+    "the composite seam needs its probe (saved)"
+  ]
+}

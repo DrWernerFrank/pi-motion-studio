@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "goal": "The same screen recording, snappy: the pauses gone, the slow part sped up, the clicks punched in, captions on \u2014 the tutorial that respects your time.",
+  "audience": "someone trying to learn the procedure",
+  "assumptions": [
+    "the recording is a screen capture (the idle/freeze cuts and the punch-ins apply)",
+    "captions from the transcript where there is speech, UI labels where there is none",
+    "'snappy' means: no second where nothing happens",
+    "the input is one source: the named screen recording",
+    "no duration or format was named: the plan states its assumptions (the recording's own length trimmed tight, 16:9)"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 60
+    },
+    {
+      "type": "captions",
+      "name": "captions"
+    }
+  ],
+  "decision": {
+    "chosen": "edit",
+    "why": "Every ask is a measured edit: the pauses leave by the idle cut (freezedetect), the slow part by the speed op (audio locked), the click punch-ins by the overlay op on the transcript's click words, the captions by the caption design \u2014 one edit film, all four.",
+    "alternatives": [
+      {
+        "id": "motion",
+        "rejected_because": "the recording is the content \u2014 motion has no footage"
+      },
+      {
+        "id": "simplest: cut the pauses only",
+        "rejected_because": "the simplest thing that could work \u2014 and it is half the ask; the slow part and the clicks are named too"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "edit",
+      "role": "the snappy cut",
+      "brief": "Ingest, transcribe, cut the idles (freezedetect), speed the slow stretch (atempo-locked), punch in on the clicks (the overlay op), captions throughout, one loudness.",
+      "duration": 60,
+      "inputs": [
+        "input:i1"
+      ],
+      "acceptance": [
+        "no frozen stretch beyond the max",
+        "the speed-up stays audio-locked",
+        "every click punches in",
+        "captions on",
+        "cut pauses: the idle and silent stretches are removed",
+        "speed the slow part: the identified slow passage is sped up (audio locked)",
+        "the slow part is identified from the recording itself (the freeze/idle map)",
+        "zoom on clicks: punch-in zooms at the click moments",
+        "captions: burned-in captions plus SRT/VTT",
+        "captions and zoomed content stay inside the safe area",
+        "snappy overall: the result is tight (a subjective row \u2014 the producer-critic judges it)"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "the dialog bus at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [
+      "input:i1 \u2014 the screen recording does not exist (the human must supply it)"
+    ],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 45,
+    "usd": 0
+  },
+  "risks": [
+    "a recording with no speech needs label-captions instead of transcript ones \u2014 the design covers both"
+  ]
+}

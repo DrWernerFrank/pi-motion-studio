@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "goal": "A 30-second birthday film from the 12 phone clips and the song: the year in twelve beats, cut to the music, ending on the people.",
+  "audience": "the person whose birthday it is (and everyone at the party)",
+  "assumptions": [
+    "30 seconds of finished film",
+    "the song is the clock: cuts on its beats",
+    "the 12 clips are the human's own files (their license is their attestation)",
+    "the footage is the 12 named phone clips (the count is twelve \u2014 the plan takes all twelve)",
+    "the named song is the music bed (the one track the human chose)",
+    "the bed is mixed, not pasted: it lands at the loudness target as one mix",
+    "no format was named: the plan states its assumption (16:9, landscape phone clips)",
+    "the 12 phone clips are missing: flagged in feasibility; the song too: flagged in feasibility"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 30
+    }
+  ],
+  "decision": {
+    "chosen": "edit",
+    "why": "A montage of real clips cut to a real song: the edit technique measures the song (its beats land the cuts \u2014 the montage preset), ingests the clips once, and the music bed rule ducks nothing here because the song IS the piece.",
+    "alternatives": [
+      {
+        "id": "motion",
+        "rejected_because": "the clips are the content \u2014 a designed piece without them would not be a birthday film"
+      },
+      {
+        "id": "simplest: the 12 clips in order, 2.5 seconds each",
+        "rejected_because": "the simplest thing that could work \u2014 and the arithmetic is right \u2014 but 12 equal beats ignores the song's shape; the chorus deserves the best clip"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "edit",
+      "role": "the montage",
+      "brief": "Ingest the 12 clips and the song; measure the song's beats; cut each clip to its moment (the best frames, not the first); end on the people. Captions: names if the human gives them.",
+      "duration": 30,
+      "inputs": [
+        "input:i1",
+        "input:i2",
+        "input:i3",
+        "input:i4",
+        "input:i5",
+        "input:i6",
+        "input:i7",
+        "input:i8",
+        "input:i9",
+        "input:i10",
+        "input:i11",
+        "input:i12",
+        "input:i13"
+      ],
+      "acceptance": [
+        "every cut within 1 frame of a beat",
+        "no clip twice",
+        "the last beat is the payoff",
+        "it reads as a birthday video: a celebratory arc, the people at the end",
+        "the montage is paced to the song: cuts land on its measured beats",
+        "the montage uses the twelve clips: no clip twice, the best frames of each",
+        "30 seconds total",
+        "the bed is mixed, not pasted: ducked 10-14 dB under any clip speech"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "cuts on the beat (a birthday montage does not crossfade)",
+    "audio": "the song at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [
+      "the 12 phone clips do not exist (the human must supply them)",
+      "the song does not exist (the human must supply it)"
+    ],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 60,
+    "usd": 0
+  },
+  "risks": [
+    "mixed phone formats (portrait + landscape) \u2014 the design picks one orientation and letterboxes honestly"
+  ]
+}

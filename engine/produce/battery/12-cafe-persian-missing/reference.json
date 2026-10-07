@@ -1,0 +1,31 @@
+{
+  "brief": "A 30-second promo for my cafe in Persian, logo attached (~/logo.png), warm colors.",
+  "requirements": [
+    "30 seconds (duration 30s ±2)",
+    "the promo is in Persian: language fa (the request is written in English but the piece is Persian — the language verifier ASR-checks the mix)",
+    "Persian on-screen text is shaped right-to-left (correctly joined glyphs, RTL alignment — the captions service with Vazirmatn does fa shaping; no tofu, no LTR rendering)",
+    "narration in Persian if the promo is narrated (an fa voice — the fa_IR voice exists; a text-only promo is a stated choice, not an accident)",
+    "the logo ~/logo.png is the brand element (used on screen — the closing brand card; a human-supplied asset; it is missing: flagged, never invented or replaced by a drawn logo)",
+    "warm colors: the design system is a warm palette (oranges, reds, ambers in design.json; subjective — critic evidence)",
+    "a promo arc: a fast hook, the cafe's mood or feel, a closing brand card with the logo (a motion-graphics ad, not a slideshow)",
+    "sound: one mix at the loudness target (a music bed cue-synced to the motion; licensed or made here — no unlicensed track)",
+    "no format was named: the plan states its assumption (a promo suggests 9:16 vertical; whichever it picks is written down)",
+    "no invented cafe facts (no made-up name, menu, prices or address: the brand truth is the logo, and it is missing — placeholders are marked as assumptions)"
+  ],
+  "acceptable_capability_sets": [
+    ["motion"],
+    ["motion", "mix"],
+    ["motion", "captions", "mix"],
+    ["motion", "voice", "mix"]
+  ],
+  "expected_feasibility_flags": [
+    "~/logo.png missing"
+  ],
+  "must_not": [
+    "inventing the logo or the cafe's name, menu and details (~/logo.png is the brand truth and it is missing: flagged; placeholders are assumptions, never invented facts)",
+    "a capability set that cannot shape RTL Persian text (plain LTR rendering, tofu or unjoined glyphs fail the ask — the captions service + Vazirmatn do fa RTL shaping)",
+    "English on-screen copy (the request is written in English but the promo is in Persian: fa copy, fa narration, RTL alignment)",
+    "a cool or neutral palette against 'warm colors' (the design system must be warm — oranges, reds, ambers)",
+    "edit as the base technique (no cafe footage exists — only the missing logo: the promo is code-drawn)"
+  ]
+}

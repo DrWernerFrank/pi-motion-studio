@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "goal": "A 10-second looping background you could put behind anything: calm, seamless, no hook \u2014 the opposite of a teaser.",
+  "audience": "anyone who needs a background: a stream, a kiosk, a meditation app",
+  "assumptions": [
+    "10 seconds of finished film that loops seamlessly",
+    "16:9",
+    "calm means slow springs, low contrast motion, no startle beats \u2014 the gates' hook rule is explicitly N/A here",
+    "abstract: non-representational visuals \u2014 no text, no logos, nothing to read",
+    "a background piece: no narration or dialog (the brief asks for none)",
+    "the piece is code-drawn, and nothing is missing: no real footage, no inputs exist"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 10
+    }
+  ],
+  "decision": {
+    "chosen": "motion",
+    "why": "A seamless abstract loop is a pure function of time \u2014 the motion technique's seek(t) contract makes the last frame meet the first exactly (the loop-seam gate proves it), and its synth can hold one calm chord.",
+    "alternatives": [
+      {
+        "id": "edit",
+        "rejected_because": "no real footage exists for an abstract background \u2014 and a cut loop would pop at the seam"
+      },
+      {
+        "id": "simplest: a single slow gradient shift",
+        "rejected_because": "the simplest thing that could work, and nearly enough \u2014 but one gradient reads as a screensaver; a second slow layer (drifting soft shapes) makes it a background without making it an event"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "motion",
+      "role": "the loop",
+      "brief": "Slow drifting soft shapes over a deep calm ground, one low chord, the seam exact: the last frame equals the first.",
+      "duration": 10,
+      "inputs": [],
+      "acceptance": [
+        "the loop seam is frame-exact (the gate)",
+        "nothing startles: the motion budget stays slow",
+        "16:9",
+        "seamless loop: the last frame joins the first with no visible seam",
+        "calm: slow gentle motion and a soft palette, no hard cuts, no hook beat",
+        "deterministic: the same inputs give identical frames",
+        "abstract: non-representational \u2014 no text, no logos, nothing to read",
+        "seamless loop: the last frame joins the first with no visible jump",
+        "calm: slow gentle motion and a soft palette, no hard cuts, no flashes, no busy promo pacing"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "one calm synth chord at -20 LUFS (a background, not a foreground)"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 30,
+    "usd": 0
+  },
+  "risks": [
+    "calm can drift into dead time \u2014 the pacing needs the gentle-motion version of the gates, not the teaser's"
+  ]
+}

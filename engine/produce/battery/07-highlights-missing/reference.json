@@ -1,0 +1,30 @@
+{
+  "brief": "Three 45-second vertical highlights from talk.mp4.",
+  "requirements": [
+    "three separate highlights (count 3: three 45-second vertical pieces — three deliverables or three clearly separated parts, not one video)",
+    "each highlight runs 45 seconds (duration 45s ±2, measured on every one of the three)",
+    "every highlight is vertical 9:16 (the 'vertical' ask, reframed from the talk's own footage)",
+    "all footage comes from the named source talk.mp4 (ingested as the project's input; no other source)",
+    "the three highlights cover different moments of the talk (three distinct selections, not the same passage delivered three ways)",
+    "each highlight is cut tight: pauses, silence and filler removed (measured cuts from the audio — silence map + transcript, not guessed in/out points)",
+    "the selection targets the talk's strongest moments (a stated criterion per highlight; subjective — critic evidence on the drafts)",
+    "the talk's own speech is carried (the speaker's audio stays intelligible; one loudness pass on each piece)",
+    "talk.mp4 is missing: the plan flags it in feasibility (blocked_inputs) and still plans all three highlights around the named source — never invents or substitutes footage"
+  ],
+  "acceptable_capability_sets": [
+    ["edit"],
+    ["edit", "motion"],
+    ["edit", "mix"],
+    ["edit", "captions", "mix"]
+  ],
+  "expected_feasibility_flags": [
+    "talk.mp4 missing"
+  ],
+  "must_not": [
+    "inventing talk.mp4 or substituting stock/other footage for the missing source (flag it, never fake it)",
+    "motion or math as the base technique (a talk is real footage: only edit can cut it; motion may only add a title/end card)",
+    "one 45-second video delivered instead of three highlights (or the same 45 seconds three times)",
+    "highlights chosen without evidence (the first 45 seconds on repeat: the selection must be measured cuts plus critic evidence)",
+    "dropping the vertical 9:16 reframe (16:9-only deliverables fail the ask)"
+  ]
+}

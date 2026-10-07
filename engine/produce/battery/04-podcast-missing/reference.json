@@ -1,0 +1,42 @@
+{
+  "brief": "A 45-second clip with waveform and captions from podcast.mp3.",
+  "requirements": [
+    "The clip is cut from the named file podcast.mp3 (its real audio, referenced read-only) - nothing else is the source",
+    "Duration: 45 seconds (verifier tolerance 2 s): a coherent selected excerpt with clean in/out, not the file truncated or sped up",
+    "A waveform visual driven by the real samples of the selected audio (an honest trace of the file, not a decorative fake animation)",
+    "Captions from an ASR transcript of the speech: word-accurate, burned-in plus SRT, in the podcast's spoken language (English unless the audio proves otherwise)",
+    "The audio is the podcast's own speech for those 45 s (never re-voiced with TTS), mixed to the loudness target",
+    "No format is named in the brief: the plan must state its assumed format (e.g. 16:9) as an explicit assumption and deliver exactly that",
+    "The visuals are drawn (an mp3 has no frames): waveform and captions carry the piece, no invented podcast footage",
+    "The missing file is flagged in feasibility and never substituted (no placeholder audio, no synthetic stand-in)"
+  ],
+  "acceptable_capability_sets": [
+    [
+      "motion"
+    ],
+    [
+      "asr",
+      "motion"
+    ],
+    [
+      "asr",
+      "captions",
+      "motion"
+    ],
+    [
+      "edit",
+      "motion"
+    ]
+  ],
+  "expected_feasibility_flags": [
+    "podcast.mp3 missing"
+  ],
+  "must_not": [
+    "must not invent the podcast (no placeholder or synthetic audio - the missing file is flagged, never faked)",
+    "must not fake the waveform (animated bars not driven by the file's real samples)",
+    "must not re-voice the podcast with TTS (the clip's audio is the podcast's own)",
+    "must not skip the waveform or the captions (both are explicit asks)",
+    "must not pick a technique that cannot cut real audio (math is a narrated explainer, not a podcast clip)",
+    "must not assume a format silently (the brief names none - the assumption is stated and followed)"
+  ]
+}

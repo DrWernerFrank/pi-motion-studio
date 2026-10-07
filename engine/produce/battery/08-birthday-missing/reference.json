@@ -1,0 +1,32 @@
+{
+  "brief": "A 30-second birthday video from 12 phone clips and a song.",
+  "requirements": [
+    "30 seconds total (duration 30s ±2, one piece)",
+    "the footage is the 12 named phone clips (count 12: all twelve ingested as inputs; the montage is cut from them)",
+    "the named song is the music bed (the one track the brief names — the piece is built on it)",
+    "the bed is mixed, not pasted: ducked 10-14 dB under any clip speech, one mix at the loudness target (LUFS ±1, true peak <= -1 dBTP)",
+    "the montage is paced to the song (cuts land on the beat; 12 clips across 30s implies ~2.5s average per clip — no long holds)",
+    "it reads as a birthday video (a celebratory arc and a birthday title or closing moment; subjective — critic evidence)",
+    "no format was named: the plan states its assumption (phone clips suggest 9:16 vertical; whichever it picks is written down)",
+    "the 12 phone clips are missing: flagged in feasibility — never fabricated (no stand-in stock clips passed off as the human's)",
+    "the song is missing: flagged in feasibility — never replaced by a synthesized or stock track passed off as the named song",
+    "one piece, one mix (the song bed and any clip audio land as a single mix, not stitched per clip)"
+  ],
+  "acceptable_capability_sets": [
+    ["edit"],
+    ["edit", "motion"],
+    ["edit", "mix"],
+    ["edit", "motion", "mix"]
+  ],
+  "expected_feasibility_flags": [
+    "the 12 phone clips missing",
+    "the song missing"
+  ],
+  "must_not": [
+    "inventing the 12 phone clips or the song (both missing: flagged in feasibility, never fabricated or replaced by stock media)",
+    "motion or math as the base technique (the clips are real footage: only edit cuts a montage; motion may only add a title/end card)",
+    "planning fewer than the 12 named clips (the count is an ask: twelve ingested inputs)",
+    "a montage with no music bed (the song is named in the brief: the mix is built on it, ducked under any speech)",
+    "ignoring the pacing (12 clips in 30 seconds: unpaced long holds are not a montage — cut to the song)"
+  ]
+}

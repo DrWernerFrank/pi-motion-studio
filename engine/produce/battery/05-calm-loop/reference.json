@@ -1,0 +1,31 @@
+{
+  "brief": "A calm 10-second looping abstract background, 16:9.",
+  "requirements": [
+    "Duration: 10 seconds (verifier tolerance 2 s) in 16:9, the only format asked (exact geometry)",
+    "Seamless loop: the last frame joins the first with no visible seam, cut or jump - the file is meant to play on repeat",
+    "Abstract: non-representational visuals (no text, no logos, no literal objects or scenes)",
+    "Calm: slow gentle motion and a soft palette, no hard cuts, flashes or busy promo pacing (subjective - it needs critic evidence)",
+    "A background piece: no narration or dialog (the brief asks for none)",
+    "No real footage and no inputs exist: the piece is code-drawn, and nothing is missing (do not flag or invent inputs)",
+    "Deterministic render: the same inputs give identical frames (the loop re-renders the same)"
+  ],
+  "acceptable_capability_sets": [
+    [
+      "motion"
+    ],
+    [
+      "mix",
+      "motion"
+    ]
+  ],
+  "expected_feasibility_flags": [],
+  "must_not": [
+    "must not narrate or add dialog (a background is not narrated - nothing was asked)",
+    "must not make a hook-first promo (calm is the explicit register)",
+    "must not leave a visible loop seam (a hard end or fade that breaks on repeat fails 'looping')",
+    "must not use literal content (text, logos, objects) - abstract is the ask",
+    "must not pick a technique that needs real footage (edit) or narration timing (math) - neither exists here",
+    "must not deliver another format (16:9 is the ask) or a longer file meant to be trimmed",
+    "must not invent inputs (nothing is missing)"
+  ]
+}

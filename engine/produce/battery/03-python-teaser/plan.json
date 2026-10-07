@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "goal": "A 20-second vertical teaser that feels like python.org: their blue, their type, their two-tone snake energy \u2014 ending on their name.",
+  "audience": "a developer who has heard of Python but never clicked",
+  "assumptions": [
+    "vertical means 9:16",
+    "'their look' means captured truth: the real palette, the real logo, the real fonts \u2014 never redrawn from memory",
+    "20 seconds of finished film",
+    "on-screen text is in English (the request's and the site's language)",
+    "sound is a beat-synced bed as one mix at the loudness target"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "9:16"
+      ],
+      "duration": 20
+    }
+  ],
+  "decision": {
+    "chosen": "motion",
+    "why": "A teaser is brand motion: the capture service takes the real site (screenshots, palette, fonts \u2014 the truth, not an impression) and the motion technique animates it in 9:16 with the studio's springs and a synthesized bed.",
+    "alternatives": [
+      {
+        "id": "edit",
+        "rejected_because": "there is no real footage of python.org to cut \u2014 a teaser needs designed motion over captured truth"
+      },
+      {
+        "id": "simplest: the captured hero screenshot with a slow zoom and a title",
+        "rejected_because": "the simplest thing that could work \u2014 and half of it is right: the zoom is honest; but 20 seconds of one zoom has no payoff beat, and the piece needs the type to move like the brand does"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "motion",
+      "role": "the teaser",
+      "brief": "Capture https://www.python.org (palette, logo, fonts); a 20-second vertical tease: the blue arrives, the two-tone wordmark resolves, one payoff beat, the name lands.",
+      "duration": 20,
+      "inputs": [
+        "asset:a1"
+      ],
+      "acceptance": [
+        "the palette and logo are the CAPTURED ones (site.json)",
+        "the hook lands in the first 2 seconds",
+        "the phone test passes",
+        "'in their look': colors, fonts, logo and UI come from captured screenshots of python.org (never redrawn from memory)",
+        "the captures are recorded as assets (origin URL, license, sha256)",
+        "the piece is code-drawn motion on top of the captured truth",
+        "a teaser arc: the hook in the first 2 seconds, the payoff, the name last",
+        "python.org is teased: the hook first, the payoff, the name last",
+        "'in their look': colors, fonts, logo and UI come from captured screenshots of the site",
+        "a teaser for python.org: hook-first promo pacing",
+        "sound: a beat-synced bed (music/SFX) as one mix at the loudness target",
+        "9:16 vertical, the only format asked: safe area holds (the platform UI never clips the design)",
+        "hook-first promo pacing: no dead time (something moves in every window \u2014 the gates' rule)",
+        "code-drawn motion on top of the captures: no invented unrelated UI (only what the real site shows)"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "a synthesized bed at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 45,
+    "usd": 0
+  },
+  "risks": [
+    "the site's fonts may not be redistributable \u2014 the design falls back to the closest bundled face and says so in the report"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "brief": "An animated chart of the ten largest economies by GDP, a decade per second.",
+  "requirements": [
+    "the chart shows the ten largest economies (count 10: a top-10 GDP ranking visible at each moment)",
+    "the chart is animated over time (the ranking changes as history advances — a race or morph of the bars, not a static list)",
+    "the pacing is a decade per second (one decade of history per second of animation — the ask's own pacing)",
+    "the covered time span is a stated assumption (e.g. 1960-2020 ≈ 6s of animation, or a stated century → 10s; the duration is derived from the pacing, not chosen freely)",
+    "the GDP figures are sourced facts: every on-screen number and ranking has a source_url + quote + snapshot from open data (World Bank / IMF / Maddison-style), recorded as facts.json entries and verified offline",
+    "the data is fetched and stored in the project (a data file or snapshot under the project drives the chart — not hand-typed numbers in code)",
+    "the GDP measure is a stated assumption (nominal vs PPP, current vs constant US$ — the top-10 depends on it)",
+    "no format was named: the plan states its assumption (16:9 is natural for a chart; whichever it picks is written down)",
+    "the data's license and attribution are recorded (open data credited in the project's assets/facts and out/credits.md)"
+  ],
+  "acceptable_capability_sets": [
+    ["motion"],
+    ["chart"],
+    ["motion", "mix"],
+    ["chart", "mix"]
+  ],
+  "expected_feasibility_flags": [],
+  "must_not": [
+    "inventing the GDP figures (unsourced numbers: every figure is a fact with a source and a snapshot, or hedged, or cut — never guessed)",
+    "treating GDP statistics as math claims (no sympy proof exists for a statistic: the numbers are sourced facts about the world, and math is the wrong technique)",
+    "ignoring the data-sourcing need (a chart plan with no facts or data step — numbers hand-typed with no source and no snapshot)",
+    "breaking the pacing (a decade per second: e.g. a century squeezed into 3 seconds, or 30 seconds covering two decades)",
+    "edit as the technique (nothing was filmed: the chart is code-drawn)"
+  ]
+}
