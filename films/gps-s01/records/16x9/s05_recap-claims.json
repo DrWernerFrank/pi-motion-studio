@@ -2,8 +2,8 @@
  {
   "expr": "4 == 4",
   "about": "the recap: four satellites, one clock, geometry \u2014 the whole story",
-  "says": "s03.1",
-  "scene": "s03_recap",
+  "says": "s05.1",
+  "scene": "s05_recap",
   "ok": true,
   "value": "4 == 4"
  }

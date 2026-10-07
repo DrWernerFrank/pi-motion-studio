@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-07T10:22:36.186Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "layout",
+      "pass": true,
+      "level": "pass",
+      "detail": "0 fail-level violations over 5 scenes' records [16:9] (studio_manim.lint)"
+    },
+    {
+      "name": "claims",
+      "pass": true,
+      "level": "pass",
+      "detail": "8 claims, all ok===true; coverage 85.7% (6/7 mathematical sentences linked; the 90% bar is the demos' P12 gate)"
+    },
+    {
+      "name": "typeset",
+      "pass": true,
+      "level": "pass",
+      "detail": "5 scenes x 1 format(s): every records layout.json non-empty; claims ledgers present — a typeset compile error itself surfaces at render time as a loud error (the formula + scene file:line)"
+    },
+    {
+      "name": "narration",
+      "pass": true,
+      "level": "pass",
+      "detail": "8 sentence(s): every script sentence in timing.json with start/end + audio, no overlaps, 5 scene timeline(s) cover their sentences' spans"
+    },
+    {
+      "name": "sync",
+      "pass": true,
+      "level": "pass",
+      "detail": "12 trace bookmark(s) over 5 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms) ; seams continuous"
+    },
+    {
+      "name": "pace",
+      "pass": true,
+      "level": "pass",
+      "detail": "7 freeze run(s) >= 3s, none while the narration is silent (8 sentences of timing crossed in)"
+    },
+    {
+      "name": "captions",
+      "pass": true,
+      "level": "pass",
+      "detail": "captions \"on\" -> ON: 8 sentence(s), 2 caption file(s) — SRT/VTT written by studio sound; the deep caption check is P7's `captions` check"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-16 LUFS (want -16 +/- 1), true peak -1.2 dBTP (want <= -1)"
+    },
+    {
+      "name": "deliverable",
+      "pass": true,
+      "level": "pass",
+      "detail": "draft-16x9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 61.78s\nfinal-16x9.mp4: 1920x1080 yuv420p bt709 SAR 1:1 faststart 61.78s"
+    },
+    {
+      "name": "deterministic",
+      "pass": false,
+      "level": "warn",
+      "detail": "4 record file(s) changed since the last gates run (16:9/s01_hook-layout.json, 16:9/s02_delay-layout.json, 16:9/s03_formula-layout.json …) — records edited or a source changed without a re-render? A full re-render is the render-determinism check's job; this only flags drift",
+      "hashes": {
+        "16:9/s01_hook-layout.json": "94d2acd44c78",
+        "16:9/s02_delay-layout.json": "abdf36c39cb5",
+        "16:9/s03_formula-layout.json": "27faa4ff50d6",
+        "16:9/s04_spheres-layout.json": "f38285719e31",
+        "16:9/s05_recap-layout.json": "6f890fb27a26"
+      }
+    }
+  ]
+}

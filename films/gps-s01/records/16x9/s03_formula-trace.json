@@ -1,0 +1,102 @@
+[
+ {
+  "kind": "bookmark",
+  "t": 38.368,
+  "id": "eq_shown",
+  "sentence": "s03.1",
+  "scene": "s03_formula"
+ },
+ {
+  "kind": "animation",
+  "t": 1.3,
+  "i": 1,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.3,
+  "i": 2,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.45,
+  "i": 3,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 2.6,
+  "i": 4,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 2.75,
+  "i": 5,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 2.89,
+  "i": 6,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 7.607,
+  "i": 7,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.607,
+  "i": 8,
+  "scene": "s03_formula",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 4.725
+ },
+ {
+  "t": 7.607,
+  "kind": "sentence_end",
+  "scene": "s03_formula",
+  "sentence": "s03.1"
+ },
+ {
+  "kind": "animation",
+  "t": 7.907,
+  "i": 9,
+  "scene": "s03_formula",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.907,
+  "i": 10,
+  "scene": "s03_formula",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.3
+ },
+ {
+  "kind": "scene_end",
+  "t": 7.907,
+  "scene": "s03_formula"
+ }
+]

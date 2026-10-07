@@ -1,0 +1,11 @@
+[
+ {
+  "expr": "299792458 * 0.07 == 20985472.06",
+  "about": "distance = the SI speed of light x the 0.07 s delay (meters)",
+  "says": "s03.1",
+  "scene": "s03_formula",
+  "tol": 0.01,
+  "ok": true,
+  "value": "20985472.060000002 == 20985472.06"
+ }
+]

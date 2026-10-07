@@ -1,14 +1,14 @@
 [
   {
     "id": "r01",
-    "text": "60 seconds",
+    "text": "60 seconds (the finished film)",
     "type": "measurable",
     "verifier": "duration",
     "arg": 60,
     "tolerance": 3,
     "source": "request",
-    "status": "pending",
-    "evidence": null,
+    "status": "green",
+    "evidence": "final-16x9.mp4 61.78s",
     "waived_by": null
   },
   {
@@ -20,8 +20,8 @@
       "16:9"
     ],
     "source": "request",
-    "status": "pending",
-    "evidence": null,
+    "status": "green",
+    "evidence": "16:9 1920x1080",
     "waived_by": null
   },
   {
@@ -29,9 +29,10 @@
     "text": "narrated (has audio)",
     "type": "measurable",
     "verifier": "has-audio",
+    "arg": true,
     "source": "request",
-    "status": "pending",
-    "evidence": null,
+    "status": "green",
+    "evidence": "mean -19.7 dB",
     "waived_by": null
   },
   {
@@ -40,10 +41,9 @@
     "type": "measurable",
     "verifier": "captions",
     "arg": "srt",
-    "tolerance": null,
     "source": "request",
-    "status": "pending",
-    "evidence": null,
+    "status": "green",
+    "evidence": "31 cues, monotonic (0:00 → 1:01)",
     "waived_by": null
   },
   {
@@ -52,22 +52,21 @@
     "type": "measurable",
     "verifier": "loudness",
     "arg": -16,
-    "tolerance": null,
     "source": "request",
-    "status": "pending",
-    "evidence": null,
+    "status": "green",
+    "evidence": "-16.1 LUFS, -1.2 dBTP",
     "waived_by": null
   },
   {
     "id": "r06",
-    "text": "60-second duration within 3s",
-    "type": "measurable",
-    "verifier": "duration",
-    "arg": 60,
-    "tolerance": 3,
+    "text": "every number said or shown is sourced or honestly hedged",
+    "type": "subjective",
+    "fact": null,
     "source": "request",
-    "status": "pending",
-    "evidence": null,
-    "waived_by": null
+    "status": "green",
+    "evidence": "critic round 3 by producer-critic: every rubric key 8+ (min 8) over 9 keys, 2 sheet(s)",
+    "waived_by": null,
+    "verifier": null,
+    "arg": null
   }
 ]

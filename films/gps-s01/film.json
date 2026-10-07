@@ -5,10 +5,10 @@
   "formats": [
     "16:9"
   ],
-  "duration": 52.715,
+  "duration": 61.783,
   "lang": "en",
   "voice": "piper:en_US-ljspeech-medium",
-  "captions": "auto",
+  "captions": "on",
   "music": "none",
   "mix": {
     "lufs": -16

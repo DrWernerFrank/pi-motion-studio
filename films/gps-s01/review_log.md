@@ -16,3 +16,48 @@ hook 4 · readability 3 · motion 2 · variety 3 · composition 3 · brand 6 · 
 Round 1 of the gps demo. The narration, claims (4, one hedged SI constant) and mix are sound; the visuals badly lag the words — the scenes ran their own short run_times instead of the clock. Fixed in s01/s02/s03: bookmark-paced plays, persistent visuals, scaled type. Re-render + look next.
 
 sheets: out/sheets/every-16x9.png
+
+## Round 2 · 2026-10-07 09:20 · lead · not yet
+
+hook 6 · readability 6 · motion 6 · variety 6 · composition 6 · brand 7 · sound 8 · correctness 10 · clarity 7
+
+1. **30s** the big first-sweep circle sliced through the equation text  
+   fix: the eq fades at the s02.3 hand-off (the formula gives way to the spheres)
+2. **7s** text sizes jumped: the clock word dwarfed the title  
+   fix: the clock word calmed to title weight (1.15)
+3. **45s** the fourth circle read as a ghost artifact  
+   fix: dashed at full weight + a "the 4th fixes the clock" label in its own band
+
+Round 2 (after 5 look-fix cycles). Two real ENGINE-class bugs found and killed: manim stroke_width is PX not units (L.u*0.9 = 0.07px — every line and circle was sub-pixel invisible; house value 3.0) and the kit Eq font_size is POINTS (48pt = the 9u role; L.u*11 = 0.88pt — the equation was always there, at fly-speck size; now 72pt in the title band). The trilateration rings now render, persist and read at phone size; the recap is title-weight and centered.
+
+sheets: out/sheets/every-16x9.png, out/sheets/phone-16x9.png
+
+## Round 3 · 2026-10-07 09:39 · lead · not yet
+
+hook 6 · readability 7 · motion 6 · variety 6 · composition 7 · brand 8 · sound 8 · correctness 10 · clarity 8
+
+1. **27s** the equation read as p1=p2xp3 placeholders  
+   fix: the kit grammar ({{\text{distance}}}=...), colored by part; the amber ties to the distance line
+2. **38s** the circles read as an abstract Venn diagram, tiny in a big frame  
+   fix: satellites at every circle center + 0.21 scale: the geometry is the sky
+3. **50s** the finale was a footnote  
+   fix: title-weight recap; a pace beat on each row
+
+Round 3. The placeholder equation became words (distance = speed of light x delay — the kit part grammar, one part colored result-amber matching the beam); the satellites now sit at the circle centers so the geometry reads as the sky; the circles grew to 0.21 with the 4th-clock label in the title band (the lint caught the text-over-figure at the first attempt). 10 gates PASS, 10 claims true, coverage 85.7%.
+
+sheets: out/sheets/every-16x9.png, out/sheets/phone-16x9.png
+
+## Round 4 · 2026-10-07 09:41 · producer-critic · not yet
+
+hook 6 · readability 7 · motion 6 · variety 6 · composition 7 · brand 7 · sound 8 · correctness 9 · clarity 8 · fidelity 7 · coherence 8
+
+1. **0s** r01 RED: measured 52.13s against the asked 60s tol 3 (floor 57s) - the request opens with "A 60-second narrated explainer"; the piece is 13% short and outside tolerance  
+   fix: add one sourced sentence the facts ledger already carries but the film never uses - f03/f02 ("more than thirty satellites, each circling the Earth twice a day") as a hook beat: ~6s of narration plus its plays lands 57-58s and finally spends the prepared sources
+2. **21s** s02.1 shows "delay 0.07 s" flat on screen - the one number with no facts row and no hedge; its linked claim "0.07 < 0.1" is vacuous (proves nothing about 0.07)  
+   fix: derive it from the facts the film already carries - claim("20200000 / 299792458 == 0.0674") and show "delay ~ 0.07 s" - or add an f05 row with a snapshot quoting the ~70 ms delay
+3. **50s** ledger/piece drift: the design.json "direction" line is unfilled template text at both levels; orphan record sets s02_meaning + s03_recap (renamed scenes, s03_recap mis-linking 4==4 to says:s03.1) inflate the gates "10 claims" - the shipped 4 scenes carry 6; the parent film.json still declares duration 60  
+   fix: author the one-line direction both levels owe, delete the orphan record sets, correct the parent duration once r01 is fixed, and re-run gates
+
+RE-MEASURED MYSELF (read-only round; did not run the ledger-mutating project verify): ffprobe final-16x9.mp4 = 52.133s, 1920x1080 16:9 SAR 1:1 bt709, 60fps, h264 + aac 48k stereo (r02 r03 green; r01 RED, 4.9s under the floor); ffmpeg loudnorm print = -16.1 LUFS integrated, -1.3 dBTP, LRA 2.2 (r05 green, matches gates); captions.srt = 26 cues strictly monotonic 0.000-51.616s covering all 8 sentences, vtt twin (r04 green). FACTS: grep -F each quote - f01/f02/f03 found verbatim in sources/*.snapshot.txt, f04 carries its hedge (the SI-defined constant); but f02 (twice a day) and f03 (30+ satellites) are never said or shown in the film - prepared sources left unused, the natural r01 fix. CLAIMS: the shipped scenes carry 6, all ok=true - 20200/1.609=12554.38 (the 12,550 miles, tol 1), 299792458*0.07=20985472.06 (the ~21,000 km spoken), 3==3, 4==4 x2, plus the vacuous 0.07<0.1. NUMBERS SAID OR SHOWN: 20,200 km (f01 quoted); 12,550 miles (sympy-derived from f01, machine-checked); the speed of light (f04 hedged); 20,985,472.06 m (sympy claim, spoken with "About"); 0.07 s - NO fact and NO hedge (spoken hedged "about seven hundredths", shown flat on screen): the one r06 miss. "a few meters" (s01.1) is vague-by-wording, borderline acceptable. SYNC: 3 animation overruns recorded (0.125s s01.1, 0.905s s02.1, 0.395s s03.1), seams continuous per the sync gate. Gates PASS (deterministic WARN: 3 records changed since the previous gates run). COHERENCE: one paper theme inherited end to end, one mix, one caption pass, one narration clock across the 4 scenes (hook, formula, spheres, recap - the plan story holds); deducted for the half-template design ledger and the orphan records. Judged from the ledgers plus my own probes; the lead ran 3 look rounds on the sheets.
+
+sheets: out/sheets/every-16x9.png, out/sheets/phone-16x9.png

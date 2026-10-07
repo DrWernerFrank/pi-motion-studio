@@ -1,6 +1,6 @@
 {
   "theme": "paper",
-  "direction": "ONE LINE: what the viewer should feel at the end. Every decision is checked against it.",
+  "direction": "A field guide page that moves: warm paper, a fine grid, textbook serif math, mono labels. Color is meaning \u2014 amber = the satellites' signal and every positive figure, red-orange = the result (the spot, the distance), green = the correction (the fourth satellite). One voice: calm, precise, never rushed.",
   "fonts": {
     "display": "Bricolage Grotesque",
     "ui": "Inter",

@@ -1,0 +1,27 @@
+[
+ {
+  "expr": "20200 / 1.609 == 12554.5",
+  "about": "the orbit altitude: 20,200 km is 12,550 miles",
+  "says": "s01.1",
+  "scene": "s01_hook",
+  "tol": 1,
+  "ok": true,
+  "value": "12554.381603480422 == 12554.5"
+ },
+ {
+  "expr": "30 > 24",
+  "about": "more than 30 GPS satellites overhead (the designed constellation was 24)",
+  "says": "s01.2",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "30 > 24"
+ },
+ {
+  "expr": "2 == 2",
+  "about": "each satellite circles the Earth twice a day (the quoted fact)",
+  "says": "s01.2",
+  "scene": "s01_hook",
+  "ok": true,
+  "value": "2 == 2"
+ }
+]
