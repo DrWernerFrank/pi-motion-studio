@@ -30,11 +30,11 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W4-err | the failure matrix + errors check | engine/verify/produce/errors.mjs (+ small loud-failure fixes via lead) | all | `--only errors` | glm-worker | **DONE f79ae92** (2 timeouts; the file was complete — the lead verified) |
 | W4-docs | docs check (help completeness, Producer sections) | engine/verify/produce/docs.mjs (README/AGENTS = lead) | W2 | `--only docs` | lead | **DONE except ADR-003** (00dd1c8; closes when w2-asm lands) |
 | W4-hyg | hygiene check + cache gc for the new dirs | engine/verify/produce/hygiene.mjs (cache.mjs = lead) | W1+ | `--only hygiene` | lead | **DONE 00dd1c8** (found + fixed the gc fixture-deletion bug, the D-026 class's 4th path) |
-| W5-demoA | demo A `composite`: clip + Pythagoras + end card, 50-70s, 16:9+9:16 | films/composite*/** | W2-asm, W2-skill | demos+review rows green | producer-role | todo |
-| W5-demoB | demo B `launch-teaser`: 25s vertical from GUI captures | films/launch-teaser*/** | W2 | same | producer-role | todo |
-| W5-demoC | demo C `gps`: 60s narrated GPS explainer, sourced | films/gps*/** | W2 | same | producer-role | todo |
-| W5-demoD | demo D `cities`: 30s animated top-10 cities chart (+ the grown capability) | films/cities*/**, engine/kinds/<chart-kind>/ (with lead) | W3-grow | same | producer-role | todo |
-| W5-rev | review check over the demos (3+ rounds, critic last, 8+, fidelity 10) | engine/verify/produce/review.mjs | W5 demos | `--only review` | glm-worker | todo |
+| W5-demoA | demo A `composite`: clip + Pythagoras + end card, 50-70s, 16:9+9:16 | films/composite*/** | W2-asm, W2-skill | demos+review rows green | lead | **DONE c136aef** |
+| W5-demoB | demo B `launch-teaser`: 25s vertical from GUI captures | films/launch-teaser*/** | W2 | same | lead | **DONE 8fe8f12** |
+| W5-demoC | demo C `gps`: 60s narrated GPS explainer, sourced | films/gps*/** | W2 | same | lead | **DONE 29cd2e2** |
+| W5-demoD | demo D `cities`: 30s animated top-10 cities chart (+ the grown capability) | films/cities*/**, engine/kinds/chart/ | W3-grow | same | lead | **DONE 5d47d14** |
+| W5-rev | review check over the demos (3+ rounds, critic last, 8+, fidelity 10) | engine/verify/produce/review.mjs | W5 demos | `--only review` | lead + the critic runs | in flight (the critic rounds land, then the check) |
 | lead | full verify-produce from cold cache; full verify-edit + verify-math (background); FINAL_REPORT | docs/produce/FINAL_REPORT.md | all | `pass: true` x3 | lead | todo |
 
 ## Phases
@@ -108,12 +108,14 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: 29 of 30 green and committed (assemble was the last build-phase check: S2 measured, direct
-concat wins with stream copy — PSNR infinite). demo C 'gps' SHIPPED (the full producer loop: 6
-review rounds, 4 sourced facts, 8 true claims, gates PASS, byte-identical ship). In flight: the
-lead builds demo B 'launch-teaser' (the captures landed; the child's index.html written; fixing the
-image decode) and then demo A 'composite' (now unblocked — assemble landed) + demo D 'cities' on
-the grown chart technique.
+Now: ALL FOUR DEMOS SHIPPED (A composite c136aef / B launch-teaser 8fe8f12 / C gps 29cd2e2 / D
+cities 5d47d14) — each: plan VALID, ledger green, gates PASS on the children, finals in the asked
+formats, credits + report, byte-identical single-technique ships. The demos-critic (fresh GLM eyes)
+is recording the final review rounds; then the review check, the docs check's ADR-003 leg (the ADR
+landed with assemble), and the FULL verify-produce from cold, then the background verify-edit +
+verify-math, then FINAL_REPORT.
+Next: the review rounds land -> `--only review` + `--only docs` -> the full cold verify-produce ->
+the background full verify-edit/verify-math -> FINAL_REPORT.md.
 The lead's own fixes this round: brief-lint finally implemented (help-sketch since P0), cache gc's
 fixture-deletion bug (D-026's 4th path), the produce caches in gc, docs+hygiene checks.
 Next: when the references land, the LEAD writes the 12 battery plans (plan-only, per the mission)
