@@ -20,7 +20,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 | W1-fab | facts + assets + budget checks (+ license fixtures) | engine/produce/{facts,assets,budget,fetch}.mjs, engine/produce/fixtures/**, engine/verify/produce/{facts,assets,budget}.mjs | — | `--only facts,assets,budget` | glm-worker | **DONE 951445e** |
 | W1-svc | narration service check (motion+script.md) | engine/verify/produce/services.mjs (reports engine needs to lead) | — | `--only services` | glm-worker | **DONE 1fc1249** |
 | W2-proj | project lifecycle: resume, where-chain, revision, child-parent; single-technique wrappers | engine/kinds/project/index.mjs, engine/produce/ship.mjs, engine/verify/produce/{project,single}.mjs | W1 | `--only project,single` | glm-worker | **DONE c6494d0** |
-| W2-asm | spike S2 + assembly (edit-film assembler, design inheritance, PSNR/geometry) + ADR-003 | engine/produce/assemble.mjs, engine/verify/produce/assemble.mjs, docs/produce/ADR-003-*.md | W2-proj | `--only assemble` | glm-worker | todo |
+| W2-asm | spike S2 + assembly (edit-film assembler, design inheritance, PSNR/geometry) + ADR-003 | engine/produce/assemble.mjs, engine/verify/produce/assemble.mjs, docs/produce/ADR-003-*.md | W2-proj | `--only assemble` | glm-worker | **DONE 47aa82c** (2 timeouts; complete files verified by the lead) |
 | W2-skill | produce skill + AGENTS/README sections (lead integrates) + producer-critic + checks | .pi/skills/produce/**, .pi/agents/producer-critic.md, engine/verify/produce/{skill,critic}.mjs | — | `--only skill,critic` | glm-worker | **DONE b2eec31** |
 | W2-make | spike S4 + runner + studio make + fake-pi + make check + ADR-004 | engine/produce/runner.mjs, engine/verify/produce/make.mjs, docs/produce/ADR-004-*.md (cli wiring = lead) | SCHEMAS runner | `--only make` | glm-worker | **DONE cf42856** (died post-completion; verified) |
 | W2-tools | project_* tools + tools check | .pi/extensions/motion-tools/project-tools.ts (BY_FILE = lead) | W2-proj | `--only tools` | glm-worker | **DONE a271650** |
@@ -73,6 +73,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `project` — `studio project new/status/list/plan/verify/rebuild/ship/where`; killed run resumes from state.json; note chains through segment to child `where`; revision appends requirements + rebuilds only touched parts; a child lists its parent
 - [x] `single` — W2-proj: 3 wrappers byte-identical (motion/edit/math), verify exit 0 — DONE
 - [ ] `single` — projects wrapping one math / one motion / one edit film ship with the child's final unchanged; `project verify` passes
+- [x] `assemble` — W2-asm: S2 measured (direct = stream copy, PSNR inf); the composite fixture green on every K8 rule, both formats — DONE
 - [ ] `assemble` — composite fixture (math+motion+edit) 16:9 + 9:16: geometry, bt709, duration, A/V, loudness, no black/frozen join, PSNR per segment, design inheritance
 - [x] `skill` — W2-skill: the produce skill + Start here + the 4 defer clauses + the any-video lint + all 11 body things — DONE
 - [ ] `skill` — `produce` skill + AGENTS.md "Start here" parse; 4 older skills defer; no duplicate "any video" trigger; the order/framework/one-question/revision/loop named
@@ -107,10 +108,12 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: 25 of 28 green. battery DONE (100% x 12 — the references were written first by fresh critics,
-the plans after, two plans honestly restructured when the references proved my first choices wrong).
-In flight: w2-asm (assemble + S2 + ADR-003 — the last check of the table's build phases), w4-err
-(the 13-case failure matrix, its check is written and verifying).
+Now: 29 of 30 green and committed (assemble was the last build-phase check: S2 measured, direct
+concat wins with stream copy — PSNR infinite). demo C 'gps' SHIPPED (the full producer loop: 6
+review rounds, 4 sourced facts, 8 true claims, gates PASS, byte-identical ship). In flight: the
+lead builds demo B 'launch-teaser' (the captures landed; the child's index.html written; fixing the
+image decode) and then demo A 'composite' (now unblocked — assemble landed) + demo D 'cities' on
+the grown chart technique.
 The lead's own fixes this round: brief-lint finally implemented (help-sketch since P0), cache gc's
 fixture-deletion bug (D-026's 4th path), the produce caches in gc, docs+hygiene checks.
 Next: when the references land, the LEAD writes the 12 battery plans (plan-only, per the mission)
