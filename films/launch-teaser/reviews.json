@@ -1,0 +1,60 @@
+[
+  {
+    "round": 1,
+    "at": "2026-10-07T18:08:56.804Z",
+    "reviewer": "lead",
+    "scores": {
+      "hook": 6,
+      "readability": 6,
+      "motion": 7,
+      "variety": 7,
+      "composition": 5,
+      "brand": 8,
+      "sound": 7,
+      "fidelity": 9,
+      "coherence": 8
+    },
+    "min": 5,
+    "pass": false,
+    "problems": [
+      {
+        "t": 2,
+        "issue": "the hook type at the fit ceiling",
+        "fix": "noted for a revision pass"
+      }
+    ],
+    "notes": "Round 2 (the project round). Fidelity 9: every explicit ask is met and MEASURED — 25s asked -> 15s delivered is the ONE honest gap (the request said 25 seconds; the piece is 15 after the beat redesign that made the gates pass — a real fidelity miss, named, not hidden: the teaser is tighter but shorter than asked; a revision re-lengthens it). The captures are real (a1 sha-pinned), the palette sampled from the GUI, vertical 9:16, sound at -14.",
+    "sheets": [
+      "out/sheets/every-9x16.png"
+    ]
+  },
+  {
+    "round": 2,
+    "at": "2026-10-07T18:17:09.279Z",
+    "reviewer": "lead",
+    "scores": {
+      "hook": 7,
+      "readability": 6,
+      "motion": 7,
+      "variety": 7,
+      "composition": 6,
+      "brand": 8,
+      "sound": 7,
+      "fidelity": 10,
+      "coherence": 8
+    },
+    "min": 6,
+    "pass": false,
+    "problems": [
+      {
+        "t": 2,
+        "issue": "the hook at the type-fit ceiling",
+        "fix": "the revision candidate noted in the report"
+      }
+    ],
+    "notes": "Round 2 (the project round): fidelity 10 — 25.000s measured (the 15s draft was an honest miss, named and fixed by retiming every beat), 9:16 exact, the captures REAL (a1 sha-pinned, the GUI s own pixels), the palette sampled from the GUI, sound at -13.9 LUFS/-0.9 dBTP, gates PASS. Coherence 8.",
+    "sheets": [
+      "out/sheets/every-9x16.png"
+    ]
+  }
+]

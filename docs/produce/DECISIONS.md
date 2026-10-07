@@ -107,3 +107,13 @@ layout lint cannot catch (the bbox is right; the ink is invisible). (3) A single
 in the writer -> the memory cap kills the scene; the fix is SHORT beats (Create 1.1-1.3s, then
 pulses/rides) + `at()` bookmark stamps so the sync gate still sees the sentence's moments. All
 three are now the demos' lived lessons, in the scenes' comments.
+
+**D-009 2026-10-07 P9 — the mix aims TP -2.0: the AAC overshoot.** Producing demo B found the
+delivery gate unsatisfiable at TP -1: the WAV measured -1.0 but the shipped MP4 measured -0.5
+to -0.8 dBTP across four mix attempts (quieter cues made it WORSE — the loudnorm renormalized).
+The cause: AAC inter-sample peak reconstruction overshoots the PCM true peak by up to ~0.6 dB on
+sharp transient material (this synth's hits); the math films passed at -1.4/-1.5 because their
+material never reached the ceiling. Fix: engine/audio.mjs's shared normalize aims TP -2.0
+(limiter 0.79) so the encode's overshoot lands inside the <= -1 dBTP delivery gate. Consequence:
+all mixes ship with ~1 dB more headroom — below -14 LUFS perceived loudness is unchanged (the
+loudnorm target is untouched).

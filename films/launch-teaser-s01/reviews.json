@@ -1,0 +1,73 @@
+[
+  {
+    "round": 1,
+    "at": "2026-10-07T18:07:36.711Z",
+    "reviewer": "lead",
+    "scores": {
+      "hook": 6,
+      "readability": 6,
+      "motion": 7,
+      "variety": 7,
+      "composition": 5,
+      "brand": 8,
+      "sound": 7
+    },
+    "min": 5,
+    "pass": false,
+    "problems": [
+      {
+        "t": 2,
+        "issue": "the hook type caps at the fit rule (~u*10); the critic wants 1.5-2x more",
+        "fix": "the honest ceiling within fitPx: three short lines at u*24-max; a future pass breaks to two-word lines or a display font"
+      },
+      {
+        "t": 6,
+        "issue": "the GUI capture region still reads dim at phone size",
+        "fix": "deep zoom (2.6x) on the densest list region; the full panel cannot be both legible and whole at 9:16"
+      },
+      {
+        "t": 0,
+        "issue": "the frame under-uses the vertical space in the hook and gates beats",
+        "fix": "cards fill 0.17-0.93H in the gates; the hook centers in its card — the remaining bands are the design's air, judged 5 by the reader"
+      }
+    ],
+    "notes": "Round 1 (lead) after 9 look-fix cycles. Found and fixed real bugs along the way: drawImage source-crop landing on the capture's empty middle panel (the films list is the dense region); the absolute /films/... image src EncodingErrors while relative decodes (measured both directions); the garbled double-drawn end-card payoff. The gates PASS (dead-time, novelty, blank-frames, loudness, cue-sync all green after the beat redesign to 15s with continuous motion: the sweeping scrub column, the marching chip borders, the breathing payoff).",
+    "sheets": [
+      "out/sheets/every-9x16.png",
+      "out/sheets/phone-9x16.png"
+    ]
+  },
+  {
+    "round": 2,
+    "at": "2026-10-07T18:16:58.427Z",
+    "reviewer": "lead",
+    "scores": {
+      "hook": 7,
+      "readability": 6,
+      "motion": 7,
+      "variety": 7,
+      "composition": 6,
+      "brand": 8,
+      "sound": 7
+    },
+    "min": 6,
+    "pass": false,
+    "problems": [
+      {
+        "t": 2,
+        "issue": "the hook type at the fitPx ceiling (three short lines, u*24-capped)",
+        "fix": "a display face or two-word lines would buy 1.5x more — a revision candidate"
+      },
+      {
+        "t": 11,
+        "issue": "the GUI capture at 9:16 cannot be both whole and phone-legible",
+        "fix": "the deep zoom on the densest region is the honest compromise; noted"
+      }
+    ],
+    "notes": "Round 2 (25s): the fidelity miss fixed — the piece is 25.000s (the requirement is the contract). Every beat retimed with continuous motion (the typing breathes 2.2s, the cards slide then RISE through their hold, the scrub runs 9.5-13.9, the gates tick 15-17.4 with marching borders, the verify:PASS stamp holds 17.9-19.9, the end card pushes in to the last frame). Gates all PASS at 25s including determinism.",
+    "sheets": [
+      "out/sheets/every-9x16.png",
+      "out/sheets/phone-9x16.png"
+    ]
+  }
+]

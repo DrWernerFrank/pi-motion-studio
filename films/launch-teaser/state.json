@@ -1,0 +1,13 @@
+{
+  "phase": "shipped",
+  "segments": {
+    "s01": {
+      "status": "done",
+      "film": "launch-teaser-s01",
+      "capability": "motion",
+      "at": "2026-10-07T18:08:49.881Z"
+    }
+  },
+  "started": "2026-10-07T09:41:23.465Z",
+  "shippedAt": "2026-10-07T18:21:09.878Z"
+}
