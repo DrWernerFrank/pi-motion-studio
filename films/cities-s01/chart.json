@@ -1,0 +1,465 @@
+{
+  "data": [
+    [
+      0,
+      36370.0
+    ],
+    [
+      1,
+      21950.0
+    ],
+    [
+      2,
+      20540.0
+    ],
+    [
+      3,
+      20190.0
+    ],
+    [
+      4,
+      19970.0
+    ],
+    [
+      5,
+      18670.0
+    ],
+    [
+      6,
+      17210.0
+    ],
+    [
+      7,
+      17040.0
+    ],
+    [
+      8,
+      17020.0
+    ],
+    [
+      9,
+      14860.0
+    ]
+  ],
+  "decades": {
+    "1950": [
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 12340.0
+      },
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 11280.0
+      },
+      {
+        "name": "London",
+        "country": "United Kingdom",
+        "pop": 8360.0
+      },
+      {
+        "name": "Paris",
+        "country": "France",
+        "pop": 6520.0
+      },
+      {
+        "name": "Shanghai",
+        "country": "China",
+        "pop": 6070.0
+      },
+      {
+        "name": "Moskva",
+        "country": "Russian Federation",
+        "pop": 5360.0
+      },
+      {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "pop": 5100.0
+      },
+      {
+        "name": "Chicago",
+        "country": "United States of America",
+        "pop": 5000.0
+      },
+      {
+        "name": "Kolkata",
+        "country": "India",
+        "pop": 4510.0
+      },
+      {
+        "name": "Beijing",
+        "country": "China",
+        "pop": 4330.0
+      }
+    ],
+    "1960": [
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 16680.0
+      },
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 14160.0
+      },
+      {
+        "name": "London",
+        "country": "United Kingdom",
+        "pop": 8200.0
+      },
+      {
+        "name": "Paris",
+        "country": "France",
+        "pop": 7410.0
+      },
+      {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "pop": 6600.0
+      },
+      {
+        "name": "Shanghai",
+        "country": "China",
+        "pop": 6540.0
+      },
+      {
+        "name": "Los Angeles-Long Beach-Santa Ana",
+        "country": "United States of America",
+        "pop": 6530.0
+      },
+      {
+        "name": "Osaka-Kobe",
+        "country": "Japan",
+        "pop": 6230.0
+      },
+      {
+        "name": "Chicago",
+        "country": "United States of America",
+        "pop": 6180.0
+      },
+      {
+        "name": "Moskva",
+        "country": "Russian Federation",
+        "pop": 6170.0
+      }
+    ],
+    "1970": [
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 23300.0
+      },
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 16190.0
+      },
+      {
+        "name": "Osaka-Kobe",
+        "country": "Japan",
+        "pop": 9410.0
+      },
+      {
+        "name": "Ciudad de M\u00e9xico",
+        "country": "Mexico",
+        "pop": 8770.0
+      },
+      {
+        "name": "Los Angeles-Long Beach-Santa Ana",
+        "country": "United States of America",
+        "pop": 8380.0
+      },
+      {
+        "name": "Paris",
+        "country": "France",
+        "pop": 8350.0
+      },
+      {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "pop": 8100.0
+      },
+      {
+        "name": "S\u00e3o Paulo",
+        "country": "Brazil",
+        "pop": 7620.0
+      },
+      {
+        "name": "London",
+        "country": "United Kingdom",
+        "pop": 7510.0
+      },
+      {
+        "name": "Moskva",
+        "country": "Russian Federation",
+        "pop": 7110.0
+      }
+    ],
+    "1980": [
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 28550.0
+      },
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 15600.0
+      },
+      {
+        "name": "Ciudad de M\u00e9xico",
+        "country": "Mexico",
+        "pop": 13010.0
+      },
+      {
+        "name": "S\u00e3o Paulo",
+        "country": "Brazil",
+        "pop": 12090.0
+      },
+      {
+        "name": "Osaka-Kobe",
+        "country": "Japan",
+        "pop": 9990.0
+      },
+      {
+        "name": "Los Angeles-Long Beach-Santa Ana",
+        "country": "United States of America",
+        "pop": 9510.0
+      },
+      {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "pop": 9420.0
+      },
+      {
+        "name": "Kolkata",
+        "country": "India",
+        "pop": 9030.0
+      },
+      {
+        "name": "Paris",
+        "country": "France",
+        "pop": 8670.0
+      },
+      {
+        "name": "Mumbai",
+        "country": "India",
+        "pop": 8660.0
+      }
+    ],
+    "1990": [
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 32530.0
+      },
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 16090.0
+      },
+      {
+        "name": "Ciudad de M\u00e9xico",
+        "country": "Mexico",
+        "pop": 15310.0
+      },
+      {
+        "name": "S\u00e3o Paulo",
+        "country": "Brazil",
+        "pop": 14780.0
+      },
+      {
+        "name": "Mumbai",
+        "country": "India",
+        "pop": 12310.0
+      },
+      {
+        "name": "Osaka-Kobe",
+        "country": "Japan",
+        "pop": 11040.0
+      },
+      {
+        "name": "Kolkata",
+        "country": "India",
+        "pop": 10890.0
+      },
+      {
+        "name": "Los Angeles-Long Beach-Santa Ana",
+        "country": "United States of America",
+        "pop": 10880.0
+      },
+      {
+        "name": "Seoul",
+        "country": "Republic of Korea",
+        "pop": 10540.0
+      },
+      {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "pop": 10510.0
+      }
+    ],
+    "2000": [
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 34450.0
+      },
+      {
+        "name": "Ciudad de M\u00e9xico",
+        "country": "Mexico",
+        "pop": 18020.0
+      },
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 17850.0
+      },
+      {
+        "name": "S\u00e3o Paulo",
+        "country": "Brazil",
+        "pop": 17100.0
+      },
+      {
+        "name": "Mumbai",
+        "country": "India",
+        "pop": 16090.0
+      },
+      {
+        "name": "Shanghai",
+        "country": "China",
+        "pop": 13240.0
+      },
+      {
+        "name": "Kolkata",
+        "country": "India",
+        "pop": 13060.0
+      },
+      {
+        "name": "Delhi",
+        "country": "India",
+        "pop": 12440.0
+      },
+      {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "pop": 11850.0
+      },
+      {
+        "name": "Los Angeles-Long Beach-Santa Ana",
+        "country": "United States of America",
+        "pop": 11810.0
+      }
+    ],
+    "2010": [
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 35680.0
+      },
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 19040.0
+      },
+      {
+        "name": "Ciudad de M\u00e9xico",
+        "country": "Mexico",
+        "pop": 19030.0
+      },
+      {
+        "name": "Mumbai",
+        "country": "India",
+        "pop": 18980.0
+      },
+      {
+        "name": "S\u00e3o Paulo",
+        "country": "Brazil",
+        "pop": 18840.0
+      },
+      {
+        "name": "Delhi",
+        "country": "India",
+        "pop": 15930.0
+      },
+      {
+        "name": "Shanghai",
+        "country": "China",
+        "pop": 14990.0
+      },
+      {
+        "name": "Kolkata",
+        "country": "India",
+        "pop": 14790.0
+      },
+      {
+        "name": "Dhaka",
+        "country": "Bangladesh",
+        "pop": 13480.0
+      },
+      {
+        "name": "Buenos Aires",
+        "country": "Argentina",
+        "pop": 12800.0
+      }
+    ],
+    "2020": [
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "pop": 36370.0
+      },
+      {
+        "name": "Mumbai",
+        "country": "India",
+        "pop": 21950.0
+      },
+      {
+        "name": "S\u00e3o Paulo",
+        "country": "Brazil",
+        "pop": 20540.0
+      },
+      {
+        "name": "Ciudad de M\u00e9xico",
+        "country": "Mexico",
+        "pop": 20190.0
+      },
+      {
+        "name": "New York-Newark",
+        "country": "United States of America",
+        "pop": 19970.0
+      },
+      {
+        "name": "Delhi",
+        "country": "India",
+        "pop": 18670.0
+      },
+      {
+        "name": "Shanghai",
+        "country": "China",
+        "pop": 17210.0
+      },
+      {
+        "name": "Kolkata",
+        "country": "India",
+        "pop": 17040.0
+      },
+      {
+        "name": "Dhaka",
+        "country": "Bangladesh",
+        "pop": 17020.0
+      },
+      {
+        "name": "Karachi",
+        "country": "Pakistan",
+        "pop": 14860.0
+      }
+    ]
+  },
+  "source": "https://nordpil.com/resources/world-database-of-large-cities/ (CC0; credit Nordpil + the UN Population Division)",
+  "note": "data: the 2020 top-10 ([rank, population-thousands]); decades: the full 1950-2020 race the film animates",
+  "units": "thousands"
+}

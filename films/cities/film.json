@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "title": "cities",
+  "formats": [
+    "16:9"
+  ],
+  "request": "An animated chart of the ten largest cities by population over the last century, with the source on screen. 30 seconds.",
+  "parts": [
+    "cities-s01"
+  ],
+  "duration": 30
+}

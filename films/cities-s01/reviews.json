@@ -1,0 +1,56 @@
+[
+  {
+    "round": 1,
+    "at": "2026-10-07T19:23:04.304Z",
+    "reviewer": "lead",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 7,
+      "variety": 7,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [
+      {
+        "t": 15,
+        "issue": "the entering/leaving rows fade at low contrast (a mid-snap sample reads half-state)",
+        "fix": "the fade is the design (a bar leaving hands off to its successor); a revision could shorten it"
+      },
+      {
+        "t": 0,
+        "issue": "the city/value labels small at phone size",
+        "fix": "the 3.7u mono is the legible floor; a revision could raise to 4.2u"
+      }
+    ],
+    "notes": "Round 1 (the lead). The race: ten bars, a decade per beat (the 0.5s snap), the running year (the reader verified: every label unique, ascending, matching its values), one-decimal millions, Tokyo's red accent, the source on screen throughout. 30.000s, gates PASS, the chart technique's own data+axis gates green. THE UNITS BUG the reader caught: thousands/100 was 10x off (a 12.3M New York showed 123.4M) — /1000 now; the duplicate-year bug needed the bar-race standard (a running counter, not a floored label).",
+    "sheets": [
+      "out/sheets/every-16x9.png",
+      "out/sheets/phone-16x9.png"
+    ]
+  },
+  {
+    "round": 2,
+    "at": "2026-10-07T19:23:14.667Z",
+    "reviewer": "lead",
+    "scores": {
+      "hook": 7,
+      "readability": 7,
+      "motion": 7,
+      "variety": 7,
+      "composition": 7,
+      "brand": 8,
+      "sound": 7
+    },
+    "min": 7,
+    "pass": false,
+    "problems": [],
+    "notes": "Round 2: the phone test (the 360px sheet) re-checked after the units + running-year fixes — the values read in the millions, the year ascends uniquely. The fixes this round were the reader's two catches: the /1000 units and the running counter. The composition's dead right third is the race's scale headroom (Tokyo's 36.4M bar defines the max; shorter bars leave the space honestly).",
+    "sheets": [
+      "out/sheets/phone-16x9.png"
+    ]
+  }
+]

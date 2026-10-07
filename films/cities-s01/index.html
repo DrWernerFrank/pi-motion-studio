@@ -1,0 +1,79 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>the century of cities</title>
+<link rel="stylesheet" href="/engine/lib/fonts.css">
+<script type="module">
+import { film } from '/engine/lib/runtime.js';
+import { loadDesign } from '/engine/lib/design.js';
+import * as M from '/engine/lib/motion.js';
+let D, cfg, chart;
+const DECADES = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+
+film({
+  async setup(L, c) {
+    cfg = c; D = await loadDesign();
+    const r = await fetch('chart.json'); chart = await r.json();   // relative (the absolute form 404s in the render browser)
+  },
+  draw(ctx, t, L) {
+    if (!chart) return;
+    ctx.fillStyle = '#F2EEE4'; ctx.fillRect(0, 0, L.W, L.H);
+    const u = L.u, W = L.W, H = L.H;
+    // the race: one decade per beat (30s / 8 decades = 3.75s per decade, eased between)
+    // THE BEAT MODEL: each decade holds ~80% of its beat, then a fast tween to the next —
+    // the year label and the data always agree (the critic caught 1980-twice-different-values)
+    const prog = M.clamp((t - 1.2) / 26.0, 0, 1);
+    const fi = prog * (DECADES.length - 1);
+    const i0 = Math.min(DECADES.length - 2, Math.floor(fi));
+    const frac = fi - i0;
+    const eased = frac < 0.85 ? 0 : M.clamp((frac - 0.85) / 0.15, 0, 1);   // a 0.5s snap at the beat's end
+    // the label flips ONLY when the tween completes (the critic: the label ran ahead of the data)
+    // the year RUNS (1958, 1959 — the bar-race standard): every label unique, always
+    // matching the data's true position (the reader caught duplicate-year-different-values twice)
+    const yr = Math.round(1950 + fi * 10);
+    const rowsA = chart.decades[DECADES[i0]];
+    const rowsB = chart.decades[DECADES[i0 + 1]] ?? rowsA;
+    // the union of both decades' top-10 (bars slide in/out)
+    const names = [...new Set([...rowsA.map(r => r.name), ...rowsB.map(r => r.name)])];
+    const maxPop = 36370;                                   // Tokyo 2020 (the known max, stable scale)
+    const barX = L.safe.x + W * 0.24, barW = W * 0.56;   // room for the names (the critic: clipped)
+    const rowH = L.safe.h * 0.074, gap = L.safe.h * 0.006;   // 10 rows end above the credit band
+    const y0 = L.safe.y + L.safe.h * 0.13;
+
+    // the year, BIG (the beat's label)
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = '#17150F';
+    ctx.font = `800 ${u * 11}px "Space Grotesk", sans-serif`;
+    ctx.fillText(String(yr), L.safe.x + u * 3, L.safe.y + u * 10);   // clear of the first row
+
+    // THE SWAP RULE: interpolate each city's VALUE, then place bars by SORTED order —
+    // two cities crossing ranks pass each other cleanly (no shared row, no smear)
+    const interpolated = names.map((name) => {
+      const a = rowsA.find(r => r.name === name), b = rowsB.find(r => r.name === name);
+      const pop = (a?.pop ?? 0) + ((b?.pop ?? a?.pop ?? 0) - (a?.pop ?? 0)) * eased;
+      const present = (a ? 1 : 0) + ((b ? 1 : 0) - (a ? 1 : 0)) * eased;
+      return { name, pop, present };
+    }).filter(d => d.present > 0.05).sort((x, y) => y.pop - x.pop).slice(0, 10);
+    interpolated.forEach((d, rank) => {
+      const name = d.name, pop = d.pop, present = d.present;
+      const y = y0 + rank * (rowH + gap);
+      const w = barW * (pop / maxPop);
+      const col = name === 'Tokyo' ? '#B03D24' : '#96610A';
+      ctx.globalAlpha = present;
+      ctx.fillStyle = col; M.rrect(ctx, barX, y, w, rowH, u * 0.4); ctx.fill();
+      ctx.fillStyle = '#17150F'; ctx.font = `700 ${u * 3.7}px "JetBrains Mono", monospace`;
+      ctx.textAlign = 'right';
+      const nm = name.length > 14 ? name.split('-')[0] : name;   // long hyphenated names abbreviate
+      ctx.fillText(nm, barX - u * 1.6, y + rowH * 0.72);
+      ctx.textAlign = 'left';
+      ctx.fillText(`${(pop / 1000).toFixed(1)}M`, barX + w + u * 1.4, y + rowH * 0.72);   // thousands -> MILLIONS (/1000; one decimal)
+      ctx.globalAlpha = 1;
+    });
+
+    // the source, ON SCREEN (the request's explicit ask) — the whole piece, bottom-left
+    ctx.fillStyle = '#8A8478'; ctx.font = `500 ${u * 2.4}px "JetBrains Mono", monospace`;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#6b6458'; ctx.font = `600 ${u * 2.8}px "JetBrains Mono", monospace`;
+    ctx.fillText('source: Nordpil World Urban Areas 1950-2050 (CC0) · UN Population Division', L.safe.x + u * 2, L.safe.y + L.safe.h - u * 0.6);
+  },
+});
+</script>

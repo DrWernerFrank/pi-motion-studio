@@ -62,8 +62,12 @@ export function verifyFacts(key) {
     if (!f.snapshot) { out.push({ id: f.id, status: 'red', why: 'no snapshot (sources/<id>.snapshot.txt) — fetch it, prove it, or hedge it' }); continue; }
     const file = join(FILMS, key, f.snapshot);
     if (!existsSync(file)) { out.push({ id: f.id, status: 'red', why: `snapshot file missing: ${f.snapshot}` }); continue; }
-    const body = readFileSync(file, 'utf8');
-    if (!f.quote || !body.includes(f.quote)) { out.push({ id: f.id, status: 'red', why: f.quote ? `the quote is NOT in the snapshot (sources/${f.id}.snapshot.txt)` : 'no quote recorded (the exact words from the source that prove the claim)' }); continue; }
+    // snapshots may be any text encoding (a CC0 TSV is latin-1): read as binary and match the
+    // quote against BOTH decodes — a strict utf8 read mangles accents and fails true quotes
+    const buf = readFileSync(file);
+    const asLatin = buf.toString('latin1'), asUtf8 = buf.toString('utf8');
+    const hit = (q) => asLatin.includes(q) || asUtf8.includes(q);
+    if (!f.quote || !hit(f.quote)) { out.push({ id: f.id, status: 'red', why: f.quote ? `the quote is NOT in the snapshot (${f.snapshot})` : 'no quote recorded (the exact words from the source that prove the claim)' }); continue; }
     out.push({ id: f.id, status: 'green', why: `quote found in the snapshot (${f.quote.slice(0, 60)}…)` });
   }
   return { ok: out.every((r) => r.status === 'green'), rows: out };

@@ -1,0 +1,13 @@
+{
+  "phase": "shipped",
+  "segments": {
+    "s01": {
+      "status": "building",
+      "film": "cities-s01",
+      "capability": "chart",
+      "at": "2026-10-07T19:02:07.755Z"
+    }
+  },
+  "started": "2026-10-07T19:02:06.635Z",
+  "shippedAt": "2026-10-07T19:25:52.883Z"
+}

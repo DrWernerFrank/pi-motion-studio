@@ -1,0 +1,92 @@
+[
+  {
+    "id": "f01",
+    "claim": "Tokyo: 36370.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "36090.00\t36370.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f02",
+    "claim": "Mumbai: 21950.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "20070.00\t21950.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f03",
+    "claim": "S\u00e3o Paulo: 20540.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "19580.00\t20540.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f04",
+    "claim": "Ciudad de M\u00e9xico: 20190.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "19480.00\t20190.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f05",
+    "claim": "New York-Newark: 19970.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "19440.00\t19970.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f06",
+    "claim": "Delhi: 18670.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "17020.00\t18670.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f07",
+    "claim": "Shanghai: 17210.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "15790.00\t17210.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f08",
+    "claim": "Kolkata: 17040.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "15580.00\t17040.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f09",
+    "claim": "Dhaka: 17020.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "14800.00\t17020.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  },
+  {
+    "id": "f10",
+    "claim": "Karachi: 14860.00 thousand in 2020 (the 2020 urban-area population, Nordpil/UN)",
+    "source_url": "https://nordpil.com/resources/world-database-of-large-cities/",
+    "quote": "13050.00\t14860.00",
+    "snapshot": "sources/urbanareas.snapshot.txt",
+    "retrieved_at": "2026-10-07T23:00:00Z",
+    "hedged": false
+  }
+]
