@@ -1,0 +1,10 @@
+[
+ {
+  "expr": "3 ** 2 + 4 ** 2 == 5 ** 2",
+  "about": "the 3-4-5 triple: nine plus sixteen is twenty five",
+  "says": "s01.1",
+  "scene": "s01_setup",
+  "ok": true,
+  "value": "25 == 25"
+ }
+]

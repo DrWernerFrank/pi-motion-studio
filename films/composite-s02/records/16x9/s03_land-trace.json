@@ -1,0 +1,70 @@
+[
+ {
+  "kind": "bookmark",
+  "t": 48.815,
+  "id": "equation_lands",
+  "sentence": "s03.1",
+  "scene": "s03_land"
+ },
+ {
+  "kind": "animation",
+  "t": 1.2,
+  "i": 1,
+  "scene": "s03_land",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 2.2,
+  "i": 2,
+  "scene": "s03_land",
+  "sentence": "s03.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 8.3,
+  "i": 3,
+  "scene": "s03_land",
+  "sentence": "s03.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.3,
+  "i": 4,
+  "scene": "s03_land",
+  "sentence": "s03.1",
+  "animation": "wait",
+  "seconds": 6.112
+ },
+ {
+  "t": 8.3,
+  "kind": "sentence_end",
+  "scene": "s03_land",
+  "sentence": "s03.1"
+ },
+ {
+  "kind": "animation",
+  "t": 8.6,
+  "i": 5,
+  "scene": "s03_land",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 8.6,
+  "i": 6,
+  "scene": "s03_land",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.3
+ },
+ {
+  "kind": "scene_end",
+  "t": 8.6,
+  "scene": "s03_land"
+ }
+]

@@ -1,0 +1,16 @@
+# Review log: composite
+
+Every round: scores 1-10, the 3 worst problems, what gets fixed. Pass = every score 8+.
+
+## Round 1 · 2026-10-07 19:00 · lead · not yet
+
+hook 7 · readability 7 · motion 6 · variety 8 · composition 7 · brand 7 · sound 7 · fidelity 10 · coherence 8
+
+1. **20s** the pinwheel frames 6-7 hold near-identical (the pack lands, then the squares fill)  
+   fix: the fill could ride the narration more tightly — a revision candidate
+2. **0s** the NASA clip's own look (a logo sting, dark) differs from the paper world  
+   fix: the 0.3s dissolve is the designed seam; the clip being REAL is the point — a deeper brand match would need a paper-frame overlay (noted, not done)
+
+Round 1 (the lead, post-assembly). Fidelity 10: every ask measured — 69.92s (50-70 ✓), both formats exact, a REAL clip opens (the NASA fixture, sha-pinned, credited), the proof is VISUAL (the verified pinwheel->tilt transformation, 7x7 minus four triangles == 25 as sympy claims), the end card closes (paper, the theorem + the mark). Coherence 8: the end card now on the proof's own paper (the critic caught the dark clash); the clip is real footage and stays itself. The proof gates PASS with 0 layout violations after 6 lint iterations (labels outside every bbox — the lint taught the layout).
+
+sheets: probes/p1-seam.png, probes/p2-join1.png, probes/p3-join2.png

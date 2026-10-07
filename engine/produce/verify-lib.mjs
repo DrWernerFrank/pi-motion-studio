@@ -188,6 +188,12 @@ const VERIFIERS = {
     for (const child of children) {
       const found = walkHash(join(FILMS, child), a.sha256);
       if (found) return { status: 'green', evidence: `${a.id} used by ${child} (${found})`, measured: found };
+      // real footage is INGESTED, not copied: the media bin pins the ORIGINAL's sha256 even
+      // though the stored bytes are the conformed cache (the bin is the studio's use record)
+      const bin = readJson(join(FILMS, child, 'assets', 'media', 'index.json'), null);
+      for (const src of Object.values(bin?.sources ?? {})) {
+        if (src.sha256 === a.sha256) return { status: 'green', evidence: `${a.id} ingested by ${child} (the media bin pins the original's sha256)`, measured: `bin:${child}` };
+      }
     }
     return { status: 'red', evidence: `${a.id} (sha ${String(a.sha256).slice(0, 8)}…) is not in any child film folder${children.length ? ` (${children.join(', ')})` : ' — the project has no child films yet'}`, measured: 'not used' };
   },

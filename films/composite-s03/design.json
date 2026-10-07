@@ -1,0 +1,66 @@
+{
+  "direction": "The proof's own field-guide paper, closing: the theorem in ink type, the three-square echo in the proof's amber/red-orange, the studio mark. One piece end to end.",
+  "fonts": {
+    "display": "Bricolage Grotesque",
+    "ui": "Inter",
+    "mono": "JetBrains Mono"
+  },
+  "palette": {
+    "bg": "#F2EEE4",
+    "ink": "#17150F",
+    "muted": "#8A8478",
+    "surface": "#FBF9F3",
+    "accent": "#96610A",
+    "accent2": "#B03D24"
+  },
+  "ladder": [
+    {
+      "role": "hero",
+      "u": 17,
+      "weight": 800,
+      "trackingEm": -0.045
+    },
+    {
+      "role": "title",
+      "u": 9,
+      "weight": 700,
+      "trackingEm": -0.03
+    },
+    {
+      "role": "body",
+      "u": 4.2,
+      "weight": 500,
+      "trackingEm": -0.01
+    },
+    {
+      "role": "label",
+      "u": 2.6,
+      "weight": 600,
+      "trackingEm": 0.08,
+      "case": "upper"
+    }
+  ],
+  "motion": {
+    "ui": "SNAPPY",
+    "containers": "DEFAULT",
+    "type": "HEAVY",
+    "character": "PLAYFUL",
+    "stagger": 0.05
+  },
+  "devices": [
+    {
+      "name": "example-device",
+      "purpose": "what it does for the viewer, in one line"
+    }
+  ],
+  "reference": "what was taken from the reference (grammar only, never content)",
+  "banned": [
+    "centered title on gradient",
+    "everything fading in",
+    "corner labels",
+    "frame borders",
+    "glow on UI chrome",
+    "particle bursts"
+  ],
+  "inheritedFrom": "films/composite/design.json"
+}

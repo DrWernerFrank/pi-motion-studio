@@ -1,0 +1,105 @@
+{
+ "version": 1,
+ "scenes": [
+  {
+   "id": "s01_setup",
+   "title": "the square on the hypotenuse"
+  },
+  {
+   "id": "s02_proof",
+   "title": "the rearrangement"
+  },
+  {
+   "id": "s03_land",
+   "title": "the close"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01.1",
+   "scene": "s01_setup",
+   "text": "Here is a right triangle. Its legs are three and four, and its hypotenuse is five — the most famous triple there is.",
+   "spoken": "Here is a right triangle. Its legs are three and four, and its hypotenuse is five — the most famous triple there is.",
+   "bookmarks": [],
+   "line": 5
+  },
+  {
+   "id": "s01.2",
+   "scene": "s01_setup",
+   "text": "The theorem says the square on the hypotenuse equals the two squares on the legs, added together. {squares_draw}But why?",
+   "spoken": "The theorem says the square on the hypotenuse equals the two squares on the legs, added together. But why?",
+   "bookmarks": [
+    {
+     "id": "squares_draw",
+     "at_word": 17
+    }
+   ],
+   "line": 6
+  },
+  {
+   "id": "s02.1",
+   "scene": "s02_proof",
+   "text": "Take four copies of that triangle. {four_copies}They pack into a square of side seven — three plus four — in two different ways.",
+   "spoken": "Take four copies of that triangle. They pack into a square of side seven — three plus four — in two different ways.",
+   "bookmarks": [
+    {
+     "id": "four_copies",
+     "at_word": 6
+    }
+   ],
+   "line": 10
+  },
+  {
+   "id": "s02.2",
+   "scene": "s02_proof",
+   "text": "Packed one way, {pack_a}the four triangles leave two squares: side three, and side four.",
+   "spoken": "Packed one way, the four triangles leave two squares: side three, and side four.",
+   "bookmarks": [
+    {
+     "id": "pack_a",
+     "at_word": 3
+    }
+   ],
+   "line": 11
+  },
+  {
+   "id": "s02.3",
+   "scene": "s02_proof",
+   "text": "Packed the other way, {pack_b}the same four triangles leave one square: side five — the hypotenuse.",
+   "spoken": "Packed the other way, the same four triangles leave one square: side five — the hypotenuse.",
+   "bookmarks": [
+    {
+     "id": "pack_b",
+     "at_word": 4
+    }
+   ],
+   "line": 12
+  },
+  {
+   "id": "s02.4",
+   "scene": "s02_proof",
+   "text": "Same square of side seven. Same four triangles. {both_shown}So what is left must be equal: nine plus sixteen equals twenty five.",
+   "spoken": "Same square of side seven. Same four triangles. So what is left must be equal: nine plus sixteen equals twenty five.",
+   "bookmarks": [
+    {
+     "id": "both_shown",
+     "at_word": 8
+    }
+   ],
+   "line": 13
+  },
+  {
+   "id": "s03.1",
+   "scene": "s03_land",
+   "text": "Three squared plus four squared equals five squared. {equation_lands}Nine plus sixteen, twenty five. Every right triangle, always.",
+   "spoken": "Three squared plus four squared equals five squared. Nine plus sixteen, twenty five. Every right triangle, always.",
+   "bookmarks": [
+    {
+     "id": "equation_lands",
+     "at_word": 8
+    }
+   ],
+   "line": 17
+  }
+ ]
+}

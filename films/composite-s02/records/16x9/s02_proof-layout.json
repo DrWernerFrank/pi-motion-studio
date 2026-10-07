@@ -1,0 +1,2886 @@
+[
+ {
+  "t": 0.5,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "1:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "1:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 1.0,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "2:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "2:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "2:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 1.5,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "3:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "3:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "3:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "3:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 2.0,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "4:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "4:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "4:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "4:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "4:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 7.95,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "5:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "5:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "5:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "5:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "5:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 7.95,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "6:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "6:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "6:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "6:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "6:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 8.1,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "7:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "7:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "7:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "7:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "7:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 8.1,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "8:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "8:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "8:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "8:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "8:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 9.4,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "9:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "9:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "9:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "9:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "9:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "9:5",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "9:6",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.792,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "9:7",
+    "bbox": [
+     1.664,
+     -1.944,
+     0.631,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "9:8",
+    "bbox": [
+     -0.997,
+     0.899,
+     0.651,
+     0.559
+    ],
+    "height_u": 6.99,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 14.65,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "10:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "10:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "10:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "10:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "10:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "10:5",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "10:6",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.792,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "10:7",
+    "bbox": [
+     1.664,
+     -1.944,
+     0.631,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "10:8",
+    "bbox": [
+     -0.997,
+     0.899,
+     0.651,
+     0.559
+    ],
+    "height_u": 6.99,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 14.65,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "11:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "11:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "11:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "11:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "11:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "11:5",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "11:6",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.792,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "11:7",
+    "bbox": [
+     1.664,
+     -1.944,
+     0.631,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "11:8",
+    "bbox": [
+     -0.997,
+     0.899,
+     0.651,
+     0.559
+    ],
+    "height_u": 6.99,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 14.8,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "12:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "12:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "12:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "12:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "12:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "12:5",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "12:6",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.792,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "12:7",
+    "bbox": [
+     1.664,
+     -1.944,
+     0.631,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "12:8",
+    "bbox": [
+     -0.997,
+     0.899,
+     0.651,
+     0.559
+    ],
+    "height_u": 6.99,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 14.8,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "13:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "13:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "13:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "13:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "13:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "13:5",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "13:6",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.792,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 6,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "13:7",
+    "bbox": [
+     1.664,
+     -1.944,
+     0.631,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 7,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "13:8",
+    "bbox": [
+     -0.997,
+     0.899,
+     0.651,
+     0.559
+    ],
+    "height_u": 6.99,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 8,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 15.2,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "14:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "14:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "14:2",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "14:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "14:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 16.0,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "15:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "15:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "15:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "15:3",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "15:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 16.8,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "16:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "16:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "16:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "16:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "16:4",
+    "bbox": [
+     0.224,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 17.6,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "17:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "17:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "17:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "17:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "17:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 18.8,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "18:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "18:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "18:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "18:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "18:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "18:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "18:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 21.817,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "19:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "19:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "19:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "19:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "19:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "19:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "19:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 21.817,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "20:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "20:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "20:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "20:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "20:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "20:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "20:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 21.967,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "21:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "21:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "21:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "21:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "21:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "21:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "21:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 21.967,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "22:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "22:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "22:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "22:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "22:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "22:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "22:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 30.667,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "23:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "23:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "23:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "23:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "23:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "23:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "23:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 30.667,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "24:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "24:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "24:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "24:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "24:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "24:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "24:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 30.967,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "25:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "25:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "25:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "25:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "25:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "25:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "25:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 30.967,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "26:0",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8A8478",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "26:1",
+    "bbox": [
+     -1.568,
+     -2.333,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 1,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "26:2",
+    "bbox": [
+     0.224,
+     -2.333,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 2,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "26:3",
+    "bbox": [
+     -0.224,
+     -0.541,
+     1.792,
+     1.344
+    ],
+    "height_u": 16.8,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 3,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "26:4",
+    "bbox": [
+     -1.568,
+     -0.989,
+     1.344,
+     1.792
+    ],
+    "height_u": 22.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 4,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Polygon",
+    "id": "26:5",
+    "bbox": [
+     -1.568,
+     -2.333,
+     3.136,
+     3.136
+    ],
+    "height_u": 39.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#8F5B00",
+    "z": 5,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "26:6",
+    "bbox": [
+     1.664,
+     -0.152,
+     0.613,
+     0.566
+    ],
+    "height_u": 7.07,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 6,
+    "alive": true,
+    "text": true
+   }
+  ]
+ }
+]

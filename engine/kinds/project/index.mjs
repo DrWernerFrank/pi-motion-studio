@@ -177,10 +177,13 @@ function copyDesign(key, childKey, childKind) {
   // So the palette/colors/fonts/direction flow; the per-kind shapes stay the CHILD's own.
   const child = readJson(join(FILMS, childKey, 'design.json'), null) || {};
   const isMath = childKind === 'math';
+  // The LADDER NEVER FLOWS: every kind's ladder is its own shape AND its own roles (the motion
+  // ladder has no 'caption' rung; flowing it into an edit child made D.px('caption') throw on
+  // every captioned frame — found live on the composite demo). The palette/fonts/direction flow;
+  // the type system stays the child's own.
   const flow = Object.fromEntries(Object.entries(d).filter(([k]) =>
     ['colors', 'fonts', 'direction', 'motion', 'feel'].includes(k)
     || (k === 'palette' && !isMath)
-    || (k === 'ladder' && (isMath ? (d.ladder && !Array.isArray(d.ladder)) : Array.isArray(d.ladder)))
     || (k === 'devices' && !isMath)));
   writeJson(join(FILMS, childKey, 'design.json'), {
     ...child, ...flow,

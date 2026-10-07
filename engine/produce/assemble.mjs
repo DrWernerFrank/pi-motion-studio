@@ -245,7 +245,13 @@ async function xfadeLeg(key, segs, fmt, target, trans, { out, slug }) {
   const work = join(out, `.asm-${slug}-xfade`); mkdirSync(work, { recursive: true });
   try {
     // video: [i] -> xfade chains -> ONE encode (each segment's pixels re-encoded exactly once)
-    let vf = parts.map((_, i) => `[${i}:v]setpts=PTS-STARTPTS[v${i}]`).join(';');
+    // xfade needs MATCHED inputs: the children of different kinds render at different rates
+    // (edit 30, math/motion 60) and geometries — normalize every part to the assembly format
+    // first (fps + scale + SAR + pix_fmt), THEN the fade chain. Found live on the composite demo
+    // (s01 30fps x s02 60fps: 'first input link parameters do not match').
+    const W = { '16:9': [1920, 1080], '9:16': [1080, 1920], '1:1': [1080, 1080], '4:5': [1080, 1350] }[fmt];
+    let vf = parts.map((_, i) =>
+      `[${i}:v]setpts=PTS-STARTPTS,fps=${ASM_FPS},scale=${W[0]}:${W[1]}:flags=lanczos,setsar=1,format=yuv420p[v${i}]`).join(';');
     let cur = 'v0';
     parts.slice(1).forEach((_, i) => {
       const off = parts.slice(0, i + 1).reduce((n, q) => n + q.dur, 0) - (i + 1) * X;
