@@ -95,3 +95,15 @@ audio). Consequence: mix.wav is now a deterministic function of (dialog, music) 
 baseline's edit.txt is stable across captures, and the earlier missions' measured-loudness checks
 are unaffected (they never compared mix bytes). This is the pattern the baseline exists for: an
 intentional-drift re-capture surfaced an unintentional one.
+
+**D-008 2026-10-07 P9 — manim's units are PX and POINTS, and a long Create is a memory bomb.**
+Found producing demo C (the loop working): (1) `stroke_width` is Manim PIXELS — `L.u * 0.9` =
+0.072px made every Line and Circle INVISIBLE (the sheets showed dots and no beams/rings through
+six look rounds; the kit's `_stroke` helper holds the house values: line 3.0). (2) The kit Eq's
+`font_size` is POINTS (48pt = the 9u math role) — `L.u * 11` = 0.88pt rendered the equation at
+fly-speck size while the layout records showed it "present". Both are unit-class confusions the
+layout lint cannot catch (the bbox is right; the ink is invisible). (3) A single
+`play(Create(x), run_time=<a whole sentence>)` at final (1080p60) holds ~500 intermediate frames
+in the writer -> the memory cap kills the scene; the fix is SHORT beats (Create 1.1-1.3s, then
+pulses/rides) + `at()` bookmark stamps so the sync gate still sees the sentence's moments. All
+three are now the demos' lived lessons, in the scenes' comments.
