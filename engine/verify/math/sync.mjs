@@ -27,7 +27,7 @@ import { buildVoice, buildMix, alignWords, normWords } from '../../narration.mjs
 import { run } from '../../lib/proc.mjs';
 import { runCapped } from '../../lib/capped.mjs';
 import { pythonFor } from '../../doctor.mjs';
-import { FILMS, readJson } from '../../lib/film.mjs';
+import { FILMS, readJson, fmtSlug } from '../../lib/film.mjs';
 import { ROOT } from '../../lib/serve.mjs';
 
 const KEY = 'verify-m-sync';
@@ -154,7 +154,7 @@ export default async () => {
 
     for (const fmt of ['16:9', '9:16']) {
       // -- 1. every bookmarked animation ENDS on its bookmark (within 1 frame) ----------------
-      const trace = readJson(join(dir, 'records', fmt, 's01_hook-trace.json'), []);
+      const trace = readJson(join(dir, 'records', fmtSlug(fmt), 's01_hook-trace.json'), []);
       const pairs = [];
       trace.forEach((e, i) => {
         if (e.kind !== 'bookmark' || e.sentence !== 's01.1') return;
@@ -182,7 +182,7 @@ export default async () => {
       for (const sid of sceneIds) {
         const own = timing.sentences.filter((s) => s.scene === sid);
         const span = Math.max(...own.map((s) => s.end)) - Math.min(...own.map((s) => s.start));
-        const seconds = readJson(join(dir, 'records', fmt, `${sid}-timeline.json`), {})?.seconds ?? 0;
+        const seconds = readJson(join(dir, 'records', fmtSlug(fmt), `${sid}-timeline.json`), {})?.seconds ?? 0;
         margins.push(`${sid}:${(seconds - span).toFixed(3)}`);
         if (seconds < span - FRAME - 1e-6) bad.push(`${fmt}: scene ${sid} runs ${seconds} s, its narration spans ${span.toFixed(3)} s (> 1 frame short)`);
       }

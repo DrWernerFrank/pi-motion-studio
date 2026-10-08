@@ -151,7 +151,7 @@ async function run({ bad, facts, need, shots, refs }) {
     need(mount.liveHidden, 'the Live view is not hidden for a math film');
     need(!mount.iframeLive, 'the live iframe is still in the DOM (math films have no live page)');
     need(mount.stripW > 400, `the timeline strip is ${mount.stripW}px wide`);
-    need(/draft-16:9\.mp4|final-16:9\.mp4/.test(mount.src), `no 16:9 draft video src: ${mount.src}`);
+    need(/draft-16x9\.mp4|final-16x9\.mp4/.test(mount.src), `no 16:9 draft video src: ${mount.src}`);
     facts.push(`mounted: tabs ${mount.tabs.join('/')}, Live hidden, strip ${mount.stripW}px, src ${mount.src.split('?')[0].split('/').pop()}`);
 
     // 2 · the video plays (a real src, currentTime advances)
@@ -163,7 +163,7 @@ async function run({ bad, facts, need, shots, refs }) {
     // 3 · the format toggle swaps to the 9:16 draft
     await page.click('#mFmt button[data-f="9:16"]');
     await evalk(() => new Promise((ok) => { const v = document.querySelector('#mVideo');
-      const iv = setInterval(() => { if (v.getAttribute('src')?.includes('draft-9:16.mp4') && v.readyState >= 1) { clearInterval(iv); ok(true); } }, 80);
+      const iv = setInterval(() => { if (v.getAttribute('src')?.includes('draft-9x16.mp4') && v.readyState >= 1) { clearInterval(iv); ok(true); } }, 80);
       setTimeout(() => { clearInterval(iv); ok(false); }, 12000); }))
       .then((ok) => need(ok, 'the 9:16 toggle did not swap the video src'));
     const t916 = await evalk(() => document.querySelector('#mVideo').currentTime);
@@ -290,7 +290,7 @@ async function run({ bad, facts, need, shots, refs }) {
     }
     need(!!jobDone && jobDone.code === 0, `the draft job did not finish cleanly: ${JSON.stringify(jobDone)?.slice(0, 140)}`);
     if (jobDone && jobDone.code === 0) {
-      const d169 = statSync(join(FILMS, KEY, 'out', 'draft-16:9.mp4')), d916 = statSync(join(FILMS, KEY, 'out', 'draft-9:16.mp4'));
+      const d169 = statSync(join(FILMS, KEY, 'out', 'draft-16x9.mp4')), d916 = statSync(join(FILMS, KEY, 'out', 'draft-9x16.mp4'));
       need(Math.max(d169.mtimeMs, d916.mtimeMs) > t0 - 1000, 'the drafts were not re-written by the job');
       facts.push(`draft job done in ${((Date.now() - t0) / 1000).toFixed(0)}s — both drafts re-written, ${jobDone.args.join(' ')}`);
     }

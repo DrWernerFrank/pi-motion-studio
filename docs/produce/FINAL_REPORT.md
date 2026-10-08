@@ -50,18 +50,13 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 - `gps` 61.8 s 16:9 — 31 caption cues; 4 facts sourced (NOAA snapshot-verified).
 - `cities` 30.0 s 16:9 — ten cities over a century, CC0 Nordpil/UN data on screen, 10 facts; **the grown `chart` technique** (its own data/axis gates).
 
-## Honest limitations
+## Honest limitations / decisions to revisit
 - The edit gold's mix flaps ±0.2 LUFS only inside the verify context (D-011; root cause open — masked in transcripts, verify-edit owns the ±1 gate).
 - Cloud providers are opt-in scaffolding, exercised with a fake provider only (no keys exist to test a real one); adding one is documented.
-- Narration is Piper (local); GPU speech recognition unproven.
-- Cosmetic: the sidebar's metadata wraps unevenly on narrow rows (readable).
+- Narration is Piper (local); GPU speech recognition unproven. Cosmetic: the sidebar's metadata wraps unevenly on narrow rows (readable).
+- Worth a second look: the mix aims TP −2.0 dB (AAC overshoot, D-009) · edit-film as the default assembler (ADR-003) · the runner's relaunch cap · brief-lint's deterministic ask extraction.
+- `NEEDS_USER.md`: nothing — no hard blocks were hit.
 
-## Decisions you may want to revisit
-The mix aims TP −2.0 dB (AAC overshoot, D-009) · edit-film as the default assembler (ADR-003) · the runner's relaunch cap · brief-lint's deterministic ask extraction.
-
-## NEEDS_USER.md
-Nothing — no hard blocks were hit.
-
-## The earlier suites, from the final tree
-- `./studio verify-edit`: (running — result appended below)
+## The earlier suites, from the final tree (commit 9d28918)
+- `./studio verify-edit`: **34/34 PASS** (74 min, `pass: true` — docs/editing/verify-last.json; the two D-013 check-race fixes hold in the full context: transcript-edit 93% ≥ 90%, gui-smoke's pane-wait green).
 - `./studio verify-math`: (running — result appended below)

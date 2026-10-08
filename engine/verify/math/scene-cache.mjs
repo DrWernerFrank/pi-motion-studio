@@ -29,7 +29,7 @@ export default async () => {
     const cold = await renderMathFilm(KEY, { quality: 'draft', fmt: '16:9' });
     const tCold = (Date.now() - t0) / 1000;
     if (cold[0].rendered !== 3 || cold[0].cached !== 0) bad.push(`cold: rendered ${cold[0].rendered}, cached ${cold[0].cached} (wanted 3/0)`);
-    const coldMd5 = md5(join(dir, 'out', 'draft-16:9.mp4'));
+    const coldMd5 = md5(join(dir, 'out', 'draft-16x9.mp4'));
 
     // 2. unchanged warm: < 10% of cold, all cached, byte-identical output
     const t1 = Date.now();
@@ -37,7 +37,7 @@ export default async () => {
     const tWarm = (Date.now() - t1) / 1000;
     if (warm[0].cached !== 3) bad.push(`warm: cached ${warm[0].cached} (wanted 3)`);
     if (tWarm >= tCold * 0.10) bad.push(`warm re-render ${tWarm.toFixed(1)}s is not < 10% of cold ${tCold.toFixed(1)}s`);
-    const warmMd5 = md5(join(dir, 'out', 'draft-16:9.mp4'));
+    const warmMd5 = md5(join(dir, 'out', 'draft-16x9.mp4'));
     if (warmMd5 !== coldMd5) bad.push(`warm output differs from cold (${warmMd5} vs ${coldMd5}) — the cache is not transparent`);
     facts.push(`cold ${tCold.toFixed(1)}s (3 rendered) → warm ${tWarm.toFixed(1)}s (${((tWarm / tCold) * 100).toFixed(1)}%, 3 cached), md5 identical`);
 

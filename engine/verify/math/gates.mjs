@@ -211,7 +211,7 @@ export default async (ctx = {}) => {
     {
       mkdirSync(join(pace, 'out'), { recursive: true });
       writeJson(join(pace, 'film.json'), { kind: 'math', title: 'pace unit', fps: 30, formats: ['16:9'], gates: { maxStill: 3 } });
-      const draft = join(pace, 'out', 'draft-16:9.mp4');
+      const draft = join(pace, 'out', 'draft-16x9.mp4');   // slugged like every real output (a colon would break the films/ no-colon invariant)
       const timing = (sentences) => writeJson(join(pace, 'timing.json'), { version: 1, voice: 'piper:en_US-ljspeech-medium', duration: 10, sentences });
       const say = (id, start, end) => ({ id, scene: 's01_hook', text: 'One sentence of narration.', spoken: 'One sentence of narration.', start, end, bookmarks: [] });
       // 10 s of frozen frames: ONE testsrc frame, looped — no Manim render involved

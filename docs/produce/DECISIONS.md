@@ -174,3 +174,21 @@ film.json/edit.json/index.html) prove no writer exists and the pane is stable on
 suite run was the one loaded-context loss of that race. Fix: waitForFunction on the words + the click
 find retries for 3 s (a pane rebuild is transient); every downstream assertion unchanged. No engine
 file was touched — both fixes live in engine/verify/{transcript-edit,gui-smoke}.mjs.
+
+**D-014 2026-10-08 P9 — the first full verify-math since the P1 naming migration caught five check files
+reading the PRE-migration colon paths.** The renderer and the records now write slugged names
+(draft-16x9.mp4, records/16x9/ — fmtSlug, d6000eb 10-06) but formats/look/sync/where/scene-cache
+(+ gui-smoke's src probes, + gates' synthetic pace draft) still read 'records/16:9' /
+`draft-${fmt}.mp4` / 'draft-16:9.mp4': every such read defaulted to empty — "no Text object in
+records", "0 bookmark/animation pairs", "scenes run 0 s", sceneMap-vs-records disagreement, ENOENT
+draft-16:9.mp4 — and gui-smoke's 9:16-toggle poll waited 12 s on a src that never matched. The
+RENDERER is healthy (the kit's records/16x9/s01_plane-timeline.json carries real seconds 9.033; the
+demos re-render byte-identical; render-determinism/layout-lint/starter/concat-mux/gates'
+records-faults were already migrated). The debt was invisible until now because the last full
+verify-math predates the migration (10-05 15:50Z vs 10-06 11:49+0330) and the cheap subsets
+(env,regress,typeset,claims,docs) never touch records or draft paths — exactly what the final
+both-suites-green gate exists to catch. Fix: the five files now build paths with fmtSlug (the
+canonical helper, lib/film.mjs) and the literal slugged filenames; scene-cache's draft md5s,
+gui-smoke's src regex/statSync, gates' synthetic unit draft follow. NO bar, seeded fault or
+assertion changed — the checks read the same things the renderer actually writes. Also: mathdemo's
+gates.json re-measured -16.1 LUFS/-2 dBTP (D-009's aim) — still green within its ±1 contract.

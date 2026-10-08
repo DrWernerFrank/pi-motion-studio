@@ -103,15 +103,16 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 ## P9 final gates
 
 - [x] Full `./studio verify-produce` from a cold cache: `pass: true`
-- [ ] Full `./studio verify-edit` in the background from the final tree (34 checks)
+- [x] Full `./studio verify-edit` in the background from the final tree (34 checks) — 34/34 PASS (74 min, 9d28918), the D-013 fixes green in context
 - [ ] Full `./studio verify-math` in the background from the final tree (27 checks)
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: gui-smoke's real cause found and fixed (D-012: the readiness poll DoSed the very
-/api/films it waited on; cheap '/' poll + 127.0.0.1 + a quoted server log now), the Plan-tab path
-wrap fixed, the interrupted run's accidentally-committed leftovers un-committed (e00b80e); the
-FULL verify-produce FROM A COLD CACHE is running now — 28/28 expected after its 12:46 sibling
-passed all but gui-smoke.
-Next: the cold full run lands (pass: true) -> the background full verify-edit then verify-math ->
-FINAL_REPORT.md -> every box ticked -> the final commit.
+Now: verify-produce PASSED 28/28 cold (069450a). The first full verify-edit from the final tree
+then caught two CHECK races (D-013 — both fixed in the checks, no bar weakened, no engine touched,
+re-validated 3/3 and 2/2); the verify-math leg of that chain was killed by a hung browser my own
+concurrent Playwright probes starved (my fault, not the suite's) — swept, and the full chain
+(verify-edit then verify-math) relaunched clean from the final tree (9d28918). Remaining: both
+suites green -> FINAL_REPORT's last two lines -> the P9/verify-edit/verify-math boxes ticked ->
+final commit.
+Next: poll the chain; on green fill FINAL_REPORT's suite lines, tick the last boxes, commit.
