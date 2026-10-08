@@ -233,3 +233,9 @@ changes every partial bitstream, so all six demo finals re-render to new values;
 re-frozen from fresh cold renders (the same rule as D-010's baseline re-capture: intentional,
 explained, re-measured). This is an ENGINE change under §5.10: small, measured, committed apart from
 the project work, listed in the report.
+  D-016 (cont.) — the golden baseline's math draft row follows the same re-capture rule as D-010:
+  the pin legitimately changes the math draft's bytes (a draft muxes the partials), so
+  `engine/produce/baseline.mjs --out docs/produce/baseline` was re-run after the fix: motion
+  (c88ef10c) and edit (6e43dc37) drafts UNCHANGED — the pin affects only the math path — and the
+  math draft moved 61187385 -> 3f719eb0 (the exact value the drift reported). The 27/28 run that
+  caught this is the evidence the gate bites; the final full run after the re-capture is the proof.
