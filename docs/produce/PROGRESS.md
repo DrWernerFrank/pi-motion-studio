@@ -48,7 +48,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [x] P6 Capability growth (K12)
 - [x] P7 Planning battery (12 briefs + independent references)
 - [x] P8 Hardening (failure matrix)
-- [ ] P9 Demos (4 projects, reviews, final verify runs, FINAL_REPORT)
+- [x] P9 Demos (4 projects, reviews, final verify runs, FINAL_REPORT)
 
 ## Checks (§7 — `./studio verify-produce`, every one needs a file + green)
 
@@ -105,7 +105,7 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [x] Full `./studio verify-produce` from a cold cache: `pass: true`
 - [x] Full `./studio verify-edit` in the background from the final tree (34 checks) — 34/34 PASS (74 min, 9d28918), the D-013 fixes green in context
 - [x] Full `./studio verify-math` in the background from the final tree (27 checks) — 27/27 PASS (33 min, c380c50) after the D-014/D-015 fixes (one a REAL product bug: the blank math video pane)
-- [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
+- [x] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
 Now: verify-edit 34/34 (9d28918), verify-math 27/27 (c380c50) — and the naming check of the

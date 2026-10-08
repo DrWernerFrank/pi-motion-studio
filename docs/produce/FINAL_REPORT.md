@@ -12,7 +12,7 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 2. `./studio make "Cut my interview ~/Videos/i.mp4 down to 90 seconds, no ums, captions, 9:16."`
 3. `./studio gui` → **✦ Make** → paste the request → the Plan/Requirements/Log tabs → Run → Ship.
 
-## `./studio verify-produce` — 28/28 PASS from a cold cache, 19.6 min (`pass: true`)
+## `./studio verify-produce` — 28/28 PASS (`pass: true`, ~33 min; the final run's row-by-row numbers: `docs/produce/verify-last.json`)
 | check | the headline number (full rows: `docs/produce/verify-last.json`) |
 |---|---|
 | env | pi 0.87.1 on PATH; doctor 0 red rows; 12/12 capabilities ready |
@@ -50,13 +50,16 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 - `gps` 61.8 s 16:9 — 31 caption cues; 4 facts sourced (NOAA snapshot-verified).
 - `cities` 30.0 s 16:9 — ten cities over a century, CC0 Nordpil/UN data on screen, 10 facts; **the grown `chart` technique** (its own data/axis gates).
 
-## Honest limitations / decisions to revisit
+## Honest limitations
+- A REAL engine bug found by the final gates and FIXED (D-016): PyAV's sliced-thread x264 partial encodes made math finals non-deterministic at the encode layer (identical frames, different bits, ±1 seam frame) — the kit now pins partial encoders to one thread; proven by identical cold re-renders. The golden math-draft baseline and the migration md5 ledger were honestly re-frozen (motion/edit unchanged).
 - The edit gold's mix flaps ±0.2 LUFS only inside the verify context (D-011; root cause open — masked in transcripts, verify-edit owns the ±1 gate).
 - Cloud providers are opt-in scaffolding, exercised with a fake provider only (no keys exist to test a real one); adding one is documented.
 - Narration is Piper (local); GPU speech recognition unproven. Cosmetic: the sidebar's metadata wraps unevenly on narrow rows (readable).
+- The SSE film-scanner sweeps every film once a second once a client connects (~1.8 s at ~35 films on 9p): harmless for one viewer, worth a real watch mechanism if the GUI serves more.
 - Worth a second look: the mix aims TP −2.0 dB (AAC overshoot, D-009) · edit-film as the default assembler (ADR-003) · the runner's relaunch cap · brief-lint's deterministic ask extraction.
 - `NEEDS_USER.md`: nothing — no hard blocks were hit.
 
-## The earlier suites, from the final tree (commit c380c50)
-- `./studio verify-edit`: **34/34 PASS** (74 min, `pass: true` — docs/editing/verify-last.json; the two D-013 check-race fixes hold in the full context: transcript-edit 93% ≥ 90%, gui-smoke's pane-wait green).
-- `./studio verify-math`: **27/27 PASS** (33 min, zero skips — docs/math/verify-last.json). The first post-migration run exposed real debt (D-014: five checks on pre-rename colon paths; D-015: a REAL product bug — the GUI's math video pane had been blank since P1, now fixed — plus the SSE-scanner starvation, measured 115 ms → 3046 ms with one client, now avoided check-side). All fixed at the right layer, no bar weakened; the suite then passed clean.
+## The earlier suites, from the final tree
+- `./studio verify-edit`: **34/34 PASS** (74 min, `pass: true` — docs/editing/verify-last.json).
+- `./studio verify-math`: **27/27 PASS** twice (33 + 30 min, zero skips — docs/math/verify-last.json), the second run from the D-016-fixed tree.
+- The tail's own finds, all fixed at the right layer and re-verified green: five math checks on pre-rename colon paths (D-014); the GUI's math video pane blank since P1 + four check races (D-015); the PyAV sliced-thread nondeterminism (D-016) with the baseline and migration ledger honestly re-frozen.
