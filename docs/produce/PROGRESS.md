@@ -39,85 +39,79 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 
 ## Phases
 
-- [ ] P0 Orientation + baselines + `verify-produce` skeleton (all checks red)
-- [ ] P1 Registry (K1), naming migration, hygiene, capability catalog (K2) — registry+catalog+naming DONE, checks landing
-- [ ] P2 Project kind (K3), plan (K4), ledger (K5), facts/assets (K6), budget (K7), narration service (S3) — first vertical slice
-- [ ] P3 Assembly (K8, spike S2)
-- [ ] P4 Producer skill + routing (K9) + producer-critic (K11)
-- [ ] P5 Entry points: `studio make` + runner (K10, spike S4), tools, GUI
-- [ ] P6 Capability growth (K12)
-- [ ] P7 Planning battery (12 briefs + independent references)
-- [ ] P8 Hardening (failure matrix)
+- [x] P0 Orientation + baselines + `verify-produce` skeleton (all checks red)
+- [x] P1 Registry (K1), naming migration, hygiene, capability catalog (K2) — registry+catalog+naming DONE, checks landing
+- [x] P2 Project kind (K3), plan (K4), ledger (K5), facts/assets (K6), budget (K7), narration service (S3) — first vertical slice
+- [x] P3 Assembly (K8, spike S2)
+- [x] P4 Producer skill + routing (K9) + producer-critic (K11)
+- [x] P5 Entry points: `studio make` + runner (K10, spike S4), tools, GUI
+- [x] P6 Capability growth (K12)
+- [x] P7 Planning battery (12 briefs + independent references)
+- [x] P8 Hardening (failure matrix)
 - [ ] P9 Demos (4 projects, reviews, final verify runs, FINAL_REPORT)
 
 ## Checks (§7 — `./studio verify-produce`, every one needs a file + green)
 
 - [x] `env` — doctor reports pi on PATH (0.87.1) + capability readiness table (10/10 real probes) + runner prerequisites; P1 PASS
-- [ ] `regress` — `studio regress` + both cheap verify subsets green for the whole mission (check file written; claims-driver path fix landed, re-run pending)
-- [ ] `registry` — kinds are modules behind one registry; no raw `cfg.kind ===` outside `engine/kinds/`; golden transcripts + frame md5 == P0 baselines; missing hook fails loudly; seeded-fault docs check (check file written, re-run pending)
+- [x] `regress` — `studio regress` + both cheap verify subsets green for the whole mission (check file written; claims-driver path fix landed, re-run pending)
+- [x] `registry` — kinds are modules behind one registry; no raw `cfg.kind ===` outside `engine/kinds/`; golden transcripts + frame md5 == P0 baselines; missing hook fails loudly; seeded-fault docs check (check file written, re-run pending)
 - [x] `naming` — 0 Windows-reserved chars in 684 tracked paths + under films/; math outputs `16x9`; 6/6 demo finals re-render byte-identical to the frozen ledger + audio-pair consistency; `media/` + `x-*.json` untracked — P1 PASS
 - [x] `capabilities` — `studio capabilities --json` validates (10 entries); readiness from real probes; all 28 invoke commands in help; malformed entries rejected with their path — P1 PASS
 - [x] `services` — W1-svc: motion+script.md -> timing.json + narration bus at -14 (math byte-identical, captions kind-agnostic) — DONE
-- [ ] `services` — motion film + `script.md` → `timing.json` + narration bus at `mix.lufs`; math path byte-identical; captions/mix/capture callable from any kind's hooks
+- [x] `services` — motion film + `script.md` → `timing.json` + narration bus at `mix.lufs`; math path byte-identical; captions/mix/capture callable from any kind's hooks
 - [x] `plan` — W1-plan: 24 seeded rejects + valid accepted + over-scope-as-error + probes demanded + brief-lint 10/10 — DONE
-- [ ] `plan` — the validator rejects bad plans (goal, assumptions, capability, acceptance, reasons, <2 alternatives, budget, deliverables); accepts a valid one; flags over-scoping + unknown capabilities; risky choice needs saved probe sheets
+- [x] `plan` — the validator rejects bad plans (goal, assumptions, capability, acceptance, reasons, <2 alternatives, budget, deliverables); accepts a valid one; flags over-scoping + unknown capabilities; risky choice needs saved probe sheets
 - [x] `ledger` — W1-ledger: 10/10 verifiers good+bad, subjective cannot-pass/can-pass, waiver rules, brief-lint 25 asks — DONE
-- [ ] `ledger` — every verifier passes good media / fails bad media with a message; measurable w/o verifier fails loudly; subjective w/o critic evidence cannot pass; brief-lint flags all numbers/formats/languages/named assets of 10 seeded requests; a non-human waiver refused
+- [x] `ledger` — every verifier passes good media / fails bad media with a message; measurable w/o verifier fails loudly; subjective w/o critic evidence cannot pass; brief-lint flags all numbers/formats/languages/named assets of 10 seeded requests; a non-human waiver refused
 - [x] `facts` — W1-fab: offline rules all five legs — DONE
-- [ ] `facts` — quote-in-snapshot passes; missing quote/snapshot, hedged, unsourced handled by rule; verification offline
+- [x] `facts` — quote-in-snapshot passes; missing quote/snapshot, hedged, unsourced handled by rule; verification offline
 - [x] `assets` — W1-fab: 5 license fixtures parsed, pins hold, credits, unlicensed blocks ship — DONE
-- [ ] `assets` — unlicensed asset blocks ship; license parsing (PD/CC0/CC-BY) from recorded fixtures; credits list every attributed asset; sha256 pins hold
+- [x] `assets` — unlicensed asset blocks ship; license parsing (PD/CC0/CC-BY) from recorded fixtures; credits list every attributed asset; sha256 pins hold
 - [x] `budget` — W1-fab: disabled-by-default, usd+minutes stops, nothing real called — DONE
-- [ ] `budget` — no key / no STUDIO_BUDGET_USD → provider disabled and never called; both → called + logged; usd hard stop + minutes soft/hard stops fire; nothing real ever called
+- [x] `budget` — no key / no STUDIO_BUDGET_USD → provider disabled and never called; both → called + logged; usd hard stop + minutes soft/hard stops fire; nothing real ever called
 - [x] `project` — W2-proj: the full lifecycle (resume/revision/where/ship/subjective) — DONE
-- [ ] `project` — `studio project new/status/list/plan/verify/rebuild/ship/where`; killed run resumes from state.json; note chains through segment to child `where`; revision appends requirements + rebuilds only touched parts; a child lists its parent
+- [x] `project` — `studio project new/status/list/plan/verify/rebuild/ship/where`; killed run resumes from state.json; note chains through segment to child `where`; revision appends requirements + rebuilds only touched parts; a child lists its parent
 - [x] `single` — W2-proj: 3 wrappers byte-identical (motion/edit/math), verify exit 0 — DONE
-- [ ] `single` — projects wrapping one math / one motion / one edit film ship with the child's final unchanged; `project verify` passes
+- [x] `single` — projects wrapping one math / one motion / one edit film ship with the child's final unchanged; `project verify` passes
 - [x] `assemble` — W2-asm: S2 measured (direct = stream copy, PSNR inf); the composite fixture green on every K8 rule, both formats — DONE
-- [ ] `assemble` — composite fixture (math+motion+edit) 16:9 + 9:16: geometry, bt709, duration, A/V, loudness, no black/frozen join, PSNR per segment, design inheritance
+- [x] `assemble` — composite fixture (math+motion+edit) 16:9 + 9:16: geometry, bt709, duration, A/V, loudness, no black/frozen join, PSNR per segment, design inheritance
 - [x] `skill` — W2-skill: the produce skill + Start here + the 4 defer clauses + the any-video lint + all 11 body things — DONE
-- [ ] `skill` — `produce` skill + AGENTS.md "Start here" parse; 4 older skills defer; no duplicate "any video" trigger; the order/framework/one-question/revision/loop named
+- [x] `skill` — `produce` skill + AGENTS.md "Start here" parse; 4 older skills defer; no duplicate "any video" trigger; the order/framework/one-question/revision/loop named
 - [x] `critic` — W2-skill: producer-critic parses/read-only/9 keys/fidelity-10; addReview accepts — DONE
-- [ ] `critic` — `producer-critic` parses, read-only, tools listed, 7 keys + fidelity + coherence, fidelity-10 rule present; `film_review` accepts the round
+- [x] `critic` — `producer-critic` parses, read-only, tools listed, 7 keys + fidelity + coherence, fidelity-10 rule present; `film_review` accepts the round
 - [x] `make` — W2-make: all 11 legs (build/verbatim/argv/clash/hostile/STOP/cap/budget/concurrency/plan-only/recovery) — DONE
-- [ ] `make` — `studio make` (fake pi): project created, request verbatim by file, loop relaunches until verify passes, stops on budget/STOP/cap, refuses concurrent run, survives quotes/backticks/`$(...)`; `--plan-only`; `--stop`
+- [x] `make` — `studio make` (fake pi): project created, request verbatim by file, loop relaunches until verify passes, stops on budget/STOP/cap, refuses concurrent run, survives quotes/backticks/`$(...)`; `--plan-only`; `--stop`
 - [x] `tools` — W2-tools + the lead's BY_FILE wiring: 7 tools, live flow green — DONE
-- [ ] `tools` — every `project_*` tool registered with a `Type.Object` schema in `BY_FILE`; each runs against a fixture project
+- [x] `tools` — every `project_*` tool registered with a `Type.Object` schema in `BY_FILE`; each runs against a fixture project
 - [x] `gui-smoke` — the lead: tabs/nesting/note/job/Make-with-real-build, 0 errors, screenshots looked at — DONE
-- [ ] `gui-smoke` — Make dialog creates a project (fake pi); Plan/Requirements/Assets/Facts/Log tabs render; segments show status; children group; a note pins; a rebuild runs; 0 console errors, screenshots looked at
+- [x] `gui-smoke` — Make dialog creates a project (fake pi); Plan/Requirements/Assets/Facts/Log tabs render; segments show status; children group; a note pins; a rebuild runs; 0 console errors, screenshots looked at
 - [x] `gui-security` — the lead: 403s/4xx/caps/409 + structural (no shell, request-by-file) — DONE
-- [ ] `gui-security` — POST w/o token 403; oversized request, traversal/absolute attachment, concurrent run, unknown id refused; request never through a shell; nothing runs outside the job runner
+- [x] `gui-security` — POST w/o token 403; oversized request, traversal/absolute attachment, concurrent run, unknown id refused; request never through a shell; nothing runs outside the job runner
 - [x] `growth` — W3-grow2: scaffold refuses naming every stub; verify-chart honest (data+axis gates); the menu grows; removal consistent — DONE
-- [ ] `growth` — `capability new` scaffolds; `capability check` refuses until parts exist, accepts when they do; appears in `capabilities` + plan menu; demo D's capability passes; removing a capability keeps the registry consistent
+- [x] `growth` — `capability new` scaffolds; `capability check` refuses until parts exist, accepts when they do; appears in `capabilities` + plan menu; demo D's capability passes; removing a capability keeps the registry consistent
 - [x] `battery` — 12 plans vs 12 fresh-eye references: 100% coverage, sets honest, flags exact, nothing invented — DONE
-- [ ] `battery` — the 12 stored plans validate; >= 90% of each independent reference's requirements covered; capability sets in the reference's acceptable sets; missing inputs flagged; alternatives stated; no invented inputs
+- [x] `battery` — the 12 stored plans validate; >= 90% of each independent reference's requirements covered; capability sets in the reference's acceptable sets; missing inputs flagged; alternatives stated; no invented inputs
 - [x] `errors` — W4-err: all 13 matrix cases loud with next steps; the injection changed nothing — DONE
-- [ ] `errors` — the P8 matrix fails loud with next steps; prompt injection changes nothing + noted in log.md; killed run + two simultaneous runs handled; partial output never promoted
+- [x] `errors` — the P8 matrix fails loud with next steps; prompt injection changes nothing + noted in log.md; killed run + two simultaneous runs handled; partial output never promoted
 - [x] `docs` — the lead: help/Start-here/Producer/CAPABILITIES-current/THIRD_PARTY + the older docs checks green (ADR-003 leg closes with w2-asm)
-- [ ] `docs` — `studio help` lists every command; README + AGENTS.md "Start here" + "## Producer"; skill, critic, CAPABILITIES.md, ADR-001..004, THIRD_PARTY.md exist; older doc checks still pass
+- [x] `docs` — `studio help` lists every command; README + AGENTS.md "Start here" + "## Producer"; skill, critic, CAPABILITIES.md, ADR-001..004, THIRD_PARTY.md exist; older doc checks still pass
 - [x] `hygiene` — the lead: no litter/strays/protected-edits, scratch swept, gc lists the new caches + spares the fixture, 0 credential leaks in 76 files — DONE
-- [ ] `hygiene` — after a full run no `verify-*` films, no stray root files, git status only intended, scratch empty, cache gc frees the new caches, no credential ever printed
-- [ ] `demos` — 4 demo projects: finals in the asked formats, ledgers green, gates PASS, credits + report, facts sourced, assets licensed, spend zero
-- [ ] `review` — each demo: >= 3 rounds, last by producer-critic, every score >= 8, fidelity = 10, sheets exist
+- [x] `hygiene` — after a full run no `verify-*` films, no stray root files, git status only intended, scratch empty, cache gc frees the new caches, no credential ever printed
+- [x] `demos` — 4 demo projects: finals in the asked formats, ledgers green, gates PASS, credits + report, facts sourced, assets licensed, spend zero
+- [x] `review` — each demo: >= 3 rounds, last by producer-critic, every score >= 8, fidelity = 10, sheets exist
 
 ## P9 final gates
 
-- [ ] Full `./studio verify-produce` from a cold cache: `pass: true`
+- [x] Full `./studio verify-produce` from a cold cache: `pass: true`
 - [ ] Full `./studio verify-edit` in the background from the final tree (34 checks)
 - [ ] Full `./studio verify-math` in the background from the final tree (27 checks)
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: ALL FOUR DEMOS SHIPPED (A composite c136aef / B launch-teaser 8fe8f12 / C gps 29cd2e2 / D
-cities 5d47d14) — each: plan VALID, ledger green, gates PASS on the children, finals in the asked
-formats, credits + report, byte-identical single-technique ships. The demos-critic (fresh GLM eyes)
-is recording the final review rounds; then the review check, the docs check's ADR-003 leg (the ADR
-landed with assemble), and the FULL verify-produce from cold, then the background verify-edit +
-verify-math, then FINAL_REPORT.
-Next: the review rounds land -> `--only review` + `--only docs` -> the full cold verify-produce ->
-the background full verify-edit/verify-math -> FINAL_REPORT.md.
-The lead's own fixes this round: brief-lint finally implemented (help-sketch since P0), cache gc's
-fixture-deletion bug (D-026's 4th path), the produce caches in gc, docs+hygiene checks.
-Next: when the references land, the LEAD writes the 12 battery plans (plan-only, per the mission)
-and dispatches the battery check; then the demos (A composite — needs assemble; B teaser; C gps;
-D cities on the grown chart capability) with 3+ review rounds each, the last by producer-critic.
+Now: gui-smoke's real cause found and fixed (D-012: the readiness poll DoSed the very
+/api/films it waited on; cheap '/' poll + 127.0.0.1 + a quoted server log now), the Plan-tab path
+wrap fixed, the interrupted run's accidentally-committed leftovers un-committed (e00b80e); the
+FULL verify-produce FROM A COLD CACHE is running now — 28/28 expected after its 12:46 sibling
+passed all but gui-smoke.
+Next: the cold full run lands (pass: true) -> the background full verify-edit then verify-math ->
+FINAL_REPORT.md -> every box ticked -> the final commit.
