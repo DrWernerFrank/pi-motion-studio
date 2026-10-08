@@ -108,11 +108,12 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: verify-produce PASSED 28/28 cold (069450a). The first full verify-edit from the final tree
-then caught two CHECK races (D-013 — both fixed in the checks, no bar weakened, no engine touched,
-re-validated 3/3 and 2/2); the verify-math leg of that chain was killed by a hung browser my own
-concurrent Playwright probes starved (my fault, not the suite's) — swept, and the full chain
-(verify-edit then verify-math) relaunched clean from the final tree (9d28918). Remaining: both
-suites green -> FINAL_REPORT's last two lines -> the P9/verify-edit/verify-math boxes ticked ->
+Now: verify-edit 34/34 PASS (9d28918). verify-math's first full run exposed real debt the cheap
+subsets never touch: five check files on pre-migration colon paths (D-014, fixed), then a five-part
+gui-smoke failure whose core was a REAL product bug — the GUI's math video pane blank since P1
+(D-015, fixed: math.js src slug + play() bail + tap-after-goto for the SSE scanner starvation,
+measured 115ms->3046ms + IPv4 in 4 checks + job-start retry). gui-smoke now 55-58s (was a 19-min
+pend), 2/2 stable; perf-budget green (checkMathFilm 10s = 40%). The FULL verify-math is running
+from c3bdc1b; after it: the final verify-produce from this tree, FINAL_REPORT's last lines, the
 final commit.
-Next: poll the chain; on green fill FINAL_REPORT's suite lines, tick the last boxes, commit.
+Next: poll the full math run -> on green run the final verify-produce -> report + commit -> done.

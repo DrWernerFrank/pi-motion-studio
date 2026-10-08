@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-05T15:50:47.193Z",
+  "at": "2026-10-08T20:18:25.648Z",
   "pass": true,
   "checks": [
     {
@@ -54,7 +54,7 @@
       "name": "deliverable",
       "pass": true,
       "level": "pass",
-      "detail": "draft-16:9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 65.67s\ndraft-9:16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 65.67s\nfinal-16:9.mp4: 1920x1080 yuv420p bt709 SAR 1:1 faststart 65.67s\nfinal-9:16.mp4: 1080x1920 yuv420p bt709 SAR 1:1 faststart 65.67s"
+      "detail": "draft-16x9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart 65.67s\ndraft-9x16.mp4: 540x960 yuv420p bt709 SAR 1:1 faststart 65.67s\nfinal-16x9.mp4: 1920x1080 yuv420p bt709 SAR 1:1 faststart 65.67s\nfinal-9x16.mp4: 1080x1920 yuv420p bt709 SAR 1:1 faststart 65.67s"
     },
     {
       "name": "deterministic",
