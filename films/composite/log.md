@@ -17,3 +17,5 @@ One line per decision, newest last.
 - 2026-10-07 18:55  assembled (edit-film + 300 ms fades): 16:9 via direct+xfade, 9:16 via direct+xfade; one mix at -14 LUFS
 - 2026-10-07 18:58  assembled (edit-film + 300 ms fades): 16:9 via direct+xfade, 9:16 via direct+xfade; one mix at -14 LUFS
 - 2026-10-07 18:59  shipped: verify green, poster + credits + report written
+- 2026-10-07 19:41  assembled (edit-film + 300 ms fades): 16:9 via direct+xfade, 9:16 via direct+xfade; one mix at -14 LUFS
+- 2026-10-08 10:31  shipped: verify green, poster + credits + report written

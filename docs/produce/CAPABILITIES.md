@@ -1,4 +1,4 @@
-# The capability catalog (generated 2026-10-06 by `studio capabilities --doc`)
+# The capability catalog (generated 2026-10-07 by `studio capabilities --doc`)
 
 A *technique* makes a piece; a *service* is a reusable capability any technique calls. This
 page is generated from the same source as `studio capabilities` — edit the catalog, not this file.
@@ -38,6 +38,16 @@ page is generated from the same source as `studio capabilities` — edit the cat
 **Needs:** chromium.
 **Invoke:** `studio capture <key> <https://url>`
 **Gates:** assets/ contains the captures; site.json parses.
+
+## chart — technique
+
+**Makes:** animated data charts: bars racing ranks over time, drawn from a data file (chart.json) the film reads in setup — the GDP/population style pieces.
+**Strengths:** the data + axis gates make the chart honest (rows + source + numeric pairs checked mechanically); motion-based: one timeline reframes to every format; the drawn chart is a pure function of (chart.json, t).
+**Weak:** no real footage; no narration of its own (the voice service adds one); a chart film needs its data sourced (facts) — the gates check the file, not the truth of the figures.
+**Typical:** 10-60 s, 16:9 + 9:16
+**Invoke:** `studio new <key> --chart` · `studio look <key>` · `studio render <key> --draft` · `studio sound <key>` · `studio gate <key>` · `studio ship <key>`
+**Gates:** chart-data (rows + the source every figure cites), chart-axis (every row a numeric pair).
+**Skill:** `.pi/skills/produce/SKILL.md` · **Critic:** `.pi/agents/producer-critic.md`
 
 ## edit — technique
 

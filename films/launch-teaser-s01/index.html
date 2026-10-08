@@ -166,7 +166,20 @@ film({
       ctx.beginPath(); ctx.moveTo(cx2 - s, cy2); ctx.lineTo(cx2 - s * 0.1, cy2 + s * 0.8); ctx.lineTo(cx2 + s, cy2 - s * 0.9); ctx.stroke();
       ctx.globalAlpha = 1;
     }
-    // the payoff strip (10.2-11.4): "verify: PASS" slides in under the chips — no dead air
+    // the PHONE capture beat (the critic: 'captures' plural, one drawn): the second real capture,
+    // the studio on a phone — its own beat between the desktop card and the gates
+    if (t >= 14.4 && t < 16.9) {
+      const img2 = shots['assets_phone.png'];
+      const a3 = M.clamp((t - 14.4) / 0.5, 0, 1) * M.clamp(1 - (t - 16.4) / 0.4, 0, 1);
+      const cw2 = W * 0.42, ch2 = H * 0.72, cx3 = (W - cw2) / 2, cy3 = H * 0.10;
+      ctx.save(); ctx.globalAlpha = a3;
+      ctx.beginPath(); M.rrect(ctx, cx3, cy3, cw2, ch2, u * 3.0); ctx.clip();
+      const sc2 = Math.max(cw2 / img2.width, ch2 / img2.height);
+      ctx.drawImage(img2, (img2.width - cw2 / sc2) / 2, (img2.height - ch2 / sc2) / 2, cw2 / sc2, ch2 / sc2, cx3, cy3, cw2, ch2);
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(236,236,239,0.28)'; ctx.lineWidth = 2; M.rrect(ctx, cx3, cy3, cw2, ch2, u * 3.0); ctx.stroke();
+    }
+    // the payoff strip: "verify: PASS" — its own beat
     if (t > 17.9 && t < 19.9) {
       const a2 = M.clamp((t - 17.9) / 0.4, 0, 1) * M.clamp(1 - (t - 19.6) / 0.25, 0, 1);   // a solid hold
       const sw3 = W * 0.82 * a2;

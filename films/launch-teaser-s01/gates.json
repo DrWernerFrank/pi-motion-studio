@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-07T18:15:25.270Z",
+  "at": "2026-10-07T19:42:38.234Z",
   "pass": true,
   "checks": [
     {
@@ -36,13 +36,13 @@
       "name": "blank-frames",
       "pass": false,
       "level": "warn",
-      "detail": "flat frames at 14.9, 15, 15.1, 17.9, 19.9, 20s"
+      "detail": "flat frames at 17.9, 19.9, 20s"
     },
     {
       "name": "loudness",
       "pass": true,
       "level": "pass",
-      "detail": "-14 LUFS (want -14 ±1), true peak -1 dBFS"
+      "detail": "-14.6 LUFS (want -14 ±1), true peak -1.9 dBFS"
     },
     {
       "name": "cue-sync",
@@ -52,9 +52,9 @@
     },
     {
       "name": "deliverable final-9x16.mp4",
-      "pass": false,
-      "level": "warn",
-      "detail": "15.00s, yuv420p, with audio"
+      "pass": true,
+      "level": "pass",
+      "detail": "25.00s, yuv420p, with audio"
     }
   ]
 }

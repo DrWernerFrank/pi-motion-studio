@@ -1,6 +1,6 @@
 {
   "key": "composite",
-  "at": "2026-10-07T18:57:44.018Z",
+  "at": "2026-10-07T19:40:54.099Z",
   "mode": "edit-film",
   "transitions": {
     "kind": "fade",
@@ -15,21 +15,21 @@
       "leg": "direct+xfade",
       "file": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite/out/final-16x9.mp4",
       "fps": "30",
-      "sum": 69.916667,
+      "sum": 70.316667,
       "overlaps": 0.6,
-      "expected": 69.316667,
+      "expected": 69.716667,
       "joins": [
         {
-          "at": 7.9,
+          "at": 8.3,
           "ms": 300,
-          "from": 7.55,
-          "to": 8.1
+          "from": 7.95,
+          "to": 8.5
         },
         {
-          "at": 61.616667,
+          "at": 62.016667,
           "ms": 300,
-          "from": 61.267,
-          "to": 61.817
+          "from": 61.667,
+          "to": 62.217
         }
       ],
       "segments": [
@@ -37,35 +37,35 @@
           "id": "s01",
           "film": "composite-s01",
           "at": 0,
-          "dur": 7.9,
+          "dur": 8.3,
           "ref": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite-s01/out/final-16x9.mp4",
           "refAt": 0,
           "pure": {
             "from": 0,
-            "dur": 7.55
+            "dur": 7.95
           }
         },
         {
           "id": "s02",
           "film": "composite-s02",
-          "at": 7.6,
+          "at": 8,
           "dur": 54.016667,
           "ref": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite-s02/out/final-16x9.mp4",
           "refAt": 0,
           "pure": {
-            "from": 7.95,
+            "from": 8.35,
             "dur": 53.316667
           }
         },
         {
           "id": "s03",
           "film": "composite-s03",
-          "at": 61.316667,
+          "at": 61.716667,
           "dur": 8,
           "ref": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite-s03/out/final-16x9.mp4",
           "refAt": 0,
           "pure": {
-            "from": 61.666667,
+            "from": 62.066667,
             "dur": 7.65
           }
         }
@@ -77,21 +77,21 @@
       "leg": "direct+xfade",
       "file": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite/out/final-9x16.mp4",
       "fps": "30",
-      "sum": 69.916667,
+      "sum": 70.316667,
       "overlaps": 0.6,
-      "expected": 69.316667,
+      "expected": 69.716667,
       "joins": [
         {
-          "at": 7.9,
+          "at": 8.3,
           "ms": 300,
-          "from": 7.55,
-          "to": 8.1
+          "from": 7.95,
+          "to": 8.5
         },
         {
-          "at": 61.616667,
+          "at": 62.016667,
           "ms": 300,
-          "from": 61.267,
-          "to": 61.817
+          "from": 61.667,
+          "to": 62.217
         }
       ],
       "segments": [
@@ -99,35 +99,35 @@
           "id": "s01",
           "film": "composite-s01",
           "at": 0,
-          "dur": 7.9,
+          "dur": 8.3,
           "ref": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite-s01/out/final-9x16.mp4",
           "refAt": 0,
           "pure": {
             "from": 0,
-            "dur": 7.55
+            "dur": 7.95
           }
         },
         {
           "id": "s02",
           "film": "composite-s02",
-          "at": 7.6,
+          "at": 8,
           "dur": 54.016667,
           "ref": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite-s02/out/final-9x16.mp4",
           "refAt": 0,
           "pure": {
-            "from": 7.95,
+            "from": 8.35,
             "dur": 53.316667
           }
         },
         {
           "id": "s03",
           "film": "composite-s03",
-          "at": 61.316667,
+          "at": 61.716667,
           "dur": 8,
           "ref": "/mnt/c/Users/Hp/Desktop/pi-motion-studio/films/composite-s03/out/final-9x16.mp4",
           "refAt": 0,
           "pure": {
-            "from": 61.666667,
+            "from": 62.066667,
             "dur": 7.65
           }
         }

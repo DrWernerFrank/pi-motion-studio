@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "title": "make-spring-ident-studio",
+  "formats": [
+    "9:16"
+  ],
+  "request": "A spring ident for the studio, six seconds, vertical.",
+  "parts": [
+    "make-spring-ident-studio-s01"
+  ],
+  "duration": 6
+}

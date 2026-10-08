@@ -1,2 +1,3 @@
 {"rev":1,"at":"2026-10-07T18:23:14.009Z","who":"cli","ops":[{"op":"add","src":"cam","in":0.1,"out":8,"at":0}]}
 {"rev":2,"at":"2026-10-07T18:23:20.395Z","who":"cli","ops":[{"op":"caption-style","from":"cam"}]}
+{"rev":3,"at":"2026-10-07T19:39:41.451Z","who":"cli","ops":[{"op":"trim","id":"c1","in":0.1,"out":8.4}]}

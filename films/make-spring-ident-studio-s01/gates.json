@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-07T19:40:08.848Z",
+  "at": "2026-10-07T19:47:20.857Z",
   "pass": true,
   "checks": [
     {
@@ -18,43 +18,31 @@
       "name": "dead-time",
       "pass": true,
       "level": "pass",
-      "detail": "something moves in every 4s window"
+      "detail": "something moves in every 1.5s window"
     },
     {
       "name": "novelty",
       "pass": true,
       "level": "pass",
-      "detail": "a new visual event at least every 8s"
+      "detail": "a new visual event at least every 4s"
     },
     {
       "name": "hook",
       "pass": false,
       "level": "warn",
-      "detail": "first frame contrast 0.3 (want >3), max change in first 2s 28.4 (want >8)"
+      "detail": "first frame contrast 5.2 (want >3), max change in first 2s 2.1 (want >8)"
     },
     {
       "name": "blank-frames",
-      "pass": false,
-      "level": "warn",
-      "detail": "flat frames at 0, 4.8, 4.9, 5s"
+      "pass": true,
+      "level": "pass",
+      "detail": "no flat frames"
     },
     {
       "name": "loudness",
-      "pass": true,
-      "level": "pass",
-      "detail": "-14.2 LUFS (want -14 ±1), true peak -1.9 dBFS"
-    },
-    {
-      "name": "deliverable final-16x9.mp4",
       "pass": false,
       "level": "warn",
-      "detail": "7.90s, yuv420p, with audio"
-    },
-    {
-      "name": "deliverable final-9x16.mp4",
-      "pass": false,
-      "level": "warn",
-      "detail": "7.90s, yuv420p, with audio"
+      "detail": "no out/mix.wav yet: run `studio sound <film>`"
     }
   ]
 }

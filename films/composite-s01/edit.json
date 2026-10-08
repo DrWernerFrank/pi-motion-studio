@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "rev": 2,
+  "rev": 3,
   "fps": "30",
   "counter": 1,
   "sources": {
@@ -23,7 +23,7 @@
           "id": "c1",
           "src": "cam",
           "in": 0.1,
-          "out": 8,
+          "out": 8.4,
           "at": 0
         }
       ]

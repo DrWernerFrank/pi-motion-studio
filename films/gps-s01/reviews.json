@@ -159,5 +159,47 @@
       "out/sheets/every-16x9.png",
       "out/sheets/phone-16x9.png"
     ]
+  },
+  {
+    "round": 5,
+    "at": "2026-10-07T19:35:27.176Z",
+    "reviewer": "producer-critic",
+    "scores": {
+      "hook": 8,
+      "readability": 8,
+      "motion": 8,
+      "variety": 8,
+      "composition": 8,
+      "brand": 8,
+      "sound": 8,
+      "correctness": 10,
+      "clarity": 8,
+      "fidelity": 10,
+      "coherence": 9
+    },
+    "min": 8,
+    "pass": true,
+    "problems": [
+      {
+        "t": 27,
+        "issue": "the words-equation (distance = speed of light x delay) lands as one block; its parts could build in narration order — the polish the project rounds noted, still the best free upgrade",
+        "fix": "Write the three parts in spoken order (speed, then delay, then the distance colored as the result) so the equation assembles with the sentence"
+      },
+      {
+        "t": 4,
+        "issue": "'to within a few meters' is the one quantifier in the narration with no source row — vague-by-wording and so acceptable under 'sources for every number', but it is the weakest link in that chain",
+        "fix": "an f05 row with a snapshot quoting typical GPS accuracy (gps.gov carries it), or hedge it on screen ('typically within a few meters')"
+      },
+      {
+        "t": 0,
+        "issue": "the child's brief.md is still the math-starter scaffold ('the determinant's area meaning') — it describes the wrong film; the project design.json's devices/reference rows are also template text",
+        "fix": "author the child brief (one line: the clock trick in 60s) and fill the two design rows"
+      }
+    ],
+    "notes": "RE-MEASURED read-only — the round-4 misses are fixed on the shipped cut. ffprobe: final-16x9.mp4 61.783s, 1920x1080, 60fps, h264+aac (r01: 60+-3 ✓ — it was 52.13s RED at round 4). ebur128: -16.0 LUFS integrated, true peak -1.2 dBTP (the narration-first target ✓). Captions: 31 cues, monotonic 0:00.000 to 1:01.310, covering all 8 sentences; the SRT/VTT twins ship. FACTS, hand-verified by grep (verifyFacts logic by hand): f01 'fly in medium Earth orbit at an altitude of approximately 20,200 Kilometers' ✓, f02 'Each satellite circles the Earth twice a day.' ✓, f03 'Over 30 GPS navigation satellites are whizzing around the world' ✓ — all verbatim in sources/*.snapshot.txt; f04 hedged (the SI-defined constant). The f02/f03 that round 4 found prepared-but-unused are NOW in the film (s01.2: 'more than thirty GPS satellites… each circling the Earth twice a day'). CLAIMS, hand-checked: 20200000/299792458 = 0.06738 ≈ 0.0674 ✓ (the delay, shown 'delay ~ 0.07 s' with the tilde), 299792458 x 0.07 = 20985472.06 ✓ (the '~21,000 km', spoken 'About'), 20200/1.609 = 12554.38 ≈ 12554.5 tol 1 ✓ (the km/miles agreement), 30>24, 2==2, 3==3, 4==4 — every number said or shown is sourced, sympy-derived, or hedged (r06 ✓). The orphan record sets are gone (5 record sets = 5 shipped scenes); the design direction is authored ('a field guide page that moves', theme paper, background #F2EEE4). Gates pass:true (10 checks; only the advisory deterministic-drift warn). Coherence 9: one paper field-guide system end to end, one narration clock, one caption pass, seams continuous per the sync gate.",
+    "sheets": [
+      "out/sheets/every-16x9.png",
+      "out/sheets/phone-16x9.png"
+    ]
   }
 ]

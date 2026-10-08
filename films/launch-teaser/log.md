@@ -8,3 +8,5 @@ One line per decision, newest last.
 - 2026-10-07 18:08  segment s01 (motion) -> films/launch-teaser-s01 (existing film linked)
 - 2026-10-07 18:08  segment s01: draft + gates PASS -> done
 - 2026-10-07 18:21  shipped: verify green, poster + credits + report written
+- 2026-10-07 19:44  shipped: verify green, poster + credits + report written
+- 2026-10-08 10:31  shipped: verify green, poster + credits + report written
