@@ -158,3 +158,19 @@ abort, 60s cap), BASE is now 127.0.0.1 (the server binds IPv4; 'localhost' resol
 here — curl falls back, Chromium is not guaranteed to), and the server's stdout/stderr are piped
 to scratch/server.log with any boot failure thrown WITH the log tail — a piped-and-dropped stderr
 is how the 12:46 'fetch failed' stayed undiagnosed.
+
+**D-013 2026-10-08 P9 — the first full verify-edit since D-009 caught two check races; both fixed in the
+CHECKS, not the bars.** (1) transcript-edit 66/74 vs the required 90%: the retime math is proven by the
+check's own cut-placement and neighbor assertions (measured median word drift 10 ms); the 8 misses were
+"simple,"@8.03 vs "simple."@7.91 — 120 ms apart, the same word, a miss on ASR punctuation alone — a
+"uh," filler 290 ms off (filler timestamps whim; the check filtered um+ but not uh), and five words
+160-380 ms over on the mix that D-009 legitimately changed (audio-chain PASSES at the new TP -2.0, its
+own ±1 contract). Fix: punctuation-insensitive word compare (norm, as edit.js's own FILLERS/norm) and
+fillers excluded on both sides; the bars — >= 90% within 150 ms — are untouched (67/73 = 91.8%). (2)
+gui-smoke edit "clicking a transcript word did nothing": a fixed 2.5 s sleep raced the edit tab's async
+mount + transcript fetch on 9p; the word was found at 2.5 s and the pane was mid-rebuild ~50 ms later.
+Four instrumented probes (SSE + MutationObserver + 100 ms word census + an external mtime poll of
+film.json/edit.json/index.html) prove no writer exists and the pane is stable once words land; the
+suite run was the one loaded-context loss of that race. Fix: waitForFunction on the words + the click
+find retries for 3 s (a pane rebuild is transient); every downstream assertion unchanged. No engine
+file was touched — both fixes live in engine/verify/{transcript-edit,gui-smoke}.mjs.

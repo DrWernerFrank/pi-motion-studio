@@ -40,7 +40,13 @@ export default async () => {
     page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 160)); });
     page.on('response', (r) => { if (r.status() >= 400) failed.push(`${r.status()} ${r.url().slice(0, 120)}`); });
     await page.goto(`http://localhost:${PORT}/#film=${KEY}`);
-    await page.waitForTimeout(2500);
+    // WAIT for the pane instead of a fixed sleep: the edit tab mounts async (module imports over
+    // 9p) and the transcript fetch lands after it, so a blind 2.5s sleep races the pane — the
+    // 2026-10-08 full suite lost exactly that race (wordHit passed at 2.5s, the click ~50ms later
+    // hit the pane mid-rebuild: no word element; stable in 4/4 instrumented probes unloaded —
+    // docs/produce/DECISIONS.md D-013). Nothing downstream is weakened: the words must show, the
+    // click must still land, every later assertion is untouched.
+    await page.waitForFunction(() => [...document.querySelectorAll('*')].some((e) => /^(today|studio|welcome|edit)$/i.test(e.textContent?.trim() || '') && e.children.length === 0), null, { timeout: 15000 });
 
     // the editor mounted: a canvas timeline and a transcript pane with words
     const hasCanvas = await page.evaluate(() => !!document.querySelector('canvas'));
@@ -51,12 +57,16 @@ export default async () => {
     // click a word -> the preview seeks (the iframe's page time changes)
     const t0 = await page.evaluate(() => (document.querySelector('iframe')?.contentWindow?.__film?.duration ?? null));
     void t0;
-    const seeked = await page.evaluate(() => {
-      const w = [...document.querySelectorAll('*')].find((e) => /today/i.test(e.textContent?.trim() || '') && e.children.length === 0);
-      if (!w) return false;
-      w.click();
-      return new Promise((ok) => setTimeout(() => ok(true), 700));
-    });
+    const seeked = await page.evaluate(() => new Promise((ok) => {
+      const started = Date.now();
+      const tryClick = () => {
+        const w = [...document.querySelectorAll('*')].find((e) => /today/i.test(e.textContent?.trim() || '') && e.children.length === 0);
+        if (w) { w.click(); return ok(true); }              // found + clicked: done
+        if (Date.now() - started > 3000) return ok(false);  // the pane never came back: a real failure
+        setTimeout(tryClick, 100);                          // else retry — a pane rebuild is transient
+      };
+      tryClick();
+    }));
     need(seeked, 'clicking a transcript word did nothing');
 
     // delete a word range: select the first and a later word (the pane's own selection model), strike-through,
