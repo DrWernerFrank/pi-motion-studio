@@ -17,7 +17,7 @@ import { join } from 'node:path';
 import { FILMS, kindOf } from '../../lib/film.mjs';
 import { ROOT } from '../../lib/serve.mjs';
 
-const KEY = 'verify-m-gui-sec', PORT = 3211, BASE = `http://localhost:${PORT}`;
+const KEY = 'verify-m-gui-sec', PORT = 3211, BASE = `http://127.0.0.1:${PORT}`;   // IPv4 literal: localhost resolves ::1 first here and the server binds 127.0.0.1 (D-012's class)
 const NEW_GETS = ['script', 'records', 'where'];   // + the sentence POST
 
 export default async () => {

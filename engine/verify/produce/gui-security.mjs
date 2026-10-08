@@ -10,7 +10,7 @@ import { FILMS, kindOf } from '../../lib/film.mjs';
 import { ROOT } from '../../lib/serve.mjs';
 import { makeRun, stopRun } from '../../produce/runner.mjs';
 
-const PORT = 3213, BASE = `http://localhost:${PORT}`;
+const PORT = 3213, BASE = `http://127.0.0.1:${PORT}`;   // IPv4 literal: localhost resolves ::1 first here and the server binds 127.0.0.1 (D-012's class)
 const KEY = 'verify-p-guisec';
 const LOCK = join(homedir(), '.cache', 'pi-motion-studio', 'make.lock');
 

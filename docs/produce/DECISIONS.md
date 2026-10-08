@@ -192,3 +192,24 @@ canonical helper, lib/film.mjs) and the literal slugged filenames; scene-cache's
 gui-smoke's src regex/statSync, gates' synthetic unit draft follow. NO bar, seeded fault or
 assertion changed — the checks read the same things the renderer actually writes. Also: mathdemo's
 gates.json re-measured -16.1 LUFS/-2 dBTP (D-009's aim) — still green within its ±1 contract.
+
+**D-015 2026-10-08 P9 — the math gui-smoke's 19-minute "hang" was five separate faults, one a REAL
+product bug; each fixed at its layer, no bar weakened.** Post-D-014 the suite still sat ~19 min in
+the check (browser idle, server alive, no job). Instrumented per-step markers + reproduction probes
+isolated: (1) a REAL product bug — studio-gui/public/math.js line 141 still looked for the
+pre-migration `draft-<fmt>.mp4` (colon), so EVERY math film's video pane has been blank in the GUI
+since the P1 rename (app.js line 90 slugs correctly; math.js missed the sweep): fixed with the same
+slug() the other views use. The check's red src assertion was right all along. (2) the check's own
+`page.evaluate(v.play())` awaited a media promise headless Chrome leaves PENDING on a no-resource
+video — the red became a hang; now raced with a 3s in-page bail, 'pending' fails the need loudly.
+(3) its Node SSE tap connected BEFORE page.goto: ONE client wakes the server's 1-second signature
+sweep (full readdir+stat of every film — measured 115ms -> 3046ms per request at ~35 films), and
+goto's ~25 subrequests queue behind sweep after sweep into a 30s timeout — measured in isolation;
+the tap now connects AFTER goto (zero behavior change: it still sees every event it asserts). (4)
+BASE used 'localhost' (resolves ::1 first; the server binds 127.0.0.1) in four more check files —
+all IPv4 literals now (D-012's class, swept engine-wide). (5) the draft-job click raced the Run
+tab's own re-render (the touch interval churns a 'film' event every 15s) — the start now retries on
+the SSE evidence (3x) and the done-poll FAILS FAST after 20 empty polls instead of grinding ~5 min.
+One more stale grep (toggle-back poll matched '16:9' against 'draft-16x9.mp4') followed D-014's
+class. Result: the check runs 58-72s end to end (was a 19-min pend), every step marked, and the
+video pane plays again for real.

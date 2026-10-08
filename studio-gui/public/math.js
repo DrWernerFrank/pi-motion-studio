@@ -137,8 +137,12 @@ function syncStage(S, d) {
       if (MATH_TABS.includes(S.tab)) renderTab(S);
     }));
   }
-  // the newest file for this format: final-<fmt>.mp4 when shipped, else the draft
-  const want = ['final', 'draft'].map((k) => d.files.find((f) => f.name === `${k}-${M.fmt}.mp4`)).find(Boolean);
+  // the newest file for this format: final-<fmt>.mp4 when shipped, else the draft — SLUGGED
+  // (16x9): the P1 naming migration renamed every output; this view asked for the old colon
+  // name until 2026-10-08, so every math film's video pane sat blank post-migration (caught by
+  // verify-math gui-smoke's src assertion — the check was right)
+  const slug = (f) => f.replace(':', 'x');
+  const want = ['final', 'draft'].map((k) => d.files.find((f) => f.name === `${k}-${slug(M.fmt)}.mp4`)).find(Boolean);
   const src = want ? `/films/${d.key}/out/${want.name}?v=${want.mtime}` : '';
   const v = el('#mVideo'), nr = el('#mNoRender');
   if (v) {

@@ -39,7 +39,7 @@ export default async () => {
     page.on('pageerror', (e) => errors.push(String(e).slice(0, 160)));
     page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 160)); });
     page.on('response', (r) => { if (r.status() >= 400) failed.push(`${r.status()} ${r.url().slice(0, 120)}`); });
-    await page.goto(`http://localhost:${PORT}/#film=${KEY}`);
+    await page.goto(`http://127.0.0.1:${PORT}/#film=${KEY}`);   // IPv4 literal (D-012's class: localhost -> ::1 first, the server binds 127.0.0.1)
     // WAIT for the pane instead of a fixed sleep: the edit tab mounts async (module imports over
     // 9p) and the transcript fetch lands after it, so a blind 2.5s sleep races the pane — the
     // 2026-10-08 full suite lost exactly that race (wordHit passed at 2.5s, the click ~50ms later

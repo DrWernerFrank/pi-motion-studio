@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-06T09:31:57.884Z",
+  "at": "2026-10-08T18:46:33.256Z",
   "pass": true,
   "checks": [
     {
@@ -48,7 +48,7 @@
       "name": "loudness",
       "pass": true,
       "level": "pass",
-      "detail": "-16 LUFS (want -16 +/- 1), true peak -1.5 dBTP (want <= -1)"
+      "detail": "-16.1 LUFS (want -16 +/- 1), true peak -2 dBTP (want <= -1)"
     },
     {
       "name": "deliverable",
