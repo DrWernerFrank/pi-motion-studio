@@ -63,7 +63,11 @@ export default async (ctx) => {
   rmSync(scratch, { recursive: true, force: true });
   const diffs = compare(join(ROOT, 'docs', 'produce', 'baseline'), scratch);
   const drift = diffs.filter((d) => canon(d.a) !== canon(d.b));
-  need(!drift.length, `golden CLI transcripts/drafts drifted: ${drift.map((d) => d.file).join(', ')}`);
+  need(!drift.length, `golden CLI transcripts/drafts drifted: ${drift.map((d) => {
+    const al = d.a.split('\n'), bl = d.b.split('\n');
+    const i = al.findIndex((l, k) => l !== bl[k]);
+    return `${d.file} (line ${i + 1}: ${JSON.stringify((al[i] ?? '').slice(0, 60))} != ${JSON.stringify((bl[i] ?? '').slice(0, 60))})`;
+  }).join('; ')}`);
   const drafts = existsSync(join(scratch, 'drafts.json')) ? JSON.parse(readFileSync(join(scratch, 'drafts.json'), 'utf8')) : {};
   const base = JSON.parse(readFileSync(join(ROOT, 'docs', 'produce', 'baseline', 'drafts.json'), 'utf8'));
   for (const k of ['motion', 'edit', 'math']) {

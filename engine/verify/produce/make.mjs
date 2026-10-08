@@ -23,6 +23,11 @@ const INSTRUCTION = 'Follow the produce skill for the attached request.';
 const ENVKEYS = ['STUDIO_PI_CMD', 'STUDIO_FAKE_PI_MODE', 'STUDIO_FAKE_PI_SLEEP', 'STUDIO_FAKE_PI_LOG', 'STUDIO_MAKE_MAX_RUNS'];
 
 export default async (ctx = {}) => {
+  // a killed full run leaves its seeds (the machine slept mid-run once; the leftovers collided
+  // with the restarted run's keys — D-010). Sweep the make keys at ENTRY: every run starts clean.
+  const { readdirSync, rmSync } = await import('node:fs');
+  const { FILMS } = await import('../../lib/film.mjs');
+  for (const k of readdirSync(FILMS)) if (k.startsWith('make-')) rmSync(join(FILMS, k), { recursive: true, force: true });
   const bad = [], facts = [], runs = [];
   const need = (ok, what) => { if (!ok) bad.push(what); };
   const sh = (args, timeout = 10 * 60 * 1000) => {

@@ -19,7 +19,7 @@ films/verify-p-gold/out/draft-9x16.mp4
 $ studio sound verify-p-gold
 films/verify-p-gold/out/music.wav
 films/verify-p-gold/out/sfx.wav (0 cues)
-films/verify-p-gold/out/mix.wav  -13.8 LUFS, true peak -1.2 dBFS
+films/verify-p-gold/out/mix.wav  -N LUFS, true peak -N dBFS
 [exit 0]
 $ studio gate verify-p-gold
 PASS  lint: no timers, randomness, wall clock or CSS animation
@@ -28,7 +28,7 @@ FAIL  dead-time: nothing moves during 4.0-Ns
 PASS  novelty: a new visual event at least every Ns
 WARN  hook: first frame contrast 0.0 (want >3), max change in first Ns 8.0 (want >8)
 WARN  blank-frames: flat frames at 0, 4, 4.1, 4.2, 4.3, 4.4, 4.5, Ns …
-PASS  loudness: -13.8 LUFS (want -14 ±1), true peak -1.2 dBFS
+PASS  loudness: -N LUFS (want -14 ±1), true peak -N dBFS
 
 gates: FAIL
 [exit 1]

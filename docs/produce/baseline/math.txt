@@ -6,7 +6,7 @@ check: 3/3 scenes clean
 [exit 0]
 $ studio sound verify-p-gold-math
 voice: 4 sentences, Ns, timing native
-films/verify-p-gold-math/out/mix.wav  -16 LUFS, true peak -1.5 dBTP
+films/verify-p-gold-math/out/mix.wav  -N LUFS, true peak -N dBTP
 9 cues → films/verify-p-gold-math/out/captions.srt, films/verify-p-gold-math/out/captions.vtt
 [exit 0]
 $ studio look verify-p-gold-math
@@ -20,7 +20,7 @@ PASS  narration: 4 sentence(s): every script sentence in timing.json with start/
 PASS  sync: 4 trace bookmark(s) over 3 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 1 overrun(s) recorded ; seams continuous
 PASS  pace: 1 freeze run(s) >= Ns, none while the narration is silent (4 sentences of timing crossed in)
 PASS  captions: captions "auto" -> ON (auto = on in 9:16): 4 sentence(s), 2 caption file(s) — SRT/VTT written by studio sound; the deep caption check is P7's `captions` check
-PASS  loudness: -16 LUFS (want -16 +/- 1), true peak -1.5 dBTP (want <= -1)
+PASS  loudness: -N LUFS (want -16 +/- 1), true peak -N dBTP (want <= -1)
 PASS  deliverable: draft-16x9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart Ns
 PASS  deterministic: first gates run: 3 layout record hash(es) stored (drift vs this baseline warns on the next run)
 

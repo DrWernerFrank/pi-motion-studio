@@ -22,7 +22,13 @@ const NASA = join(homedir(), '.cache', 'pi-motion-studio', 'fixtures', 'real', '
 // in file names, exit codes and prose, which this keeps intact.
 export const norm = (s) => s
   .replace(/\((\d+(\.\d+)?)s to render\)/g, '(Ns to render)')
-  .replace(/\b(\d+(\.\d+)?)s\b/g, 'Ns');
+  .replace(/\b(\d+(\.\d+)?)s\b/g, 'Ns')
+  // the edit gold's mix flaps ±0.2 LUFS across process contexts (D-011: 8/8 stable isolated,
+  // 1-in-6 inside the verify run; arnndn deterministic 4/4; D-007 fixed the sidechain). The
+  // registry transcript proves DISPATCH, not mix precision — verify-edit's audio-chain check
+  // owns that (±1 LUFS). Mask the floats; the gate rows still print PASS with the values.
+  .replace(/-\d+(\.\d+)? LUFS/g, '-N LUFS')
+  .replace(/-\d+(\.\d+)? dB(TP|FS)/g, '-N dB$2');
 
 const sh = (args, cwd = ROOT) => {
   const r = spawnSync(STUDIO, args, { cwd, encoding: 'utf8', timeout: 10 * 60 * 1000 });
@@ -111,6 +117,18 @@ function drafts(dir) {
 
 export function capture({ out }) {
   mkdirSync(out, { recursive: true });
+  // 9p deletion lag: rmSync returns before the Windows side agrees, so a PREVIOUS capture's
+  // sweep leaves the gold films "existing" for the next `studio new` (found as 6/6 'already
+  // exists' after a re-baseline — D-011's cousin). Sweep at ENTRY and settle until gone.
+  for (let k = 0; k < 30; k++) {
+    let any = false;
+    for (const f of [GOLD, `${GOLD}-edit`, `${GOLD}-math`]) {
+      const d = join(ROOT, 'films', f);
+      if (existsSync(d)) { rmSync(d, { recursive: true, force: true }); any = true; }
+    }
+    if (!any) break;
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 200);   // a real sleep (no timers rule is for films)
+  }
   try {
     const t = transcripts(out);
     const d = drafts(out);

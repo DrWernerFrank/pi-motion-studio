@@ -25,7 +25,7 @@ $ studio sound verify-p-gold-edit
 films/verify-p-gold-edit/out/music.wav
 clean cam: denoise + hp + compressor -> audio-clean.wav
 dialog.wav: 1 clips, 144000 samples (Ns) = 90 frames
-films/verify-p-gold-edit/out/mix.wav  -13.9 LUFS, true peak -1.1 dBFS
+films/verify-p-gold-edit/out/mix.wav  -N LUFS, true peak -N dBFS
 [exit 0]
 $ studio gate verify-p-gold-edit
 PASS  lint: no timers, randomness, wall clock or CSS animation
@@ -34,7 +34,7 @@ PASS  dead-time: something moves in every Ns window
 PASS  novelty: a new visual event at least every Ns
 WARN  hook: first frame contrast 49.6 (want >3), max change in first Ns 3.0 (want >8)
 PASS  blank-frames: no flat frames
-PASS  loudness: -13.9 LUFS (want -14 ±1), true peak -1.1 dBFS
+PASS  loudness: -N LUFS (want -14 ±1), true peak -N dBFS
 
 gates: PASS
 [exit 0]

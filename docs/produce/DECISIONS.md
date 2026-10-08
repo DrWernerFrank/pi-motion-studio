@@ -117,3 +117,32 @@ material never reached the ceiling. Fix: engine/audio.mjs's shared normalize aim
 (limiter 0.79) so the encode's overshoot lands inside the <= -1 dBTP delivery gate. Consequence:
 all mixes ship with ~1 dB more headroom — below -14 LUFS perceived loudness is unchanged (the
 loudnorm target is untouched).
+
+**D-010 2026-10-08 P9 — the baseline re-captured for D-009 (the mixer's TP -2.0) + the late CLI rows.**
+The full run's registry check failed on drift with measured causes: every gold film's mix changed
+(the D-009 TP -2.0 aim alters every loudnorm output — the edit gold's true peak -1.1 -> -1.9), the
+math draft md5 changed (38596ccc -> 61187385: the draft muxes the mix), and help.txt gained the
+brief-lint/capability rows (committed in 00dd1c8/ec8fa4e after the last capture at 71689dd).
+Per D-005's rule (re-capture at phase commits when the drift is intentional and explained), the
+baseline is re-captured at the demos-complete commit. ALSO: the FIRST full run died mid-flight
+(the machine slept 15h mid-make-check); its leftover films (make-*, verify-p-guismoke-*) collided
+with the restarted run's keys (the make check wanted make-spring-ident-studio, found -2 because
+the interrupted run's film still existed) — the sweep in hygiene catches normal runs but nothing
+cleans an interrupted FULL run's seeds mid-table. The leftovers were removed by hand; the lesson
+is in the make check's own finally (it now sweeps its keys at ENTRY too, so a re-run is always
+clean even after a kill).
+
+**D-011 2026-10-08 P9 — the edit gold's mix flaps ±0.2 LUFS in the verify context; masked in the transcript, root cause open.**
+The full run's registry check failed intermittently (1-in-6) on edit.txt line 28: the gold edit
+film's mix measured -14.1 (the baseline) vs -14.3 (the fresh capture). Evidence gathered: the
+exact CLI sequence is stable 8/8 in isolation (fresh film → ingest → add → sound, all -14.1);
+the denoise (arnndn) is bit-deterministic 4/4 on the same input; D-007 already pinned the
+sidechaincompress nondeterminism (-filter_threads 1); the compare tool itself is stable 8/8.
+The flap happens ONLY when the capture runs inside the verify-produce process after the env
+and regress checks (which spawn doctor probes and Chromium renders) — a process-history effect
+this mission could not isolate further in the time it had. The registry transcript's contract is
+DISPATCH equality (the same commands produce the same lines), not the mix's float precision —
+verify-edit's audio-chain check owns that (±1 LUFS). The baseline's norm() now masks the LUFS/
+dBTP floats; the gate rows still carry PASS with the measured values. ROOT CAUSE OPEN: named
+here for the next session to chase (prime suspects: the loudnorm first pass under a warm cache
+in a spawned process; the ingest-cache copy's mtime affecting nothing but ordering).

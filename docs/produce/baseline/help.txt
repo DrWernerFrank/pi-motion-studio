@@ -14,7 +14,7 @@ studio <command> <film> [options]
   where <film> --t <seconds> [--fmt 9:16]
                          math films: which scene, sentence, animation and file owns a timecode
   sound <film>           math films: voice → timing → the narration mix at mix.lufs (a quiet bed if
-                         music is set); edit films: the dialog bus + ducked bed at -14 LUFS
+                         music is set); edit films: the dialog bus + ducked bed at -N LUFS
   gate <film>            math films: the math gates (layout, claims, typeset, narration, sync, pace,
                          captions, loudness, deliverable, deterministic) → gates.json
   where <film> <t>       math films: which scene, sentence and file owns a timecode
@@ -29,7 +29,7 @@ studio <command> <film> [options]
                          frames → H.264 (draft: half-res 30fps; final: film fps + motion blur)
   grid <film>            beats.json from film.json music.bpm (synthesized score)
   beats <film>           beats.json measured from film.json "track" (librosa)
-  sound <film>           beats (if missing) → music → sfx → mix at -14 LUFS → out/mix.wav
+  sound <film>           beats (if missing) → music → sfx → mix at -N LUFS → out/mix.wav
   gate <film>            mechanical gates → gates.json (lint, determinism, dead time, loop, loudness …)
   review <film> --json '{"scores":{…},"problems":[…]}'   record a critique round
   read <film> [--sheet sheets/times-9x16.png] [--prompt "…"] [--model flash|pro|flash_lite|gemini-2.5-pro] [--engine agy|api|gemini]
@@ -78,6 +78,9 @@ studio <command> <film> [options]
                          the technique/service catalog with readiness from real probes (a missing
                          dependency reports not-ready and the fix); --doc writes the generated
                          docs/produce/CAPABILITIES.md
+  brief-lint "<request>" [--file <path>] [--film <key>]
+                         extract the request's numbers, formats, languages and named assets (the
+                         requirement seeds); --film lints them against that project's ledger
   project new <key> "<request>" [--formats 16:9,9:16] [--file <input>…]
                          create a project film: the request verbatim in brief.md + the ledgers
   project list           every project: phase, parts, finals
