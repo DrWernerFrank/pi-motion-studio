@@ -108,12 +108,12 @@ first unchecked box. `Now:`/`Next:` at the bottom are kept current at all times.
 - [ ] `docs/produce/FINAL_REPORT.md` written (<= ~60 lines)
 
 Now: 17 of 28 checks green and committed (wave 1 + skill/critic + project/single + tools + services + the P1 five + registry). In flight: w2-make2 (the runner; the first worker died mid-spike — its S4 findings were handed to the respawn). The lead's own fixes landed meanwhile: D-007 (the nondeterministic edit mix), AGENTS.md Start here, README Producer, the BY_FILE wiring, cli --arg JSON parsing.
-Now: verify-edit 34/34 PASS (9d28918). verify-math's first full run exposed real debt the cheap
-subsets never touch: five check files on pre-migration colon paths (D-014, fixed), then a five-part
-gui-smoke failure whose core was a REAL product bug — the GUI's math video pane blank since P1
-(D-015, fixed: math.js src slug + play() bail + tap-after-goto for the SSE scanner starvation,
-measured 115ms->3046ms + IPv4 in 4 checks + job-start retry). gui-smoke now 55-58s (was a 19-min
-pend), 2/2 stable; perf-budget green (checkMathFilm 10s = 40%). The FULL verify-math is running
-from c3bdc1b; after it: the final verify-produce from this tree, FINAL_REPORT's last lines, the
-final commit.
-Next: poll the full math run -> on green run the final verify-produce -> report + commit -> done.
+Now: verify-edit 34/34 (9d28918), verify-math 27/27 (c380c50) — and the naming check of the
+final verify-produce caught a REAL engine bug: PyAV's sliced-thread x264 partial encodes made
+odd-squares' 9:16 final different on every cold render. Root-caused layer by layer (cairo OK,
+records OK, partials ~100k scattered byte diffs, 5 seam frames moved), FIXED in the kit (partial
+encoders pinned to thread_count=1; proven: identical partials, identical cold finals, tangent
+spot-checked), the migration ledger honestly re-frozen (D-016, 3d3daa4), naming PASS. The final
+verify-math + verify-produce chain is RUNNING from 3d3daa4; after it: FINAL_REPORT's last lines,
+the final commit, done.
+Next: poll the chain -> on green write the report's tail -> final commit -> mission complete.

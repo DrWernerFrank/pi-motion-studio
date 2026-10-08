@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "rev": 0,
+  "fps": "30",
+  "counter": 0,
+  "sources": {},
+  "tracks": [
+    {
+      "id": "V1",
+      "kind": "video",
+      "clips": []
+    },
+    {
+      "id": "A1",
+      "kind": "audio",
+      "clips": []
+    }
+  ],
+  "overlays": [],
+  "captions": null,
+  "markers": []
+}
