@@ -194,7 +194,7 @@ function renderPlan(root, r) {
     <h3>Segments (${(plan.segments || []).length})</h3>
     ${(plan.segments || []).map((s) => `<div class="pSegRow">
       <b>${s.id}</b>${chip(st[s.id]?.status ?? 'planned')}<code>${ctx.esc(s.capability)}</code><span class="pRole">${ctx.esc(s.role ?? '')}</span>
-      <span class="dim">→ films/${ctx.esc(s.film ?? `${P.key}-${s.id}`)} · ${s.duration ?? '?'}s</span>
+      <span class="dim pPath">→ films/${ctx.esc(s.film ?? `${P.key}-${s.id}`)} · ${s.duration ?? '?'}s</span>
       <div class="pBrief dim">${ctx.esc(s.brief ?? '')}</div>
       ${(s.acceptance || []).length ? `<div class="pAcc dim">accept: ${(s.acceptance || []).map((a) => ctx.esc(a)).join(' · ')}</div>` : ''}
     </div>`).join('') || '<p class="dim">none</p>'}
@@ -363,6 +363,7 @@ export function init(c) {
       .pEv { font-family: var(--mono); font-size: 11px; color: var(--dim); }
       .pSegRow { padding: 6px 4px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 40px auto auto 1fr; gap: 4px 8px; align-items: baseline; font-size: 12.5px; }
       .pSegRow .pBrief, .pSegRow .pAcc { grid-column: 1 / -1; font-size: 11.5px; }
+      .pSegRow .pPath { grid-column: 1 / -1; white-space: nowrap; font-size: 11.5px; }   /* a 5th grid child wrapped into the 40px first column — its own full row reads */
       .pFact { padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 12.5px; }
       .pFact .dim { font-size: 11.5px; margin-top: 2px; }
       .pFact a { color: var(--accent); }

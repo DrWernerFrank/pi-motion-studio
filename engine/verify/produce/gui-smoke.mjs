@@ -5,13 +5,13 @@
 // a note pins; a rebuild job runs; zero console errors and zero failed requests. Screenshots are
 // saved for the lead to LOOK at (the smoke's own eyes are DOM assertions).
 import { spawn } from 'node:child_process';
-import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { createWriteStream, existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { FILMS } from '../../lib/film.mjs';
 import { ROOT } from '../../lib/serve.mjs';
 
-const PORT = 3214, BASE = `http://localhost:${PORT}`;
+const PORT = 3214, BASE = `http://127.0.0.1:${PORT}`;   // the server binds 127.0.0.1 (IPv4); 'localhost' resolves to ::1 here first
 const KEY = 'verify-p-guismoke', CHILD = `${KEY}-s01`;
 const FAKE = join(homedir(), '.cache', 'pi-motion-studio', 'scratch', 'w3-gui-lead', 'fake-pi.mjs');
 
@@ -59,11 +59,29 @@ export default async () => {
   setState(KEY, { phase: 'building', segments: { s01: { status: 'done', film: CHILD, capability: 'math' } } });
   appendLog(KEY, 's01 built and gated (the seeded row)');
 
+  const SRVLOG = join(scratch, 'server.log');
   const srv = spawn('node', [join(ROOT, 'studio-gui', 'server.mjs')], { env, stdio: ['ignore', 'pipe', 'pipe'], detached: true });
+  // the server's own output goes to a file we can quote when it dies — a piped-and-dropped stderr
+  // is how the first full run's 'fetch failed' stayed undiagnosed for a day
+  const srvOut = createWriteStream(SRVLOG, { flags: 'a' });
+  srv.stdout?.pipe(srvOut); srv.stderr?.pipe(srvOut);
+  let srvDied = '';
+  srv.on('exit', (c, s) => { srvDied = `the GUI server exited (code ${c}${s ? ', ' + s : ''})`; });
+  const bootLog = () => { try { return readFileSync(SRVLOG, 'utf8').split('\n').slice(-12).join(' | ').slice(0, 400); } catch { return '(no log)'; } };
   let browser = null;
   const refs = { srv };
   try {
-    await new Promise((r) => setTimeout(r, 2500));
+    // POLL the CHEAP static '/' until it answers — never /api/films: that scans every film on
+    // the 9p repo (~1.8s a hit), and a client-aborted request still queues its FULL scan, so a
+    // 500ms-aborted poll DoSes the very server it is waiting for (60 queued scans starved 'goto'
+    // into a 'domcontentloaded' timeout — the 2026-10-08 only-run's real cause, measured live:
+    // '/' answers in ~1s, /api/films takes 1.6-1.8s warm).
+    let up = false;
+    for (let k = 0; k < 60 && !up && !srvDied; k++) {
+      try { up = (await fetch(`${BASE}/`, { signal: AbortSignal.timeout(2000) })).ok; } catch { await new Promise((r) => setTimeout(r, 1000)); }
+    }
+    if (srvDied) throw new Error(`${srvDied} — boot log: ${bootLog()}`);
+    if (!up) throw new Error(`the GUI never answered on :${PORT} within 60s — boot log: ${bootLog()}`);
     const { chromium } = await import('playwright');
     refs.browser = browser = await chromium.launch();
     const page = await browser.newPage();
@@ -73,7 +91,12 @@ export default async () => {
     page.on('requestfailed', (r2) => failed.push(r2.url().slice(0, 80)));
     page.on('response', (r2) => { if (r2.status() >= 400) failed.push(`${r2.status()} ${r2.url().slice(0, 80)}`); });
 
-    await page.goto(`${BASE}/#film=${KEY}`, { waitUntil: 'networkidle' });
+    // 'networkidle' NEVER fires while the SSE stream is open (the /api/events connection stays
+    // alive) — goto raced 30s into a timeout on the second boot. Load the DOM, then wait for
+    // the film list content explicitly.
+    await page.goto(`${BASE}/#film=${KEY}`, { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('#films li, #films .dim', { timeout: 15000 }).catch(() => {});
+    await new Promise((r) => setTimeout(r, 800));   // the view modules mount after the film fetch
     // the project view mounted: the phase chip + the goal + the segment row
     await page.waitForSelector('#stage, .proj, [data-proj]', { timeout: 8000 }).catch(() => {});
     const body = await page.textContent('body');

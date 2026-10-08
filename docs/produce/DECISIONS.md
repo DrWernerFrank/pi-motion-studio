@@ -146,3 +146,15 @@ verify-edit's audio-chain check owns that (±1 LUFS). The baseline's norm() now 
 dBTP floats; the gate rows still carry PASS with the measured values. ROOT CAUSE OPEN: named
 here for the next session to chase (prime suspects: the loudnorm first pass under a warm cache
 in a spawned process; the ingest-cache copy's mtime affecting nothing but ordering).
+
+**D-012 2026-10-08 P9 — gui-smoke's readiness poll was DoSing the server it waited for.** The
+only-run's 'domcontentloaded' timeout was NOT a page race: the mid-flight poll hit /api/films
+(the one endpoint that scans EVERY film with per-kind summary hooks — ~1.6-1.8s warm on the 9p
+repo, measured by hand) with AbortSignal.timeout(500), so every attempt failed client-side while
+queueing its full scan server-side; 60 queued scans starved goto's static '/' request for the
+whole 30s. The earlier 'networkidle' timeout (12:57) was real too (the SSE stream never goes
+idle — domcontentloaded + explicit content waits are correct). Fix: poll the CHEAP static '/' (2s
+abort, 60s cap), BASE is now 127.0.0.1 (the server binds IPv4; 'localhost' resolves to ::1 first
+here — curl falls back, Chromium is not guaranteed to), and the server's stdout/stderr are piped
+to scratch/server.log with any boot failure thrown WITH the log tail — a piped-and-dropped stderr
+is how the 12:46 'fetch failed' stayed undiagnosed.
