@@ -57,6 +57,6 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 - Worth a second look: the mix aims TP −2.0 dB (AAC overshoot, D-009) · edit-film as the default assembler (ADR-003) · the runner's relaunch cap · brief-lint's deterministic ask extraction.
 - `NEEDS_USER.md`: nothing — no hard blocks were hit.
 
-## The earlier suites, from the final tree (commit 9d28918)
+## The earlier suites, from the final tree (commit c380c50)
 - `./studio verify-edit`: **34/34 PASS** (74 min, `pass: true` — docs/editing/verify-last.json; the two D-013 check-race fixes hold in the full context: transcript-edit 93% ≥ 90%, gui-smoke's pane-wait green).
-- `./studio verify-math`: (running — result appended below)
+- `./studio verify-math`: **27/27 PASS** (33 min, zero skips — docs/math/verify-last.json). The first post-migration run exposed real debt (D-014: five checks on pre-rename colon paths; D-015: a REAL product bug — the GUI's math video pane had been blank since P1, now fixed — plus the SSE-scanner starvation, measured 115 ms → 3046 ms with one client, now avoided check-side). All fixed at the right layer, no bar weakened; the suite then passed clean.

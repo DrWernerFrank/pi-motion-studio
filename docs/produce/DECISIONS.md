@@ -213,3 +213,23 @@ the SSE evidence (3x) and the done-poll FAILS FAST after 20 empty polls instead 
 One more stale grep (toggle-back poll matched '16:9' against 'draft-16x9.mp4') followed D-014's
 class. Result: the check runs 58-72s end to end (was a 19-min pend), every step marked, and the
 video pane plays again for real.
+
+**D-016 2026-10-08 P9 — odd-squares' 9:16 final was non-deterministic at the ENCODE layer; root cause
+found and fixed in the engine (a real determinism bug, caught by the naming check).** Symptom: the
+first post-D-014 full verify-produce failed `naming` — odd-squares' final-9x16 re-rendered to a third
+md5 every cold run (cae7b2…, 315868…, a5e400…, c848515…; 16:9 was stable). Root cause, measured at
+each layer: (1) manim's CAIRO frames are deterministic (records byte-identical across renders; a
+single-scene double-render decoded bit-identical); (2) the PARTIAL MP4s differ in ~100k scattered
+bytes with identical profile/size/pts — libavcodec drives PyAV's libx264 ENCODE with SLICED
+threading, whose partitioning varies run to run (manim's `_PartialMovieEncodeJob` background
+encoders); (3) the varying partial bitstreams moved the seam-trim by one frame, so the assembled
+silent/final differed at exactly 5 seam frames (frames 1736-1740). Fix: `studio_manim/__init__.py`
+pins every partial-movie encoder to `thread_count=1` at import time (the kit loads before any
+render; cairo renders on the main thread so the encode is not the bottleneck — the fixture scene
+renders in ~7s single-threaded). Proven: two cold s01 partial renders → identical sha (94027eede6
+twice, was different every run); two FULL cold 9:16 renders → identical final md5 (93a5b323 twice).
+Consequence: the frozen post-migration ledger (math-names.md5) is legitimately stale — the pin
+changes every partial bitstream, so all six demo finals re-render to new values; the ledger is
+re-frozen from fresh cold renders (the same rule as D-010's baseline re-capture: intentional,
+explained, re-measured). This is an ENGINE change under §5.10: small, measured, committed apart from
+the project work, listed in the report.
