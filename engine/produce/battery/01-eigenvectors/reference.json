@@ -1,0 +1,44 @@
+{
+  "brief": "Explain eigenvectors in 90 seconds, narrated, 16:9 and 9:16.",
+  "requirements": [
+    "Duration: 90 seconds (verifier tolerance 2 s) in every delivered format",
+    "Two video deliverables: 16:9 and 9:16, each exact geometry - both formats shipped, not one standing in for the other",
+    "Narrated: continuous spoken narration with a real audio stream in the mix",
+    "Language: narration and on-screen text in English (the request's language)",
+    "Content: explains eigenvectors themselves - the intuition (a vector the transformation only scales, never rotates) and the relation Av = lambda*v (eigenvalue times eigenvector), with at least one worked example",
+    "Claims: every on-screen mathematical claim is verified (sympy proof / claims ledger) - no unverified math",
+    "The 9:16 deliverable is composed for vertical (format-aware re-layout, safe area holds) - not a letterboxed or center-cropped 16:9",
+    "One audio mix at the studio loudness target (narration intelligible: LUFS within 1, true peak <= -1 dBTP)",
+    "Captions/SRT accompany the narration (English, monotonic)",
+    "Scope: the segment durations sum to the 90 s target (no over-scoping into a longer treatment)"
+  ],
+  "acceptable_capability_sets": [
+    [
+      "math"
+    ],
+    [
+      "math",
+      "voice"
+    ],
+    [
+      "captions",
+      "math",
+      "voice"
+    ],
+    [
+      "captions",
+      "math",
+      "mix",
+      "voice"
+    ]
+  ],
+  "expected_feasibility_flags": [],
+  "must_not": [
+    "must not deliver only one format or fake the second (a center-crop or letterbox of the 16:9 is not a 9:16 composition)",
+    "must not treat the 90 seconds loosely (a 60 s or 2-minute piece fails the ask; the segments must not over-scope the target)",
+    "must not pick a technique that cannot narrate (plain motion has no narration voice of its own - narration is an explicit ask)",
+    "must not put unverified math on screen (every claim needs a sympy proof / claims-ledger entry)",
+    "must not invent inputs (no source footage or files are needed; none may be flagged or fabricated)",
+    "must not switch language (the request is English; narration and on-screen text stay English)"
+  ]
+}

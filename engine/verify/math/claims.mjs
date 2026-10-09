@@ -87,10 +87,10 @@ cov = coverage(job["sentences"], [{"expr": "1 == 1", "says": s} for s in job["sa
 out["coverage"] = cov
 # merge_ledgers: the same scene ledger in two formats dedupes by (expr, says)
 rec = job["records"]
-os.makedirs(os.path.join(rec, "16:9"), exist_ok=True); os.makedirs(os.path.join(rec, "9:16"), exist_ok=True)
+os.makedirs(os.path.join(rec, "16x9"), exist_ok=True); os.makedirs(os.path.join(rec, "9x16"), exist_ok=True)
 led = json.load(open(job["claims_file"]))
-json.dump(led, open(os.path.join(rec, "16:9", "s01-claims.json"), "w"))
-json.dump(led, open(os.path.join(rec, "9:16", "s01-claims.json"), "w"))
+json.dump(led, open(os.path.join(rec, "16x9", "s01-claims.json"), "w"))
+json.dump(led, open(os.path.join(rec, "9x16", "s01-claims.json"), "w"))
 out["merged_n"] = len(merge_ledgers(rec))
 print("RESULT " + json.dumps(out))
 `;

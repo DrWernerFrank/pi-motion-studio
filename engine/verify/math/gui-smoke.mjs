@@ -20,7 +20,7 @@ import { pythonFor } from '../../doctor.mjs';
 import { FILMS } from '../../lib/film.mjs';
 import { ROOT } from '../../lib/serve.mjs';
 
-const KEY = 'verify-m-gui', EKEY = 'verify-m-gui-err', PORT = 3210, BASE = `http://localhost:${PORT}`;
+const KEY = 'verify-m-gui', EKEY = 'verify-m-gui-err', PORT = 3210, BASE = `http://127.0.0.1:${PORT}`;   // IPv4 literal: 'localhost' resolves ::1 first here and the server binds 127.0.0.1 (D-012's class — Chromium does not fall back)
 const MANIM = join(ROOT, 'engine', 'manim');
 
 export default async (ctx = {}) => {
@@ -65,7 +65,7 @@ export default async (ctx = {}) => {
 };
 
 async function run({ bad, facts, need, shots, refs }) {
-  const PORT = refs.port, BASE = `http://localhost:${PORT}`;
+  const PORT = refs.port, BASE = `http://127.0.0.1:${PORT}`;   // IPv4 literal — see the module header (localhost resolves ::1 first here)
 
   // ── the fixture: mathdemo copied (title fixed), plus a twin with a SEEDED syntax error ──────
   for (const k of [KEY, EKEY]) rmSync(join(FILMS, k), { recursive: true, force: true });
@@ -93,7 +93,7 @@ async function run({ bad, facts, need, shots, refs }) {
     }
   }
   const lints = await Promise.all(['16:9', '9:16'].map((f) => runCapped(pythonFor('manim'),
-    ['-m', 'studio_manim.lint', join(FILMS, KEY, 'records', f), join(FILMS, KEY, 'design.json'), f],
+    ['-m', 'studio_manim.lint', join(FILMS, KEY, 'records', f.replace(':', 'x')), join(FILMS, KEY, 'design.json'), f],
     { cwd: ROOT, memoryMb: 512, timeoutS: 30, env: { PYTHONPATH: MANIM }, label: `smoke lint ${f}` })));
   const lintTruth = {};
   ['16:9', '9:16'].forEach((f, i) => { lintTruth[f] = JSON.parse((lints[i].out || '').trim()).length; });
@@ -113,15 +113,15 @@ async function run({ bad, facts, need, shots, refs }) {
   if (!up) { bad.push(`the gui server never answered on :${PORT}`); return; }
   let browser;
   try {
-    // a node-side SSE tap: every event the GUI's own connection would see (the timing.json leg)
+    // a node-side SSE tap: every event the GUI's own connection would see (the timing.json leg).
+    // Connected AFTER page.goto, deliberately: ONE SSE client wakes the server's 1-second
+    // signature sweep (a full readdir+stat of every film — ~3 s on this 9p repo at ~35 films;
+    // measured 2026-10-08: /api/films/<key> 115 ms idle vs 3046 ms with a client connected), and
+    // goto's ~25 subrequests then queue behind sweep after sweep — a hard 30 s goto timeout
+    // (reproduced in isolation, D-015). With zero clients during goto the scanner sleeps and the
+    // page loads in ~114 ms. Every assertion is unchanged — the tap still sees the revoice/job
+    // events it asserts, and the page's OWN EventSource keeps the scanner honest during the steps.
     const events = [];
-    await new Promise((ok) => {
-      const req = httpGet(`${BASE}/api/events`, (res) => {
-        res.on('data', (d) => { for (const line of String(d).split('\n')) { const m = /^data: (.*)$/.exec(line.trim()); if (m) try { events.push(JSON.parse(m[1])); } catch {} } });
-        setTimeout(ok, 400);   // the hello handshake
-      });
-      req.on('error', () => ok());
-    });
     const saw = (pred, ms = 6000) => new Promise((ok) => {
       const t0 = Date.now();
       const iv = setInterval(() => { const hit = events.find(pred); if (hit) { clearInterval(iv); ok(hit); } else if (Date.now() - t0 > ms) { clearInterval(iv); ok(null); } }, 100);
@@ -135,9 +135,18 @@ async function run({ bad, facts, need, shots, refs }) {
     page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text().slice(0, 160)); });
     page.on('response', (r) => { if (r.status() >= 400) failed.push(`${r.status()} ${r.url().slice(0, 120)}`); });
     const evalk = (fn, ...a) => page.evaluate(fn, ...a);
+    const mark = (m) => console.log(`[gui-smoke ${((Date.now() - (refs.t0 ??= Date.now())) / 1000).toFixed(1)}s] ${m}`);
 
     // 1 · the math view mounts: its tabs, the hidden Live view, the video with a real src, the strip
+    mark(1);
     await page.goto(`${BASE}/#film=${KEY}`);
+    await new Promise((ok) => {
+      const req = httpGet(`${BASE}/api/events`, (res) => {
+        res.on('data', (d) => { for (const line of String(d).split('\n')) { const m = /^data: (.*)$/.exec(line.trim()); if (m) try { events.push(JSON.parse(m[1])); } catch {} } });
+        setTimeout(ok, 400);   // the hello handshake
+      });
+      req.on('error', () => ok());
+    });
     await evalk(() => new Promise((ok) => { const iv = setInterval(() => { if (document.querySelector('#mView')) { clearInterval(iv); ok(true); } }, 100); setTimeout(() => { clearInterval(iv); ok(false); }, 10000); }))
       .then((m) => need(m, 'the math view did not mount'));
     const mount = await evalk(() => ({
@@ -151,30 +160,39 @@ async function run({ bad, facts, need, shots, refs }) {
     need(mount.liveHidden, 'the Live view is not hidden for a math film');
     need(!mount.iframeLive, 'the live iframe is still in the DOM (math films have no live page)');
     need(mount.stripW > 400, `the timeline strip is ${mount.stripW}px wide`);
-    need(/draft-16:9\.mp4|final-16:9\.mp4/.test(mount.src), `no 16:9 draft video src: ${mount.src}`);
+    need(/draft-16x9\.mp4|final-16x9\.mp4/.test(mount.src), `no 16:9 draft video src: ${mount.src}`);
     facts.push(`mounted: tabs ${mount.tabs.join('/')}, Live hidden, strip ${mount.stripW}px, src ${mount.src.split('?')[0].split('/').pop()}`);
 
-    // 2 · the video plays (a real src, currentTime advances)
-    const played = await evalk(() => { const v = document.querySelector('#mVideo'); v.muted = true; return v.play().then(() => 'playing').catch((e) => e.name); });
+    // 2 · the video plays (a real src, currentTime advances). The play() promise is RACED with a
+    // bail INSIDE the page: page.evaluate awaits a returned promise, and a media promise that
+    // never settles (headless Chrome leaves play() pending on a no-resource video — measured
+    // 2026-10-08, the 19-minute hangs) would pend the whole check forever. 'pending' then fails
+    // the need below loudly instead of hanging. The bar — actually playing, t > 0.3 — is unchanged.
+    mark(2);
+    const played = await evalk(() => { const v = document.querySelector('#mVideo'); v.muted = true;
+      const p = v.play().then(() => 'playing').catch((e) => e.name);
+      return Promise.race([p, new Promise((r) => setTimeout(() => r('pending'), 3000))]); });
     await page.waitForTimeout(1300);
     const t1 = await evalk(() => document.querySelector('#mVideo').currentTime);
     need(played === 'playing' && t1 > 0.3, `the video did not play (${played}, t=${t1})`);
 
     // 3 · the format toggle swaps to the 9:16 draft
+    mark(3);
     await page.click('#mFmt button[data-f="9:16"]');
     await evalk(() => new Promise((ok) => { const v = document.querySelector('#mVideo');
-      const iv = setInterval(() => { if (v.getAttribute('src')?.includes('draft-9:16.mp4') && v.readyState >= 1) { clearInterval(iv); ok(true); } }, 80);
+      const iv = setInterval(() => { if (v.getAttribute('src')?.includes('draft-9x16.mp4') && v.readyState >= 1) { clearInterval(iv); ok(true); } }, 80);
       setTimeout(() => { clearInterval(iv); ok(false); }, 12000); }))
       .then((ok) => need(ok, 'the 9:16 toggle did not swap the video src'));
     const t916 = await evalk(() => document.querySelector('#mVideo').currentTime);
     facts.push(`video played to ${t1.toFixed(2)}s; the 9:16 toggle swapped the src (kept t=${t916.toFixed(2)}s)`);
     await page.click('#mFmt button[data-f="16:9"]');
     await evalk(() => new Promise((ok) => { const v = document.querySelector('#mVideo');
-      const iv = setInterval(() => { if (v.getAttribute('src')?.includes('16:9') && v.readyState >= 1) { clearInterval(iv); ok(true); } }, 80);
+      const iv = setInterval(() => { if (v.getAttribute('src')?.includes('16x9') && v.readyState >= 1) { clearInterval(iv); ok(true); } }, 80);   // slugged (16x9) — the src is draft-16x9.mp4 post-migration
       setTimeout(() => { clearInterval(iv); ok(false); }, 12000); }))
       .then((ok) => need(ok, 'toggling back to 16:9 did not restore the src'));
 
     // 4 · a sentence click seeks the video to that sentence's start (±0.1 s)
+    mark(4);
     const want = 6.372971;   // s02.1's start in the copied timing.json
     await evalk((id) => document.querySelector(`.mSent[data-id="${id}"]`).click(), 's02.1');
     await page.waitForTimeout(700);
@@ -182,6 +200,7 @@ async function run({ bad, facts, need, shots, refs }) {
     need(Math.abs(tSeek - want) <= 0.1, `clicking s02.1 sought to ${tSeek}, wanted ${want} ±0.1`);
 
     // 5 · a sentence edit re-voices and the status shows the new timing + the SSE film event fires
+    mark(5);
     const oldTime = await evalk(() => document.querySelector('.mSent[data-id="s02.2"] .mTime').textContent);
     await evalk(() => document.querySelector('.mSent[data-id="s02.2"] .mEdit').click());
     await evalk((txt) => { document.querySelector('.mSent[data-id="s02.2"] textarea').value = txt; },
@@ -202,6 +221,7 @@ async function run({ bad, facts, need, shots, refs }) {
     need(!!newLine && newLine.includes('Five, exactly.'), `script.md's [s02.2] line was not rewritten: ${newLine}`);
 
     // 6 · the seeded-error twin: Scenes shows the error WITH file:line
+    mark(6);
     await evalk((k) => document.querySelector(`#films li[data-k="${k}"]`).click(), EKEY);
     await evalk(() => new Promise((ok) => { const iv = setInterval(() => { if (document.querySelector('#mView')) { clearInterval(iv); ok(true); } }, 100); setTimeout(() => { clearInterval(iv); ok(false); }, 10000); }))
       .then((m) => need(m, 'the seeded-error film did not mount the math view'));
@@ -214,6 +234,7 @@ async function run({ bad, facts, need, shots, refs }) {
       });
 
     // 7 · Checks lists the real numbers: lint + claims, recomputed here independently
+    mark(7);
     await evalk((k) => document.querySelector(`#films li[data-k="${k}"]`).click(), KEY);
     await evalk(() => new Promise((ok) => { const iv = setInterval(() => { if (document.querySelector('#mView')) { clearInterval(iv); ok(true); } }, 100); setTimeout(() => { clearInterval(iv); ok(false); }, 10000); }))
       .then((m) => need(m, 'switching back to the main fixture did not mount'));
@@ -233,6 +254,7 @@ async function run({ bad, facts, need, shots, refs }) {
     await page.screenshot({ path: join(shots, 'checks.png') });
 
     // 8 · a pinned note resolves through /where (scene · sentence · file) in the Notes tab
+    mark(8);
     const note = await evalk(async () => (await fetch(`/api/films/verify-m-gui/notes`, { method: 'POST',
       headers: { 'content-type': 'application/json', 'x-studio-token': window.STUDIO_TOKEN }, body: JSON.stringify({ t: 3.4, fmt: '16:9', text: 'smoke: the square should be visible here' }) })).status);
     need(note === 200, `pinning a note failed: ${note}`);
@@ -247,6 +269,7 @@ async function run({ bad, facts, need, shots, refs }) {
     await page.screenshot({ path: join(shots, 'notes.png') });
 
     // 9 · the rubric chart carries the two math keys (correctness + clarity)
+    mark(9);
     await evalk(() => document.querySelector('#tabs button[data-tab="reviews"]').click());
     await page.waitForTimeout(300);
     const rub = await evalk(() => [...document.querySelectorAll('#tabBody .scores > div')].map((d) => d.firstChild.textContent));
@@ -254,6 +277,7 @@ async function run({ bad, facts, need, shots, refs }) {
     facts.push(`the rubric chart shows ${rub.length} keys (incl. correctness + clarity)`);
 
     // 10 · a draft job: pgrep-guarded (never two Manim renders), started through the Run tab,
+    mark(10);
     //     logs streaming over SSE, waited to completion
     const rendersInFlight = () => {
       try { return execSync('pgrep -af "manim render" || true').toString().split('\n')
@@ -268,9 +292,18 @@ async function run({ bad, facts, need, shots, refs }) {
     await evalk(() => document.querySelector('#tabs button[data-tab="jobs"]').click());
     await page.waitForTimeout(300);
     const t0 = Date.now();
-    await evalk(() => document.querySelector('.jobs button[data-k="draft"]').click());
-    const jobStart = await saw((e) => e.type === 'job-start' && e.key === KEY, 15000);
-    need(!!jobStart, 'no job-start SSE event for the draft job');
+    // the draft job's start is RETRIED (up to 3): the click races the Run tab's own re-render — the
+    // touch interval churns a 'film' SSE event every 15 s, app.js re-renders the tab body, and a
+    // click on a just-detached button node silently does nothing (2026-10-08: two runs sat 19+ min
+    // in the poll loop below with /api/jobs empty — the click never registered; the probe clicked
+    // the same selector fine. A retry on the SSE evidence is the honest fix; the job must still
+    // START, REGISTER and FINISH — no assertion is touched).
+    let jobStart = null;
+    for (let a = 0; a < 3 && !jobStart; a++) {
+      await evalk(() => document.querySelector('.jobs button[data-k="draft"]')?.click());
+      jobStart = await saw((e) => e.type === 'job-start' && e.key === KEY, a ? 8000 : 15000);
+    }
+    need(!!jobStart, 'no job-start SSE event for the draft job (3 clicks)');
     // the job record exists and is RUNNING (JOBS shells the same CLI pi uses) — then the logs:
     // the math CLI is quiet while it renders (manim's progress is captured, not printed), so the
     // first streamed line arrives at the END; assert the stream with the render-long timeout.
@@ -287,16 +320,22 @@ async function run({ bad, facts, need, shots, refs }) {
       jobDone = await evalk(async () => (await fetch('/api/jobs').then((r) => r.json())).slice(-1)[0]);
       if (jobDone && jobDone.key === KEY && jobDone.code !== undefined && jobDone.kind === 'draft') break;
       if (jobDone && jobDone.key !== KEY) jobDone = null;
+      // FAIL FAST when no draft job was ever created: without this, a start that never registered
+      // grinds the full 100 polls (~5+ min under the SSE scanner) before the same red row — a
+      // silent near-hang the 2026-10-08 run proved. 20 polls with an EMPTY job list = the start
+      // really failed; break and let the need below fail loudly with the reason.
+      if (i === 20) { const any = await evalk(async () => (await fetch('/api/jobs').then((r) => r.json())).length); if (!any) break; }
     }
     need(!!jobDone && jobDone.code === 0, `the draft job did not finish cleanly: ${JSON.stringify(jobDone)?.slice(0, 140)}`);
     if (jobDone && jobDone.code === 0) {
-      const d169 = statSync(join(FILMS, KEY, 'out', 'draft-16:9.mp4')), d916 = statSync(join(FILMS, KEY, 'out', 'draft-9:16.mp4'));
+      const d169 = statSync(join(FILMS, KEY, 'out', 'draft-16x9.mp4')), d916 = statSync(join(FILMS, KEY, 'out', 'draft-9x16.mp4'));
       need(Math.max(d169.mtimeMs, d916.mtimeMs) > t0 - 1000, 'the drafts were not re-written by the job');
       facts.push(`draft job done in ${((Date.now() - t0) / 1000).toFixed(0)}s — both drafts re-written, ${jobDone.args.join(' ')}`);
     }
     await page.screenshot({ path: join(shots, 'run.png') });
 
     // 11 · screenshots of the view itself (looked at in the report) + the final tallies
+    mark(11);
     await evalk(() => document.querySelector('#tabs button[data-tab="script"]').click());
     await page.waitForTimeout(500);
     await page.screenshot({ path: join(shots, 'script.png') });

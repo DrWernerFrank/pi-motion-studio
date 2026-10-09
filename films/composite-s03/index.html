@@ -1,0 +1,48 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>the close</title>
+<link rel="stylesheet" href="/engine/lib/fonts.css">
+<script type="module">
+import { film } from '/engine/lib/runtime.js';
+import { loadDesign } from '/engine/lib/design.js';
+import * as M from '/engine/lib/motion.js';
+let D, cfg;
+film({
+  async setup(L, c) { cfg = c; D = await loadDesign(); },
+  draw(ctx, t, L) {
+    ctx.fillStyle = '#F2EEE4'; ctx.fillRect(0, 0, L.W, L.H);   // the proof's paper (one piece)
+    const u = L.u, W = L.W, H = L.H;
+    // a slow push-in over the WHOLE card (motion through every hold — the gate's rule)
+    const push = 1 + 0.05 * M.clamp(t / 8, 0, 1);
+    ctx.save(); ctx.translate(W / 2, H * 0.5); ctx.scale(push, push); ctx.translate(-W / 2, -H * 0.5);
+    // the theorem, in type (the card's hero)
+    const eq = M.life(t, 0.4, 8.5, M.SNAPPY);
+    const echo = M.life(t, 2.2, 8.5, M.SNAPPY);
+    const mark = M.life(t, 4.0, 8.5, M.SNAPPY);
+    ctx.globalAlpha = eq;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#17150F';
+    const eqs = 1 + 0.03 * Math.sin(t * 1.6);   // the theorem breathes
+    ctx.font = `800 ${u * 13}px "Instrument Serif", serif`;
+    ctx.save(); ctx.translate(W / 2, H * 0.32); ctx.scale(eqs, eqs); ctx.fillText('a² + b² = c²', 0, 0); ctx.restore();
+    ctx.globalAlpha = echo;
+    // the three-square echo (the proof's shapes, small, the 5² green)
+    const s = u * 5.4, gap = u * 2.2, y0 = H * 0.52;
+    const xs = [W / 2 - s * 1.5 - gap, W / 2 - s / 2, W / 2 + s / 2 + gap];
+    for (let i = 0; i < 3; i++) {
+      ctx.fillStyle = i < 2 ? '#96610A' : '#B03D24';   // the proof's amber + red-orange
+      const br = 1 + 0.10 * Math.sin(t * 2.2 + i * 1.1);   // the squares breathe, staggered
+      ctx.globalAlpha = echo * (0.4 + 0.25 * i);
+      M.rrect(ctx, xs[i] + s * (1 - br) / 2, y0 + s * (1 - br) / 2, s * br, s * br, u * 0.6); ctx.fill();
+    }
+    ctx.globalAlpha = echo;
+    ctx.fillStyle = '#8A8478'; ctx.font = `600 ${u * 4.6}px "JetBrains Mono", monospace`;
+    ctx.fillText('3² + 4² = 5²', W / 2, y0 + s + u * 4.5);
+    ctx.globalAlpha = mark;
+    ctx.fillStyle = '#17150F'; ctx.font = `700 ${u * 5.0}px "Space Grotesk", sans-serif`;
+    ctx.fillText('Motion Studio', W / 2, H * 0.82);
+    ctx.globalAlpha = 1;
+    ctx.restore();   // the push-in
+  },
+});
+</script>

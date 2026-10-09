@@ -1,0 +1,5 @@
+$ studio new verify-p-gold-edit --edit
+created films/verify-p-gold-edit (edit film)
+  next: studio ingest verify-p-gold-edit <your footage> --id cam   then   studio edit verify-p-gold-edit add --src cam --in 0 --out 10   then   studio look verify-p-gold-edit
+  preview: studio gui
+[exit 0]

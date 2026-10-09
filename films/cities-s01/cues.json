@@ -1,0 +1,41 @@
+[
+  {
+    "t": 2.05,
+    "type": "tick",
+    "free": true
+  },
+  {
+    "t": 5.3,
+    "type": "tick",
+    "free": true
+  },
+  {
+    "t": 8.55,
+    "type": "tick",
+    "free": true
+  },
+  {
+    "t": 11.8,
+    "type": "tick",
+    "free": true
+  },
+  {
+    "t": 15.05,
+    "type": "tick",
+    "free": true
+  },
+  {
+    "t": 18.3,
+    "type": "tick",
+    "free": true
+  },
+  {
+    "t": 21.55,
+    "type": "tick",
+    "free": true
+  },
+  {
+    "t": 27.8,
+    "type": "chime"
+  }
+]

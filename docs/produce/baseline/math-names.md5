@@ -1,0 +1,11 @@
+# Post-migration final md5s — re-frozen 2026-10-08 (D-016: the partial-encode thread pin made cold
+# renders bit-deterministic; the pin changes every partial bitstream, so all six finals moved once,
+# honestly — the frozen values below now reproduce on every cold re-render, which is the check's
+# contract). The pre-migration story is in docs/produce/DECISIONS.md D-003; the first post-migration
+# freeze and its 9:16 instability (odd-squares rendered to a different md5 every cold run) is D-016.
+92873f1a3346e0c040afcd83105abec4  films/determinant/out/final-16x9.mp4
+dacc2fd6c0edc1d8b5915d0e9c1cc704  films/determinant/out/final-9x16.mp4
+7fddf72ef6029a2e98688f2a824ae7c7  films/tangent/out/final-16x9.mp4
+31cd551a409c70febea1a231bb8cb83a  films/tangent/out/final-9x16.mp4
+6884e3d4981a6c7a868b15c70fd058f4  films/odd-squares/out/final-16x9.mp4
+93a5b32387a47be758c7a866a9cd418b  films/odd-squares/out/final-9x16.mp4

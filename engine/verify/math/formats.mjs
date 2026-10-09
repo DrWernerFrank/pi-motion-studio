@@ -8,7 +8,7 @@ import { join } from 'node:path';
 import { renderMathFilm } from '../../math.mjs';
 import { createMathFilm } from '../../math-cli.mjs';
 import { run } from '../../lib/proc.mjs';
-import { FILMS, readJson } from '../../lib/film.mjs';
+import { FILMS, readJson, fmtSlug } from '../../lib/film.mjs';
 
 const KEY = 'verify-m-fmt';
 const FMTS = ['16:9', '9:16', '1:1', '4:5'];
@@ -51,7 +51,7 @@ export default async () => {
     // re-composition, not a scaled copy: the records' title-slot geometry differs by the portrait
     // RULE (safe fractions), not a scale — the 9:16 title's y is a different fraction of its frame.
     const titleY = (fmt) => {
-      const rec = join(FILMS, KEY, 'records', fmt, 's01_hook-layout.json');
+      const rec = join(FILMS, KEY, 'records', fmtSlug(fmt), 's01_hook-layout.json');
       if (!existsSync(rec)) return null;
       const frames = readJson(rec, []);
       // the recorder stamps `role` on kit text (title/body/math/label/caption): the title slot is the proof
@@ -78,7 +78,7 @@ export default async () => {
     // four formats. A bbox height is not a type size (descenders, multi-line), so only nominal_u is judged.
     let minU = Infinity, nText = 0;
     for (const fmt of FMTS) for (const scene of ['s01_hook', 's02_meaning', 's03_recap']) {
-      for (const f of readJson(join(FILMS, KEY, 'records', fmt, `${scene}-layout.json`), [])) {
+      for (const f of readJson(join(FILMS, KEY, 'records', fmtSlug(fmt), `${scene}-layout.json`), [])) {
         for (const o of (f.objects || []).filter(isText)) {
           if (typeof o.nominal_u !== 'number') continue;
           nText++; minU = Math.min(minU, o.nominal_u);

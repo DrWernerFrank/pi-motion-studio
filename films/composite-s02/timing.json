@@ -1,0 +1,825 @@
+{
+  "version": 1,
+  "voice": "piper:en_US-ljspeech-medium",
+  "length_scale": 1,
+  "sample_rate": 22050,
+  "gap": 0.15,
+  "gap_samples": 3308,
+  "duration": 53.586213,
+  "timing": "native",
+  "sentences": [
+    {
+      "id": "s01.1",
+      "scene": "s01_setup",
+      "text": "Here is a right triangle. Its legs are three and four, and its hypotenuse is five — the most famous triple there is.",
+      "spoken": "Here is a right triangle. Its legs are three and four, and its hypotenuse is five — the most famous triple there is.",
+      "start": 0,
+      "end": 7.848345,
+      "start_sample": 0,
+      "samples": 173056,
+      "words": [
+        {
+          "w": "Here",
+          "start": 0.03483,
+          "end": 0.27864
+        },
+        {
+          "w": "is",
+          "start": 0.35991,
+          "end": 0.45279
+        },
+        {
+          "w": "a",
+          "start": 0.49923,
+          "end": 0.54567
+        },
+        {
+          "w": "right",
+          "start": 0.62694,
+          "end": 0.85914
+        },
+        {
+          "w": "triangle.",
+          "start": 0.91719,
+          "end": 1.57896
+        },
+        {
+          "w": "Its",
+          "start": 1.70667,
+          "end": 1.88082
+        },
+        {
+          "w": "legs",
+          "start": 1.93887,
+          "end": 2.19429
+        },
+        {
+          "w": "are",
+          "start": 2.24073,
+          "end": 2.35683
+        },
+        {
+          "w": "three",
+          "start": 2.41488,
+          "end": 2.72834
+        },
+        {
+          "w": "and",
+          "start": 2.77478,
+          "end": 2.93732
+        },
+        {
+          "w": "four,",
+          "start": 3.04181,
+          "end": 3.3785
+        },
+        {
+          "w": "and",
+          "start": 3.70358,
+          "end": 3.86612
+        },
+        {
+          "w": "its",
+          "start": 3.93578,
+          "end": 4.02866
+        },
+        {
+          "w": "hypotenuse",
+          "start": 4.05188,
+          "end": 4.82975
+        },
+        {
+          "w": "is",
+          "start": 4.8878,
+          "end": 5.02712
+        },
+        {
+          "w": "five",
+          "start": 5.07356,
+          "end": 5.50313
+        },
+        {
+          "w": "—",
+          "start": 5.50313,
+          "end": 5.50313
+        },
+        {
+          "w": "the",
+          "start": 6.00236,
+          "end": 6.08363
+        },
+        {
+          "w": "most",
+          "start": 6.10685,
+          "end": 6.43193
+        },
+        {
+          "w": "famous",
+          "start": 6.45515,
+          "end": 6.81506
+        },
+        {
+          "w": "triple",
+          "start": 6.87311,
+          "end": 7.15175
+        },
+        {
+          "w": "there",
+          "start": 7.18658,
+          "end": 7.34912
+        },
+        {
+          "w": "is.",
+          "start": 7.39556,
+          "end": 7.74385
+        }
+      ],
+      "bookmarks": [],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/ad12abdd8e2a699a34dc648d73c05f171107ca9a4653c4dcd7530dd52f9a6b7c/audio.wav",
+      "hash": "ad12abdd8e2a699a34dc648d73c05f171107ca9a4653c4dcd7530dd52f9a6b7c"
+    },
+    {
+      "id": "s01.2",
+      "scene": "s01_setup",
+      "text": "The theorem says the square on the hypotenuse equals the two squares on the legs, added together. {squares_draw}But why?",
+      "spoken": "The theorem says the square on the hypotenuse equals the two squares on the legs, added together. But why?",
+      "start": 7.998367,
+      "end": 14.604444,
+      "start_sample": 176364,
+      "samples": 145664,
+      "words": [
+        {
+          "w": "The",
+          "start": 8.02159,
+          "end": 8.12608
+        },
+        {
+          "w": "theorem",
+          "start": 8.17252,
+          "end": 8.50921
+        },
+        {
+          "w": "says",
+          "start": 8.57887,
+          "end": 8.78785
+        },
+        {
+          "w": "the",
+          "start": 8.83429,
+          "end": 8.90395
+        },
+        {
+          "w": "square",
+          "start": 8.99683,
+          "end": 9.36835
+        },
+        {
+          "w": "on",
+          "start": 9.47284,
+          "end": 9.5425
+        },
+        {
+          "w": "the",
+          "start": 9.5425,
+          "end": 9.60055
+        },
+        {
+          "w": "hypotenuse",
+          "start": 9.63538,
+          "end": 10.34359
+        },
+        {
+          "w": "equals",
+          "start": 10.43647,
+          "end": 10.91247
+        },
+        {
+          "w": "the",
+          "start": 11.0634,
+          "end": 11.13306
+        },
+        {
+          "w": "two",
+          "start": 11.19111,
+          "end": 11.40009
+        },
+        {
+          "w": "squares",
+          "start": 11.46975,
+          "end": 11.91093
+        },
+        {
+          "w": "on",
+          "start": 12.00381,
+          "end": 12.15474
+        },
+        {
+          "w": "the",
+          "start": 12.15474,
+          "end": 12.23601
+        },
+        {
+          "w": "legs,",
+          "start": 12.28245,
+          "end": 12.64236
+        },
+        {
+          "w": "added",
+          "start": 13.00227,
+          "end": 13.29252
+        },
+        {
+          "w": "together.",
+          "start": 13.33896,
+          "end": 13.75692
+        },
+        {
+          "w": "But",
+          "start": 13.89624,
+          "end": 14.09361
+        },
+        {
+          "w": "why?",
+          "start": 14.15166,
+          "end": 14.48835
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "squares_draw",
+          "t": 5.897873,
+          "word": "But"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/f7ee94660573dbdea1c510e9b506e8dd23bdb5a68acfbdd5a9c449b84f50d006/audio.wav",
+      "hash": "f7ee94660573dbdea1c510e9b506e8dd23bdb5a68acfbdd5a9c449b84f50d006"
+    },
+    {
+      "id": "s02.1",
+      "scene": "s02_proof",
+      "text": "Take four copies of that triangle. {four_copies}They pack into a square of side seven — three plus four — in two different ways.",
+      "spoken": "Take four copies of that triangle. They pack into a square of side seven — three plus four — in two different ways.",
+      "start": 14.754467,
+      "end": 22.718912,
+      "start_sample": 325336,
+      "samples": 175616,
+      "words": [
+        {
+          "w": "Take",
+          "start": 14.7893,
+          "end": 14.99828
+        },
+        {
+          "w": "four",
+          "start": 15.09116,
+          "end": 15.33497
+        },
+        {
+          "w": "copies",
+          "start": 15.40463,
+          "end": 15.8342
+        },
+        {
+          "w": "of",
+          "start": 15.86903,
+          "end": 15.93869
+        },
+        {
+          "w": "that",
+          "start": 15.96191,
+          "end": 16.11284
+        },
+        {
+          "w": "triangle.",
+          "start": 16.1825,
+          "end": 16.89071
+        },
+        {
+          "w": "They",
+          "start": 16.98359,
+          "end": 17.08808
+        },
+        {
+          "w": "pack",
+          "start": 17.14613,
+          "end": 17.41315
+        },
+        {
+          "w": "into",
+          "start": 17.49442,
+          "end": 17.73823
+        },
+        {
+          "w": "a",
+          "start": 17.78467,
+          "end": 17.84272
+        },
+        {
+          "w": "square",
+          "start": 17.91238,
+          "end": 18.23746
+        },
+        {
+          "w": "of",
+          "start": 18.2839,
+          "end": 18.36517
+        },
+        {
+          "w": "side",
+          "start": 18.43483,
+          "end": 18.7483
+        },
+        {
+          "w": "seven",
+          "start": 18.82957,
+          "end": 19.28236
+        },
+        {
+          "w": "—",
+          "start": 19.28236,
+          "end": 19.28236
+        },
+        {
+          "w": "three",
+          "start": 19.82803,
+          "end": 20.11828
+        },
+        {
+          "w": "plus",
+          "start": 20.16472,
+          "end": 20.47819
+        },
+        {
+          "w": "four",
+          "start": 20.57107,
+          "end": 20.96581
+        },
+        {
+          "w": "—",
+          "start": 20.96581,
+          "end": 20.96581
+        },
+        {
+          "w": "in",
+          "start": 21.3025,
+          "end": 21.40699
+        },
+        {
+          "w": "two",
+          "start": 21.48826,
+          "end": 21.63919
+        },
+        {
+          "w": "different",
+          "start": 21.69724,
+          "end": 22.04554
+        },
+        {
+          "w": "ways.",
+          "start": 22.09198,
+          "end": 22.61442
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "four_copies",
+          "t": 2.229123,
+          "word": "They"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/8a9be3a6e542aaba6ffed61a8eac186c08ba31310b16275bd4720be9c6a5fee5/audio.wav",
+      "hash": "8a9be3a6e542aaba6ffed61a8eac186c08ba31310b16275bd4720be9c6a5fee5"
+    },
+    {
+      "id": "s02.2",
+      "scene": "s02_proof",
+      "text": "Packed one way, {pack_a}the four triangles leave two squares: side three, and side four.",
+      "spoken": "Packed one way, the four triangles leave two squares: side three, and side four.",
+      "start": 22.868934,
+      "end": 29.405351,
+      "start_sample": 504260,
+      "samples": 144128,
+      "words": [
+        {
+          "w": "Packed",
+          "start": 22.89215,
+          "end": 23.24045
+        },
+        {
+          "w": "one",
+          "start": 23.31011,
+          "end": 23.5307
+        },
+        {
+          "w": "way,",
+          "start": 23.58875,
+          "end": 23.89061
+        },
+        {
+          "w": "the",
+          "start": 24.32018,
+          "end": 24.42467
+        },
+        {
+          "w": "four",
+          "start": 24.48272,
+          "end": 24.70331
+        },
+        {
+          "w": "triangles",
+          "start": 24.78458,
+          "end": 25.52761
+        },
+        {
+          "w": "leave",
+          "start": 25.60888,
+          "end": 25.85269
+        },
+        {
+          "w": "two",
+          "start": 25.92235,
+          "end": 26.13133
+        },
+        {
+          "w": "squares:",
+          "start": 26.2126,
+          "end": 26.82793
+        },
+        {
+          "w": "side",
+          "start": 27.28072,
+          "end": 27.6058
+        },
+        {
+          "w": "three,",
+          "start": 27.66385,
+          "end": 28.02376
+        },
+        {
+          "w": "and",
+          "start": 28.32562,
+          "end": 28.47655
+        },
+        {
+          "w": "side",
+          "start": 28.58104,
+          "end": 28.8829
+        },
+        {
+          "w": "four.",
+          "start": 28.97578,
+          "end": 29.31247
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "pack_a",
+          "t": 1.451246,
+          "word": "the"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/cfcb685126079317ca0b610f00f57b429f3d32d81f36abae4d4930895cf1d7fe/audio.wav",
+      "hash": "cfcb685126079317ca0b610f00f57b429f3d32d81f36abae4d4930895cf1d7fe"
+    },
+    {
+      "id": "s02.3",
+      "scene": "s02_proof",
+      "text": "Packed the other way, {pack_b}the same four triangles leave one square: side five — the hypotenuse.",
+      "spoken": "Packed the other way, the same four triangles leave one square: side five — the hypotenuse.",
+      "start": 29.555374,
+      "end": 36.57941,
+      "start_sample": 651696,
+      "samples": 154880,
+      "words": [
+        {
+          "w": "Packed",
+          "start": 29.57859,
+          "end": 29.86884
+        },
+        {
+          "w": "the",
+          "start": 29.89206,
+          "end": 30.03138
+        },
+        {
+          "w": "other",
+          "start": 30.07782,
+          "end": 30.2868
+        },
+        {
+          "w": "way,",
+          "start": 30.35646,
+          "end": 30.64671
+        },
+        {
+          "w": "the",
+          "start": 30.99501,
+          "end": 31.06467
+        },
+        {
+          "w": "same",
+          "start": 31.14594,
+          "end": 31.42458
+        },
+        {
+          "w": "four",
+          "start": 31.50585,
+          "end": 31.73805
+        },
+        {
+          "w": "triangles",
+          "start": 31.80771,
+          "end": 32.51591
+        },
+        {
+          "w": "leave",
+          "start": 32.58557,
+          "end": 32.79455
+        },
+        {
+          "w": "one",
+          "start": 32.84099,
+          "end": 33.06158
+        },
+        {
+          "w": "square:",
+          "start": 33.15446,
+          "end": 33.65369
+        },
+        {
+          "w": "side",
+          "start": 34.10648,
+          "end": 34.39673
+        },
+        {
+          "w": "five",
+          "start": 34.45478,
+          "end": 34.89596
+        },
+        {
+          "w": "—",
+          "start": 34.89596,
+          "end": 34.89596
+        },
+        {
+          "w": "the",
+          "start": 35.33714,
+          "end": 35.41841
+        },
+        {
+          "w": "hypotenuse.",
+          "start": 35.46485,
+          "end": 36.47492
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "pack_b",
+          "t": 1.439636,
+          "word": "the"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/dcbc0eb078071fe1118f29e494c2daa55bb6b3f8918c2de3417deb62fbe82738/audio.wav",
+      "hash": "dcbc0eb078071fe1118f29e494c2daa55bb6b3f8918c2de3417deb62fbe82738"
+    },
+    {
+      "id": "s02.4",
+      "scene": "s02_proof",
+      "text": "Same square of side seven. Same four triangles. {both_shown}So what is left must be equal: nine plus sixteen equals twenty five.",
+      "spoken": "Same square of side seven. Same four triangles. So what is left must be equal: nine plus sixteen equals twenty five.",
+      "start": 36.729433,
+      "end": 45.274376,
+      "start_sample": 809884,
+      "samples": 188416,
+      "words": [
+        {
+          "w": "Same",
+          "start": 36.84553,
+          "end": 37.10095
+        },
+        {
+          "w": "square",
+          "start": 37.18222,
+          "end": 37.47247
+        },
+        {
+          "w": "of",
+          "start": 37.53052,
+          "end": 37.61179
+        },
+        {
+          "w": "side",
+          "start": 37.69306,
+          "end": 38.00653
+        },
+        {
+          "w": "seven.",
+          "start": 38.0878,
+          "end": 38.4361
+        },
+        {
+          "w": "Same",
+          "start": 38.67991,
+          "end": 38.95855
+        },
+        {
+          "w": "four",
+          "start": 39.02821,
+          "end": 39.2488
+        },
+        {
+          "w": "triangles.",
+          "start": 39.31845,
+          "end": 40.21242
+        },
+        {
+          "w": "So",
+          "start": 40.44462,
+          "end": 40.59555
+        },
+        {
+          "w": "what",
+          "start": 40.64199,
+          "end": 40.79292
+        },
+        {
+          "w": "is",
+          "start": 40.83936,
+          "end": 40.94385
+        },
+        {
+          "w": "left",
+          "start": 41.0019,
+          "end": 41.26893
+        },
+        {
+          "w": "must",
+          "start": 41.29215,
+          "end": 41.50113
+        },
+        {
+          "w": "be",
+          "start": 41.52435,
+          "end": 41.60562
+        },
+        {
+          "w": "equal:",
+          "start": 41.6985,
+          "end": 42.17451
+        },
+        {
+          "w": "nine",
+          "start": 42.63891,
+          "end": 42.9756
+        },
+        {
+          "w": "plus",
+          "start": 43.02204,
+          "end": 43.28907
+        },
+        {
+          "w": "sixteen",
+          "start": 43.34712,
+          "end": 43.82313
+        },
+        {
+          "w": "equals",
+          "start": 43.89279,
+          "end": 44.28753
+        },
+        {
+          "w": "twenty",
+          "start": 44.34558,
+          "end": 44.70548
+        },
+        {
+          "w": "five.",
+          "start": 44.76353,
+          "end": 45.1931
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "both_shown",
+          "t": 3.715187,
+          "word": "So"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/38470d70e810d6b23660712efb8890d0ab5f110a26e7cabc631f24d1e412ec09/audio.wav",
+      "hash": "38470d70e810d6b23660712efb8890d0ab5f110a26e7cabc631f24d1e412ec09"
+    },
+    {
+      "id": "s03.1",
+      "scene": "s03_land",
+      "text": "Three squared plus four squared equals five squared. {equation_lands}Nine plus sixteen, twenty five. Every right triangle, always.",
+      "spoken": "Three squared plus four squared equals five squared. Nine plus sixteen, twenty five. Every right triangle, always.",
+      "start": 45.424399,
+      "end": 53.586213,
+      "start_sample": 1001608,
+      "samples": 179968,
+      "words": [
+        {
+          "w": "Three",
+          "start": 45.47084,
+          "end": 45.73787
+        },
+        {
+          "w": "squared",
+          "start": 45.80753,
+          "end": 46.15583
+        },
+        {
+          "w": "plus",
+          "start": 46.20227,
+          "end": 46.48091
+        },
+        {
+          "w": "four",
+          "start": 46.55057,
+          "end": 46.79438
+        },
+        {
+          "w": "squared",
+          "start": 46.87565,
+          "end": 47.22395
+        },
+        {
+          "w": "equals",
+          "start": 47.282,
+          "end": 47.75801
+        },
+        {
+          "w": "five",
+          "start": 47.80445,
+          "end": 48.07147
+        },
+        {
+          "w": "squared.",
+          "start": 48.16435,
+          "end": 48.67519
+        },
+        {
+          "w": "Nine",
+          "start": 48.81451,
+          "end": 49.09315
+        },
+        {
+          "w": "plus",
+          "start": 49.13959,
+          "end": 49.36018
+        },
+        {
+          "w": "sixteen,",
+          "start": 49.40662,
+          "end": 49.99873
+        },
+        {
+          "w": "twenty",
+          "start": 50.33542,
+          "end": 50.70694
+        },
+        {
+          "w": "five.",
+          "start": 50.7766,
+          "end": 51.20617
+        },
+        {
+          "w": "Every",
+          "start": 51.29905,
+          "end": 51.57769
+        },
+        {
+          "w": "right",
+          "start": 51.65896,
+          "end": 51.89116
+        },
+        {
+          "w": "triangle,",
+          "start": 51.94921,
+          "end": 52.62259
+        },
+        {
+          "w": "always.",
+          "start": 52.81996,
+          "end": 53.48172
+        }
+      ],
+      "bookmarks": [
+        {
+          "id": "equation_lands",
+          "t": 3.390111,
+          "word": "Nine"
+        }
+      ],
+      "timing": "native",
+      "audio": "/home/werner/.cache/pi-motion-studio/voice/7789143f233224bd769a62dc79e1e138c116d96075bfc13656a1f3e4cd968016/audio.wav",
+      "hash": "7789143f233224bd769a62dc79e1e138c116d96075bfc13656a1f3e4cd968016"
+    }
+  ]
+}

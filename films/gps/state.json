@@ -1,0 +1,13 @@
+{
+  "phase": "shipped",
+  "segments": {
+    "s01": {
+      "status": "done",
+      "film": "gps-s01",
+      "capability": "math",
+      "at": "2026-10-07T09:24:05.845Z"
+    }
+  },
+  "started": "2026-10-07T07:55:09.025Z",
+  "shippedAt": "2026-10-07T10:23:55.675Z"
+}

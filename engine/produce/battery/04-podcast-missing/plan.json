@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "goal": "A 45-second clip from the podcast with a live waveform and word-accurate captions \u2014 the piece you post when you want people to hear the best minute.",
+  "audience": "podcast listeners on a feed",
+  "assumptions": [
+    "45 seconds of finished clip",
+    "the waveform is a designed element (the audio's real envelope), not a stock visual",
+    "the captions are word-accurate from the transcript",
+    "the plan states its assumed format (no format was named)",
+    "the missing file is flagged in feasibility and never substituted (no stand-in audio)"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 45
+    },
+    {
+      "type": "captions",
+      "name": "captions"
+    }
+  ],
+  "decision": {
+    "chosen": "motion",
+    "why": "An mp3 has no frames: the visuals are drawn, and the waveform is the audio's REAL envelope \u2014 the motion technique draws it from the ingested peaks (the ingest + asr services feed the data: the envelope, the words), with the captions cut to the transcript. The edit technique alone cannot draw the envelope honestly; motion + the data services can.",
+    "alternatives": [
+      {
+        "id": "edit",
+        "rejected_because": "the audiogram preset draws a stock waveform \u2014 the ask is the podcast's real envelope; an edit film without code-drawn visuals cannot show the audio's own shape"
+      },
+      {
+        "id": "simplest: a static waveform image with the audio",
+        "rejected_because": "the simplest thing that could work \u2014 but 45 seconds of a frozen waveform is dead visual; the envelope must move with the words"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "motion",
+      "role": "the clip: the real waveform",
+      "brief": "Ingest the podcast (the peaks + the silence map), transcribe it (asr), pick the best 45 seconds; draw the real envelope moving with the words, the captions in the studio's design, the audio the podcast's own speech.",
+      "duration": 45,
+      "inputs": [
+        "input:i1"
+      ],
+      "acceptance": [
+        "a waveform visual driven by the real samples of the podcast (the ingested peaks)",
+        "captions from an ASR transcript of the speech: word-accurate",
+        "no format is named in the brief: the plan states it (16:9)",
+        "the missing file (podcast.mp3) is flagged in feasibility \u2014 never invented",
+        "the waveform matches the audio's measured envelope (the real peaks, not a stock shape)",
+        "captions from an ASR transcript: word-accurate",
+        "the audio is the podcast's own speech for those 45 seconds",
+        "the visuals are drawn (an mp3 has no frames): waveform + captions on a designed ground",
+        "the missing file is flagged in feasibility and never invented",
+        "no format is named in the brief: the plan states its assumption (16:9)",
+        "the waveform is driven by the real samples of the selected 45 seconds",
+        "captions word-accurate, burned-in plus SRT, in the podcast's spoken words"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "the dialog bus at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [
+      "input:i1 \u2014 podcast.mp3 does not exist (the human must supply it)"
+    ],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 45,
+    "usd": 0
+  },
+  "risks": [
+    "a podcast with no clear best-45-seconds moment needs a human's pick"
+  ]
+}

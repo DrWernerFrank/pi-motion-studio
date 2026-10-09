@@ -1,0 +1,34 @@
+{
+  "url": "http://localhost:3142",
+  "at": "2026-10-07T10:29:45.713Z",
+  "screenshots": [
+    "assets/desktop.png",
+    "assets/desktop-full.png",
+    "assets/phone.png",
+    "assets/phone-full.png"
+  ],
+  "logos": [],
+  "colors": [
+    "rgb(8, 8, 10)",
+    "rgb(236, 236, 239)",
+    "rgb(19, 19, 22)",
+    "rgb(139, 139, 148)",
+    "rgb(34, 34, 40)",
+    "rgb(27, 27, 31)",
+    "rgb(62, 207, 142)",
+    "rgb(255, 106, 61)",
+    "rgb(43, 43, 49)",
+    "rgba(62, 207, 142, 0.133)"
+  ],
+  "fonts": [
+    "Inter",
+    "ui-monospace"
+  ],
+  "title": "Motion Studio",
+  "description": "",
+  "svgs": [],
+  "headings": [
+    "No film selected",
+    "gps"
+  ]
+}

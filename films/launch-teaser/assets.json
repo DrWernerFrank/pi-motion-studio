@@ -1,0 +1,12 @@
+[
+  {
+    "id": "a1",
+    "path": "films/launch-teaser/assets/desktop.png",
+    "sha256": "18ac2bf70d0f0a87ac3f28986bb892cc2b46fc3ac6ae341979255ef6c22f7245",
+    "origin": "http://localhost:3142 (the studio's own GUI, captured by studio capture)",
+    "license": "studio",
+    "attribution": null,
+    "role": "the GUI capture (the teaser's real footage)",
+    "added": "2026-10-07T15:40:00Z"
+  }
+]

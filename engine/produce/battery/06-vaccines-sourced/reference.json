@@ -1,0 +1,44 @@
+{
+  "brief": "A narrated 60-second explainer on how vaccines train the immune system, with sources.",
+  "requirements": [
+    "Duration: 60 seconds (verifier tolerance 2 s)",
+    "Narrated: continuous spoken narration with a real audio stream in the mix",
+    "Language: narration and on-screen text in English (the request's language)",
+    "Content: explains HOW vaccines train the immune system - the mechanism (a vaccine presents a harmless form of an antigen; the immune system responds and builds antibodies plus memory cells that remember it) - not a vague 'vaccines work'",
+    "'With sources': every factual claim (numbers, names, causal statements) has a facts entry - source URL, quote found in the stored snapshot, verified offline",
+    "Sources are real, authoritative health references (e.g. WHO, CDC, a national health service), snapshotted - no invented citations",
+    "Unverifiable claims are hedged or cut - never guessed",
+    "The claims are biology, not algebra: they are sourced facts or hedges, never presented as sympy-verified proofs",
+    "No format is named in the brief: the plan states its assumed format (e.g. 16:9) as an explicit assumption and delivers exactly that",
+    "Captions/SRT accompany the narration (English, monotonic)",
+    "One audio mix at the studio loudness target (narration intelligible: LUFS within 1, true peak <= -1 dBTP)"
+  ],
+  "acceptable_capability_sets": [
+    [
+      "math"
+    ],
+    [
+      "math",
+      "voice"
+    ],
+    [
+      "motion",
+      "voice"
+    ],
+    [
+      "captions",
+      "motion",
+      "voice"
+    ]
+  ],
+  "expected_feasibility_flags": [],
+  "must_not": [
+    "must not present biological claims as sympy proofs (the claims ledger verifies algebra; vaccine facts need sources or hedges)",
+    "must not ship an unsourced claim ('with sources' is the ask: sourced, hedged or cut)",
+    "must not invent citations (sources are real pages, snapshotted, the quote found in the snapshot)",
+    "must not pick a technique that cannot narrate (plain motion has no voice of its own - narration is an explicit ask)",
+    "must not switch language (the request is English)",
+    "must not drift from the 60 seconds",
+    "must not invent inputs (no footage or files are needed; none may be flagged or fabricated)"
+  ]
+}

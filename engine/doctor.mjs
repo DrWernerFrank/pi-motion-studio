@@ -90,6 +90,14 @@ export async function doctor({ fix = false, math = false } = {}) {
   const dirs = [CACHE, DATA].map((d) => `${d.replace(homedir(), '~')} ${existsSync(d) ? 'ok' : 'missing'}`);
   add('dirs', 'cache + data dirs', existsSync(CACHE) && existsSync(DATA), dirs.join(', '), { fixable: true });
 
+  // Producer probes (the produce mission's env check): pi on PATH (the runner's engine), the
+  // runner's prerequisites (node spawn, the produce dirs), and the capability readiness table.
+  const piProbe = await probe('pi', ['--version']);
+  add('pi', 'pi on PATH (the producer loop)', !!piProbe, piProbe ? first(piProbe) : 'not found: the runner (studio make) needs pi; install it or set STUDIO_PI_CMD');
+  const produceDirs = [join(CACHE, 'logs'), join(DATA, 'projects')].map((d) => `${d.replace(homedir(), '~')} ${existsSync(d) ? 'ok' : 'will create'}`);
+  add('producer-dirs', 'producer dirs (logs, projects)', true, produceDirs.join(', '), { required: false, fixable: true });
+  if (fix) for (const d of [join(CACHE, 'logs'), join(DATA, 'projects')]) if (!existsSync(d)) { mkdirSync(d, { recursive: true }); fixed.push(`created ${d}`); }
+
   // Math-film probes (docs/math/ADR-001..004). Added ONLY when {math} is set, so the editing
   // pipeline's `studio doctor` (and verify-edit's env check) never pays for — or is gated by — them.
   // pythonFor('manim') is the exception: it resolves harmlessly for everyone.

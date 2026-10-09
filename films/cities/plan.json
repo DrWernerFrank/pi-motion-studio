@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "goal": "The century as a bar race: the ten largest cities trading places decade by decade, the source on screen, thirty seconds.",
+  "audience": "anyone who likes watching a century move",
+  "assumptions": [
+    "30 seconds of finished film",
+    "16:9 (the request names no format; a chart race is landscape)",
+    "'the last century' = 1925-2025, a decade per beat",
+    "the data: each decade's top-ten by population, every figure a sourced fact (open data, snapshotted, the quote found in it)",
+    "the chart technique (the grown capability) \u2014 its data/axis gates are the piece's own quality bar"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 30
+    }
+  ],
+  "decision": {
+    "chosen": "chart",
+    "why": "The piece IS an animated data chart: the grown chart technique (motion-based, chart.json data, the data-gate requiring rows + a source and the axis-gate requiring numeric pairs) is the honest fit \u2014 a generic motion film would re-derive the same gates by hand.",
+    "alternatives": [
+      {
+        "id": "motion",
+        "rejected_because": "the same drawing without the chart gates: nothing would check the data file or the source \u2014 the grown technique's gates ARE the craft here"
+      },
+      {
+        "id": "simplest: a static table of today's top ten",
+        "rejected_because": "the simplest thing that could work \u2014 but 'over the last century' is the ask: the movement IS the meaning"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "chart",
+      "role": "the century race",
+      "brief": "Ten bars racing rank-by-rank, a decade per beat (1925-2025), the leader changes called by year labels, the source credited on screen throughout.",
+      "duration": 30,
+      "inputs": [],
+      "acceptance": [
+        "every population figure on screen has a facts entry (snapshot + quote)",
+        "the pace: a decade per beat",
+        "the source on screen",
+        "the data/axis gates PASS"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "a synthesized bed at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 90,
+    "usd": 0
+  },
+  "risks": [
+    "the dataset must be open and per-decade complete \u2014 a gap decade is hedged on screen, never invented"
+  ]
+}

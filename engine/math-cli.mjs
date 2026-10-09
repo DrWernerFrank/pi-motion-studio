@@ -48,7 +48,7 @@ export function draftStale(film, draft) {
 
 export function sceneMap(film, fmt) {
   // records/<fmt>/<scene>-timeline.json -> [{ scene, start, end }] (the look labels + `where`)
-  const dir = join(film.dir, 'records', fmt);
+  const dir = join(film.dir, 'records', fmtSlug(fmt));   // Windows-safe records dir (16x9)
   const out = [];
   let t = 0;
   for (const s of film.scenes) {
@@ -94,7 +94,7 @@ export async function lookMath(key, opts = {}) {
   const fmt = opts.fmt || film.cfg.formats[0];
   const mode = opts.mode || 'every';
   if (!LOOK_MODES.includes(mode)) throw new Error(`look --mode ${mode}: one of ${LOOK_MODES.join('|')}`);
-  const draft = join(film.out, `draft-${fmt}.mp4`);
+  const draft = join(film.out, `draft-${fmtSlug(fmt)}.mp4`);
   const stale = draftStale(film, draft);
   if (stale) { // a stale draft is re-rendered FIRST: the sheet never shows yesterday's picture
     await renderMathFilm(key, { quality: 'draft', fmt });

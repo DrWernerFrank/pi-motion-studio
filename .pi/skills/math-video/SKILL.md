@@ -1,10 +1,11 @@
 ---
-description: 'Make a narrated math video animated with Manim — explainers, worked examples, visual proofs,
-  step-by-step derivations (roughly 45-120 s, or a chaptered series), narrated and captioned, in
-  every format. Use when the user asks for a math/physics/CS explainer, a "prove that …" visual
-  proof, "derive … step by step", "explain … with animation", or hands you a script.md to animate
-  or their own narration.wav — including Persian and other RTL languages. For code-drawn motion
-  graphics use motion-reel; for real footage video-edit.'
+description: 'Defer to the produce skill for any new piece; use this when the human names /skill:math-video
+  or the ask is a math/physics/CS explainer, a "prove that …" visual proof, "derive … step by step",
+  "explain … with animation", or hands you a script.md to animate or their own narration.wav —
+  including Persian and other RTL languages. Makes a narrated math video animated with Manim —
+  explainers, worked examples, visual proofs, step-by-step derivations (roughly 45-120 s, or a
+  chaptered series), narrated and captioned, in every format. For code-drawn motion graphics use
+  motion-reel; for real footage video-edit.'
 name: math-video
 ---
 

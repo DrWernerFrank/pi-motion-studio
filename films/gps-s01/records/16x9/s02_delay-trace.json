@@ -1,0 +1,153 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.2,
+  "i": 1,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.971,
+  "id": "delay_marks",
+  "sentence": "s02.1",
+  "scene": "s02_delay"
+ },
+ {
+  "kind": "animation",
+  "t": 2.083,
+  "i": 2,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.971,
+  "id": "delay_marks",
+  "sentence": "s02.1",
+  "scene": "s02_delay"
+ },
+ {
+  "kind": "animation",
+  "t": 2.883,
+  "i": 3,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.971,
+  "id": "delay_marks",
+  "sentence": "s02.1",
+  "scene": "s02_delay"
+ },
+ {
+  "kind": "animation",
+  "t": 3.6,
+  "i": 4,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.971,
+  "id": "delay_marks",
+  "sentence": "s02.1",
+  "scene": "s02_delay"
+ },
+ {
+  "kind": "animation",
+  "t": 4.25,
+  "i": 5,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.971,
+  "id": "delay_marks",
+  "sentence": "s02.1",
+  "scene": "s02_delay"
+ },
+ {
+  "kind": "animation",
+  "t": 4.833,
+  "i": 6,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "bookmark",
+  "t": 32.971,
+  "id": "delay_marks",
+  "sentence": "s02.1",
+  "scene": "s02_delay"
+ },
+ {
+  "kind": "animation",
+  "t": 5.35,
+  "i": 7,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 6.25,
+  "i": 8,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 10.133,
+  "i": 9,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.133,
+  "i": 10,
+  "scene": "s02_delay",
+  "sentence": "s02.1",
+  "animation": "wait",
+  "seconds": 3.885
+ },
+ {
+  "t": 10.133,
+  "kind": "sentence_end",
+  "scene": "s02_delay",
+  "sentence": "s02.1"
+ },
+ {
+  "kind": "animation",
+  "t": 10.433,
+  "i": 11,
+  "scene": "s02_delay",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 10.433,
+  "i": 12,
+  "scene": "s02_delay",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.3
+ },
+ {
+  "kind": "scene_end",
+  "t": 10.433,
+  "scene": "s02_delay"
+ }
+]

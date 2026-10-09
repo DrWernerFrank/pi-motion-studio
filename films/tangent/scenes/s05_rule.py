@@ -381,7 +381,8 @@ class Scene(StudioScene):
         }
         try:
             _fmt = _os.environ.get("STUDIO_FORMAT", "16:9")
-            with open(_os.path.join(_os.path.dirname(__file__), "..", f"s06_handoff-{_fmt}.json"), "w") as _f:
+            # naming migration (P1): derived file names are Windows-safe — the slugged fmt (16x9)
+            with open(_os.path.join(_os.path.dirname(__file__), "..", f"s06_handoff-{_fmt.replace(':', 'x')}.json"), "w") as _f:
                 _json.dump(_state, _f)
         except OSError:
             pass

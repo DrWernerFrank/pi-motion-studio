@@ -1,0 +1,987 @@
+[
+ {
+  "t": 1.0,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "1:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "1:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "1:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "1:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "1:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.833,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "2:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "2:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "2:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.833,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "3:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "3:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "3:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "3:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "3:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.983,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "4:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "4:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "4:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "4:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "4:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 7.983,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "5:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "5:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "5:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "5:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "5:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   }
+  ]
+ },
+ {
+  "t": 9.083,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "6:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "6:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "6:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "6:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "6:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Polygon",
+    "id": "6:5",
+    "bbox": [
+     -1.088,
+     -1.91,
+     1.632,
+     1.632
+    ],
+    "height_u": 20.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 14.75,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "7:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "7:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "7:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "7:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "7:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Polygon",
+    "id": "7:5",
+    "bbox": [
+     -1.088,
+     -1.91,
+     1.632,
+     1.632
+    ],
+    "height_u": 20.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 14.75,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "8:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "8:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "8:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "8:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "8:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Polygon",
+    "id": "8:5",
+    "bbox": [
+     -1.088,
+     -1.91,
+     1.632,
+     1.632
+    ],
+    "height_u": 20.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 15.05,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "9:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "9:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "9:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "9:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "9:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Polygon",
+    "id": "9:5",
+    "bbox": [
+     -1.088,
+     -1.91,
+     1.632,
+     1.632
+    ],
+    "height_u": 20.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   }
+  ]
+ },
+ {
+  "t": 15.05,
+  "objects": [
+   {
+    "kind": "Polygon",
+    "id": "10:0",
+    "bbox": [
+     -1.088,
+     -0.278,
+     1.632,
+     2.176
+    ],
+    "height_u": 27.2,
+    "nominal_u": null,
+    "role": null,
+    "color": "#B9DE6E",
+    "z": 0,
+    "alive": true,
+    "text": false
+   },
+   {
+    "kind": "Txt",
+    "id": "10:1",
+    "bbox": [
+     -1.906,
+     -1.724,
+     0.331,
+     0.498
+    ],
+    "height_u": 6.22,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 1,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "10:2",
+    "bbox": [
+     -1.917,
+     0.567,
+     0.353,
+     0.485
+    ],
+    "height_u": 6.06,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 2,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "10:3",
+    "bbox": [
+     0.605,
+     1.108,
+     0.314,
+     0.491
+    ],
+    "height_u": 6.14,
+    "nominal_u": 9,
+    "role": "math",
+    "color": "#000000",
+    "z": 3,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Txt",
+    "id": "10:4",
+    "bbox": [
+     -0.821,
+     2.567,
+     1.641,
+     0.645
+    ],
+    "height_u": 8.06,
+    "nominal_u": 9,
+    "role": "title",
+    "color": "#000000",
+    "z": 4,
+    "alive": true,
+    "text": true
+   },
+   {
+    "kind": "Polygon",
+    "id": "10:5",
+    "bbox": [
+     -1.088,
+     -1.91,
+     1.632,
+     1.632
+    ],
+    "height_u": 20.4,
+    "nominal_u": null,
+    "role": null,
+    "color": "#96610A",
+    "z": 5,
+    "alive": true,
+    "text": false
+   }
+  ]
+ }
+]

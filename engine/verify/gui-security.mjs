@@ -7,7 +7,7 @@ import { createEditFilm } from '../edit-cli.mjs';
 import { FILMS, readFilm } from '../lib/film.mjs';
 import { ROOT } from '../lib/serve.mjs';
 
-const KEY = 'verify-sec', PORT = 3199, BASE = `http://localhost:${PORT}`;
+const KEY = 'verify-sec', PORT = 3199, BASE = `http://127.0.0.1:${PORT}`;   // IPv4 literal: localhost resolves ::1 first here and the server binds 127.0.0.1 (D-012's class)
 
 export default async () => {
   const bad = [], facts = [], need = (ok, what) => { if (!ok) bad.push(what); };

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "f01",
+    "claim": "GPS satellites orbit at about 20,200 km (12,550 miles) above Earth",
+    "source_url": "https://oceanservice.noaa.gov/facts/gps.html",
+    "quote": "GPS satellites fly in medium Earth orbit at an altitude of approximately 20,200 Kilometers [#] .",
+    "snapshot": "sources/f01.snapshot.txt",
+    "retrieved_at": "2026-10-07T08:03:03.436Z",
+    "hedged": false
+  },
+  {
+    "id": "f02",
+    "claim": "Each GPS satellite circles the Earth twice a day",
+    "source_url": "https://oceanservice.noaa.gov/facts/gps.html",
+    "quote": "Each satellite circles the Earth twice a day.",
+    "snapshot": "sources/f02.snapshot.txt",
+    "retrieved_at": "2026-10-07T08:03:03.742Z",
+    "hedged": false
+  },
+  {
+    "id": "f03",
+    "claim": "More than 30 GPS navigation satellites operate today (the constellation was designed for 24)",
+    "source_url": "https://oceanservice.noaa.gov/facts/gps.html",
+    "quote": "Over 30 GPS navigation satellites are whizzing around the world, orbiting at an altitude of 20,200 Kilometers [#] , to help us find our way.",
+    "snapshot": "sources/f03.snapshot.txt",
+    "retrieved_at": "2026-10-07T08:03:04.029Z",
+    "hedged": false
+  },
+  {
+    "id": "f04",
+    "claim": "GPS signals travel at the speed of light (the SI-defined constant, 299,792,458 m/s)",
+    "quote": null,
+    "retrieved_at": "2026-10-07T08:03:04.315Z",
+    "hedged": true,
+    "hedge": "the speed of light is a defined constant (exactly 299,792,458 m/s by the SI definition); the film states it as a definition, not a measurement, and computes with it via sympy"
+  }
+]

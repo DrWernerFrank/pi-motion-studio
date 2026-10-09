@@ -18,7 +18,7 @@
 //              it; until it does, line is null rather than guessed from the source).
 import { join } from 'node:path';
 import { readMathFilm } from './math.mjs';
-import { readJson } from './lib/film.mjs';
+import { fmtSlug, readJson } from './lib/film.mjs';
 
 export function sceneMap(key, fmt) {
   const film = readMathFilm(key);
@@ -26,7 +26,7 @@ export function sceneMap(key, fmt) {
   const out = [];
   let t = 0;
   for (const s of film.scenes) {
-    const dur = readJson(join(film.dir, 'records', f, `${s.id}-timeline.json`), {})?.seconds ?? 0;
+    const dur = readJson(join(film.dir, 'records', fmtSlug(f), `${s.id}-timeline.json`), {})?.seconds ?? 0;
     out.push({ scene: s.id, start: t, end: t + dur, seconds: dur });
     t += dur;
   }
@@ -36,7 +36,7 @@ export function sceneMap(key, fmt) {
 export function resolveWhere(key, t, fmt) {
   const film = readMathFilm(key);
   const f = fmt || film.cfg.formats[0];
-  const recDir = join(film.dir, 'records', f);
+  const recDir = join(film.dir, 'records', fmtSlug(f));
   const map = sceneMap(key, f);
   const inScene = map.find((x) => t >= x.start && t < x.end) || map.at(-1);
   if (!inScene) return { error: `no scenes in films/${key}/records — render first` };

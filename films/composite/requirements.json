@@ -1,0 +1,61 @@
+[
+  {
+    "id": "r01",
+    "text": "50-70 seconds (the piece)",
+    "type": "measurable",
+    "verifier": "duration",
+    "arg": 60,
+    "tolerance": 10,
+    "source": "request",
+    "status": "green",
+    "evidence": "final-16x9.mp4 69.73s, final-9x16.mp4 69.73s",
+    "waived_by": null
+  },
+  {
+    "id": "r02",
+    "text": "16:9 and 9:16 (both)",
+    "type": "measurable",
+    "verifier": "formats",
+    "arg": [
+      "16:9",
+      "9:16"
+    ],
+    "source": "request",
+    "status": "green",
+    "evidence": "16:9 1920x1080, 9:16 1080x1920",
+    "waived_by": null
+  },
+  {
+    "id": "r03",
+    "text": "has audio (dialog then narration)",
+    "type": "measurable",
+    "verifier": "has-audio",
+    "arg": true,
+    "source": "implied",
+    "status": "green",
+    "evidence": "mean -17.2 dB, mean -17.2 dB",
+    "waived_by": null
+  },
+  {
+    "id": "r04",
+    "text": "loudness at the studio target",
+    "type": "measurable",
+    "verifier": "loudness",
+    "arg": -14,
+    "source": "implied",
+    "status": "green",
+    "evidence": "-14.4 LUFS, -2.0 dBTP, -14.4 LUFS, -2.0 dBTP",
+    "waived_by": null
+  },
+  {
+    "id": "r05",
+    "text": "the real clip opens the piece (asset-used a1)",
+    "type": "measurable",
+    "verifier": "asset-used",
+    "arg": "a1",
+    "source": "request",
+    "status": "green",
+    "evidence": "a1 ingested by composite-s01 (the media bin pins the original's sha256)",
+    "waived_by": null
+  }
+]

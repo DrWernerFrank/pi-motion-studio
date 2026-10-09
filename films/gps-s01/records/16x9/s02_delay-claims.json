@@ -1,0 +1,11 @@
+[
+ {
+  "expr": "20200000 / 299792458 == 0.0674",
+  "about": "the delay: the 20,200 km orbit divided by the speed of light (seconds)",
+  "says": "s02.1",
+  "scene": "s02_delay",
+  "tol": 0.001,
+  "ok": true,
+  "value": "0.06737994723002672 == 0.0674"
+ }
+]

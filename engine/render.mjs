@@ -47,18 +47,10 @@ export async function renderFilm(key, opts = {}) {
           if (pct !== lastPct && pct % 10 === 0) { lastPct = pct; log(`[${fmt}] ${pct}%  (${done}/${frames} frames)`); }
         }
       };
-      // a whole-output 3D LUT (edit.color.lut), resolved once here: encodePart appends it to the filter chain
-      let lut = '';
-      if (film.cfg.kind === 'edit') {
-        const { readJson } = await import('./lib/film.mjs');
-        const edit = readJson(join(film.dir, 'edit.json'));
-        if (edit?.color?.lut) {
-          const { safePath } = await import('./lib/serve.mjs');
-          const full = safePath(edit.color.lut.replace(/^\//, ''));
-          if (!full || !existsSync(full)) throw new Error(`edit.color.lut "${edit.color.lut}" does not resolve inside the repo`);
-          lut = `,lut3d=file='${full}'`; // default trilinear: exact for identity cubes (nearest quantizes to lattice nodes, ~36 dB loss)
-        }
-      }
+      // a whole-output 3D LUT (edit.color.lut), resolved by the film's kind (ADR-001: the edit
+      // kind owns it; motion has none) — encodePart appends it to the filter chain
+      const { hooksFor } = await import('./kinds/registry.mjs');
+      const lut = (await hooksFor(film)).lutFor?.(film) ?? '';
 
       // P9 segment cache. Parts are units of a fixed frame grid (engine/segment-cache.mjs): cached units are copied
       // in, the gaps are encoded and written back. Every path — cache on, --no-cache (opts.bypassCache), cold, warm,

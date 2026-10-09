@@ -1,0 +1,111 @@
+$ studio help
+studio <command> <film> [options]
+
+  new <key> [--title T] [--duration 15] [--formats 9:16,1:1,16:9] [--bpm 120] [--loop]
+                         scaffold films/<key> from templates/film
+  new <key> --edit [--fps 30000/1001] [--formats 16:9,9:16]
+                         scaffold an edit film (real footage): film.json kind=edit, edit.json, index.html
+  new <key> --math [--formats 16:9,9:16] [--lang en] [--voice piper:en_US-ljspeech-medium]
+                         scaffold a math film (Manim): script.md, design.json, lexicon.json, scenes/*.py
+  scene <film> <scene-id> [--draft|--final] [--fmt 9:16]
+                         render ONE scene of a math film (default draft) through the memory guard
+  check <film> [--scene <id>]
+                         math films: run scenes with --dry_run (typesetting + claims, no video)
+  where <film> --t <seconds> [--fmt 9:16]
+                         math films: which scene, sentence, animation and file owns a timecode
+  sound <film>           math films: voice → timing → the narration mix at mix.lufs (a quiet bed if
+                         music is set); edit films: the dialog bus + ducked bed at -N LUFS
+  gate <film>            math films: the math gates (layout, claims, typeset, narration, sync, pace,
+                         captions, loudness, deliverable, deterministic) → gates.json
+  where <film> <t>       math films: which scene, sentence and file owns a timecode
+  list                   films with their status
+  look <film> [--mode every|beats|shots|strip|times|phone] [--every 0.5] [--at 4.2] [--times 1,2.5]
+               [--fmt 9:16] [--width 270]
+                         contact sheet straight from seek(t) → out/sheets/*.png (seconds, no encode)
+  capture <film> <url>   real screenshots, logos, colors, fonts → films/<film>/assets/ (+ site.json)
+  refs <film> <video>    extract reference frames every Ns → films/<film>/refs/frames/ + a contact sheet
+  poster <film> --at 3.2 full-res still → out/poster-<fmt>.png
+  render <film> [--draft] [--fmt 9:16|all] [--from 2 --to 5] [--sub 4] [--workers 4]
+                         frames → H.264 (draft: half-res 30fps; final: film fps + motion blur)
+  grid <film>            beats.json from film.json music.bpm (synthesized score)
+  beats <film>           beats.json measured from film.json "track" (librosa)
+  sound <film>           beats (if missing) → music → sfx → mix at -N LUFS → out/mix.wav
+  gate <film>            mechanical gates → gates.json (lint, determinism, dead time, loop, loudness …)
+  review <film> --json '{"scores":{…},"problems":[…]}'   record a critique round
+  read <film> [--sheet sheets/times-9x16.png] [--prompt "…"] [--model flash|pro|flash_lite|gemini-2.5-pro] [--engine agy|api|gemini]
+                         An AI reads a sheet/poster (default: newest). Engine agy = Antigravity agents
+                         on your Google AI Pro subscription (no key — default when installed).
+                         api = GEMINI_API_KEY vision. gemini = the Gemini CLI agent.
+  login-gemini          browser login with your Google account (Pro/Code Assist quota, no API key)
+  ship <film>            sound → gate → final render (all formats) → poster → sheets → loop check
+  gui                    start the Studio GUI (http://localhost:3142)
+  regress [--write]      the four motion films still render identically (frame hashes + gate verdicts
+                         vs docs/editing/baseline.json); --write records the baseline
+  fixtures [--list] [--only a,b] [--force] [--verify]
+                         deterministic test media (barcode clips, VFR/rotated, HLG, long, subject …) → ~/.cache/pi-motion-studio/fixtures
+  ingest <film> <file...> [--id cam] [--fps 30000/1001] [--max 1920] [--audio-stream N] [--no-proxy] [--force]
+                         conform footage (CFR, upright, SDR bt709, short GOP) + proxy, audio, peaks, filmstrip, scenes, silence map
+  transcribe <film> <src-id> [--model small] [--language auto] [--force]
+                         word-level transcript of an ingested source (local faster-whisper, cached, refined)
+  transcript <film> <src-id> [--from 10 --to 40] [--grep um] [--format compact|words|srt]
+                         read the transcript back in ranges/greps an agent can use
+  cut <film> <silence|fillers|takes|idle|tighten> [--src cam] [--max-gap 0.5] [--apply] [--target 45]
+                         measured cut proposals with the removed text (dry run; --apply goes through edit-ops)
+  captions <film> [--format srt|vtt]
+                         caption export (.srt/.vtt) from the same chunks the screen shows
+  edit <film> [show | ops '<json array>' | undo | redo | sync | export-edl [f] | import-edl <f> | <op> --k v …] [--base-rev N]
+                         the timeline as data: add trim split delete ripple-delete move reorder speed freeze volume fade xfade crop-keyframe overlay caption-style marker snap
+  autoedit <film> --preset talking-head|screen|audiogram|montage [--src <file>…] [--id cam] [--target 60] [--final]
+                         the deterministic pipeline, no LLM: ingest → transcribe → measured cuts → captions →
+                         reframe → sound → gates → draft renders of every format (--final ships finals)
+  media <film>           the media bin: sources, kinds, durations, whether the originals are still where they were
+  relink <film> [--search dir ...]   find moved originals by size + sha256 and repair the bin (and edit.json)
+  cache [gc [--dry] [--fixtures]]   disk use of media/outputs/caches; gc removes temp films, orphan media, interrupted-ingest leftovers
+  doctor [--fix] [--math]  probe the toolchain: editing by default; --math adds Manim, typesetting,
+                         voice, sympy and font probes (docs/math/ADR-001..004)
+  verify-edit [--quick] [--list] [--only <id>] [--clean]
+                         the real-video-editing contract: every check of the mission, measured → docs/editing/verify-last.json
+  verify-math [--quick] [--list] [--only <id>,…] [--clean]
+                         the math-video contract: every check of the mission (env, typeset, claims, gates,
+                         demos …) → docs/math/verify-last.json
+  verify-produce [--quick] [--list] [--only <id>,…] [--clean]
+                         the producer contract: every check of the mission (registry, capabilities,
+                         plan, ledger, project, assemble, make, demos …) → docs/produce/verify-last.json
+  migrate-names [<film>|--all]
+                         math films: derived paths to the Windows-safe form (draft-16x9.mp4,
+                         records/16x9/), the tracked ones via git mv; idempotent
+  capabilities [<id>] [--json] [--doc]
+                         the technique/service catalog with readiness from real probes (a missing
+                         dependency reports not-ready and the fix); --doc writes the generated
+                         docs/produce/CAPABILITIES.md
+  brief-lint "<request>" [--file <path>] [--film <key>]
+                         extract the request's numbers, formats, languages and named assets (the
+                         requirement seeds); --film lints them against that project's ledger
+  project new <key> "<request>" [--formats 16:9,9:16] [--file <input>…]
+                         create a project film: the request verbatim in brief.md + the ledgers
+  project list           every project: phase, parts, finals
+  project status <key>  the project's state: segments, budget, parts
+  project plan <key> --check
+                         validate plan.json (goal, >= 2 alternatives, capabilities, budget…)
+  project requirement <key> add --text "…" --type measurable --verifier duration --arg 60
+                         [--waive r02]   the ledger: append an ask, or waive one (the human only)
+  project verify <key>   the whole contract: plan validates, requirements green, gates, facts, assets, budget
+  project rebuild <key> [--only s01]
+                         build the parts that are not done (resume), or exactly the named one
+  project ship <key>     verify -> refuse if red -> credits.md + report.md + out/ finals
+  project where <key> --t 12.3
+                         a timecode -> the segment -> the child's own where (scene, sentence, file:line)
+  capability new <id> --type technique|service [--description "…"]
+                         scaffold a grown capability (K12): a technique kind module
+                         (engine/kinds/<id>/ from templates/capability/) or a service module
+                         (engine/produce/services/<id>/) — the contract parts are its README
+  capability check <id> the growth contract: refuses until every part is real (hooks, gates,
+                         catalog entry, doctor probe, the check file, SKILL/TOOLS)
+  capability remove <id> remove a grown capability (its kind/service module + the grown row);
+                         a capability committed to git is the lead's to remove
+  make "<request>" [--file <input>…] [--formats 16:9,9:16] [--minutes 180] [--plan-only]
+                         create the project (the request verbatim) and RELAUNCH pi — one session,
+                         argv-only — until 'studio project verify' is green; stops on STOP/budget/cap
+  make --stop           stop the active run (SIGTERM; the lock and pid file go with it)
+  help                   this text
+[exit 0]

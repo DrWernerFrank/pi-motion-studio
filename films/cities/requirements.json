@@ -1,0 +1,49 @@
+[
+  {
+    "id": "r01",
+    "text": "30 seconds",
+    "type": "measurable",
+    "verifier": "duration",
+    "arg": 30,
+    "tolerance": 2,
+    "source": "request",
+    "status": "green",
+    "evidence": "final-16x9.mp4 30.00s",
+    "waived_by": null
+  },
+  {
+    "id": "r02",
+    "text": "16:9",
+    "type": "measurable",
+    "verifier": "formats",
+    "arg": [
+      "16:9"
+    ],
+    "source": "implied",
+    "status": "green",
+    "evidence": "16:9 1920x1080",
+    "waived_by": null
+  },
+  {
+    "id": "r03",
+    "text": "has audio",
+    "type": "measurable",
+    "verifier": "has-audio",
+    "arg": true,
+    "source": "implied",
+    "status": "green",
+    "evidence": "mean -15.0 dB",
+    "waived_by": null
+  },
+  {
+    "id": "r04",
+    "text": "loudness at the studio target",
+    "type": "measurable",
+    "verifier": "loudness",
+    "arg": -14,
+    "source": "implied",
+    "status": "green",
+    "evidence": "-14.4 LUFS, -1.4 dBTP",
+    "waived_by": null
+  }
+]

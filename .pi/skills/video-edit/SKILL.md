@@ -1,11 +1,11 @@
 ---
-description: 'Edit real footage into a platform-ready cut: trim a raw phone clip, talking head,
-  interview, podcast or screen recording — cut the dead air and the "ums", add word-accurate
-  captions, reframe widescreen to vertical with the speaker kept framed, pull podcast highlight
-  reels, make screen recordings snappy with punch-ins and a music bed, repair audio (denoise,
-  level, -14 LUFS). Use when the user hands you a real video or audio file to cut, caption,
-  reframe or fix — roughly 5-90 s of finished footage, from sources of any length. For code-drawn
-  films use motion-reel instead.'
+description: 'Defer to the produce skill for any new piece; use this when the human names /skill:video-edit
+  or hands you a real video or audio file to cut, caption, reframe or fix — roughly 5-90 s of
+  finished footage, from sources of any length. Edits real footage into a platform-ready cut:
+  trim a raw phone clip, talking head, interview, podcast or screen recording — cut the dead air
+  and the "ums", add word-accurate captions, reframe widescreen to vertical with the speaker kept
+  framed, pull podcast highlight reels, make screen recordings snappy with punch-ins and a music
+  bed, repair audio (denoise, level, -14 LUFS). For code-drawn films use motion-reel instead.'
 name: video-edit
 ---
 

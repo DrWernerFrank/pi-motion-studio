@@ -1,0 +1,49 @@
+{
+  "theme": "paper",
+  "direction": "ONE LINE: what the viewer should feel at the end. Every decision is checked against it.",
+  "fonts": {
+    "display": "Bricolage Grotesque",
+    "ui": "Inter",
+    "mono": "JetBrains Mono"
+  },
+  "colors": {
+    "background": "#F2EEE4",
+    "ink": "#17150F",
+    "muted": "#8A8478",
+    "surface": "#FBF9F3",
+    "grid": "#CBC2AE",
+    "gridBase": "#E7E1D4"
+  },
+  "math": {
+    "roles": {
+      "positive": "#96610A",
+      "negative": "#B03D24",
+      "result": "#8F5B00",
+      "vector": "#3E6F5C",
+      "area": "#B9DE6E",
+      "basis": "#A86400"
+    }
+  },
+  "ladder": {
+    "hero": 16,
+    "title": 9,
+    "math": 9,
+    "body": 3.6,
+    "label": 3.2,
+    "caption": 3.4
+  },
+  "banned": [
+    "centered title on gradient",
+    "everything fading in",
+    "glow",
+    "particle bursts"
+  ],
+  "motion": {
+    "ui": "SNAPPY",
+    "containers": "DEFAULT",
+    "type": "HEAVY",
+    "character": "PLAYFUL",
+    "stagger": 0.05
+  },
+  "inheritedFrom": "films/composite/design.json"
+}

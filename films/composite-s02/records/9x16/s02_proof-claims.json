@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "7 ** 2 - 4 * (3 * 4 / 2) == 25",
+  "about": "the same 7x7 minus the same four triangles: 25 either way",
+  "says": "s02.4",
+  "scene": "s02_proof",
+  "ok": true,
+  "value": "25.0 == 25"
+ },
+ {
+  "expr": "3 ** 2 + 4 ** 2 == 5 ** 2",
+  "about": "so the leftovers are equal: 9 + 16 = 25",
+  "says": "s02.4",
+  "scene": "s02_proof",
+  "ok": true,
+  "value": "25 == 25"
+ }
+]

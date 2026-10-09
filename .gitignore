@@ -47,3 +47,16 @@ engine/manim/test/media/
 
 # edit history snapshots
 films/*/.edit/
+
+# verifier run output (regenerated)
+docs/produce/verify-last*.json
+
+# Manim's repo-root media dir (typst/svg caches — derived; engine/manim/media is already excluded)
+/media/
+/x-layout.json
+/x-timeline.json
+/x-trace.json
+
+# the baseline capture's gold films (engine/produce/baseline.mjs): created + swept on every
+# registry comparison — local scratch, never tracked (the 14 tracked files came from one `git add -A`)
+films/verify-p-gold*

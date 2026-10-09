@@ -35,7 +35,7 @@ import { loudness } from './audio.mjs';
 import { checkMathFilm, FORMATS, readMathFilm } from './math.mjs';
 import { CAPS, TIMEOUTS, runCapped } from './lib/capped.mjs';
 import { pythonFor } from './doctor.mjs';
-import { readJson, writeJson } from './lib/film.mjs';
+import { fmtSlug, readJson, writeJson } from './lib/film.mjs';
 import { run } from './lib/proc.mjs';
 import { ROOT } from './lib/serve.mjs';
 
@@ -59,8 +59,11 @@ const parseJsonFrom = (s, tag = 'RESULT ') => {
   return line ? JSON.parse(line.slice(tag.length)) : null;
 };
 const parseList = (s) => JSON.parse(s.slice(s.indexOf('['), s.lastIndexOf(']') + 1));
-const fmtDirs = (root) => (existsSync(root) ? readdirSync(root, { withFileTypes: true })
-  .filter((e) => e.isDirectory() && !e.name.startsWith('.')).map((e) => e.name).sort() : []);
+// the formats that HAVE a records dir, as RAW format ids ('16:9'): the records dirs are named by
+// the slug (16x9, Windows-safe) but every gate compares against and prints the raw id — so resolve
+// the known formats' slugs instead of listing raw dir names (the naming migration made the two
+// differ, and fmts.includes(fmt0) silently broke: '16x9' vs '16:9').
+const fmtDirs = (root) => Object.keys(FORMATS).filter((f) => existsSync(join(root, fmtSlug(f)))).sort();
 // The narration's silent intervals (film seconds): the complement of the sentence spans, with the
 // head before the first sentence and an endless tail after the last. timing === null -> all silent.
 function silentIntervals(timing) {
@@ -145,7 +148,7 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
     const m = [];
     let t = 0;
     for (const sc of film.scenes) {
-      const tl = readJson(join(film.dir, 'records', fmt0, `${sc.id}-timeline.json`), {});
+      const tl = readJson(join(film.dir, 'records', fmtSlug(fmt0), `${sc.id}-timeline.json`), {});
       const dur = tl?.seconds ?? 0;
       m.push({ scene: sc.id, start: t, end: t + dur, seconds: dur });
       t += dur;
@@ -162,14 +165,14 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
     // the nearest recorded frame's text objects in the film's fmt0 records
     const map = sceneMapPublic(fm.key);
     const sc = map.find((x) => t >= x.start && t < x.end) || map.at(-1);
-    const rec = readJson(join(fm.dir, 'records', fmt0, `${sc.scene}-layout.json`), []);
+    const rec = readJson(join(fm.dir, 'records', fmtSlug(fmt0), `${sc.scene}-layout.json`), []);
     let best = null;
     for (const fr of rec) if (best === null || Math.abs(fr.t - (t - sc.start)) < Math.abs(best.t - (t - sc.start))) best = fr;
     return (best?.objects ?? []).filter((o) => o.text).map((o) => ({ x: o.bbox[0], y: o.bbox[1], w: o.bbox[2], h: o.bbox[3] }));
   };
   if (!FORMATS[fmt0]) throw new Error(`film.json formats[0] ${JSON.stringify(fmt0)} is not a studio format (${Object.keys(FORMATS).join(', ')})`);
   const recRoot = join(film.dir, 'records');
-  const recDir = (fmt) => join(recRoot, fmt);
+  const recDir = (fmt) => join(recRoot, fmtSlug(fmt));   // Windows-safe records dirs (16x9)
   const checks = [];
   const add = (name, pass, detail, level = 'fail', extra = {}) => {
     checks.push({ name, pass, level: pass ? 'pass' : level, detail, ...extra });
@@ -255,11 +258,11 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
       for (const s of film.scenes) {
         const frames = readJson(join(recDir(f), `${s.id}-layout.json`), null);
         if (!Array.isArray(frames) || frames.length === 0) {
-          missing.push(`${s.id} (${f}): ${frames === null ? 'no' : 'an empty'} records/${f}/${s.id}-layout.json`);
+          missing.push(`${s.id} (${f}): ${frames === null ? 'no' : 'an empty'} records/${fmtSlug(f)}/${s.id}-layout.json`);
         }
       }
     }
-    if (!fmts.includes(fmt0)) missing.push(`no records/${fmt0}/ at all — run studio render ${key} --draft`);
+    if (!fmts.includes(fmt0)) missing.push(`no records/${fmtSlug(fmt0)}/ at all — run studio render ${key} --draft`);
     // Fast path: records without a claims ledger are incomplete -> verify the scenes still compile
     // (one dry check run; the loud compile error names the formula and the scene file:line).
     let checked = null;
@@ -309,7 +312,7 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
         if (!own.length) continue;
         const span = Math.max(...own.map((x) => x.end)) - Math.min(...own.map((x) => x.start));
         const tl = readJson(join(recDir(fmt0), `${s.id}-timeline.json`), null);
-        if (!tl || typeof tl.seconds !== 'number') bad.push(`${s.id}: no records/${fmt0}/${s.id}-timeline.json — render the film`);
+        if (!tl || typeof tl.seconds !== 'number') bad.push(`${s.id}: no records/${fmtSlug(fmt0)}/${s.id}-timeline.json — render the film`);
         else if (tl.seconds + 1e-6 < span) bad.push(`${s.id}: the scene runs ${tl.seconds}s but its narration spans ${span.toFixed(3)}s (the scene must cover its sentences)`);
       }
     }
@@ -392,7 +395,7 @@ export async function runMathGates(key, { write = true, log = console.log } = {}
 
   // -- pace: WARN-level (dead time is taste, not a blocker) ------------------------------------
   {
-    const r = await _paceGate(film.dir, join(film.out, `draft-${fmt0}.mp4`));
+    const r = await _paceGate(film.dir, join(film.out, `draft-${fmtSlug(fmt0)}.mp4`));
     add(r.name, r.pass, r.detail, r.level);
   }
 

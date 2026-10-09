@@ -50,7 +50,15 @@ export default async () => {
   need(!!pT, 'the word before the cut is gone from the timeline');
   need(!!nT, `the word after the cut is not at cut_end + offset (expected ~${nextW.start - (delTo - delFrom)}, look at nT)`);
 
-  // retimed vs a fresh transcription of the cut
+  // retimed vs a fresh transcription of the cut. Words are compared PUNCTUATION-INSENSITIVELY and
+  // fillers (um/uh/hmm/er…) are excluded on BOTH sides: ASR punctuation and filler timestamps whim
+  // with the audio's character, and the mix legitimately changed with D-009's TP -2.0 aim — the
+  // agreement bar (>= 90% of words within 150 ms) is about WORD timing, and it stays exactly as it
+  // was (the 2026-10-08 full run: "simple,"@8.03 vs "simple."@7.91 — 120 ms apart, the same word —
+  // was a miss on punctuation alone; a "uh," filler 290 ms off neither side; measured median
+  // drift 10 ms, so the retime math is sound — see docs/produce/DECISIONS.md D-013).
+  const FILLER = /^(u[mh]+|umm?|hmm+|er+|erm|mm+)[,.]?$/i;
+  const norm = (s) => s.toLowerCase().replace(/[^\p{L}\p{N}\s']/gu, ' ').replace(/\s+/g, ' ').trim();
   syncFilm(KEY); // film.json duration follows the timeline: without this the render truncates to the scaffold's 1 s
   await buildDialog(KEY, { log: () => {} }); await mixEdit(KEY);
   const [r] = await renderFilm(KEY, { quality: 'final', fmt: '16:9', workers: 2, log: () => {} });
@@ -62,10 +70,10 @@ export default async () => {
   const asr = new URL('../asr.py', import.meta.url).pathname;
   await run(pythonFor('ml'), [asr, '--in', tmp, '--out', tmp + '.json', '--model', 'small', '--language', 'en', '--force']);
   const freshDoc = JSON.parse(readFileSync(tmp + '.json', 'utf8'));
-  const re = retimeWords(after, ID, tr.words).filter((x) => !/^um+[,.]?$/i.test(x.text));
-  const fw = freshDoc.words.filter((x) => !/^um+[,.]?$/i.test(x.text));
+  const re = retimeWords(after, ID, tr.words).filter((x) => !FILLER.test(x.text));
+  const fw = freshDoc.words.filter((x) => !FILLER.test(x.text));
   let matched = 0, total = 0;
-  for (const a of fw) { total++; const hit = re.find((b) => b.text.toLowerCase() === a.text.toLowerCase() && Math.abs(b.start - a.start) <= 0.15); if (hit) matched++; }
+  for (const a of fw) { total++; const hit = re.find((b) => norm(b.text) === norm(a.text) && Math.abs(b.start - a.start) <= 0.15); if (hit) matched++; }
   need(matched / Math.max(1, total) >= 0.9, `retimed vs fresh: ${matched}/${total} words within 150 ms`);
   facts.push(`cut ${wantedMs.toFixed(0)} ms -> ${cutFrames} frames (within 1 frame); neighbours intact; retimed vs fresh ASR: ${matched}/${total} (${(100 * matched / total).toFixed(0)}%) within 150 ms`);
   return { pass: bad.length === 0, measured: bad.length ? bad.join('; ') : facts.join('; ') };

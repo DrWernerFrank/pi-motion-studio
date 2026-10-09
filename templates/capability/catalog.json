@@ -1,0 +1,21 @@
+{
+  "id": "__ID__",
+  "type": "technique",
+  "makes": ["__DESCRIPTION__"],
+  "strengths": ["scaffolded (K12) — fill in what this technique is good at"],
+  "weak": ["the hooks are stubs until implemented (studio capability check __ID__)"],
+  "typical": { "duration": [10, 60], "formats": ["16:9", "9:16"] },
+  "needs": [],
+  "ready": "__ID__",
+  "invoke": {
+    "create": "studio new <key> (then set kind: __ID__ in film.json) or studio project rebuild — segments create children of any kind",
+    "look": "studio look <key>",
+    "render": "studio render <key> --draft",
+    "gate": "studio gate <key>",
+    "ship": "studio ship <key>"
+  },
+  "gates": ["firstGate", "secondGate (rename both in gates.mjs, and here)"],
+  "tools": ["__ID_US___status", "__ID_US___check"],
+  "skill": "produce",
+  "critic": "producer-critic"
+}

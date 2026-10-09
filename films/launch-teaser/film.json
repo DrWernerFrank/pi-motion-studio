@@ -1,0 +1,12 @@
+{
+  "kind": "project",
+  "title": "launch-teaser",
+  "formats": [
+    "9:16"
+  ],
+  "request": "A 25-second vertical teaser for Motion Studio itself: what it feels like to say what you want and watch it get made. Use real captures of the studio's own GUI.",
+  "parts": [
+    "launch-teaser-s01"
+  ],
+  "duration": 25
+}

@@ -1,0 +1,5 @@
+$ studio new verify-p-gold --duration 6 --formats 9:16
+created films/verify-p-gold
+  next: write brief.md, design.json, shotlist.md, then index.html
+  preview: studio gui  (or open http://localhost:3142/films/verify-p-gold/)
+[exit 0]

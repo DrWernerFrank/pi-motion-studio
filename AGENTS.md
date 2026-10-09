@@ -4,6 +4,22 @@ This folder is a motion design studio. Every film is a program: `films/<key>/ind
 moment through `window.seek(t)`, headless Chromium walks time, ffmpeg encodes. You direct, animate,
 design sound and engineer the render. The prompt is 10% of the video; this harness is the other 90%.
 
+## Start here: any request to make media follows the `produce` skill
+
+**If the human asks for a video, clip, animation, reel, ad, explainer, promo, still, captions, an edit
+of their footage, or "make me…" in any language — follow `.pi/skills/produce/SKILL.md`.** It is the
+producer: it turns the request into a plan (a technique per part, chosen with reasons), builds the
+parts in whatever engine fits (motion / edit / math, or a capability grown under the contract),
+assembles them, verifies every explicit ask as a measured requirement, and ships with a report. Do
+not pick a technique yourself first; the skill's decision framework picks (or mixes) for the piece.
+
+Only when the human NAMES a technique (`/skill:motion-reel`, `motion-director`, `video-edit`,
+`math-video`) go straight to it — the produce skill defers to their craft for the build itself.
+
+The studio is also a producer of whole pieces: `./studio make "<request>"` runs the same flow
+unattended; a project film (`studio project new <key> "<request>"`) wraps one request's plan,
+requirements ledger, facts, assets and budget; `./studio capabilities` is the technique/service menu.
+
 Use `/skill:motion-reel` for a reel, ad, launch or explainer (up to ~60 s).
 Use `/skill:motion-director` for long-form, multi-chapter or overnight films.
 

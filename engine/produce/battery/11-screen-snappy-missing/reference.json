@@ -1,0 +1,30 @@
+{
+  "brief": "Make this screen recording snappy: cut pauses, speed the slow part, zoom on clicks, captions.",
+  "requirements": [
+    "the input is the named screen recording (one source — 'this screen recording'; it is missing: flagged in feasibility, never invented or redrawn)",
+    "cut pauses: the idle and silent stretches are removed (measured from the ingest silence map — dead time cut, not guessed)",
+    "speed the slow part: the identified slow passage is sped up (a time remap above 1x on that passage only — the rest plays at 1x)",
+    "the slow part is identified from the recording itself (a stated method — silence map or hold detection, not an arbitrary timecode)",
+    "zoom on clicks: punch-in zooms at the click moments (the zooms land on the actual clicks, found from the recording — cursor or click detection, not random beats)",
+    "captions: burned-in captions plus SRT/VTT (explicitly asked; the caption text carries the actions or steps shown)",
+    "snappy overall: the result is tight (subjective — critic evidence; measured: much shorter than the source, no long static holds)",
+    "captions and zoomed content stay inside the safe area (the punch-ins keep the action and the caption band on-screen)",
+    "no duration or format was named: the plan states its assumptions (the target length after the cuts; the recording's own aspect — 16:9)"
+  ],
+  "acceptable_capability_sets": [
+    ["edit"],
+    ["edit", "captions"],
+    ["edit", "mix"],
+    ["edit", "captions", "mix"]
+  ],
+  "expected_feasibility_flags": [
+    "the screen recording missing"
+  ],
+  "must_not": [
+    "inventing the screen recording (it is missing: flagged in feasibility — never fabricated, never redrawn as a mock UI)",
+    "cutting pauses by guesswork (the silence map from ingest measures them: dead time is measured, not vibes)",
+    "the speed-up applied to the whole recording (only the slow part is sped: the rest plays at 1x)",
+    "zooms at arbitrary times (the punch-ins land on the actual clicks — found from the recording, not on random beats)",
+    "dropping the captions (they are explicitly asked)"
+  ]
+}

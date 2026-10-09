@@ -35,10 +35,10 @@ out = {"cases": {}, "controls": {}}
 for name in job["cases"]:
     case = json.loads((fix / name / "case.json").read_text())
     allow = tuple(tuple(p) for p in case["allow_pairs"]) if case["allow_pairs"] is not None else DEFAULT_ALLOW
-    out["cases"][name] = {v["fmt"]: lint_dir(fix / name / "records" / v["fmt"], design, v["fmt"], allow)
+    out["cases"][name] = {v["fmt"]: lint_dir(fix / name / "records" / v["fmt"].replace(":", "x"), design, v["fmt"], allow)
                           for v in case["variants"]}
     if case.get("control"):
-        out["controls"][name] = {v["fmt"]: lint_dir(fix / name / "records" / v["fmt"], design, v["fmt"], ())
+        out["controls"][name] = {v["fmt"]: lint_dir(fix / name / "records" / v["fmt"].replace(":", "x"), design, v["fmt"], ())
                                  for v in case["variants"]}
 sc = json.loads((fix / "solver-octagon.json").read_text())
 runs = [place_labels(sc["anchors"], sc["sizes"], sc["obstacles"], sc["max_distance"], sc["step"]) for _ in range(2)]
@@ -162,7 +162,7 @@ export default async (ctx = {}) => {
     const t0 = Date.now();
     await renderMathFilm(KEY, { quality: 'draft', fmt: '16:9', scene: 's01_hook' });
     const secs = ((Date.now() - t0) / 1000).toFixed(1);
-    const recDir = join(FILMS, KEY, 'records', '16:9');
+    const recDir = join(FILMS, KEY, 'records', '16x9');
     const layout = readJson(join(recDir, 's01_hook-layout.json'), []);
     const objs = layout.flatMap((f) => f.objects || []);
     const texts = objs.filter((o) => o.text);

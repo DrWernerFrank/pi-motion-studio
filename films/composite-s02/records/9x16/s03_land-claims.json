@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "3 ** 2 + 4 ** 2 == 5 ** 2",
+  "about": "the theorem, stated once more as the close",
+  "says": "s03.1",
+  "scene": "s03_land",
+  "ok": true,
+  "value": "25 == 25"
+ },
+ {
+  "expr": "9 + 16 == 25",
+  "about": "the numbers, said once more",
+  "says": "s03.1",
+  "scene": "s03_land",
+  "ok": true,
+  "value": "25 == 25"
+ }
+]

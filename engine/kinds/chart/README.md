@@ -1,0 +1,54 @@
+# chart — a grown capability (K12)
+
+Scaffolded by `studio capability new chart --type technique --description "…"` from
+templates/capability/ (placeholders: `chart` the id, `chart` the id with dashes as
+underscores — tool-name style, `verify-chart` → `verify_chart_status` — and `animated data charts: bars racing ranks over time, drawn from a data file the film reads (every figure a sourced fact)`).
+This directory is a KIND (ADR-001): the registry scan picks it up
+automatically — no catalog edit, no CLI of its own; its hooks ride the registry (a film.json with
+"kind": "chart" dispatches here, with motion's hook as the fallback for anything it does not
+define).
+
+## The contract — `studio capability check chart` refuses until every part is real
+
+The checker is `engine/produce/growth.mjs` (`checkCapability`); the end-to-end proof is
+`engine/verify/produce/growth.mjs` (`studio verify-produce --only growth`). Every missing part
+is reported with its file and what to do; green happens only when all of these hold:
+
+1. **index.mjs** — the six REQUIRED hooks (create, render, look, sound, gate, ship) as functions
+   the registry can load (a missing one makes allKinds fail loudly, naming this kind), and none
+   of them still the scaffold stub (the stubs throw `not implemented yet: …`). `create` works
+   from the scaffold: it copies templates/film and stamps film.json `kind: "chart"`. A
+   motion-based technique re-exports motion's hooks — engine/kinds/motion/index.mjs.
+2. **catalog.json** — the capability entry (K2, SCHEMAS "The capability entry"): id, type,
+   makes, invoke, gates required, validated on load. It rides the registry scan into
+   `studio capabilities`. `ready` ships as `"chart"` — an unknown probe id, so the catalog
+   honestly reports NOT-READY until you set `ready: "yes"` (or a registered probe id). Every
+   invoke command must already exist in `studio help`.
+3. **doctor.mjs** — a `doctor(ctx)` export returning `[{id, label, ok, detail}]` rows (the
+   scaffold ships a real existence probe — grow it), or a catalog `ready` that names a probe
+   engine/produce/capabilities.mjs's PROBES knows. The export must be WIRED in index.mjs
+   (`export { doctor } from './doctor.mjs';` — the scaffold does) — checkCapability reads it off
+   the kind module.
+4. **gates.mjs** — at least 2 gates that RUN on a seeded film: each gate is
+   `async (film) => ({name, pass, detail})` (never a throw), `GATES` lists them, `runGates(key)`
+   writes gates.json `{at, pass, checks}`. A FAIL blocks ship and names the thing that failed.
+5. **engine/verify/produce/chart.mjs** — the technique's own verify check (a default export
+   `async (ctx) => ({pass, measured})`): a real one seeds a film, runs the gates good AND bad,
+   and asserts the loud failures. The lead wires its row into verify-produce's CHECKS.
+6. **SKILL.md** — the craft paragraph (> 200 chars) and **TOOLS.md** — the tool entry lines
+   (>= 1 tool name); the lead wires the tools into .pi/extensions.
+
+## The two-step growth
+
+`studio capability new` scaffolds; the grown registry
+(~/.local/share/pi-motion-studio/produce/grown.json) records id/type/createdAt/entry for catalog
+reconciliation. A TECHNIQUE appears in `studio capabilities` the moment its kind module loads
+(the registry scan) — set catalog.json `ready: "yes"` when the parts above are real. A SERVICE
+instead gets a module under engine/produce/services/ plus the catalog entry LINES reported to
+the lead (services are entries in engine/produce/catalog.mjs SERVICES, which the lead owns):
+`studio capabilities` lists it only after the lead adds the entry — the growth is two-step by
+design, and `capability check` asserts the module + the reported entry meanwhile.
+
+Removal is `removeCapability(id)` in engine/produce/growth.mjs (the lead's wiring): it deletes
+this directory + the grown.json row and proves the registry still loads and the catalog still
+validates without it — a capability committed to git is the lead's to remove, not the tool's.

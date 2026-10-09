@@ -287,7 +287,12 @@ export async function normalize(pre, file, target) {
   const { err } = await run('ffmpeg', ['-hide_banner', '-i', pre, '-af', `loudnorm=I=${target}:TP=-1:LRA=11:print_format=json`, '-f', 'null', '-'], { allowFail: true });
   const m = JSON.parse(err.slice(err.lastIndexOf('{'), err.lastIndexOf('}') + 1));
   await run('ffmpeg', ['-y', '-v', 'error', '-i', pre, '-af',
-    `loudnorm=I=${target}:TP=-1:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,aresample=${SR},alimiter=limit=0.84:level=false:attack=1:release=40`,
+    // TP -2.0 (not -1): the AAC encode overshoots inter-sample peaks by up to ~0.5 dB, so a -1.0
+// true-peak WAV ships as -0.5 in the MP4 and fails the <= -1 dBTP delivery gate (measured on
+// launch-teaser across three mix attempts; the math films passed at -1.4/-1.5 because their
+// material never hit the ceiling). Aiming the WAV at -2.0 leaves the encode's overshoot inside
+// the delivery bar. D-009.
+`loudnorm=I=${target}:TP=-2:LRA=11:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset}:linear=true,aresample=${SR},alimiter=limit=0.79:level=false:attack=1:release=40`,
     '-c:a', 'pcm_s16le', file]);
   return loudness(file);
 }

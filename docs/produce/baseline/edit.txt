@@ -1,0 +1,44 @@
+$ studio ingest verify-p-gold-edit /home/werner/.cache/pi-motion-studio/fixtures/real/talking-head-original.webm --id cam
+ingest cam: video 1280x720 30000/1001fps -> 30 fps
+  conform: Ns
+  proxy: Ns
+  filmstrip: Ns
+  scenes: Ns
+  audio: Ns
+  peaks: Ns
+  silence: Ns
+ingest cam: done in Ns (conform, proxy, filmstrip, scenes, audio, peaks, silence)
+cam: video 1280x720 @ 30 (1615 frames, Ns)  Ns  → films/verify-p-gold-edit/assets/media/cam
+[exit 0]
+$ studio edit verify-p-gold-edit add --src cam --in 1 --out 4 --at 0
+add → rev 1
+verify-p-gold-edit · rev 1 · 30 fps · Ns (90 frames) · history {"undo":1,"redo":0}
+sources: cam(video Ns)
+V1 [video] 1 clip
+  c1    cam    Ns→Ns @Ns-Ns (90f)
+A1 [audio] 0 clips
+[exit 0]
+$ studio look verify-p-gold-edit
+films/verify-p-gold-edit/out/sheets/every-16x9.png  (6 frames: 0.25, 0.75, 1.25, 1.75, 2.25, 2.75)
+[exit 0]
+$ studio sound verify-p-gold-edit
+films/verify-p-gold-edit/out/music.wav
+clean cam: denoise + hp + compressor -> audio-clean.wav
+dialog.wav: 1 clips, 144000 samples (Ns) = 90 frames
+films/verify-p-gold-edit/out/mix.wav  -N LUFS, true peak -N dBFS
+[exit 0]
+$ studio gate verify-p-gold-edit
+PASS  lint: no timers, randomness, wall clock or CSS animation
+PASS  determinism: 4 frames identical across seek orders
+PASS  dead-time: something moves in every Ns window
+PASS  novelty: a new visual event at least every Ns
+WARN  hook: first frame contrast 49.6 (want >3), max change in first Ns 3.0 (want >8)
+PASS  blank-frames: no flat frames
+PASS  loudness: -N LUFS (want -14 ±1), true peak -N dBFS
+
+gates: PASS
+[exit 0]
+$ studio list | grep verify-p-gold
+verify-p-gold            6s    9:16             review -  gates FAIL  not rendered
+verify-p-gold-edit       3s    16:9             review -  gates pass  not rendered
+[exit 0]

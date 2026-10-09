@@ -10,7 +10,7 @@
 </head>
 <body>
 <aside id="side">
-  <header><b>Motion Studio</b><button id="newFilm" title="New film">+ new</button></header>
+  <header><b>Motion Studio</b><span class="hBtns"><button id="makeBtn" title="Make a project from one plain-words request (the runner plans, builds and verifies it)">✦ Make</button><button id="newFilm" title="New film">+ new</button></span></header>
   <ul id="films"></ul>
   <footer>
     <a href="http://localhost:3141" target="_blank" rel="noopener">open pi-web ↗</a>
@@ -104,6 +104,21 @@
       <div id="gOut" class="gOut dim">Pick a preset or write your own question, then Ask.</div>
     </div>
   </div>
+</dialog>
+<dialog id="makeDlg">
+  <form id="makeForm" method="dialog">
+    <h3>✦ Make</h3>
+    <p class="dim">One plain-words request. The runner creates the project, then pi (the produce skill) plans, builds and verifies it — watch the Run tab. One make at a time.</p>
+    <label>the request <textarea name="request" rows="5" required maxlength="4000" placeholder="e.g. A 30-second vertical explainer of how GPS trilateration finds you, with captions and one sourced fact card, 9:16."></textarea></label>
+    <fieldset><legend>formats</legend>
+      <label><input type="checkbox" name="fmt" value="16:9" checked> 16:9</label>
+      <label><input type="checkbox" name="fmt" value="9:16"> 9:16</label>
+      <label><input type="checkbox" name="fmt" value="1:1"> 1:1</label>
+      <label><input type="checkbox" name="fmt" value="4:5"> 4:5</label>
+    </fieldset>
+    <label>minutes budget <input name="minutes" type="number" value="180" min="1" max="43200"></label>
+    <menu><button value="cancel" formnovalidate>cancel</button><button value="ok" class="primary">Make</button></menu>
+  </form>
 </dialog>
 <dialog id="newDlg">
   <form id="newForm" method="dialog">

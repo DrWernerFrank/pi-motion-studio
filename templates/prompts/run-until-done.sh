@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Relaunch pi until a mission's verifier passes. The agent cannot relaunch itself; this is the outer loop.
-#   bash templates/prompts/run-until-done.sh math
+#   bash templates/prompts/run-until-done.sh math        # or: producer
 # Run it in WSL (a normal interactive terminal), from anywhere. Stop it with `touch STOP` in the repo root
 # (checked between runs). Knobs: MAX_RUNS (default 40 relaunches), PI_CMD (default pi).
 set -uo pipefail
@@ -8,7 +8,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")/../.." || exit 1
 
 case "${1:-}" in
   math) PROMPT=templates/prompts/math-video-engine.md; VERIFY=verify-math; DOCS=docs/math; SID=math-video-engine ;;
-  *) echo "usage: bash templates/prompts/run-until-done.sh math" >&2; exit 2 ;;
+  producer) PROMPT=templates/prompts/producer.md; VERIFY=verify-produce; DOCS=docs/produce; SID=producer ;;
+  *) echo "usage: bash templates/prompts/run-until-done.sh math|producer" >&2; exit 2 ;;
 esac
 PI_CMD=${PI_CMD:-pi}; MAX_RUNS=${MAX_RUNS:-40}
 command -v "${PI_CMD%% *}" >/dev/null || { echo "${PI_CMD%% *} not found: use a login shell (bash -lic) or fix PATH" >&2; exit 1; }

@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "goal": "How GPS finds you: the satellites' clock trick \u2014 time-of-flight becomes distance, four distances become a spot, all in 60 seconds with every number sourced.",
+  "audience": "a curious person with a phone who never wondered how it knows where it is",
+  "assumptions": [
+    "60 seconds of finished film, first word to last frame",
+    "narrated with captions (English \u2014 the request's language)",
+    "'sources for every number': every figure spoken or shown carries a facts entry with a source snapshot + a quote found in it, or is hedged where no open source pins it",
+    "the format is 16:9 for the demo (the request does not name one)"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 60
+    },
+    {
+      "type": "captions",
+      "name": "captions"
+    }
+  ],
+  "decision": {
+    "chosen": "math",
+    "why": "The piece turns on one equation (distance = the speed of light x the delay) and a count (four satellites for the clock): the math technique makes those computed claims (sympy) and its narration clock lets the scenes wait for the words. The figures about the world (orbit altitude, constellation size) become facts entries.",
+    "alternatives": [
+      {
+        "id": "motion",
+        "rejected_because": "code-drawn motion could carry the story, but the on-screen numbers would need hand-verification per frame \u2014 the math kind verifies its claims mechanically"
+      },
+      {
+        "id": "simplest: a narrated slide of the four-satellite diagram",
+        "rejected_because": "the simplest thing that could work \u2014 but the payoff (three circles collapsing on a spot, the fourth fixing the clock) is motion; a static diagram tells it instead of showing it"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "math",
+      "role": "the whole explainer",
+      "brief": "The clock trick: satellites carry atomic clocks and broadcast their time; the phone measures the delay; distance = the speed of light x that delay; three distances intersect at the spot; the fourth fixes the phone's own clock. Every number sourced (the constellation count, the orbital altitude, the speed of light) or hedged.",
+      "duration": 60,
+      "inputs": [],
+      "acceptance": [
+        "every number on screen is either a sympy-verified claim (the equation) or a sourced facts entry with a snapshot + quote",
+        "the narration clock drives the scenes (say/at/until)",
+        "the three-circle intersection is animated, not asserted",
+        "16:9, safe area, phone-readable type"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "one narration mix at mix.lufs (-16, narration-first)"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 120,
+    "usd": 0
+  },
+  "risks": [
+    "the GPS figures must match open sources exactly (a number off by a rounding is a red fact)",
+    "the 60s budget is tight for the trilateration payoff \u2014 the scenes must be tight"
+  ]
+}

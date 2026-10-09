@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "goal": "The Pythagorean theorem EARNED: a real face opens the question, the four-triangle rearrangement proves a\u00b2 + b\u00b2 = c\u00b2 in front of you, an end card lands it.",
+  "audience": "anyone who memorized the formula and never saw why",
+  "assumptions": [
+    "50-70s of finished piece across BOTH formats (16:9 + 9:16, re-compositions not crops)",
+    "the opening real clip is the studio's recorded public-domain NASA talking-head fixture (real footage, licensed, in-repo)",
+    "the proof is the four-triangle rearrangement (visual, not algebraic)",
+    "every number on screen is a sympy claim",
+    "one design system across all three segments; the seams are designed"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9",
+        "9:16"
+      ],
+      "duration": 60
+    }
+  ],
+  "decision": {
+    "chosen": "composite",
+    "why": "The piece needs what no single technique has: real footage for the open (edit), a narrated verified visual proof (math \u2014 the claims and the narration clock), and a designed end card (motion). The assembler joins them with a designed seam.",
+    "alternatives": [
+      {
+        "id": "math only",
+        "rejected_because": "a pure math film cannot open on real footage \u2014 the request's first ask"
+      },
+      {
+        "id": "simplest: one math film with a text card open and close",
+        "rejected_because": "the simplest thing that could work \u2014 but 'a real clip' is the request's opening word, and a text card is not a clip"
+      }
+    ],
+    "probes": [
+      "probes/p1-seam.png"
+    ],
+    "risky": true
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "edit",
+      "role": "the cold open: a real face asks why",
+      "brief": "The NASA talking-head clip, cut to its strongest 8 seconds, captioned, ending on the question the proof will answer.",
+      "duration": 8,
+      "inputs": [
+        "asset:a1"
+      ],
+      "acceptance": [
+        "real footage (the licensed fixture, never a re-enactment)",
+        "ends on the question",
+        "captioned in the studio design"
+      ]
+    },
+    {
+      "id": "s02",
+      "capability": "math",
+      "role": "the visual proof",
+      "brief": "The four-triangle rearrangement: the square of the hypotenuse, the two squares of the legs, the same four triangles inside both \u2014 a\u00b2 + b\u00b2 = c\u00b2 seen, not asserted. Narrated; every number a claim.",
+      "duration": 44,
+      "inputs": [],
+      "acceptance": [
+        "the rearrangement is animated (both dissections shown)",
+        "every number is a sympy claim",
+        "the narration clock drives the scenes",
+        "both formats re-composed"
+      ]
+    },
+    {
+      "id": "s03",
+      "capability": "motion",
+      "role": "the end card",
+      "brief": "The theorem statement a\u00b2 + b\u00b2 = c\u00b2 landing, the three-square echo of the proof, the studio mark.",
+      "duration": 8,
+      "inputs": [],
+      "acceptance": [
+        "the card carries the theorem + the mark",
+        "8s, one beat in and one out",
+        "the same design system"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "edit-film",
+    "transitions": "designed seams (a shape carries across each cut \u2014 never black)",
+    "audio": "one mix: the clip's dialog, then the narration, at one loudness"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 150,
+    "usd": 0
+  },
+  "risks": [
+    "the composite seam must be designed (the probe)",
+    "the proof must read in BOTH formats (the 9:16 re-composition of a geometric proof is the hard part)"
+  ]
+}

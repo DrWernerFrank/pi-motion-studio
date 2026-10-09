@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "goal": "The ten largest economies by GDP racing across a century \u2014 a decade per second, the ranks trading places, the source on screen.",
+  "audience": "anyone who likes seeing a century move",
+  "assumptions": [
+    "'a decade per second' fixes the pace: 100 years in ~10 seconds of racing plus the framing beats",
+    "the GDP figures are factual claims: each needs a source with a snapshot and a quote (open data: the World Bank / Maddison-style public datasets)",
+    "the source is credited on screen (the mission asks for it)",
+    "the covered time span is a stated assumption (a century: 1900s to 2010s/2020s)",
+    "the GDP measure is a stated assumption (nominal vs PPP \u2014 one, named)",
+    "the data's license and attribution are recorded (open data, credited on screen)",
+    "the GDP figures are sourced facts: every on-screen number carries a source snapshot + quote",
+    "the plan states its assumption (no format was named: 16:9)"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 20
+    }
+  ],
+  "decision": {
+    "chosen": "motion",
+    "why": "An animated chart is code-drawn motion over data: the figures land as a facts ledger (each year's ranking sourced), the bars race on the studio's springs, and the source credit sits on screen. The chart-specific capability (a data-file technique with chart gates) would fit too \u2014 motion with a data file is the smallest sufficient pipeline today.",
+    "alternatives": [
+      {
+        "id": "grown chart capability",
+        "rejected_because": "a dedicated chart technique (chart.json + data/axis gates) is the honest fit for a series of chart films; for ONE piece, motion + a data file + facts carries it without the growth step \u2014 noted in needs_capability if the studio expects more chart work"
+      },
+      {
+        "id": "simplest: a static table of the ten economies",
+        "rejected_because": "the simplest thing that could work \u2014 but 'a decade per second' IS the ask: the motion is the meaning"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "motion",
+      "role": "the century race",
+      "brief": "Ten bars racing rank-by-rank, a decade per second, the lead changes called out, the source credit on screen throughout. The data: each decade's top-ten GDP ranking, every figure a sourced facts entry.",
+      "duration": 20,
+      "inputs": [],
+      "acceptance": [
+        "every GDP figure on screen has a facts entry (snapshot + quote)",
+        "the pace is a decade per second",
+        "the source is credited on screen",
+        "the chart shows the ten largest economies (the count is ten bars)",
+        "the chart is animated: the ranking changes over time",
+        "the pacing is a decade per second",
+        "the data is fetched and stored in the project (a data file + the facts ledger)",
+        "every on-screen number and ranking has a source_url + snapshot + quote"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "a synthesized bed whose tempo matches a decade-per-second"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": [
+      "a chart technique (chart.json data file + data/axis gates) if the studio expects a series of chart films \u2014 motion carries this one piece"
+    ]
+  },
+  "budget": {
+    "minutes": 90,
+    "usd": 0
+  },
+  "risks": [
+    "the dataset must be open-licensed and per-decade complete \u2014 a gap decade is hedged on screen, never invented"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "goal": "In 90 seconds, show what an eigenvector is: the directions a matrix does not turn \u2014 with one 2x2 example computed, not asserted.",
+  "audience": "a student who knows matrix multiplication but has never seen why eigenvectors matter",
+  "assumptions": [
+    "90 seconds means the finished film, first word to last frame",
+    "narrated means a voice throughout with captions on",
+    "the two formats are re-compositions, not crops",
+    "the language is English: the narration and every on-screen word follow the request",
+    "captions accompany the narration (English, monotonic SRT) as a deliverable",
+    "one audio mix at the studio loudness target with the narration intelligible",
+    "narrated: continuous spoken narration with a real audio stream throughout"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9",
+        "9:16"
+      ],
+      "duration": 90
+    }
+  ],
+  "decision": {
+    "chosen": "math",
+    "why": "The piece shows a matrix acting on vectors with the eigen equation Av = lambda v computed on screen; every number must be a verified claim (the characteristic polynomial, the eigenvalues) and the narration must drive the scenes \u2014 the math technique's sympy claims and narration clock are exactly that.",
+    "alternatives": [
+      {
+        "id": "motion",
+        "rejected_because": "code-drawn motion could animate the arrows, but every number on screen (det, trace, the eigenvalues) would need hand-verification per frame \u2014 the math kind verifies claims mechanically"
+      },
+      {
+        "id": "simplest: one static frame per step with captions",
+        "rejected_because": "the simplest thing that could work \u2014 a slideshow \u2014 but the payoff (the vector NOT turning while everything else does) is motion; a static frame cannot land it"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "math",
+      "role": "the whole explainer",
+      "brief": "The directions a matrix does not turn: one 2x2 matrix, its action on the plane, the eigen equation with the eigenvalues computed, and why it matters in one line.",
+      "duration": 90,
+      "inputs": [],
+      "acceptance": [
+        "every number on screen is a sympy-verified claim",
+        "the narration clock drives the scenes",
+        "16:9 and 9:16 are re-compositions",
+        "explains eigenvectors themselves \u2014 the intuition: the vector a transformation scales but never rotates",
+        "every on-screen mathematical claim is verified (sympy)",
+        "the 9:16 deliverable is composed for vertical (format-aware re-layout, safe area)",
+        "the segment durations sum to the 90 s target",
+        "narration and on-screen text in English",
+        "captions/SRT accompany the narration (English, monotonic)"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "one narration mix at mix.lufs"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 120,
+    "usd": 0
+  },
+  "risks": [
+    "the 9:16 re-composition must not cramp the plane",
+    "the eigen example must be small enough to verify on screen in 90s"
+  ]
+}

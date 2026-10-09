@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "goal": "In 60 narrated seconds: how a vaccine trains the immune system \u2014 the memory cells that recognize the spike, so the first real encounter is not the first.",
+  "audience": "a curious adult with no biology background",
+  "assumptions": [
+    "60 seconds of finished film",
+    "narrated with captions",
+    "'with sources' means every number and named mechanism has a facts entry with a snapshot and a quote \u2014 nothing on screen is unsourced",
+    "the language is English: narration and on-screen text",
+    "sources are real, authoritative health references (WHO/CDC-class), snapshotted with quotes",
+    "the claims are biology, not algebra: they are sourced facts, not sympy",
+    "captions/SRT accompany the narration",
+    "one audio mix at the loudness target",
+    "the plan states its assumed format (no format was named)",
+    "one audio mix at the studio loudness target",
+    "the claims are biology, not algebra: they are sourced facts presented as facts (no sympy-verified proofs \u2014 nothing on screen is an equation)"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "16:9"
+      ],
+      "duration": 60
+    },
+    {
+      "type": "captions",
+      "name": "captions"
+    }
+  ],
+  "decision": {
+    "chosen": "motion",
+    "why": "This is biology, not mathematics \u2014 sympy cannot verify an immune claim, so the math technique's claims ledger does not fit; the motion technique draws the mechanism (the particle, the cells, the memory) while the VOICE service narrates it and every factual statement becomes a sourced facts entry. (The capability set is motion + voice: the narration is a service the plan names.)",
+    "alternatives": [
+      {
+        "id": "math",
+        "rejected_because": "the claims engine verifies equations, not mechanisms \u2014 a vaccine's story has no sympy-true statement; forcing it would make the ledger decorative"
+      },
+      {
+        "id": "simplest: a narrated slide sequence",
+        "rejected_because": "the simplest thing that could work \u2014 but the training payoff (the second encounter being fast because the first was rehearsed) needs the two-encounter comparison in motion"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "motion",
+      "role": "the training story",
+      "brief": "The particle arrives (a harmless piece of the spike), the immune system meets it, the memory forms; the real encounter later \u2014 fast, because it was rehearsed. Every number and mechanism name sourced.",
+      "duration": 60,
+      "inputs": [],
+      "acceptance": [
+        "every factual statement on screen has a facts entry (snapshot + quote)",
+        "the narration drives the timing",
+        "the two-encounter comparison lands visually",
+        "content: HOW vaccines train the immune system \u2014 the mechanism, not just 'vaccines work'",
+        "unverifiable claims are hedged or cut \u2014 never guessed",
+        "no format is named in the brief: the plan states its format assumption (16:9 feed)",
+        "narrated: continuous spoken narration with a real audio stream",
+        "content: explains HOW vaccines train the immune system (the mechanism presented, not just asserted)"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "one narration mix at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 90,
+    "usd": 0
+  },
+  "risks": [
+    "the mechanism must stay honest at this simplification \u2014 hedge anything the sources do not say outright"
+  ]
+}

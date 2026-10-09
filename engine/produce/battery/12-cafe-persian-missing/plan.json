@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "goal": "A 30-second Persian promo for the cafe: warm colors, the logo when it arrives, Farsi on screen shaped correctly \u2014 a place that feels like evening.",
+  "audience": "the neighborhood, on their phones",
+  "assumptions": [
+    "the promo is in Persian: on-screen text AND narration follow the request's language (fa), RTL shaped and aligned",
+    "warm colors: ambers, wood tones, low sun \u2014 the design's palette carries it",
+    "the logo is the human's file; until it exists the plan holds with the cafe's name set in type",
+    "no format was named: the plan states its assumption (9:16 vertical \u2014 a promo for phones)",
+    "no invented cafe facts: no made-up name, menu or price \u2014 only what the human's logo/brief carries, hedged otherwise"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "9:16"
+      ],
+      "duration": 30
+    }
+  ],
+  "decision": {
+    "chosen": "motion",
+    "why": "A place-promo is designed motion: warm light moving, the offers arriving on springs, the name/logo landing last. Persian text is native to the studio (the bundled Vazirmatn shapes and aligns RTL; the fa voice narrates) \u2014 motion plus the voice service carries it.",
+    "alternatives": [
+      {
+        "id": "edit",
+        "rejected_because": "there is no footage of the cafe \u2014 a promo from nothing is motion's job"
+      },
+      {
+        "id": "simplest: the cafe name in warm type with one offer",
+        "rejected_because": "the simplest thing that could work \u2014 but 30 seconds of one card is a sign, not a promo; the offers need their beats"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "motion",
+      "role": "the warm promo",
+      "brief": "Evening light, the offers arriving, the name (and the logo when it arrives) landing last \u2014 all Persian, RTL shaped, the fa voice narrating, warm throughout.",
+      "duration": 30,
+      "inputs": [
+        "input:i1"
+      ],
+      "acceptance": [
+        "every on-screen word is Persian, correctly shaped and aligned RTL",
+        "the palette is warm (the design names the hexes)",
+        "the logo appears when supplied (asset-used)",
+        "narration in the fa voice",
+        "the promo is in Persian: language fa (the request's own words are the ask)",
+        "Persian on-screen text is shaped right-to-left (correctly joined glyphs, RTL alignment)",
+        "narration in Persian (the fa voice) if the promo is narrated \u2014 an assumption this plan makes: yes",
+        "the logo ~/logo.png is the brand element (used on screen, asset-used verified)",
+        "warm colors: the design system is a warm palette (the ambers/woods named in design.json)",
+        "a promo arc: a fast hook, the cafe's mood, the name/logo last",
+        "sound: one mix at the loudness target (a warm bed under the fa narration)",
+        "a promo arc: a fast hook, the cafe's mood or feel, a closing beat with the name/logo"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "the fa narration + a warm bed at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [
+      "input:i1 \u2014 ~/logo.png does not exist (the human must attach it)"
+    ],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 60,
+    "usd": 0
+  },
+  "risks": [
+    "Persian narration needs the fa voice (present); a custom logo may need palette matching \u2014 the design samples it when it arrives"
+  ]
+}

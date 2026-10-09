@@ -1,0 +1,18 @@
+[
+ {
+  "expr": "3 == 3",
+  "about": "three satellites: three spheres, one intersection point",
+  "says": "s04.2",
+  "scene": "s04_spheres",
+  "ok": true,
+  "value": "3 == 3"
+ },
+ {
+  "expr": "4 == 4",
+  "about": "the fourth satellite: solving position and clock together",
+  "says": "s04.3",
+  "scene": "s04_spheres",
+  "ok": true,
+  "value": "4 == 4"
+ }
+]

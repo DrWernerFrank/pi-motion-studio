@@ -1,0 +1,14 @@
+{
+  "source": "wikimedia commons",
+  "recorded_by": "engine/produce/fetch.mjs commonsCandidates — the imageinfo extmetadata, recorded as a fixture (never a live call)",
+  "title": "File:GPS satellite over Earth (studio license fixture).jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/gps-satellite-license-fixture.jpg",
+  "descriptionurl": "https://commons.wikimedia.org/wiki/File:GPS_satellite_over_Earth_(studio_license_fixture).jpg",
+  "extmetadata": {
+    "LicenseShortName": { "value": "CC BY-SA 4.0" },
+    "UsageTerms": { "value": "Creative Commons Attribution-ShareAlike 4.0" },
+    "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:OrbitRender\" title=\"User:OrbitRender\">OrbitRender</a>" },
+    "Credit": { "value": "Own work — a deterministic studio fixture for license parsing, not a real satellite image" },
+    "ImageDescription": { "value": "A deterministic fixture rendering: a satellite over a generated Earth disc." }
+  }
+}

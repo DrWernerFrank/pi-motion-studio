@@ -1,0 +1,31 @@
+{
+  "brief": "Open on a clip of a doctor explaining a test, then explain Bayes' theorem with a narrated example, 90 seconds.",
+  "requirements": [
+    "90 seconds total (duration 90s ±2)",
+    "the piece opens on the real doctor clip (a cold-open segment built from the supplied footage — the structure is an ask: clip first, then the explanation)",
+    "Bayes' theorem is then explained (an explanation segment follows the open: the theorem, not just its name)",
+    "with a worked example (real numbers computed on screen — a base rate or prior, the test's likelihoods, the posterior; not the bare formula)",
+    "narrated: a spoken voice carries the explanation (the voice service or a supplied narration; the narration is the timing source)",
+    "the language follows the request (English — the brief is written in English)",
+    "the math is verified (the theorem statement and the example's arithmetic are claims in the sympy claims ledger — proved, not asserted)",
+    "the example's numbers are honest: hypothetical numbers stated as such (hedged) or real test statistics sourced (facts with snapshots) — never unsourced real-world statistics",
+    "the doctor clip is missing: flagged in feasibility; the plan keeps both the open (an edit segment) and the explanation (a math segment) — no substitution with found or generated footage, no silent drop of the open",
+    "no format was named: the plan states its assumption (16:9 is natural for an explainer; whichever it picks is written down)"
+  ],
+  "acceptable_capability_sets": [
+    ["edit", "math"],
+    ["edit", "math", "motion"],
+    ["edit", "math", "mix"],
+    ["edit", "math", "voice", "mix"]
+  ],
+  "expected_feasibility_flags": [
+    "the doctor clip missing"
+  ],
+  "must_not": [
+    "inventing or substituting the doctor clip (it is missing: flagged in feasibility — no stock or AI-drawn doctor passed off as the human's clip)",
+    "a math-only plan that drops the doctor-clip cold open (the structure is an ask: the clip opens the piece)",
+    "an edit-only plan with no verified math (Bayes' theorem and the worked example are claims to prove — the claims/sympy ledger, not asserted numbers)",
+    "a narration-free plan (the example is narrated: a spoken voice as the timing source — captions alone do not satisfy 'narrated')",
+    "unsourced real-world test statistics in the example (real numbers need a source with a snapshot; hypothetical numbers must be stated as such)"
+  ]
+}

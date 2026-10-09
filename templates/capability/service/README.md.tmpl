@@ -1,0 +1,17 @@
+# __ID__ — a grown service (K12)
+
+Scaffolded by `studio capability new __ID__ --type service --description "…"` from
+templates/capability/service/. A service is a reusable capability any technique calls; it is a
+MODULE here plus a catalog ENTRY — and the entry lives in engine/produce/catalog.mjs SERVICES,
+which the lead owns. So the growth is TWO-STEP BY DESIGN:
+
+1. this module — implement `run(key, opts)` (the work) and `status()` (the cheap probe). The
+   interface is frozen: techniques import `{ run }`; change what it does, never its shape.
+2. the catalog entry — the exact lines were printed by `studio capability new` and are recorded
+   in ~/.local/share/pi-motion-studio/produce/grown.json; the LEAD pastes them into
+   engine/produce/catalog.mjs SERVICES. `studio capabilities` lists the service only then, and
+   `studio capability check __ID__` asserts the module + the reported entry meanwhile.
+
+There is no gates/SKILL/TOOLS contract for a service (those are a technique's parts); the
+service's own correctness is its own tests — put a gate line in the entry naming what must hold
+for its output to be trusted.

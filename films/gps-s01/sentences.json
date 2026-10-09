@@ -1,0 +1,116 @@
+{
+ "version": 1,
+ "scenes": [
+  {
+   "id": "s01_hook",
+   "title": "the question"
+  },
+  {
+   "id": "s02_delay",
+   "title": "the measure"
+  },
+  {
+   "id": "s03_formula",
+   "title": "the distance"
+  },
+  {
+   "id": "s04_spheres",
+   "title": "the geometry"
+  },
+  {
+   "id": "s05_recap",
+   "title": "the payoff"
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01.1",
+   "scene": "s01_hook",
+   "text": "No internet. No cell signal. And still, your phone knows where it is — to within a few meters — using satellites twenty thousand two hundred kilometers overhead.",
+   "spoken": "No internet. No cell signal. And still, your phone knows where it is — to within a few meters — using satellites twenty thousand two hundred kilometers overhead.",
+   "bookmarks": [],
+   "line": 5
+  },
+  {
+   "id": "s01.2",
+   "scene": "s01_hook",
+   "text": "The trick is a clock. More than thirty GPS satellites are overhead right now, each circling the Earth twice a day, and every one carries an atomic clock, broadcasting exactly what time it is.",
+   "spoken": "The trick is a clock. More than thirty GPS satellites are overhead right now, each circling the Earth twice a day, and every one carries an atomic clock, broadcasting exactly what time it is.",
+   "bookmarks": [],
+   "line": 6
+  },
+  {
+   "id": "s02.1",
+   "scene": "s02_delay",
+   "text": "Your phone receives the signal a moment later, and measures the delay: about seven hundredths of a second — the twenty thousand kilometers, divided by the speed of light. {delay_marks}",
+   "spoken": "Your phone receives the signal a moment later, and measures the delay: about seven hundredths of a second — the twenty thousand kilometers, divided by the speed of light.",
+   "bookmarks": [
+    {
+     "id": "delay_marks",
+     "at_word": 29
+    }
+   ],
+   "line": 10
+  },
+  {
+   "id": "s03.1",
+   "scene": "s03_formula",
+   "text": "The signal travels at the speed of light, and distance equals that speed times the delay. {eq_shown}About twenty one thousand kilometers.",
+   "spoken": "The signal travels at the speed of light, and distance equals that speed times the delay. About twenty one thousand kilometers.",
+   "bookmarks": [
+    {
+     "id": "eq_shown",
+     "at_word": 16
+    }
+   ],
+   "line": 14
+  },
+  {
+   "id": "s04.1",
+   "scene": "s04_spheres",
+   "text": "One satellite gives one distance: a sphere around it. {sphere_grows}",
+   "spoken": "One satellite gives one distance: a sphere around it.",
+   "bookmarks": [
+    {
+     "id": "sphere_grows",
+     "at_word": 9
+    }
+   ],
+   "line": 18
+  },
+  {
+   "id": "s04.2",
+   "scene": "s04_spheres",
+   "text": "Three spheres intersect in one point. {spheres_close}That is where you are.",
+   "spoken": "Three spheres intersect in one point. That is where you are.",
+   "bookmarks": [
+    {
+     "id": "spheres_close",
+     "at_word": 6
+    }
+   ],
+   "line": 19
+  },
+  {
+   "id": "s04.3",
+   "scene": "s04_spheres",
+   "text": "Your phone's clock is not atomic, so a fourth satellite corrects it — solving position and time together. {fourth_draws}",
+   "spoken": "Your phone's clock is not atomic, so a fourth satellite corrects it — solving position and time together.",
+   "bookmarks": [
+    {
+     "id": "fourth_draws",
+     "at_word": 18
+    }
+   ],
+   "line": 20
+  },
+  {
+   "id": "s05.1",
+   "scene": "s05_recap",
+   "text": "Four satellites, one clock trick, and geometry: that is how GPS knows where you are.",
+   "spoken": "Four satellites, one clock trick, and geometry: that is how GPS knows where you are.",
+   "bookmarks": [],
+   "line": 24
+  }
+ ]
+}

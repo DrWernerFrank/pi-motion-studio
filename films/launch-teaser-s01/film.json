@@ -1,0 +1,39 @@
+{
+  "title": "made by one sentence",
+  "duration": 25,
+  "fps": 60,
+  "formats": [
+    "9:16"
+  ],
+  "loop": false,
+  "background": "#0e0e10",
+  "motionBlur": 4,
+  "music": {
+    "bpm": 128,
+    "key": "A minor",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "style": "drive",
+    "seed": 21
+  },
+  "mix": {
+    "music": 0.35,
+    "sfx": 0.9,
+    "lufs": -14
+  },
+  "shots": [
+    {
+      "t": 0,
+      "name": "hook"
+    }
+  ],
+  "gates": {
+    "maxStill": 1.5,
+    "maxNoNovelty": 4
+  },
+  "parent": "launch-teaser"
+}

@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "goal": "25 seconds that feel like using Motion Studio: type a sentence, watch it get made \u2014 the loop itself as the teaser.",
+  "audience": "a person who has never directed anything but has a phone full of clips and ideas",
+  "assumptions": [
+    "25 seconds of finished film",
+    "9:16 vertical (the request says vertical; a teaser lives in a feed)",
+    "the captures are the GUI's REAL pixels (studio capture against the running GUI) \u2014 never redrawn from imagination",
+    "the teaser is itself made in the studio (the proof is the process)"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "9:16"
+      ],
+      "duration": 25
+    }
+  ],
+  "decision": {
+    "chosen": "motion",
+    "why": "A teaser is brand motion over captured truth: the capture service takes the GUI's real screenshots and the motion technique animates them in 9:16 with the studio's springs and a synthesized bed. The piece is the product's own loop, which only a designed timeline can compress into 25 seconds.",
+    "alternatives": [
+      {
+        "id": "edit",
+        "rejected_because": "there is no footage of the GUI being used \u2014 and a screen recording of a real production would take an hour to show what motion can compress into 25 seconds"
+      },
+      {
+        "id": "simplest: the captures as a slideshow with a title",
+        "rejected_because": "the simplest thing that could work \u2014 but 'what it feels like' is MOTION: the typed sentence landing, the film appearing; a slideshow tells instead of showing"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "motion",
+      "role": "the loop, compressed",
+      "brief": "Type a sentence (the request, animated as typing) -> the studio thinks (the plan/segments appearing) -> the film appears (the live seek view scrubbing) -> the gates go green -> 'made by one sentence'. All from the GUI's real captures, cut on beats.",
+      "duration": 25,
+      "inputs": [],
+      "acceptance": [
+        "the captures are REAL (assets/ holds them; the palette sampled from site.json)",
+        "the hook lands in the first 2 seconds",
+        "phone test passes",
+        "the beats land on the grid"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "a synthesized bed at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 60,
+    "usd": 0
+  },
+  "risks": [
+    "the GUI captures need the GUI running",
+    "the teaser must not become a feature tour"
+  ]
+}

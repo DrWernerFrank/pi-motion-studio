@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-07T18:57:03.638Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "lint",
+      "pass": true,
+      "level": "pass",
+      "detail": "no timers, randomness, wall clock or CSS animation"
+    },
+    {
+      "name": "determinism",
+      "pass": true,
+      "level": "pass",
+      "detail": "4 frames identical across seek orders"
+    },
+    {
+      "name": "dead-time",
+      "pass": true,
+      "level": "pass",
+      "detail": "something moves in every 1.5s window"
+    },
+    {
+      "name": "novelty",
+      "pass": false,
+      "level": "warn",
+      "detail": "no big change during 0.0-8.0s"
+    },
+    {
+      "name": "hook",
+      "pass": false,
+      "level": "warn",
+      "detail": "first frame contrast 0.0 (want >3), max change in first 2s 1.7 (want >8)"
+    },
+    {
+      "name": "blank-frames",
+      "pass": false,
+      "level": "warn",
+      "detail": "flat frames at 0, 0.1, 0.2, 0.3, 0.4s"
+    },
+    {
+      "name": "loudness",
+      "pass": true,
+      "level": "pass",
+      "detail": "-14.2 LUFS (want -14 ±1), true peak -1.9 dBFS"
+    },
+    {
+      "name": "deliverable final-16x9.mp4",
+      "pass": true,
+      "level": "pass",
+      "detail": "8.00s, yuv420p, with audio"
+    },
+    {
+      "name": "deliverable final-9x16.mp4",
+      "pass": true,
+      "level": "pass",
+      "detail": "8.00s, yuv420p, with audio"
+    }
+  ]
+}

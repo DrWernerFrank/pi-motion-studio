@@ -1,0 +1,39 @@
+{
+  "title": "the close",
+  "duration": 8,
+  "fps": 60,
+  "formats": [
+    "16:9",
+    "9:16"
+  ],
+  "loop": false,
+  "background": "#0e0e10",
+  "motionBlur": 4,
+  "music": {
+    "bpm": 120,
+    "key": "A minor",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "style": "drive",
+    "seed": 7
+  },
+  "mix": {
+    "music": 0.8,
+    "sfx": 0.9
+  },
+  "shots": [
+    {
+      "t": 0,
+      "name": "hook"
+    }
+  ],
+  "gates": {
+    "maxStill": 1.5,
+    "maxNoNovelty": 4
+  },
+  "parent": "composite"
+}

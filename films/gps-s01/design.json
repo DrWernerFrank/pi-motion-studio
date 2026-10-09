@@ -1,0 +1,35 @@
+{
+  "theme": "paper",
+  "direction": "A field guide page that moves: warm paper, a fine grid, textbook serif math, mono labels. Color is meaning \u2014 amber = the satellites' signal and every positive figure, red-orange = the result (the spot, the distance), green = the correction (the fourth satellite). One voice: calm, precise, never rushed.",
+  "fonts": {
+    "display": "Bricolage Grotesque",
+    "ui": "Inter",
+    "mono": "JetBrains Mono"
+  },
+  "colors": {
+    "background": "#F2EEE4",
+    "ink": "#17150F",
+    "muted": "#8A8478",
+    "surface": "#FBF9F3",
+    "grid": "#CBC2AE",
+    "gridBase": "#E7E1D4"
+  },
+  "math": {
+    "roles": {
+      "positive": "#96610A",
+      "negative": "#B03D24",
+      "result": "#8F5B00",
+      "vector": "#3E6F5C",
+      "area": "#B9DE6E",
+      "basis": "#A86400"
+    }
+  },
+  "motion": {
+    "ui": "SNAPPY",
+    "containers": "DEFAULT",
+    "type": "HEAVY",
+    "character": "PLAYFUL",
+    "stagger": 0.05
+  },
+  "inheritedFrom": "films/gps/design.json"
+}

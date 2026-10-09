@@ -1,10 +1,10 @@
 ---
-description: 'Direct a long-form or multi-chapter film made in code (45 s to several
-  minutes: music videos, history films, story shorts, product films with a character),
-  including multi-session and overnight autonomous runs. Use when the user gives a
-  director''s brief, a song or long script, asks for a music video/short film/"work
-  on this overnight", or when a film needs chapters and subagents. For short reels
-  use motion-reel instead.'
+description: 'Defer to the produce skill for any new piece; use this when the human names /skill:motion-director,
+  gives a director''s brief, a song or long script, asks for a music video/short film/"work on
+  this overnight", or when a film needs chapters and subagents: a long-form or multi-chapter film
+  made in code (45 s to several minutes: music videos, history films, story shorts, product films
+  with a character), including multi-session and overnight autonomous runs. For short reels use
+  motion-reel instead.'
 name: motion-director
 ---
 

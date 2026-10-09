@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "goal": "A 90-second vertical cut of the interview with the dead air and the ums gone, captions on, the best 90 seconds of what was said.",
+  "audience": "a phone viewer scrolling a feed",
+  "assumptions": [
+    "90 seconds of finished cut",
+    "9:16 vertical",
+    "captions burned in the studio's caption design, not default subtitles",
+    "captions are word-accurate, burned in, plus an SRT file",
+    "the 90 s is reached by cutting \u2014 selecting the best material, never padding",
+    "the human's file is read-only: never modified, moved or deleted",
+    "dialog audio stays clear: one mix at the loudness target",
+    "the cut is made from the human's interview file ~/Videos/i.mp4 (read-only, sha-pinned)",
+    "the source is referenced read-only: path + sha256 recorded in inputs.json"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "main",
+      "formats": [
+        "9:16"
+      ],
+      "duration": 90
+    },
+    {
+      "type": "captions",
+      "name": "captions"
+    }
+  ],
+  "decision": {
+    "chosen": "edit",
+    "why": "The ask is a cut of real footage with measured trims: the ums come out by the filler cut (verified against the audio), the pacing by the silence map, the captions from the transcript \u2014 the edit technique is built for exactly this.",
+    "alternatives": [
+      {
+        "id": "motion",
+        "rejected_because": "a code-drawn piece cannot use the real footage \u2014 the ask is the interview itself"
+      },
+      {
+        "id": "simplest: one hard trim to the first 90 seconds",
+        "rejected_because": "the simplest thing that could work, but it ignores 'no ums' and the content: the best 90 seconds are rarely the first"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "edit",
+      "role": "the cut",
+      "brief": "Ingest the interview, transcribe, cut the fillers and the dead air (every proposal vetoed by its removed text), arrange the best 90 seconds, caption it, reframe if the source is widescreen.",
+      "duration": 90,
+      "inputs": [
+        "input:i1"
+      ],
+      "acceptance": [
+        "no ums survive (the filler cut's proposals applied)",
+        "captions <= 2 lines, >= 3.2u, phone-tested",
+        "9:16 with the speaker framed",
+        "the piece contains only real footage from i.mp4 (no stock, no synthetic inserts)",
+        "the clip reads as one coherent interview excerpt",
+        "'no ums': filler words (um, uh, you know) are removed, verified against the audio",
+        "9:16 vertical: the framing keeps the speaker composed (a reframe, not a center crop)",
+        "'no ums': the filler words (um, uh, you know) are removed",
+        "captions: word-accurate, burned in, plus SRT",
+        "captions word-accurate, burned-in, plus SRT from the same transcript",
+        "clean in/out points, no mid-word cuts"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (one technique)",
+    "audio": "the dialog bus at -14 LUFS"
+  },
+  "feasibility": {
+    "blocked_inputs": [
+      "input:i1 \u2014 ~/Videos/i.mp4 does not exist (the human must point at the real file)"
+    ],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 60,
+    "usd": 0
+  },
+  "risks": [
+    "the source may be much longer than 90s of good material"
+  ]
+}

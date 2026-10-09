@@ -1,0 +1,31 @@
+# Review log: composite
+
+Every round: scores 1-10, the 3 worst problems, what gets fixed. Pass = every score 8+.
+
+## Round 1 · 2026-10-07 19:00 · lead · not yet
+
+hook 7 · readability 7 · motion 6 · variety 8 · composition 7 · brand 7 · sound 7 · fidelity 10 · coherence 8
+
+1. **20s** the pinwheel frames 6-7 hold near-identical (the pack lands, then the squares fill)  
+   fix: the fill could ride the narration more tightly — a revision candidate
+2. **0s** the NASA clip's own look (a logo sting, dark) differs from the paper world  
+   fix: the 0.3s dissolve is the designed seam; the clip being REAL is the point — a deeper brand match would need a paper-frame overlay (noted, not done)
+
+Round 1 (the lead, post-assembly). Fidelity 10: every ask measured — 69.92s (50-70 ✓), both formats exact, a REAL clip opens (the NASA fixture, sha-pinned, credited), the proof is VISUAL (the verified pinwheel->tilt transformation, 7x7 minus four triangles == 25 as sympy claims), the end card closes (paper, the theorem + the mark). Coherence 8: the end card now on the proof's own paper (the critic caught the dark clash); the clip is real footage and stays itself. The proof gates PASS with 0 layout violations after 6 lint iterations (labels outside every bbox — the lint taught the layout).
+
+sheets: probes/p1-seam.png, probes/p2-join1.png, probes/p3-join2.png
+
+## Round 2 · 2026-10-07 19:35 · producer-critic · not yet
+
+hook 6 · readability 8 · motion 7 · variety 8 · composition 8 · brand 7 · sound 8 · fidelity 10 · coherence 8
+
+1. **7.9s** the astronaut is cut mid-name: c1 out=8.0 lands inside 'Kelly.' (the transcript has it at 7.87-8.34s) with dialog at 0.0 dB at the cut — the 0.3s xfade smooths the level (my RMS probe ramps -25.6 to -16.1 dB, no click) but the word never completes  
+   fix: out=8.4 — the piece becomes 69.73s, still inside the 50-70 ask, and the name lands whole
+2. **0s** the first 6 seconds are the clip's own dark sting (first-frame contrast 0.3 vs the >3 bar, flat frames at 0/4.8/5.0, the first spoken word at 6.0s) — a slow open for a 69s film  
+   fix: in=5.9 (open on the face saying 'Hi') — the sting loses nothing and the hook gains 5 seconds
+3. **0s** the composite children never ran the studio's own review loop: s01/s02/s03 carry ZERO review rounds (the demos' review check reads the CHILDREN's reviews.json and needs >=3 each; the lead's rounds all went to the project level), and the project design.json is unfilled template (direction/devices/reference) while the real system lives in the children's files  
+   fix: run the look->review loop on each child (>=3 rounds each) and author the project design ledger — the process debt is now visible in the check
+
+RE-MEASURED read-only (no project verify — it mutates the ledgers; ffprobe/ebur128/grep only). DURATION: 69.330s in BOTH formats (16:9 1920x1080, 9:16 1080x1920, 30fps, h264 + aac 48k stereo) — inside the 50-70 ask with 0.67s of headroom. LOUDNESS: -14.4 LUFS integrated, -2.0 dBTP true peak, both formats (the -14 target ✓), LRA 2.2. THE REAL CLIP, pixel-verified in both delivered finals: the final's frame at t=2.0 vs the conformed NASA fixture at t=2.1 = PSNR 43.9 dB (16:9) and 34.3 dB vs the fixture's center-crop (9:16); the fixture's sha256 == a1 == the media bin pin (f3dd2f87…); edit.json c1 at t=0. THE PROOF: s02's claims hand-checked (7^2 - 4*(3*4/2) = 25 ✓, 3^2+4^2 = 5^2 ✓, 9+16 = 25 ✓), the four-triangle rearrangement narrated (7 sentences, 0 to 53.59s, no gaps), layout lint 0 violations in both formats, 12 sync bookmarks within 1 frame. THE END CARD: s03's palette is s02's paper system exactly (#F2EEE4/#17150F/#96610A/#B03D24), theorem + 3^2+4^2=5^2 + the studio mark, 8.00s both formats. JOINS: 0.3s xfades at 7.9 and 61.6; my RMS windows show smooth ramps at both, no level jumps; the seam probes exist (p1/p2/p3). All 5 requirement rows re-measured green by me. FIDELITY 10: every explicit ask of the request is delivered and measured — the real clip opens (pixel-verified), the proof is visual and true, the end card closes, 50-70s, both formats. COHERENCE 8: one paper system across the proof and the card, one mix at -14.4, designed seams — the clip keeps its own real look by design and the open's 6s dark sting is the piece's weakest stretch.
+
+sheets: probes/p1-seam.png, probes/p2-join1.png, probes/p3-join2.png

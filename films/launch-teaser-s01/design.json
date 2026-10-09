@@ -1,0 +1,53 @@
+{
+  "direction": "The studio's own chrome, moving: near-black ground, the films list, the live view scrubbing, the gates going green. One accent = the green of a passing gate; the orange of the Make button carries the hook. Everything from the captured palette.",
+  "fonts": {
+    "display": "Space Grotesk",
+    "ui": "Inter",
+    "mono": "JetBrains Mono"
+  },
+  "palette": {
+    "bg": "#08080a",
+    "ink": "#ececef",
+    "muted": "#8b8b94",
+    "surface": "#131316",
+    "accent": "#3ecf8e",
+    "accent2": "#ff6a3d"
+  },
+  "ladder": [
+    {
+      "role": "hero",
+      "u": 15,
+      "weight": 800,
+      "trackingEm": -0.03
+    },
+    {
+      "role": "title",
+      "u": 9,
+      "weight": 700
+    },
+    {
+      "role": "body",
+      "u": 3.6,
+      "weight": 400
+    },
+    {
+      "role": "label",
+      "u": 3.2,
+      "weight": 500
+    }
+  ],
+  "feel": {
+    "spring": "SNAPPY",
+    "overshoot": 0.04
+  },
+  "devices": [
+    {
+      "name": "the typed sentence",
+      "purpose": "the request animating in \u2014 the thing you say"
+    },
+    {
+      "name": "the gate chip",
+      "purpose": "a gate going green \u2014 the studio's own proof"
+    }
+  ]
+}

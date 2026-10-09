@@ -1,0 +1,274 @@
+[
+ {
+  "kind": "bookmark",
+  "t": 44.474,
+  "id": "sphere_grows",
+  "sentence": "s04.1",
+  "scene": "s04_spheres"
+ },
+ {
+  "kind": "animation",
+  "t": 1.1,
+  "i": 1,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 1.267,
+  "i": 2,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 1.433,
+  "i": 3,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 1.593,
+  "i": 4,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 1.753,
+  "i": 5,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 1.913,
+  "i": 6,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 2.073,
+  "i": 7,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "_AnimationBuilder"
+ },
+ {
+  "kind": "animation",
+  "t": 2.423,
+  "i": 8,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "FadeOut"
+ },
+ {
+  "kind": "animation",
+  "t": 3.723,
+  "i": 9,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 3.723,
+  "i": 10,
+  "scene": "s04_spheres",
+  "sentence": "s04.1",
+  "animation": "wait",
+  "seconds": 1.315
+ },
+ {
+  "t": 3.723,
+  "kind": "sentence_end",
+  "scene": "s04_spheres",
+  "sentence": "s04.1"
+ },
+ {
+  "kind": "animation",
+  "t": 3.873,
+  "i": 11,
+  "scene": "s04_spheres",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 3.873,
+  "i": 12,
+  "scene": "s04_spheres",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.165
+ },
+ {
+  "kind": "bookmark",
+  "t": 47.132,
+  "id": "spheres_close",
+  "sentence": "s04.2",
+  "scene": "s04_spheres"
+ },
+ {
+  "kind": "animation",
+  "t": 4.723,
+  "i": 13,
+  "scene": "s04_spheres",
+  "sentence": "s04.2",
+  "animation": "Create; GrowFromCenter"
+ },
+ {
+  "kind": "bookmark",
+  "t": 47.132,
+  "id": "spheres_close",
+  "sentence": "s04.2",
+  "scene": "s04_spheres"
+ },
+ {
+  "kind": "animation",
+  "t": 5.29,
+  "i": 14,
+  "scene": "s04_spheres",
+  "sentence": "s04.2",
+  "animation": "Create; GrowFromCenter"
+ },
+ {
+  "kind": "bookmark",
+  "t": 47.132,
+  "id": "spheres_close",
+  "sentence": "s04.2",
+  "scene": "s04_spheres"
+ },
+ {
+  "kind": "animation",
+  "t": 5.673,
+  "i": 15,
+  "scene": "s04_spheres",
+  "sentence": "s04.2",
+  "animation": "Create; GrowFromCenter"
+ },
+ {
+  "kind": "animation",
+  "t": 6.273,
+  "i": 16,
+  "scene": "s04_spheres",
+  "sentence": "s04.2",
+  "animation": "GrowFromCenter"
+ },
+ {
+  "kind": "animation",
+  "t": 7.623,
+  "i": 17,
+  "scene": "s04_spheres",
+  "sentence": "s04.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.623,
+  "i": 18,
+  "scene": "s04_spheres",
+  "sentence": "s04.2",
+  "animation": "wait",
+  "seconds": 1.354
+ },
+ {
+  "t": 7.623,
+  "kind": "sentence_end",
+  "scene": "s04_spheres",
+  "sentence": "s04.2"
+ },
+ {
+  "kind": "animation",
+  "t": 7.773,
+  "i": 19,
+  "scene": "s04_spheres",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.773,
+  "i": 20,
+  "scene": "s04_spheres",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.154
+ },
+ {
+  "kind": "bookmark",
+  "t": 55.142,
+  "id": "fourth_draws",
+  "sentence": "s04.3",
+  "scene": "s04_spheres"
+ },
+ {
+  "kind": "animation",
+  "t": 12.423,
+  "i": 21,
+  "scene": "s04_spheres",
+  "sentence": "s04.3",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 13.223,
+  "i": 22,
+  "scene": "s04_spheres",
+  "sentence": "s04.3",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 14.54,
+  "i": 23,
+  "scene": "s04_spheres",
+  "sentence": "s04.3",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 14.54,
+  "i": 24,
+  "scene": "s04_spheres",
+  "sentence": "s04.3",
+  "animation": "wait",
+  "seconds": 1.333
+ },
+ {
+  "t": 14.54,
+  "kind": "sentence_end",
+  "scene": "s04_spheres",
+  "sentence": "s04.3"
+ },
+ {
+  "kind": "animation",
+  "t": 14.84,
+  "i": 25,
+  "scene": "s04_spheres",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 14.84,
+  "i": 26,
+  "scene": "s04_spheres",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.3
+ },
+ {
+  "kind": "scene_end",
+  "t": 14.84,
+  "scene": "s04_spheres"
+ }
+]

@@ -1,0 +1,23 @@
+{
+  "motion": {
+    "film": "studio-reel",
+    "fmt": "9:16",
+    "file": "films/studio-reel/out/draft-9x16.mp4",
+    "bytes": 650704,
+    "md5": "c88ef10cdc51dfa992323f2ef0211945"
+  },
+  "edit": {
+    "film": "demo-cut",
+    "fmt": "16:9",
+    "file": "films/demo-cut/out/draft-16x9.mp4",
+    "bytes": 4108981,
+    "md5": "6e43dc3756c0f8ce2b6d2349ad620136"
+  },
+  "math": {
+    "film": "mathdemo",
+    "fmt": "16:9",
+    "file": "films/mathdemo/out/draft-16x9.mp4",
+    "bytes": 683495,
+    "md5": "3f719eb0f3e2a796339cab08209ff274"
+  }
+}

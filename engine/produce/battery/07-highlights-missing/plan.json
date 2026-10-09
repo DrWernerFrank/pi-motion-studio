@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "goal": "Three 45-second vertical highlights from the talk: three different hooks, each a complete thought, each captioned.",
+  "audience": "feed viewers who will never see the full talk",
+  "assumptions": [
+    "three separate deliverables (a series, not one film)",
+    "45 seconds each, vertical 9:16",
+    "the picks come from the transcript's strongest moments \u2014 measured, not guessed",
+    "all footage comes from the named source talk.mp4 (flagged missing \u2014 never invented)",
+    "talk.mp4 is missing: the plan flags it in feasibility"
+  ],
+  "deliverables": [
+    {
+      "type": "video",
+      "name": "highlight-1",
+      "formats": [
+        "9:16"
+      ],
+      "duration": 45
+    },
+    {
+      "type": "video",
+      "name": "highlight-2",
+      "formats": [
+        "9:16"
+      ],
+      "duration": 45
+    },
+    {
+      "type": "video",
+      "name": "highlight-3",
+      "formats": [
+        "9:16"
+      ],
+      "duration": 45
+    }
+  ],
+  "decision": {
+    "chosen": "edit",
+    "why": "Three cuts of one real talk: the edit technique ingests it once (the silence map, the transcript), then one timeline per pick \u2014 three parallel outputs of the same pipeline, each a different strongest moment. The reframe keeps the speaker framed in 9:16 and the captions ride the transcript.",
+    "alternatives": [
+      {
+        "id": "motion",
+        "rejected_because": "the talk is real footage \u2014 motion cannot use it"
+      },
+      {
+        "id": "simplest: one 45-second highlight, not three",
+        "rejected_because": "the simplest thing that could work \u2014 but the ask says three, and three is exactly the same pipeline run three times on different picks"
+      }
+    ],
+    "probes": []
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "capability": "edit",
+      "role": "the three cuts (one pipeline, three picks)",
+      "brief": "Ingest the talk once; pick the three strongest distinct moments from the transcript (the hooks, the payoff, the closer); cut each to 45 seconds with the same caption design and the same reframe rule; ship three vertical timelines.",
+      "duration": 45,
+      "inputs": [
+        "input:i1"
+      ],
+      "acceptance": [
+        "three complete thoughts, three different hooks",
+        "the same caption design across the three",
+        "the speaker framed in 9:16 in all three",
+        "no clip used twice",
+        "three separate highlights (the count is three: three 45-second vertical pieces)",
+        "the three highlights cover different moments \u2014 three hooks, not one moment thrice",
+        "each is cut tight: pauses, silence and filler out",
+        "the talk's own speech is carried (the speaker's audio, not a bed over mute)",
+        "the selection targets the talk's strongest moments (measured from the transcript)",
+        "pauses, silence and filler removed"
+      ]
+    }
+  ],
+  "assembly": {
+    "mode": "single",
+    "transitions": "n/a (each highlight ships alone; the series shares one design)",
+    "audio": "the dialog bus at -14 LUFS per highlight"
+  },
+  "feasibility": {
+    "blocked_inputs": [
+      "input:i1 \u2014 talk.mp4 does not exist (the human must supply it)"
+    ],
+    "needs_capability": []
+  },
+  "budget": {
+    "minutes": 120,
+    "usd": 0
+  },
+  "risks": [
+    "a talk may hold fewer than three genuinely distinct strong moments \u2014 the plan would flag that after the transcript lands"
+  ]
+}

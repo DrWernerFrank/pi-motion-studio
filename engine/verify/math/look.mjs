@@ -10,7 +10,7 @@ import { existsSync, readFileSync, rmSync, statSync, utimesSync } from 'node:fs'
 import { join } from 'node:path';
 import { createMathFilm, lookMath, draftStale } from '../../math-cli.mjs';
 import { readMathFilm } from '../../math.mjs';
-import { FILMS, writeJson } from '../../lib/film.mjs';
+import { FILMS, writeJson, fmtSlug } from '../../lib/film.mjs';
 import { run } from '../../lib/proc.mjs';
 
 const KEY = 'verify-m-look';
@@ -58,7 +58,7 @@ export default async () => {
       sheet(ev, 'every');
       if (!ev.rendered) bad.push(`${tag('every')}: no draft existed but the look did not render one`);
       const D = +(await run('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0',
-        join(dir, 'out', `draft-${fmt}.mp4`)])).out.trim();
+        join(dir, 'out', `draft-${fmtSlug(fmt)}.mp4`)])).out.trim();
       if (ev.count !== Math.min(36, Math.floor(D / 0.5))) bad.push(`${tag('every')}: ${ev.count} frames for ~${D.toFixed(2)} s at 0.5 s`);
       for (const f of ev.frames) {
         if (!f.scene || !f.label.includes(`${f.t.toFixed(2)}s`) || !f.label.includes(f.scene)) { bad.push(`${tag('every')}: frame ${f.t} label "${f.label}" lacks time/scene`); break; }
@@ -114,7 +114,7 @@ export default async () => {
 
     // a stale draft is re-rendered first: touch one scene source, look again
     const fmt = FMTS[0];
-    const film = readMathFilm(KEY), draft = join(film.out, `draft-${fmt}.mp4`);
+    const film = readMathFilm(KEY), draft = join(film.out, `draft-${fmtSlug(fmt)}.mp4`);
     const before = statSync(draft).mtimeMs;
     const future = new Date(Date.now() + 2000);
     utimesSync(film.scenes[1].file, future, future);

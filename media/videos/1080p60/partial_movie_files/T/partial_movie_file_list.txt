@@ -1,2 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/mnt/c/Users/Hp/Desktop/pi-motion-studio/media/videos/1080p60/partial_movie_files/T/634679739_338434669_287066686.mp4'

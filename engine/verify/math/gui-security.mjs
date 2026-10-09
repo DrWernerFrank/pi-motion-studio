@@ -14,10 +14,10 @@
 import { spawn } from 'node:child_process';
 import { cpSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { FILMS } from '../../lib/film.mjs';
+import { FILMS, kindOf } from '../../lib/film.mjs';
 import { ROOT } from '../../lib/serve.mjs';
 
-const KEY = 'verify-m-gui-sec', PORT = 3211, BASE = `http://localhost:${PORT}`;
+const KEY = 'verify-m-gui-sec', PORT = 3211, BASE = `http://127.0.0.1:${PORT}`;   // IPv4 literal: localhost resolves ::1 first here and the server binds 127.0.0.1 (D-012's class)
 const NEW_GETS = ['script', 'records', 'where'];   // + the sentence POST
 
 export default async () => {
@@ -61,7 +61,7 @@ export default async () => {
     }
     // a non-math film is not a math film: the math endpoints refuse it (404, never a wrong-kind read)
     for (const other of ['demo-cut', 'studio-reel']) {
-      try { if (JSON.parse(readFileSync(join(FILMS, other, 'film.json'), 'utf8')).kind === 'math') continue; } catch { continue; }
+      try { if (kindOf(JSON.parse(readFileSync(join(FILMS, other, 'film.json'), 'utf8'))) === 'math') continue; } catch { continue; }
       const r = await get(`/api/film/${other}/script`);
       need(r.status === 404, `GET /api/film/${other}/script on a non-math film gave ${r.status}, wanted 404`);
       facts.push(`non-math film ${other} refused on the math endpoints (404)`);

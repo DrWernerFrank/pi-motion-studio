@@ -1,0 +1,110 @@
+[
+ {
+  "kind": "animation",
+  "t": 1.0,
+  "i": 1,
+  "scene": "s01_setup",
+  "sentence": "s01.1",
+  "animation": "Write"
+ },
+ {
+  "kind": "animation",
+  "t": 7.833,
+  "i": 2,
+  "scene": "s01_setup",
+  "sentence": "s01.1",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.833,
+  "i": 3,
+  "scene": "s01_setup",
+  "sentence": "s01.1",
+  "animation": "wait",
+  "seconds": 6.848
+ },
+ {
+  "t": 7.833,
+  "kind": "sentence_end",
+  "scene": "s01_setup",
+  "sentence": "s01.1"
+ },
+ {
+  "kind": "animation",
+  "t": 7.983,
+  "i": 4,
+  "scene": "s01_setup",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 7.983,
+  "i": 5,
+  "scene": "s01_setup",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.165
+ },
+ {
+  "kind": "bookmark",
+  "t": 13.896,
+  "id": "squares_draw",
+  "sentence": "s01.2",
+  "scene": "s01_setup"
+ },
+ {
+  "kind": "animation",
+  "t": 9.083,
+  "i": 6,
+  "scene": "s01_setup",
+  "sentence": "s01.2",
+  "animation": "Create"
+ },
+ {
+  "kind": "animation",
+  "t": 14.75,
+  "i": 7,
+  "scene": "s01_setup",
+  "sentence": "s01.2",
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 14.75,
+  "i": 8,
+  "scene": "s01_setup",
+  "sentence": "s01.2",
+  "animation": "wait",
+  "seconds": 5.671
+ },
+ {
+  "t": 14.75,
+  "kind": "sentence_end",
+  "scene": "s01_setup",
+  "sentence": "s01.2"
+ },
+ {
+  "kind": "animation",
+  "t": 15.05,
+  "i": 9,
+  "scene": "s01_setup",
+  "sentence": null,
+  "animation": "Wait"
+ },
+ {
+  "kind": "animation",
+  "t": 15.05,
+  "i": 10,
+  "scene": "s01_setup",
+  "sentence": null,
+  "animation": "wait",
+  "seconds": 0.3
+ },
+ {
+  "kind": "scene_end",
+  "t": 15.05,
+  "scene": "s01_setup"
+ }
+]

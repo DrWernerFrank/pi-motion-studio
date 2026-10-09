@@ -1,0 +1,25 @@
+{
+  "phase": "shipped",
+  "segments": {
+    "s01": {
+      "status": "done",
+      "film": "composite-s01",
+      "capability": "edit",
+      "at": "2026-10-07T18:22:01.927Z"
+    },
+    "s02": {
+      "status": "building",
+      "film": "composite-s02",
+      "capability": "math",
+      "at": "2026-10-07T18:22:04.439Z"
+    },
+    "s03": {
+      "status": "building",
+      "film": "composite-s03",
+      "capability": "motion",
+      "at": "2026-10-07T18:22:24.095Z"
+    }
+  },
+  "started": "2026-10-07T18:21:37.764Z",
+  "shippedAt": "2026-10-08T10:31:59.472Z"
+}

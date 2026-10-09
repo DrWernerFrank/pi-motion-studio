@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, s
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { CAPS, TIMEOUTS, MemPool, killedMessage } from './lib/capped.mjs';
-import { FILMS, readJson, writeJson } from './lib/film.mjs';
+import { FILMS, fmtSlug, readJson, requireKind, writeJson } from './lib/film.mjs';
 import { pythonFor } from './doctor.mjs';
 import { run } from './lib/proc.mjs';
 import { ROOT } from './lib/serve.mjs';
@@ -26,7 +26,7 @@ export function readMathFilm(key) {
   const dir = existsSync(join(FILMS, key)) ? join(FILMS, key) : null;
   if (!dir || !existsSync(join(dir, 'film.json'))) throw new Error(`no film.json in films/${key}`);
   const cfg = readJson(join(dir, 'film.json'));
-  if (cfg.kind !== 'math') throw new Error(`films/${key} is kind=${cfg.kind}, not math`);
+  requireKind(key, cfg, 'math');
   const sceneFiles = existsSync(join(dir, 'scenes'))
     ? readdirSync(join(dir, 'scenes')).filter((f) => f.endsWith('.py')).sort()
     : [];
@@ -156,7 +156,7 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
     if (!partials.length) continue;
 
     // records into the film folder (derived, small, the lint + `where` + GUI read them)
-    const recDir = join(film.dir, 'records', f); mkdirSync(recDir, { recursive: true });
+    const recDir = join(film.dir, 'records', fmtSlug(f)); mkdirSync(recDir, { recursive: true });   // Windows-safe: 16x9, never 16:9
     for (const p of partials) for (const x of readdirSync(p.records)) copyFileSync(join(p.records, x), join(recDir, x));
 
     // concat the scene partials losslessly, then ONE transcode with the delivery tags.
@@ -164,7 +164,7 @@ export async function renderMathFilm(key, { quality = 'draft', fmt, scene, noCac
     // cache AND the mix is unchanged, the muxed output is byte-reproducible, so a MUX-CACHE entry
     // (keyed on the partial set + mix mtime/size + quality/fmt) skips concat+encode entirely —
     // the warm re-render path (measured: mux dominated it at 18% of cold; the §3.8 target is <10%).
-    const out = join(film.out, `${quality}-${f}.mp4`); mkdirSync(film.out, { recursive: true });
+    const out = join(film.out, `${quality}-${fmtSlug(f)}.mp4`); mkdirSync(film.out, { recursive: true });
     const mix = join(film.out, 'mix.wav');
     const mixSig = existsSync(mix) ? `${statSync(mix).mtimeMs.toFixed(0)}:${statSync(mix).size}` : 'none';
     const muxKey = sha(`v${CACHE_VERSION}|${quality}|${f}|${mixSig}|${partials.map((p) => `${p.scene.id}:${sha(readFileSync(p.mp4))}`).join('|')}`);

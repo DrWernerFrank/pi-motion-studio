@@ -7,7 +7,7 @@ import { CAPS, MemPool } from '../../lib/capped.mjs';
 import { pythonFor } from '../../doctor.mjs';
 import { renderMathFilm } from '../../math.mjs';
 import { runMathGates } from '../../math-gates.mjs';
-import { readJson } from '../../lib/film.mjs';
+import { readJson, kindOf } from '../../lib/film.mjs';
 import { ROOT } from '../../lib/serve.mjs';
 
 const DEMOS = ['determinant', 'tangent', 'odd-squares'];
@@ -15,7 +15,7 @@ const PY = pythonFor('manim');
 
 const lintOf = async (pool, key, fmt) => {
   const r = await pool.run({
-    cmd: PY, args: ['-m', 'studio_manim.lint', join(ROOT, 'films', key, 'records', fmt),
+    cmd: PY, args: ['-m', 'studio_manim.lint', join(ROOT, 'films', key, 'records', fmt.replace(':', 'x')),   // records dirs are slugged (16x9)
       join(ROOT, 'films', key, 'design.json'), fmt],
     cwd: join(ROOT, 'engine', 'manim', 'test'), memoryMb: CAPS.check, timeoutS: 180,
     label: `lint ${key} ${fmt}`, env: { STUDIO_FORMAT: fmt, PYTHONPATH: join(ROOT, 'engine', 'manim') },
@@ -32,7 +32,7 @@ export default async () => {
   for (const key of DEMOS) {
     const dir = join(ROOT, 'films', key);
     const cfg = readJson(join(dir, 'film.json'), {});
-    if (cfg.kind !== 'math') { bad.push(`${key} is not a math film`); continue; }
+    if (kindOf(cfg) !== 'math') { bad.push(`${key} is not a math film`); continue; }
 
     // 1. the final renders (16:9 + 9:16 — the film's own formats), fresh (no cache games)
     const finals = await renderMathFilm(key, { quality: 'final', noCache: true });
@@ -62,9 +62,9 @@ export default async () => {
     // 4. claims: >= 15, all verified, >= 90% of mathematical sentences linked
     const ledger = new Map();
     for (const fmt of ['16:9', '9:16'])
-      for (const f of readdirSync(join(dir, 'records', fmt))) {
+      for (const f of readdirSync(join(dir, 'records', fmt.replace(':', 'x')))) {
         if (!f.endsWith('-claims.json')) continue;
-        for (const c of JSON.parse(readFileSync(join(dir, 'records', fmt, f), 'utf8')) || [])
+        for (const c of JSON.parse(readFileSync(join(dir, 'records', fmt.replace(':', 'x'), f), 'utf8')) || [])
           if (!ledger.has(c.expr + '|' + (c.says ?? ''))) ledger.set(c.expr + '|' + (c.says ?? ''), c);
       }
     const claims = [...ledger.values()];

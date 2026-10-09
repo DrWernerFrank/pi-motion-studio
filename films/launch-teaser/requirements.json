@@ -1,0 +1,60 @@
+[
+  {
+    "id": "r01",
+    "text": "25 seconds",
+    "type": "measurable",
+    "verifier": "duration",
+    "arg": 25,
+    "tolerance": 2,
+    "source": "request",
+    "status": "green",
+    "evidence": "final-9x16.mp4 25.00s",
+    "waived_by": null
+  },
+  {
+    "id": "r02",
+    "text": "9:16 vertical",
+    "type": "measurable",
+    "verifier": "formats",
+    "arg": [
+      "9:16"
+    ],
+    "source": "request",
+    "status": "green",
+    "evidence": "9:16 1080x1920",
+    "waived_by": null
+  },
+  {
+    "id": "r03",
+    "text": "has sound (a synthesized bed)",
+    "type": "measurable",
+    "verifier": "has-audio",
+    "arg": true,
+    "source": "implied",
+    "status": "green",
+    "evidence": "mean -15.8 dB",
+    "waived_by": null
+  },
+  {
+    "id": "r04",
+    "text": "loudness at the studio target",
+    "type": "measurable",
+    "verifier": "loudness",
+    "arg": -14,
+    "source": "implied",
+    "status": "green",
+    "evidence": "-14.8 LUFS, -1.1 dBTP",
+    "waived_by": null
+  },
+  {
+    "id": "r05",
+    "text": "the GUI's real captures are used (asset-used)",
+    "type": "measurable",
+    "verifier": "asset-used",
+    "arg": "a1",
+    "source": "request",
+    "status": "green",
+    "evidence": "a1 used by launch-teaser-s01 (films/launch-teaser-s01/assets_desktop.png)",
+    "waived_by": null
+  }
+]

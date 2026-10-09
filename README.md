@@ -14,7 +14,14 @@ cd ~/Desktop/pi-motion-studio        # /mnt/c/Users/Hp/Desktop/pi-motion-studio
 pi                                   # or pi-web: New chat in this folder
 ```
 
-Then, in pi or pi-web:
+Then, in pi or pi-web — the fastest way is the producer (any media request in plain words; see
+"## Producer" below):
+
+```
+Explain how GPS knows where you are, 60 seconds, narrated, vertical and widescreen.
+```
+
+Or name a technique yourself:
 
 ```
 /skill:motion-reel make a 20s launch reel for https://example.com, 9:16 + 16:9
@@ -97,6 +104,33 @@ dead time · novelty (a visual event every ≤ 4 s) · hook · blank frames · l
 - The two earlier attempts on the Desktop (`motion-studio`, `motion-studio-google`) were left untouched.
 - Inspired by the "Opus 5.5 motion design" course (movez) and veedstudio/open-edit (per-run folders,
   design system written first, mechanical gates, preview server).
+
+## Producer — say what you want, the studio decides how
+
+Any media request in plain words becomes a finished, verified piece. The `produce` skill
+(`.pi/skills/produce/SKILL.md`) is the front door — in pi it is one sentence:
+
+```
+Explain how GPS knows where you are, 60 seconds, narrated, vertical and widescreen.
+Cut my interview ~/Videos/i.mp4 down to 90 seconds, no ums, captions, 9:16.
+A 30-second promo for my cafe in Persian, logo attached (~/logo.png), warm colors.
+```
+
+Or unattended: `./studio make "<request>"` creates the project and runs the producer loop
+(plan → build → assemble → verify → ship → report) until every requirement is green. Or the
+"Make" box in the Studio GUI. The request becomes a **project film** (`studio project new <key>
+"<request>"`): `brief.md` (the request verbatim + the interpretation), `plan.json` (a technique
+per part, with alternatives and reasons), the **requirements ledger** `requirements.json` (every explicit ask — a duration, a
+format, a language, a named file — verified by a measured verifier: ffprobe'd duration, ASR'd
+language, the license of every asset; `studio brief-lint` extracts the asks from the request so
+none is missed), `facts.json` (a source snapshot + a quote for every
+number), `assets.json`, `budget.json` (zero spend by default), one `design.json` for the whole
+piece, and children — real films of any kind whose `film.json` carries `"parent"`. Revisions work
+the same way ("shorter intro, calmer music" appends requirements and rebuilds only the parts they
+touch). `studio project status|plan|verify|rebuild|ship|where` manage it; `studio capabilities`
+is the technique/service menu with readiness from real probes; `studio capability new <id>` grows
+the catalog when nothing fits. The final review is the `producer-critic` agent (fresh eyes:
+fidelity — does it deliver what was asked — must be 10).
 
 ## Real footage
 

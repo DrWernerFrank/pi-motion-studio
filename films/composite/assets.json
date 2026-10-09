@@ -1,0 +1,12 @@
+[
+  {
+    "id": "a1",
+    "path": "/home/werner/.cache/pi-motion-studio/fixtures/real/talking-head-original.webm",
+    "sha256": "f3dd2f87b8dedbc6ea9864af594e2de4fc8a2b5d425f85f834ba7f36c1d04472",
+    "origin": "the studio's recorded public-domain NASA talking-head fixture (docs/editing/THIRD_PARTY.md)",
+    "license": "public domain",
+    "attribution": "NASA (public domain)",
+    "role": "the cold open's real footage",
+    "added": "2026-10-07T16:20:00Z"
+  }
+]

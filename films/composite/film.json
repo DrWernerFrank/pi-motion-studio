@@ -1,0 +1,15 @@
+{
+  "kind": "project",
+  "title": "composite",
+  "formats": [
+    "16:9",
+    "9:16"
+  ],
+  "request": "Open on a real clip, explain the Pythagorean theorem with a visual proof, close on an end card. 50-70 seconds, 16:9 and 9:16.",
+  "parts": [
+    "composite-s01",
+    "composite-s02",
+    "composite-s03"
+  ],
+  "duration": 60
+}

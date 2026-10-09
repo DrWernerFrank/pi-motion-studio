@@ -1,0 +1,32 @@
+$ studio check verify-p-gold-math
+ok    s01_hook: typeset + 1 claim(s)
+ok    s02_meaning: typeset + 2 claim(s)
+ok    s03_recap: typeset + 2 claim(s)
+check: 3/3 scenes clean
+[exit 0]
+$ studio sound verify-p-gold-math
+voice: 4 sentences, Ns, timing native
+films/verify-p-gold-math/out/mix.wav  -N LUFS, true peak -N dBTP
+9 cues → films/verify-p-gold-math/out/captions.srt, films/verify-p-gold-math/out/captions.vtt
+[exit 0]
+$ studio look verify-p-gold-math
+films/verify-p-gold-math/out/sheets/every-16x9.png  (36 frames: 0.25, 0.75, 1.25, 1.75, 2.25, 2.75, 3.25, 3.75, 4.25, 4.75, 5.25, 5.75, 6.25, 6.75, 7.25, 7.75, 8.25, 8.75, 9.25, 9.75, 10.25, 10.75, 11.25, 11.75, 12.25, 12.75, 13.25, 13.75, 14.25, 14.75, 15.25, 15.75, 16.25, 16.75, 17.25, 17.75)
+[exit 0]
+$ studio gate verify-p-gold-math
+PASS  layout: 0 fail-level violations over 3 scenes' records [16:9] (studio_manim.lint)
+PASS  claims: 5 claims, all ok===true; coverage 66.7% (2/3 mathematical sentences linked; the 90% bar is the demos' P12 gate)
+PASS  typeset: 3 scenes x 1 format(s): every records layout.json non-empty; claims ledgers present — a typeset compile error itself surfaces at render time as a loud error (the formula + scene file:line)
+PASS  narration: 4 sentence(s): every script sentence in timing.json with start/end + audio, no overlaps, 3 scene timeline(s) cover their sentences' spans
+PASS  sync: 4 trace bookmark(s) over 3 scene record set(s) all match timing.json (sentence.start + bookmark.t) within 1 frame (33 ms); 1 overrun(s) recorded ; seams continuous
+PASS  pace: 1 freeze run(s) >= Ns, none while the narration is silent (4 sentences of timing crossed in)
+PASS  captions: captions "auto" -> ON (auto = on in 9:16): 4 sentence(s), 2 caption file(s) — SRT/VTT written by studio sound; the deep caption check is P7's `captions` check
+PASS  loudness: -N LUFS (want -16 +/- 1), true peak -N dBTP (want <= -1)
+PASS  deliverable: draft-16x9.mp4: 960x540 yuv420p bt709 SAR 1:1 faststart Ns
+PASS  deterministic: first gates run: 3 layout record hash(es) stored (drift vs this baseline warns on the next run)
+
+gates: PASS
+[exit 0]
+$ studio render verify-p-gold-math --draft
+films/verify-p-gold-math/out/draft-16x9.mp4
+films/verify-p-gold-math/out/draft-9x16.mp4
+[exit 0]

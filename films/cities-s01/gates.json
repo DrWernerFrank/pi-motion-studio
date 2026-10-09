@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-07T19:25:48.677Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "chart-data",
+      "pass": true,
+      "detail": "10 data rows, source recorded"
+    },
+    {
+      "name": "chart-axis",
+      "pass": true,
+      "detail": "10/10 rows are numeric pairs"
+    }
+  ]
+}

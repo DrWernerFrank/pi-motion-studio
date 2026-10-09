@@ -1,0 +1,57 @@
+[
+  {
+    "t": 1.0,
+    "type": "type"
+  },
+  {
+    "t": 1.875,
+    "type": "click"
+  },
+  {
+    "t": 2.5,
+    "type": "pop",
+    "free": true
+  },
+  {
+    "t": 2.9,
+    "type": "pop",
+    "free": true
+  },
+  {
+    "t": 3.3,
+    "type": "pop",
+    "free": true
+  },
+  {
+    "t": 5.2,
+    "type": "whoosh"
+  },
+  {
+    "t": 8.8,
+    "type": "chime",
+    "free": true
+  },
+  {
+    "t": 9.35,
+    "type": "chime",
+    "free": true
+  },
+  {
+    "t": 9.9,
+    "type": "chime",
+    "free": true
+  },
+  {
+    "t": 10.45,
+    "type": "chime",
+    "free": true
+  },
+  {
+    "t": 10.5,
+    "type": "drop"
+  },
+  {
+    "t": 11.5,
+    "type": "impact"
+  }
+]

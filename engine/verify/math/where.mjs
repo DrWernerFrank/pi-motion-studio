@@ -16,7 +16,7 @@ import { renderMathFilm } from '../../math.mjs';
 import { buildVoice } from '../../narration.mjs';
 import { sceneMap, resolveWhere, resolveNote } from '../../where.mjs';
 import { run } from '../../lib/proc.mjs';
-import { FILMS, readJson, writeJson } from '../../lib/film.mjs';
+import { FILMS, readJson, writeJson, fmtSlug } from '../../lib/film.mjs';
 
 const KEY = 'verify-m-where';
 
@@ -156,17 +156,17 @@ export default async () => {
     // scene order + lengths straight from records/<fmt>/ (the render order: sorted scene files)
     const timing = readJson(join(dir, 'timing.json'));
     const sents = timing.sentences;
-    const ids = readdirSync(join(dir, 'records', fmt)).filter((f) => f.endsWith('-timeline.json'))
+    const ids = readdirSync(join(dir, 'records', fmtSlug(fmt))).filter((f) => f.endsWith('-timeline.json'))
       .map((f) => f.replace(/-timeline\.json$/, '')).sort();
     let acc = 0;
     const scenes = ids.map((sid) => {
-      const seconds = readJson(join(dir, 'records', fmt, `${sid}-timeline.json`), {})?.seconds ?? 0;
+      const seconds = readJson(join(dir, 'records', fmtSlug(fmt), `${sid}-timeline.json`), {})?.seconds ?? 0;
       const x = { scene: sid, start: acc, end: acc + seconds, seconds };
       acc += seconds;
       return x;
     });
     const anims = Object.fromEntries(ids.map((sid) => [sid,
-      readJson(join(dir, 'records', fmt, `${sid}-trace.json`), []).filter((e) => e.kind === 'animation')]));
+      readJson(join(dir, 'records', fmtSlug(fmt), `${sid}-trace.json`), []).filter((e) => e.kind === 'animation')]));
     const longest = Math.max(...ids.flatMap((sid) => anims[sid].map((e, i) => e.t - (anims[sid][i - 1]?.t ?? 0))), 0);
     const D = acc;
     // the module's own sceneMap must equal this independent derivation (the CLI/GUI share it)
@@ -218,7 +218,7 @@ export default async () => {
         if (Math.abs(r.bookmark.t - t) >= 0.75) bad.push(`t=${t}: bookmark ${r.bookmark.id}@${r.bookmark.t} reported outside its 0.75 s window`);
       }
     }
-    const book = readJson(join(dir, 'records', fmt, 's02_meaning-trace.json'), []).filter((e) => e.kind === 'bookmark');
+    const book = readJson(join(dir, 'records', fmtSlug(fmt), 's02_meaning-trace.json'), []).filter((e) => e.kind === 'bookmark');
     if (book.length !== 1 || book[0].id !== 'hits') bad.push(`the {hits} bookmark was not stamped exactly once in s02's trace (${book.length})`);
     facts.push(`20 seeded times (mulberry32(42), D=${D.toFixed(2)} s, ${gapFalls} in a between-sentences gap): scene/sentence/animation/file all agree with records+timing.json; max |anim END - t| = ${maxDev.toFixed(3)} s, max time into the playing animation = ${maxInto.toFixed(3)} s, longest recorded entry = ${longest.toFixed(3)} s`);
 
