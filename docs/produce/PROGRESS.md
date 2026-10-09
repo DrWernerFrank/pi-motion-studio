@@ -116,4 +116,12 @@ encoders pinned to thread_count=1; proven: identical partials, identical cold fi
 spot-checked), the migration ledger honestly re-frozen (D-016, 3d3daa4), naming PASS. The final
 verify-math + verify-produce chain is RUNNING from 3d3daa4; after it: FINAL_REPORT's last lines,
 the final commit, done.
-Next: poll the chain -> on green write the report's tail -> final commit -> mission complete.
+Next: poll the chain -> on green write the report's tail -> final commit -> mission completeNow: THE MISSION IS COMPLETE. From the final tree (ef48d1d): verify-produce 28/28 pass:true
+(0 failed, 0 skipped, 1154s) · verify-edit 34/34 (63 min) · verify-math 27/27 (30 min, third green
+run) · every PROGRESS box ticked · the four demos at the critic bar (every key 8+, fidelity 10) ·
+FINAL_REPORT.md written. The tail beyond the 95% estimate found and fixed, at the right layer,
+with evidence: D-013 (two check races), D-014 (five checks on pre-migration colon paths), D-015
+(five gui-smoke faults, one a REAL product bug — the blank math video pane), D-016 (a REAL engine
+nondeterminism: PyAV's sliced-thread partial encodes, root-caused layer by layer, fixed with a
+one-thread pin, the golden baseline + migration ledger honestly re-frozen).
+Next: nothing — done. (After the report, stop: no new features.)

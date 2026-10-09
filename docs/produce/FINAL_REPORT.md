@@ -59,7 +59,7 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 - Worth a second look: the mix aims TP −2.0 dB (AAC overshoot, D-009) · edit-film as the default assembler (ADR-003) · the runner's relaunch cap · brief-lint's deterministic ask extraction.
 - `NEEDS_USER.md`: nothing — no hard blocks were hit.
 
-## The earlier suites, from the final tree
-- `./studio verify-edit`: **34/34 PASS** (74 min, `pass: true` — docs/editing/verify-last.json).
-- `./studio verify-math`: **27/27 PASS** twice (33 + 30 min, zero skips — docs/math/verify-last.json), the second run from the D-016-fixed tree.
-- The tail's own finds, all fixed at the right layer and re-verified green: five math checks on pre-rename colon paths (D-014); the GUI's math video pane blank since P1 + four check races (D-015); the PyAV sliced-thread nondeterminism (D-016) with the baseline and migration ledger honestly re-frozen.
+## The earlier suites, from the final tree (ef48d1d, after every tail fix)
+- `./studio verify-edit`: **34/34 PASS** (63 min, `pass: true` — docs/editing/verify-last.json).
+- `./studio verify-math`: **27/27 PASS** (30 min, zero skips — docs/math/verify-last.json), third green run, now with D-016's thread pin in the engine.
+- The tail's own finds, all fixed at the right layer and re-verified green: five math checks on pre-rename colon paths (D-014); the GUI's math video pane blank since P1 + four check races (D-015); the PyAV sliced-thread nondeterminism (D-016) with the golden baseline and migration ledger honestly re-frozen (motion/edit unchanged).
