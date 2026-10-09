@@ -3,9 +3,8 @@
 ## What now exists
 A plain-words request, through any of three doors, becomes a checked deliverable:
 - **The project kind** — `films/<key>/`: the request verbatim, a plan with reasons and alternatives, requirements/facts/assets/budget ledgers, children of any kind under one design system — behind the same registry as motion/edit/math (ADR-001/002).
-- **Proof, not vibes** — every explicit ask is a requirement measured by a verifier library or a critic's evidence; every fact is a quote found in a stored snapshot; every asset carries a license; $0 by default with a hard budget stop.
+- **Proof, not vibes** — every explicit ask is a requirement measured by a verifier library or a critic's evidence; every fact is a quote found in a stored snapshot; every asset carries a license; $0 by default with a hard budget stop. **Capability growth** — `studio capability new|check`; the `chart` technique was grown for demo D and stays in the menu.
 - **Three doors** — chat with pi (AGENTS.md "Start here" + the `produce` skill), `./studio make` (a Node relaunch loop, ADR-004), and the GUI's "✦ Make" box + the project view (Plan / Requirements / Assets / Facts / Log / Notes / Run).
-- **Capability growth** — `studio capability new|check`; the `chart` technique was grown for demo D and stays in the menu.
 
 ## Three ways to use it (copy-paste)
 1. In pi: `Make a 60-second narrated explainer of how GPS knows where you are, vertical and widescreen.`
@@ -13,7 +12,7 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 3. `./studio gui` → **✦ Make** → paste the request → the Plan/Requirements/Log tabs → Run → Ship.
 
 ## `./studio verify-produce` — 28/28 PASS (`pass: true`, ~33 min; the final run's row-by-row numbers: `docs/produce/verify-last.json`)
-| check | the headline number (full rows: `docs/produce/verify-last.json`) |
+| # | the headline number (all rows: `docs/produce/verify-last.json`) |
 |---|---|
 | env | pi 0.87.1 on PATH; doctor 0 red rows; 12/12 capabilities ready |
 | regress | 4 motion films on the baseline; both cheap subsets 5/5 PASS |
@@ -35,8 +34,7 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 | tools | 7 project_* tools with schemas in BY_FILE; live flow through ship |
 | gui-smoke | Make dialog → GUI-started runner verified green; tabs/nesting/note/job; 0 console errors |
 | gui-security | 403 tokenless; oversized/traversal/absolute/concurrent/unknown refused; no request through a shell |
-| chart | good/bad gates name the exact row; catalog + plan menu carry it |
-| growth | stub refused naming parts; implemented accepted; removal consistent |
+| growth | the grown `chart` technique: stub refused naming parts, implemented accepted, removal consistent; its gates name the exact bad row |
 | battery | 12 plans vs 12 independent references: 111/111 requirements covered; sets acceptable; missing inputs flagged |
 | errors | 13/13 loud with next steps; injection changed nothing; killed + concurrent runs handled |
 | docs | 41 commands in help; Start here + ## Producer; ADR-001..004; older doc checks still PASS |
@@ -45,17 +43,14 @@ A plain-words request, through any of three doors, becomes a checked deliverable
 | review | 3–5 rounds each, last by producer-critic, min 8, fidelity 10 |
 
 ## The demos (films/, each with credits + report)
-- `composite` 69.7 s 16:9+9:16 — real public-domain NASA clip → narrated sympy-verified Pythagoras → end card (assembled from 3 kinds).
-- `launch-teaser` 25.0 s 9:16 — the studio's own GUI, captured and animated.
-- `gps` 61.8 s 16:9 — 31 caption cues; 4 facts sourced (NOAA snapshot-verified).
-- `cities` 30.0 s 16:9 — ten cities over a century, CC0 Nordpil/UN data on screen, 10 facts; **the grown `chart` technique** (its own data/axis gates).
+- `composite` 69.7 s 16:9+9:16 — a real public-domain NASA clip → narrated sympy-verified Pythagoras → end card (3 kinds, one design system, assembled). `launch-teaser` 25.0 s 9:16 — the studio's own GUI, captured and animated.
+- `gps` 61.8 s 16:9 — 31 caption cues, 4 sourced facts (NOAA snapshots). `cities` 30.0 s 16:9 — ten cities over a century, CC0 Nordpil/UN data on screen, 10 facts; **the grown `chart` technique** (its own data/axis gates).
 
 ## Honest limitations
 - A REAL engine bug found by the final gates and FIXED (D-016): PyAV's sliced-thread x264 partial encodes made math finals non-deterministic at the encode layer (identical frames, different bits, ±1 seam frame) — the kit now pins partial encoders to one thread; proven by identical cold re-renders. The golden math-draft baseline and the migration md5 ledger were honestly re-frozen (motion/edit unchanged).
 - The edit gold's mix flaps ±0.2 LUFS only inside the verify context (D-011; root cause open — masked in transcripts, verify-edit owns the ±1 gate).
 - Cloud providers are opt-in scaffolding, exercised with a fake provider only (no keys exist to test a real one); adding one is documented.
-- Narration is Piper (local); GPU speech recognition unproven. Cosmetic: the sidebar's metadata wraps unevenly on narrow rows (readable).
-- The SSE film-scanner sweeps every film once a second once a client connects (~1.8 s at ~35 films on 9p): harmless for one viewer, worth a real watch mechanism if the GUI serves more.
+- Narration is Piper (local); GPU speech recognition unproven. Cosmetic: the sidebar's metadata wraps unevenly on narrow rows. The SSE film-scanner sweeps every film once a second once a client connects (~1.8 s at ~35 films on 9p) — fine for one viewer, worth a real watch mechanism if the GUI serves more.
 - Worth a second look: the mix aims TP −2.0 dB (AAC overshoot, D-009) · edit-film as the default assembler (ADR-003) · the runner's relaunch cap · brief-lint's deterministic ask extraction.
 - `NEEDS_USER.md`: nothing — no hard blocks were hit.
 
